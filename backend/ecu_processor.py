@@ -375,6 +375,33 @@ class ECUModifier:
         return file_data
     
     @staticmethod
+    def apply_immo_off(file_data: bytearray, maps: List[Dict]) -> bytearray:
+        """Disable immobilizer system"""
+        for map_info in maps:
+            offset = map_info["offset"]
+            size = map_info["size"]
+            
+            # Disable immobilizer (set to bypass pattern)
+            file_data[offset:offset+size] = bytearray([0xFF] * size)
+        
+        # Also search and replace common immobilizer patterns
+        immo_disable_patterns = [
+            (b'IMMO', b'FREE'),
+            (bytes([0x5A, 0xA5]), bytes([0xFF, 0xFF]))
+        ]
+        
+        for old_pattern, new_pattern in immo_disable_patterns:
+            index = 0
+            while True:
+                index = file_data.find(old_pattern, index)
+                if index == -1:
+                    break
+                file_data[index:index+len(old_pattern)] = new_pattern
+                index += len(new_pattern)
+        
+        return file_data
+    
+    @staticmethod
     def remove_dtc_codes(file_data: bytearray, ecu_type: ECUType) -> bytearray:
         """Remove DTC error codes"""
         # DTC patterns (simplified)
@@ -383,6 +410,8 @@ class ECUModifier:
             b'P2002',  # DPF efficiency
             b'P2BAC',  # AdBlue quality
             b'P0401',  # EGR flow
+            b'P0571',  # Brake switch
+            b'P1603',  # Immobilizer
         ]
         
         for pattern in dtc_patterns:
