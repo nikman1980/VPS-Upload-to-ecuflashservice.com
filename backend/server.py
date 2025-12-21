@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Form
+from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Form, BackgroundTasks
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -13,6 +13,10 @@ from datetime import datetime, timezone
 from enum import Enum
 import shutil
 import json
+import asyncio
+
+# Import AI ECU Processor
+from ecu_processor import ECUProcessor, ConfidenceLevel
 
 
 ROOT_DIR = Path(__file__).parent
