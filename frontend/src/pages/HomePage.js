@@ -12,6 +12,8 @@ const PAYPAL_CLIENT_ID = 'test';
 const HomePage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1); // 1: Upload, 2: Analysis Result & Selection, 3: Payment, 4: Processing
+  const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   // Analysis results
   const [analysisResult, setAnalysisResult] = useState(null);
