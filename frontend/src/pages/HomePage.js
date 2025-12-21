@@ -6,8 +6,8 @@ import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// PayPal Client ID - In production, use environment variable
-const PAYPAL_CLIENT_ID = 'test';
+// PayPal Live Client ID - Auto Car Locksmith (autolocksmith.fj@gmail.com)
+const PAYPAL_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
 
 const HomePage = () => {
   const navigate = useNavigate();
