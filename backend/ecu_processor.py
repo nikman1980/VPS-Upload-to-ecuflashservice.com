@@ -539,15 +539,38 @@ class ECUProcessor:
         result["total_if_all_selected"] = total_price
         result["success"] = len(result["available_services"]) > 0
         
-        # Add DTC deletion (always available)
+        # Add DTC deletion options
         result["available_services"].append({
-            "service_id": "dtc-deletion",
-            "service_name": "DTC Code Deletion",
-            "price": 0.00,  # Included free
+            "service_id": "dtc-single",
+            "service_name": "DTC Code Deletion (Single)",
+            "price": 10.00,
             "confidence": 1.0,
             "available": True,
-            "note": "Included with any service"
+            "note": "Remove one error code"
         })
+        
+        result["available_services"].append({
+            "service_id": "dtc-multiple",
+            "service_name": "DTC Code Deletion (Multiple)",
+            "price": 25.00,
+            "confidence": 1.0,
+            "available": True,
+            "note": "Remove all error codes"
+        })
+        
+        # Add combo if both EGR and DPF available
+        has_egr = any(s['service_id'] == 'egr-removal' for s in result["available_services"])
+        has_dpf = any(s['service_id'] == 'dpf-removal' for s in result["available_services"])
+        
+        if has_egr and has_dpf:
+            result["available_services"].append({
+                "service_id": "egr-dpf-combo",
+                "service_name": "EGR + DPF Combo (Best Deal!)",
+                "price": 79.00,
+                "confidence": 0.95,
+                "available": True,
+                "note": "Same price as DPF alone - save $25!"
+            })
         
         if not result["success"]:
             result["warnings"].append("No systems detected in this file")
