@@ -159,6 +159,46 @@ SERVICE_PRICING = {
     "immo-off": {
         "base_price": 35.00,
         "name": "Immobilizer Off"
+    },
+    "decat": {
+        "base_price": 20.00,
+        "name": "Decat (Cat OFF)"
+    },
+    "vmax-off": {
+        "base_price": 15.00,
+        "name": "Vmax OFF"
+    },
+    "swirl-flap-off": {
+        "base_price": 20.00,
+        "name": "Swirl Flap OFF"
+    },
+    "exhaust-flaps": {
+        "base_price": 20.00,
+        "name": "Exhaust Flaps OFF"
+    },
+    "nox-off": {
+        "base_price": 20.00,
+        "name": "NOX OFF"
+    },
+    "opf-gpf-off": {
+        "base_price": 20.00,
+        "name": "OPF/GPF OFF"
+    },
+    "maf-off": {
+        "base_price": 20.00,
+        "name": "MAF OFF"
+    },
+    "cold-start-off": {
+        "base_price": 20.00,
+        "name": "Cold Start OFF"
+    },
+    "start-stop-off": {
+        "base_price": 20.00,
+        "name": "Start & Stop OFF"
+    },
+    "cylinder-demand-off": {
+        "base_price": 15.00,
+        "name": "Cylinder On Demand OFF"
     }
 }
 
