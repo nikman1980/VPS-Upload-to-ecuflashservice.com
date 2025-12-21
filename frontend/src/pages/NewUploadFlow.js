@@ -561,7 +561,7 @@ const NewUploadFlow = () => {
       {/* Footer */}
       <footer className="bg-gray-900 py-6 mt-16">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p>© 2024 Auto Car Locksmith | AI-Powered ECU Processing</p>
+          <p>© 2024 ECU Flash Service | AI-Powered ECU Processing</p>
           <p className="text-sm mt-2">⚠️ For off-road and racing use only</p>
         </div>
       </footer>
