@@ -563,11 +563,12 @@ async def calculate_price(service_ids: List[str]):
     return calculate_pricing(service_ids)
 
 
-@api_router.post("/analyze-file")
-async def analyze_file_for_options(file: UploadFile = File(...)):
+@api_router.post("/analyze-and-process-file")
+async def analyze_and_process_file(file: UploadFile = File(...)):
     """
-    Analyze ECU file and return available processing options
-    This is called IMMEDIATELY after file upload to show customer what's available
+    STEP 1: Analyze ECU file AND pre-process with ALL available services
+    Returns what's available with prices
+    Customer then selects what to buy
     """
     try:
         # Read file
@@ -583,14 +584,176 @@ async def analyze_file_for_options(file: UploadFile = File(...)):
                 detail=f"Invalid file type. Only ECU files ({', '.join(allowed_extensions)}) are allowed."
             )
         
-        # Analyze with AI
+        # Step 1: Analyze to detect ECU type and available systems
         analysis_result = ecu_processor.analyze_file_for_options(file_data)
         
-        return analysis_result
+        if not analysis_result["success"]:
+            return {
+                "success": False,
+                "error": "Could not analyze file",
+                "warnings": analysis_result.get("warnings", [])
+            }
+        
+        # Step 2: PRE-PROCESS file with ALL available services
+        # This creates multiple versions of the file
+        processed_versions = []
+        
+        # Save original file
+        file_id = str(uuid.uuid4())
+        original_filename = f"{file_id}_original{file_ext}"
+        original_filepath = UPLOAD_DIR / original_filename
+        
+        with open(original_filepath, "wb") as f:
+            f.write(file_data)
+        
+        # Process each available service individually
+        for service in analysis_result["available_services"]:
+            service_id = service["service_id"]
+            
+            # Skip DTC for now (will be added to all)
+            if service_id in ["dtc-single", "dtc-multiple"]:
+                continue
+            
+            try:
+                # Process file with this service
+                result = ecu_processor.process_file(file_data, [service_id])
+                
+                if result["success"] and result["processed_file"]:
+                    # Save processed version
+                    version_filename = f"{file_id}_{service_id}{file_ext}"
+                    version_filepath = PROCESSED_DIR / version_filename
+                    
+                    with open(version_filepath, "wb") as f:
+                        f.write(result["processed_file"])
+                    
+                    processed_versions.append({
+                        "service_id": service_id,
+                        "service_name": service["service_name"],
+                        "price": service["price"],
+                        "file_id": f"{file_id}_{service_id}",
+                        "filename": version_filename,
+                        "filepath": str(version_filepath),
+                        "confidence": result["confidence"],
+                        "confidence_level": result["confidence_level"],
+                        "file_size": len(result["processed_file"])
+                    })
+            except Exception as e:
+                logger.error(f"Error processing {service_id}: {e}")
+        
+        # Return analysis + processed versions
+        return {
+            "success": True,
+            "file_id": file_id,
+            "original_filename": file.filename,
+            "file_size_mb": analysis_result["file_size_mb"],
+            "ecu_type": analysis_result["ecu_type"],
+            "ecu_confidence": analysis_result["ecu_confidence"],
+            "available_options": processed_versions,
+            "message": "File processed! Select which modifications you want to purchase."
+        }
         
     except Exception as e:
         logger.error(f"Error analyzing file: {e}")
-        raise HTTPException(status_code=500, detail=f"File analysis failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"File processing failed: {str(e)}")
+
+
+@api_router.post("/purchase-processed-file")
+async def purchase_processed_file(
+    file_id: str = Form(...),
+    selected_services: str = Form(...),  # JSON string of service IDs
+    customer_name: str = Form(...),
+    customer_email: str = Form(...),
+    customer_phone: str = Form(...),
+    vehicle_info: str = Form(...),  # JSON string
+    paypal_order_id: str = Form(...),
+    paypal_transaction_id: str = Form(None)
+):
+    """
+    STEP 2: Customer pays for selected processed files
+    Returns download links
+    """
+    try:
+        selected_service_ids = json.loads(selected_services)
+        vehicle_data = json.loads(vehicle_info)
+        
+        # Calculate total price
+        total_price = 0.0
+        purchased_services = []
+        
+        for service_id in selected_service_ids:
+            if service_id in SERVICE_PRICING:
+                price = SERVICE_PRICING[service_id]["base_price"]
+                total_price += price
+                purchased_services.append({
+                    "service_id": service_id,
+                    "service_name": SERVICE_PRICING[service_id]["name"],
+                    "price": price
+                })
+        
+        # Create order record
+        order_id = str(uuid.uuid4())
+        order_doc = {
+            "id": order_id,
+            "file_id": file_id,
+            "customer_name": customer_name,
+            "customer_email": customer_email,
+            "customer_phone": customer_phone,
+            "vehicle_make": vehicle_data.get("vehicle_make"),
+            "vehicle_model": vehicle_data.get("vehicle_model"),
+            "vehicle_year": vehicle_data.get("vehicle_year"),
+            "purchased_services": purchased_services,
+            "total_price": total_price,
+            "paypal_order_id": paypal_order_id,
+            "paypal_transaction_id": paypal_transaction_id,
+            "payment_status": "completed",
+            "payment_date": datetime.now(timezone.utc).isoformat(),
+            "download_links": selected_service_ids,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        await db.orders.insert_one(order_doc)
+        
+        # Return download links
+        return {
+            "success": True,
+            "order_id": order_id,
+            "download_links": [f"/api/download-purchased/{file_id}/{service_id}" for service_id in selected_service_ids],
+            "total_paid": total_price
+        }
+        
+    except Exception as e:
+        logger.error(f"Error creating purchase: {e}")
+        raise HTTPException(status_code=500, detail=f"Purchase failed: {str(e)}")
+
+
+@api_router.get("/download-purchased/{file_id}/{service_id}")
+async def download_purchased_file(file_id: str, service_id: str):
+    """Download purchased processed file"""
+    
+    # Verify purchase
+    order = await db.orders.find_one({
+        "file_id": file_id,
+        "download_links": service_id,
+        "payment_status": "completed"
+    })
+    
+    if not order:
+        raise HTTPException(status_code=403, detail="File not purchased or payment not completed")
+    
+    # Find file
+    file_pattern = f"{file_id}_{service_id}*"
+    matching_files = list(PROCESSED_DIR.glob(file_pattern))
+    
+    if not matching_files:
+        raise HTTPException(status_code=404, detail="Processed file not found")
+    
+    filepath = matching_files[0]
+    
+    return FileResponse(
+        path=filepath,
+        filename=f"processed_{service_id}{filepath.suffix}",
+        media_type="application/octet-stream"
+    )
 
 
 @api_router.post("/upload-file")
