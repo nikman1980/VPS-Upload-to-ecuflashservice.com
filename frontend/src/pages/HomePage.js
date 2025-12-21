@@ -549,16 +549,21 @@ const HomePage = () => {
                     className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="customer-email-input"
                   />
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-semibold mb-2">Phone Number (with country code) *</label>
                     <input
                       type="tel"
                       name="customer_phone"
-                      placeholder="Phone Number *"
+                      placeholder="+679 123 4567 or +1 555 123 4567"
                       required
                       value={formData.customer_phone}
                       onChange={handleInputChange}
-                      className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       data-testid="customer-phone-input"
+                      pattern="[\+]?[0-9\s\-\(\)]+"
                     />
+                    <p className="text-xs text-gray-400 mt-1">Include country code (e.g., +679 for Fiji, +1 for USA)</p>
+                  </div>
                 </div>
               </div>
 
