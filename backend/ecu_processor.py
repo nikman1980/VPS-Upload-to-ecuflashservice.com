@@ -31,8 +31,9 @@ class ProcessingAction(Enum):
     DPF_REMOVAL = "dpf-removal"
     ADBLUE_REMOVAL = "adblue-removal"
     EGR_REMOVAL = "egr-removal"
-    DTC_DELETION = "dtc-deletion"
-    STAGE1_TUNE = "stage1-tune"
+    DTC_SINGLE = "dtc-single"
+    DTC_MULTIPLE = "dtc-multiple"
+    EGR_DPF_COMBO = "egr-dpf-combo"
     IMMO_OFF = "immo-off"
 
 
