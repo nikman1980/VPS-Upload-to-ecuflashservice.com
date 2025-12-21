@@ -105,12 +105,38 @@ const HomePage = () => {
         continue;
       }
       
+      // Add file to list
       setUploadedFiles(prev => [...prev, {
         file: file,
         name: file.name,
         size: (file.size / 1024).toFixed(2) + ' KB',
         uploading: false
       }]);
+      
+      // Automatically analyze the file
+      await analyzeFile(file);
+    }
+  };
+
+  const analyzeFile = async (file) => {
+    setAnalyzingFile(true);
+    
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const response = await axios.post(`${API}/analyze-file`, formData, {
+        headers: {'Content-Type': 'multipart/form-data'}
+      });
+      
+      setAnalysisResult(response.data);
+      setStep(2); // Move to analysis result step
+      
+    } catch (error) {
+      console.error('Error analyzing file:', error);
+      alert('Error analyzing file. Please try again.');
+    } finally {
+      setAnalyzingFile(false);
     }
   };
 
