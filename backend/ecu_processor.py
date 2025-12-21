@@ -514,10 +514,10 @@ class ECUProcessor:
         
         # Service pricing mapping
         service_prices = {
-            'dpf': {'id': 'dpf-removal', 'name': 'DPF Removal', 'price': 187.50},
-            'adblue': {'id': 'adblue-removal', 'name': 'AdBlue Removal', 'price': 437.50},
-            'egr': {'id': 'egr-removal', 'name': 'EGR Removal', 'price': 150.00},
-            'immo': {'id': 'immo-off', 'name': 'Immobilizer Off', 'price': 125.00},
+            'dpf': {'id': 'dpf-removal', 'name': 'DPF Removal', 'price': 79.00},
+            'adblue': {'id': 'adblue-removal', 'name': 'AdBlue Removal', 'price': 199.00},
+            'egr': {'id': 'egr-removal', 'name': 'EGR Removal', 'price': 25.00},
+            'immo': {'id': 'immo-off', 'name': 'Immobilizer Off', 'price': 35.00},
         }
         
         # Build available services list
