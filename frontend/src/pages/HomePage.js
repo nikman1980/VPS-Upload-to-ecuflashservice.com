@@ -621,7 +621,7 @@ const HomePage = () => {
       {/* Footer */}
       <footer className="bg-gray-900 py-8 mt-16">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p>© 2024 DPF AdBlue Removal Services. Online ECU file processing powered by dpfoffservice.com</p>
+          <p>© 2024 DPF AdBlue Removal Services. AI-powered ECU file processing</p>
           <p className="text-sm mt-2">⚠️ For off-road and racing use only. Check local regulations.</p>
         </div>
       </footer>
