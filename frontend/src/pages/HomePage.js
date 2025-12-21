@@ -545,7 +545,7 @@ const HomePage = () => {
                     ))}
                     <div className="border-t border-gray-600 pt-2 mt-2">
                       <div className="flex justify-between text-sm text-gray-400">
-                        <span>Subtotal (dpfoffservice.com):</span>
+                        <span>Processing Cost:</span>
                         <span>${pricingData.base_total.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-400">
