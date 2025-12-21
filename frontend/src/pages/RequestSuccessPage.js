@@ -13,6 +13,7 @@ const RequestSuccessPage = () => {
 
   useEffect(() => {
     fetchRequest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [requestId]);
 
   const fetchRequest = async () => {
