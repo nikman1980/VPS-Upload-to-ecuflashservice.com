@@ -245,9 +245,9 @@ const HomePage = () => {
       {/* Services Section */}
       <section id="services" className="container mx-auto px-4 py-16">
         <h3 className="text-4xl font-bold text-center mb-4" data-testid="services-section">
-          Our Services
+          Our AI-Powered Services
         </h3>
-        <p className="text-center text-gray-400 mb-12">Files processed by dpfoffservice.com + 25% markup</p>
+        <p className="text-center text-gray-400 mb-12">Automated ECU file processing with advanced AI technology</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
             <div 
@@ -262,7 +262,7 @@ const HomePage = () => {
                 ${service.final_price.toFixed(2)}
               </div>
               <div className="text-sm text-gray-500">
-                Base: ${service.base_price.toFixed(2)} + 25% markup
+                Processing cost: ${service.base_price.toFixed(2)}
               </div>
             </div>
           ))}
