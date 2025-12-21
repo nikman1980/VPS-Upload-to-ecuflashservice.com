@@ -385,7 +385,8 @@ AVAILABLE_SERVICES = [
         "description": "Remove one diagnostic trouble code from ECU file.",
         "icon": "🔍",
         "base_price": 10.00,
-        "final_price": 10.00
+        "final_price": 10.00,
+        "category": "diagnostics"
     },
     {
         "id": "dtc-multiple",
@@ -393,48 +394,144 @@ AVAILABLE_SERVICES = [
         "description": "Remove all diagnostic trouble codes from ECU file.",
         "icon": "🔍",
         "base_price": 25.00,
-        "final_price": 25.00
+        "final_price": 25.00,
+        "category": "diagnostics"
     },
     {
         "id": "egr-removal",
         "name": "EGR Removal",
-        "description": "Exhaust Gas Recirculation system removal to prevent carbon buildup.",
+        "description": "Exhaust Gas Recirculation system removal.",
         "icon": "⚙️",
         "base_price": 25.00,
-        "final_price": 25.00
+        "final_price": 25.00,
+        "category": "emissions"
     },
     {
         "id": "dpf-removal",
         "name": "DPF Removal",
-        "description": "Diesel particulate filter removal and ECU remapping.",
+        "description": "Diesel particulate filter removal.",
         "icon": "🔧",
         "base_price": 79.00,
-        "final_price": 79.00
+        "final_price": 79.00,
+        "category": "emissions"
     },
     {
         "id": "egr-dpf-combo",
         "name": "EGR + DPF Combo",
-        "description": "Best deal! Remove both EGR and DPF systems together.",
+        "description": "Best deal! Remove both EGR and DPF together.",
         "icon": "💥",
         "base_price": 79.00,
         "final_price": 79.00,
-        "is_combo": True
+        "is_combo": True,
+        "category": "emissions"
     },
     {
         "id": "adblue-removal",
         "name": "AdBlue/DEF Removal",
-        "description": "Complete AdBlue/DEF system removal and ECU reprogramming.",
+        "description": "Complete AdBlue/DEF system removal.",
         "icon": "💧",
         "base_price": 199.00,
-        "final_price": 199.00
+        "final_price": 199.00,
+        "category": "emissions"
     },
     {
         "id": "immo-off",
         "name": "Immobilizer Off",
-        "description": "Disable vehicle immobilizer for key programming or ECU swap.",
+        "description": "Disable vehicle immobilizer.",
         "icon": "🔓",
         "base_price": 35.00,
-        "final_price": 35.00
+        "final_price": 35.00,
+        "category": "security"
+    },
+    {
+        "id": "decat",
+        "name": "Decat (Cat OFF)",
+        "description": "Catalytic converter removal and disable.",
+        "icon": "🔥",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "emissions"
+    },
+    {
+        "id": "vmax-off",
+        "name": "Vmax OFF",
+        "description": "Remove speed limiter for maximum velocity.",
+        "icon": "🚀",
+        "base_price": 15.00,
+        "final_price": 15.00,
+        "category": "performance"
+    },
+    {
+        "id": "swirl-flap-off",
+        "name": "Swirl Flap OFF",
+        "description": "Disable intake manifold swirl flaps.",
+        "icon": "🌀",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "intake"
+    },
+    {
+        "id": "exhaust-flaps",
+        "name": "Exhaust Flaps OFF",
+        "description": "Disable exhaust valve flaps.",
+        "icon": "💨",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "exhaust"
+    },
+    {
+        "id": "nox-off",
+        "name": "NOX OFF",
+        "description": "Disable NOx sensor and system.",
+        "icon": "🌫️",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "emissions"
+    },
+    {
+        "id": "opf-gpf-off",
+        "name": "OPF/GPF OFF",
+        "description": "Petrol particulate filter removal.",
+        "icon": "🏭",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "emissions"
+    },
+    {
+        "id": "maf-off",
+        "name": "MAF OFF",
+        "description": "Mass Air Flow sensor delete.",
+        "icon": "💨",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "sensors"
+    },
+    {
+        "id": "cold-start-off",
+        "name": "Cold Start OFF",
+        "description": "Disable cold start noise reduction.",
+        "icon": "❄️",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "comfort"
+    },
+    {
+        "id": "start-stop-off",
+        "name": "Start & Stop OFF",
+        "description": "Disable automatic start-stop system.",
+        "icon": "🔄",
+        "base_price": 20.00,
+        "final_price": 20.00,
+        "category": "comfort"
+    },
+    {
+        "id": "cylinder-demand-off",
+        "name": "Cylinder On Demand OFF",
+        "description": "Disable cylinder deactivation system.",
+        "icon": "🔌",
+        "base_price": 15.00,
+        "final_price": 15.00,
+        "category": "performance"
     }
 ]
 
