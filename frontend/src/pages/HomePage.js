@@ -280,6 +280,98 @@ const HomePage = () => {
         )}
       </section>
 
+      {/* Analysis Results Section */}
+      {step === 2 && analysisResult && (
+        <section className="container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-700 p-8 rounded-lg mb-8">
+              <h3 className="text-3xl font-bold mb-6 text-center">
+                🔍 AI Analysis Complete
+              </h3>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* File Information */}
+                <div className="bg-gray-800/50 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-400">📄 File Information</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">File Name:</span>
+                      <span>{analysisResult.file_info?.name || 'Unknown'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">File Size:</span>
+                      <span>{analysisResult.file_info?.size || 'Unknown'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">ECU Type:</span>
+                      <span>{analysisResult.ecu_info?.type || 'Detected automatically'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Vehicle:</span>
+                      <span>{analysisResult.vehicle_info?.make || 'Unknown'} {analysisResult.vehicle_info?.model || ''}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Available Services */}
+                <div className="bg-gray-800/50 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-green-400">✅ Available Services</h4>
+                  <div className="space-y-3">
+                    {analysisResult.available_services?.map((service, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <span className="text-green-400">✓</span>
+                        <span className="text-sm">{service.name}</span>
+                        <span className="text-xs text-gray-400">({service.confidence}% confidence)</span>
+                      </div>
+                    )) || (
+                      <div className="text-gray-400 text-sm">
+                        All standard services available (DPF, AdBlue, EGR)
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Analysis Summary */}
+              {analysisResult.analysis_summary && (
+                <div className="mt-6 bg-blue-900/20 border border-blue-700 p-4 rounded-lg">
+                  <h4 className="text-lg font-semibold mb-2 text-blue-400">🤖 AI Analysis Summary</h4>
+                  <p className="text-sm text-gray-300">{analysisResult.analysis_summary}</p>
+                </div>
+              )}
+
+              {/* Action Button */}
+              <div className="text-center mt-8">
+                <button 
+                  onClick={() => setShowForm(true)}
+                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition transform hover:scale-105"
+                >
+                  Select Services & Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Loading Analysis */}
+      {analyzingFile && (
+        <section className="container mx-auto px-4 py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="bg-blue-900/30 border border-blue-700 p-8 rounded-lg">
+              <div className="text-6xl mb-4">🔄</div>
+              <h3 className="text-2xl font-bold mb-4">Analyzing Your ECU File...</h3>
+              <p className="text-gray-300 mb-6">
+                Our AI is examining your file to detect available systems and compatibility.
+              </p>
+              <div className="flex justify-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Services Section */}
       <section id="services" className="container mx-auto px-4 py-16">
         <h3 className="text-4xl font-bold text-center mb-4" data-testid="services-section">
