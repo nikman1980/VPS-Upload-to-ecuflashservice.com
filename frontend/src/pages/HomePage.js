@@ -244,10 +244,6 @@ const HomePage = () => {
     }
   };
 
-  const availableModels = formData.vehicle_make && vehicleModels[formData.vehicle_make] 
-    ? vehicleModels[formData.vehicle_make] 
-    : [];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       {/* Header */}
