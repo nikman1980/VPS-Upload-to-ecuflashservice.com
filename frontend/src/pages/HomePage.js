@@ -11,11 +11,16 @@ const PAYPAL_CLIENT_ID = 'test';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [services, setServices] = useState([]);
+  const [step, setStep] = useState(1); // 1: Upload, 2: Analysis Result & Selection, 3: Payment, 4: Processing
+  
+  // Analysis results
+  const [analysisResult, setAnalysisResult] = useState(null);
+  const [analyzingFile, setAnalyzingFile] = useState(false);
+  
+  // Vehicle data
   const [vehicleMakes, setVehicleMakes] = useState([]);
   const [vehicleModels, setVehicleModels] = useState({});
-  const [showForm, setShowForm] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [services, setServices] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [pricingData, setPricingData] = useState(null);
