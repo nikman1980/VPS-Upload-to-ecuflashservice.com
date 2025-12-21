@@ -130,7 +130,7 @@ VEHICLE_MODELS = {
     "MAN Bus": ["Lion's Coach", "Lion's City", "Lion's Intercity"]
 }
 
-# Service pricing (base prices before 25% markup)
+# Service pricing (base prices - internal costs)
 SERVICE_PRICING = {
     "dpf-removal": {
         "base_price": 150.00,
@@ -150,7 +150,7 @@ SERVICE_PRICING = {
     }
 }
 
-MARKUP_PERCENTAGE = 25  # 25% markup
+MARKUP_PERCENTAGE = 25  # 25% markup on base costs
 
 
 # Define Models
