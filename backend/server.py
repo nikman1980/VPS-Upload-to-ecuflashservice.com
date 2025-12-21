@@ -235,14 +235,20 @@ class ServiceRequest(BaseModel):
     paypal_transaction_id: Optional[str] = None
     payment_date: Optional[datetime] = None
     
+    # AI Processing
+    processing_status: str = "pending"  # pending, analyzing, processing, completed, failed
+    ai_confidence: Optional[float] = None
+    confidence_level: Optional[str] = None  # high, medium, low, very_low
+    detected_ecu_type: Optional[str] = None
+    processing_warnings: List[str] = []
+    processing_started_at: Optional[datetime] = None
+    processing_completed_at: Optional[datetime] = None
+    processed_files: List[dict] = []  # Processed ECU files ready for download
+    
     # Status and Timestamps
     status: RequestStatus = RequestStatus.PENDING_PAYMENT
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    
-    # Processing (for future dpfoffservice.com integration)
-    dpfoff_task_id: Optional[str] = None
-    processed_files: List[dict] = []
 
 
 class StatusUpdate(BaseModel):
