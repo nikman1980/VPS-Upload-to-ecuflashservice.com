@@ -310,44 +310,61 @@ def calculate_pricing(service_ids: List[str]) -> dict:
 # Services catalog with pricing
 AVAILABLE_SERVICES = [
     {
-        "id": "dpf-removal",
-        "name": "DPF Removal",
-        "description": "Complete diesel particulate filter removal and ECU remapping to eliminate DPF-related issues and improve performance.",
-        "icon": "🔧",
-        "base_price": SERVICE_PRICING["dpf-removal"]["base_price"],
-        "final_price": SERVICE_PRICING["dpf-removal"]["base_price"] * 1.25
+        "id": "dtc-single",
+        "name": "DTC Removal (Single Code)",
+        "description": "Remove one diagnostic trouble code from ECU file.",
+        "icon": "🔍",
+        "base_price": 10.00,
+        "final_price": 10.00
     },
     {
-        "id": "adblue-removal",
-        "name": "AdBlue/DEF Removal",
-        "description": "Remove AdBlue/DEF system and reprogram ECU to eliminate AdBlue warnings and system failures.",
-        "icon": "💧",
-        "base_price": SERVICE_PRICING["adblue-removal"]["base_price"],
-        "final_price": SERVICE_PRICING["adblue-removal"]["base_price"] * 1.25
+        "id": "dtc-multiple",
+        "name": "DTC Removal (Multiple Codes)",
+        "description": "Remove all diagnostic trouble codes from ECU file.",
+        "icon": "🔍",
+        "base_price": 25.00,
+        "final_price": 25.00
     },
     {
         "id": "egr-removal",
         "name": "EGR Removal",
-        "description": "Exhaust Gas Recirculation system removal to prevent carbon buildup and improve engine efficiency.",
+        "description": "Exhaust Gas Recirculation system removal to prevent carbon buildup.",
         "icon": "⚙️",
-        "base_price": SERVICE_PRICING["egr-removal"]["base_price"],
-        "final_price": SERVICE_PRICING["egr-removal"]["base_price"] * 1.25
+        "base_price": 25.00,
+        "final_price": 25.00
     },
     {
-        "id": "ecu-remap",
-        "name": "ECU Remapping",
-        "description": "Professional ECU remapping for improved performance, fuel economy, and power delivery.",
-        "icon": "🚀",
-        "base_price": SERVICE_PRICING["ecu-remap"]["base_price"],
-        "final_price": SERVICE_PRICING["ecu-remap"]["base_price"] * 1.25
+        "id": "dpf-removal",
+        "name": "DPF Removal",
+        "description": "Diesel particulate filter removal and ECU remapping.",
+        "icon": "🔧",
+        "base_price": 79.00,
+        "final_price": 79.00
+    },
+    {
+        "id": "egr-dpf-combo",
+        "name": "EGR + DPF Combo",
+        "description": "Best deal! Remove both EGR and DPF systems together.",
+        "icon": "💥",
+        "base_price": 79.00,
+        "final_price": 79.00,
+        "is_combo": True
+    },
+    {
+        "id": "adblue-removal",
+        "name": "AdBlue/DEF Removal",
+        "description": "Complete AdBlue/DEF system removal and ECU reprogramming.",
+        "icon": "💧",
+        "base_price": 199.00,
+        "final_price": 199.00
     },
     {
         "id": "immo-off",
         "name": "Immobilizer Off",
-        "description": "Disable vehicle immobilizer system for key programming, ECU swap, or security system bypass.",
+        "description": "Disable vehicle immobilizer for key programming or ECU swap.",
         "icon": "🔓",
-        "base_price": SERVICE_PRICING["immo-off"]["base_price"],
-        "final_price": SERVICE_PRICING["immo-off"]["base_price"] * 1.25
+        "base_price": 35.00,
+        "final_price": 35.00
     }
 ]
 
