@@ -266,7 +266,7 @@ const SimpleUploadPage = () => {
                           onClick={() => removeFile(index)}
                           className=\"text-red-400 hover:text-red-300\"
                         >
-                          ✕
+                          Remove
                         </button>
                       </div>
                     ))}
