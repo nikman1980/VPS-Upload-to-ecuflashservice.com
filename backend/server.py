@@ -51,29 +51,72 @@ class PaymentStatus(str, Enum):
     REFUNDED = "refunded"
 
 
-# Vehicle Database - Comprehensive list like dpfoffservice.com
+# Vehicle Database - Comprehensive list including Trucks and Buses
 VEHICLE_MAKES = [
+    # Passenger Vehicles
     "Abarth", "Alfa Romeo", "Audi", "BMW", "Chevrolet", "Chrysler", 
-    "Citroen", "Dacia", "DAF", "Dodge", "Fiat", "Ford", "GMC",
-    "Honda", "Hyundai", "Infiniti", "Isuzu", "Iveco", "Jaguar",
-    "Jeep", "Kia", "Land Rover", "Lexus", "MAN", "Mazda", "Mercedes-Benz",
+    "Citroen", "Dacia", "Dodge", "Fiat", "Ford", "GMC",
+    "Honda", "Hyundai", "Infiniti", "Isuzu", "Jaguar",
+    "Jeep", "Kia", "Land Rover", "Lexus", "Mazda", "Mercedes-Benz",
     "Mini", "Mitsubishi", "Nissan", "Opel", "Peugeot", "Porsche",
-    "RAM", "Renault", "Saab", "Scania", "Seat", "Skoda", "SsangYong",
-    "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"
+    "RAM", "Renault", "Saab", "Seat", "Skoda", "SsangYong",
+    "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo",
+    
+    # Heavy Duty Trucks (Commercial)
+    "Peterbilt", "Kenworth", "Freightliner", "Mack", "International",
+    "Western Star", "Volvo Trucks", "Scania", "MAN", "DAF", "Iveco",
+    "Hino", "UD Trucks", "Isuzu Trucks",
+    
+    # Buses
+    "Blue Bird", "Thomas Built", "IC Bus", "New Flyer", "Gillig",
+    "MCI (Motor Coach)", "Prevost", "Van Hool", "Mercedes-Benz Bus",
+    "Setra", "Neoplan", "Scania Bus", "Volvo Bus", "MAN Bus"
 ]
 
 # Common models by make (subset - can be expanded)
 VEHICLE_MODELS = {
-    "Ford": ["F-150", "F-250", "F-350", "Transit", "Ranger", "Explorer", "Expedition", "Mustang"],
-    "Chevrolet": ["Silverado 1500", "Silverado 2500", "Silverado 3500", "Colorado", "Tahoe", "Suburban"],
-    "Dodge": ["RAM 1500", "RAM 2500", "RAM 3500", "Durango", "Challenger", "Charger"],
-    "RAM": ["1500", "2500", "3500", "ProMaster"],
-    "GMC": ["Sierra 1500", "Sierra 2500", "Sierra 3500", "Canyon", "Yukon"],
-    "Toyota": ["Tundra", "Tacoma", "Hilux", "Land Cruiser", "4Runner", "Camry"],
-    "Volkswagen": ["Amarok", "Transporter", "Caddy", "Touareg", "Passat", "Golf"],
-    "Mercedes-Benz": ["Sprinter", "Vito", "X-Class", "GLE", "GLC", "E-Class"],
-    "BMW": ["X3", "X5", "X6", "3 Series", "5 Series", "7 Series"],
+    # Pickup Trucks & SUVs
+    "Ford": ["F-150", "F-250", "F-250 Super Duty", "F-350", "F-350 Super Duty", "F-450", "F-550", "Transit", "Ranger", "Explorer", "Expedition", "Mustang", "E-Series"],
+    "Chevrolet": ["Silverado 1500", "Silverado 2500HD", "Silverado 3500HD", "Colorado", "Tahoe", "Suburban", "Express Van"],
+    "Dodge": ["RAM 1500", "RAM 2500", "RAM 3500", "RAM 4500", "RAM 5500", "Durango", "Challenger", "Charger", "Sprinter"],
+    "RAM": ["1500", "2500", "3500", "4500", "5500", "ProMaster", "ProMaster City"],
+    "GMC": ["Sierra 1500", "Sierra 2500HD", "Sierra 3500HD", "Canyon", "Yukon", "Savana"],
+    "Toyota": ["Tundra", "Tacoma", "Hilux", "Land Cruiser", "4Runner", "Camry", "Sequoia"],
+    "Nissan": ["Titan", "Titan XD", "Frontier", "NV Cargo", "NV Passenger"],
+    "Mercedes-Benz": ["Sprinter", "Vito", "X-Class", "GLE", "GLC", "E-Class", "Actros", "Arocs"],
+    "Volkswagen": ["Amarok", "Transporter", "Caddy", "Touareg", "Passat", "Golf", "Crafter"],
+    "BMW": ["X3", "X5", "X6", "X7", "3 Series", "5 Series", "7 Series"],
     "Audi": ["A4", "A6", "Q5", "Q7", "Q8", "A3"],
+    
+    # Heavy Duty Trucks
+    "Peterbilt": ["379", "389", "567", "579", "520", "337", "348", "365", "367"],
+    "Kenworth": ["W900", "T680", "T880", "T800", "T370", "T270", "T170"],
+    "Freightliner": ["Cascadia", "Coronado", "M2 106", "M2 112", "114SD", "122SD", "Business Class"],
+    "Mack": ["Anthem", "Pinnacle", "Granite", "TerraPro", "LR"],
+    "International": ["LT Series", "RH Series", "HV Series", "HX Series", "MV Series", "CV Series"],
+    "Western Star": ["49X", "47X", "57X", "5700XE", "4700"],
+    "Volvo Trucks": ["VNL", "VNR", "VHD", "VAH", "VNX"],
+    "Scania": ["R Series", "S Series", "P Series", "G Series", "XT Series"],
+    "MAN": ["TGX", "TGS", "TGL", "TGM"],
+    "DAF": ["XF", "XG", "XG+", "CF", "LF"],
+    "Iveco": ["S-Way", "X-Way", "Stralis", "Eurocargo", "Daily"],
+    "Hino": ["XL Series", "L Series", "M Series", "195", "268", "338"],
+    "Isuzu Trucks": ["F-Series", "N-Series", "NPR", "NQR", "NRR", "FTR", "FVR"],
+    "UD Trucks": ["Quon", "Quester", "Croner", "Condor"],
+    
+    # Buses
+    "Blue Bird": ["Vision", "All American", "Micro Bird"],
+    "Thomas Built": ["Saf-T-Liner C2", "Saf-T-Liner HDX", "Saf-T-Liner EFX"],
+    "IC Bus": ["CE Series", "RE Series", "HC Series"],
+    "New Flyer": ["Xcelsior", "XE Series", "XD Series"],
+    "Gillig": ["Low Floor", "BRT Plus", "CNG"],
+    "MCI (Motor Coach)": ["J4500", "D4505", "D45 CRT LE"],
+    "Prevost": ["H3-45", "X3-45", "H Series", "X Series"],
+    "Van Hool": ["CX Series", "TX Series", "TDX Series"],
+    "Mercedes-Benz Bus": ["Tourismo", "Intouro", "Citaro"],
+    "Volvo Bus": ["9700", "9900", "7900", "8900"],
+    "Scania Bus": ["Touring", "Interlink", "Citywide"],
+    "MAN Bus": ["Lion's Coach", "Lion's City", "Lion's Intercity"]
 }
 
 # Service pricing (base prices before 25% markup)
