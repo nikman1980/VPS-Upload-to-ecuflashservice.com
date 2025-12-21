@@ -588,6 +588,206 @@ async def download_file(request_id: str, file_id: str):
     )
 
 
+@api_router.get("/download-processed/{request_id}/{file_id}")
+async def download_processed_file(request_id: str, file_id: str):
+    """Download processed ECU file"""
+    request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
+    
+    if not request:
+        raise HTTPException(status_code=404, detail="Service request not found")
+    
+    # Find the processed file
+    file_info = None
+    for file in request.get("processed_files", []):
+        if file["file_id"] == file_id:
+            file_info = file
+            break
+    
+    if not file_info:
+        raise HTTPException(status_code=404, detail="Processed file not found")
+    
+    filepath = Path(file_info["filepath"])
+    if not filepath.exists():
+        raise HTTPException(status_code=404, detail="File not found on server")
+    
+    return FileResponse(
+        path=filepath,
+        filename=file_info["processed_filename"],
+        media_type="application/octet-stream"
+    )
+
+
+async def process_ecu_files_background(request_id: str):
+    """Background task to process ECU files with AI"""
+    try:
+        # Get request from database
+        request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
+        
+        if not request:
+            logger.error(f"Request {request_id} not found")
+            return
+        
+        # Update status to processing
+        await db.service_requests.update_one(
+            {"id": request_id},
+            {"$set": {
+                "processing_status": "analyzing",
+                "processing_started_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        
+        processed_files = []
+        all_warnings = []
+        confidences = []
+        detected_ecu_types = []
+        
+        # Process each uploaded file
+        for uploaded_file in request.get("uploaded_files", []):
+            try:
+                filepath = Path(uploaded_file["filepath"])
+                
+                if not filepath.exists():
+                    all_warnings.append(f"File {uploaded_file['original_filename']} not found")
+                    continue
+                
+                # Read file data
+                with open(filepath, "rb") as f:
+                    file_data = f.read()
+                
+                # Update status
+                await db.service_requests.update_one(
+                    {"id": request_id},
+                    {"$set": {"processing_status": "processing"}}
+                )
+                
+                # Process with AI
+                result = ecu_processor.process_file(
+                    file_data,
+                    request["selected_services"]
+                )
+                
+                if result["success"] and result["processed_file"]:
+                    # Save processed file
+                    processed_filename = f"processed_{uploaded_file['original_filename']}"
+                    processed_filepath = PROCESSED_DIR / f"{request_id}_{uploaded_file['file_id']}_{processed_filename}"
+                    
+                    with open(processed_filepath, "wb") as f:
+                        f.write(result["processed_file"])
+                    
+                    processed_files.append({
+                        "file_id": str(uuid.uuid4()),
+                        "original_filename": uploaded_file["original_filename"],
+                        "processed_filename": processed_filename,
+                        "filepath": str(processed_filepath),
+                        "size": len(result["processed_file"]),
+                        "ecu_type": result["ecu_type"],
+                        "confidence": result["confidence"],
+                        "confidence_level": result["confidence_level"],
+                        "actions_applied": result["actions_applied"],
+                        "warnings": result["warnings"],
+                        "processed_at": datetime.now(timezone.utc).isoformat()
+                    })
+                    
+                    confidences.append(result["confidence"])
+                    detected_ecu_types.append(result["ecu_type"])
+                    all_warnings.extend(result["warnings"])
+                else:
+                    all_warnings.append(f"Processing failed for {uploaded_file['original_filename']}")
+                    all_warnings.extend(result.get("warnings", []))
+                    
+            except Exception as e:
+                logger.error(f"Error processing file: {e}")
+                all_warnings.append(f"Error processing {uploaded_file.get('original_filename', 'unknown')}: {str(e)}")
+        
+        # Calculate overall confidence
+        avg_confidence = sum(confidences) / len(confidences) if confidences else 0.0
+        
+        # Determine confidence level
+        if avg_confidence >= 0.90:
+            confidence_level = ConfidenceLevel.HIGH.value
+        elif avg_confidence >= 0.70:
+            confidence_level = ConfidenceLevel.MEDIUM.value
+        elif avg_confidence >= 0.50:
+            confidence_level = ConfidenceLevel.LOW.value
+        else:
+            confidence_level = ConfidenceLevel.VERY_LOW.value
+        
+        # Determine final status
+        if processed_files:
+            final_status = "completed"
+            request_status = RequestStatus.COMPLETED.value
+        else:
+            final_status = "failed"
+            request_status = RequestStatus.CANCELLED.value
+            all_warnings.append("No files were successfully processed")
+        
+        # Update request with results
+        await db.service_requests.update_one(
+            {"id": request_id},
+            {"$set": {
+                "processing_status": final_status,
+                "processed_files": processed_files,
+                "ai_confidence": avg_confidence,
+                "confidence_level": confidence_level,
+                "detected_ecu_type": ", ".join(set(detected_ecu_types)) if detected_ecu_types else "unknown",
+                "processing_warnings": all_warnings,
+                "processing_completed_at": datetime.now(timezone.utc).isoformat(),
+                "status": request_status,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        
+        logger.info(f"Processing completed for request {request_id}")
+        
+    except Exception as e:
+        logger.error(f"Background processing error for {request_id}: {e}")
+        await db.service_requests.update_one(
+            {"id": request_id},
+            {"$set": {
+                "processing_status": "failed",
+                "processing_warnings": [str(e)],
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+
+
+@api_router.post("/trigger-processing/{request_id}")
+async def trigger_processing(request_id: str, background_tasks: BackgroundTasks):
+    """Manually trigger AI processing for a request"""
+    request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
+    
+    if not request:
+        raise HTTPException(status_code=404, detail="Service request not found")
+    
+    if request.get("payment_status") != PaymentStatus.COMPLETED.value:
+        raise HTTPException(status_code=400, detail="Payment must be completed before processing")
+    
+    # Add to background tasks
+    background_tasks.add_task(process_ecu_files_background, request_id)
+    
+    return {"success": True, "message": "Processing started"}
+
+
+@api_router.get("/processing-status/{request_id}")
+async def get_processing_status(request_id: str):
+    """Get AI processing status for a request"""
+    request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
+    
+    if not request:
+        raise HTTPException(status_code=404, detail="Service request not found")
+    
+    return {
+        "processing_status": request.get("processing_status", "pending"),
+        "ai_confidence": request.get("ai_confidence"),
+        "confidence_level": request.get("confidence_level"),
+        "detected_ecu_type": request.get("detected_ecu_type"),
+        "warnings": request.get("processing_warnings", []),
+        "processed_files": request.get("processed_files", []),
+        "processing_started_at": request.get("processing_started_at"),
+        "processing_completed_at": request.get("processing_completed_at")
+    }
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
