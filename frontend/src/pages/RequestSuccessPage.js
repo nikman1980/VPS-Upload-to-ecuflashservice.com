@@ -132,9 +132,20 @@ const RequestSuccessPage = () => {
           <div className="bg-blue-900/30 border border-blue-700 p-4 rounded-lg mb-8">
             <p className="text-blue-300">
               💡 <strong>What's Next?</strong><br/>
-              Our team will review your request and contact you within 24 hours to discuss the details and schedule your service.
+              Your ECU file is being processed by dpfoffservice.com. You will receive an email with the download link within 24-48 hours.
             </p>
           </div>
+          
+          {request.uploaded_files && request.uploaded_files.length > 0 && (
+            <div className="bg-gray-900 p-4 rounded-lg mb-8">
+              <h4 className="font-semibold mb-2 text-blue-400">📁 Uploaded Files:</h4>
+              {request.uploaded_files.map((file, index) => (
+                <div key={index} className="text-sm py-1">
+                  • {file.original_filename} ({(file.size / 1024).toFixed(2)} KB)
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="flex gap-4 justify-center">
             <button 
