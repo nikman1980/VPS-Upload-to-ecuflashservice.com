@@ -570,38 +570,35 @@ const HomePage = () => {
               <div>
                 <h4 className="text-xl font-semibold mb-4 text-blue-400">Vehicle Information</h4>
                 <div className="grid md:grid-cols-2 gap-4">
-                  <select
-                    name="vehicle_make"
-                    required
-                    value={formData.vehicle_make}
-                    onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    data-testid="vehicle-make-select"
-                  >
-                    <option value="">Select Make *</option>
-                    {vehicleMakes.map(make => (
-                      <option key={make} value={make}>{make}</option>
-                    ))}
-                  </select>
-                  
-                  <select
-                    name="vehicle_model"
-                    required
-                    value={formData.vehicle_model}
-                    onChange={handleInputChange}
-                    disabled={!formData.vehicle_make || availableModels.length === 0}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                    data-testid="vehicle-model-select"
-                  >
-                    <option value="">Select Model *</option>
-                    {availableModels.map(model => (
-                      <option key={model} value={model}>{model}</option>
-                    ))}
-                    {!formData.vehicle_make && <option disabled>Select make first</option>}
-                    {formData.vehicle_make && availableModels.length === 0 && (
-                      <option value="other">Other (Please specify in notes)</option>
-                    )}
-                  </select>
+                  {/* Brand */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Brand *</label>
+                    <select
+                      value={formData.vehicle_make}
+                      onChange={(e) => handleInputChange('vehicle_make', e.target.value)}
+                      disabled={!vehicleType}
+                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 text-lg"
+                      required
+                    >
+                      <option value="">Select Brand</option>
+                      {vehicleMakes.map(make => (
+                        <option key={make} value={make}>{make}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Model - Free Text Input */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Model *</label>
+                    <input
+                      type="text"
+                      value={formData.vehicle_model}
+                      onChange={(e) => handleInputChange('vehicle_model', e.target.value)}
+                      placeholder="Enter vehicle model"
+                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      required
+                    />
+                  </div>
                   
                   <input
                     type="number"
