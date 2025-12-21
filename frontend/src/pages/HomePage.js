@@ -542,16 +542,16 @@ const HomePage = () => {
                     className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="customer-email-input"
                   />
-                  <input
-                    type="tel"
-                    name="customer_phone"
-                    placeholder="Phone Number *"
-                    required
-                    value={formData.customer_phone}
-                    onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    data-testid="customer-phone-input"
-                  />
+                    <input
+                      type="tel"
+                      name="customer_phone"
+                      placeholder="Phone Number *"
+                      required
+                      value={formData.customer_phone}
+                      onChange={handleInputChange}
+                      className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      data-testid="customer-phone-input"
+                    />
                 </div>
               </div>
 
