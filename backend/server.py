@@ -140,6 +140,10 @@ SERVICE_PRICING = {
         "base_price": 25.00,
         "name": "DTC Removal (Multiple Codes)"
     },
+    "checksum": {
+        "base_price": 5.00,
+        "name": "Checksum Correction"
+    },
     "egr-removal": {
         "base_price": 25.00,
         "name": "EGR Removal"
