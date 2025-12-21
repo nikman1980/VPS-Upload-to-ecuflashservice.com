@@ -27,9 +27,14 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create uploads directory
+# Create uploads and processed directories
 UPLOAD_DIR = Path("/app/backend/uploads")
+PROCESSED_DIR = Path("/app/backend/processed")
 UPLOAD_DIR.mkdir(exist_ok=True)
+PROCESSED_DIR.mkdir(exist_ok=True)
+
+# Initialize AI ECU Processor
+ecu_processor = ECUProcessor()
 
 # Create the main app without a prefix
 app = FastAPI()
