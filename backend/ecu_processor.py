@@ -429,6 +429,75 @@ class ECUProcessor:
         self.modifier = ECUModifier()
         self.checksum_calc = ChecksumCalculator()
     
+    def analyze_file_for_options(self, file_data: bytes) -> Dict:
+        """
+        Analyze ECU file and return available processing options
+        This is called BEFORE customer payment to show what's available
+        """
+        result = {
+            "success": False,
+            "ecu_type": None,
+            "ecu_confidence": 0.0,
+            "file_size_mb": len(file_data) / (1024 * 1024),
+            "available_services": [],
+            "pricing": [],
+            "total_if_all_selected": 0.0,
+            "warnings": []
+        }
+        
+        # Step 1: Detect ECU type
+        ecu_type, type_confidence = self.analyzer.detect_ecu_type(file_data)
+        result["ecu_type"] = ecu_type.value
+        result["ecu_confidence"] = float(type_confidence)
+        
+        if ecu_type == ECUType.UNKNOWN:
+            result["warnings"].append("Could not reliably identify ECU type")
+            return result
+        
+        # Step 2: Detect available systems
+        available_systems = self.analyzer.detect_available_systems(file_data, ecu_type)
+        
+        # Service pricing mapping
+        service_prices = {
+            'dpf': {'id': 'dpf-removal', 'name': 'DPF Removal', 'price': 187.50},
+            'adblue': {'id': 'adblue-removal', 'name': 'AdBlue Removal', 'price': 437.50},
+            'egr': {'id': 'egr-removal', 'name': 'EGR Removal', 'price': 150.00},
+        }
+        
+        # Build available services list
+        total_price = 0.0
+        for system_key, system_info in available_systems.items():
+            if system_info['available']:
+                service = service_prices[system_key]
+                available_service = {
+                    "service_id": service['id'],
+                    "service_name": service['name'],
+                    "price": service['price'],
+                    "confidence": system_info['confidence'],
+                    "available": True
+                }
+                result["available_services"].append(available_service)
+                result["pricing"].append(available_service)
+                total_price += service['price']
+        
+        result["total_if_all_selected"] = total_price
+        result["success"] = len(result["available_services"]) > 0
+        
+        # Add DTC deletion (always available)
+        result["available_services"].append({
+            "service_id": "dtc-deletion",
+            "service_name": "DTC Code Deletion",
+            "price": 0.00,  # Included free
+            "confidence": 1.0,
+            "available": True,
+            "note": "Included with any service"
+        })
+        
+        if not result["success"]:
+            result["warnings"].append("No systems detected in this file")
+        
+        return result
+    
     def process_file(
         self, 
         file_data: bytes, 
