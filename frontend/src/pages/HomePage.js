@@ -446,7 +446,7 @@ const HomePage = () => {
             <div className="text-center">
               <div className="text-5xl mb-4">💯</div>
               <h4 className="text-xl font-bold mb-2">Money-Back Guarantee</h4>
-              <p className="text-gray-400">30-day refund if file doesn't work</p>
+              <p className="text-gray-400">30-day refund if file doesn&apos;t work</p>
             </div>
           </div>
         </div>
