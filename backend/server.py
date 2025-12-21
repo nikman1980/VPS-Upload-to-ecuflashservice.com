@@ -278,31 +278,61 @@ def calculate_pricing(service_ids: List[str]) -> dict:
     base_total = 0.0
     breakdown = []
     
+    # Check for EGR + DPF combo
+    has_egr = "egr-removal" in service_ids
+    has_dpf = "dpf-removal" in service_ids
+    
+    # If both EGR and DPF selected, use combo pricing
+    if has_egr and has_dpf:
+        # Remove individual services and add combo
+        service_ids = [s for s in service_ids if s not in ["egr-removal", "dpf-removal"]]
+        if "egr-dpf-combo" not in service_ids:
+            service_ids.append("egr-dpf-combo")
+    
     for service_id in service_ids:
         if service_id in SERVICE_PRICING:
             service_info = SERVICE_PRICING[service_id]
-            base_price = service_info["base_price"]
-            markup_amount = base_price * (MARKUP_PERCENTAGE / 100)
-            final_price = base_price + markup_amount
-            
-            base_total += base_price
+            price = service_info["base_price"]
+            base_total += price
             
             breakdown.append({
                 "service_id": service_id,
                 "service_name": service_info["name"],
-                "base_price": base_price,
-                "markup_percentage": MARKUP_PERCENTAGE,
-                "markup_amount": markup_amount,
-                "final_price": final_price
+                "base_price": price,
+                "markup_percentage": 0,
+                "markup_amount": 0.0,
+                "final_price": price
             })
     
-    markup_total = base_total * (MARKUP_PERCENTAGE / 100)
-    total_price = base_total + markup_total
+    # Check for DTC options - only allow one
+    dtc_services = [s for s in service_ids if s.startswith("dtc-")]
+    if len(dtc_services) > 1:
+        # Remove single if multiple is present
+        if "dtc-multiple" in dtc_services:
+            service_ids = [s for s in service_ids if s != "dtc-single"]
+        
+        # Recalculate
+        base_total = 0.0
+        breakdown = []
+        for service_id in service_ids:
+            if service_id in SERVICE_PRICING:
+                service_info = SERVICE_PRICING[service_id]
+                price = service_info["base_price"]
+                base_total += price
+                
+                breakdown.append({
+                    "service_id": service_id,
+                    "service_name": service_info["name"],
+                    "base_price": price,
+                    "markup_percentage": 0,
+                    "markup_amount": 0.0,
+                    "final_price": price
+                })
     
     return {
         "base_total": base_total,
-        "markup_amount": markup_total,
-        "total_price": total_price,
+        "markup_amount": 0.0,
+        "total_price": base_total,
         "pricing_breakdown": breakdown
     }
 
