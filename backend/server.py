@@ -114,6 +114,8 @@ VEHICLE_MODELS = {
     "Prevost": ["H3-45", "X3-45", "H Series", "X Series"],
     "Van Hool": ["CX Series", "TX Series", "TDX Series"],
     "Mercedes-Benz Bus": ["Tourismo", "Intouro", "Citaro"],
+    "Setra": ["S 515 HD", "S 516 HD", "S 517 HDH", "S 531 DT", "MultiClass"],
+    "Neoplan": ["Cityliner", "Tourliner", "Skyliner"],
     "Volvo Bus": ["9700", "9900", "7900", "8900"],
     "Scania Bus": ["Touring", "Interlink", "Citywide"],
     "MAN Bus": ["Lion's Coach", "Lion's City", "Lion's Intercity"]
