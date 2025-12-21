@@ -33,6 +33,7 @@ class ProcessingAction(Enum):
     EGR_REMOVAL = "egr-removal"
     DTC_DELETION = "dtc-deletion"
     STAGE1_TUNE = "stage1-tune"
+    IMMO_OFF = "immo-off"
 
 
 class ConfidenceLevel(Enum):
