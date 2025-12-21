@@ -549,7 +549,7 @@ const HomePage = () => {
                         <span>${pricingData.base_total.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-400">
-                        <span>Our Markup (25%):</span>
+                        <span>Service Fee (25%):</span>
                         <span>${pricingData.markup_amount.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-2xl font-bold text-blue-400 mt-2">
