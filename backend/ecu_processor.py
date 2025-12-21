@@ -614,6 +614,8 @@ class ECUProcessor:
                         modified_data = self.modifier.apply_adblue_removal(modified_data, maps)
                     elif action == ProcessingAction.EGR_REMOVAL:
                         modified_data = self.modifier.apply_egr_removal(modified_data, maps)
+                    elif action == ProcessingAction.IMMO_OFF:
+                        modified_data = self.modifier.apply_immo_off(modified_data, maps)
                     
                     result["actions_applied"].append(action_str)
                     avg_map_confidence = np.mean([m["confidence"] for m in maps])
