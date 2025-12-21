@@ -488,6 +488,7 @@ class ECUProcessor:
             'dpf': {'id': 'dpf-removal', 'name': 'DPF Removal', 'price': 187.50},
             'adblue': {'id': 'adblue-removal', 'name': 'AdBlue Removal', 'price': 437.50},
             'egr': {'id': 'egr-removal', 'name': 'EGR Removal', 'price': 150.00},
+            'immo': {'id': 'immo-off', 'name': 'Immobilizer Off', 'price': 125.00},
         }
         
         # Build available services list
