@@ -332,6 +332,14 @@ AVAILABLE_SERVICES = [
         "icon": "🚀",
         "base_price": SERVICE_PRICING["ecu-remap"]["base_price"],
         "final_price": SERVICE_PRICING["ecu-remap"]["base_price"] * 1.25
+    },
+    {
+        "id": "immo-off",
+        "name": "Immobilizer Off",
+        "description": "Disable vehicle immobilizer system for key programming, ECU swap, or security system bypass.",
+        "icon": "🔓",
+        "base_price": SERVICE_PRICING["immo-off"]["base_price"],
+        "final_price": SERVICE_PRICING["immo-off"]["base_price"] * 1.25
     }
 ]
 
