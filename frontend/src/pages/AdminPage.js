@@ -41,18 +41,54 @@ const AdminPage = () => {
     }
   };
 
+  const downloadFile = async (requestId, fileId, fileName) => {
+    try {
+      const response = await axios.get(
+        `${API}/download-file/${requestId}/${fileId}`,
+        { responseType: 'blob' }
+      );
+      
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      alert('Error downloading file');
+    }
+  };
+
   const getStatusColor = (status) => {
     const colors = {
+      pending_payment: 'bg-yellow-500',
+      paid: 'bg-green-500',
+      processing: 'bg-blue-500',
+      completed: 'bg-green-600',
+      cancelled: 'bg-red-500',
+      refunded: 'bg-orange-500'
+    };
+    return colors[status] || 'bg-gray-500';
+  };
+
+  const getPaymentStatusColor = (status) => {
+    const colors = {
       pending: 'bg-yellow-500',
-      in_progress: 'bg-blue-500',
       completed: 'bg-green-500',
-      cancelled: 'bg-red-500'
+      failed: 'bg-red-500',
+      refunded: 'bg-orange-500'
     };
     return colors[status] || 'bg-gray-500';
   };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString();
+  };
+
+  const formatFileSize = (bytes) => {
+    return (bytes / 1024).toFixed(2) + ' KB';
   };
 
   return (
@@ -82,22 +118,28 @@ const AdminPage = () => {
         ) : (
           <>
             {/* Stats */}
-            <div className="grid md:grid-cols-4 gap-4 mb-8">
+            <div className="grid md:grid-cols-5 gap-4 mb-8">
               <div className="bg-gray-800 p-6 rounded-lg">
                 <div className="text-3xl font-bold" data-testid="total-requests">{requests.length}</div>
                 <div className="text-gray-400">Total Requests</div>
               </div>
               <div className="bg-yellow-900/30 border border-yellow-700 p-6 rounded-lg">
-                <div className="text-3xl font-bold" data-testid="pending-requests">
-                  {requests.filter(r => r.status === 'pending').length}
+                <div className="text-3xl font-bold" data-testid="pending-payment">
+                  {requests.filter(r => r.status === 'pending_payment').length}
                 </div>
-                <div className="text-yellow-300">Pending</div>
+                <div className="text-yellow-300">Pending Payment</div>
+              </div>
+              <div className="bg-green-900/30 border border-green-700 p-6 rounded-lg">
+                <div className="text-3xl font-bold" data-testid="paid-requests">
+                  {requests.filter(r => r.status === 'paid').length}
+                </div>
+                <div className="text-green-300">Paid</div>
               </div>
               <div className="bg-blue-900/30 border border-blue-700 p-6 rounded-lg">
-                <div className="text-3xl font-bold" data-testid="in-progress-requests">
-                  {requests.filter(r => r.status === 'in_progress').length}
+                <div className="text-3xl font-bold" data-testid="processing-requests">
+                  {requests.filter(r => r.status === 'processing').length}
                 </div>
-                <div className="text-blue-300">In Progress</div>
+                <div className="text-blue-300">Processing</div>
               </div>
               <div className="bg-green-900/30 border border-green-700 p-6 rounded-lg">
                 <div className="text-3xl font-bold" data-testid="completed-requests">
@@ -117,6 +159,9 @@ const AdminPage = () => {
                       <th className="px-6 py-3 text-left">Customer</th>
                       <th className="px-6 py-3 text-left">Vehicle</th>
                       <th className="px-6 py-3 text-left">Services</th>
+                      <th className="px-6 py-3 text-left">Files</th>
+                      <th className="px-6 py-3 text-left">Amount</th>
+                      <th className="px-6 py-3 text-left">Payment</th>
                       <th className="px-6 py-3 text-left">Status</th>
                       <th className="px-6 py-3 text-left">Actions</th>
                     </tr>
@@ -124,7 +169,7 @@ const AdminPage = () => {
                   <tbody>
                     {requests.length === 0 ? (
                       <tr>
-                        <td colSpan="6" className="px-6 py-8 text-center text-gray-400">
+                        <td colSpan="9" className="px-6 py-8 text-center text-gray-400">
                           No service requests yet
                         </td>
                       </tr>
@@ -141,6 +186,21 @@ const AdminPage = () => {
                           </td>
                           <td className="px-6 py-4">
                             <div className="text-sm">{request.selected_services.length} service(s)</div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="text-sm">
+                              {request.uploaded_files?.length || 0} file(s)
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="font-bold text-green-400">
+                              ${request.total_price?.toFixed(2) || '0.00'}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className={`${getPaymentStatusColor(request.payment_status)} px-2 py-1 rounded-full text-xs font-semibold`}>
+                              {request.payment_status.toUpperCase()}
+                            </span>
                           </td>
                           <td className="px-6 py-4">
                             <span className={`${getStatusColor(request.status)} px-3 py-1 rounded-full text-xs font-semibold`}>
@@ -170,7 +230,7 @@ const AdminPage = () => {
       {/* Request Details Modal */}
       {selectedRequest && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" data-testid="request-details-modal">
-          <div className="bg-gray-800 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+          <div className="bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
             <button 
               onClick={() => setSelectedRequest(null)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
@@ -191,12 +251,106 @@ const AdminPage = () => {
                   className="bg-gray-700 text-white px-4 py-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                   data-testid="status-select"
                 >
-                  <option value="pending">Pending</option>
-                  <option value="in_progress">In Progress</option>
+                  <option value="pending_payment">Pending Payment</option>
+                  <option value="paid">Paid</option>
+                  <option value="processing">Processing</option>
                   <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
+                  <option value="refunded">Refunded</option>
                 </select>
               </div>
+
+              {/* Payment Information */}
+              <div className="bg-gray-900 p-4 rounded-lg">
+                <h4 className="text-xl font-semibold mb-3 text-blue-400">Payment Information</h4>
+                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-400">Payment Status:</span>
+                    <div className="font-semibold">
+                      <span className={`${getPaymentStatusColor(selectedRequest.payment_status)} px-2 py-1 rounded text-xs`}>
+                        {selectedRequest.payment_status.toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-gray-400">Total Amount:</span>
+                    <div className="font-semibold text-green-400 text-lg">
+                      ${selectedRequest.total_price?.toFixed(2) || '0.00'}
+                    </div>
+                  </div>
+                  {selectedRequest.paypal_order_id && (
+                    <div>
+                      <span className="text-gray-400">PayPal Order ID:</span>
+                      <div className="font-semibold text-xs">{selectedRequest.paypal_order_id}</div>
+                    </div>
+                  )}
+                  {selectedRequest.paypal_transaction_id && (
+                    <div>
+                      <span className="text-gray-400">Transaction ID:</span>
+                      <div className="font-semibold text-xs">{selectedRequest.paypal_transaction_id}</div>
+                    </div>
+                  )}
+                  {selectedRequest.payment_date && (
+                    <div>
+                      <span className="text-gray-400">Payment Date:</span>
+                      <div className="font-semibold">{formatDate(selectedRequest.payment_date)}</div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Pricing Breakdown */}
+                {selectedRequest.pricing_breakdown && selectedRequest.pricing_breakdown.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-gray-700">
+                    <h5 className="font-semibold mb-2">Pricing Breakdown:</h5>
+                    {selectedRequest.pricing_breakdown.map((item, index) => (
+                      <div key={index} className="flex justify-between text-sm py-1">
+                        <span>{item.service_name}</span>
+                        <span>${item.final_price.toFixed(2)}</span>
+                      </div>
+                    ))}
+                    <div className="border-t border-gray-600 mt-2 pt-2">
+                      <div className="flex justify-between text-sm text-gray-400">
+                        <span>Base Total (dpfoffservice.com):</span>
+                        <span>${selectedRequest.base_total?.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-400">
+                        <span>Markup (25%):</span>
+                        <span>${selectedRequest.markup_amount?.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between font-bold text-lg mt-2">
+                        <span>Total:</span>
+                        <span className="text-green-400">${selectedRequest.total_price?.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Uploaded Files */}
+              {selectedRequest.uploaded_files && selectedRequest.uploaded_files.length > 0 && (
+                <div className="bg-gray-900 p-4 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-3 text-blue-400">Uploaded ECU Files</h4>
+                  <div className="space-y-2">
+                    {selectedRequest.uploaded_files.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between bg-gray-700 p-3 rounded">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl">📄</span>
+                          <div>
+                            <div className="font-semibold">{file.original_filename}</div>
+                            <div className="text-sm text-gray-400">{formatFileSize(file.size)}</div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => downloadFile(selectedRequest.id, file.file_id, file.original_filename)}
+                          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm"
+                        >
+                          Download
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Customer Information */}
               <div>
@@ -237,10 +391,12 @@ const AdminPage = () => {
                     <span className="text-gray-400">Engine Type:</span>
                     <div className="font-semibold">{selectedRequest.engine_type}</div>
                   </div>
-                  <div>
-                    <span className="text-gray-400">Mileage:</span>
-                    <div className="font-semibold">{selectedRequest.mileage.toLocaleString()} miles</div>
-                  </div>
+                  {selectedRequest.ecu_type && (
+                    <div>
+                      <span className="text-gray-400">ECU Type:</span>
+                      <div className="font-semibold">{selectedRequest.ecu_type}</div>
+                    </div>
+                  )}
                   {selectedRequest.vin && (
                     <div>
                       <span className="text-gray-400">VIN:</span>
