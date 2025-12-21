@@ -147,6 +147,10 @@ SERVICE_PRICING = {
     "ecu-remap": {
         "base_price": 200.00,
         "name": "ECU Remapping"
+    },
+    "immo-off": {
+        "base_price": 100.00,
+        "name": "Immobilizer Off"
     }
 }
 
