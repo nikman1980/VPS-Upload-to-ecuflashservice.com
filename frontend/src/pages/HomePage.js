@@ -1,15 +1,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// PayPal Client ID - In production, use environment variable
+const PAYPAL_CLIENT_ID = 'test';
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [services, setServices] = useState([]);
+  const [vehicleMakes, setVehicleMakes] = useState([]);
+  const [vehicleModels, setVehicleModels] = useState({});
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [pricingData, setPricingData] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
   const [formData, setFormData] = useState({
     customer_name: '',
     customer_email: '',
@@ -18,8 +28,8 @@ const HomePage = () => {
     vehicle_model: '',
     vehicle_year: new Date().getFullYear(),
     engine_type: '',
+    ecu_type: '',
     vin: '',
-    mileage: '',
     selected_services: [],
     issues_description: '',
     additional_notes: ''
@@ -27,6 +37,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchServices();
+    fetchVehicleDatabase();
   }, []);
 
   const fetchServices = async () => {
@@ -38,18 +49,84 @@ const HomePage = () => {
     }
   };
 
+  const fetchVehicleDatabase = async () => {
+    try {
+      const response = await axios.get(`${API}/vehicles`);
+      setVehicleMakes(response.data.makes);
+      setVehicleModels(response.data.models);
+    } catch (error) {
+      console.error('Error fetching vehicle database:', error);
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Reset model when make changes
+    if (name === 'vehicle_make') {
+      setFormData(prev => ({ ...prev, vehicle_model: '' }));
+    }
   };
 
-  const handleServiceToggle = (serviceId) => {
-    setFormData(prev => ({
-      ...prev,
-      selected_services: prev.selected_services.includes(serviceId)
-        ? prev.selected_services.filter(id => id !== serviceId)
-        : [...prev.selected_services, serviceId]
-    }));
+  const handleServiceToggle = async (serviceId) => {
+    const updatedServices = formData.selected_services.includes(serviceId)
+      ? formData.selected_services.filter(id => id !== serviceId)
+      : [...formData.selected_services, serviceId];
+    
+    setFormData(prev => ({ ...prev, selected_services: updatedServices }));
+    
+    // Calculate pricing
+    if (updatedServices.length > 0) {
+      try {
+        const response = await axios.post(`${API}/calculate-price`, updatedServices);
+        setPricingData(response.data);
+      } catch (error) {
+        console.error('Error calculating price:', error);
+      }
+    } else {
+      setPricingData(null);
+    }
+  };
+
+  const handleFileSelect = async (files) => {
+    const validExtensions = ['.bin', '.hex', '.ecu', '.ori', '.mod'];
+    
+    for (let file of files) {
+      const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      
+      if (!validExtensions.includes(ext)) {
+        alert(`Invalid file type: ${file.name}. Only ECU files (.bin, .hex, .ecu, .ori, .mod) are allowed.`);
+        continue;
+      }
+      
+      setUploadedFiles(prev => [...prev, {
+        file: file,
+        name: file.name,
+        size: (file.size / 1024).toFixed(2) + ' KB',
+        uploading: false
+      }]);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const files = Array.from(e.dataTransfer.files);
+    handleFileSelect(files);
+  };
+
+  const removeFile = (index) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e) => {
@@ -60,15 +137,60 @@ const HomePage = () => {
       return;
     }
 
+    if (uploadedFiles.length === 0) {
+      alert('Please upload at least one ECU file');
+      return;
+    }
+
+    // Show payment section
+    setShowPayment(true);
+  };
+
+  const createOrder = (data, actions) => {
+    if (!pricingData) return;
+    
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: pricingData.total_price.toFixed(2),
+          },
+          description: `ECU File Processing - ${formData.selected_services.length} service(s)`
+        },
+      ],
+    });
+  };
+
+  const onApprove = async (data, actions) => {
+    const order = await actions.order.capture();
+    
     setLoading(true);
     try {
-      const submitData = {
-        ...formData,
-        vehicle_year: parseInt(formData.vehicle_year),
-        mileage: parseInt(formData.mileage)
-      };
+      // Create FormData for file upload
+      const formDataObj = new FormData();
       
-      const response = await axios.post(`${API}/service-requests`, submitData);
+      // Add all form fields
+      formDataObj.append('request_data', JSON.stringify(formData));
+      
+      // Add files
+      uploadedFiles.forEach(file => {
+        formDataObj.append('files', file.file);
+      });
+      
+      // Create service request
+      const response = await axios.post(`${API}/service-requests`, formDataObj, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      // Update payment status
+      await axios.patch(`${API}/service-requests/${response.data.id}/payment`, {
+        paypal_order_id: order.id,
+        paypal_transaction_id: order.purchase_units[0].payments.captures[0].id,
+        payment_status: 'completed'
+      });
+      
       navigate(`/success/${response.data.id}`);
     } catch (error) {
       console.error('Error submitting request:', error);
@@ -77,6 +199,10 @@ const HomePage = () => {
       setLoading(false);
     }
   };
+
+  const availableModels = formData.vehicle_make && vehicleModels[formData.vehicle_make] 
+    ? vehicleModels[formData.vehicle_make] 
+    : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -90,6 +216,7 @@ const HomePage = () => {
           <nav className="flex space-x-6">
             <a href="#services" className="hover:text-blue-400 transition">Services</a>
             <a href="#benefits" className="hover:text-blue-400 transition">Benefits</a>
+            <a href="#pricing" className="hover:text-blue-400 transition">Pricing</a>
             <a href="/admin" className="hover:text-blue-400 transition">Admin</a>
           </nav>
         </div>
@@ -98,26 +225,29 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h2 className="text-5xl md:text-6xl font-bold mb-6" data-testid="hero-title">
-          Professional DPF & AdBlue Removal Services
+          Online ECU File Processing
         </h2>
-        <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-          Eliminate DPF and AdBlue issues permanently with our expert ECU remapping services. 
-          Improve performance, reliability, and reduce maintenance costs.
+        <p className="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
+          Upload your ECU file and get DPF, AdBlue, and EGR removal within 24 hours.
+        </p>
+        <p className="text-lg text-blue-400 mb-8">
+          ⚡ Fully Automatic • 🔒 Secure Processing • ✅ Money-Back Guarantee
         </p>
         <button 
           onClick={() => setShowForm(true)}
           className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition transform hover:scale-105"
           data-testid="get-quote-btn"
         >
-          Get a Free Quote
+          Start Processing Now
         </button>
       </section>
 
       {/* Services Section */}
       <section id="services" className="container mx-auto px-4 py-16">
-        <h3 className="text-4xl font-bold text-center mb-12" data-testid="services-section">
+        <h3 className="text-4xl font-bold text-center mb-4" data-testid="services-section">
           Our Services
         </h3>
+        <p className="text-center text-gray-400 mb-12">Files processed by dpfoffservice.com + 25% markup</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
             <div 
@@ -127,31 +257,66 @@ const HomePage = () => {
             >
               <div className="text-5xl mb-4">{service.icon}</div>
               <h4 className="text-xl font-bold mb-2">{service.name}</h4>
-              <p className="text-gray-400">{service.description}</p>
+              <p className="text-gray-400 mb-4">{service.description}</p>
+              <div className="text-2xl font-bold text-blue-400">
+                ${service.final_price.toFixed(2)}
+              </div>
+              <div className="text-sm text-gray-500">
+                Base: ${service.base_price.toFixed(2)} + 25% markup
+              </div>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="bg-gray-800/50 py-16">
+        <div className="container mx-auto px-4">
+          <h3 className="text-4xl font-bold text-center mb-12">How It Works</h3>
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div className="text-5xl mb-4">📤</div>
+              <h4 className="text-xl font-bold mb-2">1. Upload File</h4>
+              <p className="text-gray-400">Upload your ECU file (.bin, .hex, .ecu)</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl mb-4">✅</div>
+              <h4 className="text-xl font-bold mb-2">2. Select Services</h4>
+              <p className="text-gray-400">Choose DPF, AdBlue, or EGR removal</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl mb-4">💳</div>
+              <h4 className="text-xl font-bold mb-2">3. Pay Securely</h4>
+              <p className="text-gray-400">Pay via PayPal</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl mb-4">📥</div>
+              <h4 className="text-xl font-bold mb-2">4. Download</h4>
+              <p className="text-gray-400">Get your processed file in 24h</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
-      <section id="benefits" className="bg-gray-800/50 py-16">
+      <section id="benefits" className="py-16">
         <div className="container mx-auto px-4">
           <h3 className="text-4xl font-bold text-center mb-12">Why Choose Us?</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-5xl mb-4">✅</div>
-              <h4 className="text-xl font-bold mb-2">Expert Technicians</h4>
-              <p className="text-gray-400">Certified professionals with years of experience</p>
-            </div>
-            <div className="text-center">
               <div className="text-5xl mb-4">⚡</div>
-              <h4 className="text-xl font-bold mb-2">Fast Turnaround</h4>
-              <p className="text-gray-400">Most services completed within 24-48 hours</p>
+              <h4 className="text-xl font-bold mb-2">Fast Processing</h4>
+              <p className="text-gray-400">Most files processed within 24-48 hours</p>
             </div>
             <div className="text-center">
-              <div className="text-5xl mb-4">🛡️</div>
-              <h4 className="text-xl font-bold mb-2">Lifetime Warranty</h4>
-              <p className="text-gray-400">Full warranty on all our remapping services</p>
+              <div className="text-5xl mb-4">🔒</div>
+              <h4 className="text-xl font-bold mb-2">Secure & Tested</h4>
+              <p className="text-gray-400">All solutions tested on real vehicles</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl mb-4">💯</div>
+              <h4 className="text-xl font-bold mb-2">Money-Back Guarantee</h4>
+              <p className="text-gray-400">30-day refund if file doesn't work</p>
             </div>
           </div>
         </div>
@@ -160,18 +325,69 @@ const HomePage = () => {
       {/* Request Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 overflow-y-auto" data-testid="request-form-modal">
-          <div className="bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+          <div className="bg-gray-800 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
             <button 
-              onClick={() => setShowForm(false)}
+              onClick={() => { setShowForm(false); setShowPayment(false); }}
               className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
               data-testid="close-form-btn"
             >
               ×
             </button>
             
-            <h3 className="text-3xl font-bold mb-6">Request Service</h3>
+            <h3 className="text-3xl font-bold mb-6">ECU File Processing Request</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* File Upload Section */}
+              <div>
+                <h4 className="text-xl font-semibold mb-4 text-blue-400">Upload ECU File *</h4>
+                <div 
+                  className={`border-2 border-dashed rounded-lg p-8 text-center transition ${
+                    isDragging ? 'border-blue-500 bg-blue-900/20' : 'border-gray-600'
+                  }`}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                >
+                  <div className="text-5xl mb-4">📁</div>
+                  <p className="text-lg mb-2">Drag & drop ECU files here</p>
+                  <p className="text-sm text-gray-400 mb-4">or</p>
+                  <label className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg cursor-pointer inline-block">
+                    Browse Files
+                    <input 
+                      type="file" 
+                      multiple
+                      accept=".bin,.hex,.ecu,.ori,.mod"
+                      onChange={(e) => handleFileSelect(Array.from(e.target.files))}
+                      className="hidden"
+                    />
+                  </label>
+                  <p className="text-xs text-gray-500 mt-4">Supported: .bin, .hex, .ecu, .ori, .mod</p>
+                </div>
+                
+                {uploadedFiles.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    {uploadedFiles.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between bg-gray-700 p-3 rounded">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl">📄</span>
+                          <div>
+                            <div className="font-semibold">{file.name}</div>
+                            <div className="text-sm text-gray-400">{file.size}</div>
+                          </div>
+                        </div>
+                        <button 
+                          type="button"
+                          onClick={() => removeFile(index)}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Customer Information */}
               <div>
                 <h4 className="text-xl font-semibold mb-4 text-blue-400">Customer Information</h4>
@@ -213,26 +429,39 @@ const HomePage = () => {
               <div>
                 <h4 className="text-xl font-semibold mb-4 text-blue-400">Vehicle Information</h4>
                 <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
+                  <select
                     name="vehicle_make"
-                    placeholder="Make (e.g., Ford) *"
                     required
                     value={formData.vehicle_make}
                     onChange={handleInputChange}
                     className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    data-testid="vehicle-make-input"
-                  />
-                  <input
-                    type="text"
+                    data-testid="vehicle-make-select"
+                  >
+                    <option value="">Select Make *</option>
+                    {vehicleMakes.map(make => (
+                      <option key={make} value={make}>{make}</option>
+                    ))}
+                  </select>
+                  
+                  <select
                     name="vehicle_model"
-                    placeholder="Model (e.g., F-150) *"
                     required
                     value={formData.vehicle_model}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    data-testid="vehicle-model-input"
-                  />
+                    disabled={!formData.vehicle_make || availableModels.length === 0}
+                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    data-testid="vehicle-model-select"
+                  >
+                    <option value="">Select Model *</option>
+                    {availableModels.map(model => (
+                      <option key={model} value={model}>{model}</option>
+                    ))}
+                    {!formData.vehicle_make && <option disabled>Select make first</option>}
+                    {formData.vehicle_make && availableModels.length === 0 && (
+                      <option value="other">Other (Please specify in notes)</option>
+                    )}
+                  </select>
+                  
                   <input
                     type="number"
                     name="vehicle_year"
@@ -257,23 +486,21 @@ const HomePage = () => {
                   />
                   <input
                     type="text"
+                    name="ecu_type"
+                    placeholder="ECU Type (e.g., Bosch EDC17)"
+                    value={formData.ecu_type}
+                    onChange={handleInputChange}
+                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    data-testid="ecu-type-input"
+                  />
+                  <input
+                    type="text"
                     name="vin"
                     placeholder="VIN (Optional)"
                     value={formData.vin}
                     onChange={handleInputChange}
                     className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="vin-input"
-                  />
-                  <input
-                    type="number"
-                    name="mileage"
-                    placeholder="Current Mileage *"
-                    required
-                    min="0"
-                    value={formData.mileage}
-                    onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    data-testid="mileage-input"
                   />
                 </div>
               </div>
@@ -285,29 +512,61 @@ const HomePage = () => {
                   {services.map((service) => (
                     <label 
                       key={service.id} 
-                      className="flex items-center space-x-3 bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition"
+                      className="flex items-start space-x-3 bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition"
                       data-testid={`service-checkbox-${service.id}`}
                     >
                       <input
                         type="checkbox"
                         checked={formData.selected_services.includes(service.id)}
                         onChange={() => handleServiceToggle(service.id)}
-                        className="w-5 h-5 text-blue-600"
+                        className="w-5 h-5 mt-1 text-blue-600"
                       />
-                      <div>
+                      <div className="flex-1">
                         <div className="font-semibold">{service.icon} {service.name}</div>
+                        <div className="text-sm text-gray-400 mb-1">{service.description}</div>
+                        <div className="text-lg font-bold text-blue-400">${service.final_price.toFixed(2)}</div>
+                        <div className="text-xs text-gray-500">Base: ${service.base_price} + 25%</div>
                       </div>
                     </label>
                   ))}
                 </div>
               </div>
 
+              {/* Pricing Breakdown */}
+              {pricingData && (
+                <div className="bg-blue-900/30 border border-blue-700 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-400">💰 Pricing Breakdown</h4>
+                  <div className="space-y-2">
+                    {pricingData.pricing_breakdown.map((item, index) => (
+                      <div key={index} className="flex justify-between text-sm">
+                        <span>{item.service_name}</span>
+                        <span>${item.final_price.toFixed(2)}</span>
+                      </div>
+                    ))}
+                    <div className="border-t border-gray-600 pt-2 mt-2">
+                      <div className="flex justify-between text-sm text-gray-400">
+                        <span>Subtotal (dpfoffservice.com):</span>
+                        <span>${pricingData.base_total.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-400">
+                        <span>Our Markup (25%):</span>
+                        <span>${pricingData.markup_amount.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-2xl font-bold text-blue-400 mt-2">
+                        <span>Total:</span>
+                        <span>${pricingData.total_price.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Additional Information */}
               <div>
                 <h4 className="text-xl font-semibold mb-4 text-blue-400">Additional Information</h4>
                 <textarea
                   name="issues_description"
-                  placeholder="Describe any current issues or symptoms"
+                  placeholder="Describe current issues or symptoms"
                   rows="3"
                   value={formData.issues_description}
                   onChange={handleInputChange}
@@ -316,7 +575,7 @@ const HomePage = () => {
                 />
                 <textarea
                   name="additional_notes"
-                  placeholder="Any additional notes or requests"
+                  placeholder="Any additional notes or specific requests"
                   rows="3"
                   value={formData.additional_notes}
                   onChange={handleInputChange}
@@ -325,14 +584,35 @@ const HomePage = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
-                data-testid="submit-request-btn"
-              >
-                {loading ? 'Submitting...' : 'Submit Request'}
-              </button>
+              {!showPayment ? (
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold text-lg transition"
+                  data-testid="proceed-to-payment-btn"
+                >
+                  Proceed to Payment
+                </button>
+              ) : (
+                <div className="space-y-4">
+                  <div className="bg-green-900/30 border border-green-700 p-4 rounded-lg text-center">
+                    <p className="text-lg font-semibold mb-2">✅ Ready to Process</p>
+                    <p className="text-sm text-gray-300">Complete payment to start processing your ECU file</p>
+                  </div>
+                  
+                  <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID, currency: "USD" }}>
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      createOrder={createOrder}
+                      onApprove={onApprove}
+                      disabled={loading}
+                    />
+                  </PayPalScriptProvider>
+                  
+                  <p className="text-center text-sm text-gray-400">
+                    Secure payment powered by PayPal
+                  </p>
+                </div>
+              )}
             </form>
           </div>
         </div>
@@ -341,7 +621,8 @@ const HomePage = () => {
       {/* Footer */}
       <footer className="bg-gray-900 py-8 mt-16">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p>© 2024 DPF AdBlue Removal Services. Professional ECU remapping and emissions solutions.</p>
+          <p>© 2024 DPF AdBlue Removal Services. Online ECU file processing powered by dpfoffservice.com</p>
+          <p className="text-sm mt-2">⚠️ For off-road and racing use only. Check local regulations.</p>
         </div>
       </footer>
     </div>
