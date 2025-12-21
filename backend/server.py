@@ -130,31 +130,39 @@ VEHICLE_MODELS = {
     "MAN Bus": ["Lion's Coach", "Lion's City", "Lion's Intercity"]
 }
 
-# Service pricing (base prices - internal costs)
+# Service pricing (direct customer prices - no markup)
 SERVICE_PRICING = {
-    "dpf-removal": {
-        "base_price": 150.00,
-        "name": "DPF Removal"
+    "dtc-single": {
+        "base_price": 10.00,
+        "name": "DTC Removal (Single Code)"
     },
-    "adblue-removal": {
-        "base_price": 350.00,
-        "name": "AdBlue/DEF Removal"
+    "dtc-multiple": {
+        "base_price": 25.00,
+        "name": "DTC Removal (Multiple Codes)"
     },
     "egr-removal": {
-        "base_price": 120.00,
+        "base_price": 25.00,
         "name": "EGR Removal"
     },
-    "ecu-remap": {
-        "base_price": 200.00,
-        "name": "ECU Remapping"
+    "dpf-removal": {
+        "base_price": 79.00,
+        "name": "DPF Removal"
+    },
+    "egr-dpf-combo": {
+        "base_price": 79.00,
+        "name": "EGR + DPF Combo"
+    },
+    "adblue-removal": {
+        "base_price": 199.00,
+        "name": "AdBlue/DEF Removal"
     },
     "immo-off": {
-        "base_price": 100.00,
+        "base_price": 35.00,
         "name": "Immobilizer Off"
     }
 }
 
-MARKUP_PERCENTAGE = 25  # 25% markup on base costs
+MARKUP_PERCENTAGE = 0  # No markup - direct pricing
 
 
 # Define Models
