@@ -66,8 +66,19 @@ const HomePage = () => {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (fieldName, fieldValue) => {
+    // Support both patterns: (fieldName, fieldValue) and (event)
+    let name, value;
+    if (typeof fieldName === 'string') {
+      name = fieldName;
+      value = fieldValue;
+    } else {
+      // fieldName is actually an event object
+      const e = fieldName;
+      name = e.target.name;
+      value = e.target.value;
+    }
+    
     setFormData(prev => ({ ...prev, [name]: value }));
     
     // Reset model when make changes
