@@ -359,6 +359,36 @@ async def calculate_price(service_ids: List[str]):
     return calculate_pricing(service_ids)
 
 
+@api_router.post("/analyze-file")
+async def analyze_file_for_options(file: UploadFile = File(...)):
+    """
+    Analyze ECU file and return available processing options
+    This is called IMMEDIATELY after file upload to show customer what's available
+    """
+    try:
+        # Read file
+        file_data = await file.read()
+        
+        # Validate file extension
+        allowed_extensions = [".bin", ".hex", ".ecu", ".ori", ".mod"]
+        file_ext = Path(file.filename).suffix.lower()
+        
+        if file_ext not in allowed_extensions:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid file type. Only ECU files ({', '.join(allowed_extensions)}) are allowed."
+            )
+        
+        # Analyze with AI
+        analysis_result = ecu_processor.analyze_file_for_options(file_data)
+        
+        return analysis_result
+        
+    except Exception as e:
+        logger.error(f"Error analyzing file: {e}")
+        raise HTTPException(status_code=500, detail=f"File analysis failed: {str(e)}")
+
+
 @api_router.post("/upload-file")
 async def upload_file(file: UploadFile = File(...)):
     """Upload ECU file - only accepts .bin, .hex, .ecu, .ori, .mod files"""
