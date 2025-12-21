@@ -112,13 +112,15 @@ class ECUFileAnalyzer:
         Returns: {
             'dpf': {'available': bool, 'confidence': float},
             'adblue': {'available': bool, 'confidence': float},
-            'egr': {'available': bool, 'confidence': float}
+            'egr': {'available': bool, 'confidence': float},
+            'immo': {'available': bool, 'confidence': float}
         }
         """
         available_systems = {
             'dpf': {'available': False, 'confidence': 0.0},
             'adblue': {'available': False, 'confidence': 0.0},
-            'egr': {'available': False, 'confidence': 0.0}
+            'egr': {'available': False, 'confidence': 0.0},
+            'immo': {'available': False, 'confidence': 0.0}
         }
         
         if ecu_type == ECUType.UNKNOWN:
@@ -172,6 +174,23 @@ class ECUFileAnalyzer:
                 'confidence': min(0.95, 0.50 + (egr_count * 0.15))
             }
         
+        # Immobilizer Detection - look for IMMO patterns
+        immo_patterns = [
+            b'IMMO', b'IMMOBILIZER', b'KEY', b'SECURITY',
+            bytes([0x5A, 0xA5]),  # Common security pattern
+        ]
+        immo_count = 0
+        for pattern in immo_patterns:
+            if pattern in file_data:
+                immo_count += 1
+        
+        # Immobilizer is present in almost all modern ECUs
+        if immo_count > 0 or len(file_data) > 512*1024:
+            available_systems['immo'] = {
+                'available': True,
+                'confidence': min(0.90, 0.70 + (immo_count * 0.10))
+            }
+        
         # Heuristic detection based on file size and ECU type
         # Most modern diesel trucks have all three systems
         if ecu_type in [ECUType.BOSCH_EDC17, ECUType.DELPHI_DCM]:
@@ -190,6 +209,10 @@ class ECUFileAnalyzer:
                 # EGR is almost universal
                 if not available_systems['egr']['available']:
                     available_systems['egr'] = {'available': True, 'confidence': 0.75}
+                
+                # Immobilizer almost always present
+                if not available_systems['immo']['available']:
+                    available_systems['immo'] = {'available': True, 'confidence': 0.85}
             
             elif file_size_mb >= 1.0:
                 # Medium files usually have EGR and DPF
@@ -197,6 +220,8 @@ class ECUFileAnalyzer:
                     available_systems['dpf'] = {'available': True, 'confidence': 0.60}
                 if not available_systems['egr']['available']:
                     available_systems['egr'] = {'available': True, 'confidence': 0.70}
+                if not available_systems['immo']['available']:
+                    available_systems['immo'] = {'available': True, 'confidence': 0.80}
         
         return available_systems
     
