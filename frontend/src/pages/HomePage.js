@@ -258,21 +258,26 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h2 className="text-5xl md:text-6xl font-bold mb-6" data-testid="hero-title">
-          Online ECU File Processing
+          {step === 1 ? 'Upload ECU File for Analysis' : 'Select Services to Remove'}
         </h2>
         <p className="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
-          Upload your ECU file and get DPF, AdBlue, and EGR removal within 24 hours.
+          {step === 1 
+            ? 'Upload your ECU file and our AI will detect what systems are available for removal.' 
+            : 'We analyzed your file. Select the services you want to remove.'
+          }
         </p>
         <p className="text-lg text-blue-400 mb-8">
-          ⚡ Fully Automatic • 🔒 Secure Processing • ✅ Money-Back Guarantee
+          ⚡ AI Analysis • 🔒 Secure • ⚙️ Custom Options
         </p>
-        <button 
-          onClick={() => setShowForm(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition transform hover:scale-105"
-          data-testid="get-quote-btn"
-        >
-          Start Processing Now
-        </button>
+        {step === 1 && (
+          <button 
+            onClick={() => setShowForm(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition transform hover:scale-105"
+            data-testid="get-quote-btn"
+          >
+            Start Upload
+          </button>
+        )}
       </section>
 
       {/* Services Section */}
