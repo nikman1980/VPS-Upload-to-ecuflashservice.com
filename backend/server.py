@@ -79,19 +79,19 @@ VEHICLE_MODELS = {
 # Service pricing (base prices before 25% markup)
 SERVICE_PRICING = {
     "dpf-removal": {
-        "base_price": 120.00,
+        "base_price": 150.00,
         "name": "DPF Removal"
     },
     "adblue-removal": {
-        "base_price": 100.00,
+        "base_price": 350.00,
         "name": "AdBlue/DEF Removal"
     },
     "egr-removal": {
-        "base_price": 90.00,
+        "base_price": 120.00,
         "name": "EGR Removal"
     },
     "ecu-remap": {
-        "base_price": 150.00,
+        "base_price": 200.00,
         "name": "ECU Remapping"
     }
 }
