@@ -527,7 +527,7 @@ async def update_service_request_status(request_id: str, status_update: StatusUp
 
 
 @api_router.patch("/service-requests/{request_id}/payment")
-async def update_payment_status(request_id: str, payment_update: PaymentUpdate):
+async def update_payment_status(request_id: str, payment_update: PaymentUpdate, background_tasks: BackgroundTasks):
     """Update payment status after PayPal payment"""
     request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
     
@@ -550,13 +550,16 @@ async def update_payment_status(request_id: str, payment_update: PaymentUpdate):
     if payment_update.payment_status == PaymentStatus.COMPLETED:
         update_data["payment_date"] = payment_date
         update_data["status"] = RequestStatus.PAID
+        
+        # Automatically trigger AI processing after successful payment
+        background_tasks.add_task(process_ecu_files_background, request_id)
     
     await db.service_requests.update_one(
         {"id": request_id},
         {"$set": update_data}
     )
     
-    return {"success": True, "message": "Payment status updated"}
+    return {"success": True, "message": "Payment status updated and processing started"}
 
 
 @api_router.get("/download-file/{request_id}/{file_id}")
