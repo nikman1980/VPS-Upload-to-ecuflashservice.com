@@ -576,8 +576,7 @@ const HomePage = () => {
                     <select
                       value={formData.vehicle_make}
                       onChange={(e) => handleInputChange('vehicle_make', e.target.value)}
-                      disabled={!vehicleType}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 text-lg"
+                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                       required
                     >
                       <option value="">Select Brand</option>
