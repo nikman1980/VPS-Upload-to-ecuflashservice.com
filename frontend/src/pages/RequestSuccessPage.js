@@ -132,7 +132,7 @@ const RequestSuccessPage = () => {
           <div className="bg-blue-900/30 border border-blue-700 p-4 rounded-lg mb-8">
             <p className="text-blue-300">
               💡 <strong>What's Next?</strong><br/>
-              Your ECU file is being processed by dpfoffservice.com. You will receive an email with the download link within 24-48 hours.
+              Our AI system is now processing your ECU file. You will receive an email with the download link within 24 hours. Most files are processed automatically within 1-2 hours.
             </p>
           </div>
           
