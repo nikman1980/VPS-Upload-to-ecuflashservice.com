@@ -617,11 +617,25 @@ class ECUProcessor:
             try:
                 action = ProcessingAction(action_str)
                 
-                if action == ProcessingAction.DTC_DELETION:
-                    # DTC removal doesn't need map location
+                # Handle DTC removal
+                if action == ProcessingAction.DTC_SINGLE or action == ProcessingAction.DTC_MULTIPLE:
                     modified_data = self.modifier.remove_dtc_codes(modified_data, ecu_type)
                     result["actions_applied"].append(action_str)
                     action_confidences.append(0.95)
+                # Handle EGR+DPF combo
+                elif action == ProcessingAction.EGR_DPF_COMBO:
+                    # Process both EGR and DPF
+                    egr_maps = self.map_locator.find_maps(bytes(modified_data), ecu_type, ProcessingAction.EGR_REMOVAL)
+                    dpf_maps = self.map_locator.find_maps(bytes(modified_data), ecu_type, ProcessingAction.DPF_REMOVAL)
+                    
+                    if egr_maps:
+                        modified_data = self.modifier.apply_egr_removal(modified_data, egr_maps)
+                    if dpf_maps:
+                        modified_data = self.modifier.apply_dpf_removal(modified_data, dpf_maps)
+                    
+                    result["actions_applied"].append(action_str)
+                    avg_confidence = np.mean([m["confidence"] for m in (egr_maps + dpf_maps)] or [0.70])
+                    action_confidences.append(avg_confidence)
                 else:
                     # Find maps for this action
                     maps = self.map_locator.find_maps(bytes(modified_data), ecu_type, action)
