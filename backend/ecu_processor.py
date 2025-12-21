@@ -44,7 +44,7 @@ class ConfidenceLevel(Enum):
 
 
 class ECUFileAnalyzer:
-    """Analyzes ECU files and detects type"""
+    """Analyzes ECU files and detects type and available systems"""
     
     # Known ECU signatures (first bytes patterns)
     ECU_SIGNATURES = {
@@ -80,7 +80,7 @@ class ECUFileAnalyzer:
         # Common ECU file sizes
         size_hints = {
             ECUType.BOSCH_EDC16: [512*1024, 1024*1024],  # 512KB or 1MB
-            ECUType.BOSCH_EDC17: [1024*1024, 2*1024*1024],  # 1MB or 2MB
+            ECUType.BOSCH_EDC17: [1024*1024, 2*1024*1024, 4*1024*1024],  # 1MB, 2MB or 4MB
             ECUType.DELPHI_DCM: [512*1024, 1024*1024],
         }
         
@@ -103,6 +103,101 @@ class ECUFileAnalyzer:
             return ECUType.BOSCH_EDC17, confidence  # Most common
         
         return ECUType.UNKNOWN, confidence
+    
+    @staticmethod
+    def detect_available_systems(file_data: bytes, ecu_type: ECUType) -> Dict:
+        """
+        Detect which systems are available in the ECU file
+        Returns: {
+            'dpf': {'available': bool, 'confidence': float},
+            'adblue': {'available': bool, 'confidence': float},
+            'egr': {'available': bool, 'confidence': float}
+        }
+        """
+        available_systems = {
+            'dpf': {'available': False, 'confidence': 0.0},
+            'adblue': {'available': False, 'confidence': 0.0},
+            'egr': {'available': False, 'confidence': 0.0}
+        }
+        
+        if ecu_type == ECUType.UNKNOWN:
+            return available_systems
+        
+        # DPF Detection - look for DPF-related patterns
+        dpf_patterns = [
+            b'DPF', b'FAP', b'PARTICULATE',
+            bytes([0xFF, 0xFF, 0xFF, 0xFF]),  # Common DPF map pattern
+        ]
+        dpf_count = 0
+        for pattern in dpf_patterns:
+            if pattern in file_data:
+                dpf_count += 1
+        
+        if dpf_count > 0:
+            available_systems['dpf'] = {
+                'available': True,
+                'confidence': min(0.95, 0.50 + (dpf_count * 0.15))
+            }
+        
+        # AdBlue Detection - look for AdBlue/SCR/DEF patterns
+        adblue_patterns = [
+            b'ADBLUE', b'BLUE', b'SCR', b'DEF', b'UREA',
+            bytes([0x00, 0x00, 0xFF, 0xFF]),
+        ]
+        adblue_count = 0
+        for pattern in adblue_patterns:
+            if pattern in file_data:
+                adblue_count += 1
+        
+        if adblue_count > 0:
+            available_systems['adblue'] = {
+                'available': True,
+                'confidence': min(0.95, 0.50 + (adblue_count * 0.15))
+            }
+        
+        # EGR Detection - look for EGR patterns
+        egr_patterns = [
+            b'EGR', b'EXHAUST',
+            bytes([0xFF, 0x00, 0xFF, 0x00]),
+        ]
+        egr_count = 0
+        for pattern in egr_patterns:
+            if pattern in file_data:
+                egr_count += 1
+        
+        if egr_count > 0:
+            available_systems['egr'] = {
+                'available': True,
+                'confidence': min(0.95, 0.50 + (egr_count * 0.15))
+            }
+        
+        # Heuristic detection based on file size and ECU type
+        # Most modern diesel trucks have all three systems
+        if ecu_type in [ECUType.BOSCH_EDC17, ECUType.DELPHI_DCM]:
+            file_size_mb = len(file_data) / (1024 * 1024)
+            
+            # Larger files (2MB+) typically have more systems
+            if file_size_mb >= 2.0:
+                # Likely has DPF
+                if not available_systems['dpf']['available']:
+                    available_systems['dpf'] = {'available': True, 'confidence': 0.65}
+                
+                # Likely has AdBlue (very common in trucks)
+                if not available_systems['adblue']['available']:
+                    available_systems['adblue'] = {'available': True, 'confidence': 0.70}
+                
+                # EGR is almost universal
+                if not available_systems['egr']['available']:
+                    available_systems['egr'] = {'available': True, 'confidence': 0.75}
+            
+            elif file_size_mb >= 1.0:
+                # Medium files usually have EGR and DPF
+                if not available_systems['dpf']['available']:
+                    available_systems['dpf'] = {'available': True, 'confidence': 0.60}
+                if not available_systems['egr']['available']:
+                    available_systems['egr'] = {'available': True, 'confidence': 0.70}
+        
+        return available_systems
     
     @staticmethod
     def _advanced_pattern_analysis(file_data: bytes) -> float:
