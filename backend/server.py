@@ -614,10 +614,7 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         for service in analysis_result["available_services"]:
             service_id = service["service_id"]
             
-            # Skip DTC for now (will be added to all)
-            if service_id in ["dtc-single", "dtc-multiple"]:
-                continue
-            
+            # Process ALL services including DTC
             try:
                 # Process file with this service
                 result = ecu_processor.process_file(file_data, [service_id])
