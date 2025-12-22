@@ -60,26 +60,53 @@ class PaymentStatus(str, Enum):
     REFUNDED = "refunded"
 
 
-# Vehicle Database - Comprehensive list including Trucks and Buses
+# Vehicle Database - COMPREHENSIVE list including ALL major brands worldwide
 VEHICLE_MAKES = [
-    # Passenger Vehicles
-    "Abarth", "Alfa Romeo", "Audi", "BMW", "Chevrolet", "Chrysler", 
-    "Citroen", "Dacia", "Dodge", "Fiat", "Ford", "GMC",
-    "Honda", "Hyundai", "Infiniti", "Isuzu", "Jaguar",
-    "Jeep", "Kia", "Land Rover", "Lexus", "Mazda", "Mercedes-Benz",
-    "Mini", "Mitsubishi", "Nissan", "Opel", "Peugeot", "Porsche",
-    "RAM", "Renault", "Saab", "Seat", "Skoda", "SsangYong",
-    "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo",
+    # === PASSENGER VEHICLES & LIGHT TRUCKS (A-Z) ===
+    "Abarth", "Acura", "Alfa Romeo", "Aston Martin", "Audi", 
+    "Bentley", "BMW", "Bugatti", "Buick", "BYD",
+    "Cadillac", "Chery", "Chevrolet", "Chrysler", "Citroen", 
+    "Cupra", "Dacia", "Daewoo", "Daihatsu", "Dodge", 
+    "DS Automobiles", "Ferrari", "Fiat", "Ford", "Geely",
+    "Genesis", "GMC", "Great Wall", "Haval", "Honda", 
+    "Hummer", "Hyundai", "Infiniti", "Isuzu", "Jaguar",
+    "Jeep", "Kia", "Koenigsegg", "Lada", "Lamborghini",
+    "Lancia", "Land Rover", "Lexus", "Lincoln", "Lotus",
+    "Maserati", "Maybach", "Mazda", "McLaren", "Mercedes-Benz",
+    "MG", "Mini", "Mitsubishi", "Nissan", "Opel",
+    "Pagani", "Peugeot", "Plymouth", "Polestar", "Pontiac",
+    "Porsche", "Proton", "RAM", "Renault", "Rolls-Royce",
+    "Rover", "Saab", "Saturn", "Seat", "Skoda",
+    "Smart", "SsangYong", "Subaru", "Suzuki", "Tata",
+    "Tesla", "Toyota", "Vauxhall", "Volkswagen", "Volvo",
     
-    # Heavy Duty Trucks (Commercial)
-    "Peterbilt", "Kenworth", "Freightliner", "Mack", "International",
-    "Western Star", "Volvo Trucks", "Scania", "MAN", "DAF", "Iveco",
-    "Hino", "UD Trucks", "Isuzu Trucks",
+    # === HEAVY DUTY TRUCKS (Commercial/Class 8) ===
+    # North American Trucks
+    "Peterbilt", "Kenworth", "Freightliner", "Mack", "International", 
+    "Western Star", "Autocar", "Oshkosh",
     
-    # Buses
-    "Blue Bird", "Thomas Built", "IC Bus", "New Flyer", "Gillig",
-    "MCI (Motor Coach)", "Prevost", "Van Hool", "Mercedes-Benz Bus",
-    "Setra", "Neoplan", "Scania Bus", "Volvo Bus", "MAN Bus"
+    # European Trucks
+    "Volvo Trucks", "Scania", "MAN", "DAF", "Iveco", "Renault Trucks",
+    "Mercedes-Benz Trucks", "FUSO (Mitsubishi Fuso)",
+    
+    # Asian Trucks
+    "Hino", "Isuzu Trucks", "UD Trucks (Nissan)", "Foton", "Shacman",
+    "Sinotruk (HOWO)", "Dongfeng", "FAW", "JAC", "Tata Trucks",
+    
+    # === BUSES & COACHES ===
+    # North American Buses
+    "Blue Bird", "Thomas Built Buses", "IC Bus", "Collins Bus",
+    "New Flyer", "Gillig", "Nova Bus", "ARBOC",
+    "Eldorado National", "Starcraft Bus", "Champion Bus",
+    
+    # Motor Coaches
+    "MCI (Motor Coach Industries)", "Prevost", "Van Hool", 
+    "Setra", "Temsa", "ABC Bus Companies",
+    
+    # European Buses
+    "Mercedes-Benz Bus", "Volvo Bus", "Scania Bus", "MAN Bus",
+    "Iveco Bus", "VDL Bus & Coach", "Solaris Bus & Coach",
+    "Neoplan", "Irizar", "King Long", "Yutong"
 ]
 
 # Common models by make (subset - can be expanded)
