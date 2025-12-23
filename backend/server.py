@@ -18,6 +18,9 @@ import asyncio
 # Import AI ECU Processor
 from ecu_processor import ECUProcessor, ConfidenceLevel
 
+# Import Email Service
+from email_service import send_order_confirmation
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
