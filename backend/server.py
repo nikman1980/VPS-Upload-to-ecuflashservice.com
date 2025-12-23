@@ -693,6 +693,7 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
 
 @api_router.post("/purchase-processed-file")
 async def purchase_processed_file(
+    background_tasks: BackgroundTasks,
     file_id: str = Form(...),
     selected_services: str = Form(...),  # JSON string of service IDs
     customer_name: str = Form(...),
@@ -705,8 +706,14 @@ async def purchase_processed_file(
 ):
     """
     STEP 2: Customer pays for selected processed files
-    Returns download links
+    - Creates order in database
+    - Uploads file to Sedox/TuningFiles
+    - Creates tuning project
+    - Starts background polling for completion
+    - Returns order confirmation
     """
+    from sedox_integration import sedox_client, poll_sedox_project
+    
     try:
         selected_service_ids = json.loads(selected_services)
         vehicle_data = json.loads(vehicle_info)
