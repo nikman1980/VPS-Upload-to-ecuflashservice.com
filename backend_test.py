@@ -222,7 +222,8 @@ class ECUServiceTester:
                 if abs(total_price - expected_total) < 0.01:
                     details = f"Correct pricing: ${total_price} for {len(breakdown)} services"
                     print(f"   Services: {[b['service_name'] for b in breakdown]}")
-                    print(f"   Prices: {[f'${b[\"final_price\"]}' for b in breakdown]}")
+                    prices = [f"${b['final_price']}" for b in breakdown]
+                    print(f"   Prices: {prices}")
                 else:
                     success = False
                     details = f"Wrong total: ${total_price}, expected ${expected_total}"
