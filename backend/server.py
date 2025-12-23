@@ -871,6 +871,76 @@ async def purchase_processed_file(
         raise HTTPException(status_code=500, detail=f"Purchase failed: {str(e)}")
 
 
+@api_router.get("/order-status/{order_id}")
+async def get_order_status(order_id: str):
+    """
+    Get order processing status
+    Customer can use this to check if their file is ready
+    """
+    order = await db.orders.find_one({"id": order_id}, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    processing_status = order.get("processing_status", "unknown")
+    
+    response = {
+        "order_id": order_id,
+        "processing_status": processing_status,
+        "payment_status": order.get("payment_status"),
+        "created_at": order.get("created_at"),
+        "vehicle": f"{order.get('vehicle_year', '')} {order.get('vehicle_make', '')} {order.get('vehicle_model', '')}".strip(),
+        "services": [s.get("service_name") for s in order.get("purchased_services", [])],
+        "total_paid": order.get("total_price", 0)
+    }
+    
+    if processing_status == "completed":
+        response["download_ready"] = True
+        response["download_url"] = f"/api/download-order/{order_id}"
+        response["message"] = "Your processed file is ready for download!"
+    elif processing_status == "submitted_to_sedox":
+        response["download_ready"] = False
+        response["message"] = "Your file is being processed. Please check back in 20-60 minutes."
+    elif processing_status == "sedox_error":
+        response["download_ready"] = False
+        response["message"] = "There was an error processing your file. Please contact support."
+    elif processing_status == "timeout":
+        response["download_ready"] = False
+        response["message"] = "Processing is taking longer than expected. Please contact support."
+    else:
+        response["download_ready"] = False
+        response["message"] = "Your order is being processed."
+    
+    return response
+
+
+@api_router.get("/download-order/{order_id}")
+async def download_order_file(order_id: str):
+    """
+    Download processed file by order ID
+    """
+    order = await db.orders.find_one({"id": order_id}, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    if order.get("processing_status") != "completed":
+        raise HTTPException(status_code=400, detail="File is not ready yet. Please check order status.")
+    
+    processed_file_path = order.get("processed_file_path")
+    
+    if not processed_file_path or not Path(processed_file_path).exists():
+        raise HTTPException(status_code=404, detail="Processed file not found")
+    
+    filename = order.get("processed_filename", f"processed_{order_id}.bin")
+    
+    return FileResponse(
+        path=processed_file_path,
+        filename=filename,
+        media_type="application/octet-stream"
+    )
+
+
 @api_router.get("/download-purchased/{file_id}/{service_id}")
 async def download_purchased_file(file_id: str, service_id: str):
     """Download purchased processed file"""
