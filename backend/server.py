@@ -693,6 +693,7 @@ async def purchase_processed_file(
     customer_email: str = Form(...),
     customer_phone: str = Form(...),
     vehicle_info: str = Form(...),  # JSON string
+    dtc_codes: str = Form("{}"),  # JSON string with DTC codes
     paypal_order_id: str = Form(...),
     paypal_transaction_id: str = Form(None)
 ):
@@ -703,6 +704,7 @@ async def purchase_processed_file(
     try:
         selected_service_ids = json.loads(selected_services)
         vehicle_data = json.loads(vehicle_info)
+        dtc_data = json.loads(dtc_codes) if dtc_codes else {}
         
         # Calculate total price
         total_price = 0.0
@@ -712,11 +714,15 @@ async def purchase_processed_file(
             if service_id in SERVICE_PRICING:
                 price = SERVICE_PRICING[service_id]["base_price"]
                 total_price += price
-                purchased_services.append({
+                service_info = {
                     "service_id": service_id,
                     "service_name": SERVICE_PRICING[service_id]["name"],
                     "price": price
-                })
+                }
+                # Add DTC codes to the service info if applicable
+                if service_id in ['dtc-single', 'dtc-multiple'] and dtc_data.get('dtc_codes'):
+                    service_info['dtc_codes'] = dtc_data['dtc_codes']
+                purchased_services.append(service_info)
         
         # Create order record
         order_id = str(uuid.uuid4())
@@ -730,6 +736,8 @@ async def purchase_processed_file(
             "vehicle_model": vehicle_data.get("vehicle_model"),
             "vehicle_year": vehicle_data.get("vehicle_year"),
             "purchased_services": purchased_services,
+            "dtc_codes": dtc_data.get('dtc_codes', []),  # Store DTC codes separately too
+            "dtc_type": dtc_data.get('dtc_type'),  # 'single' or 'multiple'
             "total_price": total_price,
             "paypal_order_id": paypal_order_id,
             "paypal_transaction_id": paypal_transaction_id,
