@@ -166,15 +166,6 @@ const NewUploadFlow = () => {
     setStep(2);
   };
 
-  const fetchVehicleData = async () => {
-    try {
-      const response = await axios.get(`${API}/vehicles`);
-      setVehicleTypes(response.data.makes || {});
-    } catch (error) {
-      console.error('Error fetching vehicles:', error);
-    }
-  };
-
   const fetchServices = async () => {
     try {
       const response = await axios.get(`${API}/services`);
@@ -188,6 +179,14 @@ const NewUploadFlow = () => {
   const getServicePrice = (serviceId) => {
     const service = allServices.find(s => s.id === serviceId);
     return service ? service.base_price : 0;
+  };
+
+  // Get vehicle summary string
+  const getVehicleSummary = () => {
+    if (!selectedManufacturer || !selectedModel || !selectedGeneration || !selectedEngine) {
+      return 'No vehicle selected';
+    }
+    return `${selectedManufacturer.name} ${selectedModel.name} ${selectedGeneration.name} - ${selectedEngine.name}`;
   };
 
   const handleFileSelect = (e) => {
