@@ -559,6 +559,16 @@ class ECUProcessor:
             "note": "Remove all error codes"
         })
         
+        # Add Checksum correction - always available for any ECU file
+        result["available_services"].append({
+            "service_id": "checksum",
+            "service_name": "Checksum Correction",
+            "price": 5.00,
+            "confidence": 1.0,
+            "available": True,
+            "note": "Recalculate and fix file checksum"
+        })
+        
         # Add combo if both EGR and DPF available
         has_egr = any(s['service_id'] == 'egr-removal' for s in result["available_services"])
         has_dpf = any(s['service_id'] == 'dpf-removal' for s in result["available_services"])
