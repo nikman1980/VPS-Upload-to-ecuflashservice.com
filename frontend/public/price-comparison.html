@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Comparison: e-tuningfiles vs Sedox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            min-height: 100vh;
+            padding: 40px;
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        th {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            padding: 20px;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+        th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        .service-name {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        .price-etuning {
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .price-sedox {
+            color: #ef4444;
+            font-weight: 600;
+        }
+        .savings {
+            color: #22c55e;
+            font-weight: 600;
+        }
+        .example-box {
+            margin-top: 40px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .example-box h2 {
+            color: #f1f5f9;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .example-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .example-row:last-child {
+            border-bottom: none;
+            padding-top: 20px;
+            margin-top: 10px;
+            border-top: 2px solid rgba(59, 130, 246, 0.5);
+        }
+        .example-label {
+            color: #94a3b8;
+        }
+        .example-value-green {
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .example-value-red {
+            color: #ef4444;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Price Comparison</h1>
+        <p class="subtitle">e-tuningfiles.com vs Sedox (TuningFiles.com)</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>e-tuningfiles.com</th>
+                    <th>Sedox</th>
+                    <th>You Save</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="service-name">Stage 1 Remap</td>
+                    <td class="price-etuning">€24</td>
+                    <td class="price-sedox">€100 <small>(10 credits)</small></td>
+                    <td class="savings">76% cheaper</td>
+                </tr>
+                <tr>
+                    <td class="service-name">Stage 2 Remap</td>
+                    <td class="price-etuning">€32</td>
+                    <td class="price-sedox">€100+ <small>(10+ credits)</small></td>
+                    <td class="savings">~68% cheaper</td>
+                </tr>
+                <tr>
+                    <td class="service-name">DPF Off</td>
+                    <td class="price-etuning">€16</td>
+                    <td class="price-sedox">€100 <small>(10 credits)</small></td>
+                    <td class="savings">84% cheaper</td>
+                </tr>
+                <tr>
+                    <td class="service-name">EGR Off</td>
+                    <td class="price-etuning">€16</td>
+                    <td class="price-sedox">€100 <small>(10 credits)</small></td>
+                    <td class="savings">84% cheaper</td>
+                </tr>
+                <tr>
+                    <td class="service-name">AdBlue Off</td>
+                    <td class="price-etuning">€16</td>
+                    <td class="price-sedox">€100 <small>(10 credits)</small></td>
+                    <td class="savings">84% cheaper</td>
+                </tr>
+                <tr>
+                    <td class="service-name">DTC Off</td>
+                    <td class="price-etuning">~€10</td>
+                    <td class="price-sedox">€50 <small>(5 credits)</small></td>
+                    <td class="savings">80% cheaper</td>
+                </tr>
+                <tr>
+                    <td class="service-name">API Subscription</td>
+                    <td class="price-etuning">Contact for pricing</td>
+                    <td class="price-sedox">€1,000/year</td>
+                    <td class="savings">TBD</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="example-box">
+            <h2>📊 Example Order: Stage 1 + DPF + EGR</h2>
+            <div class="example-row">
+                <span class="example-label">e-tuningfiles.com</span>
+                <span class="example-value-green">€24 + €16 + €16 = €56</span>
+            </div>
+            <div class="example-row">
+                <span class="example-label">Sedox (TuningFiles.com)</span>
+                <span class="example-value-red">25 credits × €10 = €250</span>
+            </div>
+            <div class="example-row">
+                <span class="example-label">Total Savings</span>
+                <span class="example-value-green">€194 per order <span class="badge">78% SAVINGS</span></span>
+            </div>
+        </div>
+        
+        <p class="footer">* Sedox pricing based on €10/credit (standard rate). Bulk discounts may apply.</p>
+    </div>
+</body>
+</html>
