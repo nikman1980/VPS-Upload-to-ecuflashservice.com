@@ -228,6 +228,16 @@ const NewUploadFlow = () => {
     const order = await actions.order.capture();
     
     try {
+      // Prepare DTC codes data
+      const dtcCodesData = {};
+      if (selectedServices.includes('dtc-single') && dtcSingleCode) {
+        dtcCodesData.dtc_codes = [dtcSingleCode.trim().toUpperCase()];
+        dtcCodesData.dtc_type = 'single';
+      } else if (selectedServices.includes('dtc-multiple') && dtcMultipleCodes) {
+        dtcCodesData.dtc_codes = parseDTCCodes(dtcMultipleCodes);
+        dtcCodesData.dtc_type = 'multiple';
+      }
+      
       // Create purchase record
       const purchaseData = new FormData();
       purchaseData.append('file_id', fileId);
@@ -236,6 +246,7 @@ const NewUploadFlow = () => {
       purchaseData.append('customer_email', customerInfo.customer_email);
       purchaseData.append('customer_phone', customerInfo.customer_phone);
       purchaseData.append('vehicle_info', JSON.stringify(customerInfo));
+      purchaseData.append('dtc_codes', JSON.stringify(dtcCodesData));
       purchaseData.append('paypal_order_id', order.id);
       purchaseData.append('paypal_transaction_id', order.purchase_units[0].payments.captures[0].id);
       
