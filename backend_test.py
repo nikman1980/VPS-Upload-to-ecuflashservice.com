@@ -417,13 +417,56 @@ class ECUServiceTester:
             print("❌ API is not accessible. Stopping tests.")
             return False
             
-        # Test all endpoints
+        # Test vehicle database APIs (Sedox-style)
+        print("\n🚗 Testing Vehicle Database APIs (Sedox-style)")
+        print("-" * 40)
+        
+        # Test vehicle types
+        success, vehicle_types = self.test_vehicle_types()
+        if not success:
+            print("❌ Vehicle types API failed. Skipping dependent tests.")
+            return False
+            
+        # Test manufacturers for Cars (type_id=1)
+        success, manufacturers = self.test_manufacturers(1)
+        if success and manufacturers:
+            # Find BMW for model testing
+            bmw = next((m for m in manufacturers if 'BMW' in m.get('name', '')), None)
+            if bmw:
+                bmw_id = bmw.get('id')
+                print(f"   Using BMW ID {bmw_id} for model testing")
+                
+                # Test models for BMW
+                success, models = self.test_models(bmw_id)
+                if success and models:
+                    # Test generations for first BMW model
+                    first_model = models[0]
+                    model_id = first_model.get('id')
+                    print(f"   Using model '{first_model.get('name')}' (ID: {model_id}) for generation testing")
+                    
+                    success, generations = self.test_generations(model_id)
+                    if success and generations:
+                        # Test engines for first generation
+                        first_gen = generations[0]
+                        gen_id = first_gen.get('id')
+                        print(f"   Using generation '{first_gen.get('name')}' (ID: {gen_id}) for engine testing")
+                        
+                        self.test_engines(gen_id)
+        
+        # Test vehicle database stats
+        self.test_vehicle_stats()
+        
+        # Test other endpoints
+        print("\n🔧 Testing Other APIs")
+        print("-" * 40)
         self.test_get_services()
-        self.test_get_vehicles()
+        self.test_get_vehicles()  # Legacy endpoint
         self.test_price_calculation()
         self.test_invalid_file_upload()
         
-        # Test main workflow
+        # Test main workflow (if test file exists)
+        print("\n📁 Testing File Upload Workflow")
+        print("-" * 40)
         success, analysis_result = self.test_file_upload_and_analysis()
         
         # Print summary
