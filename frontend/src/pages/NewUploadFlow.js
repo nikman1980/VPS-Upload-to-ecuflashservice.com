@@ -1220,7 +1220,7 @@ const NewUploadFlow = () => {
                 <span className="text-lg text-amber-400 font-semibold">Processing Your File...</span>
               </div>
               <p className="text-amber-300/80">
-                Our engineers are working on your file. You'll receive an email within <strong>20-60 minutes</strong> with your download link.
+                Our engineers are working on your file. You&apos;ll receive an email within <strong>20-60 minutes</strong> with your download link.
               </p>
             </div>
 
