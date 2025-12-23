@@ -12,6 +12,12 @@ import base64
 import asyncio
 from typing import Optional, List, Dict, Any
 from datetime import datetime, timezone
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +27,9 @@ TUNINGFILES_API_BASE = "https://api.tuningfiles.com"
 
 # Markup percentage (100% = double the cost)
 MARKUP_PERCENTAGE = float(os.environ.get('MARKUP_PERCENTAGE', '100'))
+
+# Debug log
+logger.info(f"TuningFiles API initialized with key: {TUNINGFILES_API_KEY[:8] if TUNINGFILES_API_KEY else 'EMPTY'}...")
 
 
 class TuningFilesAPI:
