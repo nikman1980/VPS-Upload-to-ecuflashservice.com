@@ -1103,8 +1103,8 @@ const NewUploadFlow = () => {
           </div>
         )}
         
-        {/* STEP 4: Customer Info & Payment */}
-        {step === 4 && (
+        {/* STEP 5: Customer Info & Payment */}
+        {step === 5 && (
           <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-2">Complete Your Order</h2>
