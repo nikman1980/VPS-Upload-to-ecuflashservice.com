@@ -305,7 +305,6 @@ const NewUploadFlow = () => {
               <div className="text-sm space-y-1">
                 <div>📄 File: {analysisResult.original_filename}</div>
                 <div>💾 Size: {analysisResult.file_size_mb.toFixed(2)} MB</div>
-                <div>🔍 ECU Type: {analysisResult.ecu_type}</div>
                 <div>🎯 Detection Confidence: {(analysisResult.ecu_confidence * 100).toFixed(0)}%</div>
               </div>
             </div>
