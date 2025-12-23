@@ -388,28 +388,32 @@ const NewUploadFlow = () => {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { icon: '🔧', id: 'dtc-single', name: 'DTC Code Deletion', desc: 'Remove specific error codes from your ECU', priceLabel: 'From' },
-                { icon: '✓', id: 'checksum', name: 'Checksum Correction', desc: 'Automatic checksum recalculation', priceLabel: '' },
-                { icon: '🚫', id: 'dpf-removal', name: 'DPF Removal', desc: 'Diesel Particulate Filter deactivation', priceLabel: '' },
-                { icon: '♻️', id: 'egr-removal', name: 'EGR Removal', desc: 'Exhaust Gas Recirculation OFF', priceLabel: '' },
-                { icon: '💧', id: 'adblue-removal', name: 'AdBlue OFF', desc: 'SCR/AdBlue system deactivation', priceLabel: '' },
-                { icon: '🔒', id: 'immo-off', name: 'IMMO OFF', desc: 'Immobilizer system bypass', priceLabel: '' },
-              ].map((service, i) => {
-                const apiService = allServices.find(s => s.id === service.id);
-                const price = apiService ? apiService.base_price : 0;
-                return (
-                  <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{service.name}</h3>
-                    <p className="text-slate-400 text-sm mb-4">{service.desc}</p>
-                    <div className="text-blue-400 font-semibold">
-                      {service.priceLabel} ${price.toFixed(0)}
+            {/* Main Services - 6 cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {allServices.slice(0, 6).map((service, i) => (
+                <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
+                  <div className="text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{service.name}</h3>
+                  <p className="text-slate-400 text-sm mb-4">{service.description}</p>
+                  <div className="text-blue-400 font-semibold">${service.base_price?.toFixed(0)}</div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Additional Services - Smaller cards */}
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold text-white text-center mb-6">Additional Services</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {allServices.slice(6).map((service, i) => (
+                  <div key={i} className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-4 hover:border-blue-500/30 transition-all">
+                    <div className="flex items-center space-x-3 mb-2">
+                      <span className="text-2xl">{service.icon}</span>
+                      <span className="text-white font-medium text-sm">{service.name}</span>
                     </div>
+                    <div className="text-blue-400 font-semibold text-sm">${service.base_price?.toFixed(0)}</div>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </section>
