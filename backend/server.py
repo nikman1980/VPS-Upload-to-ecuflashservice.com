@@ -1252,6 +1252,84 @@ async def get_processing_status(request_id: str):
     }
 
 
+# ==================== TuningFiles/Sedox API Endpoints ====================
+
+@api_router.get("/admin/tuningfiles/status")
+async def get_tuningfiles_status():
+    """
+    Check TuningFiles API status, subscription, and credits
+    Admin endpoint to monitor API health
+    """
+    try:
+        tf_api = TuningFilesAPI()
+        
+        subscription = await tf_api.check_subscription()
+        credits = await tf_api.get_credits()
+        
+        return {
+            "success": True,
+            "api_connected": True,
+            "subscription": {
+                "name": subscription.get("name"),
+                "active": subscription.get("active"),
+                "end_date": subscription.get("end_date")
+            },
+            "credits": {
+                "amount": credits.get("amount"),
+                "last_change": credits.get("last_change")
+            },
+            "markup_percentage": float(os.environ.get('MARKUP_PERCENTAGE', '100')),
+            "status": "ready" if subscription.get("active") and credits.get("amount", 0) > 0 else "needs_setup"
+        }
+    except Exception as e:
+        logger.error(f"TuningFiles API error: {e}")
+        return {
+            "success": False,
+            "api_connected": False,
+            "error": str(e),
+            "status": "error"
+        }
+
+
+@api_router.get("/admin/tuningfiles/vehicle-types")
+async def get_tf_vehicle_types():
+    """Get vehicle types from TuningFiles"""
+    try:
+        tf_api = TuningFilesAPI()
+        types = await tf_api.get_vehicle_types()
+        return {"success": True, "vehicle_types": types}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/tuningfiles/manufacturers/{vehicle_type_id}")
+async def get_tf_manufacturers(vehicle_type_id: int):
+    """Get manufacturers for a vehicle type from TuningFiles"""
+    try:
+        tf_api = TuningFilesAPI()
+        manufacturers = await tf_api.get_manufacturers(vehicle_type_id)
+        return {"success": True, "manufacturers": manufacturers}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/orders")
+async def get_all_orders(skip: int = 0, limit: int = 50):
+    """Get all orders with profit calculation"""
+    orders = await db.orders.find({}, {"_id": 0}).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
+    
+    # Calculate totals
+    total_revenue = sum(order.get("total_price", 0) for order in orders)
+    total_orders = await db.orders.count_documents({})
+    
+    return {
+        "orders": orders,
+        "total_orders": total_orders,
+        "total_revenue": total_revenue,
+        "showing": len(orders)
+    }
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
