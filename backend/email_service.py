@@ -210,15 +210,30 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
                     </tbody>
                 </table>
                 
-                <!-- Download Section -->
-                <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 8px; padding: 20px; margin: 20px 0;">
-                    <h3 style="color: #ffffff; margin: 0 0 16px 0; text-align: center;">📥 Download Your Files</h3>
+                {"" if not is_completed else f'''
+                <!-- Download Section (only shown when completed) -->
+                <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+                    <h3 style="color: #ffffff; margin: 0 0 16px 0;">📥 Download Your Processed File</h3>
                     <table style="width: 100%; background-color: #ffffff; border-radius: 8px;">
                         <tbody>
                             {downloads_html}
                         </tbody>
                     </table>
                 </div>
+                '''}
+                
+                {"" if is_completed else '''
+                <!-- Processing Info (shown when still processing) -->
+                <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+                    <h3 style="color: #92400e; margin: 0 0 12px 0;">⏳ What Happens Next?</h3>
+                    <ol style="text-align: left; color: #78350f; margin: 0; padding-left: 24px;">
+                        <li style="margin-bottom: 8px;">Our professional engineers are processing your file</li>
+                        <li style="margin-bottom: 8px;">You will receive another email when ready (20-60 min)</li>
+                        <li style="margin-bottom: 8px;">Click the download link to get your modified file</li>
+                        <li>Flash the file to your vehicle ECU</li>
+                    </ol>
+                </div>
+                '''}
                 
                 <!-- Important Notes -->
                 <div style="background-color: #fef2f2; border: 1px solid #ef4444; border-radius: 8px; padding: 16px; margin: 20px 0;">
@@ -241,7 +256,7 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
             
             <!-- Footer -->
             <div style="text-align: center; padding: 20px; color: #9ca3af; font-size: 12px;">
-                <p style="margin: 0;">© 2024 ECU Flash Service | AI-Powered ECU Processing</p>
+                <p style="margin: 0;">© 2024 ECU Flash Service | Professional ECU Tuning</p>
                 <p style="margin: 8px 0 0 0;">For off-road and racing use only</p>
             </div>
             
