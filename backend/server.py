@@ -752,6 +752,28 @@ async def purchase_processed_file(
         
         await db.orders.insert_one(order_doc)
         
+        # Send confirmation email
+        try:
+            email_sent = send_order_confirmation(
+                customer_email=customer_email,
+                customer_name=customer_name,
+                order_id=order_id,
+                order_details={
+                    "file_id": file_id,
+                    "purchased_services": purchased_services,
+                    "total_price": total_price,
+                    "vehicle_make": vehicle_data.get("vehicle_make"),
+                    "vehicle_model": vehicle_data.get("vehicle_model"),
+                    "vehicle_year": vehicle_data.get("vehicle_year"),
+                    "dtc_codes": dtc_data.get('dtc_codes', []),
+                    "download_links": selected_service_ids
+                }
+            )
+            logger.info(f"Email sent: {email_sent} for order {order_id}")
+        except Exception as email_error:
+            logger.error(f"Failed to send email: {email_error}")
+            # Don't fail the purchase if email fails
+        
         # Return download links
         return {
             "success": True,
