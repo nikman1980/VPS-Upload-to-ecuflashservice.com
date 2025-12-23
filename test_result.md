@@ -104,21 +104,30 @@
 
 ## Current Testing Session - Dec 23, 2025
 
-### Completed Changes:
-1. Fixed backend startup (corrupted Python packages in venv - recreated venv)
-2. Added Checksum service ($5) to available_services in ecu_processor.py
-3. Added Checksum to ProcessingAction enum
-4. Added Checksum handling in process_file function  
-5. Removed "ECU Type:" from File Information display in NewUploadFlow.js
+### UI Redesign Completed:
+1. Professional landing page with hero section
+2. Services section with pricing cards
+3. How It Works - 3 step process
+4. Transparent pricing table
+5. CTA section with gradient
+6. Professional footer
+7. Progress indicator in upload flow
+8. Clean service selection cards
+9. DTC input fields with validation
 
 ### Features to Test:
-1. File upload workflow - Upload → Analyze → Show services → Pay → Download
-2. Checksum service is visible at $5.00
-3. DTC Delete services are showing
-4. ECU Type is NOT shown in File Information
-5. PayPal payment flow
-6. Vehicle dropdown functionality
+1. Landing page displays correctly
+2. Get Started navigates to upload
+3. File upload works
+4. Analysis completes successfully
+5. DTC Single input appears when selected
+6. DTC Multiple textarea appears when selected
+7. Checksum service selection works
+8. Continue to Payment requires selection
+9. Payment form displays customer info fields
+10. PayPal buttons load
+11. Order status endpoint works
 
 ### Test Status:
 - needs_retesting: true
-- test_priority: high_first
+- test_priority: frontend_first
