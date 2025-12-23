@@ -7,7 +7,23 @@ const API = `${BACKEND_URL}/api`;
 const PAYPAL_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
 
 const NewUploadFlow = () => {
-  const [step, setStep] = useState(0); // 0: Landing, 1: Upload, 2: Processing, 3: Results, 4: Payment, 5: Success
+  // Updated step: 0: Landing, 1: Vehicle Selection, 2: Upload, 3: Processing, 4: Services, 5: Payment, 6: Success
+  const [step, setStep] = useState(0);
+  
+  // Vehicle Selection State (Sedox-style)
+  const [vehicleTypes, setVehicleTypes] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
+  const [models, setModels] = useState([]);
+  const [generations, setGenerations] = useState([]);
+  const [engines, setEngines] = useState([]);
+  
+  const [selectedVehicleType, setSelectedVehicleType] = useState(null);
+  const [selectedManufacturer, setSelectedManufacturer] = useState(null);
+  const [selectedModel, setSelectedModel] = useState(null);
+  const [selectedGeneration, setSelectedGeneration] = useState(null);
+  const [selectedEngine, setSelectedEngine] = useState(null);
+  
+  const [vehicleLoading, setVehicleLoading] = useState(false);
   
   // Upload state
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -32,16 +48,10 @@ const NewUploadFlow = () => {
   const [dtcError, setDtcError] = useState('');
   
   // Customer info
-  const [vehicleTypes, setVehicleTypes] = useState({});
-  const [vehicleType, setVehicleType] = useState('');
   const [customerInfo, setCustomerInfo] = useState({
     customer_name: '',
     customer_email: '',
-    customer_phone: '',
-    vehicle_make: '',
-    vehicle_model: '',
-    vehicle_year: new Date().getFullYear(),
-    engine_type: ''
+    customer_phone: ''
   });
   
   // Download state
@@ -52,9 +62,109 @@ const NewUploadFlow = () => {
   const [allServices, setAllServices] = useState([]);
 
   useEffect(() => {
-    fetchVehicleData();
+    fetchVehicleTypes();
     fetchServices();
   }, []);
+
+  // Fetch vehicle types on load
+  const fetchVehicleTypes = async () => {
+    try {
+      const response = await axios.get(`${API}/vehicles/types`);
+      setVehicleTypes(response.data || []);
+    } catch (error) {
+      console.error('Error fetching vehicle types:', error);
+    }
+  };
+
+  // Fetch manufacturers when vehicle type is selected
+  const handleVehicleTypeSelect = async (type) => {
+    setSelectedVehicleType(type);
+    setSelectedManufacturer(null);
+    setSelectedModel(null);
+    setSelectedGeneration(null);
+    setSelectedEngine(null);
+    setManufacturers([]);
+    setModels([]);
+    setGenerations([]);
+    setEngines([]);
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/manufacturers/${type.id}`);
+      setManufacturers(response.data || []);
+    } catch (error) {
+      console.error('Error fetching manufacturers:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch models when manufacturer is selected
+  const handleManufacturerSelect = async (mfr) => {
+    setSelectedManufacturer(mfr);
+    setSelectedModel(null);
+    setSelectedGeneration(null);
+    setSelectedEngine(null);
+    setModels([]);
+    setGenerations([]);
+    setEngines([]);
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/models/${mfr.id}`);
+      setModels(response.data || []);
+    } catch (error) {
+      console.error('Error fetching models:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch generations when model is selected
+  const handleModelSelect = async (model) => {
+    setSelectedModel(model);
+    setSelectedGeneration(null);
+    setSelectedEngine(null);
+    setGenerations([]);
+    setEngines([]);
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/generations/${model.id}`);
+      setGenerations(response.data || []);
+    } catch (error) {
+      console.error('Error fetching generations:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch engines when generation is selected
+  const handleGenerationSelect = async (gen) => {
+    setSelectedGeneration(gen);
+    setSelectedEngine(null);
+    setEngines([]);
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/engines/${gen.id}`);
+      setEngines(response.data || []);
+    } catch (error) {
+      console.error('Error fetching engines:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Handle engine selection
+  const handleEngineSelect = (engine) => {
+    setSelectedEngine(engine);
+  };
+
+  // Proceed to upload after vehicle selection
+  const proceedToUpload = () => {
+    if (!selectedEngine) {
+      alert('Please select your vehicle engine to continue');
+      return;
+    }
+    setStep(2);
+  };
 
   const fetchVehicleData = async () => {
     try {
