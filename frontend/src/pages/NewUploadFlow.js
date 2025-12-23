@@ -1128,57 +1128,23 @@ const NewUploadFlow = () => {
               </div>
             </div>
 
-            {/* Vehicle Information */}
+            {/* Vehicle Information (Read-only - from step 1) */}
             <div className="mb-8">
               <h3 className="font-semibold mb-4">Vehicle Information</h3>
-              <div className="grid gap-4">
-                <select
-                  value={vehicleType}
-                  onChange={(e) => {
-                    setVehicleType(e.target.value);
-                    setCustomerInfo({...customerInfo, vehicle_make: '', vehicle_model: ''});
-                  }}
-                  className="w-full bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
-                  required
-                >
-                  <option value="">Select Vehicle Type *</option>
-                  <option value="Car">Car / Pickup</option>
-                  <option value="Truck">Heavy Duty Truck</option>
-                  <option value="Bus">Bus</option>
-                </select>
-
-                <select
-                  value={customerInfo.vehicle_make}
-                  onChange={(e) => setCustomerInfo({...customerInfo, vehicle_make: e.target.value, vehicle_model: ''})}
-                  disabled={!vehicleType}
-                  className="w-full bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none disabled:opacity-50"
-                  required
-                >
-                  <option value="">Select Brand *</option>
-                  {availableMakes.map(make => (
-                    <option key={make} value={make}>{make}</option>
-                  ))}
-                </select>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    value={customerInfo.vehicle_model}
-                    onChange={(e) => setCustomerInfo({...customerInfo, vehicle_model: e.target.value})}
-                    placeholder="Model *"
-                    className="bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
-                    required
-                  />
-                  <select
-                    value={customerInfo.vehicle_year}
-                    onChange={(e) => setCustomerInfo({...customerInfo, vehicle_year: e.target.value})}
-                    className="bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
-                    required
-                  >
-                    {Array.from({length: 36}, (_, i) => new Date().getFullYear() - i).map(year => (
-                      <option key={year} value={year}>{year}</option>
-                    ))}
-                  </select>
+              <div className="bg-slate-900/50 rounded-xl p-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">
+                      {selectedVehicleType?.slug === 'cars' ? '🚗' : 
+                       selectedVehicleType?.slug === 'trucks' ? '🚛' : 
+                       selectedVehicleType?.slug === 'agriculture' ? '🚜' : 
+                       selectedVehicleType?.slug === 'marine' ? '🚤' : '🏍️'}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-slate-400 text-sm">Selected Vehicle</p>
+                    <p className="text-white font-medium">{getVehicleSummary()}</p>
+                  </div>
                 </div>
               </div>
             </div>
