@@ -633,6 +633,11 @@ class ECUProcessor:
                     modified_data = self.modifier.remove_dtc_codes(modified_data, ecu_type)
                     result["actions_applied"].append(action_str)
                     action_confidences.append(0.95)
+                # Handle Checksum correction
+                elif action == ProcessingAction.CHECKSUM:
+                    modified_data = self.checksum_calc.fix_checksum(modified_data, ecu_type)
+                    result["actions_applied"].append(action_str)
+                    action_confidences.append(0.98)
                 # Handle EGR+DPF combo
                 elif action == ProcessingAction.EGR_DPF_COMBO:
                     # Process both EGR and DPF
