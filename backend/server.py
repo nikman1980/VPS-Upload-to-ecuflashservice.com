@@ -1511,6 +1511,126 @@ async def get_all_orders(skip: int = 0, limit: int = 50):
     }
 
 
+# ==================== Vehicle Database API (Local Sedox Mirror) ====================
+
+@api_router.get("/vehicles/types")
+async def get_vehicle_types():
+    """Get all vehicle types (Cars, Trucks, Agriculture, Marine, Motorcycles)"""
+    types = await db.vehicle_types.find({}, {"_id": 0}).to_list(100)
+    if not types:
+        # Fallback to default types if database not populated yet
+        return [
+            {"id": 1, "name": "Cars & LCV", "slug": "cars"},
+            {"id": 2, "name": "Trucks & Buses", "slug": "trucks"},
+            {"id": 3, "name": "Agriculture", "slug": "agriculture"},
+            {"id": 4, "name": "Marine", "slug": "marine"},
+            {"id": 5, "name": "Motorcycles & ATVs", "slug": "motorcycles"}
+        ]
+    return types
+
+
+@api_router.get("/vehicles/manufacturers/{vehicle_type_id}")
+async def get_manufacturers(vehicle_type_id: int):
+    """Get all manufacturers for a vehicle type"""
+    manufacturers = await db.manufacturers.find(
+        {"vehicle_type_id": vehicle_type_id}, 
+        {"_id": 0}
+    ).sort("name", 1).to_list(500)
+    return manufacturers
+
+
+@api_router.get("/vehicles/models/{manufacturer_id}")
+async def get_models(manufacturer_id: int):
+    """Get all models for a manufacturer"""
+    models = await db.models.find(
+        {"manufacturer_id": manufacturer_id}, 
+        {"_id": 0}
+    ).sort("name", 1).to_list(500)
+    return models
+
+
+@api_router.get("/vehicles/generations/{model_id}")
+async def get_generations(model_id: int):
+    """Get all generations/years for a model"""
+    generations = await db.generations.find(
+        {"model_id": model_id}, 
+        {"_id": 0}
+    ).sort("name", 1).to_list(200)
+    return generations
+
+
+@api_router.get("/vehicles/engines/{generation_id}")
+async def get_engines(generation_id: int):
+    """Get all engines for a generation"""
+    engines = await db.engines.find(
+        {"generation_id": generation_id}, 
+        {"_id": 0}
+    ).sort("name", 1).to_list(200)
+    return engines
+
+
+@api_router.get("/vehicles/engine/{engine_id}")
+async def get_engine_details(engine_id: int):
+    """Get detailed engine information by ID"""
+    engine = await db.engines.find_one(
+        {"id": engine_id}, 
+        {"_id": 0}
+    )
+    if not engine:
+        raise HTTPException(status_code=404, detail="Engine not found")
+    return engine
+
+
+@api_router.get("/vehicles/search")
+async def search_vehicles(q: str):
+    """Search across all vehicle data (manufacturers, models, generations)"""
+    search_regex = {"$regex": q, "$options": "i"}
+    
+    # Search manufacturers
+    manufacturers = await db.manufacturers.find(
+        {"name": search_regex}, 
+        {"_id": 0}
+    ).limit(10).to_list(10)
+    
+    # Search models
+    models = await db.models.find(
+        {"name": search_regex}, 
+        {"_id": 0}
+    ).limit(10).to_list(10)
+    
+    # Search engines
+    engines = await db.engines.find(
+        {"name": search_regex}, 
+        {"_id": 0}
+    ).limit(10).to_list(10)
+    
+    return {
+        "manufacturers": manufacturers,
+        "models": models,
+        "engines": engines
+    }
+
+
+@api_router.get("/vehicles/stats")
+async def get_vehicle_database_stats():
+    """Get statistics about the local vehicle database"""
+    types_count = await db.vehicle_types.count_documents({})
+    manufacturers_count = await db.manufacturers.count_documents({})
+    models_count = await db.models.count_documents({})
+    generations_count = await db.generations.count_documents({})
+    engines_count = await db.engines.count_documents({})
+    
+    return {
+        "vehicle_types": types_count,
+        "manufacturers": manufacturers_count,
+        "models": models_count,
+        "generations": generations_count,
+        "engines": engines_count,
+        "total_records": types_count + manufacturers_count + models_count + generations_count + engines_count,
+        "database_ready": engines_count > 0
+    }
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
