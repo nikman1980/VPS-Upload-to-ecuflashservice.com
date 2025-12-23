@@ -716,7 +716,7 @@ const NewUploadFlow = () => {
             
             {/* Progress Steps */}
             <div className="hidden md:flex items-center space-x-2">
-              {['Upload', 'Analyze', 'Select', 'Pay', 'Done'].map((label, i) => (
+              {['Vehicle', 'Upload', 'Analyze', 'Services', 'Pay', 'Done'].map((label, i) => (
                 <div key={i} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     step > i ? 'bg-green-500 text-white' : 
@@ -725,7 +725,7 @@ const NewUploadFlow = () => {
                   }`}>
                     {step > i ? '✓' : i + 1}
                   </div>
-                  {i < 4 && <div className={`w-8 h-0.5 ${step > i ? 'bg-green-500' : 'bg-slate-700'}`}></div>}
+                  {i < 5 && <div className={`w-6 h-0.5 ${step > i ? 'bg-green-500' : 'bg-slate-700'}`}></div>}
                 </div>
               ))}
             </div>
