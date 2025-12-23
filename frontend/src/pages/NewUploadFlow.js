@@ -460,27 +460,31 @@ const NewUploadFlow = () => {
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-3xl overflow-hidden">
               <div className="p-8 border-b border-slate-700/50">
                 <h3 className="text-2xl font-bold text-white mb-2">Service Pricing</h3>
-                <p className="text-slate-400">All prices in USD</p>
+                <p className="text-slate-400">All prices in USD • 18 services available</p>
               </div>
-              <div className="divide-y divide-slate-700/50">
-                {[
-                  { id: 'dtc-single', name: 'DTC Code Deletion (Single)' },
-                  { id: 'dtc-multiple', name: 'DTC Code Deletion (Multiple)' },
-                  { id: 'checksum', name: 'Checksum Correction' },
-                  { id: 'dpf-removal', name: 'DPF Removal' },
-                  { id: 'egr-removal', name: 'EGR Removal' },
-                  { id: 'adblue-removal', name: 'AdBlue/SCR OFF' },
-                  { id: 'egr-dpf-combo', name: 'EGR + DPF Combo' },
-                ].map((item, i) => {
-                  const apiService = allServices.find(s => s.id === item.id);
-                  const price = apiService ? apiService.base_price : 0;
-                  return (
-                    <div key={i} className="flex justify-between items-center p-6 hover:bg-slate-800/50 transition">
-                      <span className="text-white font-medium">{item.name}</span>
-                      <span className="text-blue-400 font-bold text-lg">${price.toFixed(0)}</span>
+              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 divide-slate-700/50">
+                <div className="divide-y divide-slate-700/50">
+                  {allServices.slice(0, 9).map((service, i) => (
+                    <div key={i} className="flex justify-between items-center p-4 hover:bg-slate-800/50 transition">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-xl">{service.icon}</span>
+                        <span className="text-white font-medium text-sm">{service.name}</span>
+                      </div>
+                      <span className="text-blue-400 font-bold">${service.base_price?.toFixed(0)}</span>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
+                <div className="divide-y divide-slate-700/50 md:border-l md:border-slate-700/50">
+                  {allServices.slice(9).map((service, i) => (
+                    <div key={i} className="flex justify-between items-center p-4 hover:bg-slate-800/50 transition">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-xl">{service.icon}</span>
+                        <span className="text-white font-medium text-sm">{service.name}</span>
+                      </div>
+                      <span className="text-blue-400 font-bold">${service.base_price?.toFixed(0)}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
