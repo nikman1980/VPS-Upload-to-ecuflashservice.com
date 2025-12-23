@@ -130,6 +130,24 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
         </div>
         """
     
+    # Set header and intro text based on status
+    if is_completed:
+        header_text = "Your processed file is ready!"
+        intro_text = "Great news! Your ECU file has been processed and is ready for download."
+        status_banner = """
+        <div style="background-color: #059669; padding: 16px; text-align: center; margin-bottom: 20px; border-radius: 8px;">
+            <span style="color: #ffffff; font-size: 18px; font-weight: 600;">✅ Processing Complete - Ready for Download</span>
+        </div>
+        """
+    else:
+        header_text = "Order Received - Processing Started"
+        intro_text = f"Thank you for your order! Your ECU file has been submitted for processing. Estimated time: <strong>{estimated_time}</strong>"
+        status_banner = """
+        <div style="background-color: #f59e0b; padding: 16px; text-align: center; margin-bottom: 20px; border-radius: 8px;">
+            <span style="color: #ffffff; font-size: 18px; font-weight: 600;">⏳ Processing Your File - Please Wait 20-60 Minutes</span>
+        </div>
+        """
+    
     # Complete HTML email template
     html = f"""
     <!DOCTYPE html>
@@ -144,16 +162,18 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
             <!-- Header -->
             <div style="background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border-radius: 12px 12px 0 0; padding: 30px; text-align: center;">
                 <h1 style="color: #ffffff; margin: 0; font-size: 28px;">🔧 ECU Flash Service</h1>
-                <p style="color: #94a3b8; margin: 10px 0 0 0;">Your processed files are ready!</p>
+                <p style="color: #94a3b8; margin: 10px 0 0 0;">{header_text}</p>
             </div>
             
             <!-- Main Content -->
             <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 
+                {status_banner}
+                
                 <h2 style="color: #1e3a5f; margin-top: 0;">Hi {customer_name},</h2>
                 
                 <p style="color: #4b5563; line-height: 1.6;">
-                    Thank you for your order! Your ECU files have been processed and are ready for download.
+                    {intro_text}
                 </p>
                 
                 <!-- Order Info -->
