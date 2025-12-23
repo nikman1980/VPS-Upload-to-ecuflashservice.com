@@ -1234,7 +1234,7 @@ const NewUploadFlow = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Vehicle:</span>
-                  <span className="text-white">{customerInfo.vehicle_year} {customerInfo.vehicle_make} {customerInfo.vehicle_model}</span>
+                  <span className="text-white">{getVehicleSummary()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Total Paid:</span>
