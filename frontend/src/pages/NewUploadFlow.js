@@ -952,17 +952,24 @@ const NewUploadFlow = () => {
             
             {uploadedFile && (
               <button
-                onClick={() => { setStep(2); startProcessing(); }}
+                onClick={() => { setStep(3); startProcessing(); }}
                 className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
               >
                 Analyze File →
               </button>
             )}
+            
+            {/* Vehicle Info Summary */}
+            {selectedEngine && (
+              <div className="mt-6 bg-slate-700/30 rounded-xl p-4">
+                <p className="text-slate-400 text-sm">Vehicle: <span className="text-white font-medium">{getVehicleSummary()}</span></p>
+              </div>
+            )}
           </div>
         )}
         
-        {/* STEP 2: Processing */}
-        {step === 2 && (
+        {/* STEP 3: Processing */}
+        {step === 3 && (
           <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12 text-center">
             <div className="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
