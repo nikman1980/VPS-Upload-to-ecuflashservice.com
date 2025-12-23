@@ -558,24 +558,25 @@ const NewUploadFlow = () => {
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How It Works</h2>
               <p className="text-slate-400 max-w-2xl mx-auto">
-                Get your modified ECU file in 3 simple steps
+                Get your modified ECU file in 4 simple steps
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-4 gap-6">
               {[
-                { step: '01', title: 'Upload Your File', desc: 'Upload your original ECU file (.bin, .hex, .ori). We support all major ECU brands.' },
-                { step: '02', title: 'Select Services', desc: 'Choose the modifications you need. DTC removal, DPF OFF, EGR OFF, and more.' },
-                { step: '03', title: 'Download & Flash', desc: 'Pay securely via PayPal. Receive your modified file within 20-60 minutes.' },
+                { step: '01', title: 'Select Vehicle', desc: 'Choose your vehicle make, model, generation, and engine from our database.' },
+                { step: '02', title: 'Upload ECU File', desc: 'Upload your original ECU file (.bin, .hex, .ori). We support all major brands.' },
+                { step: '03', title: 'Choose Services', desc: 'Select the modifications you need: DPF OFF, EGR OFF, DTC removal, and more.' },
+                { step: '04', title: 'Pay & Download', desc: 'Pay securely via PayPal. Receive your modified file within 20-60 minutes.' },
               ].map((item, i) => (
                 <div key={i} className="relative">
-                  <div className="bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700/50 rounded-2xl p-8">
-                    <div className="text-6xl font-bold text-slate-700 mb-4">{item.step}</div>
-                    <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
-                    <p className="text-slate-400">{item.desc}</p>
+                  <div className="bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+                    <div className="text-5xl font-bold text-slate-700 mb-3">{item.step}</div>
+                    <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                    <p className="text-slate-400 text-sm">{item.desc}</p>
                   </div>
-                  {i < 2 && (
-                    <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 text-slate-600 text-2xl">→</div>
+                  {i < 3 && (
+                    <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-slate-600 text-xl">→</div>
                   )}
                 </div>
               ))}
