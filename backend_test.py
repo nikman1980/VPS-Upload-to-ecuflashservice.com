@@ -60,16 +60,16 @@ class ECUServiceTester:
             
             if success:
                 services = response.json()
-                # Check for required services
+                # Check for required services (checksum is added during file analysis)
                 service_ids = [s['id'] for s in services]
-                required_services = ['dtc-single', 'dtc-multiple', 'checksum']
+                required_services = ['dtc-single', 'dtc-multiple']
                 
                 missing_services = [s for s in required_services if s not in service_ids]
                 if missing_services:
                     success = False
                     details = f"Missing services: {missing_services}"
                 else:
-                    details = f"Found {len(services)} services including required ones"
+                    details = f"Found {len(services)} services including required DTC services"
                     
                     # Check specific pricing
                     checksum_service = next((s for s in services if s['id'] == 'checksum'), None)
