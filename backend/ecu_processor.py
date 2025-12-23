@@ -35,6 +35,7 @@ class ProcessingAction(Enum):
     DTC_MULTIPLE = "dtc-multiple"
     EGR_DPF_COMBO = "egr-dpf-combo"
     IMMO_OFF = "immo-off"
+    CHECKSUM = "checksum"
 
 
 class ConfidenceLevel(Enum):
