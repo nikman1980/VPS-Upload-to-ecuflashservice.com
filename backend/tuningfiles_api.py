@@ -40,6 +40,9 @@ class TuningFilesAPI:
         """Make async request to TuningFiles API"""
         url = f"{self.base_url}{endpoint}"
         
+        # Debug log the API key (first 8 chars only)
+        logger.info(f"TuningFiles API request to {endpoint} with key: {self.api_key[:8]}...")
+        
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.request(
                 method=method,
