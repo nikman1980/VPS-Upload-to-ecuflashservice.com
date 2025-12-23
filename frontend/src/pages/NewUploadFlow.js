@@ -332,7 +332,7 @@ const NewUploadFlow = () => {
     }
     
     setDtcError('');
-    setStep(4);
+    setStep(5); // Payment step in new flow
   };
 
   const createOrder = (data, actions) => {
