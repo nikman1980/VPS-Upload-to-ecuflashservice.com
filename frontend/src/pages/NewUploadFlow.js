@@ -447,7 +447,7 @@ const NewUploadFlow = () => {
               </h1>
               
               <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-                Upload your ECU file, select your services, and receive your professionally 
+                Select your vehicle, upload your ECU file, choose your services, and receive your professionally 
                 modified file within 20-60 minutes. No software required.
               </p>
               
@@ -456,7 +456,7 @@ const NewUploadFlow = () => {
                   onClick={() => setStep(1)}
                   className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all transform hover:-translate-y-1"
                 >
-                  Upload ECU File →
+                  Select Your Vehicle →
                 </button>
                 <a 
                   href="#how-it-works"
