@@ -177,15 +177,6 @@ const NewUploadFlow = () => {
     setStep(2);
   };
 
-  const fetchServices = async () => {
-    try {
-      const response = await axios.get(`${API}/services`);
-      setAllServices(response.data || []);
-    } catch (error) {
-      console.error('Error fetching services:', error);
-    }
-  };
-
   // Helper to get service price from API data
   const getServicePrice = (serviceId) => {
     const service = allServices.find(s => s.id === serviceId);
