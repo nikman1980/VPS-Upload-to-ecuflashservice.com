@@ -825,7 +825,7 @@ const NewUploadFlow = () => {
               {/* Generation */}
               {selectedModel && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Generation / Year</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Generation</label>
                   {vehicleLoading && generations.length === 0 ? (
                     <div className="text-center py-4 text-slate-400">Loading generations...</div>
                   ) : (
@@ -839,7 +839,9 @@ const NewUploadFlow = () => {
                     >
                       <option value="">Select generation...</option>
                       {generations.map((gen) => (
-                        <option key={gen.id} value={gen.id}>{gen.name}</option>
+                        <option key={gen.id} value={gen.id}>
+                          {gen.name} {gen.year ? `(${gen.year}${gen.yearend ? `-${gen.yearend}` : '+'})` : ''}
+                        </option>
                       ))}
                     </select>
                   )}
