@@ -460,19 +460,23 @@ const NewUploadFlow = () => {
               </div>
               <div className="divide-y divide-slate-700/50">
                 {[
-                  { name: 'DTC Code Deletion (Single)', price: '$10' },
-                  { name: 'DTC Code Deletion (Multiple)', price: '$25' },
-                  { name: 'Checksum Correction', price: '$5' },
-                  { name: 'DPF Removal', price: '$49' },
-                  { name: 'EGR Removal', price: '$39' },
-                  { name: 'AdBlue/SCR OFF', price: '$49' },
-                  { name: 'EGR + DPF Combo', price: '$79' },
-                ].map((item, i) => (
-                  <div key={i} className="flex justify-between items-center p-6 hover:bg-slate-800/50 transition">
-                    <span className="text-white font-medium">{item.name}</span>
-                    <span className="text-blue-400 font-bold text-lg">{item.price}</span>
-                  </div>
-                ))}
+                  { id: 'dtc-single', name: 'DTC Code Deletion (Single)' },
+                  { id: 'dtc-multiple', name: 'DTC Code Deletion (Multiple)' },
+                  { id: 'checksum', name: 'Checksum Correction' },
+                  { id: 'dpf-removal', name: 'DPF Removal' },
+                  { id: 'egr-removal', name: 'EGR Removal' },
+                  { id: 'adblue-removal', name: 'AdBlue/SCR OFF' },
+                  { id: 'egr-dpf-combo', name: 'EGR + DPF Combo' },
+                ].map((item, i) => {
+                  const apiService = allServices.find(s => s.id === item.id);
+                  const price = apiService ? apiService.base_price : 0;
+                  return (
+                    <div key={i} className="flex justify-between items-center p-6 hover:bg-slate-800/50 transition">
+                      <span className="text-white font-medium">{item.name}</span>
+                      <span className="text-blue-400 font-bold text-lg">${price.toFixed(0)}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
