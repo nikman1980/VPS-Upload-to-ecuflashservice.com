@@ -735,8 +735,171 @@ const NewUploadFlow = () => {
 
       <div className="container mx-auto px-6 py-12 max-w-4xl">
         
-        {/* STEP 1: Upload */}
+        {/* STEP 1: Vehicle Selection (Sedox-style) */}
         {step === 1 && (
+          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">Select Your Vehicle</h2>
+              <p className="text-slate-400">Choose your vehicle to see available tuning services</p>
+            </div>
+            
+            {/* Vehicle Selection Chain */}
+            <div className="space-y-6">
+              
+              {/* Vehicle Type */}
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Vehicle Type</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                  {vehicleTypes.map((type) => (
+                    <button
+                      key={type.id}
+                      onClick={() => handleVehicleTypeSelect(type)}
+                      className={`p-4 rounded-xl border-2 transition-all text-center ${
+                        selectedVehicleType?.id === type.id 
+                          ? 'border-blue-500 bg-blue-500/20 text-white' 
+                          : 'border-slate-600 hover:border-slate-500 text-slate-300'
+                      }`}
+                    >
+                      <div className="text-2xl mb-1">
+                        {type.slug === 'cars' ? '🚗' : 
+                         type.slug === 'trucks' ? '🚛' : 
+                         type.slug === 'agriculture' ? '🚜' : 
+                         type.slug === 'marine' ? '🚤' : '🏍️'}
+                      </div>
+                      <div className="text-sm font-medium">{type.name}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Manufacturer */}
+              {selectedVehicleType && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Manufacturer</label>
+                  {vehicleLoading && manufacturers.length === 0 ? (
+                    <div className="text-center py-4 text-slate-400">Loading manufacturers...</div>
+                  ) : (
+                    <select
+                      value={selectedManufacturer?.id || ''}
+                      onChange={(e) => {
+                        const mfr = manufacturers.find(m => m.id === parseInt(e.target.value));
+                        if (mfr) handleManufacturerSelect(mfr);
+                      }}
+                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    >
+                      <option value="">Select manufacturer...</option>
+                      {manufacturers.map((mfr) => (
+                        <option key={mfr.id} value={mfr.id}>{mfr.name}</option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              )}
+              
+              {/* Model */}
+              {selectedManufacturer && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Model</label>
+                  {vehicleLoading && models.length === 0 ? (
+                    <div className="text-center py-4 text-slate-400">Loading models...</div>
+                  ) : (
+                    <select
+                      value={selectedModel?.id || ''}
+                      onChange={(e) => {
+                        const model = models.find(m => m.id === parseInt(e.target.value));
+                        if (model) handleModelSelect(model);
+                      }}
+                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    >
+                      <option value="">Select model...</option>
+                      {models.map((model) => (
+                        <option key={model.id} value={model.id}>{model.name}</option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              )}
+              
+              {/* Generation */}
+              {selectedModel && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Generation / Year</label>
+                  {vehicleLoading && generations.length === 0 ? (
+                    <div className="text-center py-4 text-slate-400">Loading generations...</div>
+                  ) : (
+                    <select
+                      value={selectedGeneration?.id || ''}
+                      onChange={(e) => {
+                        const gen = generations.find(g => g.id === parseInt(e.target.value));
+                        if (gen) handleGenerationSelect(gen);
+                      }}
+                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    >
+                      <option value="">Select generation...</option>
+                      {generations.map((gen) => (
+                        <option key={gen.id} value={gen.id}>{gen.name}</option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              )}
+              
+              {/* Engine */}
+              {selectedGeneration && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">Engine</label>
+                  {vehicleLoading && engines.length === 0 ? (
+                    <div className="text-center py-4 text-slate-400">Loading engines...</div>
+                  ) : (
+                    <select
+                      value={selectedEngine?.id || ''}
+                      onChange={(e) => {
+                        const eng = engines.find(en => en.id === parseInt(e.target.value));
+                        if (eng) handleEngineSelect(eng);
+                      }}
+                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    >
+                      <option value="">Select engine...</option>
+                      {engines.map((eng) => (
+                        <option key={eng.id} value={eng.id}>{eng.name}</option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              )}
+              
+              {/* Selected Vehicle Summary */}
+              {selectedEngine && (
+                <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-green-400 text-sm font-medium">Selected Vehicle</p>
+                      <p className="text-white font-semibold">{getVehicleSummary()}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Continue Button */}
+            {selectedEngine && (
+              <button
+                onClick={proceedToUpload}
+                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+              >
+                Continue to File Upload →
+              </button>
+            )}
+          </div>
+        )}
+        
+        {/* STEP 2: Upload */}
+        {step === 2 && (
           <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Upload Your ECU File</h2>
