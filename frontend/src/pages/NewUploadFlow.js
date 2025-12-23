@@ -633,50 +633,82 @@ const NewUploadFlow = () => {
         {/* STEP 5: Download */}
         {step === 5 && (
           <div className="bg-gray-800 rounded-lg p-8 text-center">
-            <div className="text-6xl mb-6">🎉</div>
+            <div className="text-6xl mb-6">⏳</div>
             <h2 className="text-4xl font-bold mb-4">Payment Successful!</h2>
-            <p className="text-xl text-gray-300 mb-8">Your processed files are ready for download</p>
-
-            <div className="bg-gray-900 p-6 rounded-lg mb-6 text-left">
-              <h3 className="text-xl font-semibold mb-4">Your Processed Files:</h3>
-              <div className="space-y-3">
-                {availableOptions.filter(opt => selectedServices.includes(opt.service_id)).map((opt, index) => (
-                  <div key={opt.service_id} className="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
-                    <div>
-                      <div className="font-semibold">{opt.service_name}</div>
-                      <div className="text-sm text-gray-400">{analysisResult.original_filename}</div>
-                    </div>
-                    <a
-                      href={`${API}/download-purchased/${fileId}/${opt.service_id}`}
-                      download
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold"
-                    >
-                      Download
-                    </a>
-                  </div>
-                ))}
+            <p className="text-xl text-gray-300 mb-4">Your file has been submitted for processing</p>
+            
+            {/* Processing Status */}
+            <div className="bg-yellow-900/30 border border-yellow-600 p-6 rounded-lg mb-6">
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500"></div>
+                <span className="text-xl text-yellow-400 font-semibold">Processing Your File...</span>
               </div>
-            </div>
-
-            <div className="bg-blue-900/30 border border-blue-700 p-4 rounded-lg mb-6">
-              <p className="text-blue-300">
-                📧 <strong>Download links sent to:</strong> {customerInfo.customer_email}<br/>
-                💾 Keep your original file as backup<br/>
-                ⚠️ Test on vehicle before permanent installation
+              <p className="text-yellow-300">
+                ⏱️ <strong>Estimated Time:</strong> 20-60 minutes<br/>
+                Our professional tuning engineers are working on your file
               </p>
             </div>
 
-            <div className="bg-gray-700 p-4 rounded-lg mb-6">
-              <p className="text-sm text-gray-400">Order ID:</p>
-              <p className="font-mono">{orderId}</p>
+            {/* Order Details */}
+            <div className="bg-gray-900 p-6 rounded-lg mb-6 text-left">
+              <h3 className="text-xl font-semibold mb-4">Order Details:</h3>
+              <div className="space-y-2 text-gray-300">
+                <div><strong>Vehicle:</strong> {customerInfo.vehicle_year} {customerInfo.vehicle_make} {customerInfo.vehicle_model}</div>
+                <div><strong>Services:</strong></div>
+                <ul className="list-disc list-inside ml-4">
+                  {availableOptions.filter(opt => selectedServices.includes(opt.service_id)).map(opt => (
+                    <li key={opt.service_id}>{opt.service_name}</li>
+                  ))}
+                </ul>
+                {(selectedServices.includes('dtc-single') || selectedServices.includes('dtc-multiple')) && (dtcSingleCode || dtcMultipleCodes) && (
+                  <div><strong>DTC Codes to Remove:</strong> {dtcSingleCode || dtcMultipleCodes}</div>
+                )}
+                <div className="mt-2"><strong>Total Paid:</strong> <span className="text-green-400">${totalPrice.toFixed(2)}</span></div>
+              </div>
             </div>
 
-            <button
-              onClick={() => window.location.reload()}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold"
-            >
-              Process Another File
-            </button>
+            {/* What Happens Next */}
+            <div className="bg-blue-900/30 border border-blue-700 p-6 rounded-lg mb-6 text-left">
+              <h3 className="text-lg font-semibold text-blue-300 mb-3">📋 What Happens Next:</h3>
+              <ol className="list-decimal list-inside text-blue-200 space-y-2">
+                <li>Our engineers analyze and process your file (20-60 min)</li>
+                <li>You'll receive an <strong>email notification</strong> when ready</li>
+                <li>Click the download link in your email</li>
+                <li>Flash the modified file to your vehicle</li>
+              </ol>
+            </div>
+
+            {/* Order ID */}
+            <div className="bg-gray-700 p-4 rounded-lg mb-6">
+              <p className="text-sm text-gray-400">Order ID (save this for reference):</p>
+              <p className="font-mono text-lg">{orderId}</p>
+            </div>
+
+            {/* Check Status Button */}
+            <div className="space-y-4">
+              <a
+                href={`${API}/order-status/${orderId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold"
+              >
+                Check Order Status
+              </a>
+              
+              <div>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg"
+                >
+                  Process Another File
+                </button>
+              </div>
+            </div>
+
+            {/* Email Notice */}
+            <div className="mt-6 text-gray-400 text-sm">
+              <p>📧 Confirmation and download link will be sent to: <strong>{customerInfo.customer_email}</strong></p>
+            </div>
           </div>
         )}
       </div>
@@ -684,7 +716,7 @@ const NewUploadFlow = () => {
       {/* Footer */}
       <footer className="bg-gray-900 py-6 mt-16">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p>© 2024 ECU Flash Service | AI-Powered ECU Processing</p>
+          <p>© 2024 ECU Flash Service | Professional ECU Tuning</p>
           <p className="text-sm mt-2">⚠️ For off-road and racing use only</p>
         </div>
       </footer>
