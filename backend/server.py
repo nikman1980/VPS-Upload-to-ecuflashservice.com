@@ -415,7 +415,7 @@ def calculate_pricing(service_ids: List[str]) -> dict:
 
 
 # Services catalog with pricing
-# 100% markup applied - base_price is our cost, final_price is customer price
+# 100% markup applied - base_price is customer price, cost_price is our cost
 MARKUP_PERCENTAGE = 100  # 100% markup
 
 AVAILABLE_SERVICES = [
@@ -424,7 +424,8 @@ AVAILABLE_SERVICES = [
         "name": "DTC Removal (Single Code)",
         "description": "Remove one diagnostic trouble code from ECU file.",
         "icon": "🔍",
-        "base_price": 20.00,  # Cost: $10, Markup: 100%
+        "base_price": 20.00,
+        "final_price": 20.00,
         "cost_price": 10.00,
         "category": "diagnostics"
     },
@@ -433,7 +434,8 @@ AVAILABLE_SERVICES = [
         "name": "DTC Removal (Multiple Codes)",
         "description": "Remove all diagnostic trouble codes from ECU file.",
         "icon": "🔍",
-        "base_price": 50.00,  # Cost: $25, Markup: 100%
+        "base_price": 50.00,
+        "final_price": 50.00,
         "cost_price": 25.00,
         "category": "diagnostics"
     },
@@ -442,7 +444,8 @@ AVAILABLE_SERVICES = [
         "name": "Checksum Correction",
         "description": "Automatic checksum recalculation for modified files.",
         "icon": "✓",
-        "base_price": 10.00,  # Cost: $5, Markup: 100%
+        "base_price": 10.00,
+        "final_price": 10.00,
         "cost_price": 5.00,
         "category": "utility"
     },
@@ -451,7 +454,8 @@ AVAILABLE_SERVICES = [
         "name": "EGR Removal",
         "description": "Exhaust Gas Recirculation system removal.",
         "icon": "♻️",
-        "base_price": 50.00,  # Cost: $25, Markup: 100%
+        "base_price": 50.00,
+        "final_price": 50.00,
         "cost_price": 25.00,
         "category": "emissions"
     },
@@ -460,7 +464,8 @@ AVAILABLE_SERVICES = [
         "name": "DPF Removal",
         "description": "Diesel particulate filter removal.",
         "icon": "🚫",
-        "base_price": 158.00,  # Cost: $79, Markup: 100%
+        "base_price": 158.00,
+        "final_price": 158.00,
         "cost_price": 79.00,
         "category": "emissions"
     },
@@ -469,7 +474,8 @@ AVAILABLE_SERVICES = [
         "name": "EGR + DPF Combo",
         "description": "Best deal! Remove both EGR and DPF together.",
         "icon": "💥",
-        "base_price": 158.00,  # Cost: $79, Markup: 100%
+        "base_price": 158.00,
+        "final_price": 158.00,
         "cost_price": 79.00,
         "is_combo": True,
         "category": "emissions"
@@ -479,7 +485,8 @@ AVAILABLE_SERVICES = [
         "name": "AdBlue/DEF Removal",
         "description": "Complete AdBlue/DEF system removal.",
         "icon": "💧",
-        "base_price": 398.00,  # Cost: $199, Markup: 100%
+        "base_price": 398.00,
+        "final_price": 398.00,
         "cost_price": 199.00,
         "category": "emissions"
     },
@@ -488,7 +495,8 @@ AVAILABLE_SERVICES = [
         "name": "Immobilizer Off",
         "description": "Disable vehicle immobilizer.",
         "icon": "🔓",
-        "base_price": 70.00,  # Cost: $35, Markup: 100%
+        "base_price": 70.00,
+        "final_price": 70.00,
         "cost_price": 35.00,
         "category": "security"
     },
@@ -497,7 +505,8 @@ AVAILABLE_SERVICES = [
         "name": "Decat (Cat OFF)",
         "description": "Catalytic converter removal and disable.",
         "icon": "🔥",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "emissions"
     },
@@ -506,7 +515,8 @@ AVAILABLE_SERVICES = [
         "name": "Speed Limiter OFF",
         "description": "Remove speed limiter for maximum velocity.",
         "icon": "🚀",
-        "base_price": 30.00,  # Cost: $15, Markup: 100%
+        "base_price": 30.00,
+        "final_price": 30.00,
         "cost_price": 15.00,
         "category": "performance"
     },
@@ -515,7 +525,8 @@ AVAILABLE_SERVICES = [
         "name": "Swirl Flap OFF",
         "description": "Disable intake manifold swirl flaps.",
         "icon": "🌀",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "intake"
     },
@@ -524,7 +535,8 @@ AVAILABLE_SERVICES = [
         "name": "Exhaust Flaps OFF",
         "description": "Disable exhaust valve flaps.",
         "icon": "💨",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "exhaust"
     },
@@ -533,7 +545,8 @@ AVAILABLE_SERVICES = [
         "name": "NOX Sensor OFF",
         "description": "Disable NOx sensor and system.",
         "icon": "🌫️",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "emissions"
     },
@@ -542,7 +555,8 @@ AVAILABLE_SERVICES = [
         "name": "OPF/GPF OFF",
         "description": "Petrol particulate filter removal.",
         "icon": "🏭",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "emissions"
     },
@@ -551,7 +565,8 @@ AVAILABLE_SERVICES = [
         "name": "MAF Sensor OFF",
         "description": "Mass Air Flow sensor delete.",
         "icon": "📊",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "sensors"
     },
@@ -560,7 +575,8 @@ AVAILABLE_SERVICES = [
         "name": "Cold Start Noise OFF",
         "description": "Disable cold start noise reduction.",
         "icon": "❄️",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "comfort"
     },
@@ -569,7 +585,8 @@ AVAILABLE_SERVICES = [
         "name": "Start & Stop OFF",
         "description": "Disable automatic start-stop system.",
         "icon": "🔄",
-        "base_price": 40.00,  # Cost: $20, Markup: 100%
+        "base_price": 40.00,
+        "final_price": 40.00,
         "cost_price": 20.00,
         "category": "comfort"
     },
@@ -578,7 +595,8 @@ AVAILABLE_SERVICES = [
         "name": "Cylinder On Demand OFF",
         "description": "Disable cylinder deactivation system.",
         "icon": "⚡",
-        "base_price": 30.00,  # Cost: $15, Markup: 100%
+        "base_price": 30.00,
+        "final_price": 30.00,
         "cost_price": 15.00,
         "category": "performance"
     }
