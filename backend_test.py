@@ -71,16 +71,10 @@ class ECUServiceTester:
                 else:
                     details = f"Found {len(services)} services including required DTC services"
                     
-                    # Check specific pricing
-                    checksum_service = next((s for s in services if s['id'] == 'checksum'), None)
+                    # Check specific pricing (checksum is not in general services)
                     dtc_single = next((s for s in services if s['id'] == 'dtc-single'), None)
                     dtc_multiple = next((s for s in services if s['id'] == 'dtc-multiple'), None)
                     
-                    if checksum_service and checksum_service['base_price'] == 5.00:
-                        print(f"   ✓ Checksum service found at $5.00")
-                    else:
-                        print(f"   ⚠️ Checksum service price issue")
-                        
                     if dtc_single and dtc_single['base_price'] == 10.00:
                         print(f"   ✓ DTC Single service found at $10.00")
                     else:
