@@ -390,29 +390,78 @@ const NewUploadFlow = () => {
             
             <div className="space-y-3 mb-6">
               {availableOptions.map((option) => (
-                <label 
-                  key={option.service_id}
-                  className="flex items-center justify-between bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition"
-                >
-                  <div className="flex items-center space-x-3">
-                    <input
-                      type="checkbox"
-                      checked={selectedServices.includes(option.service_id)}
-                      onChange={() => handleServiceToggle(option.service_id, option.price)}
-                      className="w-5 h-5"
-                    />
-                    <div>
-                      <div className="font-semibold text-lg">{option.service_name}</div>
-                      <div className="text-sm text-gray-400">
-                        Confidence: {(option.confidence * 100).toFixed(0)}% • 
-                        Level: {option.confidence_level}
+                <div key={option.service_id} className="bg-gray-700 rounded-lg overflow-hidden">
+                  <label 
+                    className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-600 transition"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <input
+                        type="checkbox"
+                        checked={selectedServices.includes(option.service_id)}
+                        onChange={() => handleServiceToggle(option.service_id, option.price)}
+                        className="w-5 h-5"
+                      />
+                      <div>
+                        <div className="font-semibold text-lg">{option.service_name}</div>
+                        <div className="text-sm text-gray-400">
+                          Confidence: {(option.confidence * 100).toFixed(0)}%
+                          {option.confidence_level && ` • Level: ${option.confidence_level}`}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="text-2xl font-bold text-green-400">${option.price.toFixed(2)}</div>
-                </label>
+                    <div className="text-2xl font-bold text-green-400">${option.price.toFixed(2)}</div>
+                  </label>
+                  
+                  {/* DTC Single Input */}
+                  {option.service_id === 'dtc-single' && selectedServices.includes('dtc-single') && (
+                    <div className="px-4 pb-4 pt-2 border-t border-gray-600">
+                      <label className="block text-sm text-gray-300 mb-2">
+                        Enter the DTC code to remove:
+                      </label>
+                      <input
+                        type="text"
+                        value={dtcSingleCode}
+                        onChange={(e) => {
+                          setDtcSingleCode(e.target.value.toUpperCase());
+                          setDtcError('');
+                        }}
+                        placeholder="e.g., P0420"
+                        className="w-full bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none"
+                        maxLength={5}
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Format: 1 letter + 4 digits (P0420, C1234, B0001, U0100)</p>
+                    </div>
+                  )}
+                  
+                  {/* DTC Multiple Input */}
+                  {option.service_id === 'dtc-multiple' && selectedServices.includes('dtc-multiple') && (
+                    <div className="px-4 pb-4 pt-2 border-t border-gray-600">
+                      <label className="block text-sm text-gray-300 mb-2">
+                        Enter all DTC codes to remove (one per line or comma-separated):
+                      </label>
+                      <textarea
+                        value={dtcMultipleCodes}
+                        onChange={(e) => {
+                          setDtcMultipleCodes(e.target.value.toUpperCase());
+                          setDtcError('');
+                        }}
+                        placeholder="P0420&#10;P2002&#10;P0401"
+                        className="w-full bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none min-h-[100px]"
+                        rows={4}
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Enter each code on a new line or separate with commas</p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
+            
+            {/* DTC Error Message */}
+            {dtcError && (
+              <div className="bg-red-900/30 border border-red-700 text-red-300 p-4 rounded-lg mb-6">
+                ⚠️ {dtcError}
+              </div>
+            )}
 
             {/* Total */}
             {selectedServices.length > 0 && (
