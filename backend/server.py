@@ -15,11 +15,14 @@ import shutil
 import json
 import asyncio
 
-# Import AI ECU Processor
+# Import AI ECU Processor (mock - for fallback)
 from ecu_processor import ECUProcessor, ConfidenceLevel
 
 # Import Email Service
 from email_service import send_order_confirmation
+
+# Import TuningFiles API (real ECU processing)
+from tuningfiles_api import TuningFilesAPI, calculate_customer_price, calculate_profit
 
 
 ROOT_DIR = Path(__file__).parent
