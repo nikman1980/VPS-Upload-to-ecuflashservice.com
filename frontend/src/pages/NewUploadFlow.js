@@ -252,14 +252,13 @@ const NewUploadFlow = () => {
         setTimeout(() => {
           setStep(4); // Go to service selection (step 4 in new flow)
         }, 500);
-        }, 500);
       }
     } catch (error) {
       console.error('Error processing file:', error);
       alert('Error processing file. Please try again.');
       clearInterval(interval);
       setProcessing(false);
-      setStep(1);
+      setStep(2); // Back to upload step
     }
   };
 
