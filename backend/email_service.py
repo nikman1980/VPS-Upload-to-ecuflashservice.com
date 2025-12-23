@@ -85,6 +85,11 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
     file_id = order_details.get('file_id', '')
     base_url = os.environ.get('BASE_URL', 'https://ecuflashservice.com')
     
+    # Check if this is a "processing" notification or "completed" notification
+    is_processing = order_details.get('processing_status') == 'processing'
+    is_completed = order_details.get('processing_complete', False)
+    estimated_time = order_details.get('estimated_time', '20-60 minutes')
+    
     # Build services list HTML
     services_html = ""
     for service in services:
@@ -97,21 +102,22 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
         </tr>
         """
     
-    # Build download links HTML
+    # Build download links HTML (only if completed)
     downloads_html = ""
-    for i, link in enumerate(download_links):
-        service_id = link if isinstance(link, str) else link.get('service_id', f'file_{i}')
-        service_name = next((s.get('service_name', service_id) for s in services if s.get('service_id') == service_id), service_id)
-        download_url = f"{base_url}/api/download-purchased/{file_id}/{service_id}"
-        downloads_html += f"""
-        <tr>
-            <td style="padding: 12px;">
-                <a href="{download_url}" style="color: #2563eb; text-decoration: none; font-weight: 600;">
-                    📥 Download {service_name}
-                </a>
-            </td>
-        </tr>
-        """
+    if is_completed and download_links:
+        for i, link in enumerate(download_links):
+            if isinstance(link, str) and link:
+                # Use order ID for download
+                download_url = f"{base_url}/api/download-order/{link}"
+                downloads_html += f"""
+                <tr>
+                    <td style="padding: 12px;">
+                        <a href="{download_url}" style="color: #ffffff; text-decoration: none; font-weight: 600; background-color: #059669; padding: 12px 24px; border-radius: 8px; display: inline-block;">
+                            📥 Download Your Processed File
+                        </a>
+                    </td>
+                </tr>
+                """
     
     # Build DTC codes section if applicable
     dtc_html = ""
