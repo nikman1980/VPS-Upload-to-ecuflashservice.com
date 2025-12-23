@@ -93,8 +93,159 @@ class ECUServiceTester:
             self.log_test("Get Services", False, f"Error: {str(e)}")
             return False
 
+    def test_vehicle_types(self):
+        """Test vehicle types endpoint (Sedox-style)"""
+        try:
+            response = requests.get(f"{self.api_url}/vehicles/types", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                types = response.json()
+                expected_count = 5  # Cars, Trucks, Agriculture, Marine, Motorcycles
+                
+                if len(types) >= expected_count:
+                    details = f"Found {len(types)} vehicle types"
+                    print(f"   Types: {[t.get('name', 'Unknown') for t in types]}")
+                else:
+                    success = False
+                    details = f"Expected {expected_count} types, got {len(types)}"
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Vehicle Types API", success, details, 200, response.status_code)
+            return success, types if success else []
+        except Exception as e:
+            self.log_test("Vehicle Types API", False, f"Error: {str(e)}")
+            return False, []
+
+    def test_manufacturers(self, vehicle_type_id=1):
+        """Test manufacturers endpoint for Cars (type_id=1)"""
+        try:
+            response = requests.get(f"{self.api_url}/vehicles/manufacturers/{vehicle_type_id}", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                manufacturers = response.json()
+                expected_count = 50  # Should have many manufacturers for cars
+                
+                if len(manufacturers) >= expected_count:
+                    details = f"Found {len(manufacturers)} manufacturers for type {vehicle_type_id}"
+                    # Look for BMW specifically (mentioned in test requirements)
+                    bmw = next((m for m in manufacturers if 'BMW' in m.get('name', '')), None)
+                    if bmw:
+                        print(f"   ✓ BMW found with ID: {bmw.get('id')}")
+                    else:
+                        print(f"   ⚠️ BMW not found in manufacturers")
+                    print(f"   Sample manufacturers: {[m.get('name') for m in manufacturers[:5]]}")
+                else:
+                    success = False
+                    details = f"Expected at least {expected_count} manufacturers, got {len(manufacturers)}"
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Manufacturers API", success, details, 200, response.status_code)
+            return success, manufacturers if success else []
+        except Exception as e:
+            self.log_test("Manufacturers API", False, f"Error: {str(e)}")
+            return False, []
+
+    def test_models(self, manufacturer_id=1262):
+        """Test models endpoint for BMW (manufacturer_id=1262)"""
+        try:
+            response = requests.get(f"{self.api_url}/vehicles/models/{manufacturer_id}", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                models = response.json()
+                expected_count = 20  # BMW should have many models
+                
+                if len(models) >= expected_count:
+                    details = f"Found {len(models)} models for manufacturer {manufacturer_id}"
+                    print(f"   Sample models: {[m.get('name') for m in models[:5]]}")
+                else:
+                    success = False
+                    details = f"Expected at least {expected_count} models, got {len(models)}"
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Models API", success, details, 200, response.status_code)
+            return success, models if success else []
+        except Exception as e:
+            self.log_test("Models API", False, f"Error: {str(e)}")
+            return False, []
+
+    def test_generations(self, model_id):
+        """Test generations endpoint"""
+        try:
+            response = requests.get(f"{self.api_url}/vehicles/generations/{model_id}", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                generations = response.json()
+                details = f"Found {len(generations)} generations for model {model_id}"
+                if generations:
+                    print(f"   Sample generations: {[g.get('name') for g in generations[:3]]}")
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Generations API", success, details, 200, response.status_code)
+            return success, generations if success else []
+        except Exception as e:
+            self.log_test("Generations API", False, f"Error: {str(e)}")
+            return False, []
+
+    def test_engines(self, generation_id):
+        """Test engines endpoint"""
+        try:
+            response = requests.get(f"{self.api_url}/vehicles/engines/{generation_id}", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                engines = response.json()
+                details = f"Found {len(engines)} engines for generation {generation_id}"
+                if engines:
+                    print(f"   Sample engines: {[e.get('name') for e in engines[:3]]}")
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Engines API", success, details, 200, response.status_code)
+            return success, engines if success else []
+        except Exception as e:
+            self.log_test("Engines API", False, f"Error: {str(e)}")
+            return False, []
+
+    def test_vehicle_stats(self):
+        """Test vehicle database stats endpoint"""
+        try:
+            response = requests.get(f"{self.api_url}/vehicles/stats", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                stats = response.json()
+                total_records = stats.get('total_records', 0)
+                database_ready = stats.get('database_ready', False)
+                
+                if total_records >= 10000 and database_ready:
+                    details = f"Database ready with {total_records} records"
+                    print(f"   Vehicle types: {stats.get('vehicle_types', 0)}")
+                    print(f"   Manufacturers: {stats.get('manufacturers', 0)}")
+                    print(f"   Models: {stats.get('models', 0)}")
+                    print(f"   Generations: {stats.get('generations', 0)}")
+                    print(f"   Engines: {stats.get('engines', 0)}")
+                else:
+                    success = False
+                    details = f"Database not ready: {total_records} records, ready: {database_ready}"
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Vehicle Database Stats", success, details, 200, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Vehicle Database Stats", False, f"Error: {str(e)}")
+            return False
+
     def test_get_vehicles(self):
-        """Test vehicle database endpoint"""
+        """Test legacy vehicle database endpoint"""
         try:
             response = requests.get(f"{self.api_url}/vehicles", timeout=10)
             success = response.status_code == 200
@@ -120,10 +271,10 @@ class ECUServiceTester:
             else:
                 details = f"HTTP {response.status_code}"
                 
-            self.log_test("Get Vehicle Database", success, details, 200, response.status_code)
+            self.log_test("Legacy Vehicle Database", success, details, 200, response.status_code)
             return success
         except Exception as e:
-            self.log_test("Get Vehicle Database", False, f"Error: {str(e)}")
+            self.log_test("Legacy Vehicle Database", False, f"Error: {str(e)}")
             return False
 
     def test_file_upload_and_analysis(self):
