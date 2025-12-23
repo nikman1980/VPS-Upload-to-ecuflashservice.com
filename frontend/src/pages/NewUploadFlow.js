@@ -225,6 +225,20 @@ const NewUploadFlow = () => {
     try {
       const formData = new FormData();
       formData.append('file', uploadedFile);
+      // Include vehicle information with the upload
+      if (selectedEngine) {
+        formData.append('vehicle_info', JSON.stringify({
+          vehicle_type: selectedVehicleType?.name,
+          manufacturer: selectedManufacturer?.name,
+          manufacturer_id: selectedManufacturer?.id,
+          model: selectedModel?.name,
+          model_id: selectedModel?.id,
+          generation: selectedGeneration?.name,
+          generation_id: selectedGeneration?.id,
+          engine: selectedEngine?.name,
+          engine_id: selectedEngine?.id
+        }));
+      }
 
       const response = await axios.post(`${API}/analyze-and-process-file`, formData);
       
@@ -236,7 +250,8 @@ const NewUploadFlow = () => {
         setAnalysisResult(response.data);
         setAvailableOptions(response.data.available_options || []);
         setTimeout(() => {
-          setStep(3);
+          setStep(4); // Go to service selection (step 4 in new flow)
+        }, 500);
         }, 500);
       }
     } catch (error) {
