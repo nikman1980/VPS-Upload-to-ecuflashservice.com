@@ -359,13 +359,26 @@ const NewUploadFlow = () => {
         dtcCodesData.dtc_type = 'multiple';
       }
       
+      // Build vehicle info from Sedox-style selection
+      const vehicleInfo = {
+        vehicle_type: selectedVehicleType?.name,
+        manufacturer: selectedManufacturer?.name,
+        manufacturer_id: selectedManufacturer?.id,
+        model: selectedModel?.name,
+        model_id: selectedModel?.id,
+        generation: selectedGeneration?.name,
+        generation_id: selectedGeneration?.id,
+        engine: selectedEngine?.name,
+        engine_id: selectedEngine?.id
+      };
+      
       const purchaseData = new FormData();
       purchaseData.append('file_id', fileId);
       purchaseData.append('selected_services', JSON.stringify(selectedServices));
       purchaseData.append('customer_name', customerInfo.customer_name);
       purchaseData.append('customer_email', customerInfo.customer_email);
       purchaseData.append('customer_phone', customerInfo.customer_phone);
-      purchaseData.append('vehicle_info', JSON.stringify(customerInfo));
+      purchaseData.append('vehicle_info', JSON.stringify(vehicleInfo));
       purchaseData.append('dtc_codes', JSON.stringify(dtcCodesData));
       purchaseData.append('paypal_order_id', order.id);
       purchaseData.append('paypal_transaction_id', order.purchase_units[0].payments.captures[0].id);
@@ -375,15 +388,13 @@ const NewUploadFlow = () => {
       if (response.data.success) {
         setOrderId(response.data.order_id);
         setDownloadLinks(response.data.download_links || []);
-        setStep(5);
+        setStep(6); // Success step in new flow
       }
     } catch (error) {
       console.error('Error:', error);
       alert('Payment successful but error creating order. Contact support with PayPal order ID: ' + order.id);
     }
   };
-
-  const availableMakes = vehicleType ? vehicleTypes[vehicleType] : [];
 
   // ============== LANDING PAGE (Step 0) ==============
   if (step === 0) {
