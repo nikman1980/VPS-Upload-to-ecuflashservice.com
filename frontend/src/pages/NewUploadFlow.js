@@ -992,8 +992,8 @@ const NewUploadFlow = () => {
           </div>
         )}
         
-        {/* STEP 3: Results & Selection */}
-        {step === 3 && analysisResult && (
+        {/* STEP 4: Results & Service Selection */}
+        {step === 4 && analysisResult && (
           <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
