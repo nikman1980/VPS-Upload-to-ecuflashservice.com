@@ -390,20 +390,26 @@ const NewUploadFlow = () => {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: '🔧', name: 'DTC Code Deletion', desc: 'Remove specific error codes from your ECU', price: 'From $10' },
-                { icon: '✓', name: 'Checksum Correction', desc: 'Automatic checksum recalculation', price: '$5' },
-                { icon: '🚫', name: 'DPF Removal', desc: 'Diesel Particulate Filter deactivation', price: '$49' },
-                { icon: '♻️', name: 'EGR Removal', desc: 'Exhaust Gas Recirculation OFF', price: '$39' },
-                { icon: '💧', name: 'AdBlue OFF', desc: 'SCR/AdBlue system deactivation', price: '$49' },
-                { icon: '🔒', name: 'IMMO OFF', desc: 'Immobilizer system bypass', price: '$59' },
-              ].map((service, i) => (
-                <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
-                  <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{service.name}</h3>
-                  <p className="text-slate-400 text-sm mb-4">{service.desc}</p>
-                  <div className="text-blue-400 font-semibold">{service.price}</div>
-                </div>
-              ))}
+                { icon: '🔧', id: 'dtc-single', name: 'DTC Code Deletion', desc: 'Remove specific error codes from your ECU', priceLabel: 'From' },
+                { icon: '✓', id: 'checksum', name: 'Checksum Correction', desc: 'Automatic checksum recalculation', priceLabel: '' },
+                { icon: '🚫', id: 'dpf-removal', name: 'DPF Removal', desc: 'Diesel Particulate Filter deactivation', priceLabel: '' },
+                { icon: '♻️', id: 'egr-removal', name: 'EGR Removal', desc: 'Exhaust Gas Recirculation OFF', priceLabel: '' },
+                { icon: '💧', id: 'adblue-removal', name: 'AdBlue OFF', desc: 'SCR/AdBlue system deactivation', priceLabel: '' },
+                { icon: '🔒', id: 'immo-off', name: 'IMMO OFF', desc: 'Immobilizer system bypass', priceLabel: '' },
+              ].map((service, i) => {
+                const apiService = allServices.find(s => s.id === service.id);
+                const price = apiService ? apiService.base_price : 0;
+                return (
+                  <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
+                    <div className="text-4xl mb-4">{service.icon}</div>
+                    <h3 className="text-xl font-semibold text-white mb-2">{service.name}</h3>
+                    <p className="text-slate-400 text-sm mb-4">{service.desc}</p>
+                    <div className="text-blue-400 font-semibold">
+                      {service.priceLabel} ${price.toFixed(0)}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
