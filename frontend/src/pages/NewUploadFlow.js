@@ -254,8 +254,8 @@ const NewUploadFlow = () => {
       
       if (response.data.success) {
         setOrderId(response.data.order_id);
-        setDownloadLinks(response.data.download_links);
-        setStep(5); // Download page
+        setDownloadLinks(response.data.download_links || []);
+        setStep(5); // Processing status page
       }
     } catch (error) {
       console.error('Error:', error);
