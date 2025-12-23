@@ -47,9 +47,13 @@ const NewUploadFlow = () => {
   // Download state
   const [orderId, setOrderId] = useState(null);
   const [downloadLinks, setDownloadLinks] = useState([]);
+  
+  // Services from API
+  const [allServices, setAllServices] = useState([]);
 
   useEffect(() => {
     fetchVehicleData();
+    fetchServices();
   }, []);
 
   const fetchVehicleData = async () => {
@@ -59,6 +63,21 @@ const NewUploadFlow = () => {
     } catch (error) {
       console.error('Error fetching vehicles:', error);
     }
+  };
+
+  const fetchServices = async () => {
+    try {
+      const response = await axios.get(`${API}/services`);
+      setAllServices(response.data || []);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
+
+  // Helper to get service price from API data
+  const getServicePrice = (serviceId) => {
+    const service = allServices.find(s => s.id === serviceId);
+    return service ? service.base_price : 0;
   };
 
   const handleFileSelect = (e) => {
