@@ -138,13 +138,41 @@ const NewUploadFlow = () => {
     }
   };
 
+  // Validate DTC code format (letter + 4 digits, e.g., P0420)
+  const isValidDTC = (code) => {
+    const dtcPattern = /^[PCBU][0-9]{4}$/i;
+    return dtcPattern.test(code.trim());
+  };
+
+  // Parse and validate multiple DTC codes
+  const parseDTCCodes = (input) => {
+    const codes = input.split(/[,\n\s]+/).filter(code => code.trim() !== '');
+    return codes.map(code => code.trim().toUpperCase());
+  };
+
   const handleServiceToggle = (serviceId, price) => {
     if (selectedServices.includes(serviceId)) {
       setSelectedServices(prev => prev.filter(id => id !== serviceId));
       setTotalPrice(prev => prev - price);
+      // Clear DTC input when deselecting
+      if (serviceId === 'dtc-single') setDtcSingleCode('');
+      if (serviceId === 'dtc-multiple') setDtcMultipleCodes('');
+      setDtcError('');
     } else {
-      setSelectedServices(prev => [...prev, serviceId]);
-      setTotalPrice(prev => prev + price);
+      // If selecting single, deselect multiple and vice versa
+      if (serviceId === 'dtc-single' && selectedServices.includes('dtc-multiple')) {
+        setSelectedServices(prev => prev.filter(id => id !== 'dtc-multiple'));
+        setTotalPrice(prev => prev - 25 + price);
+        setDtcMultipleCodes('');
+      } else if (serviceId === 'dtc-multiple' && selectedServices.includes('dtc-single')) {
+        setSelectedServices(prev => prev.filter(id => id !== 'dtc-single'));
+        setTotalPrice(prev => prev - 10 + price);
+        setDtcSingleCode('');
+      } else {
+        setTotalPrice(prev => prev + price);
+      }
+      setSelectedServices(prev => [...prev.filter(id => !id.startsWith('dtc-')), serviceId]);
+      setDtcError('');
     }
   };
 
@@ -153,6 +181,37 @@ const NewUploadFlow = () => {
       alert('Please select at least one service');
       return;
     }
+    
+    // Validate DTC codes if DTC service is selected
+    if (selectedServices.includes('dtc-single')) {
+      if (!dtcSingleCode.trim()) {
+        setDtcError('Please enter the DTC code you want to remove');
+        return;
+      }
+      if (!isValidDTC(dtcSingleCode)) {
+        setDtcError('Invalid DTC format. Example: P0420, C1234, B0001');
+        return;
+      }
+    }
+    
+    if (selectedServices.includes('dtc-multiple')) {
+      if (!dtcMultipleCodes.trim()) {
+        setDtcError('Please enter the DTC codes you want to remove');
+        return;
+      }
+      const codes = parseDTCCodes(dtcMultipleCodes);
+      if (codes.length === 0) {
+        setDtcError('Please enter at least one DTC code');
+        return;
+      }
+      const invalidCodes = codes.filter(code => !isValidDTC(code));
+      if (invalidCodes.length > 0) {
+        setDtcError(`Invalid DTC format: ${invalidCodes.join(', ')}. Example: P0420`);
+        return;
+      }
+    }
+    
+    setDtcError('');
     setStep(4);
   };
 
