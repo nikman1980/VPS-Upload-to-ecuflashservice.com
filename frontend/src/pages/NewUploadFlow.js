@@ -61,11 +61,6 @@ const NewUploadFlow = () => {
   // Services from API
   const [allServices, setAllServices] = useState([]);
 
-  useEffect(() => {
-    fetchVehicleTypes();
-    fetchServices();
-  }, []);
-
   // Fetch vehicle types on load
   const fetchVehicleTypes = async () => {
     try {
@@ -75,6 +70,22 @@ const NewUploadFlow = () => {
       console.error('Error fetching vehicle types:', error);
     }
   };
+
+  // Fetch services
+  const fetchServices = async () => {
+    try {
+      const response = await axios.get(`${API}/services`);
+      setAllServices(response.data || []);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchVehicleTypes();
+    fetchServices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Fetch manufacturers when vehicle type is selected
   const handleVehicleTypeSelect = async (type) => {
