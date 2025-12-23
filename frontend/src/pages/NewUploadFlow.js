@@ -26,6 +26,11 @@ const NewUploadFlow = () => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   
+  // DTC codes input
+  const [dtcSingleCode, setDtcSingleCode] = useState('');
+  const [dtcMultipleCodes, setDtcMultipleCodes] = useState('');
+  const [dtcError, setDtcError] = useState('');
+  
   // Customer info
   const [vehicleMakes, setVehicleMakes] = useState([]);
   const [vehicleModels, setVehicleModels] = useState({});
