@@ -757,12 +757,82 @@ async def purchase_processed_file(
             "payment_status": "completed",
             "payment_date": datetime.now(timezone.utc).isoformat(),
             "download_links": selected_service_ids,
+            "processing_status": "pending",  # Will be updated by Sedox
             "created_at": datetime.now(timezone.utc).isoformat()
         }
         
         await db.orders.insert_one(order_doc)
         
-        # Send confirmation email
+        # ==================== SEDOX INTEGRATION ====================
+        sedox_project_id = None
+        sedox_file_id = None
+        
+        try:
+            # Find the original uploaded file
+            original_file_pattern = f"{file_id}_original*"
+            matching_files = list(UPLOAD_DIR.glob(original_file_pattern))
+            
+            if matching_files:
+                original_file_path = str(matching_files[0])
+                
+                # Upload file to Sedox
+                logger.info(f"Uploading file to Sedox for order {order_id}")
+                upload_result = await sedox_client.upload_file(original_file_path)
+                sedox_file_id = upload_result.get("id")
+                
+                # Create tuning project on Sedox
+                logger.info(f"Creating Sedox project for order {order_id}")
+                project_result = await sedox_client.create_tuning_project(
+                    sedox_file_id=sedox_file_id,
+                    vehicle_make=vehicle_data.get("vehicle_make", "Unknown"),
+                    vehicle_model=vehicle_data.get("vehicle_model", "Unknown"),
+                    vehicle_year=int(vehicle_data.get("vehicle_year", 2020)),
+                    services=selected_service_ids,
+                    dtc_codes=dtc_data.get('dtc_codes', []),
+                    order_id=order_id
+                )
+                
+                sedox_project_id = project_result.get("id")
+                
+                # Update order with Sedox info
+                await db.orders.update_one(
+                    {"id": order_id},
+                    {
+                        "$set": {
+                            "sedox_project_id": sedox_project_id,
+                            "sedox_file_id": sedox_file_id,
+                            "processing_status": "submitted_to_sedox",
+                            "sedox_submitted_at": datetime.now(timezone.utc).isoformat()
+                        }
+                    }
+                )
+                
+                # Start background polling for completion
+                background_tasks.add_task(
+                    poll_sedox_project,
+                    project_id=sedox_project_id,
+                    order_id=order_id,
+                    db=db
+                )
+                
+                logger.info(f"Sedox project {sedox_project_id} created for order {order_id}")
+                
+        except Exception as sedox_error:
+            logger.error(f"Sedox integration error: {sedox_error}")
+            # Update order to show Sedox failed
+            await db.orders.update_one(
+                {"id": order_id},
+                {
+                    "$set": {
+                        "processing_status": "sedox_error",
+                        "sedox_error": str(sedox_error)
+                    }
+                }
+            )
+        
+        # ==================== END SEDOX INTEGRATION ====================
+        
+        # Send order received email (not completion - that comes later)
         try:
             email_sent = send_order_confirmation(
                 customer_email=customer_email,
@@ -776,19 +846,23 @@ async def purchase_processed_file(
                     "vehicle_model": vehicle_data.get("vehicle_model"),
                     "vehicle_year": vehicle_data.get("vehicle_year"),
                     "dtc_codes": dtc_data.get('dtc_codes', []),
-                    "download_links": selected_service_ids
+                    "download_links": [],  # Empty for now - will be sent when ready
+                    "processing_status": "processing",
+                    "estimated_time": "20-60 minutes"
                 }
             )
-            logger.info(f"Email sent: {email_sent} for order {order_id}")
+            logger.info(f"Order received email sent: {email_sent} for order {order_id}")
         except Exception as email_error:
             logger.error(f"Failed to send email: {email_error}")
-            # Don't fail the purchase if email fails
         
-        # Return download links
+        # Return order confirmation
         return {
             "success": True,
             "order_id": order_id,
-            "download_links": [f"/api/download-purchased/{file_id}/{service_id}" for service_id in selected_service_ids],
+            "processing_status": "submitted",
+            "sedox_project_id": sedox_project_id,
+            "message": "Your file has been submitted for processing. You will receive an email when it's ready (typically 20-60 minutes).",
+            "estimated_time": "20-60 minutes",
             "total_paid": total_price
         }
         
