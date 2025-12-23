@@ -435,6 +435,15 @@ AVAILABLE_SERVICES = [
         "category": "diagnostics"
     },
     {
+        "id": "checksum",
+        "name": "Checksum Correction",
+        "description": "Automatic checksum recalculation for modified files.",
+        "icon": "✓",
+        "base_price": 5.00,
+        "final_price": 5.00,
+        "category": "utility"
+    },
+    {
         "id": "egr-removal",
         "name": "EGR Removal",
         "description": "Exhaust Gas Recirculation system removal.",
