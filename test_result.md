@@ -101,3 +101,24 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+## Current Testing Session - Dec 23, 2025
+
+### Completed Changes:
+1. Fixed backend startup (corrupted Python packages in venv - recreated venv)
+2. Added Checksum service ($5) to available_services in ecu_processor.py
+3. Added Checksum to ProcessingAction enum
+4. Added Checksum handling in process_file function  
+5. Removed "ECU Type:" from File Information display in NewUploadFlow.js
+
+### Features to Test:
+1. File upload workflow - Upload → Analyze → Show services → Pay → Download
+2. Checksum service is visible at $5.00
+3. DTC Delete services are showing
+4. ECU Type is NOT shown in File Information
+5. PayPal payment flow
+6. Vehicle dropdown functionality
+
+### Test Status:
+- needs_retesting: true
+- test_priority: high_first
