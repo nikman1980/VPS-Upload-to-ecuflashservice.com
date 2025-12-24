@@ -1025,12 +1025,13 @@ const NewUploadFlow = () => {
             </div>
             
             {/* Continue Button */}
-            {selectedEngine && (
+            {selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()) && (
               <button
                 onClick={proceedToUpload}
                 className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
               >
                 Continue to File Upload →
+              </button>
               </button>
             )}
           </div>
