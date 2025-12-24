@@ -258,17 +258,37 @@ const NewUploadFlow = () => {
 
   // Proceed to upload after vehicle selection
   const proceedToUpload = () => {
-    if (!selectedEngine) {
-      alert('Please select your vehicle engine to continue');
-      return;
-    }
-    if (!selectedEcu) {
-      alert('Please select your ECU type to continue');
-      return;
-    }
-    if (selectedEcu.id === 'other' && !customEcu.trim()) {
-      alert('Please enter your ECU type');
-      return;
+    if (isManualVehicle) {
+      // Validate manual vehicle entry
+      if (!manualVehicle.make.trim()) {
+        alert('Please enter the vehicle make/brand');
+        return;
+      }
+      if (!manualVehicle.model.trim()) {
+        alert('Please enter the vehicle model');
+        return;
+      }
+      if (!selectedEcu) {
+        alert('Please select your ECU type');
+        return;
+      }
+      if (selectedEcu.id === 'other' && !customEcu.trim()) {
+        alert('Please enter your ECU type');
+        return;
+      }
+    } else {
+      if (!selectedEngine) {
+        alert('Please select your vehicle engine to continue');
+        return;
+      }
+      if (!selectedEcu) {
+        alert('Please select your ECU type to continue');
+        return;
+      }
+      if (selectedEcu.id === 'other' && !customEcu.trim()) {
+        alert('Please enter your ECU type');
+        return;
+      }
     }
     setStep(2);
   };
