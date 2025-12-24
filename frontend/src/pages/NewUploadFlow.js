@@ -948,8 +948,66 @@ const NewUploadFlow = () => {
                 </div>
               )}
               
-              {/* Selected Vehicle Summary */}
+              {/* ECU Type */}
               {selectedEngine && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">ECU Type</label>
+                  <select
+                    value={selectedEcu?.id || ''}
+                    onChange={(e) => handleEcuSelect(e.target.value)}
+                    className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  >
+                    <option value="">Select ECU type...</option>
+                    <optgroup label="Bosch">
+                      {commonEcuTypes.filter(e => e.manufacturer === 'Bosch').map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Siemens">
+                      {commonEcuTypes.filter(e => e.manufacturer === 'Siemens').map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Continental">
+                      {commonEcuTypes.filter(e => e.manufacturer === 'Continental').map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Delphi">
+                      {commonEcuTypes.filter(e => e.manufacturer === 'Delphi').map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Denso">
+                      {commonEcuTypes.filter(e => e.manufacturer === 'Denso').map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Marelli">
+                      {commonEcuTypes.filter(e => e.manufacturer === 'Marelli').map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Other">
+                      <option value="other">Other (Enter manually)</option>
+                    </optgroup>
+                  </select>
+                  
+                  {/* Custom ECU Input */}
+                  {selectedEcu?.id === 'other' && (
+                    <input
+                      type="text"
+                      value={customEcu}
+                      onChange={(e) => setCustomEcu(e.target.value)}
+                      placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
+                      className="w-full mt-3 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
+              )}
+              
+              {/* Selected Vehicle Summary */}
+              {selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()) && (
                 <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
