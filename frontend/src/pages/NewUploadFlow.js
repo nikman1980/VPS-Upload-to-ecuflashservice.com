@@ -301,6 +301,10 @@ const NewUploadFlow = () => {
 
   // Get vehicle summary string
   const getVehicleSummary = () => {
+    if (isManualVehicle) {
+      const ecuInfo = selectedEcu ? (selectedEcu.id === 'other' ? customEcu : selectedEcu.name) : '';
+      return `${manualVehicle.make} ${manualVehicle.model} ${manualVehicle.year} - ${manualVehicle.engine}${ecuInfo ? ` (${ecuInfo})` : ''}`;
+    }
     if (!selectedManufacturer || !selectedModel || !selectedGeneration || !selectedEngine) {
       return 'No vehicle selected';
     }
