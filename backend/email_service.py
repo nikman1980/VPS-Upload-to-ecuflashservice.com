@@ -352,3 +352,268 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
     """
     
     return html
+
+
+
+# Admin email address for notifications
+ADMIN_EMAIL = "admin@ecuflashservice.com"
+
+
+async def send_admin_new_order_notification(
+    order_id: str,
+    customer_name: str,
+    customer_email: str,
+    order_details: dict
+) -> bool:
+    """
+    Send notification email to admin when a new paid order comes in
+    
+    Args:
+        order_id: Order ID
+        customer_name: Customer's name
+        customer_email: Customer's email
+        order_details: Dict containing order info
+    
+    Returns:
+        bool: True if email sent successfully, False otherwise
+    """
+    
+    # Extract details
+    services = order_details.get('purchased_services', [])
+    total_price = order_details.get('total_price', 0)
+    vehicle_info = order_details.get('vehicle_info', {})
+    
+    # Build vehicle info string
+    if isinstance(vehicle_info, dict) and vehicle_info:
+        if vehicle_info.get('is_manual'):
+            vehicle_str = f"{vehicle_info.get('manufacturer', 'N/A')} {vehicle_info.get('model', 'N/A')} {vehicle_info.get('generation', '')} {vehicle_info.get('engine', '')}"
+        else:
+            vehicle_str = f"{vehicle_info.get('manufacturer', 'N/A')} {vehicle_info.get('model', 'N/A')} {vehicle_info.get('generation', '')} - {vehicle_info.get('engine', '')}"
+        ecu_type = vehicle_info.get('ecu', 'N/A')
+    else:
+        vehicle_str = "N/A"
+        ecu_type = "N/A"
+    
+    # Build services list
+    services_list = "\n".join([f"• {s.get('service_name', 'Service')} - ${s.get('price', 0):.2f}" for s in services])
+    
+    base_url = os.environ.get('BASE_URL', 'https://ecuflashservice.com')
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body style="font-family: Arial, sans-serif; background-color: #1e293b; margin: 0; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #0f172a; border-radius: 16px; overflow: hidden; border: 1px solid #334155;">
+            
+            <!-- Header -->
+            <div style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); padding: 30px; text-align: center;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 24px;">🔔 NEW PAID ORDER!</h1>
+            </div>
+            
+            <!-- Content -->
+            <div style="padding: 30px;">
+                <div style="background-color: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h2 style="color: #f59e0b; margin: 0 0 15px 0; font-size: 18px;">Order #{order_id[:8]}</h2>
+                    
+                    <table style="width: 100%; color: #e2e8f0;">
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Customer:</td>
+                            <td style="padding: 8px 0; font-weight: bold;">{customer_name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Email:</td>
+                            <td style="padding: 8px 0;">{customer_email}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Vehicle:</td>
+                            <td style="padding: 8px 0; font-weight: bold;">{vehicle_str}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">ECU Type:</td>
+                            <td style="padding: 8px 0; color: #22d3ee; font-weight: bold;">{ecu_type}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Total:</td>
+                            <td style="padding: 8px 0; color: #22c55e; font-weight: bold; font-size: 20px;">${total_price:.2f}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="background-color: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h3 style="color: #e2e8f0; margin: 0 0 15px 0;">Services Requested:</h3>
+                    <pre style="color: #94a3b8; margin: 0; white-space: pre-wrap;">{services_list}</pre>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="{base_url}/admin" style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; display: inline-block;">
+                        📋 Go to Admin Panel
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; padding: 20px; color: #64748b; font-size: 12px; border-top: 1px solid #334155;">
+                <p style="margin: 0;">ECU Flash Service Admin Notification</p>
+            </div>
+            
+        </div>
+    </body>
+    </html>
+    """
+    
+    subject = f"🔔 NEW ORDER #{order_id[:8]} - ${total_price:.2f} - {customer_name}"
+    
+    if not RESEND_API_KEY:
+        logger.warning("RESEND_API_KEY not set. Admin email would be sent to: %s", ADMIN_EMAIL)
+        return False
+    
+    try:
+        params = {
+            "from": f"{SENDER_NAME} <{SENDER_EMAIL}>",
+            "to": [ADMIN_EMAIL],
+            "subject": subject,
+            "html": html_content
+        }
+        
+        email_response = await asyncio.to_thread(resend.Emails.send, params)
+        email_id = email_response.get("id") if isinstance(email_response, dict) else getattr(email_response, 'id', None)
+        
+        if email_id:
+            logger.info("Admin notification sent successfully for order %s (email_id: %s)", order_id, email_id)
+            return True
+        else:
+            logger.error("Failed to send admin notification - no email ID returned")
+            return False
+            
+    except Exception as e:
+        logger.error("Error sending admin notification: %s", str(e))
+        return False
+
+
+async def send_file_ready_notification(
+    customer_email: str,
+    customer_name: str,
+    order_id: str,
+    download_url: str,
+    order_details: dict
+) -> bool:
+    """
+    Send email to customer when their processed file is ready for download
+    
+    Args:
+        customer_email: Customer's email
+        customer_name: Customer's name
+        order_id: Order ID
+        download_url: URL to download the processed file
+        order_details: Dict containing order info
+    
+    Returns:
+        bool: True if email sent successfully, False otherwise
+    """
+    
+    vehicle_info = order_details.get('vehicle_info', {})
+    if isinstance(vehicle_info, dict) and vehicle_info:
+        vehicle_str = f"{vehicle_info.get('manufacturer', '')} {vehicle_info.get('model', '')} {vehicle_info.get('engine', '')}"
+    else:
+        vehicle_str = "Your Vehicle"
+    
+    services = order_details.get('purchased_services', [])
+    services_list = ", ".join([s.get('service_name', '') for s in services])
+    
+    base_url = os.environ.get('BASE_URL', 'https://ecuflashservice.com')
+    full_download_url = f"{base_url}{download_url}" if not download_url.startswith('http') else download_url
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body style="font-family: Arial, sans-serif; background-color: #1e293b; margin: 0; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #0f172a; border-radius: 16px; overflow: hidden; border: 1px solid #334155;">
+            
+            <!-- Header -->
+            <div style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); padding: 30px; text-align: center;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 24px;">✅ Your ECU File is Ready!</h1>
+            </div>
+            
+            <!-- Content -->
+            <div style="padding: 30px;">
+                <p style="color: #e2e8f0; font-size: 16px; line-height: 1.6;">
+                    Hi <strong>{customer_name}</strong>,
+                </p>
+                <p style="color: #94a3b8; font-size: 16px; line-height: 1.6;">
+                    Great news! Your ECU tuning file has been professionally processed and is ready for download.
+                </p>
+                
+                <div style="background-color: #1e293b; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                    <table style="width: 100%; color: #e2e8f0;">
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Order:</td>
+                            <td style="padding: 8px 0; font-weight: bold;">#{order_id[:8]}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Vehicle:</td>
+                            <td style="padding: 8px 0;">{vehicle_str}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #94a3b8;">Services:</td>
+                            <td style="padding: 8px 0;">{services_list}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="{full_download_url}" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #ffffff; text-decoration: none; padding: 18px 40px; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block;">
+                        📥 Download Your File
+                    </a>
+                </div>
+                
+                <div style="background-color: #422006; border: 1px solid #854d0e; border-radius: 8px; padding: 15px; margin-top: 20px;">
+                    <p style="color: #fbbf24; margin: 0; font-size: 14px;">
+                        ⚠️ <strong>Important:</strong> This file is for off-road and competition use only. Please ensure proper installation by a qualified professional.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; padding: 20px; color: #64748b; font-size: 12px; border-top: 1px solid #334155;">
+                <p style="margin: 0;">Thank you for choosing ECU Flash Service!</p>
+                <p style="margin: 8px 0 0 0;">Need help? Reply to this email.</p>
+            </div>
+            
+        </div>
+    </body>
+    </html>
+    """
+    
+    subject = f"✅ Your ECU File is Ready - Order #{order_id[:8]}"
+    
+    if not RESEND_API_KEY:
+        logger.warning("RESEND_API_KEY not set. File ready email would be sent to: %s", customer_email)
+        return False
+    
+    try:
+        params = {
+            "from": f"{SENDER_NAME} <{SENDER_EMAIL}>",
+            "to": [customer_email],
+            "subject": subject,
+            "html": html_content
+        }
+        
+        email_response = await asyncio.to_thread(resend.Emails.send, params)
+        email_id = email_response.get("id") if isinstance(email_response, dict) else getattr(email_response, 'id', None)
+        
+        if email_id:
+            logger.info("File ready notification sent to %s for order %s (email_id: %s)", customer_email, order_id, email_id)
+            return True
+        else:
+            logger.error("Failed to send file ready notification - no email ID returned")
+            return False
+            
+    except Exception as e:
+        logger.error("Error sending file ready notification: %s", str(e))
+        return False
