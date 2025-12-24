@@ -82,6 +82,41 @@ const NewUploadFlow = () => {
     { id: 'marelli-mj8', name: 'Marelli MJ8', manufacturer: 'Marelli' },
     { id: 'marelli-mj9', name: 'Marelli MJ9', manufacturer: 'Marelli' },
     { id: 'marelli-8gmf', name: 'Marelli 8GMF', manufacturer: 'Marelli' },
+    // Weichai ECUs (Chinese Trucks)
+    { id: 'weichai-ecm', name: 'Weichai ECM', manufacturer: 'Weichai' },
+    { id: 'weichai-wp10-ecu', name: 'Weichai WP10 ECU', manufacturer: 'Weichai' },
+    { id: 'weichai-wp12-ecu', name: 'Weichai WP12 ECU', manufacturer: 'Weichai' },
+    { id: 'weichai-wp13-ecu', name: 'Weichai WP13 ECU', manufacturer: 'Weichai' },
+    { id: 'weichai-bosch-edc17cv44', name: 'Weichai Bosch EDC17CV44', manufacturer: 'Weichai' },
+    { id: 'weichai-bosch-edc17cv54', name: 'Weichai Bosch EDC17CV54', manufacturer: 'Weichai' },
+    // Cummins ECUs (Chinese Trucks)
+    { id: 'cummins-cm2150', name: 'Cummins CM2150', manufacturer: 'Cummins' },
+    { id: 'cummins-cm2250', name: 'Cummins CM2250', manufacturer: 'Cummins' },
+    { id: 'cummins-cm2350', name: 'Cummins CM2350', manufacturer: 'Cummins' },
+    { id: 'cummins-cm870', name: 'Cummins CM870', manufacturer: 'Cummins' },
+    { id: 'cummins-celect', name: 'Cummins CELECT', manufacturer: 'Cummins' },
+    // Yuchai ECUs (Chinese Trucks)
+    { id: 'yuchai-ecu', name: 'Yuchai ECU', manufacturer: 'Yuchai' },
+    { id: 'yuchai-bosch-edc17', name: 'Yuchai Bosch EDC17', manufacturer: 'Yuchai' },
+    // FAW ECUs
+    { id: 'faw-ecu', name: 'FAW ECU', manufacturer: 'FAW' },
+    { id: 'faw-bosch-edc17', name: 'FAW Bosch EDC17', manufacturer: 'FAW' },
+    // Sinotruk/HOWO ECUs
+    { id: 'sinotruk-ecu', name: 'Sinotruk ECU', manufacturer: 'Sinotruk' },
+    { id: 'sinotruk-bosch-edc17', name: 'Sinotruk Bosch EDC17', manufacturer: 'Sinotruk' },
+    { id: 'howo-mc11-ecu', name: 'HOWO MC11 ECU', manufacturer: 'Sinotruk' },
+    // Dongfeng ECUs
+    { id: 'dongfeng-dci-ecu', name: 'Dongfeng dCi ECU', manufacturer: 'Dongfeng' },
+    { id: 'dongfeng-bosch-edc17', name: 'Dongfeng Bosch EDC17', manufacturer: 'Dongfeng' },
+    { id: 'dongfeng-renault-ecu', name: 'Dongfeng Renault ECU', manufacturer: 'Dongfeng' },
+    // Bosch Truck ECUs (Common in Chinese Trucks)
+    { id: 'bosch-edc7', name: 'Bosch EDC7', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cv41', name: 'Bosch EDC17CV41', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cv44', name: 'Bosch EDC17CV44', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cv54', name: 'Bosch EDC17CV54', manufacturer: 'Bosch' },
+    { id: 'bosch-md1ce100', name: 'Bosch MD1CE100', manufacturer: 'Bosch' },
+    { id: 'bosch-md1cs001', name: 'Bosch MD1CS001', manufacturer: 'Bosch' },
+    { id: 'bosch-md1cs006', name: 'Bosch MD1CS006', manufacturer: 'Bosch' },
     // Other
     { id: 'other', name: 'Other (Enter manually)', manufacturer: 'Other' },
   ];
