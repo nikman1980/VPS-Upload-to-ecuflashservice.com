@@ -22,8 +22,60 @@ const NewUploadFlow = () => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedGeneration, setSelectedGeneration] = useState(null);
   const [selectedEngine, setSelectedEngine] = useState(null);
+  const [selectedEcu, setSelectedEcu] = useState(null);
+  const [customEcu, setCustomEcu] = useState('');
   
   const [vehicleLoading, setVehicleLoading] = useState(false);
+  
+  // Common ECU types for dropdown
+  const commonEcuTypes = [
+    // Bosch
+    { id: 'bosch-edc17c49', name: 'Bosch EDC17C49', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17c46', name: 'Bosch EDC17C46', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17c50', name: 'Bosch EDC17C50', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17c54', name: 'Bosch EDC17C54', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17c57', name: 'Bosch EDC17C57', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17c60', name: 'Bosch EDC17C60', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17c64', name: 'Bosch EDC17C64', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cp14', name: 'Bosch EDC17CP14', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cp20', name: 'Bosch EDC17CP20', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cp44', name: 'Bosch EDC17CP44', manufacturer: 'Bosch' },
+    { id: 'bosch-edc17cp52', name: 'Bosch EDC17CP52', manufacturer: 'Bosch' },
+    { id: 'bosch-edc16c34', name: 'Bosch EDC16C34', manufacturer: 'Bosch' },
+    { id: 'bosch-edc16c39', name: 'Bosch EDC16C39', manufacturer: 'Bosch' },
+    { id: 'bosch-edc16u1', name: 'Bosch EDC16U1', manufacturer: 'Bosch' },
+    { id: 'bosch-edc16u31', name: 'Bosch EDC16U31', manufacturer: 'Bosch' },
+    { id: 'bosch-med17', name: 'Bosch MED17', manufacturer: 'Bosch' },
+    { id: 'bosch-med9', name: 'Bosch MED9', manufacturer: 'Bosch' },
+    { id: 'bosch-me7', name: 'Bosch ME7', manufacturer: 'Bosch' },
+    { id: 'bosch-md1', name: 'Bosch MD1', manufacturer: 'Bosch' },
+    { id: 'bosch-mg1', name: 'Bosch MG1', manufacturer: 'Bosch' },
+    // Siemens/Continental
+    { id: 'siemens-sid201', name: 'Siemens SID201', manufacturer: 'Siemens' },
+    { id: 'siemens-sid206', name: 'Siemens SID206', manufacturer: 'Siemens' },
+    { id: 'siemens-sid208', name: 'Siemens SID208', manufacturer: 'Siemens' },
+    { id: 'siemens-sid209', name: 'Siemens SID209', manufacturer: 'Siemens' },
+    { id: 'siemens-sid305', name: 'Siemens SID305', manufacturer: 'Siemens' },
+    { id: 'siemens-sid310', name: 'Siemens SID310', manufacturer: 'Siemens' },
+    { id: 'siemens-sid803', name: 'Siemens SID803', manufacturer: 'Siemens' },
+    { id: 'siemens-sid803a', name: 'Siemens SID803A', manufacturer: 'Siemens' },
+    { id: 'continental-simos18', name: 'Continental Simos 18', manufacturer: 'Continental' },
+    { id: 'continental-simos19', name: 'Continental Simos 19', manufacturer: 'Continental' },
+    // Delphi
+    { id: 'delphi-dcm35', name: 'Delphi DCM3.5', manufacturer: 'Delphi' },
+    { id: 'delphi-dcm62', name: 'Delphi DCM6.2', manufacturer: 'Delphi' },
+    { id: 'delphi-dcm71', name: 'Delphi DCM7.1', manufacturer: 'Delphi' },
+    // Denso
+    { id: 'denso-sh7058', name: 'Denso SH7058', manufacturer: 'Denso' },
+    { id: 'denso-sh7059', name: 'Denso SH7059', manufacturer: 'Denso' },
+    { id: 'denso-sh72531', name: 'Denso SH72531', manufacturer: 'Denso' },
+    // Marelli
+    { id: 'marelli-mj8', name: 'Marelli MJ8', manufacturer: 'Marelli' },
+    { id: 'marelli-mj9', name: 'Marelli MJ9', manufacturer: 'Marelli' },
+    { id: 'marelli-8gmf', name: 'Marelli 8GMF', manufacturer: 'Marelli' },
+    // Other
+    { id: 'other', name: 'Other (Enter manually)', manufacturer: 'Other' },
+  ];
   
   // Upload state
   const [uploadedFile, setUploadedFile] = useState(null);
