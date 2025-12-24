@@ -25,6 +25,15 @@ const NewUploadFlow = () => {
   const [selectedEcu, setSelectedEcu] = useState(null);
   const [customEcu, setCustomEcu] = useState('');
   
+  // Manual vehicle entry (for "Other" option)
+  const [isManualVehicle, setIsManualVehicle] = useState(false);
+  const [manualVehicle, setManualVehicle] = useState({
+    make: '',
+    model: '',
+    year: '',
+    engine: ''
+  });
+  
   const [vehicleLoading, setVehicleLoading] = useState(false);
   
   // Common ECU types for dropdown
