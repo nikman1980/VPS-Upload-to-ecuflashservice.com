@@ -261,7 +261,8 @@ const NewUploadFlow = () => {
     if (!selectedManufacturer || !selectedModel || !selectedGeneration || !selectedEngine) {
       return 'No vehicle selected';
     }
-    return `${selectedManufacturer.name} ${selectedModel.name} ${selectedGeneration.name} - ${selectedEngine.name}`;
+    const ecuInfo = selectedEcu ? (selectedEcu.id === 'other' ? customEcu : selectedEcu.name) : '';
+    return `${selectedManufacturer.name} ${selectedModel.name} ${selectedGeneration.name} - ${selectedEngine.name}${ecuInfo ? ` (${ecuInfo})` : ''}`;
   };
 
   const handleFileSelect = (e) => {
