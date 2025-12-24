@@ -218,12 +218,33 @@ const NewUploadFlow = () => {
   // Handle engine selection
   const handleEngineSelect = (engine) => {
     setSelectedEngine(engine);
+    setSelectedEcu(null);
+    setCustomEcu('');
+  };
+
+  // Handle ECU selection
+  const handleEcuSelect = (ecuId) => {
+    if (ecuId === 'other') {
+      setSelectedEcu({ id: 'other', name: 'Other', manufacturer: 'Other' });
+    } else {
+      const ecu = commonEcuTypes.find(e => e.id === ecuId);
+      setSelectedEcu(ecu);
+      setCustomEcu('');
+    }
   };
 
   // Proceed to upload after vehicle selection
   const proceedToUpload = () => {
     if (!selectedEngine) {
       alert('Please select your vehicle engine to continue');
+      return;
+    }
+    if (!selectedEcu) {
+      alert('Please select your ECU type to continue');
+      return;
+    }
+    if (selectedEcu.id === 'other' && !customEcu.trim()) {
+      alert('Please enter your ECU type');
       return;
     }
     setStep(2);
