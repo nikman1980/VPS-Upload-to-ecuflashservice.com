@@ -1262,6 +1262,99 @@ async def download_processed_file(request_id: str, file_id: str):
     )
 
 
+@api_router.post("/admin/upload-processed/{request_id}")
+async def admin_upload_processed_file(
+    request_id: str,
+    file: UploadFile = File(...),
+    background_tasks: BackgroundTasks = None
+):
+    """Admin endpoint to upload manually processed ECU file and notify customer"""
+    from email_service import send_file_ready_notification
+    
+    request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
+    
+    if not request:
+        raise HTTPException(status_code=404, detail="Service request not found")
+    
+    # Generate file ID and save file
+    file_id = str(uuid4())
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    original_ext = Path(file.filename).suffix
+    processed_filename = f"processed_{request_id[:8]}_{timestamp}{original_ext}"
+    filepath = PROCESSED_DIR / processed_filename
+    
+    # Save the uploaded file
+    content = await file.read()
+    with open(filepath, "wb") as f:
+        f.write(content)
+    
+    file_size = len(content)
+    
+    # Create processed file info
+    processed_file_info = {
+        "file_id": file_id,
+        "processed_filename": processed_filename,
+        "original_filename": file.filename,
+        "filepath": str(filepath),
+        "file_size": file_size,
+        "processed_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    # Update database
+    updated_at = datetime.now(timezone.utc).isoformat()
+    download_url = f"/api/download-processed/{request_id}/{file_id}"
+    
+    await db.service_requests.update_one(
+        {"id": request_id},
+        {
+            "$push": {"processed_files": processed_file_info},
+            "$set": {
+                "status": RequestStatus.COMPLETED,
+                "processing_status": "completed",
+                "processing_complete": True,
+                "completed_at": updated_at,
+                "updated_at": updated_at,
+                "download_url": download_url
+            }
+        }
+    )
+    
+    # Send email notification to customer
+    customer_email = request.get("customer_email")
+    customer_name = request.get("customer_name", "Customer")
+    
+    if customer_email:
+        try:
+            await send_file_ready_notification(
+                customer_email=customer_email,
+                customer_name=customer_name,
+                order_id=request_id,
+                download_url=download_url,
+                order_details=request
+            )
+            logger.info(f"File ready notification sent to {customer_email} for order {request_id}")
+        except Exception as e:
+            logger.error(f"Failed to send file ready notification: {e}")
+    
+    return {
+        "success": True,
+        "message": "Processed file uploaded and customer notified",
+        "file_id": file_id,
+        "download_url": download_url
+    }
+
+
+@api_router.get("/admin/orders")
+async def get_admin_orders():
+    """Get all orders for admin panel with detailed info"""
+    orders = await db.service_requests.find(
+        {},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(1000)
+    
+    return orders
+
+
 async def process_ecu_files_background(request_id: str):
     """Background task to process ECU files with AI"""
     try:
