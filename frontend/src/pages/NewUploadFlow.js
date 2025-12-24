@@ -1351,30 +1351,61 @@ const NewUploadFlow = () => {
                 Vehicle Information
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Manufacturer:</span>
-                    <span className="text-white font-medium">{selectedManufacturer?.name || 'N/A'}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Model:</span>
-                    <span className="text-white font-medium">{selectedModel?.name || 'N/A'}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Generation:</span>
-                    <span className="text-white font-medium">{selectedGeneration?.name || 'N/A'}</span>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Engine:</span>
-                    <span className="text-white font-medium">{selectedEngine?.name || 'N/A'}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">ECU Type:</span>
-                    <span className="text-cyan-400 font-semibold">{selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name || 'N/A'}</span>
-                  </div>
-                </div>
+                {isManualVehicle ? (
+                  <>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Make:</span>
+                        <span className="text-white font-medium">{manualVehicle.make || 'N/A'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Model:</span>
+                        <span className="text-white font-medium">{manualVehicle.model || 'N/A'}</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Year:</span>
+                        <span className="text-white font-medium">{manualVehicle.year || 'N/A'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Engine:</span>
+                        <span className="text-white font-medium">{manualVehicle.engine || 'N/A'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">ECU Type:</span>
+                        <span className="text-cyan-400 font-semibold">{selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name || 'N/A'}</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Manufacturer:</span>
+                        <span className="text-white font-medium">{selectedManufacturer?.name || 'N/A'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Model:</span>
+                        <span className="text-white font-medium">{selectedModel?.name || 'N/A'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Generation:</span>
+                        <span className="text-white font-medium">{selectedGeneration?.name || 'N/A'}</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Engine:</span>
+                        <span className="text-white font-medium">{selectedEngine?.name || 'N/A'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">ECU Type:</span>
+                        <span className="text-cyan-400 font-semibold">{selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name || 'N/A'}</span>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
