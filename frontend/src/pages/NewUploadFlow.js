@@ -312,7 +312,9 @@ const NewUploadFlow = () => {
           generation: selectedGeneration?.name,
           generation_id: selectedGeneration?.id,
           engine: selectedEngine?.name,
-          engine_id: selectedEngine?.id
+          engine_id: selectedEngine?.id,
+          ecu: selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name,
+          ecu_manufacturer: selectedEcu?.manufacturer
         }));
       }
 
