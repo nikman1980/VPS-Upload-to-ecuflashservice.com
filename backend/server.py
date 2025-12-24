@@ -33,9 +33,9 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create uploads and processed directories
-UPLOAD_DIR = Path("/app/backend/uploads")
-PROCESSED_DIR = Path("/app/backend/processed")
+# Create uploads and processed directories (relative to server.py location)
+UPLOAD_DIR = ROOT_DIR / "uploads"
+PROCESSED_DIR = ROOT_DIR / "processed"
 UPLOAD_DIR.mkdir(exist_ok=True)
 PROCESSED_DIR.mkdir(exist_ok=True)
 
