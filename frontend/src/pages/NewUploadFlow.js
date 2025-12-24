@@ -1143,9 +1143,50 @@ const NewUploadFlow = () => {
               <p className="text-slate-400">Select the services you need</p>
             </div>
 
+            {/* Vehicle & ECU Info Card */}
+            <div className="bg-gradient-to-r from-blue-600/10 to-cyan-600/10 border border-blue-500/30 rounded-2xl p-6 mb-6">
+              <h3 className="font-semibold mb-4 text-blue-400 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Vehicle Information
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Manufacturer:</span>
+                    <span className="text-white font-medium">{selectedManufacturer?.name || 'N/A'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Model:</span>
+                    <span className="text-white font-medium">{selectedModel?.name || 'N/A'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Generation:</span>
+                    <span className="text-white font-medium">{selectedGeneration?.name || 'N/A'}</span>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Engine:</span>
+                    <span className="text-white font-medium">{selectedEngine?.name || 'N/A'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">ECU Type:</span>
+                    <span className="text-cyan-400 font-semibold">{selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* File Info */}
             <div className="bg-slate-900/50 rounded-2xl p-6 mb-8">
-              <h3 className="font-semibold mb-4 text-slate-300">File Information</h3>
+              <h3 className="font-semibold mb-4 text-slate-300 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                File Information
+              </h3>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-slate-500">Filename:</span>
