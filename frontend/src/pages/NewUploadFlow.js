@@ -1196,6 +1196,11 @@ const NewUploadFlow = () => {
                     className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   >
                     <option value="">Select ECU type...</option>
+                    <optgroup label="⭐ Chinese Truck ECUs">
+                      {commonEcuTypes.filter(e => ['Weichai', 'Cummins', 'Yuchai', 'FAW', 'Sinotruk', 'Dongfeng'].includes(e.manufacturer)).map((ecu) => (
+                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                      ))}
+                    </optgroup>
                     <optgroup label="Bosch">
                       {commonEcuTypes.filter(e => e.manufacturer === 'Bosch').map((ecu) => (
                         <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
