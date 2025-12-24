@@ -1032,7 +1032,6 @@ const NewUploadFlow = () => {
               >
                 Continue to File Upload →
               </button>
-              </button>
             )}
           </div>
         )}
