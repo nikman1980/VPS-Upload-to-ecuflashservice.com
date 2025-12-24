@@ -886,7 +886,7 @@ const NewUploadFlow = () => {
               {/* Vehicle Type */}
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Vehicle Type</label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
                   {vehicleTypes.map((type) => (
                     <button
                       key={type.id}
@@ -906,8 +906,147 @@ const NewUploadFlow = () => {
                       <div className="text-sm font-medium">{type.name}</div>
                     </button>
                   ))}
+                  {/* Other / Not Listed Option */}
+                  <button
+                    onClick={() => handleVehicleTypeSelect({ id: 'other', name: 'Other / Not Listed', slug: 'other' })}
+                    className={`p-4 rounded-xl border-2 transition-all text-center ${
+                      isManualVehicle 
+                        ? 'border-orange-500 bg-orange-500/20 text-white' 
+                        : 'border-slate-600 hover:border-slate-500 text-slate-300'
+                    }`}
+                  >
+                    <div className="text-2xl mb-1">❓</div>
+                    <div className="text-sm font-medium">Other</div>
+                  </button>
                 </div>
               </div>
+              
+              {/* Manual Vehicle Entry Form */}
+              {isManualVehicle && (
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6 space-y-4">
+                  <h3 className="text-orange-400 font-semibold flex items-center">
+                    <span className="mr-2">✏️</span> Enter Vehicle Details Manually
+                  </h3>
+                  <p className="text-sm text-slate-400">Your vehicle is not in our database? No problem! Enter the details below.</p>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Make / Brand *</label>
+                      <input
+                        type="text"
+                        value={manualVehicle.make}
+                        onChange={(e) => setManualVehicle({...manualVehicle, make: e.target.value})}
+                        placeholder="e.g., Shacman, Sinotruk, FAW..."
+                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Model *</label>
+                      <input
+                        type="text"
+                        value={manualVehicle.model}
+                        onChange={(e) => setManualVehicle({...manualVehicle, model: e.target.value})}
+                        placeholder="e.g., X3000, HOWO A7..."
+                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Year</label>
+                      <input
+                        type="text"
+                        value={manualVehicle.year}
+                        onChange={(e) => setManualVehicle({...manualVehicle, year: e.target.value})}
+                        placeholder="e.g., 2020"
+                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Engine</label>
+                      <input
+                        type="text"
+                        value={manualVehicle.engine}
+                        onChange={(e) => setManualVehicle({...manualVehicle, engine: e.target.value})}
+                        placeholder="e.g., Weichai WP10 375hp"
+                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* ECU Type for Manual Entry */}
+                  {manualVehicle.make && manualVehicle.model && (
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">ECU Type</label>
+                      <select
+                        value={selectedEcu?.id || ''}
+                        onChange={(e) => handleEcuSelect(e.target.value)}
+                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      >
+                        <option value="">Select ECU type...</option>
+                        <optgroup label="Bosch">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Bosch').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Siemens">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Siemens').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Continental">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Continental').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Delphi">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Delphi').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Denso">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Denso').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Marelli">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Marelli').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Other">
+                          <option value="other">Other (Enter manually)</option>
+                        </optgroup>
+                      </select>
+                      
+                      {selectedEcu?.id === 'other' && (
+                        <input
+                          type="text"
+                          value={customEcu}
+                          onChange={(e) => setCustomEcu(e.target.value)}
+                          placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
+                          className="w-full mt-3 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        />
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Summary for Manual Entry */}
+                  {manualVehicle.make && manualVehicle.model && selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()) && (
+                    <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 mt-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                          <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-green-400 text-sm font-medium">Vehicle Ready</p>
+                          <p className="text-white font-semibold">{getVehicleSummary()}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
               
               {/* Manufacturer */}
               {selectedVehicleType && (
