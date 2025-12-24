@@ -1,29 +1,37 @@
 """
 Email Service for ECU Flash Service
-Sends order confirmations and download links via SendGrid
+Sends order confirmations and download links via Resend
 """
 
 import os
+import asyncio
 import logging
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Email, To, Content, HtmlContent
+import resend
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-# SendGrid configuration
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'admin@ecuflashservice.com')
+# Resend configuration
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY')
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
 SENDER_NAME = os.environ.get('SENDER_NAME', 'ECU Flash Service')
 
+# Initialize Resend
+if RESEND_API_KEY:
+    resend.api_key = RESEND_API_KEY
 
-def send_order_confirmation(
+
+async def send_order_confirmation(
     customer_email: str,
     customer_name: str,
     order_id: str,
     order_details: dict
 ) -> bool:
     """
-    Send order confirmation email with download links
+    Send order confirmation email with download links (async)
     
     Args:
         customer_email: Customer's email address
@@ -42,28 +50,92 @@ def send_order_confirmation(
         order_details=order_details
     )
     
+    # Determine subject based on status
+    is_completed = order_details.get('processing_complete', False)
+    if is_completed:
+        subject = f"✅ Your ECU File is Ready - Order #{order_id[:8]}"
+    else:
+        subject = f"⏳ Order Received - Processing Started #{order_id[:8]}"
+    
     # If no API key, log the email instead of sending
-    if not SENDGRID_API_KEY:
-        logger.warning("SENDGRID_API_KEY not set. Email would be sent to: %s", customer_email)
+    if not RESEND_API_KEY:
+        logger.warning("RESEND_API_KEY not set. Email would be sent to: %s", customer_email)
+        logger.info("Subject: %s", subject)
         logger.info("Email content preview:\n%s", html_content[:500] + "...")
         return False
     
     try:
-        message = Mail(
-            from_email=Email(SENDER_EMAIL, SENDER_NAME),
-            to_emails=To(customer_email),
-            subject=f"Your ECU File is Ready - Order #{order_id[:8]}",
-            html_content=HtmlContent(html_content)
-        )
+        params = {
+            "from": f"{SENDER_NAME} <{SENDER_EMAIL}>",
+            "to": [customer_email],
+            "subject": subject,
+            "html": html_content
+        }
         
-        sg = SendGridAPIClient(SENDGRID_API_KEY)
-        response = sg.send(message)
+        # Run sync SDK in thread to keep FastAPI non-blocking
+        email_response = await asyncio.to_thread(resend.Emails.send, params)
         
-        if response.status_code in [200, 201, 202]:
-            logger.info("Email sent successfully to %s for order %s", customer_email, order_id)
+        email_id = email_response.get("id") if isinstance(email_response, dict) else getattr(email_response, 'id', None)
+        
+        if email_id:
+            logger.info("Email sent successfully to %s for order %s (email_id: %s)", customer_email, order_id, email_id)
             return True
         else:
-            logger.error("Failed to send email. Status: %s", response.status_code)
+            logger.error("Failed to send email - no email ID returned")
+            return False
+            
+    except Exception as e:
+        logger.error("Error sending email: %s", str(e))
+        return False
+
+
+def send_order_confirmation_sync(
+    customer_email: str,
+    customer_name: str,
+    order_id: str,
+    order_details: dict
+) -> bool:
+    """
+    Synchronous version of send_order_confirmation for use in non-async contexts
+    """
+    
+    # Build email content
+    html_content = build_order_email_html(
+        customer_name=customer_name,
+        order_id=order_id,
+        order_details=order_details
+    )
+    
+    # Determine subject based on status
+    is_completed = order_details.get('processing_complete', False)
+    if is_completed:
+        subject = f"✅ Your ECU File is Ready - Order #{order_id[:8]}"
+    else:
+        subject = f"⏳ Order Received - Processing Started #{order_id[:8]}"
+    
+    # If no API key, log the email instead of sending
+    if not RESEND_API_KEY:
+        logger.warning("RESEND_API_KEY not set. Email would be sent to: %s", customer_email)
+        logger.info("Subject: %s", subject)
+        return False
+    
+    try:
+        params = {
+            "from": f"{SENDER_NAME} <{SENDER_EMAIL}>",
+            "to": [customer_email],
+            "subject": subject,
+            "html": html_content
+        }
+        
+        email_response = resend.Emails.send(params)
+        
+        email_id = email_response.get("id") if isinstance(email_response, dict) else getattr(email_response, 'id', None)
+        
+        if email_id:
+            logger.info("Email sent successfully to %s for order %s (email_id: %s)", customer_email, order_id, email_id)
+            return True
+        else:
+            logger.error("Failed to send email - no email ID returned")
             return False
             
     except Exception as e:
@@ -77,12 +149,22 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
     # Extract order details
     services = order_details.get('purchased_services', [])
     total_price = order_details.get('total_price', 0)
-    vehicle_make = order_details.get('vehicle_make', 'N/A')
-    vehicle_model = order_details.get('vehicle_model', 'N/A')
-    vehicle_year = order_details.get('vehicle_year', 'N/A')
+    
+    # Vehicle info - support both old and new format
+    vehicle_info = order_details.get('vehicle_info', {})
+    if isinstance(vehicle_info, dict) and vehicle_info:
+        vehicle_make = vehicle_info.get('manufacturer', 'N/A')
+        vehicle_model = vehicle_info.get('model', 'N/A')
+        vehicle_year = vehicle_info.get('generation', 'N/A')
+        vehicle_engine = vehicle_info.get('engine', '')
+    else:
+        vehicle_make = order_details.get('vehicle_make', 'N/A')
+        vehicle_model = order_details.get('vehicle_model', 'N/A')
+        vehicle_year = order_details.get('vehicle_year', 'N/A')
+        vehicle_engine = order_details.get('engine_type', '')
+    
     dtc_codes = order_details.get('dtc_codes', [])
     download_links = order_details.get('download_links', [])
-    file_id = order_details.get('file_id', '')
     base_url = os.environ.get('BASE_URL', 'https://ecuflashservice.com')
     
     # Check if this is a "processing" notification or "completed" notification
@@ -107,7 +189,6 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
     if is_completed and download_links:
         for i, link in enumerate(download_links):
             if isinstance(link, str) and link:
-                # Use order ID for download
                 download_url = f"{base_url}/api/download-order/{link}"
                 downloads_html += f"""
                 <tr>
@@ -122,7 +203,7 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
     # Build DTC codes section if applicable
     dtc_html = ""
     if dtc_codes:
-        dtc_list = ", ".join(dtc_codes)
+        dtc_list = ", ".join(dtc_codes) if isinstance(dtc_codes, list) else str(dtc_codes)
         dtc_html = f"""
         <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 16px; margin: 20px 0;">
             <h3 style="margin: 0 0 8px 0; color: #92400e;">DTC Codes to Remove:</h3>
@@ -147,6 +228,11 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
             <span style="color: #ffffff; font-size: 18px; font-weight: 600;">⏳ Processing Your File - Please Wait 20-60 Minutes</span>
         </div>
         """
+    
+    # Vehicle display string
+    vehicle_display = f"{vehicle_make} {vehicle_model} {vehicle_year}"
+    if vehicle_engine:
+        vehicle_display += f" - {vehicle_engine}"
     
     # Complete HTML email template
     html = f"""
@@ -186,7 +272,7 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
                 <div style="background-color: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 16px; margin: 20px 0;">
                     <h3 style="margin: 0 0 8px 0; color: #0369a1;">Vehicle Information</h3>
                     <p style="margin: 0; color: #0c4a6e;">
-                        <strong>{vehicle_year} {vehicle_make} {vehicle_model}</strong>
+                        <strong>{vehicle_display}</strong>
                     </p>
                 </div>
                 
