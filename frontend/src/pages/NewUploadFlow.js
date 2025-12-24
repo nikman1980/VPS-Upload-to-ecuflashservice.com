@@ -349,8 +349,20 @@ const NewUploadFlow = () => {
       const formData = new FormData();
       formData.append('file', uploadedFile);
       // Include vehicle information with the upload
-      if (selectedEngine) {
+      if (isManualVehicle) {
         formData.append('vehicle_info', JSON.stringify({
+          is_manual: true,
+          vehicle_type: 'Other / Not Listed',
+          manufacturer: manualVehicle.make,
+          model: manualVehicle.model,
+          generation: manualVehicle.year,
+          engine: manualVehicle.engine,
+          ecu: selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name,
+          ecu_manufacturer: selectedEcu?.manufacturer
+        }));
+      } else if (selectedEngine) {
+        formData.append('vehicle_info', JSON.stringify({
+          is_manual: false,
           vehicle_type: selectedVehicleType?.name,
           manufacturer: selectedManufacturer?.name,
           manufacturer_id: selectedManufacturer?.id,
