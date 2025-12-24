@@ -150,11 +150,25 @@ const NewUploadFlow = () => {
 
   // Fetch manufacturers when vehicle type is selected
   const handleVehicleTypeSelect = async (type) => {
+    // Check if "Other" was selected
+    if (type.id === 'other') {
+      setIsManualVehicle(true);
+      setSelectedVehicleType({ id: 'other', name: 'Other / Not Listed', slug: 'other' });
+      setSelectedManufacturer(null);
+      setSelectedModel(null);
+      setSelectedGeneration(null);
+      setSelectedEngine(null);
+      setSelectedEcu(null);
+      return;
+    }
+    
+    setIsManualVehicle(false);
     setSelectedVehicleType(type);
     setSelectedManufacturer(null);
     setSelectedModel(null);
     setSelectedGeneration(null);
     setSelectedEngine(null);
+    setSelectedEcu(null);
     setManufacturers([]);
     setModels([]);
     setGenerations([]);
