@@ -1171,6 +1171,8 @@ async def update_service_request_status(request_id: str, status_update: StatusUp
 @api_router.patch("/service-requests/{request_id}/payment")
 async def update_payment_status(request_id: str, payment_update: PaymentUpdate, background_tasks: BackgroundTasks):
     """Update payment status after PayPal payment"""
+    from email_service import send_admin_new_order_notification
+    
     request = await db.service_requests.find_one({"id": request_id}, {"_id": 0})
     
     if not request:
@@ -1193,15 +1195,24 @@ async def update_payment_status(request_id: str, payment_update: PaymentUpdate, 
         update_data["payment_date"] = payment_date
         update_data["status"] = RequestStatus.PAID
         
-        # Automatically trigger AI processing after successful payment
-        background_tasks.add_task(process_ecu_files_background, request_id)
+        # Send admin notification for new paid order
+        background_tasks.add_task(
+            send_admin_new_order_notification,
+            order_id=request_id,
+            customer_name=request.get("customer_name", "Customer"),
+            customer_email=request.get("customer_email", ""),
+            order_details=request
+        )
+        
+        # Note: Removed automatic AI processing - admin will manually process
+        # background_tasks.add_task(process_ecu_files_background, request_id)
     
     await db.service_requests.update_one(
         {"id": request_id},
         {"$set": update_data}
     )
     
-    return {"success": True, "message": "Payment status updated and processing started"}
+    return {"success": True, "message": "Payment status updated"}
 
 
 @api_router.get("/download-file/{request_id}/{file_id}")
