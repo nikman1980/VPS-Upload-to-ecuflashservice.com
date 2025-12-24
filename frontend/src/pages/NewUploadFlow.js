@@ -1049,7 +1049,7 @@ const NewUploadFlow = () => {
               )}
               
               {/* Manufacturer */}
-              {selectedVehicleType && (
+              {selectedVehicleType && !isManualVehicle && (
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">Manufacturer</label>
                   {vehicleLoading && manufacturers.length === 0 ? (
