@@ -247,21 +247,82 @@ class ECUAnalyzer:
                     break
     
     def _detect_vin(self, file_data):
-        """Detect VIN (Vehicle Identification Number)"""
+        """Detect VIN (Vehicle Identification Number) - Only show if 100% confident"""
         
+        # VIN must be exactly 17 characters, excluding I, O, Q
         vin_pattern = rb"([A-HJ-NPR-Z0-9]{17})"
         matches = re.findall(vin_pattern, file_data)
         
         for v in matches:
             try:
                 vin = v.decode("utf-8")
+                
+                # Skip if it looks like random hex data
+                if all(c in "0123456789ABCDEF" for c in vin):
+                    continue
+                
+                # Skip if all same character or repeating pattern
+                if len(set(vin)) < 8:
+                    continue
+                
+                # Skip sequential patterns like "12345678901234567"
+                if vin == "".join(str(i % 10) for i in range(17)):
+                    continue
+                
+                # Count digits and letters
                 digits = sum(c.isdigit() for c in vin)
                 letters = sum(c.isalpha() for c in vin)
-                # Valid VIN has mix of letters and numbers
-                if 4 <= digits <= 13 and 4 <= letters <= 13:
-                    if vin[0] in "123456789JKLMNPRSTUVWXYZ":
-                        self.results["vin"] = vin
-                        break
+                
+                # Real VINs have specific structure:
+                # - Position 1: Country (letter or digit 1-5)
+                # - Position 9: Check digit (0-9 or X)
+                # - Position 10: Model year
+                # - Positions 12-17: Serial number (usually digits)
+                
+                # Must have reasonable mix (not all digits, not all letters)
+                if digits < 5 or letters < 4:
+                    continue
+                if digits > 14 or letters > 12:
+                    continue
+                
+                # First character must be valid country code
+                valid_first = "123456789JKLMNPRSTUVWXYZ"
+                if vin[0] not in valid_first:
+                    continue
+                
+                # Position 9 check digit must be 0-9 or X
+                if vin[8] not in "0123456789X":
+                    continue
+                
+                # Position 10 (model year) - valid year codes
+                valid_years = "ABCDEFGHJKLMNPRSTVWXY123456789"
+                if vin[9] not in valid_years:
+                    continue
+                
+                # Last 6 characters (serial) should be mostly digits
+                serial = vin[11:17]
+                serial_digits = sum(c.isdigit() for c in serial)
+                if serial_digits < 4:
+                    continue
+                
+                # Additional sanity check - avoid patterns that look like calibration IDs
+                # Real VINs don't usually have long letter sequences
+                max_consecutive_letters = 0
+                current_letters = 0
+                for c in vin:
+                    if c.isalpha():
+                        current_letters += 1
+                        max_consecutive_letters = max(max_consecutive_letters, current_letters)
+                    else:
+                        current_letters = 0
+                
+                if max_consecutive_letters > 5:
+                    continue
+                
+                # Passed all checks - this is likely a real VIN
+                self.results["vin"] = vin
+                break
+                
             except:
                 pass
     
