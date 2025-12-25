@@ -1395,66 +1395,106 @@ const NewUploadFlow = () => {
               <p className="text-slate-400">Select the services you need</p>
             </div>
 
-            {/* ECU Analysis Results Card */}
-            <div className="bg-gradient-to-r from-green-600/10 to-cyan-600/10 border border-green-500/30 rounded-2xl p-6 mb-6">
-              <h3 className="font-semibold mb-4 text-green-400 flex items-center">
-                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                </svg>
-                ECU Analysis Results
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  {analysisResult.detected_manufacturer && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Manufacturer:</span>
-                      <span className="text-white font-semibold">{analysisResult.detected_manufacturer}</span>
+            {/* ECU Analysis Results Card - Professional Layout */}
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-cyan-500/30 rounded-2xl overflow-hidden mb-6 shadow-xl shadow-cyan-500/5">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-cyan-600/20 to-green-600/20 px-6 py-4 border-b border-slate-700/50">
+                <h3 className="font-bold text-lg text-white flex items-center">
+                  <svg className="w-6 h-6 mr-3 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  </svg>
+                  ECU Analysis Report
+                  <span className="ml-auto bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/30">
+                    ✓ Analysis Complete
+                  </span>
+                </h3>
+              </div>
+              
+              {/* Main Info Grid */}
+              <div className="p-6">
+                <div className="grid md:grid-cols-3 gap-6 mb-6">
+                  {/* ECU Identity */}
+                  <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+                    <div className="text-slate-500 text-xs uppercase tracking-wider mb-2">ECU Identity</div>
+                    <div className="text-2xl font-bold text-cyan-400 mb-1">
+                      {analysisResult.detected_ecu || 'Unknown'}
                     </div>
-                  )}
-                  {analysisResult.detected_ecu && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">ECU Type:</span>
-                      <span className="text-cyan-400 font-semibold">{analysisResult.detected_ecu}</span>
+                    <div className="text-slate-400 text-sm">
+                      {analysisResult.detected_manufacturer || 'Unknown Manufacturer'}
                     </div>
-                  )}
-                  {analysisResult.metadata?.calibration_id && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Calibration ID:</span>
-                      <span className="text-yellow-400 font-mono">{analysisResult.metadata.calibration_id}</span>
+                  </div>
+                  
+                  {/* Calibration */}
+                  <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+                    <div className="text-slate-500 text-xs uppercase tracking-wider mb-2">Calibration ID</div>
+                    <div className="text-xl font-mono font-bold text-yellow-400">
+                      {analysisResult.metadata?.calibration_id || 'Not Found'}
                     </div>
-                  )}
+                    <div className="text-slate-400 text-sm">
+                      SW: {analysisResult.metadata?.software_version || 'N/A'}
+                    </div>
+                  </div>
+                  
+                  {/* File Info */}
+                  <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+                    <div className="text-slate-500 text-xs uppercase tracking-wider mb-2">File Details</div>
+                    <div className="text-xl font-bold text-white">
+                      {analysisResult.file_size_mb?.toFixed(2)} MB
+                    </div>
+                    <div className="text-slate-400 text-sm truncate" title={analysisResult.original_filename}>
+                      {analysisResult.original_filename}
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-3">
-                  {analysisResult.metadata?.software_version && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Software Ver:</span>
-                      <span className="text-white font-mono">{analysisResult.metadata.software_version}</span>
-                    </div>
-                  )}
+                
+                {/* Additional Details */}
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
                   {analysisResult.metadata?.part_number && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Part Number:</span>
-                      <span className="text-white font-mono">{analysisResult.metadata.part_number}</span>
+                    <div className="flex items-center justify-between bg-slate-800/30 rounded-lg px-4 py-3">
+                      <span className="text-slate-400 flex items-center">
+                        <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg>
+                        Part Number
+                      </span>
+                      <span className="text-white font-mono font-semibold">{analysisResult.metadata.part_number}</span>
                     </div>
                   )}
                   {analysisResult.metadata?.vin && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">VIN:</span>
+                    <div className="flex items-center justify-between bg-slate-800/30 rounded-lg px-4 py-3">
+                      <span className="text-slate-400 flex items-center">
+                        <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                        </svg>
+                        VIN
+                      </span>
                       <span className="text-white font-mono text-sm">{analysisResult.metadata.vin}</span>
                     </div>
                   )}
                 </div>
-              </div>
-              {analysisResult.metadata?.strings?.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-slate-700">
-                  <span className="text-slate-400 text-sm">Detected Strings:</span>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {analysisResult.metadata.strings.slice(0, 6).map((str, idx) => (
-                      <span key={idx} className="bg-slate-700/50 text-slate-300 px-2 py-1 rounded text-xs font-mono">{str}</span>
-                    ))}
+                
+                {/* Detected Strings - Expandable */}
+                {analysisResult.metadata?.strings?.length > 0 && (
+                  <div className="bg-slate-800/30 rounded-xl p-4 border border-slate-700/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-slate-400 text-sm font-medium flex items-center">
+                        <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        Binary Strings Detected ({analysisResult.metadata.strings.length})
+                      </span>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-2 max-h-40 overflow-y-auto custom-scrollbar">
+                      {analysisResult.metadata.strings.map((str, idx) => (
+                        <div key={idx} className="bg-slate-900/50 text-slate-300 px-3 py-2 rounded-lg text-xs font-mono border border-slate-700/30 hover:border-cyan-500/30 transition-colors truncate" title={str}>
+                          <span className="text-cyan-500/60 mr-2">{String(idx + 1).padStart(2, '0')}</span>
+                          {str}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
 
             {/* File Info */}
