@@ -238,28 +238,43 @@ class ECUAnalyzer:
     
     def _detect_processor(self, file_data):
         """Detect processor type"""
-        processors = [
-            (b"Infineon", b"TriCore", rb'TC17[0-9]{2}', "Infineon TriCore"),
-            (b"NEC", b"Renesas", None, "NEC/Renesas"),
-            (b"Freescale", b"MPC5", rb'MPC5[0-9]+', "Freescale MPC5xx"),
-            (b"SH7058", b"SH7059", None, "Renesas SH705x"),
-            (b"ST10", b"C167", None, "ST Micro ST10"),
-            (b"MC68", b"68HC", None, "Motorola 68HC"),
-        ]
+        # Check Infineon/TriCore
+        if b"Infineon" in file_data or b"TriCore" in file_data or b"TC1797" in file_data or b"TC1767" in file_data:
+            match = re.search(rb'TC17[0-9]{2}', file_data)
+            if match:
+                self.results["processor"] = f"Infineon TriCore {match.group(0).decode('utf-8')}"
+            else:
+                self.results["processor"] = "Infineon TriCore"
+            return
         
-        for sigs in processors:
-            *signatures, pattern, name = sigs[:-2], sigs[-2], sigs[-1]
-            for sig in signatures:
-                if sig and sig in file_data:
-                    if pattern:
-                        match = re.search(pattern, file_data)
-                        if match:
-                            self.results["processor"] = f"{name} {match.group(0).decode('utf-8', errors='ignore')}"
-                        else:
-                            self.results["processor"] = name
-                    else:
-                        self.results["processor"] = name
-                    return
+        # Check NEC/Renesas
+        if b"NEC" in file_data or b"Renesas" in file_data:
+            self.results["processor"] = "NEC/Renesas"
+            return
+        
+        # Check Renesas SH705x
+        if b"SH7058" in file_data or b"SH7059" in file_data or b"SH7055" in file_data:
+            self.results["processor"] = "Renesas SH705x"
+            return
+        
+        # Check Freescale
+        if b"Freescale" in file_data or b"MPC5" in file_data:
+            match = re.search(rb'MPC5[0-9]+', file_data)
+            if match:
+                self.results["processor"] = f"Freescale {match.group(0).decode('utf-8')}"
+            else:
+                self.results["processor"] = "Freescale MPC5xx"
+            return
+        
+        # Check ST Micro
+        if b"ST10" in file_data or b"C167" in file_data:
+            self.results["processor"] = "ST Micro ST10/C167"
+            return
+        
+        # Check Motorola
+        if b"MC68" in file_data or b"68HC" in file_data:
+            self.results["processor"] = "Motorola 68HC"
+            return
     
     def _detect_calibration(self, file_data, strings):
         """Detect calibration ID and software version"""
