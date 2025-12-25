@@ -464,6 +464,12 @@ class ECUServiceTester:
         self.test_price_calculation()
         self.test_invalid_file_upload()
         
+        # Test Customer Portal APIs
+        print("\n🏠 Testing Customer Portal APIs")
+        print("-" * 40)
+        self.test_portal_login_invalid()
+        self.test_portal_login_missing_data()
+        
         # Test main workflow (if test file exists)
         print("\n📁 Testing File Upload Workflow")
         print("-" * 40)
