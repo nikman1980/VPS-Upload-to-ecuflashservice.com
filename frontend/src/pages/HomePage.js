@@ -365,14 +365,14 @@ const HomePage = () => {
       {analyzingFile && (
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-blue-900/30 border border-blue-700 p-8 rounded-lg">
+            <div className="bg-blue-50 border border-blue-200 p-8 rounded-lg">
               <div className="text-6xl mb-4">🔄</div>
-              <h3 className="text-2xl font-bold mb-4">Analyzing Your ECU File...</h3>
-              <p className="text-gray-300 mb-6">
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Analyzing Your ECU File...</h3>
+              <p className="text-gray-600 mb-6">
                 Our AI is examining your file to detect available systems and compatibility.
               </p>
               <div className="flex justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
               </div>
             </div>
           </div>
@@ -381,24 +381,24 @@ const HomePage = () => {
 
       {/* Services Section */}
       <section id="services" className="container mx-auto px-4 py-16">
-        <h3 className="text-4xl font-bold text-center mb-4" data-testid="services-section">
+        <h3 className="text-4xl font-bold text-center mb-4 text-gray-900" data-testid="services-section">
           Our AI-Powered Services
         </h3>
-        <p className="text-center text-gray-400 mb-12">Automated ECU file processing with advanced AI technology</p>
+        <p className="text-center text-gray-500 mb-12">Automated ECU file processing with advanced AI technology</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
             <div 
               key={service.id} 
-              className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition transform hover:scale-105"
+              className="bg-white border border-gray-200 p-6 rounded-lg hover:shadow-lg transition transform hover:scale-105"
               data-testid={`service-card-${service.id}`}
             >
               <div className="text-5xl mb-4">{service.icon}</div>
-              <h4 className="text-xl font-bold mb-2">{service.name}</h4>
-              <p className="text-gray-400 mb-4">{service.description}</p>
-              <div className="text-2xl font-bold text-blue-400">
+              <h4 className="text-xl font-bold mb-2 text-gray-900">{service.name}</h4>
+              <p className="text-gray-500 mb-4">{service.description}</p>
+              <div className="text-2xl font-bold text-blue-600">
                 ${service.final_price.toFixed(2)}
               </div>
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-400">
                 Processing cost: ${service.base_price.toFixed(2)}
               </div>
             </div>
@@ -407,53 +407,53 @@ const HomePage = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="bg-gray-800/50 py-16">
+      <section id="pricing" className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-4xl font-bold text-center mb-12">How It Works</h3>
+          <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">How It Works</h3>
           <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
             <div className="text-center">
               <div className="text-5xl mb-4">📤</div>
-              <h4 className="text-xl font-bold mb-2">1. Upload File</h4>
-              <p className="text-gray-400">Upload your ECU file (.bin, .hex, .ecu)</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">1. Upload File</h4>
+              <p className="text-gray-500">Upload your ECU file (.bin, .hex, .ecu)</p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">✅</div>
-              <h4 className="text-xl font-bold mb-2">2. Select Services</h4>
-              <p className="text-gray-400">Choose DPF, AdBlue, or EGR removal</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">2. Select Services</h4>
+              <p className="text-gray-500">Choose DPF, AdBlue, or EGR removal</p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">💳</div>
-              <h4 className="text-xl font-bold mb-2">3. Pay Securely</h4>
-              <p className="text-gray-400">Pay via PayPal</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">3. Pay Securely</h4>
+              <p className="text-gray-500">Pay via PayPal</p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">📥</div>
-              <h4 className="text-xl font-bold mb-2">4. Download</h4>
-              <p className="text-gray-400">Get your processed file in 24h</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">4. Download</h4>
+              <p className="text-gray-500">Get your processed file in 24h</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits" className="py-16">
+      <section id="benefits" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h3 className="text-4xl font-bold text-center mb-12">Why Choose Us?</h3>
+          <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Why Choose Us?</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-5xl mb-4">⚡</div>
-              <h4 className="text-xl font-bold mb-2">Fast Processing</h4>
-              <p className="text-gray-400">Most files processed within 24-48 hours</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">Fast Processing</h4>
+              <p className="text-gray-500">Most files processed within 24-48 hours</p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">🔒</div>
-              <h4 className="text-xl font-bold mb-2">Secure & Tested</h4>
-              <p className="text-gray-400">All solutions tested on real vehicles</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">Secure & Tested</h4>
+              <p className="text-gray-500">All solutions tested on real vehicles</p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">💯</div>
-              <h4 className="text-xl font-bold mb-2">Money-Back Guarantee</h4>
-              <p className="text-gray-400">30-day refund if file doesn&apos;t work</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900">Money-Back Guarantee</h4>
+              <p className="text-gray-500">30-day refund if file doesn&apos;t work</p>
             </div>
           </div>
         </div>
