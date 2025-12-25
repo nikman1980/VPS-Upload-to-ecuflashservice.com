@@ -1395,71 +1395,66 @@ const NewUploadFlow = () => {
               <p className="text-slate-400">Select the services you need</p>
             </div>
 
-            {/* Vehicle & ECU Info Card */}
-            <div className="bg-gradient-to-r from-blue-600/10 to-cyan-600/10 border border-blue-500/30 rounded-2xl p-6 mb-6">
-              <h3 className="font-semibold mb-4 text-blue-400 flex items-center">
+            {/* ECU Analysis Results Card */}
+            <div className="bg-gradient-to-r from-green-600/10 to-cyan-600/10 border border-green-500/30 rounded-2xl p-6 mb-6">
+              <h3 className="font-semibold mb-4 text-green-400 flex items-center">
                 <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
-                Vehicle Information
+                ECU Analysis Results
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
-                {isManualVehicle ? (
-                  <>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Make:</span>
-                        <span className="text-white font-medium">{manualVehicle.make || 'N/A'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Model:</span>
-                        <span className="text-white font-medium">{manualVehicle.model || 'N/A'}</span>
-                      </div>
+                <div className="space-y-3">
+                  {analysisResult.detected_manufacturer && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Manufacturer:</span>
+                      <span className="text-white font-semibold">{analysisResult.detected_manufacturer}</span>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Year:</span>
-                        <span className="text-white font-medium">{manualVehicle.year || 'N/A'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Engine:</span>
-                        <span className="text-white font-medium">{manualVehicle.engine || 'N/A'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">ECU Type:</span>
-                        <span className="text-cyan-400 font-semibold">{selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name || 'N/A'}</span>
-                      </div>
+                  )}
+                  {analysisResult.detected_ecu && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">ECU Type:</span>
+                      <span className="text-cyan-400 font-semibold">{analysisResult.detected_ecu}</span>
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Manufacturer:</span>
-                        <span className="text-white font-medium">{selectedManufacturer?.name || 'N/A'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Model:</span>
-                        <span className="text-white font-medium">{selectedModel?.name || 'N/A'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Generation:</span>
-                        <span className="text-white font-medium">{selectedGeneration?.name || 'N/A'}</span>
-                      </div>
+                  )}
+                  {analysisResult.metadata?.calibration_id && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Calibration ID:</span>
+                      <span className="text-yellow-400 font-mono">{analysisResult.metadata.calibration_id}</span>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Engine:</span>
-                        <span className="text-white font-medium">{selectedEngine?.name || 'N/A'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">ECU Type:</span>
-                        <span className="text-cyan-400 font-semibold">{selectedEcu?.id === 'other' ? customEcu : selectedEcu?.name || 'N/A'}</span>
-                      </div>
+                  )}
+                </div>
+                <div className="space-y-3">
+                  {analysisResult.metadata?.software_version && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Software Ver:</span>
+                      <span className="text-white font-mono">{analysisResult.metadata.software_version}</span>
                     </div>
-                  </>
-                )}
+                  )}
+                  {analysisResult.metadata?.part_number && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Part Number:</span>
+                      <span className="text-white font-mono">{analysisResult.metadata.part_number}</span>
+                    </div>
+                  )}
+                  {analysisResult.metadata?.vin && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">VIN:</span>
+                      <span className="text-white font-mono text-sm">{analysisResult.metadata.vin}</span>
+                    </div>
+                  )}
+                </div>
               </div>
+              {analysisResult.metadata?.strings?.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-slate-700">
+                  <span className="text-slate-400 text-sm">Detected Strings:</span>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {analysisResult.metadata.strings.slice(0, 6).map((str, idx) => (
+                      <span key={idx} className="bg-slate-700/50 text-slate-300 px-2 py-1 rounded text-xs font-mono">{str}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* File Info */}
