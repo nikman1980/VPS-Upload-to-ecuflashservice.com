@@ -245,19 +245,19 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
-      <header className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700 sticky top-0 z-50">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <span className="text-2xl">🔧</span>
-            <h1 className="text-2xl font-bold text-white">DPF AdBlue Removal</h1>
+            <h1 className="text-2xl font-bold text-gray-900">DPF AdBlue Removal</h1>
           </div>
           <nav className="flex space-x-6">
-            <a href="#services" className="hover:text-blue-400 transition">Services</a>
-            <a href="#benefits" className="hover:text-blue-400 transition">Benefits</a>
-            <a href="#pricing" className="hover:text-blue-400 transition">Pricing</a>
-            <a href="/admin" className="hover:text-blue-400 transition">Admin</a>
+            <a href="#services" className="text-gray-700 hover:text-blue-600 transition">Services</a>
+            <a href="#benefits" className="text-gray-700 hover:text-blue-600 transition">Benefits</a>
+            <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition">Pricing</a>
+            <a href="/admin" className="text-gray-700 hover:text-blue-600 transition">Admin</a>
           </nav>
         </div>
       </header>
