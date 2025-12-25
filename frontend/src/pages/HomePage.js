@@ -461,33 +461,33 @@ const HomePage = () => {
 
       {/* Request Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 overflow-y-auto" data-testid="request-form-modal">
-          <div className="bg-gray-800 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto" data-testid="request-form-modal">
+          <div className="bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative shadow-2xl">
             <button 
               onClick={() => { setShowForm(false); setShowPayment(false); }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 text-2xl"
               data-testid="close-form-btn"
             >
               ×
             </button>
             
-            <h3 className="text-3xl font-bold mb-6">ECU File Processing Request</h3>
+            <h3 className="text-3xl font-bold mb-6 text-gray-900">ECU File Processing Request</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* File Upload Section */}
               <div>
-                <h4 className="text-xl font-semibold mb-4 text-blue-400">Upload ECU File *</h4>
+                <h4 className="text-xl font-semibold mb-4 text-blue-600">Upload ECU File *</h4>
                 <div 
                   className={`border-2 border-dashed rounded-lg p-8 text-center transition ${
-                    isDragging ? 'border-blue-500 bg-blue-900/20' : 'border-gray-600'
+                    isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
                   }`}
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
                 >
                   <div className="text-5xl mb-4">📁</div>
-                  <p className="text-lg mb-2">Drag & drop ECU files here</p>
-                  <p className="text-sm text-gray-400 mb-4">or</p>
+                  <p className="text-lg mb-2 text-gray-900">Drag & drop ECU files here</p>
+                  <p className="text-sm text-gray-500 mb-4">or</p>
                   <label className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg cursor-pointer inline-block">
                     Browse Files
                     <input 
@@ -498,24 +498,24 @@ const HomePage = () => {
                       className="hidden"
                     />
                   </label>
-                  <p className="text-xs text-gray-500 mt-4">Supported: .bin, .hex, .ecu, .ori, .mod</p>
+                  <p className="text-xs text-gray-400 mt-4">Supported: .bin, .hex, .ecu, .ori, .mod</p>
                 </div>
                 
                 {uploadedFiles.length > 0 && (
                   <div className="mt-4 space-y-2">
                     {uploadedFiles.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between bg-gray-700 p-3 rounded">
+                      <div key={index} className="flex items-center justify-between bg-gray-100 p-3 rounded">
                         <div className="flex items-center space-x-3">
                           <span className="text-2xl">📄</span>
                           <div>
-                            <div className="font-semibold">{file.name}</div>
-                            <div className="text-sm text-gray-400">{file.size}</div>
+                            <div className="font-semibold text-gray-900">{file.name}</div>
+                            <div className="text-sm text-gray-500">{file.size}</div>
                           </div>
                         </div>
                         <button 
                           type="button"
                           onClick={() => removeFile(index)}
-                          className="text-red-400 hover:text-red-300"
+                          className="text-red-500 hover:text-red-700"
                         >
                           Remove
                         </button>
@@ -527,7 +527,7 @@ const HomePage = () => {
 
               {/* Customer Information */}
               <div>
-                <h4 className="text-xl font-semibold mb-4 text-blue-400">Customer Information</h4>
+                <h4 className="text-xl font-semibold mb-4 text-blue-600">Customer Information</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
                     type="text"
@@ -536,7 +536,7 @@ const HomePage = () => {
                     required
                     value={formData.customer_name}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="customer-name-input"
                   />
                   <input
@@ -546,11 +546,11 @@ const HomePage = () => {
                     required
                     value={formData.customer_email}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="customer-email-input"
                   />
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2">Phone Number (with country code) *</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-700">Phone Number (with country code) *</label>
                     <input
                       type="tel"
                       name="customer_phone"
@@ -558,11 +558,11 @@ const HomePage = () => {
                       required
                       value={formData.customer_phone}
                       onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       data-testid="customer-phone-input"
                       pattern="[\+]?[0-9\s\-\(\)]+"
                     />
-                    <p className="text-xs text-gray-400 mt-1">Include country code (e.g., +679 for Fiji, +1 for USA)</p>
+                    <p className="text-xs text-gray-500 mt-1">Include country code (e.g., +679 for Fiji, +1 for USA)</p>
                   </div>
                 </div>
               </div>
