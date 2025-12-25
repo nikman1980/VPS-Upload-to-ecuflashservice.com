@@ -47,14 +47,53 @@ class ECUAnalyzer:
         # Step 6: VIN detection
         self._detect_vin(file_data)
         
-        # Step 7: Set ECU type if still missing
+        # Step 7: Infer processor from manufacturer if not directly detected
+        if not self.results["processor"] and self.results["manufacturer"]:
+            self._infer_processor_from_manufacturer()
+        
+        # Step 8: Set ECU type if still missing
         if not self.results["ecu_type"] and self.results["manufacturer"]:
             self.results["ecu_type"] = f"{self.results['manufacturer']} ECU"
         
-        # Step 8: Filter interesting strings for display
+        # Step 9: Filter interesting strings for display
         self.results["strings"] = self._filter_strings(extracted_strings)
         
         return self.results
+    
+    def _infer_processor_from_manufacturer(self):
+        """Infer likely processor family based on ECU manufacturer"""
+        
+        manufacturer = self.results.get("manufacturer", "")
+        
+        # Manufacturer to processor mapping (most common configurations)
+        processor_hints = {
+            # Japanese manufacturers typically use Renesas
+            "Transtron": "Likely Renesas (SH/V850/RH850)",
+            "Denso": "Likely Renesas SH705x/RH850",
+            "Hitachi": "Likely Renesas SH/RH850",
+            "Keihin": "Likely Renesas SH705x",
+            "Mitsubishi Electric": "Likely Renesas/NEC",
+            "Jatco": "Likely Renesas",
+            "Aisin": "Likely Renesas",
+            "Fujitsu Ten": "Likely Fujitsu FR/MB9x",
+            
+            # European manufacturers typically use Infineon TriCore or ST
+            "Bosch": "Likely Infineon TriCore",
+            "Siemens/Continental": "Likely Infineon TriCore/C16x",
+            "Delphi": "Likely NXP MPC5xx/ST",
+            "Marelli": "Likely ST/NXP",
+            "Visteon": "Likely NXP/Freescale",
+            
+            # Korean
+            "Kefico": "Likely Infineon/NXP",
+            
+            # Chinese
+            "Weichai": "Likely Bosch platform (TriCore)",
+            "Yuchai": "Likely Bosch platform (TriCore)",
+        }
+        
+        if manufacturer in processor_hints:
+            self.results["processor"] = processor_hints[manufacturer]
     
     def _detect_manufacturer_from_bytes(self, file_data):
         """Direct byte-level manufacturer detection - checks if signature exists in file"""
