@@ -677,6 +677,12 @@ class ECUServiceTester:
         print("-" * 40)
         self.test_portal_login_invalid()
         self.test_portal_login_missing_data()
+        self.test_portal_email_login()  # New email-only login
+        
+        # Test Chinese Truck Database
+        print("\n🚛 Testing Chinese Truck Database")
+        print("-" * 40)
+        self.test_chinese_truck_models()  # This calls test_chinese_truck_manufacturers internally
         
         # Test main workflow (if test file exists)
         print("\n📁 Testing File Upload Workflow")
