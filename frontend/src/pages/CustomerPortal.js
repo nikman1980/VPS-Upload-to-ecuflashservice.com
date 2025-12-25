@@ -29,6 +29,38 @@ const CustomerPortal = () => {
   const [uploadingFile, setUploadingFile] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(null);
 
+  const doLogin = async (email, orderId) => {
+    if (!email || !orderId) {
+      setLoginError('Please enter both email and order number');
+      return;
+    }
+    
+    setLoginLoading(true);
+    setLoginError('');
+    
+    try {
+      const response = await axios.post(`${API}/portal/login`, {
+        email: email.trim(),
+        order_id: orderId.trim()
+      });
+      
+      if (response.data.success) {
+        setOrder(response.data.order);
+        setMessages(response.data.messages || []);
+        setIsLoggedIn(true);
+        // Update URL without reload
+        window.history.replaceState({}, '', `/portal?order=${orderId}&email=${encodeURIComponent(email)}`);
+      } else {
+        setLoginError(response.data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError(error.response?.data?.detail || 'Invalid email or order number');
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
   // Check URL params for auto-login
   useEffect(() => {
     const orderId = searchParams.get('order');
@@ -37,17 +69,13 @@ const CustomerPortal = () => {
     if (orderId && email) {
       setLoginEmail(email);
       setLoginOrderId(orderId);
-      handleLogin(email, orderId);
+      doLogin(email, orderId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const handleLogin = async (email = loginEmail, orderId = loginOrderId) => {
-    if (!email || !orderId) {
-      setLoginError('Please enter both email and order number');
-      return;
-    }
-    
-    setLoginLoading(true);
+    doLogin(email, orderId);
     setLoginError('');
     
     try {
