@@ -262,6 +262,20 @@ class ECUAnalyzer:
                     self.results["ecu_type"] = "Kefico Engine ECU"
                     break
         
+        # === TRANSTRON DETECTION ===
+        if not self.results["manufacturer"]:
+            transtron_sigs = [b"Transtron", b"TRANSTRON", b"transtron"]
+            for sig in transtron_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Transtron"
+                    self.results["vehicle_info"] = "Subaru/Nissan/Mazda"
+                    # Look for ECU type hints
+                    if b"fpb2ecu" in file_data or b"fpb" in file_data.lower():
+                        self.results["ecu_type"] = "Transtron FPB ECU"
+                    else:
+                        self.results["ecu_type"] = "Transtron ECU"
+                    break
+        
         # === NEC/RENESAS DETECTION ===
         if b"NEC Electronics" in file_data or b"Renesas" in file_data:
             self.results["processor"] = "NEC/Renesas"
