@@ -76,29 +76,6 @@ const CustomerPortal = () => {
 
   const handleLogin = async (email = loginEmail, orderId = loginOrderId) => {
     doLogin(email, orderId);
-    setLoginError('');
-    
-    try {
-      const response = await axios.post(`${API}/portal/login`, {
-        email: email.trim(),
-        order_id: orderId.trim()
-      });
-      
-      if (response.data.success) {
-        setOrder(response.data.order);
-        setMessages(response.data.messages || []);
-        setIsLoggedIn(true);
-        // Update URL without reload
-        window.history.replaceState({}, '', `/portal?order=${orderId}&email=${encodeURIComponent(email)}`);
-      } else {
-        setLoginError(response.data.message || 'Login failed');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      setLoginError(error.response?.data?.detail || 'Invalid email or order number');
-    } finally {
-      setLoginLoading(false);
-    }
   };
 
   const refreshOrder = async () => {
