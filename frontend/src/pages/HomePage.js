@@ -291,47 +291,47 @@ const HomePage = () => {
       {step === 2 && analysisResult && (
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-700 p-8 rounded-lg mb-8">
-              <h3 className="text-3xl font-bold mb-6 text-center">
+            <div className="bg-green-50 border border-green-200 p-8 rounded-lg mb-8">
+              <h3 className="text-3xl font-bold mb-6 text-center text-gray-900">
                 🔍 AI Analysis Complete
               </h3>
               
               <div className="grid md:grid-cols-2 gap-8">
                 {/* File Information */}
-                <div className="bg-gray-800/50 p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-4 text-blue-400">📄 File Information</h4>
+                <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-600">📄 File Information</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-gray-400">File Name:</span>
-                      <span>{analysisResult.file_info?.name || 'Unknown'}</span>
+                      <span className="text-gray-500">File Name:</span>
+                      <span className="text-gray-900">{analysisResult.file_info?.name || 'Unknown'}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-400">File Size:</span>
-                      <span>{analysisResult.file_info?.size || 'Unknown'}</span>
+                      <span className="text-gray-500">File Size:</span>
+                      <span className="text-gray-900">{analysisResult.file_info?.size || 'Unknown'}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-400">ECU Type:</span>
-                      <span>{analysisResult.ecu_info?.type || 'Detected automatically'}</span>
+                      <span className="text-gray-500">ECU Type:</span>
+                      <span className="text-gray-900">{analysisResult.ecu_info?.type || 'Detected automatically'}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-400">Vehicle:</span>
-                      <span>{analysisResult.vehicle_info?.make || 'Unknown'} {analysisResult.vehicle_info?.model || ''}</span>
+                      <span className="text-gray-500">Vehicle:</span>
+                      <span className="text-gray-900">{analysisResult.vehicle_info?.make || 'Unknown'} {analysisResult.vehicle_info?.model || ''}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Available Services */}
-                <div className="bg-gray-800/50 p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-4 text-green-400">✅ Available Services</h4>
+                <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                  <h4 className="text-xl font-semibold mb-4 text-green-600">✅ Available Services</h4>
                   <div className="space-y-3">
                     {analysisResult.available_services?.map((service, index) => (
                       <div key={index} className="flex items-center space-x-3">
-                        <span className="text-green-400">✓</span>
-                        <span className="text-sm">{service.name}</span>
-                        <span className="text-xs text-gray-400">({service.confidence}% confidence)</span>
+                        <span className="text-green-600">✓</span>
+                        <span className="text-sm text-gray-900">{service.name}</span>
+                        <span className="text-xs text-gray-500">({service.confidence}% confidence)</span>
                       </div>
                     )) || (
-                      <div className="text-gray-400 text-sm">
+                      <div className="text-gray-500 text-sm">
                         All standard services available (DPF, AdBlue, EGR)
                       </div>
                     )}
@@ -341,9 +341,9 @@ const HomePage = () => {
 
               {/* Analysis Summary */}
               {analysisResult.analysis_summary && (
-                <div className="mt-6 bg-blue-900/20 border border-blue-700 p-4 rounded-lg">
-                  <h4 className="text-lg font-semibold mb-2 text-blue-400">🤖 AI Analysis Summary</h4>
-                  <p className="text-sm text-gray-300">{analysisResult.analysis_summary}</p>
+                <div className="mt-6 bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                  <h4 className="text-lg font-semibold mb-2 text-blue-600">🤖 AI Analysis Summary</h4>
+                  <p className="text-sm text-gray-700">{analysisResult.analysis_summary}</p>
                 </div>
               )}
 
