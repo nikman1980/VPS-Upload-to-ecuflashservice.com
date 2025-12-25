@@ -723,44 +723,6 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Error analyzing file: {e}")
         raise HTTPException(status_code=500, detail=f"File processing failed: {str(e)}")
-                
-                if result["success"] and result["processed_file"]:
-                    # Save processed version
-                    version_filename = f"{file_id}_{service_id}{file_ext}"
-                    version_filepath = PROCESSED_DIR / version_filename
-                    
-                    with open(version_filepath, "wb") as f:
-                        f.write(result["processed_file"])
-                    
-                    processed_versions.append({
-                        "service_id": service_id,
-                        "service_name": service["service_name"],
-                        "price": service["price"],
-                        "file_id": f"{file_id}_{service_id}",
-                        "filename": version_filename,
-                        "filepath": str(version_filepath),
-                        "confidence": result["confidence"],
-                        "confidence_level": result["confidence_level"],
-                        "file_size": len(result["processed_file"])
-                    })
-            except Exception as e:
-                logger.error(f"Error processing {service_id}: {e}")
-        
-        # Return analysis + processed versions
-        return {
-            "success": True,
-            "file_id": file_id,
-            "original_filename": file.filename,
-            "file_size_mb": analysis_result["file_size_mb"],
-            "ecu_type": analysis_result["ecu_type"],
-            "ecu_confidence": analysis_result["ecu_confidence"],
-            "available_options": processed_versions,
-            "message": "File processed! Select which modifications you want to purchase."
-        }
-        
-    except Exception as e:
-        logger.error(f"Error analyzing file: {e}")
-        raise HTTPException(status_code=500, detail=f"File processing failed: {str(e)}")
 
 
 @api_router.post("/purchase-processed-file")
