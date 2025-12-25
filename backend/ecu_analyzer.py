@@ -196,31 +196,274 @@ class ECUAnalyzer:
                 return
     
     def _detect_processor(self, file_data):
-        """Detect microprocessor/microcontroller"""
+        """Detect microprocessor/microcontroller - Comprehensive ECU CPU detection"""
         
-        if b"Infineon" in file_data or b"TriCore" in file_data or b"TC1797" in file_data or b"TC1767" in file_data:
-            match = re.search(rb"TC17[0-9]{2}", file_data)
+        # =====================================================================
+        # INFINEON TRICORE FAMILY (Most common in modern ECUs)
+        # Used in: Bosch MED17, EDC17, MD1, MG1 and Continental/Siemens ECUs
+        # =====================================================================
+        
+        # TC3xx Series (Latest generation - AURIX 2G)
+        tc3_patterns = [rb"TC3[0-9]{2}", rb"TC38[0-9]", rb"TC37[0-9]", rb"TC36[0-9]", rb"TC35[0-9]"]
+        for pat in tc3_patterns:
+            match = re.search(pat, file_data)
+            if match:
+                self.results["processor"] = f"Infineon TriCore {match.group(0).decode('utf-8')} (AURIX 2G)"
+                return
+        
+        # TC2xx Series (AURIX 1G - very common)
+        tc2_patterns = [rb"TC2[0-9]{2}", rb"TC27[0-9]", rb"TC26[0-9]", rb"TC29[0-9]", rb"TC23[0-9]"]
+        for pat in tc2_patterns:
+            match = re.search(pat, file_data)
+            if match:
+                self.results["processor"] = f"Infineon TriCore {match.group(0).decode('utf-8')} (AURIX)"
+                return
+        
+        # TC1xx Series (Older but still common)
+        tc1_patterns = [rb"TC1797", rb"TC1796", rb"TC1767", rb"TC1766", rb"TC1782", rb"TC1784", rb"TC1724", rb"TC17[0-9]{2}"]
+        for pat in tc1_patterns:
+            match = re.search(pat, file_data)
             if match:
                 self.results["processor"] = f"Infineon TriCore {match.group(0).decode('utf-8')}"
-            else:
-                self.results["processor"] = "Infineon TriCore"
+                return
+        
+        # Generic TriCore detection
+        if b"TriCore" in file_data or b"TRICORE" in file_data or b"Infineon" in file_data:
+            self.results["processor"] = "Infineon TriCore"
             return
         
-        if b"Renesas" in file_data or b"SH7058" in file_data or b"SH7059" in file_data:
-            self.results["processor"] = "Renesas SH705x"
-            return
+        # =====================================================================
+        # RENESAS FAMILY (Common in Japanese ECUs - Denso, Hitachi)
+        # =====================================================================
         
-        if b"Freescale" in file_data or b"MPC5" in file_data:
-            match = re.search(rb"MPC5[0-9]+", file_data)
+        # RH850 Family (Modern Renesas - replacing V850)
+        rh850_patterns = [rb"RH850", rb"rh850", rb"RH850/[A-Z0-9]+"]
+        for pat in rh850_patterns:
+            match = re.search(pat, file_data)
             if match:
-                self.results["processor"] = f"Freescale {match.group(0).decode('utf-8')}"
-            else:
-                self.results["processor"] = "Freescale MPC5xx"
+                self.results["processor"] = "Renesas RH850"
+                return
+        
+        # SuperH SH7xxx Family (Older Renesas, very common in Denso ECUs)
+        sh_patterns = [
+            (rb"SH7058", "Renesas SH7058"),
+            (rb"SH7059", "Renesas SH7059"),
+            (rb"SH7055", "Renesas SH7055"),
+            (rb"SH7052", "Renesas SH7052"),
+            (rb"SH7054", "Renesas SH7054"),
+            (rb"SH7057", "Renesas SH7057"),
+            (rb"SH705[0-9]", "Renesas SH705x"),
+            (rb"SH7[0-9]{3}", "Renesas SuperH"),
+        ]
+        for pat, name in sh_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # V850 Family (Older NEC/Renesas)
+        v850_patterns = [rb"V850", rb"v850", rb"V850E", rb"V850ES"]
+        for pat in v850_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = "Renesas V850"
+                return
+        
+        # 78K Family (NEC/Renesas 8/16-bit)
+        if b"78K" in file_data or b"uPD78" in file_data:
+            self.results["processor"] = "Renesas 78K"
             return
+        
+        # Generic Renesas
+        if b"Renesas" in file_data or b"RENESAS" in file_data:
+            self.results["processor"] = "Renesas"
+            return
+        
+        # =====================================================================
+        # NXP/FREESCALE MPC5xx FAMILY (Power Architecture - common in ECUs)
+        # Used in: Bosch, Delphi, Continental ECUs
+        # =====================================================================
+        
+        mpc_patterns = [
+            (rb"MPC5777", "NXP MPC5777"),
+            (rb"MPC5775", "NXP MPC5775"),
+            (rb"MPC5748", "NXP MPC5748"),
+            (rb"MPC5746", "NXP MPC5746"),
+            (rb"MPC5744", "NXP MPC5744"),
+            (rb"MPC5676", "NXP MPC5676"),
+            (rb"MPC5674", "NXP MPC5674"),
+            (rb"MPC5668", "NXP MPC5668"),
+            (rb"MPC5667", "NXP MPC5667"),
+            (rb"MPC5566", "NXP MPC5566"),
+            (rb"MPC5565", "NXP MPC5565"),
+            (rb"MPC5564", "NXP MPC5564"),
+            (rb"MPC5554", "NXP MPC5554"),
+            (rb"MPC5553", "NXP MPC5553"),
+            (rb"MPC5534", "NXP MPC5534"),
+            (rb"MPC5[0-9]{3}", "NXP MPC5xxx"),
+            (rb"MPC5[0-9]+", "NXP MPC5xx"),
+        ]
+        for pat, name in mpc_patterns:
+            match = re.search(pat, file_data)
+            if match:
+                self.results["processor"] = name
+                return
+        
+        # Generic Freescale/NXP
+        if b"Freescale" in file_data or b"FREESCALE" in file_data:
+            self.results["processor"] = "Freescale/NXP"
+            return
+        
+        # =====================================================================
+        # ST MICROELECTRONICS FAMILY
+        # Used in: Marelli, some Bosch ECUs
+        # =====================================================================
+        
+        # SPC5xx Family (Power Architecture based)
+        spc_patterns = [
+            (rb"SPC58", "ST SPC58xx"),
+            (rb"SPC57", "ST SPC57xx"),
+            (rb"SPC56", "ST SPC56xx"),
+            (rb"SPC5[0-9]", "ST SPC5xx"),
+        ]
+        for pat, name in spc_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # ST10 Family (16-bit, older ECUs)
+        st10_patterns = [
+            (rb"ST10F2[0-9]{2}", "ST ST10F2xx"),
+            (rb"ST10F168", "ST ST10F168"),
+            (rb"ST10F269", "ST ST10F269"),
+            (rb"ST10F273", "ST ST10F273"),
+            (rb"ST10F275", "ST ST10F275"),
+            (rb"ST10F276", "ST ST10F276"),
+            (rb"ST10F280", "ST ST10F280"),
+            (rb"ST10", "ST ST10"),
+        ]
+        for pat, name in st10_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # =====================================================================
+        # INFINEON/SIEMENS C16x FAMILY (Older 16-bit)
+        # Used in: Siemens/Continental ECUs, older Bosch
+        # =====================================================================
+        
+        c16x_patterns = [
+            (rb"C167", "Infineon C167"),
+            (rb"C166", "Infineon C166"),
+            (rb"C164", "Infineon C164"),
+            (rb"C161", "Infineon C161"),
+            (rb"XC16[0-9]", "Infineon XC16x"),
+            (rb"XC2[0-9]{3}", "Infineon XC2xxx"),
+        ]
+        for pat, name in c16x_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # =====================================================================
+        # MOTOROLA 68HC FAMILY (Legacy ECUs)
+        # Used in: Very old ECUs, some Ford, GM applications
+        # =====================================================================
+        
+        m68_patterns = [
+            (rb"68HC12", "Motorola 68HC12"),
+            (rb"68HC11", "Motorola 68HC11"),
+            (rb"68HC08", "Motorola 68HC08"),
+            (rb"68HC05", "Motorola 68HC05"),
+            (rb"MC68HC", "Motorola 68HC"),
+            (rb"MC9S12", "Freescale S12"),
+            (rb"S12X", "Freescale S12X"),
+            (rb"S12", "Freescale S12"),
+        ]
+        for pat, name in m68_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # =====================================================================
+        # NEC FAMILY (Older Japanese ECUs)
+        # =====================================================================
+        
+        nec_patterns = [
+            (rb"uPD70", "NEC 70xx"),
+            (rb"uPD78", "NEC 78K"),
+            (rb"76F00[0-9]+", "NEC 76F00xx"),
+        ]
+        for pat, name in nec_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
         
         if b"NEC" in file_data:
             self.results["processor"] = "NEC"
             return
+        
+        # =====================================================================
+        # TEXAS INSTRUMENTS FAMILY
+        # Used in: Some body controllers, infotainment
+        # =====================================================================
+        
+        ti_patterns = [
+            (rb"TMS470", "TI TMS470"),
+            (rb"TMS570", "TI TMS570"),
+            (rb"TMS320", "TI TMS320 DSP"),
+            (rb"Hercules", "TI Hercules"),
+        ]
+        for pat, name in ti_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # =====================================================================
+        # FUJITSU/SPANSION FAMILY
+        # Used in: Some Asian manufacturer ECUs
+        # =====================================================================
+        
+        fujitsu_patterns = [
+            (rb"MB91F", "Fujitsu MB91F"),
+            (rb"MB90F", "Fujitsu MB90F"),
+            (rb"FR60", "Fujitsu FR60"),
+            (rb"FR80", "Fujitsu FR80"),
+        ]
+        for pat, name in fujitsu_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
+        
+        # =====================================================================
+        # MICROCHIP/ATMEL FAMILY
+        # Used in: Some auxiliary ECUs, sensors
+        # =====================================================================
+        
+        if b"ATMEGA" in file_data or b"ATmega" in file_data:
+            self.results["processor"] = "Atmel ATmega"
+            return
+        
+        if b"ATXMEGA" in file_data or b"ATxmega" in file_data:
+            self.results["processor"] = "Atmel ATxmega"
+            return
+        
+        if b"PIC18" in file_data or b"PIC24" in file_data or b"dsPIC" in file_data:
+            self.results["processor"] = "Microchip PIC"
+            return
+        
+        # =====================================================================
+        # ARM CORTEX FAMILY (Modern trend in automotive)
+        # =====================================================================
+        
+        arm_patterns = [
+            (rb"Cortex-R", "ARM Cortex-R"),
+            (rb"Cortex-M", "ARM Cortex-M"),
+            (rb"ARM7", "ARM7"),
+            (rb"ARM9", "ARM9"),
+        ]
+        for pat, name in arm_patterns:
+            if re.search(pat, file_data):
+                self.results["processor"] = name
+                return
     
     def _detect_calibration(self, file_data, strings):
         """Detect calibration ID and software version"""
