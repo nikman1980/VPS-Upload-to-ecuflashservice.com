@@ -225,7 +225,7 @@ const CustomerPortal = () => {
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full bg-gray-100/50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    className="w-full bg-gray-100/50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     required
                   />
                   <p className="text-gray-500 text-sm mt-2">Enter the email you used when placing orders</p>
@@ -552,7 +552,7 @@ const CustomerPortal = () => {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         placeholder="Type your message..."
-                        className="flex-1 bg-gray-100/50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-slate-500 focus:border-blue-500"
+                        className="flex-1 bg-gray-100/50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-300 focus:border-blue-500"
                         onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                       />
                       <button
