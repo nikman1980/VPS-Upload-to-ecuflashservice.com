@@ -750,13 +750,13 @@ const NewUploadFlow = () => {
                 { step: '04', title: 'Pay & Download', desc: 'Pay securely via PayPal. Receive your modified file within 20-60 minutes.' },
               ].map((item, i) => (
                 <div key={i} className="relative">
-                  <div className="bg-gradient-to-br from-slate-800 to-slate-800/50 border border-gray-200/50 rounded-2xl p-6">
-                    <div className="text-5xl font-bold text-slate-700 mb-3">{item.step}</div>
+                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200/50 rounded-2xl p-6">
+                    <div className="text-5xl font-bold text-gray-300 mb-3">{item.step}</div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                     <p className="text-gray-500 text-sm">{item.desc}</p>
                   </div>
                   {i < 3 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-slate-600 text-xl">→</div>
+                    <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-gray-200 text-xl">→</div>
                   )}
                 </div>
               ))}
@@ -772,13 +772,13 @@ const NewUploadFlow = () => {
               <p className="text-gray-500">No hidden fees. Pay only for what you need.</p>
             </div>
             
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-200/50 rounded-3xl overflow-hidden">
+            <div className="bg-gradient-to-br from-gray-100 to-white border border-gray-200/50 rounded-3xl overflow-hidden">
               <div className="p-8 border-b border-gray-200/50">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Service Pricing</h3>
                 <p className="text-gray-500">All prices in USD • 18 services available</p>
               </div>
-              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 divide-slate-700/50">
-                <div className="divide-y divide-slate-700/50">
+              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 divide-gray-300/50">
+                <div className="divide-y divide-gray-300/50">
                   {allServices.slice(0, 9).map((service, i) => (
                     <div key={i} className="flex justify-between items-center p-4 hover:bg-gray-50/50 transition">
                       <div className="flex items-center space-x-3">
@@ -789,7 +789,7 @@ const NewUploadFlow = () => {
                     </div>
                   ))}
                 </div>
-                <div className="divide-y divide-slate-700/50 md:border-l md:border-gray-200/50">
+                <div className="divide-y divide-gray-300/50 md:border-l md:border-gray-200/50">
                   {allServices.slice(9).map((service, i) => (
                     <div key={i} className="flex justify-between items-center p-4 hover:bg-gray-50/50 transition">
                       <div className="flex items-center space-x-3">
@@ -826,7 +826,7 @@ const NewUploadFlow = () => {
         </section>
 
         {/* Footer */}
-        <footer className="bg-white border-t border-slate-800 py-12 px-6">
+        <footer className="bg-white border-t border-gray-100 py-12 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
@@ -866,7 +866,7 @@ const NewUploadFlow = () => {
                 </ul>
               </div>
             </div>
-            <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-500 text-sm">© 2024 ECU Flash Service. All rights reserved.</p>
               <p className="text-gray-500 text-sm mt-2 md:mt-0">⚠️ For off-road and competition use only</p>
             </div>
@@ -937,7 +937,7 @@ const NewUploadFlow = () => {
                       className={`p-4 rounded-xl border-2 transition-all text-center ${
                         selectedVehicleType?.id === type.id 
                           ? 'border-blue-500 bg-blue-500/20 text-gray-900' 
-                          : 'border-gray-300 hover:border-slate-500 text-gray-600'
+                          : 'border-gray-300 hover:border-gray-300 text-gray-600'
                       }`}
                     >
                       <div className="text-2xl mb-1">
@@ -955,7 +955,7 @@ const NewUploadFlow = () => {
                     className={`p-4 rounded-xl border-2 transition-all text-center ${
                       isManualVehicle 
                         ? 'border-orange-500 bg-orange-500/20 text-gray-900' 
-                        : 'border-gray-300 hover:border-slate-500 text-gray-600'
+                        : 'border-gray-300 hover:border-gray-300 text-gray-600'
                     }`}
                   >
                     <div className="text-2xl mb-1">❓</div>
@@ -1309,7 +1309,7 @@ const NewUploadFlow = () => {
               className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all cursor-pointer ${
                 isDragging ? 'border-blue-500 bg-blue-500/10' : 
                 uploadedFile ? 'border-green-500 bg-green-500/10' : 
-                'border-gray-300 hover:border-slate-500 hover:bg-gray-100/30'
+                'border-gray-300 hover:border-gray-300 hover:bg-gray-100/30'
               }`}
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}
@@ -1415,7 +1415,7 @@ const NewUploadFlow = () => {
               </div>
               
               {/* Table */}
-              <div className="divide-y divide-slate-700/50">
+              <div className="divide-y divide-gray-300/50">
                 {/* Table Header */}
                 <div className="grid grid-cols-2 bg-gray-50/50">
                   <div className="px-6 py-3 text-gray-500 font-semibold text-sm">Field</div>
@@ -1519,7 +1519,7 @@ const NewUploadFlow = () => {
                         type="checkbox"
                         checked={selectedServices.includes(option.service_id)}
                         onChange={() => handleServiceToggle(option.service_id, option.price)}
-                        className="w-5 h-5 rounded border-slate-500 text-blue-500 focus:ring-blue-500"
+                        className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
                       />
                       <div>
                         <div className="font-semibold text-gray-900">{option.service_name}</div>
@@ -1771,7 +1771,7 @@ const NewUploadFlow = () => {
 
       {/* Footer for inner pages */}
       {step > 0 && (
-        <footer className="bg-white/50 border-t border-slate-800 py-6 mt-16">
+        <footer className="bg-white/50 border-t border-gray-100 py-6 mt-16">
           <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
             <p>© 2024 ECU Flash Service | Professional ECU Tuning</p>
             <p className="mt-1">⚠️ For off-road and competition use only</p>
