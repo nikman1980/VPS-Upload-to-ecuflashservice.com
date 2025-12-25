@@ -1720,12 +1720,10 @@ const NewUploadFlow = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={`${API}/order-status/${orderId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition"
+                href={`/portal?order=${orderId}&email=${encodeURIComponent(customerInfo.customer_email)}`}
+                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-lg hover:shadow-blue-500/25 text-white px-8 py-3 rounded-xl font-semibold transition"
               >
-                Check Order Status
+                Go to Customer Portal
               </a>
               <button
                 onClick={() => window.location.reload()}
