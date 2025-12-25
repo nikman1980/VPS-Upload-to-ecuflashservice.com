@@ -19,7 +19,7 @@ import asyncio
 from ecu_processor import ECUProcessor, ConfidenceLevel
 
 # Import Real ECU Analyzer
-from ecu_analyzer import ECUAnalyzer, analyze_ecu_file, get_available_services, SERVICE_PRICING
+from ecu_analyzer import ECUAnalyzer
 
 # Import Email Service
 from email_service import send_order_confirmation
