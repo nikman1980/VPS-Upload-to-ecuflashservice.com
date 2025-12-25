@@ -636,16 +636,15 @@ async def calculate_price(service_ids: List[str]):
 @api_router.post("/analyze-and-process-file")
 async def analyze_and_process_file(file: UploadFile = File(...)):
     """
-    STEP 1: Analyze ECU file AND pre-process with ALL available services
-    Returns what's available with prices
-    Customer then selects what to buy
+    Analyze ECU file and return available services
+    Uses real ECU analyzer to detect manufacturer and ECU type
     """
     try:
         # Read file
         file_data = await file.read()
         
         # Validate file extension
-        allowed_extensions = [".bin", ".hex", ".ecu", ".ori", ".mod"]
+        allowed_extensions = [".bin", ".hex", ".ecu", ".ori", ".mod", ".frf", ".sgm"]
         file_ext = Path(file.filename).suffix.lower()
         
         if file_ext not in allowed_extensions:
@@ -654,10 +653,7 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
                 detail=f"Invalid file type. Only ECU files ({', '.join(allowed_extensions)}) are allowed."
             )
         
-        # Step 1: Analyze to detect ECU type and available systems
-        analysis_result = ecu_processor.analyze_file_for_options(file_data)
-        
-        # Save original file first (even if analysis fails)
+        # Generate file ID and save original file
         file_id = str(uuid.uuid4())
         original_filename = f"{file_id}_original{file_ext}"
         original_filepath = UPLOAD_DIR / original_filename
@@ -665,63 +661,68 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         with open(original_filepath, "wb") as f:
             f.write(file_data)
         
-        # If analysis failed, still proceed with all available services
-        if not analysis_result["success"]:
-            # Offer all services as available options (manual processing)
-            all_services = [
-                {"service_id": "dpf_off", "service_name": "DPF/FAP Removal", "price": 50.0},
-                {"service_id": "egr_off", "service_name": "EGR Removal", "price": 40.0},
-                {"service_id": "adblue_off", "service_name": "AdBlue/SCR Removal", "price": 60.0},
-                {"service_id": "dtc_off", "service_name": "DTC/Error Code Removal", "price": 30.0},
-                {"service_id": "lambda_off", "service_name": "Lambda/O2 Sensor Removal", "price": 35.0},
-                {"service_id": "cat_off", "service_name": "Catalyst Removal", "price": 45.0},
-                {"service_id": "flaps_off", "service_name": "Swirl Flaps Removal", "price": 35.0},
-                {"service_id": "start_stop_off", "service_name": "Start/Stop Disable", "price": 25.0},
-                {"service_id": "speed_limit_off", "service_name": "Speed Limiter Removal", "price": 40.0},
-                {"service_id": "stage1", "service_name": "Stage 1 Tuning", "price": 150.0},
-                {"service_id": "stage2", "service_name": "Stage 2 Tuning", "price": 250.0},
-            ]
-            
-            # Create processed versions for all services
-            processed_versions = []
-            for service in all_services:
-                processed_versions.append({
-                    "service_id": service["service_id"],
-                    "service_name": service["service_name"],
-                    "price": service["price"],
-                    "file_id": f"{file_id}_{service['service_id']}",
-                    "filename": f"{file_id}_{service['service_id']}{file_ext}",
-                    "filepath": str(original_filepath),  # Use original file for manual processing
-                    "confidence": 0.7,
-                    "confidence_level": "manual",
-                    "file_size": len(file_data),
-                    "manual_processing": True  # Flag for manual processing
-                })
-            
-            return {
-                "success": True,
-                "file_id": file_id,
-                "original_filename": file.filename,
-                "file_size_mb": round(len(file_data) / (1024 * 1024), 2),
-                "ecu_type": "Unknown - Manual Processing Required",
-                "ecu_confidence": 0.5,
-                "available_options": processed_versions,
-                "warnings": analysis_result.get("warnings", []),
-                "message": "ECU type could not be auto-detected. All services are available for manual processing by our engineers."
-            }
+        # Use real ECU Analyzer
+        analyzer = ECUAnalyzer()
+        analysis = analyzer.analyze(file_data)
+        display_info = analyzer.get_display_info()
         
-        # Step 2: PRE-PROCESS file with ALL available services
-        # This creates multiple versions of the file
-        processed_versions = []
+        # Build available services list
+        services = [
+            {"service_id": "dpf_off", "service_name": "DPF/FAP Removal", "price": 50.0},
+            {"service_id": "adblue_off", "service_name": "AdBlue/SCR Removal", "price": 60.0},
+            {"service_id": "egr_off", "service_name": "EGR Removal", "price": 40.0},
+            {"service_id": "dtc_off", "service_name": "DTC/Error Code Removal", "price": 30.0},
+            {"service_id": "lambda_off", "service_name": "Lambda/O2 Sensor Removal", "price": 35.0},
+            {"service_id": "cat_off", "service_name": "Catalyst Removal", "price": 45.0},
+            {"service_id": "speed_limit_off", "service_name": "Speed Limiter Removal", "price": 40.0},
+            {"service_id": "start_stop_off", "service_name": "Start/Stop Disable", "price": 25.0},
+            {"service_id": "flaps_off", "service_name": "Swirl Flaps Removal", "price": 35.0},
+            {"service_id": "immo_off", "service_name": "Immobilizer Removal", "price": 80.0},
+            {"service_id": "stage1", "service_name": "Stage 1 Tuning (+20-30% Power)", "price": 150.0},
+            {"service_id": "stage2", "service_name": "Stage 2 Tuning (+30-50% Power)", "price": 250.0},
+        ]
         
-        # Process each available service individually
-        for service in analysis_result["available_services"]:
-            service_id = service["service_id"]
-            
-            # Process ALL services including DTC
-            try:
-                # Process file with this service
-                result = ecu_processor.process_file(file_data, [service_id])
+        available_options = []
+        for svc in services:
+            available_options.append({
+                "service_id": svc["service_id"],
+                "service_name": svc["service_name"],
+                "price": svc["price"],
+                "file_id": f"{file_id}_{svc['service_id']}",
+            })
+        
+        # Build ECU info string
+        ecu_info = display_info['ecu_type']
+        if display_info['manufacturer'] and display_info['manufacturer'] != 'Unknown':
+            if display_info['manufacturer'] not in ecu_info:
+                ecu_info = f"{display_info['manufacturer']} - {ecu_info}"
+        
+        # Add metadata if found
+        metadata = {}
+        if display_info['calibration_id'] != 'N/A':
+            metadata['calibration_id'] = display_info['calibration_id']
+        if display_info['software_version'] != 'N/A':
+            metadata['software_version'] = display_info['software_version']
+        if display_info['part_number'] != 'N/A':
+            metadata['part_number'] = display_info['part_number']
+        
+        return {
+            "success": True,
+            "file_id": file_id,
+            "original_filename": file.filename,
+            "file_size_mb": display_info['file_size_mb'],
+            "ecu_type": ecu_info,
+            "manufacturer": display_info['manufacturer'],
+            "metadata": metadata,
+            "available_options": available_options,
+            "message": "File uploaded successfully! Select the services you need."
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error analyzing file: {e}")
+        raise HTTPException(status_code=500, detail=f"File processing failed: {str(e)}")
                 
                 if result["success"] and result["processed_file"]:
                     # Save processed version
