@@ -207,32 +207,159 @@ class ECUAnalyzer:
                 return
     
     def _detect_part_number(self, file_data):
-        """Detect OEM part numbers"""
+        """Detect OEM part numbers - strict validation to avoid false positives"""
         
+        # Part number patterns with strict validation
         part_patterns = [
-            # Toyota/Lexus (Denso)
+            # =====================================================================
+            # JAPANESE MANUFACTURERS
+            # =====================================================================
+            
+            # Toyota/Lexus (Denso) - 89xxx-xxxxx format
             (rb"(89[0-9]{3}-[0-9A-Z]{5})", "Toyota/Lexus", "Denso"),
-            # Honda/Acura (Keihin)
-            (rb"(37820-[A-Z0-9]{3,7})", "Honda/Acura", "Keihin"),
-            (rb"(37805-[A-Z0-9]{3,7})", "Honda/Acura", "Keihin"),
-            # Nissan/Infiniti
+            
+            # Honda/Acura (Keihin) - 37820-xxx-xxx or 37805-xxx-xxx
+            (rb"(37820-[A-Z0-9]{3}-[A-Z0-9]{3,4})", "Honda/Acura", "Keihin"),
+            (rb"(37805-[A-Z0-9]{3}-[A-Z0-9]{3,4})", "Honda/Acura", "Keihin"),
+            (rb"(37820-[A-Z0-9]{6,8})", "Honda/Acura", "Keihin"),
+            
+            # Nissan/Infiniti - 23710-xxxxx format
             (rb"(23710-[A-Z0-9]{5,7})", "Nissan/Infiniti", "Hitachi/Denso"),
-            # Hyundai/Kia
+            (rb"(23703-[A-Z0-9]{5,7})", "Nissan/Infiniti", "Hitachi/Denso"),
+            (rb"(MEC[0-9]{2}-[0-9]{3}[A-Z0-9]*)", "Nissan/Infiniti", "Hitachi"),
+            
+            # Mazda - PE01-18-881x, SH01-18-881x, etc.
+            (rb"([A-Z]{2,4}[0-9]{2}-18-[0-9]{3}[A-Z]?)", "Mazda", "Denso"),
+            (rb"(GK6T[A-Z0-9]{6,12})", "Mazda", "Denso"),  # Mazda Skyactiv ECU IDs
+            
+            # Subaru - 22611-xxxxx, 22765-xxxxx
+            (rb"(22611-[A-Z]{2}[0-9]{3})", "Subaru", "Denso/Hitachi"),
+            (rb"(22765-[A-Z]{2}[0-9]{3})", "Subaru", "Denso/Hitachi"),
+            
+            # Mitsubishi - E6T, E5T series
+            (rb"(E6T[0-9]{5})", "Mitsubishi", "Mitsubishi Electric"),
+            (rb"(E5T[0-9]{5})", "Mitsubishi", "Mitsubishi Electric"),
+            (rb"(1860A[0-9]{3})", "Mitsubishi", "Mitsubishi Electric"),
+            
+            # Suzuki
+            (rb"(33920-[0-9]{2}[A-Z][0-9]{2})", "Suzuki", "Denso"),
+            
+            # =====================================================================
+            # KOREAN MANUFACTURERS  
+            # =====================================================================
+            
+            # Hyundai/Kia (Kefico) - 39xxx-xxxxx format
             (rb"(39[0-9]{3}-[A-Z0-9]{5})", "Hyundai/Kia", "Kefico"),
-            # Bosch 10-digit
-            (rb"(0[0-9]{9})", None, "Bosch"),
-            (rb"(1037[0-9]{6})", None, "Bosch"),
+            (rb"(39[0-9]{3}-[0-9]{2}[A-Z]{3})", "Hyundai/Kia", "Kefico"),
+            
+            # =====================================================================
+            # EUROPEAN MANUFACTURERS
+            # =====================================================================
+            
+            # Bosch - Very strict patterns only
+            # 0 281 xxx xxx format (diesel EDC)
+            (rb"(0\s?281\s?[0-9]{3}\s?[0-9]{3})", None, "Bosch"),
+            # 0 261 xxx xxx format (gasoline)
+            (rb"(0\s?261\s?[0-9]{3}\s?[0-9]{3})", None, "Bosch"),
+            # 1037 series (Bosch internal)
+            (rb"(1037[3-5][0-9]{5})", None, "Bosch"),
+            
+            # Continental/Siemens - SID xxx, 5WS xxxxx
+            (rb"(5WS[0-9]{5})", None, "Siemens/Continental"),
+            (rb"(5WP[0-9]{5})", None, "Siemens/Continental"),
+            (rb"(A2C[0-9]{8})", None, "Siemens/Continental"),
+            
+            # Delphi - DCM xxx, 28xxxxxx
+            (rb"(28[0-9]{6})", None, "Delphi"),
+            
+            # Marelli - IAW xxx.xx, MJD xxx.xx
+            (rb"(HW[:\s]?[0-9]{3}\.[0-9]{2})", None, "Marelli"),
+            
+            # VW/Audi - xxx xxx xxx x format
+            (rb"([0-9]{3}\s[0-9]{3}\s[0-9]{3}\s[A-Z])", "VW/Audi", None),
+            
+            # BMW - 779xxxxx, DME-xxx
+            (rb"(779[0-9]{5})", "BMW", None),
+            (rb"(DME-[A-Z0-9]{5,8})", "BMW", None),
+            
+            # =====================================================================
+            # TRUCK/COMMERCIAL VEHICLE
+            # =====================================================================
+            
+            # Cummins CM series
+            (rb"(CM[0-9]{3,4}[A-Z]?)", None, "Cummins"),
+            (rb"(4921[0-9]{3})", None, "Cummins"),
+            
+            # Volvo Truck
+            (rb"(2[01][0-9]{6})", "Volvo Truck", None),
+            
+            # DAF
+            (rb"(173[0-9]{4})", "DAF", None),
+            
+            # Scania
+            (rb"(231[0-9]{4})", "Scania", None),
         ]
         
         for pattern, vehicle_hint, mfr_hint in part_patterns:
             match = re.search(pattern, file_data)
             if match:
-                self.results["part_number"] = match.group(1).decode("utf-8", errors="ignore")
+                part_num = match.group(1).decode("utf-8", errors="ignore")
+                
+                # STRICT VALIDATION - Reject obvious false positives
+                # Reject sequential digits like 0123456789
+                if self._is_sequential_digits(part_num):
+                    continue
+                
+                # Reject repeated patterns
+                if self._is_repeated_pattern(part_num):
+                    continue
+                
+                # Reject all same digit
+                digits_only = re.sub(r'[^0-9]', '', part_num)
+                if len(digits_only) > 4 and len(set(digits_only)) == 1:
+                    continue
+                
+                self.results["part_number"] = part_num
                 if vehicle_hint and not self.results["vehicle_info"]:
                     self.results["vehicle_info"] = vehicle_hint
                 if mfr_hint and not self.results["manufacturer"]:
                     self.results["manufacturer"] = mfr_hint
                 return
+    
+    def _is_sequential_digits(self, s):
+        """Check if string contains sequential digits like 0123456789"""
+        digits = re.sub(r'[^0-9]', '', s)
+        if len(digits) < 5:
+            return False
+        
+        # Check ascending sequence
+        for i in range(len(digits) - 4):
+            window = digits[i:i+5]
+            if window in "0123456789":
+                return True
+        
+        # Check descending sequence  
+        for i in range(len(digits) - 4):
+            window = digits[i:i+5]
+            if window in "9876543210":
+                return True
+        
+        return False
+    
+    def _is_repeated_pattern(self, s):
+        """Check if string is a repeated pattern"""
+        clean = re.sub(r'[\s\-]', '', s)
+        if len(clean) < 4:
+            return False
+        
+        # Check for simple repetition (AAAA, ABAB, etc.)
+        for pattern_len in range(1, len(clean) // 2 + 1):
+            pattern = clean[:pattern_len]
+            if pattern * (len(clean) // pattern_len) == clean[:pattern_len * (len(clean) // pattern_len)]:
+                if len(clean) // pattern_len >= 3:  # At least 3 repetitions
+                    return True
+        
+        return False
     
     def _detect_processor(self, file_data):
         """Detect microprocessor/microcontroller - Comprehensive ECU CPU detection"""
