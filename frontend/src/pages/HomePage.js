@@ -569,15 +569,15 @@ const HomePage = () => {
 
               {/* Vehicle Information */}
               <div>
-                <h4 className="text-xl font-semibold mb-4 text-blue-400">Vehicle Information</h4>
+                <h4 className="text-xl font-semibold mb-4 text-blue-600">Vehicle Information</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   {/* Brand */}
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Brand *</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-700">Brand *</label>
                     <select
                       value={formData.vehicle_make}
                       onChange={(e) => handleInputChange('vehicle_make', e.target.value)}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      className="w-full bg-gray-50 border border-gray-300 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                       required
                     >
                       <option value="">Select Brand</option>
@@ -589,13 +589,13 @@ const HomePage = () => {
 
                   {/* Model - Free Text Input */}
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Model *</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-700">Model *</label>
                     <input
                       type="text"
                       value={formData.vehicle_model}
                       onChange={(e) => handleInputChange('vehicle_model', e.target.value)}
                       placeholder="Enter vehicle model"
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      className="w-full bg-gray-50 border border-gray-300 text-gray-900 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                       required
                     />
                   </div>
@@ -609,7 +609,7 @@ const HomePage = () => {
                     max={new Date().getFullYear() + 1}
                     value={formData.vehicle_year}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="vehicle-year-input"
                   />
                   <input
@@ -619,7 +619,7 @@ const HomePage = () => {
                     required
                     value={formData.engine_type}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="engine-type-input"
                   />
                   <input
@@ -628,7 +628,7 @@ const HomePage = () => {
                     placeholder="ECU Type (e.g., Bosch EDC17)"
                     value={formData.ecu_type}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="ecu-type-input"
                   />
                   <input
@@ -637,7 +637,7 @@ const HomePage = () => {
                     placeholder="VIN (Optional)"
                     value={formData.vin}
                     onChange={handleInputChange}
-                    className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="vin-input"
                   />
                 </div>
@@ -645,12 +645,12 @@ const HomePage = () => {
 
               {/* Service Selection */}
               <div>
-                <h4 className="text-xl font-semibold mb-4 text-blue-400">Select Services *</h4>
+                <h4 className="text-xl font-semibold mb-4 text-blue-600">Select Services *</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   {services.map((service) => (
                     <label 
                       key={service.id} 
-                      className="flex items-start space-x-3 bg-gray-700 p-4 rounded-lg cursor-pointer hover:bg-gray-600 transition"
+                      className="flex items-start space-x-3 bg-gray-50 border border-gray-200 p-4 rounded-lg cursor-pointer hover:bg-gray-100 transition"
                       data-testid={`service-checkbox-${service.id}`}
                     >
                       <input
@@ -660,10 +660,10 @@ const HomePage = () => {
                         className="w-5 h-5 mt-1 text-blue-600"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold">{service.icon} {service.name}</div>
-                        <div className="text-sm text-gray-400 mb-1">{service.description}</div>
-                        <div className="text-lg font-bold text-blue-400">${service.final_price.toFixed(2)}</div>
-                        <div className="text-xs text-gray-500">Base: ${service.base_price} + 25%</div>
+                        <div className="font-semibold text-gray-900">{service.icon} {service.name}</div>
+                        <div className="text-sm text-gray-500 mb-1">{service.description}</div>
+                        <div className="text-lg font-bold text-blue-600">${service.final_price.toFixed(2)}</div>
+                        <div className="text-xs text-gray-400">Base: ${service.base_price} + 25%</div>
                       </div>
                     </label>
                   ))}
@@ -672,25 +672,25 @@ const HomePage = () => {
 
               {/* Pricing Breakdown */}
               {pricingData && (
-                <div className="bg-blue-900/30 border border-blue-700 p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-4 text-blue-400">💰 Pricing Breakdown</h4>
+                <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-600">💰 Pricing Breakdown</h4>
                   <div className="space-y-2">
                     {pricingData.pricing_breakdown.map((item, index) => (
-                      <div key={index} className="flex justify-between text-sm">
+                      <div key={index} className="flex justify-between text-sm text-gray-700">
                         <span>{item.service_name}</span>
                         <span>${item.final_price.toFixed(2)}</span>
                       </div>
                     ))}
-                    <div className="border-t border-gray-600 pt-2 mt-2">
-                      <div className="flex justify-between text-sm text-gray-400">
+                    <div className="border-t border-gray-300 pt-2 mt-2">
+                      <div className="flex justify-between text-sm text-gray-500">
                         <span>Processing Cost:</span>
                         <span>${pricingData.base_total.toFixed(2)}</span>
                       </div>
-                      <div className="flex justify-between text-sm text-gray-400">
+                      <div className="flex justify-between text-sm text-gray-500">
                         <span>Service Fee (25%):</span>
                         <span>${pricingData.markup_amount.toFixed(2)}</span>
                       </div>
-                      <div className="flex justify-between text-2xl font-bold text-blue-400 mt-2">
+                      <div className="flex justify-between text-2xl font-bold text-blue-600 mt-2">
                         <span>Total:</span>
                         <span>${pricingData.total_price.toFixed(2)}</span>
                       </div>
@@ -701,14 +701,14 @@ const HomePage = () => {
 
               {/* Additional Information */}
               <div>
-                <h4 className="text-xl font-semibold mb-4 text-blue-400">Additional Information</h4>
+                <h4 className="text-xl font-semibold mb-4 text-blue-600">Additional Information</h4>
                 <textarea
                   name="issues_description"
                   placeholder="Describe current issues or symptoms"
                   rows="3"
                   value={formData.issues_description}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   data-testid="issues-description-input"
                 />
                 <textarea
@@ -717,7 +717,7 @@ const HomePage = () => {
                   rows="3"
                   value={formData.additional_notes}
                   onChange={handleInputChange}
-                  className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
+                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
                   data-testid="additional-notes-input"
                 />
               </div>
@@ -732,9 +732,9 @@ const HomePage = () => {
                 </button>
               ) : (
                 <div className="space-y-4">
-                  <div className="bg-green-900/30 border border-green-700 p-4 rounded-lg text-center">
-                    <p className="text-lg font-semibold mb-2">✅ Ready to Process</p>
-                    <p className="text-sm text-gray-300">Complete payment to start processing your ECU file</p>
+                  <div className="bg-green-50 border border-green-200 p-4 rounded-lg text-center">
+                    <p className="text-lg font-semibold mb-2 text-green-700">✅ Ready to Process</p>
+                    <p className="text-sm text-gray-600">Complete payment to start processing your ECU file</p>
                   </div>
                   
                   <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID, currency: "USD" }}>
@@ -746,7 +746,7 @@ const HomePage = () => {
                     />
                   </PayPalScriptProvider>
                   
-                  <p className="text-center text-sm text-gray-400">
+                  <p className="text-center text-sm text-gray-500">
                     Secure payment powered by PayPal
                   </p>
                 </div>
@@ -757,8 +757,8 @@ const HomePage = () => {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 py-8 mt-16">
-        <div className="container mx-auto px-4 text-center text-gray-400">
+      <footer className="bg-gray-100 py-8 mt-16 border-t border-gray-200">
+        <div className="container mx-auto px-4 text-center text-gray-600">
           <p>© 2024 DPF AdBlue Removal Services. AI-powered ECU file processing</p>
           <p className="text-sm mt-2">⚠️ For off-road and racing use only. Check local regulations.</p>
         </div>
