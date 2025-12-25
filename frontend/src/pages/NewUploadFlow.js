@@ -1391,7 +1391,7 @@ const NewUploadFlow = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold mb-2">Analysis Complete</h2>
+              <h2 className="text-3xl font-bold mb-2">Upload Complete</h2>
               <p className="text-slate-400">Select the services you need</p>
             </div>
 
