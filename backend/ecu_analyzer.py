@@ -147,11 +147,134 @@ class ECUAnalyzer:
                         self.results["ecu_type"] = "Yuchai ECU"
                     break
         
+        # === HITACHI DETECTION ===
+        if not self.results["manufacturer"]:
+            hitachi_sigs = [b"HITACHI", b"Hitachi", b"MEC", b"HCM"]
+            for sig in hitachi_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Hitachi"
+                    ecu_match = re.search(rb'(MEC[0-9A-Z]+|HCM[0-9A-Z]+)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Hitachi " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Hitachi ECU"
+                    break
+        
+        # === KEIHIN (Honda) DETECTION ===
+        if not self.results["manufacturer"]:
+            keihin_sigs = [b"KEIHIN", b"Keihin", b"37820-", b"37805-"]
+            for sig in keihin_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Keihin"
+                    self.results["vehicle_info"] = "Honda/Acura"
+                    # Look for Honda part numbers
+                    honda_pn = re.search(rb'(37820-[A-Z0-9]{3,7}|37805-[A-Z0-9]{3,7})', file_data)
+                    if honda_pn:
+                        self.results["part_number"] = honda_pn.group(1).decode("utf-8")
+                        self.results["ecu_type"] = "Keihin Engine ECU"
+                    else:
+                        self.results["ecu_type"] = "Keihin ECU"
+                    break
+        
+        # === MITSUBISHI DETECTION ===
+        if not self.results["manufacturer"]:
+            mitsu_sigs = [b"MITSUBISHI", b"Mitsubishi", b"E6T", b"E5T", b"MH8"]
+            for sig in mitsu_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Mitsubishi Electric"
+                    ecu_match = re.search(rb'(E6T[0-9A-Z]+|E5T[0-9A-Z]+|MH8[0-9A-Z]+)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Mitsubishi " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Mitsubishi ECU"
+                    break
+        
+        # === JATCO (Nissan CVT) DETECTION ===
+        if not self.results["manufacturer"]:
+            jatco_sigs = [b"JATCO", b"Jatco", b"JF011", b"JF015", b"JF017"]
+            for sig in jatco_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Jatco"
+                    self.results["vehicle_info"] = "Nissan/Renault CVT"
+                    ecu_match = re.search(rb'(JF[0-9]{3}[A-Z]*)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Jatco " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Jatco TCU"
+                    break
+        
+        # === VISTEON DETECTION ===
+        if not self.results["manufacturer"]:
+            visteon_sigs = [b"VISTEON", b"Visteon", b"DCU"]
+            for sig in visteon_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Visteon"
+                    self.results["ecu_type"] = "Visteon ECU"
+                    break
+        
+        # === ZF DETECTION (Transmissions) ===
+        if not self.results["manufacturer"]:
+            zf_sigs = [b"ZF Friedrichshafen", b"ZF GETRIEBE", b"6HP", b"8HP"]
+            for sig in zf_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "ZF"
+                    self.results["vehicle_info"] = "Transmission"
+                    ecu_match = re.search(rb'([68]HP[0-9]{2})', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "ZF " + ecu_match.group(1).decode("utf-8") + " TCU"
+                    else:
+                        self.results["ecu_type"] = "ZF Transmission ECU"
+                    break
+        
+        # === AISIN (Toyota/Lexus Transmissions) DETECTION ===
+        if not self.results["manufacturer"]:
+            aisin_sigs = [b"AISIN", b"Aisin", b"A960", b"A750", b"U660"]
+            for sig in aisin_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Aisin"
+                    self.results["vehicle_info"] = "Toyota/Lexus Transmission"
+                    ecu_match = re.search(rb'([AU][0-9]{3}[A-Z]*)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Aisin " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Aisin TCU"
+                    break
+        
+        # === NISSAN DETECTION ===
+        if not self.results["manufacturer"]:
+            nissan_pn = re.search(rb'(23710-[A-Z0-9]{5,7})', file_data)
+            if nissan_pn:
+                self.results["manufacturer"] = "Hitachi/Denso"
+                self.results["vehicle_info"] = "Nissan/Infiniti"
+                self.results["part_number"] = nissan_pn.group(1).decode("utf-8")
+                self.results["ecu_type"] = "Nissan Engine ECU"
+        
+        # === HYUNDAI/KIA (Kefico) DETECTION ===
+        if not self.results["manufacturer"]:
+            kefico_sigs = [b"KEFICO", b"Kefico", b"39100-", b"39110-"]
+            for sig in kefico_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Kefico"
+                    self.results["vehicle_info"] = "Hyundai/Kia"
+                    hyundai_pn = re.search(rb'(39[0-9]{3}-[A-Z0-9]{5})', file_data)
+                    if hyundai_pn:
+                        self.results["part_number"] = hyundai_pn.group(1).decode("utf-8")
+                    self.results["ecu_type"] = "Kefico Engine ECU"
+                    break
+        
         # === NEC/RENESAS DETECTION ===
         if b"NEC Electronics" in file_data or b"Renesas" in file_data:
             self.results["processor"] = "NEC/Renesas"
             if not self.results["manufacturer"]:
                 self.results["manufacturer"] = "Unknown (NEC Processor)"
+        
+        # === INFINEON/TRICORE DETECTION ===
+        if b"Infineon" in file_data or b"TriCore" in file_data or b"TC1797" in file_data or b"TC1767" in file_data:
+            proc_match = re.search(rb'(TC17[0-9]{2})', file_data)
+            if proc_match:
+                self.results["processor"] = "Infineon " + proc_match.group(1).decode("utf-8")
+            else:
+                self.results["processor"] = "Infineon TriCore"
         
         # === CALIBRATION ID ===
         # Look for common calibration ID patterns
