@@ -424,6 +424,13 @@ const NewUploadFlow = () => {
         setTimeout(() => {
           setStep(4); // Go to service selection (step 4 in new flow)
         }, 500);
+      } else {
+        // Analysis failed - show error and go back
+        const errorMsg = response.data.error || 'Could not analyze file';
+        const warnings = response.data.warnings || [];
+        alert(`Analysis failed: ${errorMsg}\n${warnings.join('\n')}\n\nPlease try with a different ECU file.`);
+        setProcessing(false);
+        setStep(2); // Back to upload step
       }
     } catch (error) {
       console.error('Error processing file:', error);
