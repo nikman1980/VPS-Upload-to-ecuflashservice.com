@@ -181,12 +181,19 @@ class ECUAnalyzer:
     
     def _extract_copyright_manufacturer(self, file_data, strings):
         """Extract manufacturer from copyright strings - THIS IS THE KEY AUTO-DETECTION"""
-        # Pattern 1: "Copyright X Inc/Corp/Ltd/Co" or "(c) X"
+        # Words that are NOT manufacturers (tools, dates, generic terms)
+        ignore_words = {
+            'etas', 'nec', 'copyright', 'reserved', 'rights', 'all', 
+            'date', 'version', 'software', 'firmware', 'code', 'data',
+            'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
+            'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
+        }
+        
+        # Look for "Copyright COMPANY inc/corp/ltd" patterns
         copyright_patterns = [
-            rb'[Cc]opyright\s+([A-Z][a-zA-Z0-9\s]{2,25}?)[\s,.](?:inc|Inc|INC|corp|Corp|CORP|ltd|Ltd|LTD|co|Co|CO|LLC|llc|GmbH|gmbh|[0-9]{4})',
-            rb'[Cc]opyright\s+(?:by\s+)?([A-Z][a-zA-Z0-9\s]{2,25}?)[\s,.]',
-            rb'\([cC]\)\s*([A-Z][a-zA-Z0-9\s]{2,20})',
-            rb'[Cc]opyright\s*\([cC]\)\s*(?:[0-9]{4}[\-,\s]*)*([A-Z][a-zA-Z0-9\s]{2,25})',
+            rb'[Cc]opyright\s+([A-Z][a-zA-Z]{2,20})\s+(?:inc|Inc|INC|corp|Corp|ltd|Ltd|LLC|GmbH)',
+            rb'[Cc]opyright\s+([A-Z][a-zA-Z]{2,20})\s+[Cc]o\.',
+            rb'\([cC]\)\s*(?:[0-9]{4}[\s\-,]*)?([A-Z][a-zA-Z]{3,20})\s+(?:inc|Inc|corp|Corp|ltd|Ltd)',
         ]
         
         for pattern in copyright_patterns:
@@ -194,27 +201,28 @@ class ECUAnalyzer:
             for match in matches:
                 try:
                     company = match.decode("utf-8", errors="ignore").strip()
-                    # Clean up the company name
-                    company = re.sub(r'\s+', ' ', company)
-                    company = company.strip(' .,')
-                    # Validate it looks like a company name
+                    company = re.sub(r'\s+', ' ', company).strip(' .,')
+                    
+                    # Validate company name
                     if (len(company) >= 3 and 
-                        len(company) <= 30 and
+                        len(company) <= 25 and
                         company[0].isupper() and
-                        not company.isdigit() and
+                        company.lower() not in ignore_words and
+                        not any(c.isdigit() for c in company) and
                         'AAAA' not in company and
                         'FFFF' not in company):
                         return company
                 except: pass
         
-        # Also check strings for copyright
+        # Check strings for copyright with company suffix
         for s in strings:
-            if 'copyright' in s.lower() or '(c)' in s.lower():
-                # Try to extract company name
-                match = re.search(r'(?:copyright|©|\(c\))\s*(?:[0-9]{4}[\-,\s]*)*([A-Z][a-zA-Z0-9\s]{2,25}?)(?:\s|,|\.|inc|corp|ltd|$)', s, re.IGNORECASE)
+            s_lower = s.lower()
+            if 'copyright' in s_lower:
+                # Look for "Copyright COMPANY inc." pattern
+                match = re.search(r'[Cc]opyright\s+([A-Z][a-zA-Z]{2,20})\s+(?:inc|corp|ltd|co\.)', s)
                 if match:
                     company = match.group(1).strip()
-                    if len(company) >= 3 and len(company) <= 30:
+                    if company.lower() not in ignore_words and len(company) >= 3:
                         return company
         
         return None
