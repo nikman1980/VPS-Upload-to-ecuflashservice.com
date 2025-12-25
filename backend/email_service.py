@@ -308,7 +308,16 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
                 </div>
                 '''}
                 
-                {"" if is_completed else '''
+                {"" if is_completed else f'''
+                <!-- Customer Portal Access -->
+                <div style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+                    <h3 style="color: #ffffff; margin: 0 0 12px 0;">📋 Track Your Order</h3>
+                    <p style="color: #e0f2fe; margin: 0 0 16px 0;">Access your Customer Portal to check status, upload files, and communicate with our team.</p>
+                    <a href="{base_url}/portal?order={order_id}&email={order_details.get("customer_email", "")}" style="background-color: #ffffff; color: #1e3a8a; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; display: inline-block;">
+                        Go to Customer Portal →
+                    </a>
+                </div>
+                
                 <!-- Processing Info (shown when still processing) -->
                 <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
                     <h3 style="color: #92400e; margin: 0 0 12px 0;">⏳ What Happens Next?</h3>
