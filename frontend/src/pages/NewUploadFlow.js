@@ -578,30 +578,30 @@ const NewUploadFlow = () => {
   // ============== LANDING PAGE (Step 0) ==============
   if (step === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen bg-white">
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-700/50">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-white">ECU Flash Service</h1>
-                  <p className="text-xs text-slate-400">Professional ECU Tuning</p>
+                  <h1 className="text-xl font-bold text-gray-900">ECU Flash Service</h1>
+                  <p className="text-xs text-gray-500">Professional ECU Tuning</p>
                 </div>
               </div>
               <nav className="hidden md:flex items-center space-x-8">
-                <a href="#services" className="text-slate-300 hover:text-white transition">Services</a>
-                <a href="#how-it-works" className="text-slate-300 hover:text-white transition">How It Works</a>
-                <a href="#pricing" className="text-slate-300 hover:text-white transition">Pricing</a>
-                <a href="/portal" className="text-slate-300 hover:text-white transition">My Orders</a>
+                <a href="#services" className="text-gray-600 hover:text-blue-600 transition">Services</a>
+                <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition">How It Works</a>
+                <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition">Pricing</a>
+                <a href="/portal" className="text-gray-600 hover:text-blue-600 transition">My Orders</a>
                 <button 
                   onClick={() => setStep(1)}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
                 >
                   Get Started
                 </button>
@@ -619,14 +619,14 @@ const NewUploadFlow = () => {
                 <span className="text-blue-400 text-sm font-medium">Professional Engineers • 20-60 Min Delivery</span>
               </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
                 Professional ECU
                 <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
                   Tuning Service
                 </span>
               </h1>
               
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+              <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-10">
                 Select your vehicle, upload your ECU file, choose your services, and receive your professionally 
                 modified file within 20-60 minutes. No software required.
               </p>
@@ -634,13 +634,13 @@ const NewUploadFlow = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
                   onClick={() => setStep(1)}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all transform hover:-translate-y-1"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all transform hover:-translate-y-1"
                 >
                   Select Your Vehicle →
                 </button>
                 <a 
                   href="#how-it-works"
-                  className="border border-slate-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-slate-800 transition-all"
+                  className="border border-gray-300 text-gray-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all"
                 >
                   Learn More
                 </a>
@@ -649,25 +649,25 @@ const NewUploadFlow = () => {
 
             {/* Trust Badges */}
             <div className="flex flex-wrap justify-center gap-8 mb-16">
-              <div className="flex items-center space-x-2 text-slate-400">
+              <div className="flex items-center space-x-2 text-gray-500">
                 <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>Secure PayPal Checkout</span>
               </div>
-              <div className="flex items-center space-x-2 text-slate-400">
+              <div className="flex items-center space-x-2 text-gray-500">
                 <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>Professional Engineers</span>
               </div>
-              <div className="flex items-center space-x-2 text-slate-400">
+              <div className="flex items-center space-x-2 text-gray-500">
                 <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>20-60 Min Delivery</span>
               </div>
-              <div className="flex items-center space-x-2 text-slate-400">
+              <div className="flex items-center space-x-2 text-gray-500">
                 <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
@@ -683,9 +683,9 @@ const NewUploadFlow = () => {
                 { value: '24/7', label: 'Support' },
                 { value: '50+', label: 'Countries Served' },
               ].map((stat, i) => (
-                <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-slate-400 text-sm">{stat.label}</div>
+                <div key={i} className="bg-gray-50/50 border border-gray-200/50 rounded-2xl p-6 text-center">
+                  <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                  <div className="text-gray-500 text-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -693,11 +693,11 @@ const NewUploadFlow = () => {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20 px-6 bg-slate-800/30">
+        <section id="services" className="py-20 px-6 bg-gray-50/30">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Services</h2>
-              <p className="text-slate-400 max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">
                 Professional ECU modifications performed by certified engineers
               </p>
             </div>
@@ -705,10 +705,10 @@ const NewUploadFlow = () => {
             {/* Main Services - 6 cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {allServices.slice(0, 6).map((service, i) => (
-                <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
+                <div key={i} className="bg-gray-50/50 border border-gray-200/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
                   <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{service.name}</h3>
-                  <p className="text-slate-400 text-sm mb-4">{service.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.name}</h3>
+                  <p className="text-gray-500 text-sm mb-4">{service.description}</p>
                   <div className="text-blue-400 font-semibold">${service.base_price?.toFixed(0)}</div>
                 </div>
               ))}
@@ -716,13 +716,13 @@ const NewUploadFlow = () => {
             
             {/* Additional Services - Smaller cards */}
             <div className="mt-8">
-              <h3 className="text-xl font-semibold text-white text-center mb-6">Additional Services</h3>
+              <h3 className="text-xl font-semibold text-gray-900 text-center mb-6">Additional Services</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {allServices.slice(6).map((service, i) => (
-                  <div key={i} className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-4 hover:border-blue-500/30 transition-all">
+                  <div key={i} className="bg-gray-50/30 border border-gray-200/30 rounded-xl p-4 hover:border-blue-500/30 transition-all">
                     <div className="flex items-center space-x-3 mb-2">
                       <span className="text-2xl">{service.icon}</span>
-                      <span className="text-white font-medium text-sm">{service.name}</span>
+                      <span className="text-gray-900 font-medium text-sm">{service.name}</span>
                     </div>
                     <div className="text-blue-400 font-semibold text-sm">${service.base_price?.toFixed(0)}</div>
                   </div>
@@ -736,8 +736,8 @@ const NewUploadFlow = () => {
         <section id="how-it-works" className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How It Works</h2>
-              <p className="text-slate-400 max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">
                 Get your modified ECU file in 4 simple steps
               </p>
             </div>
@@ -750,10 +750,10 @@ const NewUploadFlow = () => {
                 { step: '04', title: 'Pay & Download', desc: 'Pay securely via PayPal. Receive your modified file within 20-60 minutes.' },
               ].map((item, i) => (
                 <div key={i} className="relative">
-                  <div className="bg-gradient-to-br from-slate-800 to-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+                  <div className="bg-gradient-to-br from-slate-800 to-slate-800/50 border border-gray-200/50 rounded-2xl p-6">
                     <div className="text-5xl font-bold text-slate-700 mb-3">{item.step}</div>
-                    <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                    <p className="text-slate-400 text-sm">{item.desc}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-gray-500 text-sm">{item.desc}</p>
                   </div>
                   {i < 3 && (
                     <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-slate-600 text-xl">→</div>
@@ -765,36 +765,36 @@ const NewUploadFlow = () => {
         </section>
 
         {/* Pricing Section */}
-        <section id="pricing" className="py-20 px-6 bg-slate-800/30">
+        <section id="pricing" className="py-20 px-6 bg-gray-50/30">
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Transparent Pricing</h2>
-              <p className="text-slate-400">No hidden fees. Pay only for what you need.</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Transparent Pricing</h2>
+              <p className="text-gray-500">No hidden fees. Pay only for what you need.</p>
             </div>
             
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-3xl overflow-hidden">
-              <div className="p-8 border-b border-slate-700/50">
-                <h3 className="text-2xl font-bold text-white mb-2">Service Pricing</h3>
-                <p className="text-slate-400">All prices in USD • 18 services available</p>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-200/50 rounded-3xl overflow-hidden">
+              <div className="p-8 border-b border-gray-200/50">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Service Pricing</h3>
+                <p className="text-gray-500">All prices in USD • 18 services available</p>
               </div>
               <div className="grid md:grid-cols-2 divide-y md:divide-y-0 divide-slate-700/50">
                 <div className="divide-y divide-slate-700/50">
                   {allServices.slice(0, 9).map((service, i) => (
-                    <div key={i} className="flex justify-between items-center p-4 hover:bg-slate-800/50 transition">
+                    <div key={i} className="flex justify-between items-center p-4 hover:bg-gray-50/50 transition">
                       <div className="flex items-center space-x-3">
                         <span className="text-xl">{service.icon}</span>
-                        <span className="text-white font-medium text-sm">{service.name}</span>
+                        <span className="text-gray-900 font-medium text-sm">{service.name}</span>
                       </div>
                       <span className="text-blue-400 font-bold">${service.base_price?.toFixed(0)}</span>
                     </div>
                   ))}
                 </div>
-                <div className="divide-y divide-slate-700/50 md:border-l md:border-slate-700/50">
+                <div className="divide-y divide-slate-700/50 md:border-l md:border-gray-200/50">
                   {allServices.slice(9).map((service, i) => (
-                    <div key={i} className="flex justify-between items-center p-4 hover:bg-slate-800/50 transition">
+                    <div key={i} className="flex justify-between items-center p-4 hover:bg-gray-50/50 transition">
                       <div className="flex items-center space-x-3">
                         <span className="text-xl">{service.icon}</span>
-                        <span className="text-white font-medium text-sm">{service.name}</span>
+                        <span className="text-gray-900 font-medium text-sm">{service.name}</span>
                       </div>
                       <span className="text-blue-400 font-bold">${service.base_price?.toFixed(0)}</span>
                     </div>
@@ -809,7 +809,7 @@ const NewUploadFlow = () => {
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-4xl">
             <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Ready to Get Started?
               </h2>
               <p className="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
@@ -826,23 +826,23 @@ const NewUploadFlow = () => {
         </section>
 
         {/* Footer */}
-        <footer className="bg-slate-900 border-t border-slate-800 py-12 px-6">
+        <footer className="bg-white border-t border-slate-800 py-12 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <span className="text-xl font-bold text-white">ECU Flash Service</span>
+                  <span className="text-xl font-bold text-gray-900">ECU Flash Service</span>
                 </div>
-                <p className="text-slate-400 text-sm">Professional ECU tuning services for automotive enthusiasts worldwide.</p>
+                <p className="text-gray-500 text-sm">Professional ECU tuning services for automotive enthusiasts worldwide.</p>
               </div>
               <div>
-                <h4 className="text-white font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-slate-400 text-sm">
+                <h4 className="text-gray-900 font-semibold mb-4">Services</h4>
+                <ul className="space-y-2 text-gray-500 text-sm">
                   <li>DTC Removal</li>
                   <li>DPF OFF</li>
                   <li>EGR OFF</li>
@@ -850,8 +850,8 @@ const NewUploadFlow = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="text-white font-semibold mb-4">Support</h4>
-                <ul className="space-y-2 text-slate-400 text-sm">
+                <h4 className="text-gray-900 font-semibold mb-4">Support</h4>
+                <ul className="space-y-2 text-gray-500 text-sm">
                   <li>Contact Us</li>
                   <li>FAQ</li>
                   <li>Terms of Service</li>
@@ -859,16 +859,16 @@ const NewUploadFlow = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="text-white font-semibold mb-4">Contact</h4>
-                <ul className="space-y-2 text-slate-400 text-sm">
+                <h4 className="text-gray-900 font-semibold mb-4">Contact</h4>
+                <ul className="space-y-2 text-gray-500 text-sm">
                   <li>admin@ecuflashservice.com</li>
                   <li>24/7 Email Support</li>
                 </ul>
               </div>
             </div>
             <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-slate-500 text-sm">© 2024 ECU Flash Service. All rights reserved.</p>
-              <p className="text-slate-500 text-sm mt-2 md:mt-0">⚠️ For off-road and competition use only</p>
+              <p className="text-gray-500 text-sm">© 2024 ECU Flash Service. All rights reserved.</p>
+              <p className="text-gray-500 text-sm mt-2 md:mt-0">⚠️ For off-road and competition use only</p>
             </div>
           </div>
         </footer>
@@ -877,20 +877,20 @@ const NewUploadFlow = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Header */}
-      <header className="bg-slate-900/80 backdrop-blur-xl border-b border-slate-700/50 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <button onClick={() => setStep(0)} className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">ECU Flash Service</h1>
-                <p className="text-xs text-slate-400">Professional ECU Tuning</p>
+                <h1 className="text-xl font-bold text-gray-900">ECU Flash Service</h1>
+                <p className="text-xs text-gray-500">Professional ECU Tuning</p>
               </div>
             </button>
             
@@ -899,13 +899,13 @@ const NewUploadFlow = () => {
               {['Vehicle', 'Upload', 'Analyze', 'Services', 'Pay', 'Done'].map((label, i) => (
                 <div key={i} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    step > i ? 'bg-green-500 text-white' : 
-                    step === i + 1 ? 'bg-blue-500 text-white' : 
-                    'bg-slate-700 text-slate-400'
+                    step > i ? 'bg-green-500 text-gray-900' : 
+                    step === i + 1 ? 'bg-blue-500 text-gray-900' : 
+                    'bg-gray-100 text-gray-500'
                   }`}>
                     {step > i ? '✓' : i + 1}
                   </div>
-                  {i < 5 && <div className={`w-6 h-0.5 ${step > i ? 'bg-green-500' : 'bg-slate-700'}`}></div>}
+                  {i < 5 && <div className={`w-6 h-0.5 ${step > i ? 'bg-green-500' : 'bg-gray-100'}`}></div>}
                 </div>
               ))}
             </div>
@@ -917,10 +917,10 @@ const NewUploadFlow = () => {
         
         {/* STEP 1: Vehicle Selection (Sedox-style) */}
         {step === 1 && (
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
+          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Select Your Vehicle</h2>
-              <p className="text-slate-400">Choose your vehicle to see available tuning services</p>
+              <p className="text-gray-500">Choose your vehicle to see available tuning services</p>
             </div>
             
             {/* Vehicle Selection Chain */}
@@ -928,7 +928,7 @@ const NewUploadFlow = () => {
               
               {/* Vehicle Type */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Vehicle Type</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Vehicle Type</label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
                   {vehicleTypes.map((type) => (
                     <button
@@ -936,8 +936,8 @@ const NewUploadFlow = () => {
                       onClick={() => handleVehicleTypeSelect(type)}
                       className={`p-4 rounded-xl border-2 transition-all text-center ${
                         selectedVehicleType?.id === type.id 
-                          ? 'border-blue-500 bg-blue-500/20 text-white' 
-                          : 'border-slate-600 hover:border-slate-500 text-slate-300'
+                          ? 'border-blue-500 bg-blue-500/20 text-gray-900' 
+                          : 'border-gray-300 hover:border-slate-500 text-gray-600'
                       }`}
                     >
                       <div className="text-2xl mb-1">
@@ -954,8 +954,8 @@ const NewUploadFlow = () => {
                     onClick={() => handleVehicleTypeSelect({ id: 'other', name: 'Other / Not Listed', slug: 'other' })}
                     className={`p-4 rounded-xl border-2 transition-all text-center ${
                       isManualVehicle 
-                        ? 'border-orange-500 bg-orange-500/20 text-white' 
-                        : 'border-slate-600 hover:border-slate-500 text-slate-300'
+                        ? 'border-orange-500 bg-orange-500/20 text-gray-900' 
+                        : 'border-gray-300 hover:border-slate-500 text-gray-600'
                     }`}
                   >
                     <div className="text-2xl mb-1">❓</div>
@@ -970,47 +970,47 @@ const NewUploadFlow = () => {
                   <h3 className="text-orange-400 font-semibold flex items-center">
                     <span className="mr-2">✏️</span> Enter Vehicle Details Manually
                   </h3>
-                  <p className="text-sm text-slate-400">Your vehicle is not in our database? No problem! Enter the details below.</p>
+                  <p className="text-sm text-gray-500">Your vehicle is not in our database? No problem! Enter the details below.</p>
                   
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">Make / Brand *</label>
+                      <label className="block text-sm font-medium text-gray-600 mb-2">Make / Brand *</label>
                       <input
                         type="text"
                         value={manualVehicle.make}
                         onChange={(e) => setManualVehicle({...manualVehicle, make: e.target.value})}
                         placeholder="e.g., Shacman, Sinotruk, FAW..."
-                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">Model *</label>
+                      <label className="block text-sm font-medium text-gray-600 mb-2">Model *</label>
                       <input
                         type="text"
                         value={manualVehicle.model}
                         onChange={(e) => setManualVehicle({...manualVehicle, model: e.target.value})}
                         placeholder="e.g., X3000, HOWO A7..."
-                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">Year</label>
+                      <label className="block text-sm font-medium text-gray-600 mb-2">Year</label>
                       <input
                         type="text"
                         value={manualVehicle.year}
                         onChange={(e) => setManualVehicle({...manualVehicle, year: e.target.value})}
                         placeholder="e.g., 2020"
-                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">Engine</label>
+                      <label className="block text-sm font-medium text-gray-600 mb-2">Engine</label>
                       <input
                         type="text"
                         value={manualVehicle.engine}
                         onChange={(e) => setManualVehicle({...manualVehicle, engine: e.target.value})}
                         placeholder="e.g., Weichai WP10 375hp"
-                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       />
                     </div>
                   </div>
@@ -1018,11 +1018,11 @@ const NewUploadFlow = () => {
                   {/* ECU Type for Manual Entry */}
                   {manualVehicle.make && manualVehicle.model && (
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">ECU Type</label>
+                      <label className="block text-sm font-medium text-gray-600 mb-2">ECU Type</label>
                       <select
                         value={selectedEcu?.id || ''}
                         onChange={(e) => handleEcuSelect(e.target.value)}
-                        className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       >
                         <option value="">Select ECU type...</option>
                         <optgroup label="⭐ Chinese Truck ECUs">
@@ -1071,7 +1071,7 @@ const NewUploadFlow = () => {
                           value={customEcu}
                           onChange={(e) => setCustomEcu(e.target.value)}
                           placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
-                          className="w-full mt-3 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                          className="w-full mt-3 bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                         />
                       )}
                     </div>
@@ -1088,7 +1088,7 @@ const NewUploadFlow = () => {
                         </div>
                         <div>
                           <p className="text-green-400 text-sm font-medium">Vehicle Ready</p>
-                          <p className="text-white font-semibold">{getVehicleSummary()}</p>
+                          <p className="text-gray-900 font-semibold">{getVehicleSummary()}</p>
                         </div>
                       </div>
                     </div>
@@ -1099,9 +1099,9 @@ const NewUploadFlow = () => {
               {/* Manufacturer */}
               {selectedVehicleType && !isManualVehicle && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Manufacturer</label>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">Manufacturer</label>
                   {vehicleLoading && manufacturers.length === 0 ? (
-                    <div className="text-center py-4 text-slate-400">Loading manufacturers...</div>
+                    <div className="text-center py-4 text-gray-500">Loading manufacturers...</div>
                   ) : (
                     <select
                       value={selectedManufacturer?.id || ''}
@@ -1109,7 +1109,7 @@ const NewUploadFlow = () => {
                         const mfr = manufacturers.find(m => m.id === parseInt(e.target.value));
                         if (mfr) handleManufacturerSelect(mfr);
                       }}
-                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select manufacturer...</option>
                       {manufacturers.map((mfr) => (
@@ -1123,9 +1123,9 @@ const NewUploadFlow = () => {
               {/* Model */}
               {selectedManufacturer && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Model</label>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">Model</label>
                   {vehicleLoading && models.length === 0 ? (
-                    <div className="text-center py-4 text-slate-400">Loading models...</div>
+                    <div className="text-center py-4 text-gray-500">Loading models...</div>
                   ) : (
                     <select
                       value={selectedModel?.id || ''}
@@ -1133,7 +1133,7 @@ const NewUploadFlow = () => {
                         const model = models.find(m => m.id === parseInt(e.target.value));
                         if (model) handleModelSelect(model);
                       }}
-                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select model...</option>
                       {models.map((model) => (
@@ -1147,9 +1147,9 @@ const NewUploadFlow = () => {
               {/* Generation */}
               {selectedModel && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Generation</label>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">Generation</label>
                   {vehicleLoading && generations.length === 0 ? (
-                    <div className="text-center py-4 text-slate-400">Loading generations...</div>
+                    <div className="text-center py-4 text-gray-500">Loading generations...</div>
                   ) : (
                     <select
                       value={selectedGeneration?.id || ''}
@@ -1157,7 +1157,7 @@ const NewUploadFlow = () => {
                         const gen = generations.find(g => g.id === parseInt(e.target.value));
                         if (gen) handleGenerationSelect(gen);
                       }}
-                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select generation...</option>
                       {generations.map((gen) => (
@@ -1173,9 +1173,9 @@ const NewUploadFlow = () => {
               {/* Engine */}
               {selectedGeneration && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Engine</label>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">Engine</label>
                   {vehicleLoading && engines.length === 0 ? (
-                    <div className="text-center py-4 text-slate-400">Loading engines...</div>
+                    <div className="text-center py-4 text-gray-500">Loading engines...</div>
                   ) : (
                     <select
                       value={selectedEngine?.id || ''}
@@ -1187,7 +1187,7 @@ const NewUploadFlow = () => {
                           if (eng) handleEngineSelect(eng);
                         }
                       }}
-                      className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select engine...</option>
                       {engines.map((eng) => {
@@ -1206,11 +1206,11 @@ const NewUploadFlow = () => {
               {/* ECU Type */}
               {selectedEngine && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">ECU Type</label>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">ECU Type</label>
                   <select
                     value={selectedEcu?.id || ''}
                     onChange={(e) => handleEcuSelect(e.target.value)}
-                    className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   >
                     <option value="">Select ECU type...</option>
                     <optgroup label="⭐ Chinese Truck ECUs">
@@ -1260,7 +1260,7 @@ const NewUploadFlow = () => {
                       value={customEcu}
                       onChange={(e) => setCustomEcu(e.target.value)}
                       placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
-                      className="w-full mt-3 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full mt-3 bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     />
                   )}
                 </div>
@@ -1277,7 +1277,7 @@ const NewUploadFlow = () => {
                     </div>
                     <div>
                       <p className="text-green-400 text-sm font-medium">Selected Vehicle</p>
-                      <p className="text-white font-semibold">{getVehicleSummary()}</p>
+                      <p className="text-gray-900 font-semibold">{getVehicleSummary()}</p>
                     </div>
                   </div>
                 </div>
@@ -1289,7 +1289,7 @@ const NewUploadFlow = () => {
               (!isManualVehicle && selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()))) && (
               <button
                 onClick={proceedToUpload}
-                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
               >
                 Continue to File Upload →
               </button>
@@ -1299,17 +1299,17 @@ const NewUploadFlow = () => {
         
         {/* STEP 2: Upload */}
         {step === 2 && (
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
+          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Upload Your ECU File</h2>
-              <p className="text-slate-400">Our engineers will analyze and process your file professionally</p>
+              <p className="text-gray-500">Our engineers will analyze and process your file professionally</p>
             </div>
             
             <div 
               className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all cursor-pointer ${
                 isDragging ? 'border-blue-500 bg-blue-500/10' : 
                 uploadedFile ? 'border-green-500 bg-green-500/10' : 
-                'border-slate-600 hover:border-slate-500 hover:bg-slate-700/30'
+                'border-gray-300 hover:border-slate-500 hover:bg-gray-100/30'
               }`}
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}
@@ -1331,20 +1331,20 @@ const NewUploadFlow = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <p className="text-xl font-semibold text-white mb-2">{uploadedFile.name}</p>
-                  <p className="text-slate-400">{(uploadedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p className="text-xl font-semibold text-gray-900 mb-2">{uploadedFile.name}</p>
+                  <p className="text-gray-500">{(uploadedFile.size / 1024 / 1024).toFixed(2)} MB</p>
                   <p className="text-blue-400 text-sm mt-4">Click to change file</p>
                 </div>
               ) : (
                 <div>
-                  <div className="w-16 h-16 bg-slate-700/50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 bg-gray-100/50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
                   </div>
-                  <p className="text-xl font-semibold text-white mb-2">Drag & drop your ECU file here</p>
-                  <p className="text-slate-400 mb-4">or click to browse</p>
-                  <p className="text-slate-500 text-sm">Supported: .bin, .hex, .ecu, .ori, .mod</p>
+                  <p className="text-xl font-semibold text-gray-900 mb-2">Drag & drop your ECU file here</p>
+                  <p className="text-gray-500 mb-4">or click to browse</p>
+                  <p className="text-gray-500 text-sm">Supported: .bin, .hex, .ecu, .ori, .mod</p>
                 </div>
               )}
             </div>
@@ -1352,7 +1352,7 @@ const NewUploadFlow = () => {
             {uploadedFile && (
               <button
                 onClick={() => { setStep(3); startProcessing(); }}
-                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
               >
                 Analyze File →
               </button>
@@ -1360,8 +1360,8 @@ const NewUploadFlow = () => {
             
             {/* Vehicle Info Summary */}
             {selectedEngine && (
-              <div className="mt-6 bg-slate-700/30 rounded-xl p-4">
-                <p className="text-slate-400 text-sm">Vehicle: <span className="text-white font-medium">{getVehicleSummary()}</span></p>
+              <div className="mt-6 bg-gray-100/30 rounded-xl p-4">
+                <p className="text-gray-500 text-sm">Vehicle: <span className="text-gray-900 font-medium">{getVehicleSummary()}</span></p>
               </div>
             )}
           </div>
@@ -1369,7 +1369,7 @@ const NewUploadFlow = () => {
         
         {/* STEP 3: Processing */}
         {step === 3 && (
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12 text-center">
+          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12 text-center">
             <div className="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -1377,23 +1377,23 @@ const NewUploadFlow = () => {
               </svg>
             </div>
             <h2 className="text-3xl font-bold mb-4">Analyzing Your File</h2>
-            <p className="text-slate-400 mb-8">Please wait while we analyze your ECU file...</p>
+            <p className="text-gray-500 mb-8">Please wait while we analyze your ECU file...</p>
             
             <div className="max-w-md mx-auto">
-              <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
+              <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-300"
                   style={{ width: `${processingProgress}%` }}
                 ></div>
               </div>
-              <p className="text-slate-400 mt-4">{Math.round(processingProgress)}% Complete</p>
+              <p className="text-gray-500 mt-4">{Math.round(processingProgress)}% Complete</p>
             </div>
           </div>
         )}
         
         {/* STEP 4: Results & Service Selection */}
         {step === 4 && analysisResult && (
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
+          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1401,14 +1401,14 @@ const NewUploadFlow = () => {
                 </svg>
               </div>
               <h2 className="text-3xl font-bold mb-2">Upload Complete</h2>
-              <p className="text-slate-400">Select the services you need</p>
+              <p className="text-gray-500">Select the services you need</p>
             </div>
 
             {/* ECU Analysis Results - Clean Table Format */}
-            <div className="bg-slate-900/80 border border-slate-700/50 rounded-2xl overflow-hidden mb-8">
+            <div className="bg-white/80 border border-gray-200/50 rounded-2xl overflow-hidden mb-8">
               {/* Header */}
-              <div className="bg-slate-800/80 px-6 py-4 border-b border-slate-700/50">
-                <h3 className="font-bold text-xl text-white flex items-center">
+              <div className="bg-gray-50/80 px-6 py-4 border-b border-gray-200/50">
+                <h3 className="font-bold text-xl text-gray-900 flex items-center">
                   <span className="text-2xl mr-3">📊</span>
                   ECU Analysis Results: {analysisResult.original_filename}
                 </h3>
@@ -1417,34 +1417,34 @@ const NewUploadFlow = () => {
               {/* Table */}
               <div className="divide-y divide-slate-700/50">
                 {/* Table Header */}
-                <div className="grid grid-cols-2 bg-slate-800/50">
-                  <div className="px-6 py-3 text-slate-400 font-semibold text-sm">Field</div>
-                  <div className="px-6 py-3 text-slate-400 font-semibold text-sm">Value</div>
+                <div className="grid grid-cols-2 bg-gray-50/50">
+                  <div className="px-6 py-3 text-gray-500 font-semibold text-sm">Field</div>
+                  <div className="px-6 py-3 text-gray-500 font-semibold text-sm">Value</div>
                 </div>
                 
                 {/* File Size */}
-                <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                  <div className="px-6 py-4 text-white font-medium">File Size</div>
-                  <div className="px-6 py-4 text-slate-300">
+                <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                  <div className="px-6 py-4 text-gray-900 font-medium">File Size</div>
+                  <div className="px-6 py-4 text-gray-600">
                     {analysisResult.file_size_mb?.toFixed(2)} MB ({Math.round(analysisResult.file_size_mb * 1024 * 1024).toLocaleString()} bytes)
                   </div>
                 </div>
                 
                 {/* Manufacturer */}
-                <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                  <div className="px-6 py-4 text-white font-medium">Manufacturer</div>
+                <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                  <div className="px-6 py-4 text-gray-900 font-medium">Manufacturer</div>
                   <div className="px-6 py-4 text-cyan-400 font-semibold">
                     {analysisResult.detected_manufacturer || 'Unknown'}
                     {analysisResult.metadata?.vehicle_info && (
-                      <span className="text-slate-400 font-normal"> (for {analysisResult.metadata.vehicle_info})</span>
+                      <span className="text-gray-500 font-normal"> (for {analysisResult.metadata.vehicle_info})</span>
                     )}
                   </div>
                 </div>
                 
                 {/* ECU Type */}
-                <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                  <div className="px-6 py-4 text-white font-medium">ECU Type</div>
-                  <div className="px-6 py-4 text-white">
+                <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                  <div className="px-6 py-4 text-gray-900 font-medium">ECU Type</div>
+                  <div className="px-6 py-4 text-gray-900">
                     {analysisResult.detected_ecu || 'Unknown ECU'}
                     {analysisResult.metadata?.processor && (
                       <span className="text-cyan-400"> / {analysisResult.metadata.processor} processor</span>
@@ -1454,12 +1454,12 @@ const NewUploadFlow = () => {
                 
                 {/* Part Number */}
                 {analysisResult.metadata?.part_number && (
-                  <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                    <div className="px-6 py-4 text-white font-medium">Part Number</div>
+                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                    <div className="px-6 py-4 text-gray-900 font-medium">Part Number</div>
                     <div className="px-6 py-4 text-yellow-400 font-mono font-semibold">
                       {analysisResult.metadata.part_number}
                       {analysisResult.metadata.part_number.startsWith('89') && (
-                        <span className="text-slate-400 font-normal font-sans"> (Toyota Part)</span>
+                        <span className="text-gray-500 font-normal font-sans"> (Toyota Part)</span>
                       )}
                     </div>
                   </div>
@@ -1467,36 +1467,36 @@ const NewUploadFlow = () => {
                 
                 {/* Calibration ID */}
                 {analysisResult.metadata?.calibration_id && (
-                  <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                    <div className="px-6 py-4 text-white font-medium">Calibration ID</div>
+                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                    <div className="px-6 py-4 text-gray-900 font-medium">Calibration ID</div>
                     <div className="px-6 py-4 text-green-400 font-mono">{analysisResult.metadata.calibration_id}</div>
                   </div>
                 )}
                 
                 {/* Software Version */}
                 {analysisResult.metadata?.software_version && (
-                  <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                    <div className="px-6 py-4 text-white font-medium">Software Version</div>
-                    <div className="px-6 py-4 text-slate-300 font-mono">{analysisResult.metadata.software_version}</div>
+                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                    <div className="px-6 py-4 text-gray-900 font-medium">Software Version</div>
+                    <div className="px-6 py-4 text-gray-600 font-mono">{analysisResult.metadata.software_version}</div>
                   </div>
                 )}
                 
                 {/* VIN */}
                 {analysisResult.metadata?.vin && (
-                  <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                    <div className="px-6 py-4 text-white font-medium">VIN</div>
-                    <div className="px-6 py-4 text-slate-300 font-mono">{analysisResult.metadata.vin}</div>
+                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                    <div className="px-6 py-4 text-gray-900 font-medium">VIN</div>
+                    <div className="px-6 py-4 text-gray-600 font-mono">{analysisResult.metadata.vin}</div>
                   </div>
                 )}
                 
                 {/* Binary Strings */}
                 {analysisResult.metadata?.strings?.length > 0 && (
-                  <div className="grid grid-cols-2 hover:bg-slate-800/30 transition-colors">
-                    <div className="px-6 py-4 text-white font-medium">Detected Strings</div>
+                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
+                    <div className="px-6 py-4 text-gray-900 font-medium">Detected Strings</div>
                     <div className="px-6 py-4">
                       <div className="space-y-1 max-h-32 overflow-y-auto">
                         {analysisResult.metadata.strings.map((str, idx) => (
-                          <div key={idx} className="text-slate-400 text-sm font-mono truncate" title={str}>
+                          <div key={idx} className="text-gray-500 text-sm font-mono truncate" title={str}>
                             {str}
                           </div>
                         ))}
@@ -1512,7 +1512,7 @@ const NewUploadFlow = () => {
             <h3 className="text-xl font-semibold mb-4">Available Services</h3>
             <div className="space-y-3 mb-8">
               {availableOptions.map((option) => (
-                <div key={option.service_id} className="bg-slate-900/50 rounded-2xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition">
+                <div key={option.service_id} className="bg-white/50 rounded-2xl overflow-hidden border border-gray-200/50 hover:border-gray-300 transition">
                   <label className="flex items-center justify-between p-5 cursor-pointer">
                     <div className="flex items-center space-x-4">
                       <input
@@ -1522,7 +1522,7 @@ const NewUploadFlow = () => {
                         className="w-5 h-5 rounded border-slate-500 text-blue-500 focus:ring-blue-500"
                       />
                       <div>
-                        <div className="font-semibold text-white">{option.service_name}</div>
+                        <div className="font-semibold text-gray-900">{option.service_name}</div>
                       </div>
                     </div>
                     <div className="text-2xl font-bold text-green-400">${option.price.toFixed(2)}</div>
@@ -1530,28 +1530,28 @@ const NewUploadFlow = () => {
                   
                   {/* DTC Input Fields */}
                   {option.service_id === 'dtc-single' && selectedServices.includes('dtc-single') && (
-                    <div className="px-5 pb-5 pt-2 border-t border-slate-700/50">
-                      <label className="block text-sm text-slate-400 mb-2">Enter DTC code to remove:</label>
+                    <div className="px-5 pb-5 pt-2 border-t border-gray-200/50">
+                      <label className="block text-sm text-gray-500 mb-2">Enter DTC code to remove:</label>
                       <input
                         type="text"
                         value={dtcSingleCode}
                         onChange={(e) => { setDtcSingleCode(e.target.value.toUpperCase()); setDtcError(''); }}
                         placeholder="e.g., P0420"
-                        className="w-full bg-slate-800 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
+                        className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none"
                         maxLength={5}
                       />
-                      <p className="text-xs text-slate-500 mt-2">Format: P0420, C1234, B0001, U0100</p>
+                      <p className="text-xs text-gray-500 mt-2">Format: P0420, C1234, B0001, U0100</p>
                     </div>
                   )}
                   
                   {option.service_id === 'dtc-multiple' && selectedServices.includes('dtc-multiple') && (
-                    <div className="px-5 pb-5 pt-2 border-t border-slate-700/50">
-                      <label className="block text-sm text-slate-400 mb-2">Enter DTC codes (one per line):</label>
+                    <div className="px-5 pb-5 pt-2 border-t border-gray-200/50">
+                      <label className="block text-sm text-gray-500 mb-2">Enter DTC codes (one per line):</label>
                       <textarea
                         value={dtcMultipleCodes}
                         onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(''); }}
                         placeholder="P0420&#10;P2002&#10;P0401"
-                        className="w-full bg-slate-800 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none min-h-[100px]"
+                        className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none min-h-[100px]"
                         rows={4}
                       />
                     </div>
@@ -1570,8 +1570,8 @@ const NewUploadFlow = () => {
             {selectedServices.length > 0 && (
               <div className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 rounded-2xl p-6 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg text-slate-300">Total:</span>
-                  <span className="text-3xl font-bold text-white">${totalPrice.toFixed(2)}</span>
+                  <span className="text-lg text-gray-600">Total:</span>
+                  <span className="text-3xl font-bold text-gray-900">${totalPrice.toFixed(2)}</span>
                 </div>
               </div>
             )}
@@ -1581,8 +1581,8 @@ const NewUploadFlow = () => {
               disabled={selectedServices.length === 0}
               className={`w-full py-4 rounded-xl font-semibold text-lg transition-all ${
                 selectedServices.length > 0
-                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:shadow-lg hover:shadow-blue-500/25'
-                  : 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 hover:shadow-lg hover:shadow-blue-500/25'
+                  : 'bg-gray-100 text-gray-500 cursor-not-allowed'
               }`}
             >
               Continue to Payment →
@@ -1592,24 +1592,24 @@ const NewUploadFlow = () => {
         
         {/* STEP 5: Customer Info & Payment */}
         {step === 5 && (
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12">
+          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-2">Complete Your Order</h2>
-              <p className="text-slate-400">Enter your details and complete payment</p>
+              <p className="text-gray-500">Enter your details and complete payment</p>
             </div>
 
             {/* Order Summary */}
-            <div className="bg-slate-900/50 rounded-2xl p-6 mb-8">
+            <div className="bg-white/50 rounded-2xl p-6 mb-8">
               <h3 className="font-semibold mb-4">Order Summary</h3>
               <div className="space-y-2 mb-4">
                 {availableOptions.filter(opt => selectedServices.includes(opt.service_id)).map(opt => (
                   <div key={opt.service_id} className="flex justify-between text-sm">
-                    <span className="text-slate-400">{opt.service_name}</span>
-                    <span className="text-white">${opt.price.toFixed(2)}</span>
+                    <span className="text-gray-500">{opt.service_name}</span>
+                    <span className="text-gray-900">${opt.price.toFixed(2)}</span>
                   </div>
                 ))}
               </div>
-              <div className="border-t border-slate-700 pt-4 flex justify-between">
+              <div className="border-t border-gray-200 pt-4 flex justify-between">
                 <span className="font-semibold">Total</span>
                 <span className="text-xl font-bold text-green-400">${totalPrice.toFixed(2)}</span>
               </div>
@@ -1618,7 +1618,7 @@ const NewUploadFlow = () => {
             {/* Vehicle Information (Read-only - from step 1) */}
             <div className="mb-8">
               <h3 className="font-semibold mb-4">Vehicle Information</h3>
-              <div className="bg-slate-900/50 rounded-xl p-4">
+              <div className="bg-white/50 rounded-xl p-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
                     <span className="text-lg">
@@ -1629,8 +1629,8 @@ const NewUploadFlow = () => {
                     </span>
                   </div>
                   <div>
-                    <p className="text-slate-400 text-sm">Selected Vehicle</p>
-                    <p className="text-white font-medium">{getVehicleSummary()}</p>
+                    <p className="text-gray-500 text-sm">Selected Vehicle</p>
+                    <p className="text-gray-900 font-medium">{getVehicleSummary()}</p>
                   </div>
                 </div>
               </div>
@@ -1645,7 +1645,7 @@ const NewUploadFlow = () => {
                   value={customerInfo.customer_name}
                   onChange={(e) => setCustomerInfo({...customerInfo, customer_name: e.target.value})}
                   placeholder="Full Name *"
-                  className="w-full bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  className="w-full bg-white text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none"
                   required
                 />
                 <input
@@ -1653,7 +1653,7 @@ const NewUploadFlow = () => {
                   value={customerInfo.customer_email}
                   onChange={(e) => setCustomerInfo({...customerInfo, customer_email: e.target.value})}
                   placeholder="Email Address * (for download link)"
-                  className="w-full bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  className="w-full bg-white text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none"
                   required
                 />
                 <input
@@ -1661,13 +1661,13 @@ const NewUploadFlow = () => {
                   value={customerInfo.customer_phone}
                   onChange={(e) => setCustomerInfo({...customerInfo, customer_phone: e.target.value})}
                   placeholder="Phone (optional)"
-                  className="w-full bg-slate-900 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-blue-500 focus:outline-none"
+                  className="w-full bg-white text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none"
                 />
               </div>
             </div>
 
             {/* PayPal */}
-            <div className="bg-slate-900/50 rounded-2xl p-6">
+            <div className="bg-white/50 rounded-2xl p-6">
               <h3 className="font-semibold mb-4 text-center">Secure Payment</h3>
               <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID, currency: "USD" }}>
                 <PayPalButtons 
@@ -1680,7 +1680,7 @@ const NewUploadFlow = () => {
 
             <button
               onClick={() => setStep(3)}
-              className="w-full mt-4 py-3 rounded-xl text-slate-400 hover:text-white transition"
+              className="w-full mt-4 py-3 rounded-xl text-gray-500 hover:text-blue-600 transition"
             >
               ← Back to Service Selection
             </button>
@@ -1689,14 +1689,14 @@ const NewUploadFlow = () => {
         
         {/* STEP 6: Success */}
         {step === 6 && (
-          <div className="bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-3xl p-8 md:p-12 text-center">
+          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12 text-center">
             <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
             <h2 className="text-3xl font-bold mb-4">Payment Successful!</h2>
-            <p className="text-slate-400 mb-8">Your file has been submitted for processing</p>
+            <p className="text-gray-500 mb-8">Your file has been submitted for processing</p>
             
             {/* Processing Status */}
             <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-6 mb-8">
@@ -1710,19 +1710,19 @@ const NewUploadFlow = () => {
             </div>
 
             {/* Order Details */}
-            <div className="bg-slate-900/50 rounded-2xl p-6 mb-8 text-left">
+            <div className="bg-white/50 rounded-2xl p-6 mb-8 text-left">
               <h3 className="font-semibold mb-4">Order Details</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Order ID:</span>
-                  <span className="text-white font-mono">{orderId}</span>
+                  <span className="text-gray-500">Order ID:</span>
+                  <span className="text-gray-900 font-mono">{orderId}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Vehicle:</span>
-                  <span className="text-white">{getVehicleSummary()}</span>
+                  <span className="text-gray-500">Vehicle:</span>
+                  <span className="text-gray-900">{getVehicleSummary()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Total Paid:</span>
+                  <span className="text-gray-500">Total Paid:</span>
                   <span className="text-green-400 font-semibold">${totalPrice.toFixed(2)}</span>
                 </div>
               </div>
@@ -1731,7 +1731,7 @@ const NewUploadFlow = () => {
             {/* What's Next */}
             <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6 mb-8 text-left">
               <h3 className="font-semibold mb-4 text-blue-400">What Happens Next?</h3>
-              <ol className="space-y-3 text-sm text-slate-300">
+              <ol className="space-y-3 text-sm text-gray-600">
                 <li className="flex items-start">
                   <span className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 mr-3 mt-0.5 flex-shrink-0">1</span>
                   Our engineers analyze and process your file
@@ -1754,13 +1754,13 @@ const NewUploadFlow = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={`/portal?order=${orderId}&email=${encodeURIComponent(customerInfo.customer_email)}`}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-lg hover:shadow-blue-500/25 text-white px-8 py-3 rounded-xl font-semibold transition"
+                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-lg hover:shadow-blue-500/25 text-gray-900 px-8 py-3 rounded-xl font-semibold transition"
               >
                 Go to Customer Portal
               </a>
               <button
                 onClick={() => window.location.reload()}
-                className="bg-slate-700 hover:bg-slate-600 text-white px-8 py-3 rounded-xl font-semibold transition"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-900 px-8 py-3 rounded-xl font-semibold transition"
               >
                 Process Another File
               </button>
@@ -1771,8 +1771,8 @@ const NewUploadFlow = () => {
 
       {/* Footer for inner pages */}
       {step > 0 && (
-        <footer className="bg-slate-900/50 border-t border-slate-800 py-6 mt-16">
-          <div className="container mx-auto px-6 text-center text-slate-500 text-sm">
+        <footer className="bg-white/50 border-t border-slate-800 py-6 mt-16">
+          <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
             <p>© 2024 ECU Flash Service | Professional ECU Tuning</p>
             <p className="mt-1">⚠️ For off-road and competition use only</p>
           </div>
