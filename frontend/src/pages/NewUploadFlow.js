@@ -591,6 +591,7 @@ const NewUploadFlow = () => {
                 <a href="#services" className="text-slate-300 hover:text-white transition">Services</a>
                 <a href="#how-it-works" className="text-slate-300 hover:text-white transition">How It Works</a>
                 <a href="#pricing" className="text-slate-300 hover:text-white transition">Pricing</a>
+                <a href="/portal" className="text-slate-300 hover:text-white transition">My Orders</a>
                 <button 
                   onClick={() => setStep(1)}
                   className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
