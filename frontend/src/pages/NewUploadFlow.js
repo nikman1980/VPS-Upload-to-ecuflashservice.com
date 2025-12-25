@@ -1492,7 +1492,6 @@ const NewUploadFlow = () => {
                       />
                       <div>
                         <div className="font-semibold text-white">{option.service_name}</div>
-                        <div className="text-sm text-slate-400">Confidence: {(option.confidence * 100).toFixed(0)}%</div>
                       </div>
                     </div>
                     <div className="text-2xl font-bold text-green-400">${option.price.toFixed(2)}</div>
