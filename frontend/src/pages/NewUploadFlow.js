@@ -1180,15 +1180,24 @@ const NewUploadFlow = () => {
                     <select
                       value={selectedEngine?.id || ''}
                       onChange={(e) => {
-                        const eng = engines.find(en => en.id === parseInt(e.target.value));
-                        if (eng) handleEngineSelect(eng);
+                        if (e.target.value === 'other') {
+                          handleEngineSelect({ id: 'other', name: 'Other / Not Listed' });
+                        } else {
+                          const eng = engines.find(en => en.id === parseInt(e.target.value));
+                          if (eng) handleEngineSelect(eng);
+                        }
                       }}
                       className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select engine...</option>
-                      {engines.map((eng) => (
-                        <option key={eng.id} value={eng.id}>{eng.name}</option>
-                      ))}
+                      {engines.map((eng) => {
+                        // Simplify engine name display - extract key info
+                        const name = eng.name;
+                        return (
+                          <option key={eng.id} value={eng.id}>{name}</option>
+                        );
+                      })}
+                      <option value="other">➕ Other / Not Listed</option>
                     </select>
                   )}
                 </div>
