@@ -71,7 +71,6 @@ const CustomerPortal = () => {
       setLoginOrderId(orderId);
       doLogin(email, orderId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const handleLogin = async (email = loginEmail, orderId = loginOrderId) => {
