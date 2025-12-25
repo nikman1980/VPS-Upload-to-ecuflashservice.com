@@ -405,6 +405,69 @@ class ECUServiceTester:
             self.log_test("Invalid File Upload", False, f"Error: {str(e)}")
             return False
 
+    def test_portal_login_invalid(self):
+        """Test portal login with invalid credentials"""
+        try:
+            login_data = {
+                "email": "invalid@example.com",
+                "order_id": "invalid-order-123"
+            }
+            
+            response = requests.post(f"{self.api_url}/portal/login", 
+                                   json=login_data, timeout=10)
+            
+            # Should return 401 for invalid credentials
+            success = response.status_code == 401
+            details = ""
+            if not success:
+                details = f"Expected 401 for invalid credentials, got {response.status_code}"
+                
+            self.log_test("Portal Login - Invalid Credentials", success, details, 401, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Portal Login - Invalid Credentials", False, f"Error: {str(e)}")
+            return False
+
+    def test_portal_login_missing_data(self):
+        """Test portal login with missing data"""
+        try:
+            # Test with missing email
+            login_data = {
+                "order_id": "test-order-123"
+            }
+            
+            response = requests.post(f"{self.api_url}/portal/login", 
+                                   json=login_data, timeout=10)
+            
+            # Should return 422 for missing required fields
+            success = response.status_code == 422
+            details = ""
+            if not success:
+                details = f"Expected 422 for missing email, got {response.status_code}"
+                
+            self.log_test("Portal Login - Missing Email", success, details, 422, response.status_code)
+            
+            # Test with missing order_id
+            login_data = {
+                "email": "test@example.com"
+            }
+            
+            response = requests.post(f"{self.api_url}/portal/login", 
+                                   json=login_data, timeout=10)
+            
+            # Should return 422 for missing required fields
+            success2 = response.status_code == 422
+            details2 = ""
+            if not success2:
+                details2 = f"Expected 422 for missing order_id, got {response.status_code}"
+                
+            self.log_test("Portal Login - Missing Order ID", success2, details2, 422, response.status_code)
+            
+            return success and success2
+        except Exception as e:
+            self.log_test("Portal Login - Missing Data", False, f"Error: {str(e)}")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("🔧 ECU Flash Service Backend API Tests")
