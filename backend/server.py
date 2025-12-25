@@ -699,20 +699,24 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         
         # Add metadata if found
         metadata = {}
-        if display_info['calibration_id'] != 'N/A':
+        if display_info.get('calibration_id'):
             metadata['calibration_id'] = display_info['calibration_id']
-        if display_info['software_version'] != 'N/A':
+        if display_info.get('software_version'):
             metadata['software_version'] = display_info['software_version']
-        if display_info['part_number'] != 'N/A':
+        if display_info.get('part_number'):
             metadata['part_number'] = display_info['part_number']
+        if display_info.get('vin'):
+            metadata['vin'] = display_info['vin']
+        if display_info.get('strings'):
+            metadata['strings'] = display_info['strings']
         
         return {
             "success": True,
             "file_id": file_id,
             "original_filename": file.filename,
             "file_size_mb": display_info['file_size_mb'],
-            "ecu_type": ecu_info,
-            "manufacturer": display_info['manufacturer'],
+            "detected_ecu": display_info['ecu_type'],
+            "detected_manufacturer": display_info['manufacturer'],
             "metadata": metadata,
             "available_options": available_options,
             "message": "File uploaded successfully! Select the services you need."
