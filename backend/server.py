@@ -1288,7 +1288,7 @@ async def admin_upload_processed_file(
         raise HTTPException(status_code=404, detail="Service request not found")
     
     # Generate file ID and save file
-    file_id = str(uuid4())
+    file_id = str(uuid.uuid4())
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     original_ext = Path(file.filename).suffix
     processed_filename = f"processed_{request_id[:8]}_{timestamp}{original_ext}"
