@@ -262,11 +262,12 @@ class ECUAnalyzer:
                     continue
                 
                 # Skip if all same character or repeating pattern
-                if len(set(vin)) < 8:
+                if len(set(vin)) < 10:  # Real VINs have high entropy
                     continue
                 
-                # Skip sequential patterns like "12345678901234567"
-                if vin == "".join(str(i % 10) for i in range(17)):
+                # Skip patterns containing common ECU strings
+                skip_patterns = ["SW", "HW", "CAL", "VER", "ECU", "EDC", "MED", "SID"]
+                if any(pat in vin for pat in skip_patterns):
                     continue
                 
                 # Count digits and letters
@@ -274,19 +275,16 @@ class ECUAnalyzer:
                 letters = sum(c.isalpha() for c in vin)
                 
                 # Real VINs have specific structure:
-                # - Position 1: Country (letter or digit 1-5)
-                # - Position 9: Check digit (0-9 or X)
-                # - Position 10: Model year
-                # - Positions 12-17: Serial number (usually digits)
-                
-                # Must have reasonable mix (not all digits, not all letters)
-                if digits < 5 or letters < 4:
+                # - Digits typically 6-10
+                # - Letters typically 7-11
+                if digits < 6 or digits > 10:
                     continue
-                if digits > 14 or letters > 12:
+                if letters < 7 or letters > 11:
                     continue
                 
                 # First character must be valid country code
-                valid_first = "123456789JKLMNPRSTUVWXYZ"
+                # 1-5 = North America, J = Japan, K = Korea, S = UK, W = Germany, etc.
+                valid_first = "12345JKLMNPRSTUVWXYZ"
                 if vin[0] not in valid_first:
                     continue
                 
@@ -294,32 +292,30 @@ class ECUAnalyzer:
                 if vin[8] not in "0123456789X":
                     continue
                 
-                # Position 10 (model year) - valid year codes
+                # Position 10 (model year) - valid year codes for 1980-2030
                 valid_years = "ABCDEFGHJKLMNPRSTVWXY123456789"
                 if vin[9] not in valid_years:
                     continue
                 
-                # Last 6 characters (serial) should be mostly digits
+                # Last 6 characters (serial) should be mostly digits (at least 5)
                 serial = vin[11:17]
                 serial_digits = sum(c.isdigit() for c in serial)
-                if serial_digits < 4:
+                if serial_digits < 5:
                     continue
                 
-                # Additional sanity check - avoid patterns that look like calibration IDs
-                # Real VINs don't usually have long letter sequences
-                max_consecutive_letters = 0
-                current_letters = 0
-                for c in vin:
-                    if c.isalpha():
-                        current_letters += 1
-                        max_consecutive_letters = max(max_consecutive_letters, current_letters)
-                    else:
-                        current_letters = 0
+                # Position 2-3 should be manufacturer code (letters or digits)
+                # Position 4-8 is VDS (vehicle descriptor section)
                 
-                if max_consecutive_letters > 5:
+                # Check for realistic patterns - avoid calibration IDs
+                # Real VINs don't start with 0
+                if vin[0] == "0":
                     continue
                 
-                # Passed all checks - this is likely a real VIN
+                # Avoid patterns that look like part numbers
+                if vin[:2].isdigit() and vin[2] in "SW":
+                    continue
+                
+                # Passed all strict checks - this is likely a real VIN
                 self.results["vin"] = vin
                 break
                 
