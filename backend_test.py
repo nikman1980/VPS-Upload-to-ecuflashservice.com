@@ -468,6 +468,151 @@ class ECUServiceTester:
             self.log_test("Portal Login - Missing Data", False, f"Error: {str(e)}")
             return False
 
+    def test_portal_email_login(self):
+        """Test new email-only portal login functionality"""
+        try:
+            # Test email-only login with non-existent email
+            login_data = {
+                "email": "nonexistent@example.com"
+            }
+            
+            response = requests.post(f"{self.api_url}/portal/login-email", 
+                                   json=login_data, timeout=10)
+            
+            # Should return 404 for no orders found
+            success = response.status_code == 404
+            details = ""
+            if success:
+                details = "Correctly returns 404 for email with no orders"
+            else:
+                details = f"Expected 404 for non-existent email, got {response.status_code}"
+                
+            self.log_test("Portal Email Login - No Orders", success, details, 404, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Portal Email Login - No Orders", False, f"Error: {str(e)}")
+            return False
+
+    def test_chinese_truck_manufacturers(self):
+        """Test Chinese truck manufacturers are present in database"""
+        try:
+            # First get vehicle types to find trucks
+            types_response = requests.get(f"{self.api_url}/vehicles/types", timeout=10)
+            if types_response.status_code != 200:
+                self.log_test("Chinese Trucks - Get Types", False, "Failed to get vehicle types")
+                return False
+                
+            types = types_response.json()
+            truck_type = next((t for t in types if 'truck' in t.get('name', '').lower() or 'bus' in t.get('name', '').lower()), None)
+            
+            if not truck_type:
+                self.log_test("Chinese Trucks - Find Type", False, "Truck vehicle type not found")
+                return False
+                
+            truck_type_id = truck_type.get('id')
+            print(f"   Found truck type: {truck_type.get('name')} (ID: {truck_type_id})")
+            
+            # Get manufacturers for trucks
+            mfr_response = requests.get(f"{self.api_url}/vehicles/manufacturers/{truck_type_id}", timeout=10)
+            success = mfr_response.status_code == 200
+            
+            if success:
+                manufacturers = mfr_response.json()
+                
+                # Check for Chinese truck brands
+                chinese_brands = ['Shacman', 'Sinotruk', 'FAW', 'Dongfeng', 'Foton', 'JAC']
+                found_brands = []
+                
+                for brand in chinese_brands:
+                    found = next((m for m in manufacturers if brand.lower() in m.get('name', '').lower()), None)
+                    if found:
+                        found_brands.append(found['name'])
+                        print(f"   ✓ Found {found['name']} (ID: {found.get('id')})")
+                
+                if len(found_brands) >= 4:  # At least 4 out of 6 brands
+                    details = f"Found {len(found_brands)}/{len(chinese_brands)} Chinese truck brands: {found_brands}"
+                else:
+                    success = False
+                    details = f"Only found {len(found_brands)}/{len(chinese_brands)} Chinese truck brands: {found_brands}"
+            else:
+                details = f"HTTP {mfr_response.status_code}"
+                
+            self.log_test("Chinese Truck Manufacturers", success, details, 200, mfr_response.status_code)
+            return success, manufacturers if success else []
+        except Exception as e:
+            self.log_test("Chinese Truck Manufacturers", False, f"Error: {str(e)}")
+            return False, []
+
+    def test_chinese_truck_models(self):
+        """Test Chinese truck models are present in database"""
+        try:
+            # Get truck manufacturers first
+            success, manufacturers = self.test_chinese_truck_manufacturers()
+            if not success:
+                return False
+                
+            # Test Shacman models specifically
+            shacman = next((m for m in manufacturers if 'shacman' in m.get('name', '').lower()), None)
+            if not shacman:
+                self.log_test("Shacman Models", False, "Shacman manufacturer not found")
+                return False
+                
+            shacman_id = shacman.get('id')
+            print(f"   Testing models for Shacman (ID: {shacman_id})")
+            
+            response = requests.get(f"{self.api_url}/vehicles/models/{shacman_id}", timeout=10)
+            success = response.status_code == 200
+            
+            if success:
+                models = response.json()
+                
+                # Check for expected Shacman models
+                expected_models = ['X3000', 'X5000', 'X6000', 'F3000', 'H3000', 'M3000']
+                found_models = []
+                
+                for model_name in expected_models:
+                    found = next((m for m in models if model_name.lower() in m.get('name', '').lower()), None)
+                    if found:
+                        found_models.append(found['name'])
+                        print(f"   ✓ Found Shacman {found['name']}")
+                
+                if len(found_models) >= 3:  # At least 3 out of 6 models
+                    details = f"Found {len(found_models)}/{len(expected_models)} Shacman models: {found_models}"
+                else:
+                    success = False
+                    details = f"Only found {len(found_models)}/{len(expected_models)} Shacman models: {found_models}"
+                    
+                # Test Sinotruk models as well
+                sinotruk = next((m for m in manufacturers if 'sinotruk' in m.get('name', '').lower() or 'howo' in m.get('name', '').lower()), None)
+                if sinotruk:
+                    sinotruk_id = sinotruk.get('id')
+                    print(f"   Testing models for Sinotruk (ID: {sinotruk_id})")
+                    
+                    sino_response = requests.get(f"{self.api_url}/vehicles/models/{sinotruk_id}", timeout=10)
+                    if sino_response.status_code == 200:
+                        sino_models = sino_response.json()
+                        expected_sino = ['HOWO A7', 'HOWO T7H', 'Sitrak C7H']
+                        found_sino = []
+                        
+                        for model_name in expected_sino:
+                            found = next((m for m in sino_models if any(part.lower() in m.get('name', '').lower() for part in model_name.split())), None)
+                            if found:
+                                found_sino.append(found['name'])
+                                print(f"   ✓ Found Sinotruk {found['name']}")
+                        
+                        if found_sino:
+                            details += f" | Sinotruk: {found_sino}"
+                        else:
+                            print(f"   ⚠️ No expected Sinotruk models found")
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Chinese Truck Models", success, details, 200, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Chinese Truck Models", False, f"Error: {str(e)}")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("🔧 ECU Flash Service Backend API Tests")
