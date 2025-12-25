@@ -654,24 +654,62 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         # Step 1: Analyze to detect ECU type and available systems
         analysis_result = ecu_processor.analyze_file_for_options(file_data)
         
-        if not analysis_result["success"]:
-            return {
-                "success": False,
-                "error": "Could not analyze file",
-                "warnings": analysis_result.get("warnings", [])
-            }
-        
-        # Step 2: PRE-PROCESS file with ALL available services
-        # This creates multiple versions of the file
-        processed_versions = []
-        
-        # Save original file
+        # Save original file first (even if analysis fails)
         file_id = str(uuid.uuid4())
         original_filename = f"{file_id}_original{file_ext}"
         original_filepath = UPLOAD_DIR / original_filename
         
         with open(original_filepath, "wb") as f:
             f.write(file_data)
+        
+        # If analysis failed, still proceed with all available services
+        if not analysis_result["success"]:
+            # Offer all services as available options (manual processing)
+            all_services = [
+                {"service_id": "dpf_off", "service_name": "DPF/FAP Removal", "price": 50.0},
+                {"service_id": "egr_off", "service_name": "EGR Removal", "price": 40.0},
+                {"service_id": "adblue_off", "service_name": "AdBlue/SCR Removal", "price": 60.0},
+                {"service_id": "dtc_off", "service_name": "DTC/Error Code Removal", "price": 30.0},
+                {"service_id": "lambda_off", "service_name": "Lambda/O2 Sensor Removal", "price": 35.0},
+                {"service_id": "cat_off", "service_name": "Catalyst Removal", "price": 45.0},
+                {"service_id": "flaps_off", "service_name": "Swirl Flaps Removal", "price": 35.0},
+                {"service_id": "start_stop_off", "service_name": "Start/Stop Disable", "price": 25.0},
+                {"service_id": "speed_limit_off", "service_name": "Speed Limiter Removal", "price": 40.0},
+                {"service_id": "stage1", "service_name": "Stage 1 Tuning", "price": 150.0},
+                {"service_id": "stage2", "service_name": "Stage 2 Tuning", "price": 250.0},
+            ]
+            
+            # Create processed versions for all services
+            processed_versions = []
+            for service in all_services:
+                processed_versions.append({
+                    "service_id": service["service_id"],
+                    "service_name": service["service_name"],
+                    "price": service["price"],
+                    "file_id": f"{file_id}_{service['service_id']}",
+                    "filename": f"{file_id}_{service['service_id']}{file_ext}",
+                    "filepath": str(original_filepath),  # Use original file for manual processing
+                    "confidence": 0.7,
+                    "confidence_level": "manual",
+                    "file_size": len(file_data),
+                    "manual_processing": True  # Flag for manual processing
+                })
+            
+            return {
+                "success": True,
+                "file_id": file_id,
+                "original_filename": file.filename,
+                "file_size_mb": round(len(file_data) / (1024 * 1024), 2),
+                "ecu_type": "Unknown - Manual Processing Required",
+                "ecu_confidence": 0.5,
+                "available_options": processed_versions,
+                "warnings": analysis_result.get("warnings", []),
+                "message": "ECU type could not be auto-detected. All services are available for manual processing by our engineers."
+            }
+        
+        # Step 2: PRE-PROCESS file with ALL available services
+        # This creates multiple versions of the file
+        processed_versions = []
         
         # Process each available service individually
         for service in analysis_result["available_services"]:
