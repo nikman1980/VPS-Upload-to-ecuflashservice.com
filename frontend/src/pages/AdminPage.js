@@ -92,9 +92,9 @@ const AdminPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-900">
       {/* Header */}
-      <header className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700">
+      <header className="bg-white/50 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <span className="text-2xl">🔧</span>
@@ -102,7 +102,7 @@ const AdminPage = () => {
           </div>
           <button 
             onClick={() => navigate('/')}
-            className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg transition"
+            className="bg-gray-100 hover:bg-gray-600 px-4 py-2 rounded-lg transition"
             data-testid="back-to-home-btn"
           >
             ← Back to Home
@@ -119,9 +119,9 @@ const AdminPage = () => {
           <>
             {/* Stats */}
             <div className="grid md:grid-cols-5 gap-4 mb-8">
-              <div className="bg-gray-800 p-6 rounded-lg">
+              <div className="bg-gray-50 p-6 rounded-lg">
                 <div className="text-3xl font-bold" data-testid="total-requests">{requests.length}</div>
-                <div className="text-gray-400">Total Requests</div>
+                <div className="text-gray-500">Total Requests</div>
               </div>
               <div className="bg-yellow-900/30 border border-yellow-700 p-6 rounded-lg">
                 <div className="text-3xl font-bold" data-testid="pending-payment">
@@ -150,10 +150,10 @@ const AdminPage = () => {
             </div>
 
             {/* Requests Table */}
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
+            <div className="bg-gray-50 rounded-lg overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full" data-testid="requests-table">
-                  <thead className="bg-gray-900">
+                  <thead className="bg-white">
                     <tr>
                       <th className="px-6 py-3 text-left">Date</th>
                       <th className="px-6 py-3 text-left">Customer</th>
@@ -169,17 +169,17 @@ const AdminPage = () => {
                   <tbody>
                     {requests.length === 0 ? (
                       <tr>
-                        <td colSpan="9" className="px-6 py-8 text-center text-gray-400">
+                        <td colSpan="9" className="px-6 py-8 text-center text-gray-500">
                           No service requests yet
                         </td>
                       </tr>
                     ) : (
                       requests.map((request) => (
-                        <tr key={request.id} className="border-t border-gray-700 hover:bg-gray-700/50" data-testid={`request-row-${request.id}`}>
+                        <tr key={request.id} className="border-t border-gray-200 hover:bg-gray-100/50" data-testid={`request-row-${request.id}`}>
                           <td className="px-6 py-4">{formatDate(request.created_at)}</td>
                           <td className="px-6 py-4">
                             <div>{request.customer_name}</div>
-                            <div className="text-sm text-gray-400">{request.customer_email}</div>
+                            <div className="text-sm text-gray-500">{request.customer_email}</div>
                           </td>
                           <td className="px-6 py-4">
                             {request.vehicle_year} {request.vehicle_make} {request.vehicle_model}
@@ -230,10 +230,10 @@ const AdminPage = () => {
       {/* Request Details Modal */}
       {selectedRequest && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" data-testid="request-details-modal">
-          <div className="bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+          <div className="bg-gray-50 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
             <button 
               onClick={() => setSelectedRequest(null)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl"
+              className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 text-2xl"
               data-testid="close-details-btn"
             >
               ×
@@ -243,12 +243,12 @@ const AdminPage = () => {
             
             <div className="space-y-6">
               {/* Status Update */}
-              <div className="bg-gray-900 p-4 rounded-lg">
+              <div className="bg-white p-4 rounded-lg">
                 <label className="block text-sm font-semibold mb-2">Update Status</label>
                 <select
                   value={selectedRequest.status}
                   onChange={(e) => updateStatus(selectedRequest.id, e.target.value)}
-                  className="bg-gray-700 text-white px-4 py-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-gray-100 text-gray-900 px-4 py-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                   data-testid="status-select"
                 >
                   <option value="pending_payment">Pending Payment</option>
@@ -261,11 +261,11 @@ const AdminPage = () => {
               </div>
 
               {/* Payment Information */}
-              <div className="bg-gray-900 p-4 rounded-lg">
+              <div className="bg-white p-4 rounded-lg">
                 <h4 className="text-xl font-semibold mb-3 text-blue-400">Payment Information</h4>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-400">Payment Status:</span>
+                    <span className="text-gray-500">Payment Status:</span>
                     <div className="font-semibold">
                       <span className={`${getPaymentStatusColor(selectedRequest.payment_status)} px-2 py-1 rounded text-xs`}>
                         {selectedRequest.payment_status.toUpperCase()}
@@ -273,26 +273,26 @@ const AdminPage = () => {
                     </div>
                   </div>
                   <div>
-                    <span className="text-gray-400">Total Amount:</span>
+                    <span className="text-gray-500">Total Amount:</span>
                     <div className="font-semibold text-green-400 text-lg">
                       ${selectedRequest.total_price?.toFixed(2) || '0.00'}
                     </div>
                   </div>
                   {selectedRequest.paypal_order_id && (
                     <div>
-                      <span className="text-gray-400">PayPal Order ID:</span>
+                      <span className="text-gray-500">PayPal Order ID:</span>
                       <div className="font-semibold text-xs">{selectedRequest.paypal_order_id}</div>
                     </div>
                   )}
                   {selectedRequest.paypal_transaction_id && (
                     <div>
-                      <span className="text-gray-400">Transaction ID:</span>
+                      <span className="text-gray-500">Transaction ID:</span>
                       <div className="font-semibold text-xs">{selectedRequest.paypal_transaction_id}</div>
                     </div>
                   )}
                   {selectedRequest.payment_date && (
                     <div>
-                      <span className="text-gray-400">Payment Date:</span>
+                      <span className="text-gray-500">Payment Date:</span>
                       <div className="font-semibold">{formatDate(selectedRequest.payment_date)}</div>
                     </div>
                   )}
@@ -300,7 +300,7 @@ const AdminPage = () => {
                 
                 {/* Pricing Breakdown */}
                 {selectedRequest.pricing_breakdown && selectedRequest.pricing_breakdown.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-gray-700">
+                  <div className="mt-4 pt-4 border-t border-gray-200">
                     <h5 className="font-semibold mb-2">Pricing Breakdown:</h5>
                     {selectedRequest.pricing_breakdown.map((item, index) => (
                       <div key={index} className="flex justify-between text-sm py-1">
@@ -308,12 +308,12 @@ const AdminPage = () => {
                         <span>${item.final_price.toFixed(2)}</span>
                       </div>
                     ))}
-                    <div className="border-t border-gray-600 mt-2 pt-2">
-                      <div className="flex justify-between text-sm text-gray-400">
+                    <div className="border-t border-gray-300 mt-2 pt-2">
+                      <div className="flex justify-between text-sm text-gray-500">
                         <span>Base Total (dpfoffservice.com):</span>
                         <span>${selectedRequest.base_total?.toFixed(2)}</span>
                       </div>
-                      <div className="flex justify-between text-sm text-gray-400">
+                      <div className="flex justify-between text-sm text-gray-500">
                         <span>Markup (25%):</span>
                         <span>${selectedRequest.markup_amount?.toFixed(2)}</span>
                       </div>
@@ -328,16 +328,16 @@ const AdminPage = () => {
 
               {/* Uploaded Files */}
               {selectedRequest.uploaded_files && selectedRequest.uploaded_files.length > 0 && (
-                <div className="bg-gray-900 p-4 rounded-lg">
+                <div className="bg-white p-4 rounded-lg">
                   <h4 className="text-xl font-semibold mb-3 text-blue-400">Uploaded ECU Files</h4>
                   <div className="space-y-2">
                     {selectedRequest.uploaded_files.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between bg-gray-700 p-3 rounded">
+                      <div key={index} className="flex items-center justify-between bg-gray-100 p-3 rounded">
                         <div className="flex items-center space-x-3">
                           <span className="text-2xl">📄</span>
                           <div>
                             <div className="font-semibold">{file.original_filename}</div>
-                            <div className="text-sm text-gray-400">{formatFileSize(file.size)}</div>
+                            <div className="text-sm text-gray-500">{formatFileSize(file.size)}</div>
                           </div>
                         </div>
                         <button
@@ -357,15 +357,15 @@ const AdminPage = () => {
                 <h4 className="text-xl font-semibold mb-3 text-blue-400">Customer Information</h4>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-400">Name:</span>
+                    <span className="text-gray-500">Name:</span>
                     <div className="font-semibold" data-testid="detail-customer-name">{selectedRequest.customer_name}</div>
                   </div>
                   <div>
-                    <span className="text-gray-400">Email:</span>
+                    <span className="text-gray-500">Email:</span>
                     <div className="font-semibold" data-testid="detail-customer-email">{selectedRequest.customer_email}</div>
                   </div>
                   <div>
-                    <span className="text-gray-400">Phone:</span>
+                    <span className="text-gray-500">Phone:</span>
                     <div className="font-semibold" data-testid="detail-customer-phone">{selectedRequest.customer_phone}</div>
                   </div>
                 </div>
@@ -376,30 +376,30 @@ const AdminPage = () => {
                 <h4 className="text-xl font-semibold mb-3 text-blue-400">Vehicle Information</h4>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-400">Make:</span>
+                    <span className="text-gray-500">Make:</span>
                     <div className="font-semibold">{selectedRequest.vehicle_make}</div>
                   </div>
                   <div>
-                    <span className="text-gray-400">Model:</span>
+                    <span className="text-gray-500">Model:</span>
                     <div className="font-semibold">{selectedRequest.vehicle_model}</div>
                   </div>
                   <div>
-                    <span className="text-gray-400">Year:</span>
+                    <span className="text-gray-500">Year:</span>
                     <div className="font-semibold">{selectedRequest.vehicle_year}</div>
                   </div>
                   <div>
-                    <span className="text-gray-400">Engine Type:</span>
+                    <span className="text-gray-500">Engine Type:</span>
                     <div className="font-semibold">{selectedRequest.engine_type}</div>
                   </div>
                   {selectedRequest.ecu_type && (
                     <div>
-                      <span className="text-gray-400">ECU Type:</span>
+                      <span className="text-gray-500">ECU Type:</span>
                       <div className="font-semibold">{selectedRequest.ecu_type}</div>
                     </div>
                   )}
                   {selectedRequest.vin && (
                     <div>
-                      <span className="text-gray-400">VIN:</span>
+                      <span className="text-gray-500">VIN:</span>
                       <div className="font-semibold">{selectedRequest.vin}</div>
                     </div>
                   )}
@@ -422,19 +422,19 @@ const AdminPage = () => {
               {selectedRequest.issues_description && (
                 <div>
                   <h4 className="text-xl font-semibold mb-3 text-blue-400">Issues Description</h4>
-                  <p className="text-gray-300 bg-gray-900 p-4 rounded-lg">{selectedRequest.issues_description}</p>
+                  <p className="text-gray-600 bg-white p-4 rounded-lg">{selectedRequest.issues_description}</p>
                 </div>
               )}
 
               {selectedRequest.additional_notes && (
                 <div>
                   <h4 className="text-xl font-semibold mb-3 text-blue-400">Additional Notes</h4>
-                  <p className="text-gray-300 bg-gray-900 p-4 rounded-lg">{selectedRequest.additional_notes}</p>
+                  <p className="text-gray-600 bg-white p-4 rounded-lg">{selectedRequest.additional_notes}</p>
                 </div>
               )}
 
               {/* Timestamps */}
-              <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-400">
+              <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-500">
                 <div>
                   <span>Created:</span> {formatDate(selectedRequest.created_at)}
                 </div>

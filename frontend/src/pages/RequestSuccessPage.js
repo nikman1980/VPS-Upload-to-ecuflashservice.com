@@ -29,7 +29,7 @@ const RequestSuccessPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-900 flex items-center justify-center">
         <div className="text-2xl">Loading...</div>
       </div>
     );
@@ -37,7 +37,7 @@ const RequestSuccessPage = () => {
 
   if (!request) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="text-2xl mb-4">Request not found</div>
           <button 
@@ -52,9 +52,9 @@ const RequestSuccessPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-900">
       {/* Header */}
-      <header className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700">
+      <header className="bg-white/50 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <span className="text-2xl">🔧</span>
@@ -62,7 +62,7 @@ const RequestSuccessPage = () => {
           </div>
           <button 
             onClick={() => navigate('/')}
-            className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg transition"
+            className="bg-gray-100 hover:bg-gray-600 px-4 py-2 rounded-lg transition"
             data-testid="back-to-home-btn"
           >
             ← Back to Home
@@ -71,44 +71,44 @@ const RequestSuccessPage = () => {
       </header>
 
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-2xl mx-auto bg-gray-800 rounded-lg p-8 text-center" data-testid="success-message">
+        <div className="max-w-2xl mx-auto bg-gray-50 rounded-lg p-8 text-center" data-testid="success-message">
           {/* Success Icon */}
           <div className="text-6xl mb-6">✅</div>
           
           <h2 className="text-4xl font-bold mb-4">Request Submitted Successfully!</h2>
           
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-gray-600 mb-8">
             Thank you for your service request. We've received your information and will contact you shortly.
           </p>
 
-          <div className="bg-gray-900 p-6 rounded-lg mb-8 text-left">
+          <div className="bg-white p-6 rounded-lg mb-8 text-left">
             <h3 className="text-xl font-semibold mb-4 text-blue-400">Request Details</h3>
             
             <div className="space-y-3 text-sm">
               <div>
-                <span className="text-gray-400">Request ID:</span>
+                <span className="text-gray-500">Request ID:</span>
                 <div className="font-mono font-semibold" data-testid="request-id">{request.id}</div>
               </div>
               
               <div>
-                <span className="text-gray-400">Customer:</span>
+                <span className="text-gray-500">Customer:</span>
                 <div className="font-semibold">{request.customer_name}</div>
               </div>
               
               <div>
-                <span className="text-gray-400">Email:</span>
+                <span className="text-gray-500">Email:</span>
                 <div className="font-semibold">{request.customer_email}</div>
               </div>
               
               <div>
-                <span className="text-gray-400">Vehicle:</span>
+                <span className="text-gray-500">Vehicle:</span>
                 <div className="font-semibold">
                   {request.vehicle_year} {request.vehicle_make} {request.vehicle_model}
                 </div>
               </div>
               
               <div>
-                <span className="text-gray-400">Selected Services:</span>
+                <span className="text-gray-500">Selected Services:</span>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {request.selected_services.map((serviceId) => (
                     <span key={serviceId} className="bg-blue-600 px-3 py-1 rounded-full text-xs">
@@ -119,7 +119,7 @@ const RequestSuccessPage = () => {
               </div>
               
               <div>
-                <span className="text-gray-400">Status:</span>
+                <span className="text-gray-500">Status:</span>
                 <div>
                   <span className="bg-yellow-500 px-3 py-1 rounded-full text-xs font-semibold inline-block mt-1">
                     PENDING
@@ -137,7 +137,7 @@ const RequestSuccessPage = () => {
           </div>
           
           {request.uploaded_files && request.uploaded_files.length > 0 && (
-            <div className="bg-gray-900 p-4 rounded-lg mb-8">
+            <div className="bg-white p-4 rounded-lg mb-8">
               <h4 className="font-semibold mb-2 text-blue-400">📁 Uploaded Files:</h4>
               {request.uploaded_files.map((file, index) => (
                 <div key={index} className="text-sm py-1">
