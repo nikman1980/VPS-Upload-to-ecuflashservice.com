@@ -392,7 +392,7 @@ class ECUAnalyzer:
             # ===================
             # Format: 89661-12345, 89663-0E090
             (rb"(89[0-9]{3}-[0-9A-Z]{5})", "Toyota/Lexus", "Denso"),
-            (rb"(89[0-9]{3}-[0-9A-Z]{6,7})", "Toyota/Lexus", "Denso")
+            (rb"(89[0-9]{3}-[0-9A-Z]{6,7})", "Toyota/Lexus", "Denso"),
             
             # ===================
             # HONDA/ACURA (Keihin/Denso)
