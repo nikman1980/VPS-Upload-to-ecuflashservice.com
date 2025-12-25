@@ -374,21 +374,25 @@ class ECUAnalyzer:
             # ===================
             # MAZDA (Denso) - Priority for the user's file
             # ===================
-            # Format: S55B-18881-D, PE01-18881-A, SH01-188K2-D
-            (rb"([A-Z]{2,4}[0-9]{1,2}-18[0-9]{2}[0-9A-Z]-[A-Z0-9])", "Mazda", "Denso"),
-            (rb"([A-Z]{2,4}[0-9]{1,2}-188[A-Z][0-9]-[A-Z0-9])", "Mazda", "Denso"),
-            # GK6T style calibration/part IDs
-            (rb"(GK[0-9][A-Z][A-Z0-9]{6,10})", "Mazda", "Denso"),
-            # PE/SH/PY series
-            (rb"(P[EYX][0-9]{2}[A-Z0-9]{6,12})", "Mazda", "Denso"),
-            (rb"(SH[0-9]{2}[A-Z0-9]{6,12})", "Mazda", "Denso"),
+            # Format: S55B-18881-D, PE01-18881-A, SH01-188K2-D, PY01-188K2-B
+            (rb"([A-Z]{1,2}[0-9]{1,2}[A-Z]?-18[0-9]{2}[0-9A-Z]-[A-Z0-9])", "Mazda", "Denso"),
+            (rb"([A-Z]{1,2}[0-9]{1,2}[A-Z]?-188[A-Z][0-9]-[A-Z0-9])", "Mazda", "Denso"),
+            # S55B, PY01, PE01, SH01 style prefixes with dash
+            (rb"(S[0-9]{1,2}[A-Z]-[0-9]{5}-[A-Z])", "Mazda", "Denso"),
+            (rb"(P[EYX][0-9]{2}-[0-9]{5}-[A-Z])", "Mazda", "Denso"),
+            (rb"(SH[0-9]{2}-[0-9]{5}-[A-Z])", "Mazda", "Denso"),
+            # GK6T style calibration/part IDs (must have letters and numbers)
+            (rb"(GK[0-9][A-Z][A-Z0-9]{6,12})", "Mazda", "Denso"),
+            # PE/SH/PY/PX series without dash (continuous)
+            (rb"(P[EYXA][0-9]{2}[A-Z]{2}[0-9]{6,10})", "Mazda", "Denso"),
+            (rb"(SH[0-9]{2}[A-Z]{2}[0-9]{6,10})", "Mazda", "Denso"),
             
             # ===================
             # TOYOTA/LEXUS (Denso)
             # ===================
-            # Format: 89661-xxxxx, 89663-xxxxx
-            (rb"(89[0-9]{3}-[0-9A-Z]{5,7})", "Toyota/Lexus", "Denso"),
-            (rb"(89[0-9]{3}[A-Z][0-9]{4,6})", "Toyota/Lexus", "Denso"),
+            # Format: 89661-12345, 89663-0E090
+            (rb"(89[0-9]{3}-[0-9A-Z]{5})", "Toyota/Lexus", "Denso"),
+            (rb"(89[0-9]{3}-[0-9A-Z]{6,7})", "Toyota/Lexus", "Denso")
             
             # ===================
             # HONDA/ACURA (Keihin/Denso)
