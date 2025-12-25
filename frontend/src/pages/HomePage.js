@@ -264,16 +264,16 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
-        <h2 className="text-5xl md:text-6xl font-bold mb-6" data-testid="hero-title">
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900" data-testid="hero-title">
           {step === 1 ? 'Upload ECU File for Analysis' : 'Select Services to Remove'}
         </h2>
-        <p className="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-600 mb-4 max-w-3xl mx-auto">
           {step === 1 
             ? 'Upload your ECU file and our AI will detect what systems are available for removal.' 
             : 'We analyzed your file. Select the services you want to remove.'
           }
         </p>
-        <p className="text-lg text-blue-400 mb-8">
+        <p className="text-lg text-blue-600 mb-8">
           ⚡ AI Analysis • 🔒 Secure • ⚙️ Custom Options
         </p>
         {step === 1 && (
