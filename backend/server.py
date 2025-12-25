@@ -1749,6 +1749,51 @@ class PortalMessageRequest(BaseModel):
     sender: str = "customer"
 
 
+class PortalEmailLoginRequest(BaseModel):
+    email: str
+
+
+@api_router.post("/portal/login-email")
+async def portal_login_email(login_data: PortalEmailLoginRequest):
+    """
+    Customer portal login with email only - returns ALL orders for this email
+    """
+    email = login_data.email.strip().lower()
+    
+    # Get all orders from service_requests collection
+    orders_sr = await db.service_requests.find(
+        {"customer_email": {"$regex": f"^{email}$", "$options": "i"}},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    # Get all orders from orders collection (new flow)
+    orders_new = await db.orders.find(
+        {"customer_email": {"$regex": f"^{email}$", "$options": "i"}},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    # Combine and sort by date
+    all_orders = orders_sr + orders_new
+    all_orders.sort(key=lambda x: x.get('created_at', ''), reverse=True)
+    
+    if not all_orders:
+        raise HTTPException(status_code=404, detail="No orders found for this email")
+    
+    # Get messages for each order
+    for order in all_orders:
+        messages = await db.portal_messages.find(
+            {"order_id": order.get("id")},
+            {"_id": 0}
+        ).sort("created_at", 1).to_list(50)
+        order["messages"] = messages
+    
+    return {
+        "success": True,
+        "orders": all_orders,
+        "total_orders": len(all_orders)
+    }
+
+
 @api_router.post("/portal/login")
 async def portal_login(login_data: PortalLoginRequest):
     """
