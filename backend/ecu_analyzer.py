@@ -12,12 +12,15 @@ class ECUAnalyzer:
             "ecu_type": None,
             "calibration_id": None,
             "software_version": None,
+            "hardware_version": None,
             "part_number": None,
             "vin": None,
+            "vehicle_info": None,
+            "processor": None,
             "strings": []
         }
         
-        # Extract ALL readable strings (6+ chars)
+        # Extract readable strings (only clean ASCII, 6+ chars)
         strings = []
         current = b""
         for byte in file_data:
@@ -27,118 +30,227 @@ class ECUAnalyzer:
                 if len(current) >= 6:
                     try:
                         s = current.decode("ascii").strip()
-                        if any(c.isalpha() for c in s) and len(s) <= 100:
+                        # Only keep strings with letters and reasonable characters
+                        if (any(c.isalpha() for c in s) and 
+                            len(s) <= 80 and
+                            not self._is_garbage(s)):
                             strings.append(s)
                     except: pass
                 current = b""
         
         unique_strings = list(dict.fromkeys(strings))
         
-        # Detect manufacturer from binary signatures
-        mfr_sigs = {
-            "Bosch": [b"BOSCH", b"Bosch", b"EDC17", b"EDC16", b"ME17", b"MED17", b"MG1", b"MD1", b"ME7"],
-            "Denso": [b"DENSO", b"Denso", b"SH7058", b"SH7059"],
-            "Siemens": [b"SIEMENS", b"SID", b"SIMOS", b"5WP", b"5WK"],
-            "Continental": [b"Continental", b"CONTINENTAL", b"VDO", b"EMS"],
-            "Delphi": [b"DELPHI", b"Delphi", b"DCM", b"DDCR", b"MT80"],
-            "Marelli": [b"MARELLI", b"Marelli", b"IAW", b"MJD"],
-            "Cummins": [b"CUMMINS", b"Cummins", b"CM2150", b"CM2", b"ISZ", b"ISL", b"ISB"],
-            "Weichai": [b"WEICHAI", b"Weichai", b"WP10", b"WP12", b"WP13"],
-            "Yuchai": [b"YUCHAI", b"Yuchai", b"YC6"],
-            "Hitachi": [b"HITACHI", b"Hitachi", b"MEC"],
-        }
+        # === TOYOTA DETECTION ===
+        # Look for Toyota part numbers: 89661-XXXXX or 89663-XXXXX
+        toyota_pattern = rb'(89[0-9]{3}-[0-9A-Z]{5})'
+        toyota_matches = re.findall(toyota_pattern, file_data)
+        if toyota_matches:
+            self.results["part_number"] = toyota_matches[0].decode("utf-8")
+            self.results["manufacturer"] = "Denso"
+            self.results["vehicle_info"] = "Toyota/Lexus"
+            # Detect ECU type from part number
+            part = self.results["part_number"]
+            if part.startswith("89661"):
+                self.results["ecu_type"] = "Denso Engine ECU"
+            elif part.startswith("89663"):
+                self.results["ecu_type"] = "Denso Diesel ECU"
+            elif part.startswith("89664"):
+                self.results["ecu_type"] = "Denso Transmission ECU"
         
-        for mfr, sigs in mfr_sigs.items():
-            for sig in sigs:
+        # === BOSCH DETECTION ===
+        bosch_sigs = [b"BOSCH", b"Bosch", b"EDC17", b"EDC16", b"ME17", b"MED17", b"MG1", b"MD1", b"ME7", b"MED9"]
+        for sig in bosch_sigs:
+            if sig in file_data:
+                self.results["manufacturer"] = "Bosch"
+                # Find specific ECU type
+                ecu_match = re.search(rb'(EDC17[A-Z0-9]{0,5}|EDC16[A-Z0-9]{0,5}|MED17[A-Z0-9]{0,5}|ME17[A-Z0-9]{0,5}|MG1[A-Z0-9]{0,5}|MD1[A-Z0-9]{0,5}|MED9[A-Z0-9]{0,5}|ME7[A-Z0-9]{0,5})', file_data)
+                if ecu_match:
+                    self.results["ecu_type"] = "Bosch " + ecu_match.group(1).decode("utf-8")
+                else:
+                    self.results["ecu_type"] = "Bosch ECU"
+                break
+        
+        # === DENSO DETECTION (non-Toyota) ===
+        if not self.results["manufacturer"]:
+            denso_sigs = [b"DENSO", b"Denso", b"SH7058", b"SH7059", b"SH7055", b"76F00"]
+            for sig in denso_sigs:
                 if sig in file_data:
-                    self.results["manufacturer"] = mfr
+                    self.results["manufacturer"] = "Denso"
+                    if b"SH7058" in file_data or b"SH7059" in file_data or b"SH7055" in file_data:
+                        self.results["ecu_type"] = "Denso SH705x"
+                    else:
+                        self.results["ecu_type"] = "Denso ECU"
                     break
-            if self.results["manufacturer"]: break
         
-        # Detect ECU type from strings
-        ecu_patterns = ["EDC17", "EDC16", "ME17", "MED17", "MG1", "MD1", "ME7", 
-                       "SH7058", "SH7059", "SID", "SIMOS", "DCM", "IAW", "MJD",
-                       "CM2150", "CM2", "TC1767", "TC1796", "TC1797"]
-        for s in unique_strings:
-            for pat in ecu_patterns:
-                if pat in s.upper():
-                    # Extract full ECU name
-                    match = re.search(r'(EDC17[A-Z0-9]*|ME17[A-Z0-9]*|MED17[A-Z0-9]*|MG1[A-Z0-9]*|MD1[A-Z0-9]*|SID[0-9]*|CM2[0-9]*|TC17[0-9]*)', s, re.IGNORECASE)
-                    if match:
-                        self.results["ecu_type"] = match.group(1).upper()
-                        break
-            if self.results["ecu_type"]: break
+        # === SIEMENS/CONTINENTAL DETECTION ===
+        if not self.results["manufacturer"]:
+            siemens_sigs = [b"SIEMENS", b"Siemens", b"SIMOS", b"SID", b"CONTINENTAL", b"Continental", b"5WP", b"5WK"]
+            for sig in siemens_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Siemens/Continental"
+                    ecu_match = re.search(rb'(SID[0-9]{3}|SIMOS[0-9.]+|PCR[0-9.]+)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Siemens/Continental ECU"
+                    break
         
-        # Find calibration ID patterns
+        # === DELPHI DETECTION ===
+        if not self.results["manufacturer"]:
+            delphi_sigs = [b"DELPHI", b"Delphi", b"DCM", b"DDCR", b"MT80"]
+            for sig in delphi_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Delphi"
+                    ecu_match = re.search(rb'(DCM[0-9.]+|MT[0-9]+)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Delphi " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Delphi ECU"
+                    break
+        
+        # === MARELLI DETECTION ===
+        if not self.results["manufacturer"]:
+            marelli_sigs = [b"MARELLI", b"Marelli", b"IAW", b"MJD"]
+            for sig in marelli_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Marelli"
+                    ecu_match = re.search(rb'(IAW[0-9A-Z]+|MJD[0-9A-Z]+)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Marelli " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Marelli ECU"
+                    break
+        
+        # === CUMMINS DETECTION ===
+        if not self.results["manufacturer"]:
+            cummins_sigs = [b"CUMMINS", b"Cummins", b"CM2150", b"CM2250", b"CM870"]
+            for sig in cummins_sigs:
+                if sig in file_data:
+                    self.results["manufacturer"] = "Cummins"
+                    ecu_match = re.search(rb'(CM[0-9]+)', file_data)
+                    if ecu_match:
+                        self.results["ecu_type"] = "Cummins " + ecu_match.group(1).decode("utf-8")
+                    else:
+                        self.results["ecu_type"] = "Cummins ECU"
+                    break
+        
+        # === WEICHAI/YUCHAI DETECTION ===
+        if not self.results["manufacturer"]:
+            chinese_sigs = [b"WEICHAI", b"Weichai", b"WP10", b"WP12", b"WP13", b"YUCHAI", b"Yuchai", b"YC6"]
+            for sig in chinese_sigs:
+                if sig in file_data:
+                    if b"WEICHAI" in file_data or b"Weichai" in file_data or b"WP1" in file_data:
+                        self.results["manufacturer"] = "Weichai"
+                        self.results["ecu_type"] = "Weichai ECU"
+                    else:
+                        self.results["manufacturer"] = "Yuchai"
+                        self.results["ecu_type"] = "Yuchai ECU"
+                    break
+        
+        # === NEC/RENESAS DETECTION ===
+        if b"NEC Electronics" in file_data or b"Renesas" in file_data:
+            self.results["processor"] = "NEC/Renesas"
+            if not self.results["manufacturer"]:
+                self.results["manufacturer"] = "Unknown (NEC Processor)"
+        
+        # === CALIBRATION ID ===
+        # Look for common calibration ID patterns
         cal_patterns = [
-            rb'([A-Z]{1,2}[0-9]{6,10}[A-Z0-9]*)',  # P1158774, NR0000000227
-            rb'CAL[_\s-]?ID[:\s=]*([A-Z0-9_\-\.]{5,25})',
+            rb'CAL[_\-\s]?ID[:\s=]*([A-Z0-9_\-]{6,20})',
+            rb'SW[:\s]?([A-Z0-9]{8,16})',
+            rb'HW[:\s]?([A-Z0-9]{8,16})',
         ]
         for pat in cal_patterns:
-            matches = re.findall(pat, file_data)
-            if matches:
-                for m in matches:
-                    try:
-                        val = m.decode("utf-8", errors="ignore")
-                        if len(val) >= 6 and any(c.isdigit() for c in val) and any(c.isalpha() for c in val):
-                            self.results["calibration_id"] = val
-                            break
-                    except: pass
-            if self.results["calibration_id"]: break
+            match = re.search(pat, file_data)
+            if match:
+                self.results["calibration_id"] = match.group(1).decode("utf-8", errors="ignore")
+                break
         
-        # Find software version
+        # Look for Bosch part numbers (10-digit)
+        if not self.results["part_number"]:
+            bosch_pn = re.search(rb'(0[0-9]{9}|1037[0-9]{6})', file_data)
+            if bosch_pn:
+                self.results["part_number"] = bosch_pn.group(1).decode("utf-8")
+        
+        # === SOFTWARE VERSION ===
         for s in unique_strings:
-            if "SW" in s.upper() or "VER" in s.upper() or "_V" in s:
-                match = re.search(r'V?(\d+\.\d+\.\d+)', s)
-                if match:
-                    self.results["software_version"] = match.group(1)
-                    break
-                # Also try pattern like B_EDC17CV_EME_CB.03.01.03
-                match = re.search(r'[._](\d+\.\d+\.\d+)$', s)
+            if any(kw in s.upper() for kw in ["VER", "VERSION", "SW:", "SW_"]):
+                match = re.search(r'V?(\d+\.\d+\.?\d*)', s)
                 if match:
                     self.results["software_version"] = match.group(1)
                     break
         
-        # Find part number (10-digit Bosch format)
-        pn_pat = rb'(10[0-9]{8})'
-        matches = re.findall(pn_pat, file_data)
-        if matches:
-            self.results["part_number"] = matches[0].decode("utf-8")
-        
-        # Find VIN (17 chars)
-        vin_pat = rb'([A-HJ-NPR-Z0-9]{17})'
-        matches = re.findall(vin_pat, file_data)
-        for m in matches:
+        # === VIN (very strict - must be valid format) ===
+        # VIN is exactly 17 chars, excludes I, O, Q
+        vin_pattern = rb'([A-HJ-NPR-Z0-9]{17})'
+        vin_matches = re.findall(vin_pattern, file_data)
+        for v in vin_matches:
             try:
-                vin = m.decode("utf-8")
-                # Validate VIN-like pattern
-                if any(c.isdigit() for c in vin) and any(c.isalpha() for c in vin):
+                vin = v.decode("utf-8")
+                # VIN must have mix of letters and numbers, and common prefixes
+                if (sum(c.isdigit() for c in vin) >= 4 and 
+                    sum(c.isalpha() for c in vin) >= 4 and
+                    any(vin.startswith(p) for p in ['1', '2', '3', '4', '5', 'J', 'K', 'L', 'M', 'N', 'S', 'V', 'W', 'Y', 'Z'])):
                     self.results["vin"] = vin
                     break
             except: pass
         
-        # Store interesting strings
-        keywords = ["VER", "CAL", "ECU", "BOSCH", "DENSO", "DELPHI", "EDC", "SID", "SW", "HW"]
-        interesting = [s for s in unique_strings if any(kw in s.upper() for kw in keywords)]
+        # === FILTER INTERESTING STRINGS ===
+        keywords = ["VER", "CAL", "ECU", "BOSCH", "DENSO", "DELPHI", "SIEMENS", "MARELLI",
+                   "ENGINE", "DIESEL", "INJECT", "FUEL", "TURBO", "DPF", "EGR", "SCR",
+                   "TOYOTA", "HONDA", "NISSAN", "VW", "BMW", "MERCEDES", "AUDI",
+                   "Copyright", "CONTROL", "DIAG", "CAN", "OBD"]
+        
+        interesting = []
+        for s in unique_strings:
+            # Only keep strings with keywords or that look like identifiers
+            if any(kw.lower() in s.lower() for kw in keywords):
+                interesting.append(s)
+            elif re.match(r'^[A-Z0-9\-_]{8,20}$', s):  # Looks like an ID
+                interesting.append(s)
+        
         self.results["strings"] = interesting[:15]
         
         return self.results
     
+    def _is_garbage(self, s):
+        """Check if string is garbage/random data"""
+        # Too many repeated characters
+        if len(set(s)) < len(s) * 0.3:
+            return True
+        # Too many special chars
+        special = sum(1 for c in s if c in '{}[]|\\~`@#$%^&*()+=')
+        if special > len(s) * 0.2:
+            return True
+        # Looks like hex dump
+        if re.match(r'^[0-9A-Fa-f\s]+$', s) and len(s) > 20:
+            return True
+        # Random looking strings
+        if re.match(r'^[a-z]{20,}$', s.lower()):
+            return True
+        return False
+    
     def get_display_info(self):
-        mfr = self.results.get("manufacturer", "Unknown")
+        mfr = self.results.get("manufacturer") or "Unknown"
         ecu = self.results.get("ecu_type")
+        
         if ecu:
-            display_ecu = f"{mfr} {ecu}" if mfr and mfr != "Unknown" else ecu
+            display_ecu = ecu
+        elif mfr and mfr != "Unknown":
+            display_ecu = f"{mfr} ECU"
         else:
-            display_ecu = f"{mfr} ECU" if mfr else "Unknown ECU"
+            display_ecu = "Unknown ECU"
         
         return {
             "manufacturer": mfr,
             "ecu_type": display_ecu,
-            "calibration_id": self.results.get("calibration_id", ""),
-            "software_version": self.results.get("software_version", ""),
-            "part_number": self.results.get("part_number", ""),
-            "vin": self.results.get("vin", ""),
-            "strings": self.results.get("strings", []),
-            "file_size_mb": self.results["file_size_mb"]
+            "calibration_id": self.results.get("calibration_id") or "",
+            "software_version": self.results.get("software_version") or "",
+            "hardware_version": self.results.get("hardware_version") or "",
+            "part_number": self.results.get("part_number") or "",
+            "vin": self.results.get("vin") or "",
+            "vehicle_info": self.results.get("vehicle_info") or "",
+            "processor": self.results.get("processor") or "",
+            "strings": self.results.get("strings") or [],
+            "file_size_mb": self.results.get("file_size_mb", 0)
         }
