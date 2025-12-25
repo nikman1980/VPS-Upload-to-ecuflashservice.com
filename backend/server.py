@@ -1735,6 +1735,327 @@ async def get_vehicle_database_stats():
     }
 
 
+# ==================== CUSTOMER PORTAL API Endpoints ====================
+
+class PortalLoginRequest(BaseModel):
+    email: str
+    order_id: str
+
+
+class PortalMessageRequest(BaseModel):
+    order_id: str
+    email: str
+    message: str
+    sender: str = "customer"
+
+
+@api_router.post("/portal/login")
+async def portal_login(login_data: PortalLoginRequest):
+    """
+    Customer portal login - verify email matches order
+    """
+    email = login_data.email.strip().lower()
+    order_id = login_data.order_id.strip()
+    
+    # Search in service_requests collection
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    # Also search in orders collection (for orders created via new flow)
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Invalid email or order number")
+    
+    # Get messages for this order
+    messages = await db.portal_messages.find(
+        {"order_id": order_id},
+        {"_id": 0}
+    ).sort("created_at", 1).to_list(100)
+    
+    return {
+        "success": True,
+        "order": order,
+        "messages": messages
+    }
+
+
+@api_router.get("/portal/order/{order_id}")
+async def get_portal_order(order_id: str, email: str):
+    """
+    Get order details for customer portal (requires email verification)
+    """
+    email = email.strip().lower()
+    
+    # Search in service_requests
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    # Also search in orders collection
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Order not found or access denied")
+    
+    # Get messages
+    messages = await db.portal_messages.find(
+        {"order_id": order_id},
+        {"_id": 0}
+    ).sort("created_at", 1).to_list(100)
+    
+    return {
+        "success": True,
+        "order": order,
+        "messages": messages
+    }
+
+
+@api_router.post("/portal/message")
+async def send_portal_message(msg_data: PortalMessageRequest):
+    """
+    Send a message from customer or admin on an order
+    """
+    email = msg_data.email.strip().lower()
+    order_id = msg_data.order_id.strip()
+    
+    # Verify order access
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Order not found or access denied")
+    
+    # Create message
+    message = {
+        "id": str(uuid.uuid4()),
+        "order_id": order_id,
+        "sender": msg_data.sender,  # 'customer' or 'admin'
+        "message": msg_data.message.strip(),
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.portal_messages.insert_one(message)
+    
+    # If customer sends message, notify admin (optional background task)
+    if msg_data.sender == "customer":
+        logger.info(f"New customer message on order {order_id[:8]}: {msg_data.message[:50]}...")
+    
+    return {
+        "success": True,
+        "message": {
+            "id": message["id"],
+            "sender": message["sender"],
+            "message": message["message"],
+            "created_at": message["created_at"]
+        }
+    }
+
+
+@api_router.post("/portal/upload-file")
+async def portal_upload_file(
+    file: UploadFile = File(...),
+    order_id: str = Form(...),
+    email: str = Form(...)
+):
+    """
+    Customer uploads additional file through portal
+    """
+    email = email.strip().lower()
+    
+    # Verify order access
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Order not found or access denied")
+    
+    # Validate file extension
+    allowed_extensions = [".bin", ".hex", ".ecu", ".ori", ".mod"]
+    file_ext = Path(file.filename).suffix.lower()
+    
+    if file_ext not in allowed_extensions:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Only ECU files ({', '.join(allowed_extensions)}) are allowed."
+        )
+    
+    # Save file
+    file_id = str(uuid.uuid4())
+    filename = f"{file_id}_portal{file_ext}"
+    filepath = UPLOAD_DIR / filename
+    
+    content = await file.read()
+    with open(filepath, "wb") as f:
+        f.write(content)
+    
+    file_info = {
+        "file_id": file_id,
+        "original_filename": file.filename,
+        "stored_filename": filename,
+        "filepath": str(filepath),
+        "size": len(content),
+        "uploaded_via": "portal",
+        "uploaded_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    # Update order with new file
+    # Try service_requests first
+    result = await db.service_requests.update_one(
+        {"id": order_id},
+        {"$push": {"uploaded_files": file_info}}
+    )
+    
+    if result.modified_count == 0:
+        # Try orders collection
+        await db.orders.update_one(
+            {"id": order_id},
+            {"$push": {"uploaded_files": file_info}}
+        )
+    
+    return {
+        "success": True,
+        "file": file_info
+    }
+
+
+@api_router.get("/portal/download/{order_id}/{file_id}")
+async def portal_download_file(order_id: str, file_id: str, email: str):
+    """
+    Download processed file from customer portal
+    """
+    email = email.strip().lower()
+    
+    # Verify order access
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Order not found or access denied")
+    
+    # Find the file
+    file_info = None
+    for f in order.get("processed_files", []):
+        if f.get("file_id") == file_id:
+            file_info = f
+            break
+    
+    if not file_info:
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    filepath = Path(file_info.get("filepath", ""))
+    if not filepath.exists():
+        raise HTTPException(status_code=404, detail="File not found on server")
+    
+    return FileResponse(
+        path=filepath,
+        filename=file_info.get("processed_filename", f"processed_{file_id}.bin"),
+        media_type="application/octet-stream"
+    )
+
+
+@api_router.get("/portal/messages/{order_id}")
+async def get_portal_messages(order_id: str, email: str):
+    """
+    Get all messages for an order
+    """
+    email = email.strip().lower()
+    
+    # Verify order access
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Order not found or access denied")
+    
+    messages = await db.portal_messages.find(
+        {"order_id": order_id},
+        {"_id": 0}
+    ).sort("created_at", 1).to_list(100)
+    
+    return {
+        "success": True,
+        "messages": messages
+    }
+
+
+# Admin endpoint to send message to customer
+@api_router.post("/admin/portal/message")
+async def admin_send_portal_message(
+    order_id: str = Form(...),
+    message: str = Form(...)
+):
+    """
+    Admin sends a message to customer on an order
+    """
+    # Verify order exists
+    order = await db.service_requests.find_one({"id": order_id}, {"_id": 0})
+    if not order:
+        order = await db.orders.find_one({"id": order_id}, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    # Create message
+    msg = {
+        "id": str(uuid.uuid4()),
+        "order_id": order_id,
+        "sender": "admin",
+        "message": message.strip(),
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.portal_messages.insert_one(msg)
+    
+    return {
+        "success": True,
+        "message": msg
+    }
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
