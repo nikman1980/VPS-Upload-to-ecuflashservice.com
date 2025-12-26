@@ -1105,69 +1105,6 @@ class ECUAnalyzer:
         self.results["detected_maps"] = detected_maps
         self.results["available_services"] = available_services
     
-    def _detect_dpf_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect DPF (Diesel Particulate Filter) related maps and blocks"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection (most reliable)
-        dpf_strings = [
-            "DPF", "DIESEL PARTICULATE", "PARTICULATE FILTER",
-            "FAP",  # French: Filtre à particules
-            "RUSS",  # German: Russpartikelfilter
-            "PARTIKELFILTER", "SOOT", "REGENERATION", "REGEN",
-            "DPF_REGEN", "DPFREGEN", "FILTER_REGEN",
-            "PARTICLE", "PM_FILTER", "PMFILTER"
-        ]
-        
-        for s in dpf_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 20
-        
-        # Binary pattern detection
-        dpf_binary_patterns = [
-            (rb"DPF[_\s]", "DPF marker"),
-            (rb"dpf[_\s]", "dpf marker"),
-            (rb"(?i)soot[_\s]?load", "Soot load reference"),
-            (rb"(?i)regen[_\s]?temp", "Regeneration temperature"),
-            (rb"(?i)diff[_\s]?press", "Differential pressure sensor"),
-            (rb"(?i)exh[_\s]?press", "Exhaust pressure"),
-            (rb"(?i)part[_\s]?filter", "Particulate filter"),
-            (rb"FAP[_\x00]", "FAP marker"),
-            (rb"KDPF", "Korean DPF"),
-            (rb"(?i)ash[_\s]?load", "Ash load map"),
-        ]
-        
-        for pattern, desc in dpf_binary_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        # ECU type inference (Bosch diesel ECUs commonly have DPF)
-        ecu_type = self.results.get("ecu_type", "") or ""
-        if any(x in ecu_type.upper() for x in ["EDC17", "EDC16", "MD1", "DCM", "SID"]):
-            indicators.append("Diesel ECU type detected (likely has DPF)")
-            confidence_score += 10
-        
-        # Determine confidence level
-        if confidence_score >= 50:
-            confidence = "high"
-        elif confidence_score >= 25:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]  # Limit to top 5
-        }
-    
     def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """Detect EGR (Exhaust Gas Recirculation) related maps and blocks"""
         
