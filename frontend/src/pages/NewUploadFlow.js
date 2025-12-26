@@ -25,6 +25,10 @@ const NewUploadFlow = () => {
   const [selectedEcu, setSelectedEcu] = useState(null);
   const [customEcu, setCustomEcu] = useState('');
   
+  // Dynamic ECU types based on selected engine
+  const [dynamicEcuTypes, setDynamicEcuTypes] = useState([]);
+  const [ecuLoading, setEcuLoading] = useState(false);
+  
   // Manual vehicle entry (for "Other" option)
   const [isManualVehicle, setIsManualVehicle] = useState(false);
   const [manualVehicle, setManualVehicle] = useState({
@@ -36,7 +40,7 @@ const NewUploadFlow = () => {
   
   const [vehicleLoading, setVehicleLoading] = useState(false);
   
-  // Common ECU types for dropdown
+  // Fallback ECU types for manual entry
   const commonEcuTypes = [
     // Bosch
     { id: 'bosch-edc17c49', name: 'Bosch EDC17C49', manufacturer: 'Bosch' },
