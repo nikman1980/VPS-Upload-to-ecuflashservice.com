@@ -1906,7 +1906,7 @@ const NewUploadFlow = () => {
             {/* Free DTC Support Notice */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8">
               <p className="text-green-700 text-sm">
-                <strong>🆓 Free DTC Support:</strong> If any DTCs appear after our modification, we'll fix them FREE for 1 month (same file only).
+                <strong>🆓 Free DTC Support:</strong> If any DTCs appear after our modification, we&apos;ll fix them FREE for 1 month (same file only).
               </p>
             </div>
 
