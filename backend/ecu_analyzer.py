@@ -1151,7 +1151,7 @@ class ECUAnalyzer:
             indicators.append(f"DPF boundary markers (7FFF/8000): {count_7fff_8000 + count_8000_7fff} occurrences")
             confidence_score += 40
         elif count_7fff_8000 >= 1 or count_8000_7fff >= 1:
-            indicators.append(f"DPF boundary pattern found")
+            indicators.append("DPF boundary pattern found")
             confidence_score += 25
         
         # =================================================================
