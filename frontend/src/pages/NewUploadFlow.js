@@ -1844,7 +1844,7 @@ const NewUploadFlow = () => {
                 Access Your Customer Portal
               </h3>
               <p className="text-gray-600 mb-6">
-                Track your order status, download files, and manage your requests. Choose how you'd like to access:
+                Track your order status, download files, and manage your requests. Choose how you&apos;d like to access:
               </p>
               
               <div className="grid md:grid-cols-2 gap-4">
