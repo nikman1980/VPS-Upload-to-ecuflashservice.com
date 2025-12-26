@@ -1261,7 +1261,6 @@ class ECUAnalyzer:
             (rb"(?i)scr[_\s]?cat", "SCR catalyst"),
             (rb"(?i)urea[_\s]?dos", "Urea dosing"),
             (rb"(?i)urea[_\s]?inj", "Urea injection"),
-            (rb"NOX[_\s\x00]", "NOx marker"),
             (rb"(?i)nox[_\s]?sens", "NOx sensor"),
             (rb"(?i)denox", "DeNOx system"),
             (rb"(?i)nh3[_\s]?slip", "NH3 slip"),
