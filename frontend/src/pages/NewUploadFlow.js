@@ -277,11 +277,27 @@ const NewUploadFlow = () => {
     setVehicleLoading(false);
   };
 
-  // Handle engine selection
-  const handleEngineSelect = (engine) => {
+  // Handle engine selection - fetch recommended ECU types
+  const handleEngineSelect = async (engine) => {
     setSelectedEngine(engine);
     setSelectedEcu(null);
     setCustomEcu('');
+    setDynamicEcuTypes([]);
+    
+    if (engine && engine.id !== 'other') {
+      setEcuLoading(true);
+      try {
+        const response = await axios.get(`${API}/vehicles/ecu-types/${engine.id}`);
+        if (response.data && response.data.ecu_types) {
+          setDynamicEcuTypes(response.data.ecu_types);
+        }
+      } catch (error) {
+        console.error('Error fetching ECU types:', error);
+        // Fallback to empty - will use commonEcuTypes
+        setDynamicEcuTypes([]);
+      }
+      setEcuLoading(false);
+    }
   };
 
   // Handle ECU selection
@@ -289,9 +305,15 @@ const NewUploadFlow = () => {
     if (ecuId === 'other') {
       setSelectedEcu({ id: 'other', name: 'Other', manufacturer: 'Other' });
     } else {
-      const ecu = commonEcuTypes.find(e => e.id === ecuId);
-      setSelectedEcu(ecu);
-      setCustomEcu('');
+      // First check dynamic ECU types, then fallback to common types
+      let ecu = dynamicEcuTypes.find(e => e.id === ecuId);
+      if (!ecu) {
+        ecu = commonEcuTypes.find(e => e.id === ecuId);
+      }
+      if (ecu) {
+        setSelectedEcu(ecu);
+        setCustomEcu('');
+      }
     }
   };
 
