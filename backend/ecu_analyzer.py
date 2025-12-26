@@ -1285,25 +1285,27 @@ class ECUAnalyzer:
         mfr_upper = manufacturer.upper()
         
         # Check for truck/commercial vehicle indicators in the binary
+        # IMPORTANT: Use strict patterns to avoid false positives
         is_truck_ecu = False
         truck_indicators = [
-            (rb"FUSO", "Mitsubishi FUSO truck"),
-            (rb"HINO", "Hino truck"),
-            (rb"ISUZU", "Isuzu truck"),
-            (rb"MAN", "MAN truck"),
-            (rb"SCANIA", "Scania truck"),
-            (rb"VOLVO", "Volvo truck"),
-            (rb"DAF", "DAF truck"),
-            (rb"IVECO", "Iveco truck"),
-            (rb"MERCEDES", "Mercedes truck"),
-            (rb"ACTROS", "Mercedes Actros"),
-            (rb"ATEGO", "Mercedes Atego"),
-            (rb"CANTER", "Mitsubishi Canter"),
-            (rb"FIGHTER", "Mitsubishi Fighter"),
+            # Must be uppercase or have clear word boundaries to avoid false matches
+            (rb"FUSO\b", "Mitsubishi FUSO truck"),
+            (rb"HINO\b", "Hino truck"),
+            (rb"ISUZU\b", "Isuzu truck"),
+            (rb"\bMAN\b", "MAN truck"),  # Require word boundaries for short names
+            (rb"SCANIA\b", "Scania truck"),
+            (rb"VOLVO\b", "Volvo truck"),
+            (rb"\bDAF\b", "DAF truck"),  # Require word boundaries - "DAF" not "daf" in random data
+            (rb"IVECO\b", "Iveco truck"),
+            (rb"MERCEDES\b", "Mercedes truck"),
+            (rb"ACTROS\b", "Mercedes Actros"),
+            (rb"ATEGO\b", "Mercedes Atego"),
+            (rb"CANTER\b", "Mitsubishi Canter"),
+            (rb"FIGHTER\b", "Mitsubishi Fighter"),
         ]
         
         for pattern, desc in truck_indicators:
-            if re.search(pattern, file_data, re.IGNORECASE):
+            if re.search(pattern, file_data):  # Case sensitive for truck brands
                 indicators.append(f"Truck brand: {desc}")
                 is_truck_ecu = True
                 confidence_score += 25
