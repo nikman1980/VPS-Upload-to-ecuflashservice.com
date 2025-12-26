@@ -263,12 +263,16 @@ class ECUAnalyzer:
         """Detect specific ECU type/family from known patterns"""
         
         # ECU type patterns organized by manufacturer
+        # IMPORTANT: More specific patterns should come first
         ecu_patterns = [
             # ===================
             # BOSCH ECU Types
             # ===================
-            # Diesel ECUs
-            (rb"EDC17[A-Z]{0,2}[0-9]{0,2}", "Bosch", "Diesel"),
+            # Diesel ECUs - More specific patterns first
+            (rb"EDC17[A-Z]{2}[0-9]{1,2}", "Bosch", "Diesel"),  # EDC17CP52, EDC17C46, etc.
+            (rb"EDC17[A-Z][0-9]{1,2}", "Bosch", "Diesel"),     # EDC17C4, EDC17C5, etc.
+            (rb"EDC17[A-Z]{2}", "Bosch", "Diesel"),            # EDC17CP, EDC17CV, etc.
+            (rb"EDC17", "Bosch", "Diesel"),                     # Fallback
             (rb"EDC16[A-Z]{0,2}[0-9]{0,2}", "Bosch", "Diesel"),
             (rb"EDC15[A-Z]{0,2}[0-9]{0,2}", "Bosch", "Diesel"),
             (rb"MD1[A-Z]{2}[0-9]{0,3}", "Bosch", "Latest Diesel"),
