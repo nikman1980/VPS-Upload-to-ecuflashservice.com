@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:07:57.195190",
+  "last_update": "2025-12-26T23:13:05.595779",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -58172,6 +58172,2128 @@
                   {
                     "id": "20202",
                     "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Caterpillar": {
+        "id": "306",
+        "models": {
+          "Articulated Trucks": {
+            "id": "2783",
+            "engines": {
+              "Cat C13": {
+                "id": "11924",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C15": {
+                "id": "11925",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11940",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11939",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Asphalt Pavers": {
+            "id": "2785",
+            "engines": {
+              "Cat C2": {
+                "id": "11928",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C4": {
+                "id": "11929",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11930",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Backhoe Loaders": {
+            "id": "2788",
+            "engines": {
+              "Cat C4": {
+                "id": "11941",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11944",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "C2.2": {
+            "id": "3015",
+            "engines": {
+              "2.2 TDI": {
+                "id": "12461",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Cold Planers": {
+            "id": "2787",
+            "engines": {
+              "Cat C18": {
+                "id": "11945",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11942",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Compactors": {
+            "id": "2789",
+            "engines": {
+              "Cat C15": {
+                "id": "11948",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11949",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11951",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C4": {
+                "id": "11950",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11947",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11946",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Dozer": {
+            "id": "2786",
+            "engines": {
+              "Cat C15": {
+                "id": "11935",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C19": {
+                "id": "11936",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11937",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C3": {
+                "id": "11931",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C32": {
+                "id": "11938",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C4": {
+                "id": "11932",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11933",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11934",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Drills": {
+            "id": "2792",
+            "engines": {
+              "Cat C15": {
+                "id": "11954",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11955",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C32": {
+                "id": "11956",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Excavator": {
+            "id": "2793",
+            "engines": {
+              "306": {
+                "id": "13125",
+                "ecus": [
+                  {
+                    "id": "20135",
+                    "name": "Bosch EDC17CV45"
+                  }
+                ]
+              },
+              "Cat C13": {
+                "id": "11960",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C15": {
+                "id": "11961",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11962",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C4": {
+                "id": "11957",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11958",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11959",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Feller Bunchers": {
+            "id": "2794",
+            "engines": {
+              "Cat C7": {
+                "id": "11963",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11964",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Forest Machines": {
+            "id": "2795",
+            "engines": {
+              "Cat C7": {
+                "id": "11965",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11966",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Forwarders": {
+            "id": "2796",
+            "engines": {
+              "Cat C7": {
+                "id": "11967",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Harvesters": {
+            "id": "2797",
+            "engines": {
+              "Cat C9": {
+                "id": "11968",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Hydraulic Shovel": {
+            "id": "2798",
+            "engines": {
+              "Cat C32": {
+                "id": "11969",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Material Handlers": {
+            "id": "2799",
+            "engines": {
+              "Cat C7": {
+                "id": "11970",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Motor Graders": {
+            "id": "2800",
+            "engines": {
+              "Cat C7": {
+                "id": "11972",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11971",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Off-Highway Trucks": {
+            "id": "2801",
+            "engines": {
+              "Cat C15": {
+                "id": "11973",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11974",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11975",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C32": {
+                "id": "11976",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Pipelayers": {
+            "id": "2802",
+            "engines": {
+              "Cat C15": {
+                "id": "11978",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11977",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Road Reclaimer": {
+            "id": "2803",
+            "engines": {
+              "Cat C11": {
+                "id": "11980",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11979",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Site Prep Tractors": {
+            "id": "2804",
+            "engines": {
+              "Cat C9": {
+                "id": "11981",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Skid Steers": {
+            "id": "3040",
+            "engines": {
+              "V3307-CR": {
+                "id": "12534",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "V3800-CR": {
+                "id": "12533",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "Skidders": {
+            "id": "2805",
+            "engines": {
+              "Cat C7": {
+                "id": "11982",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Telehandler": {
+            "id": "3120",
+            "engines": {
+              "3.4 TDI": {
+                "id": "12704",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          },
+          "Track Loaders": {
+            "id": "2806",
+            "engines": {
+              "Cat C7": {
+                "id": "11983",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11984",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Underground - Hard Rock": {
+            "id": "2807",
+            "engines": {
+              "Cat C11": {
+                "id": "11985",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C15": {
+                "id": "11986",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11987",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11988",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel Dozers": {
+            "id": "2808",
+            "engines": {
+              "Cat C15": {
+                "id": "11991",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11989",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11992",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C32": {
+                "id": "11993",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11990",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel Excavators": {
+            "id": "2809",
+            "engines": {
+              "Cat C7": {
+                "id": "11994",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel loaders": {
+            "id": "2810",
+            "engines": {
+              "Cat C15": {
+                "id": "11997",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "11998",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C27": {
+                "id": "11999",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C32": {
+                "id": "12000",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C7": {
+                "id": "11995",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "11996",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel Tractor-Scrapers": {
+            "id": "2811",
+            "engines": {
+              "Cat C15": {
+                "id": "12003",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C18": {
+                "id": "12002",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              },
+              "Cat C9": {
+                "id": "12001",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Daewoo": {
+        "id": "304",
+        "models": {
+          "Novus": {
+            "id": "2775",
+            "engines": {
+              "15.0L ISX": {
+                "id": "11896",
+                "ecus": [
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              },
+              "5.9L TD": {
+                "id": "12554",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Deutz - Fahr": {
+        "id": "360",
+        "models": {
+          "Forklift Linde": {
+            "id": "2999",
+            "engines": {
+              "16.0L V8 TCD": {
+                "id": "12425",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Doosan": {
+        "id": "191",
+        "models": {
+          "Air Compressors - 185": {
+            "id": "3091",
+            "engines": {
+              "4.5L TD": {
+                "id": "12647",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "DL200": {
+            "id": "2572",
+            "engines": {
+              "5.9TD": {
+                "id": "11517",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DL250": {
+            "id": "2573",
+            "engines": {
+              "5.9TD": {
+                "id": "11516",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX140LC": {
+            "id": "2341",
+            "engines": {
+              "5.9 TD": {
+                "id": "11020",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX160LC": {
+            "id": "2342",
+            "engines": {
+              "5.9 TD": {
+                "id": "11021",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX180LC": {
+            "id": "2343",
+            "engines": {
+              "5.9 TD": {
+                "id": "11022",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX190LC": {
+            "id": "2935",
+            "engines": {
+              "5.9 TD": {
+                "id": "12254",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX225LC": {
+            "id": "2344",
+            "engines": {
+              "5.9 TD": {
+                "id": "11023",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX235LC": {
+            "id": "2345",
+            "engines": {
+              "5.9 TD": {
+                "id": "11024",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "DX300LC": {
+            "id": "2571",
+            "engines": {
+              "7.6 TD": {
+                "id": "11512",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "DX340LC": {
+            "id": "2934",
+            "engines": {
+              "7.6 TD": {
+                "id": "12250",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "DX350LC": {
+            "id": "3257",
+            "engines": {
+              "7.6L TD": {
+                "id": "13049",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "DX420LC": {
+            "id": "3068",
+            "engines": {
+              "9.9L TDI": {
+                "id": "12600",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "DX490LC": {
+            "id": "3022",
+            "engines": {
+              "15.7L TD": {
+                "id": "12473",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Dulevo": {
+        "id": "429",
+        "models": {
+          "204L": {
+            "id": "3300",
+            "engines": {
+              "3.0 TDI": {
+                "id": "13134",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "FAW": {
+        "id": "215",
+        "models": {
+          "CA 3xxx": {
+            "id": "2610",
+            "engines": {
+              "8.6L CA6DL2": {
+                "id": "11579",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          },
+          "J6 3xxx": {
+            "id": "2465",
+            "engines": {
+              "11L CA6DМ": {
+                "id": "11308",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "FPT Industrial": {
+        "id": "402",
+        "models": {
+          "Gensets": {
+            "id": "3175",
+            "engines": {
+              "15.9L I6": {
+                "id": "12881",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "6.7L I6": {
+                "id": "12883",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "8.7L I6": {
+                "id": "12882",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Freightliner": {
+        "id": "286",
+        "models": {
+          "114SD": {
+            "id": "2728",
+            "engines": {
+              "DD13 12.8 L": {
+                "id": "11784",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          },
+          "122SD": {
+            "id": "2727",
+            "engines": {
+              "DD13 12.8 L": {
+                "id": "11781",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "DD15 14.8 L": {
+                "id": "11782",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "DD16 15.6 L": {
+                "id": "11783",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Genie": {
+        "id": "329",
+        "models": {
+          "GTH-xxx": {
+            "id": "2881",
+            "engines": {
+              "3.6L TD": {
+                "id": "12153",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hako": {
+        "id": "382",
+        "models": {
+          "Multicar": {
+            "id": "3095",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12655",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hamm": {
+        "id": "384",
+        "models": {
+          "Soil Compactors": {
+            "id": "3098",
+            "engines": {
+              "4.5L TDI": {
+                "id": "12669",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "Tandem rollers": {
+            "id": "3099",
+            "engines": {
+              "4.5L TDI": {
+                "id": "12670",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hatz diesel": {
+        "id": "378",
+        "models": {
+          "H-Series": {
+            "id": "3066",
+            "engines": {
+              "1.5L TD": {
+                "id": "12595",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "2.0L TD": {
+                "id": "12596",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "3.2L TD": {
+                "id": "12745",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              },
+              "3.8L TD": {
+                "id": "12958",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "HELI": {
+        "id": "421",
+        "models": {
+          "Forklift": {
+            "id": "3275",
+            "engines": {
+              "2.4L TD": {
+                "id": "13090",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hitachi": {
+        "id": "282",
+        "models": {
+          "ZW550xx": {
+            "id": "2716",
+            "engines": {
+              "15.6 TD": {
+                "id": "11763",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "ZX210xx": {
+            "id": "2715",
+            "engines": {
+              "3.0 TD": {
+                "id": "12365",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              },
+              "5.2 TD": {
+                "id": "11762",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "ZX330xx": {
+            "id": "3023",
+            "engines": {
+              "7.8L TD": {
+                "id": "12475",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "ZX470xx": {
+            "id": "3110",
+            "engines": {
+              "9.8L TDI": {
+                "id": "12684",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "ZX870xx": {
+            "id": "2985",
+            "engines": {
+              "15.7 TDI": {
+                "id": "12386",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
                   }
                 ]
               }
