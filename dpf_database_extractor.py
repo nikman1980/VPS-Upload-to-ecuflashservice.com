@@ -317,7 +317,7 @@ async def main():
         print("📂 Starting fresh extraction...")
     
     print(f"\n🔑 Using credentials: {EMAIL}")
-    input("\nPress ENTER to start extraction (Ctrl+C to cancel)...")
+    print("\n🚀 Starting extraction automatically...")
     
     async with async_playwright() as p:
         # Launch browser (non-headless so you can see progress)
