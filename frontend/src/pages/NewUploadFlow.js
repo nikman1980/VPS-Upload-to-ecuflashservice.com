@@ -1676,7 +1676,7 @@ const NewUploadFlow = () => {
                         <label className="block text-sm text-gray-500 mb-2">Enter DTC codes to remove (optional):</label>
                         <textarea
                           value={dtcMultipleCodes}
-                          onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(&apos;&apos;); }}
+                          onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(''); }}
                           placeholder="P0420&#10;P2002&#10;P0401"
                           className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none min-h-[80px]"
                           rows={3}
