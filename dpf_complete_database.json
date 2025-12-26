@@ -1,0 +1,1371 @@
+{
+  "source": "dpfoffservice.com",
+  "extraction_started": "2025-12-26T12:28:06.069590",
+  "vehicle_types": [
+    {
+      "id": "3",
+      "name": "Agriculture"
+    },
+    {
+      "id": "6",
+      "name": "Bike / Marine / Snowmobile"
+    },
+    {
+      "id": "2",
+      "name": "Bus"
+    },
+    {
+      "id": "1",
+      "name": "Car"
+    },
+    {
+      "id": "5",
+      "name": "Construction / Equipment"
+    },
+    {
+      "id": "4",
+      "name": "Truck"
+    }
+  ],
+  "Agriculture": {
+    "brands": {
+      "Atlas": {
+        "id": "276",
+        "models": {
+          "140 W": {
+            "id": "2689",
+            "engines": {
+              "4.1L": {
+                "id": "11721",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "230 MH": {
+            "id": "2690",
+            "engines": {
+              "6.7L": {
+                "id": "11722",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Ausa": {
+        "id": "403",
+        "models": {
+          "D1000": {
+            "id": "3181",
+            "engines": {
+              "3.8L TDI": {
+                "id": "12900",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Avant": {
+        "id": "389",
+        "models": {
+          "760i": {
+            "id": "3115",
+            "engines": {
+              "1.9L TCR": {
+                "id": "12694",
+                "ecus": [
+                  {
+                    "id": "20186",
+                    "name": "Denso DC1U"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Belorus": {
+        "id": "359",
+        "models": {
+          "1221": {
+            "id": "2998",
+            "engines": {
+              "7.12L TD": {
+                "id": "12424",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Buhler": {
+        "id": "334",
+        "models": {
+          "VERSATILE": {
+            "id": "2902",
+            "engines": {
+              "XTA15-CE": {
+                "id": "12188",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Caron": {
+        "id": "428",
+        "models": {
+          "CT-x SERIES": {
+            "id": "3299",
+            "engines": {
+              "3.0 TDI": {
+                "id": "13132",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "CASE": {
+        "id": "208",
+        "models": {
+          "AF / AFX": {
+            "id": "2432",
+            "engines": {
+              "11.1L": {
+                "id": "11252",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              },
+              "12.9L": {
+                "id": "11253",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              },
+              "16.0L V8": {
+                "id": "11657",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "4.5L": {
+                "id": "11225",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              },
+              "6.7L": {
+                "id": "11215",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "8.3L": {
+                "id": "11292",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "8.7L": {
+                "id": "11228",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "Axial Flow Combines": {
+            "id": "3161",
+            "engines": {
+              "15.9L I6": {
+                "id": "12856",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "6.7L I6": {
+                "id": "12854",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "8.7L I6": {
+                "id": "12855",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "CVX": {
+            "id": "2433",
+            "engines": {
+              "6.6L": {
+                "id": "11220",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "Farmall": {
+            "id": "2438",
+            "engines": {
+              "3.4L": {
+                "id": "11229",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              },
+              "4.5L I4": {
+                "id": "12857",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Farmlift": {
+            "id": "2434",
+            "engines": {
+              "3.3L": {
+                "id": "11815",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "4.5L I4": {
+                "id": "11221",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Magnum": {
+            "id": "2431",
+            "engines": {
+              "6.7L": {
+                "id": "11226",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "8.3L": {
+                "id": "11227",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "8.7L I6": {
+                "id": "11211",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "MAXXUM / MXU": {
+            "id": "2437",
+            "engines": {
+              "4.5L I4": {
+                "id": "11254",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "6.7L I6": {
+                "id": "11224",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "8.3L": {
+                "id": "11499",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "9.0L": {
+                "id": "11500",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          },
+          "Optum": {
+            "id": "3162",
+            "engines": {
+              "6.7L I6": {
+                "id": "12858",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Puma": {
+            "id": "2436",
+            "engines": {
+              "6.7L I6": {
+                "id": "11223",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Quadtrac": {
+            "id": "2435",
+            "engines": {
+              "12.9L": {
+                "id": "11222",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "Sprayers": {
+            "id": "2440",
+            "engines": {
+              "6.7L": {
+                "id": "11255",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "8.3L": {
+                "id": "11294",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          },
+          "Steiger / Steiger Quadtrac": {
+            "id": "2441",
+            "engines": {
+              "12.9L I6": {
+                "id": "11257",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "15.0L": {
+                "id": "11501",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "8.3L": {
+                "id": "11295",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "8.7L I6": {
+                "id": "11256",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Sugar Harvesters": {
+            "id": "2442",
+            "engines": {
+              "12.9L": {
+                "id": "11258",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "8.3L": {
+                "id": "11502",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "8.7L": {
+                "id": "11259",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "SV 185": {
+            "id": "3121",
+            "engines": {
+              "2.2L TDI": {
+                "id": "12707",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Vestrum": {
+            "id": "3163",
+            "engines": {
+              "4.5L I4": {
+                "id": "12859",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Caterpillar": {
+        "id": "242",
+        "models": {
+          "C9-B ACERT": {
+            "id": "2563",
+            "engines": {
+              "8.4 TD": {
+                "id": "11488",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          },
+          "Telehandler": {
+            "id": "3119",
+            "engines": {
+              "3.4 TDI": {
+                "id": "12703",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Challenger": {
+        "id": "195",
+        "models": {
+          "MT7xx": {
+            "id": "2669",
+            "engines": {
+              "6.6L": {
+                "id": "11687",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "7.4L": {
+                "id": "11686",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          },
+          "MT8xx": {
+            "id": "2670",
+            "engines": {
+              "7.4L": {
+                "id": "11688",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "8.4L": {
+                "id": "11689",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "CLAAS": {
+        "id": "232",
+        "models": {
+          "Ares": {
+            "id": "2526",
+            "engines": {
+              "4.5L": {
+                "id": "11409",
+                "ecus": [
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              },
+              "6.8L": {
+                "id": "11410",
+                "ecus": [
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              }
+            }
+          },
+          "Arion": {
+            "id": "2527",
+            "engines": {
+              "4.5L": {
+                "id": "11411",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              },
+              "6.8L": {
+                "id": "11412",
+                "ecus": [
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              }
+            }
+          },
+          "Axion": {
+            "id": "2529",
+            "engines": {
+              "6.7L I6": {
+                "id": "11413",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  },
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              },
+              "8.7L I6": {
+                "id": "11506",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Celtis": {
+            "id": "2530",
+            "engines": {
+              "4.5L": {
+                "id": "11414",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              }
+            }
+          },
+          "Jaguar": {
+            "id": "2654",
+            "engines": {
+              "12.8L": {
+                "id": "11655",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "16L": {
+                "id": "11656",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Lexion": {
+            "id": "2653",
+            "engines": {
+              "10.7L": {
+                "id": "12130",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "16L": {
+                "id": "11654",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Tucano": {
+            "id": "2652",
+            "engines": {
+              "6.4L": {
+                "id": "11652",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "7.7L": {
+                "id": "11653",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Xerion": {
+            "id": "2869",
+            "engines": {
+              "12.8L 6L": {
+                "id": "12129",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Daedong": {
+        "id": "227",
+        "models": {
+          "DSM72G(C)": {
+            "id": "2514",
+            "engines": {
+              "2.4 TD": {
+                "id": "11386",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          },
+          "DX series": {
+            "id": "2510",
+            "engines": {
+              "2.4 TD": {
+                "id": "11383",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          },
+          "DXM85G(C)": {
+            "id": "2515",
+            "engines": {
+              "2.4 TD": {
+                "id": "11387",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          },
+          "NX series": {
+            "id": "2511",
+            "engines": {
+              "2.4 TD": {
+                "id": "11382",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          },
+          "RX series": {
+            "id": "2512",
+            "engines": {
+              "2.4 TD": {
+                "id": "11379",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Deutz - Fahr": {
+        "id": "203",
+        "models": {
+          "Agrotron": {
+            "id": "2418",
+            "engines": {
+              "4.0L TD": {
+                "id": "11603",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "4.1L TD": {
+                "id": "11193",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "6.0L TD": {
+                "id": "11604",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "7.1L TD": {
+                "id": "11605",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "7.8L TD": {
+                "id": "12277",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "Atlas": {
+            "id": "2628",
+            "engines": {
+              "4.0L TD": {
+                "id": "11601",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              }
+            }
+          },
+          "H - HTS": {
+            "id": "2629",
+            "engines": {
+              "6.0L TD": {
+                "id": "11602",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              }
+            }
+          },
+          "Mobile Machinery": {
+            "id": "2419",
+            "engines": {
+              "16.0L V8": {
+                "id": "11194",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "4.0L": {
+                "id": "11606",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "4.1L": {
+                "id": "11195",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "4.8L": {
+                "id": "11607",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "6.1L": {
+                "id": "11608",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "7.1L": {
+                "id": "11609",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              },
+              "7.8L": {
+                "id": "11196",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "Series 5": {
+            "id": "2420",
+            "engines": {
+              "2.9L": {
+                "id": "12842",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              },
+              "3.6L": {
+                "id": "11197",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              },
+              "4.0L": {
+                "id": "11198",
+                "ecus": [
+                  {
+                    "id": "19779",
+                    "name": "Bosch EDC17C53"
+                  }
+                ]
+              }
+            }
+          },
+          "Series 6": {
+            "id": "2421",
+            "engines": {
+              "4.1L": {
+                "id": "11199",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "6.1L": {
+                "id": "11200",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "Series 7": {
+            "id": "2422",
+            "engines": {
+              "6.1L": {
+                "id": "11201",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Dieci": {
+        "id": "367",
+        "models": {
+          "Agri Star": {
+            "id": "3018",
+            "engines": {
+              "4.5L TD": {
+                "id": "12466",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Erkunt": {
+        "id": "412",
+        "models": {
+          "Hasmet": {
+            "id": "3223",
+            "engines": {
+              "3.5L TD": {
+                "id": "12987",
+                "ecus": [
+                  {
+                    "id": "20243",
+                    "name": "Bosch MD1CC898"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Faresin": {
+        "id": "424",
+        "models": {
+          "Leader PF": {
+            "id": "3289",
+            "engines": {
+              "4.5L TD": {
+                "id": "13116",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              },
+              "6.7L TD": {
+                "id": "13115",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "last_update": "2025-12-26T12:32:35.804327"
+}
