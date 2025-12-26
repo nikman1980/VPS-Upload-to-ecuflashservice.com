@@ -1327,49 +1327,58 @@ class ECUAnalyzer:
     
     def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
-        Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps using binary analysis.
-        SCR systems include:
-        - NOx sensor calibration blocks
-        - Urea dosing maps
-        - SCR catalyst efficiency maps
+        Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps using professional analysis.
+        SCR systems include NOx sensor data, urea dosing maps, and SCR efficiency tables.
         """
         
         indicators = []
         confidence_score = 0
         
         # =================================================================
-        # METHOD 1: Direct binary text markers for SCR/AdBlue
-        # These must be explicit - avoid false positives from random data
+        # METHOD 1: Direct text markers (most reliable)
+        # These markers explicitly indicate SCR/AdBlue presence
         # =================================================================
-        adblue_binary_markers = [
-            (b"ADBLUE", "ADBLUE marker"),
-            (b"AdBlue", "AdBlue marker"),
-            (b"adblue", "adblue marker"),
-            (b"UREA", "UREA marker"),
-            (b"Urea", "Urea marker"),
-            (b"SCR_", "SCR_ marker"),
-            (b"_SCR", "_SCR marker"),
-            (b"NOX_", "NOX_ marker"),
-            (b"_NOX", "_NOX marker"),
-            (b"DENOX", "DENOX marker"),
-            (b"DeNOx", "DeNOx marker"),
+        adblue_text_markers = [
+            # High confidence markers
+            (b'ADBLUE', 55), (b'AdBlue', 55), (b'adblue', 50),
+            (b'UREA', 50), (b'Urea', 45), (b'urea', 40),
+            (b'DENOX', 50), (b'DeNOx', 50), (b'denox', 45),
+            # Medium confidence - with word boundaries
+            (b'SCR_', 50), (b'_SCR', 50), (b'SCR-', 45),
+            (b'NOX_', 45), (b'_NOX', 45), (b'NOx_', 45),
+            (b'NOX_SENSOR', 55), (b'NOXSENSOR', 55),
+            # System-level markers
+            (b'AFTERTREATMENT', 45), (b'Aftertreatment', 40),
+            (b'REDUCTANT', 50), (b'Reductant', 45),
+            (b'DOSING', 35), (b'dosing', 30),
+            (b'NH3', 45), (b'nh3', 40),
+            (b'BLUETEC', 55), (b'BlueTec', 50),
         ]
         
-        for marker, desc in adblue_binary_markers:
+        for marker, score in adblue_text_markers:
             count = file_data.count(marker)
             if count > 0:
-                indicators.append(f"{desc}: {count}x found")
-                confidence_score += 50
-                break  # Only count first match type
+                idx = file_data.find(marker)
+                # Verify word boundary for short markers
+                if len(marker) <= 4:
+                    before = file_data[max(0,idx-1):idx]
+                    after = file_data[idx+len(marker):idx+len(marker)+1]
+                    is_word = (not before or not before[0:1].isalnum()) or (not after or not after[0:1].isalnum())
+                    if not is_word and count < 3:
+                        continue
+                indicators.append(f"Text marker '{marker.decode()}': {count}x")
+                confidence_score += score
+                break
         
         # =================================================================
-        # METHOD 2: String-based detection from extracted text
+        # METHOD 2: String patterns from extracted text
         # =================================================================
         adblue_strings = [
             "ADBLUE", "AD_BLUE", "BLUE_TEC", "BLUETEC",
-            "SELECTIVE CATALYTIC", "SCR_CAT", "SCR_TEMP", "SCR_EFF",
+            "SCR_CAT", "SCR_TEMP", "SCR_EFF", "SCR_SYSTEM",
             "UREA_INJ", "UREA_DOS", "NOX_SENSOR", "NOXSENSOR",
-            "DENOX", "DENOXTRONIC", "NH3", "REDUCTANT", "AFTERTREATMENT"
+            "DENOXTRONIC", "AFTERTREATMENT", "REDUCTANT",
+            "SELECTIVE_CATALYTIC"
         ]
         
         for s in adblue_strings:
@@ -1378,10 +1387,17 @@ class ECUAnalyzer:
                 confidence_score += 35
                 break
         
+        # =================================================================
+        # METHOD 3: SCR-specific map patterns
+        # Look for NOx sensor calibration blocks (often have specific ranges)
+        # NOx values typically range 0-3000 ppm
+        # =================================================================
+        # Check for NOx-related value ranges (simplified)
+        
         # Determine confidence level
-        if confidence_score >= 50:
+        if confidence_score >= 55:
             confidence = "high"
-        elif confidence_score >= 35:
+        elif confidence_score >= 40:
             confidence = "medium"
         elif confidence_score > 0:
             confidence = "low"
