@@ -1331,183 +1331,150 @@ class ECUAnalyzer:
         Uses methods similar to WinOLS and professional tuning tools.
         
         Detection methods:
-        1. SCR-specific DTC codes (3712-3715, 4094, 5246, 5249, etc.)
-        2. Temperature axis patterns (SCR catalyst temps 150-700°C)
-        3. Dosing map characteristics
+        1. ECU Type identification (CM2150E, EDC17CP52, etc.)
+        2. SCR text markers (UREA, NOX, SCR, etc.)
+        3. SCR DTC code concentrations (high counts = SCR present)
         4. DCU (Dosing Control Unit) signatures
-        5. Text markers (as fallback)
         """
         
         indicators = []
         confidence_score = 0
         
-        # =================================================================
-        # METHOD 1: SCR-Specific DTC Code Detection (MOST RELIABLE)
-        # Professional tools use DTC presence to detect SCR capability
-        # =================================================================
-        scr_dtc_codes = [
-            # Cummins SCR DTCs
-            (3712, "SCR System Fault"),
-            (3713, "SCR Inducement"),
-            (3714, "SCR NOx Efficiency"),
-            (3715, "SCR Derate"),
-            (4094, "Aftertreatment Fault"),
-            (4374, "Aftertreatment DEF"),
-            (4765, "DEF Dosing"),
-            (4766, "DEF Tank"),
-            (5246, "SCR NOx Sensor"),
-            (5249, "SCR System"),
-            (5394, "DEF Quality"),
-            # Bosch SCR DTCs (P-codes as numeric)
-            (20950, "NOx Sensor Circuit"),  # P20EE
-            (20951, "SCR NOx Catalyst"),    # P20EF
-            (20939, "SCR System"),          # P20DB
-        ]
-        
-        dtc_hits = 0
-        dtc_indicators = []
-        for dtc_code, dtc_desc in scr_dtc_codes:
-            # Search as 16-bit both endianness
-            be_bytes = struct.pack('>H', dtc_code)
-            le_bytes = struct.pack('<H', dtc_code)
-            count_be = file_data.count(be_bytes)
-            count_le = file_data.count(le_bytes)
-            total = count_be + count_le
-            
-            # Only count if found multiple times (to avoid false positives)
-            if total >= 3:
-                dtc_hits += 1
-                dtc_indicators.append(f"DTC {dtc_code}")
-        
-        if dtc_hits >= 3:
-            indicators.append(f"SCR DTCs found: {dtc_hits} types ({', '.join(dtc_indicators[:3])})")
-            confidence_score += 60
-        elif dtc_hits >= 1:
-            indicators.append(f"SCR DTC present: {dtc_indicators[0]}")
-            confidence_score += 35
-        
-        # =================================================================
-        # METHOD 2: SCR Temperature Axis Detection
-        # SCR systems have characteristic temperature maps (150-700°C)
-        # =================================================================
-        if confidence_score < 50:
-            temp_axes_found = 0
-            for i in range(0, min(len(file_data) - 10, 500000), 2):
-                vals = []
-                for j in range(5):
-                    if i + j*2 + 2 <= len(file_data):
-                        val = struct.unpack('>H', file_data[i + j*2:i + j*2 + 2])[0]
-                        vals.append(val)
-                
-                # Check for SCR temperature axis pattern
-                if len(vals) == 5:
-                    if (all(150 <= v <= 700 for v in vals) and 
-                        all(vals[k] < vals[k+1] for k in range(len(vals)-1)) and
-                        vals[-1] - vals[0] >= 100):
-                        temp_axes_found += 1
-                        if temp_axes_found >= 3:
-                            break
-            
-            if temp_axes_found >= 3:
-                indicators.append(f"SCR temp axes: {temp_axes_found}")
-                confidence_score += 40
-            elif temp_axes_found >= 1:
-                indicators.append("SCR temp axis pattern")
-                confidence_score += 20
-        
-        # =================================================================
-        # METHOD 3: DCU (Dosing Control Unit) Detection
-        # =================================================================
-        if HAS_ECU_DATABASE:
-            for marker, desc in SCR_DCU_SIGNATURES:
-                if marker in file_data:
-                    indicators.append(f"DCU: {desc}")
-                    confidence_score += 60
-                    break
-        
-        dcu_markers = [
-            (b'DENOXTRONIC', 65), (b'Denoxtronic', 60),
-            (b'DOSING_UNIT', 55), (b'DOSING UNIT', 50),
-            (b'UREADOS', 55), (b'DEF_PUMP', 50),
-            (b'REDUCTANT', 50), (b'NOX_CTRL', 50),
-        ]
-        for marker, score in dcu_markers:
-            if marker in file_data:
-                indicators.append(f"SCR marker: {marker.decode()}")
-                confidence_score += score
-                break
-        
-        # =================================================================
-        # METHOD 4: Text Marker Detection (Fallback)
-        # =================================================================
-        if confidence_score < 30:
-            adblue_markers = [
-                (b'ADBLUE', 60), (b'AdBlue', 60), (b'adblue', 55),
-                (b'UREA', 50), (b'Urea', 45),
-                (b'DENOX', 50), (b'DeNOx', 50),
-                (b'SCR_CAT', 55), (b'SCRCAT', 50),
-                (b'NOX_SENS', 50), (b'NOXSENS', 50),
-                (b'AFTERTREAT', 50),
-            ]
-            for marker, score in adblue_markers:
-                count = file_data.count(marker)
-                if count > 0:
-                    # Verify not false positive (like "ABCDEF")
-                    idx = file_data.find(marker)
-                    context = file_data[max(0, idx-5):idx+len(marker)+5]
-                    if b'ABCDEF' not in context:  # Exclude hex test patterns
-                        indicators.append(f"Text: {marker.decode()}")
-                        confidence_score += score
-                        break
-        
-        # =================================================================
-        # METHOD 5: ECU Type-Based Detection
-        # Some ECU types are KNOWN to have SCR
-        # =================================================================
+        # Get ECU info for type-based detection
         ecu_type = self.results.get("ecu_type", "") or ""
         manufacturer = self.results.get("manufacturer", "") or ""
         ecu_upper = ecu_type.upper()
         mfr_upper = manufacturer.upper()
+        file_size = len(file_data)
+        
+        # =================================================================
+        # METHOD 1: ECU Type-Based Detection (MOST RELIABLE)
+        # Certain ECU types are KNOWN to have SCR
+        # =================================================================
         
         # Cummins CM2150E and later ALL have SCR capability
         # (CM2150E = EPA2010 compliant = requires SCR)
-        if "CM2150E" in ecu_upper or "CM2150E" in mfr_upper:
+        if "CM2150E" in ecu_upper:
             indicators.append("Cummins CM2150E (EPA2010 SCR)")
-            confidence_score += 50
+            confidence_score += 70
         elif "CM2250" in ecu_upper or "CM2350" in ecu_upper:
             indicators.append("Cummins CM22xx/CM23xx (SCR standard)")
-            confidence_score += 55
+            confidence_score += 70
+        elif "CM2150" in ecu_upper:
+            # CM2150 without 'E' suffix might be pre-EPA2010
+            # Check for additional SCR indicators
+            pass
         
-        # Bosch EDC17CP52/CV41/CV44/CV54 are truck ECUs with SCR
+        # Bosch truck ECUs with SCR
         truck_scr_ecus = ["EDC17CP52", "EDC17CV41", "EDC17CV44", "EDC17CV54", "EDC17C49", "EDC17C54"]
         for scr_ecu in truck_scr_ecus:
             if scr_ecu in ecu_upper:
                 indicators.append(f"Bosch {scr_ecu} (Truck SCR)")
-                confidence_score += 45
+                confidence_score += 55
                 break
         
         # =================================================================
-        # EXCLUSION: Light vehicle ECUs typically don't have SCR in main ECU
-        # (They use separate DCU if equipped)
+        # METHOD 2: DCU (Dosing Control Unit) Detection
         # =================================================================
-        # Transtron light vehicle ECUs - exclude unless DCU signatures found
-        if "TRANSTRON" in mfr_upper and confidence_score < 40:
-            # Check if this might be a DCU file (smaller size, specific markers)
-            file_size = len(file_data)
-            if file_size < 512 * 1024:  # < 512KB might be DCU
-                pass  # Keep any detected score
-            else:
-                # Large Transtron file without strong SCR indicators = no SCR
-                if confidence_score <= 20:
+        dcu_markers = [
+            (b'DENOXTRONIC', 70), (b'Denoxtronic', 65),
+            (b'DOSING_UNIT', 60), (b'DOSING UNIT', 55),
+            (b'UREADOS', 60), (b'DEF_PUMP', 55),
+            (b'REDUCTANT_CTRL', 60), (b'NOX_CTRL', 55),
+            (b'SCR_CTRL', 60), (b'SCRCTRL', 55),
+        ]
+        for marker, score in dcu_markers:
+            if marker in file_data:
+                indicators.append(f"SCR controller: {marker.decode()}")
+                confidence_score += score
+                break
+        
+        if HAS_ECU_DATABASE:
+            for marker, desc in SCR_DCU_SIGNATURES:
+                if marker in file_data:
+                    indicators.append(f"DCU: {desc}")
+                    confidence_score += 65
+                    break
+        
+        # =================================================================
+        # METHOD 3: Strong Text Markers
+        # Only use unambiguous markers
+        # =================================================================
+        if confidence_score < 50:
+            strong_markers = [
+                (b'ADBLUE', 65), (b'AdBlue', 65),
+                (b'UREA_TANK', 60), (b'UREA_PUMP', 60),
+                (b'UREA_DOSING', 65), (b'UREADOS', 60),
+                (b'DEF_TANK', 60), (b'DEF_PUMP', 55),
+                (b'SCR_CATALYST', 60), (b'SCRCAT', 55),
+                (b'NOX_SENSOR', 55), (b'NOXSENS', 50),
+                (b'DENOX_', 55), (b'DENOX', 50),
+                (b'AFTERTREATMENT', 55),
+            ]
+            for marker, score in strong_markers:
+                count = file_data.count(marker)
+                if count > 0:
+                    # Verify it's real (not part of "ABCDEF" or other patterns)
+                    idx = file_data.find(marker)
+                    context = file_data[max(0, idx-10):idx+len(marker)+10]
+                    if b'ABCDEF' not in context:
+                        indicators.append(f"SCR text: {marker.decode()}")
+                        confidence_score += score
+                        break
+        
+        # =================================================================
+        # METHOD 4: SCR DTC Code Analysis (use higher thresholds)
+        # Only count if DTC codes appear in HIGH concentrations
+        # (to avoid false positives from random byte patterns)
+        # =================================================================
+        if confidence_score < 50:
+            # Only check specific high-value DTCs with very high thresholds
+            # These thresholds are based on real Cummins SCR file analysis
+            scr_dtc_codes = [
+                (3712, 30),   # Need 30+ occurrences
+                (4094, 50),   # Need 50+ occurrences (common in SCR files)
+                (5249, 100),  # Need 100+ occurrences (very common in SCR files)
+            ]
+            
+            dtc_strong_hits = 0
+            for dtc_code, threshold in scr_dtc_codes:
+                be_bytes = struct.pack('>H', dtc_code)
+                le_bytes = struct.pack('<H', dtc_code)
+                count = file_data.count(be_bytes) + file_data.count(le_bytes)
+                if count >= threshold:
+                    dtc_strong_hits += 1
+            
+            if dtc_strong_hits >= 2:
+                indicators.append(f"SCR DTC concentration detected")
+                confidence_score += 50
+            elif dtc_strong_hits == 1:
+                indicators.append("SCR DTC pattern")
+                confidence_score += 30
+        
+        # =================================================================
+        # EXCLUSION: Light vehicle ECUs (Transtron, etc.)
+        # These typically don't have SCR in main ECU
+        # =================================================================
+        if "TRANSTRON" in mfr_upper and confidence_score < 60:
+            # Transtron without strong SCR indicators = no SCR
+            # (SCR would be in separate DCU if equipped)
+            if confidence_score <= 30:
+                confidence_score = 0
+                indicators = []
+        
+        # Same for small Denso/Isuzu light vehicle ECUs
+        if "DENSO" in mfr_upper or "ISUZU" in mfr_upper:
+            if file_size < 2 * 1024 * 1024 and confidence_score < 60:  # < 2MB
+                if confidence_score <= 30:
                     confidence_score = 0
                     indicators = []
         
         # =================================================================
         # Calculate final confidence
         # =================================================================
-        if confidence_score >= 55:
+        if confidence_score >= 60:
             confidence = "high"
-        elif confidence_score >= 35:
+        elif confidence_score >= 40:
             confidence = "medium"
         elif confidence_score > 0:
             confidence = "low"
