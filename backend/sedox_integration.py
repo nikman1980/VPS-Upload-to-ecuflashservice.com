@@ -368,7 +368,7 @@ class SedoxIntegration:
             for m in manufacturers:
                 if m.get("name", "").lower() == make_lower:
                     return m.get("id")
-        except:
+        except Exception:
             pass
         
         # Default to Audi if not found

@@ -167,8 +167,7 @@ def build_order_email_html(customer_name: str, order_id: str, order_details: dic
     download_links = order_details.get('download_links', [])
     base_url = os.environ.get('BASE_URL', 'https://ecuflashservice.com')
     
-    # Check if this is a "processing" notification or "completed" notification
-    is_processing = order_details.get('processing_status') == 'processing'
+    # Check if this is a "completed" notification
     is_completed = order_details.get('processing_complete', False)
     estimated_time = order_details.get('estimated_time', '20-60 minutes')
     

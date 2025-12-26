@@ -116,7 +116,6 @@ async def build_vehicle_database():
         
         for i, mfr in enumerate(all_manufacturers):
             mfr_id = mfr['id']
-            mfr_name = mfr['name']
             
             if i % 20 == 0:
                 logger.info(f"Fetching models... ({i}/{len(all_manufacturers)} manufacturers)")
