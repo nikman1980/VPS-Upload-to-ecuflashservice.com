@@ -1265,7 +1265,6 @@ class ECUAnalyzer:
             (rb"(?i)denox", "DeNOx system"),
             (rb"(?i)nh3[_\s]?slip", "NH3 slip"),
             (rb"(?i)reductant", "Reductant reference"),
-            (rb"DCU[_\s\x00]", "DCU (Dosing Control Unit)"),
         ]
         
         for pattern, desc in adblue_binary_patterns:
