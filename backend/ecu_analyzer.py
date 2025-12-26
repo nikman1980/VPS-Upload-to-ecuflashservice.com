@@ -58,7 +58,10 @@ class ECUAnalyzer:
             "processor": None,
             "flash_type": None,
             "strings": [],
-            "confidence": "low"
+            "confidence": "low",
+            # NEW: Detected maps/blocks for available services
+            "detected_maps": {},
+            "available_services": []
         }
         
         # Step 1: Extract readable strings from binary
@@ -95,7 +98,10 @@ class ECUAnalyzer:
         # Step 11: Filter and store interesting strings
         self.results["strings"] = self._filter_relevant_strings()
         
-        # Step 12: Calculate confidence level
+        # Step 12: NEW - Detect maps/blocks for available services
+        self._detect_available_maps(file_data)
+        
+        # Step 13: Calculate confidence level
         self._calculate_confidence()
         
         return self.results
