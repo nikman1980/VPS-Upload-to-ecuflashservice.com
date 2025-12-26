@@ -1254,14 +1254,6 @@ class ECUAnalyzer:
             if s in strings_upper:
                 indicators.append(f"String found: {s}")
                 confidence_score += 25  # Higher weight - AdBlue is specific
-            "DCU",  # Dosing Control Unit
-            "REDUCTANT"
-        ]
-        
-        for s in adblue_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 25  # Higher weight - AdBlue is specific
         
         # Binary patterns
         adblue_binary_patterns = [
