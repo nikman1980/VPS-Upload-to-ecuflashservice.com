@@ -1693,6 +1693,61 @@ async def get_engine_details(engine_id: int):
     return engine
 
 
+@api_router.get("/vehicles/ecu-types/{engine_id}")
+async def get_ecu_types_for_engine(engine_id: int):
+    """
+    Get recommended ECU types for a specific engine.
+    Returns ECU options based on manufacturer, fuel type, and vehicle characteristics.
+    """
+    from ecu_mapping import get_ecu_types_for_vehicle
+    
+    # Get engine details
+    engine = await db.engines.find_one({"id": engine_id}, {"_id": 0})
+    if not engine:
+        raise HTTPException(status_code=404, detail="Engine not found")
+    
+    # Get manufacturer name
+    manufacturer = await db.manufacturers.find_one(
+        {"id": engine.get("manufacturer_id")}, 
+        {"_id": 0}
+    )
+    manufacturer_name = manufacturer.get("name", "") if manufacturer else ""
+    
+    # Determine if this is a truck
+    vehicle_type = await db.vehicle_types.find_one(
+        {"id": engine.get("vehicle_type_id")}, 
+        {"_id": 0}
+    )
+    is_truck = False
+    if vehicle_type:
+        vt_name = vehicle_type.get("name", "").lower()
+        is_truck = any(x in vt_name for x in ["truck", "commercial", "heavy", "lcv"])
+    
+    # Get ECU types
+    ecu_types = get_ecu_types_for_vehicle(
+        manufacturer_name=manufacturer_name,
+        fuel_type=engine.get("fuel", "Petrol"),
+        engine_name=engine.get("name", ""),
+        is_truck=is_truck
+    )
+    
+    return {
+        "engine_id": engine_id,
+        "engine_name": engine.get("name"),
+        "manufacturer": manufacturer_name,
+        "fuel_type": engine.get("fuel"),
+        "is_truck": is_truck,
+        "ecu_types": ecu_types
+    }
+
+
+@api_router.get("/vehicles/ecu-types")
+async def get_all_ecu_types_endpoint():
+    """Get all available ECU types (for fallback/manual selection)"""
+    from ecu_mapping import get_all_ecu_types
+    return get_all_ecu_types()
+
+
 @api_router.get("/vehicles/search")
 async def search_vehicles(q: str):
     """Search across all vehicle data (manufacturers, models, generations)"""
