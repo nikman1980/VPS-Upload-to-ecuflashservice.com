@@ -1204,63 +1204,74 @@ class ECUAnalyzer:
         }
     
     def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect EGR (Exhaust Gas Recirculation) related maps and blocks"""
+        """
+        Detect EGR (Exhaust Gas Recirculation) maps using binary structure analysis.
+        EGR maps typically:
+        - Have 13x16 or similar dimensions
+        - Scale with factor 0.1
+        - Appear near DPF maps in many ECUs
+        """
         
         indicators = []
         confidence_score = 0
         
-        # Binary pattern detection FIRST (more reliable)
-        egr_binary_patterns = [
-            (rb"EGR", "EGR marker"),
-            (rb"egr", "egr marker"),
-            (rb"Egr", "Egr marker"),
-            (rb"AGR", "AGR marker (German)"),
-            (rb"agr", "agr marker"),
-            (rb"(?i)egr[_\s]?valve", "EGR valve reference"),
-            (rb"(?i)egr[_\s]?cool", "EGR cooler reference"),
-            (rb"(?i)recircul", "Recirculation reference"),
+        # =================================================================
+        # METHOD 1: Direct binary text markers
+        # =================================================================
+        egr_binary_markers = [
+            (b"EGR", "EGR text marker"),
+            (b"egr", "egr text marker"),
+            (b"Egr", "Egr text marker"),
+            (b"AGR", "AGR marker (German)"),
+            (b"agr", "agr marker"),
+            (b"Agr", "Agr marker"),
         ]
         
-        for pattern, desc in egr_binary_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary: {desc}")
-                confidence_score += 30
+        for marker, desc in egr_binary_markers:
+            count = file_data.count(marker)
+            if count > 0:
+                indicators.append(f"{desc}: {count}x found")
+                confidence_score += 40
+                break
         
-        # String-based detection
+        # =================================================================
+        # METHOD 2: EGR-related string patterns in extracted text
+        # =================================================================
         egr_strings = [
-            "EXHAUST GAS RECIRCULATION",
+            "EXHAUST GAS RECIRCULATION", "RECIRCULATION",
             "EGR_VALVE", "EGRVALVE", "EGR_FLOW", "EGRFLOW",
-            "EGR_TEMP", "RECIRCULATION", "EGR_POS", "EGR_RATE",
+            "EGR_TEMP", "EGR_POS", "EGR_RATE", "EGR_COOL",
             "LP_EGR", "HP_EGR", "COOL_EGR", "HOT_EGR"
         ]
         
         for s in egr_strings:
             if s in strings_upper:
                 indicators.append(f"String: {s}")
-                confidence_score += 15
+                confidence_score += 25
+                break
         
-        # For diesel ECUs, EGR is extremely common even if not explicitly labeled
-        # Many Denso ECUs don't have "EGR" text but still have EGR maps
-        ecu_type = self.results.get("ecu_type", "") or ""
-        manufacturer = self.results.get("manufacturer", "") or ""
-        ecu_upper = ecu_type.upper()
-        mfr_upper = manufacturer.upper()
+        # =================================================================
+        # METHOD 3: If DPF was detected with high confidence, EGR is likely
+        # Most diesel ECUs with DPF also have EGR - but only add small score
+        # =================================================================
+        # This is checked in the calling code by looking at DPF results
         
-        # Transtron ECUs on light trucks have EGR
-        if "TRANSTRON" in mfr_upper or "TRANSTRON" in ecu_upper:
-            indicators.append("Transtron ECU (EGR standard)")
-            confidence_score += 25
+        # Determine confidence level
+        if confidence_score >= 40:
+            confidence = "high"
+        elif confidence_score >= 25:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
         
-        # Check if DPF was detected - if DPF exists, EGR almost certainly exists too
-        if confidence_score == 0:
-            # Check if this is a diesel ECU with DPF
-            is_diesel_ecu = any(x in ecu_upper for x in ["EDC", "DCM", "SID", "DIESEL"])
-            is_denso_diesel = "DENSO" in mfr_upper
-            
-            # If we have DPF indicators, EGR is very likely
-            if is_diesel_ecu or is_denso_diesel:
-                indicators.append("Diesel ECU (EGR standard on diesels)")
-                confidence_score += 10
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
         
         if confidence_score >= 30:
             confidence = "high"
