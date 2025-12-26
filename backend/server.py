@@ -695,20 +695,26 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         
         # Check if DPF was detected
         dpf_detected = any(s.get('service_id') == 'dpf_off' for s in detected_services)
-        dpf_confidence = "high"
+        egr_detected = any(s.get('service_id') == 'egr_off' for s in detected_services)
+        
+        dpf_confidence = "low"
         dpf_indicators = []
+        egr_confidence = "low"
+        egr_indicators = []
+        
         for s in detected_services:
             if s.get('service_id') == 'dpf_off':
-                dpf_confidence = s.get('confidence', 'high')
+                dpf_confidence = s.get('confidence', 'low')
                 dpf_indicators = s.get('indicators', [])
-                break
+            if s.get('service_id') == 'egr_off':
+                egr_confidence = s.get('confidence', 'low')
+                egr_indicators = s.get('indicators', [])
         
-        # Build available options
+        # Build available options - ONLY show what was actually detected
         available_options = []
         
-        # If DPF detected, offer DPF, EGR, and Combo options (file with DPF will have EGR)
+        # Add DPF if detected
         if dpf_detected:
-            # Add DPF Removal
             available_options.append({
                 "service_id": "dpf_off",
                 "service_name": all_services["dpf_off"]["service_name"],
@@ -718,30 +724,33 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
                 "confidence": dpf_confidence,
                 "indicators": dpf_indicators
             })
-            
-            # Add EGR Removal (if DPF exists, EGR exists too)
+        
+        # Add EGR if detected
+        if egr_detected:
             available_options.append({
                 "service_id": "egr_off",
                 "service_name": all_services["egr_off"]["service_name"],
                 "price": all_services["egr_off"]["price"],
                 "file_id": f"{file_id}_egr_off",
                 "detected": True,
-                "confidence": dpf_confidence,  # Same confidence as DPF
-                "indicators": ["DPF detected - EGR included in diesel ECU"]
+                "confidence": egr_confidence,
+                "indicators": egr_indicators
             })
-            
-            # Add DPF & EGR Combo
+        
+        # Add DPF & EGR Combo only if BOTH are detected
+        if dpf_detected and egr_detected:
+            combo_confidence = min(dpf_confidence, egr_confidence, key=lambda x: {"high": 0, "medium": 1, "low": 2}.get(x, 3))
             available_options.append({
                 "service_id": "dpf_egr_off",
                 "service_name": all_services["dpf_egr_off"]["service_name"],
                 "price": all_services["dpf_egr_off"]["price"],
                 "file_id": f"{file_id}_dpf_egr_off",
                 "detected": True,
-                "confidence": dpf_confidence,
-                "indicators": ["Complete DPF + EGR removal package"]
+                "confidence": combo_confidence,
+                "indicators": ["DPF + EGR both detected in file"]
             })
         
-        # Add other detected services (excluding dpf_off and egr_off since handled above)
+        # Add other detected services
         for detected_svc in detected_services:
             service_id = detected_svc.get('service_id', '')
             # Skip DPF and EGR as they're handled above
