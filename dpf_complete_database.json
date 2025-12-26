@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T22:19:28.248874",
+  "last_update": "2025-12-26T22:29:46.543170",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -33748,6 +33748,4361 @@
                   {
                     "id": "20060",
                     "name": "Bosch ME17.8.3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mercedes": {
+        "id": "141",
+        "models": {
+          "A-class W168": {
+            "id": "2244",
+            "engines": {
+              "1.4L": {
+                "id": "10669",
+                "ecus": [
+                  {
+                    "id": "20029",
+                    "name": "Siemens/VDO MSM1.3"
+                  }
+                ]
+              },
+              "1.6L": {
+                "id": "10670",
+                "ecus": [
+                  {
+                    "id": "20029",
+                    "name": "Siemens/VDO MSM1.3"
+                  }
+                ]
+              },
+              "1.7 CDI": {
+                "id": "10671",
+                "ecus": [
+                  {
+                    "id": "19762",
+                    "name": "Bosch EDC15C0"
+                  },
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "1.9L": {
+                "id": "10672",
+                "ecus": [
+                  {
+                    "id": "20029",
+                    "name": "Siemens/VDO MSM1.3"
+                  }
+                ]
+              }
+            }
+          },
+          "A-class W169": {
+            "id": "2245",
+            "engines": {
+              "1.5L": {
+                "id": "10674",
+                "ecus": [
+                  {
+                    "id": "19721",
+                    "name": "Siemens/Continental SIM266"
+                  }
+                ]
+              },
+              "1.7L": {
+                "id": "10675",
+                "ecus": [
+                  {
+                    "id": "19721",
+                    "name": "Siemens/Continental SIM266"
+                  }
+                ]
+              },
+              "1.8 CDI": {
+                "id": "10678",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19442",
+                    "name": "Bosch EDC17C43"
+                  }
+                ]
+              },
+              "2.0 CDI": {
+                "id": "10677",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "10676",
+                "ecus": [
+                  {
+                    "id": "19721",
+                    "name": "Siemens/Continental SIM266"
+                  }
+                ]
+              }
+            }
+          },
+          "A-class W176": {
+            "id": "2246",
+            "engines": {
+              "1.5 CDI": {
+                "id": "10681",
+                "ecus": [
+                  {
+                    "id": "19848",
+                    "name": "Siemens/Continental SID307"
+                  },
+                  {
+                    "id": "20105",
+                    "name": "Siemens/Continental SID310"
+                  }
+                ]
+              },
+              "1.6 CDI": {
+                "id": "11806",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "20105",
+                    "name": "Siemens/Continental SID310"
+                  }
+                ]
+              },
+              "1.8 CDI": {
+                "id": "10682",
+                "ecus": [
+                  {
+                    "id": "19442",
+                    "name": "Bosch EDC17C43"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "10680",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10683",
+                "ecus": [
+                  {
+                    "id": "19442",
+                    "name": "Bosch EDC17C43"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "A-class W177": {
+            "id": "2967",
+            "engines": {
+              "1.5 CDI": {
+                "id": "12346",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "1.8 CDI": {
+                "id": "12650",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 CDI": {
+                "id": "12347",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "45 AMG S (2.0T)": {
+                "id": "12991",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "AMG GT X290": {
+            "id": "3258",
+            "engines": {
+              "3.0T": {
+                "id": "13051",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "B-class W245": {
+            "id": "2247",
+            "engines": {
+              "1.5L": {
+                "id": "10684",
+                "ecus": [
+                  {
+                    "id": "19721",
+                    "name": "Siemens/Continental SIM266"
+                  }
+                ]
+              },
+              "1.7L": {
+                "id": "10685",
+                "ecus": [
+                  {
+                    "id": "19721",
+                    "name": "Siemens/Continental SIM266"
+                  }
+                ]
+              },
+              "1.8 CDI": {
+                "id": "10687",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.0 CDI": {
+                "id": "10688",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "10686",
+                "ecus": [
+                  {
+                    "id": "19721",
+                    "name": "Siemens/Continental SIM266"
+                  }
+                ]
+              }
+            }
+          },
+          "B-class W246": {
+            "id": "2248",
+            "engines": {
+              "1.6 CDI": {
+                "id": "11807",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "20105",
+                    "name": "Siemens/Continental SID310"
+                  }
+                ]
+              },
+              "1.6L": {
+                "id": "12428",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "1.8 CDI": {
+                "id": "10691",
+                "ecus": [
+                  {
+                    "id": "19442",
+                    "name": "Bosch EDC17C43"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "10690",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10692",
+                "ecus": [
+                  {
+                    "id": "19442",
+                    "name": "Bosch EDC17C43"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "B-class W247": {
+            "id": "3024",
+            "engines": {
+              "1.5 CDI": {
+                "id": "12483",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "1.8 CDI": {
+                "id": "12651",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              }
+            }
+          },
+          "C-class W202/S202": {
+            "id": "2299",
+            "engines": {
+              "2.0L R4": {
+                "id": "10884",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "10857",
+                "ecus": [
+                  {
+                    "id": "19762",
+                    "name": "Bosch EDC15C0"
+                  }
+                ]
+              },
+              "2.4L V6": {
+                "id": "10853",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.8L V6": {
+                "id": "10854",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "4.3L V8": {
+                "id": "10855",
+                "ecus": [
+                  {
+                    "id": "19481",
+                    "name": "Bosch M2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10856",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "C-class W203/S203": {
+            "id": "2249",
+            "engines": {
+              "1.8L Komp": {
+                "id": "10907",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "10707",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.5L V6": {
+                "id": "10737",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "2.6L V6": {
+                "id": "10858",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.7 CDI": {
+                "id": "10708",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "10722",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10740",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.2 CDI": {
+                "id": "10709",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10859",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10738",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10860",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "C-class W204/S204": {
+            "id": "2250",
+            "engines": {
+              "1.8L Komp": {
+                "id": "10908",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  },
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "12079",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10693",
+                "ecus": [
+                  {
+                    "id": "19799",
+                    "name": "Delphi CRD 1.xx"
+                  },
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.5L V6": {
+                "id": "10741",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  },
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10728",
+                "ecus": [
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10743",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10742",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "C-class W205/S205": {
+            "id": "2251",
+            "engines": {
+              "1.6 CDI": {
+                "id": "11804",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "2.0 CDI": {
+                "id": "12348",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "10973",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10694",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10735",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.0T": {
+                "id": "13052",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              },
+              "4.0L Turbo": {
+                "id": "11910",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "C-class W206/S206": {
+            "id": "3259",
+            "engines": {
+              "2.0T": {
+                "id": "13053",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "Citan W415": {
+            "id": "1895",
+            "engines": {
+              "1.5 CDI R4": {
+                "id": "8778",
+                "ecus": [
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  },
+                  {
+                    "id": "19984",
+                    "name": "Bosch EDC17C84"
+                  },
+                  {
+                    "id": "20222",
+                    "name": "Bosch MD1CS006"
+                  },
+                  {
+                    "id": "19848",
+                    "name": "Siemens/Continental SID307"
+                  },
+                  {
+                    "id": "20105",
+                    "name": "Siemens/Continental SID310"
+                  }
+                ]
+              }
+            }
+          },
+          "CL-class C215": {
+            "id": "1896",
+            "engines": {
+              "5.5L V8": {
+                "id": "8786",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "6.0L V8": {
+                "id": "8789",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "CL-class C216": {
+            "id": "2262",
+            "engines": {
+              "4.7 V8 TwinTurbo": {
+                "id": "10770",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "5.5 V8 TwinTurbo": {
+                "id": "10771",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10744",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  },
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "6.0L V8": {
+                "id": "10861",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "6.2L V8": {
+                "id": "10745",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "CLA-class C117/X117": {
+            "id": "1897",
+            "engines": {
+              "1.8 CDI": {
+                "id": "8793",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "8794",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "CLA-class C118/X118": {
+            "id": "3025",
+            "engines": {
+              "1.5 CDI R4": {
+                "id": "12485",
+                "ecus": [
+                  {
+                    "id": "20105",
+                    "name": "Siemens/Continental SID310"
+                  }
+                ]
+              },
+              "2.0T": {
+                "id": "13054",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "CLC-class C204": {
+            "id": "2259",
+            "engines": {
+              "1.8L Komp": {
+                "id": "10909",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  },
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10704",
+                "ecus": [
+                  {
+                    "id": "19799",
+                    "name": "Delphi CRD 1.xx"
+                  }
+                ]
+              },
+              "2.5L V6": {
+                "id": "10746",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10731",
+                "ecus": [
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10748",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10747",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "CLC-class C257": {
+            "id": "3261",
+            "engines": {
+              "3.0T": {
+                "id": "13057",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "CLC-class CL203": {
+            "id": "1898",
+            "engines": {
+              "1.8L Komp": {
+                "id": "8801",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L Komp": {
+                "id": "8800",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "10880",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "8799",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.3L Komp": {
+                "id": "10914",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.5L V6": {
+                "id": "8802",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "10723",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10739",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.2 CDI": {
+                "id": "10716",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10881",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "8803",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "CLE-class A236/C236": {
+            "id": "3260",
+            "engines": {
+              "3.0T": {
+                "id": "13055",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "CLK-class C207/A207": {
+            "id": "2261",
+            "engines": {
+              "2.0L R4": {
+                "id": "12082",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10699",
+                "ecus": [
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "CLK-class C208/A208": {
+            "id": "1899",
+            "engines": {
+              "2.0L Komp": {
+                "id": "8808",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "8809",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "2.3L Komp": {
+                "id": "8807",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.3L R4": {
+                "id": "8810",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "2.7 CDI": {
+                "id": "8805",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "8806",
+                "ecus": [
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  }
+                ]
+              },
+              "4.3L V6": {
+                "id": "8813",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "8817",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "6.0L V8": {
+                "id": "8815",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "CLK-class C209/A209": {
+            "id": "2260",
+            "engines": {
+              "1.8L Komp": {
+                "id": "10910",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L Komp": {
+                "id": "12080",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "10717",
+                "ecus": [
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  }
+                ]
+              },
+              "2.6L V6": {
+                "id": "10863",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.7 CDI": {
+                "id": "10711",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "10724",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10749",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10862",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10750",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "10864",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10751",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  },
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "CLS-class W218/X218": {
+            "id": "2258",
+            "engines": {
+              "2.0L R4": {
+                "id": "10972",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10701",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10729",
+                "ecus": [
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "4.6 V8 TwinTurbo": {
+                "id": "10772",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "CLS-class W219": {
+            "id": "1900",
+            "engines": {
+              "3.0 CDI V6": {
+                "id": "8823",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "8825",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "8827",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "8829",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "8831",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  },
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "CLS-class W257": {
+            "id": "2968",
+            "engines": {
+              "2.0 CDI": {
+                "id": "12349",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "2.9 CDI": {
+                "id": "12350",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              }
+            }
+          },
+          "E-class W140/S140": {
+            "id": "2415",
+            "engines": {
+              "3.0 R6 TDI": {
+                "id": "11182",
+                "ecus": [
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  },
+                  {
+                    "id": "19998",
+                    "name": "Bosch MSA25"
+                  }
+                ]
+              }
+            }
+          },
+          "E-class W210/S210": {
+            "id": "2252",
+            "engines": {
+              "2.0L Komp": {
+                "id": "10913",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "10885",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "2.2 CDI R4": {
+                "id": "10712",
+                "ecus": [
+                  {
+                    "id": "19762",
+                    "name": "Bosch EDC15C0"
+                  },
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "2.4L V6": {
+                "id": "10865",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.6L V6": {
+                "id": "10866",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.7 CDI R5": {
+                "id": "10713",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "2.8L V6": {
+                "id": "10867",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.2 CDI R6": {
+                "id": "10714",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10886",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "4.2L V8": {
+                "id": "10887",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "4.3L V8": {
+                "id": "10868",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "10888",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10869",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "6.0L V8": {
+                "id": "10889",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              }
+            }
+          },
+          "E-class W211/S211": {
+            "id": "2253",
+            "engines": {
+              "1.8L Komp": {
+                "id": "10911",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  },
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L Komp": {
+                "id": "12081",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10703",
+                "ecus": [
+                  {
+                    "id": "19799",
+                    "name": "Delphi CRD 1.xx"
+                  }
+                ]
+              },
+              "2.2 CDI R4": {
+                "id": "10718",
+                "ecus": [
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.6L V6": {
+                "id": "10870",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "2.7 CDI R5": {
+                "id": "10975",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10827",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10753",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.2 CDI R6": {
+                "id": "10719",
+                "ecus": [
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10871",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10752",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "4.0 CDI V8": {
+                "id": "10769",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "4.2 CDI V8": {
+                "id": "11329",
+                "ecus": [
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "10872",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10754",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  },
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "E-class W212/S212/V212": {
+            "id": "2254",
+            "engines": {
+              "1.8 CDI": {
+                "id": "10696",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "10971",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  },
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10695",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  },
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10730",
+                "ecus": [
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10755",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "4.6 V8 TwinTurbo": {
+                "id": "10773",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "5.5 V8 TwinTurbo": {
+                "id": "10774",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10756",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "E-class W213/S213": {
+            "id": "2969",
+            "engines": {
+              "2.0 CDI": {
+                "id": "12351",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "2.9 CDI": {
+                "id": "12352",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "3.0T": {
+                "id": "13058",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              },
+              "4.0T": {
+                "id": "13059",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "G-class W460/W461/W463": {
+            "id": "1902",
+            "engines": {
+              "2.7 CDI": {
+                "id": "8888",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "2.9 CDI": {
+                "id": "12353",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "8884",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.0 R6 TDI": {
+                "id": "8883",
+                "ecus": [
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  },
+                  {
+                    "id": "19998",
+                    "name": "Bosch MSA25"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "8893",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "4.0 CDI V8": {
+                "id": "10405",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "8895",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "8900",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  },
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "6.0 T V12": {
+                "id": "8903",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "GL-class X164": {
+            "id": "1903",
+            "engines": {
+              "3.0 CDI V6": {
+                "id": "8905",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "4.2 CDI V8": {
+                "id": "10397",
+                "ecus": [
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  }
+                ]
+              },
+              "4.6L V8": {
+                "id": "8909",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "8911",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "GL-class X166": {
+            "id": "2273",
+            "engines": {
+              "3.0 CDI V6": {
+                "id": "10734",
+                "ecus": [
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.0T": {
+                "id": "13060",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              },
+              "4.7L V8": {
+                "id": "10775",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "GLA-class H247": {
+            "id": "3262",
+            "engines": {
+              "2.0T": {
+                "id": "13061",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "GLA-class W156": {
+            "id": "2276",
+            "engines": {
+              "2.1 CDI": {
+                "id": "10700",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "GLC-class X253": {
+            "id": "2832",
+            "engines": {
+              "1.6 CDI R4": {
+                "id": "12047",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  }
+                ]
+              },
+              "2.0L Turbo": {
+                "id": "12044",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "2.2 CDI R4": {
+                "id": "12048",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "12049",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.0L V6 Turbo": {
+                "id": "12045",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "4.0L V8 Turbo": {
+                "id": "12046",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "GLE-class C292": {
+            "id": "3263",
+            "engines": {
+              "3.0T": {
+                "id": "13062",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "GLE-class V167": {
+            "id": "2970",
+            "engines": {
+              "2.0 CDI": {
+                "id": "12354",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "12671",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "3.0T": {
+                "id": "13063",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "GLK-class X204": {
+            "id": "1904",
+            "engines": {
+              "2.1 CDI R4": {
+                "id": "8914",
+                "ecus": [
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19799",
+                    "name": "Delphi CRD 1.xx"
+                  },
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.2 CDI R4": {
+                "id": "8913",
+                "ecus": [
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "8915",
+                "ecus": [
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "8916",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  },
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "8917",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  },
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "GLS-class X167": {
+            "id": "3264",
+            "engines": {
+              "3.0T": {
+                "id": "13064",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "ML-class W163": {
+            "id": "1905",
+            "engines": {
+              "2.7 CDI": {
+                "id": "8919",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "8926",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  },
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.7L V6": {
+                "id": "8930",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "4.0 CDI V8": {
+                "id": "8923",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "4.3L V8": {
+                "id": "8924",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  },
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "8932",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  },
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "ML-class W164": {
+            "id": "2271",
+            "engines": {
+              "3.0 CDI V6": {
+                "id": "10726",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10757",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "4.2 CDI V8": {
+                "id": "13133",
+                "ecus": [
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "10873",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10758",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "6.2L V8": {
+                "id": "10759",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "ML-class W166": {
+            "id": "2272",
+            "engines": {
+              "2.1 CDI": {
+                "id": "10697",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10733",
+                "ecus": [
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "5.5 V8 TwinTurbo": {
+                "id": "10776",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "R-class W251": {
+            "id": "1906",
+            "engines": {
+              "3.0 CDI V6": {
+                "id": "8937",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "8939",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "8940",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "8941",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "8942",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "S-class W220/V220/VF220": {
+            "id": "2255",
+            "engines": {
+              "3.2 CDI": {
+                "id": "10715",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10890",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "3.7L V8": {
+                "id": "10874",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "4.0 CDI V8": {
+                "id": "10768",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "4.3L V8": {
+                "id": "10875",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  },
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "10876",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  },
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10877",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "6.0L V12": {
+                "id": "10878",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "S-class W221/V221": {
+            "id": "2256",
+            "engines": {
+              "2.1 CDI": {
+                "id": "10702",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10725",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10762",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10760",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "4.2 CDI V8": {
+                "id": "10727",
+                "ecus": [
+                  {
+                    "id": "19432",
+                    "name": "Bosch EDC16CP36"
+                  }
+                ]
+              },
+              "4.6 V8 TwinTurbo": {
+                "id": "10777",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "4.6L V8": {
+                "id": "10763",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "5.5 V8 TwinTurbo": {
+                "id": "10778",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10764",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  },
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "6.0L V12": {
+                "id": "10879",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "S-class W222/V222": {
+            "id": "2257",
+            "engines": {
+              "2.1 CDI": {
+                "id": "10736",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "2.9 CDI": {
+                "id": "12355",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10732",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.0 V6 TwinTurbo": {
+                "id": "10782",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "S-class W223/V223": {
+            "id": "3265",
+            "engines": {
+              "3.0T": {
+                "id": "13065",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              },
+              "4.0T": {
+                "id": "13066",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              }
+            }
+          },
+          "SL-class R230": {
+            "id": "1908",
+            "engines": {
+              "3.0L V6": {
+                "id": "8979",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "8982",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.7L V6": {
+                "id": "8983",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.0L V8": {
+                "id": "8985",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V12": {
+                "id": "8989",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "8984",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "6.0L V12": {
+                "id": "8991",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "SL-class R231": {
+            "id": "2267",
+            "engines": {
+              "2.0T": {
+                "id": "13068",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              },
+              "3.0T": {
+                "id": "13067",
+                "ecus": [
+                  {
+                    "id": "20246",
+                    "name": "Bosch MG1CP002"
+                  }
+                ]
+              },
+              "4.6 V8 TwinTurbo": {
+                "id": "10779",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "SLK-class R170": {
+            "id": "1909",
+            "engines": {
+              "2.0L Komp": {
+                "id": "8998",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L R4": {
+                "id": "8999",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "2.3L Komp": {
+                "id": "8997",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.3L R4": {
+                "id": "9001",
+                "ecus": [
+                  {
+                    "id": "19947",
+                    "name": "Bosch ME2.0 generation 1"
+                  },
+                  {
+                    "id": "19967",
+                    "name": "Bosch ME2.0 generation 2"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10400",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "9002",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "9007",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "SLK-class R171": {
+            "id": "2265",
+            "engines": {
+              "1.8L Komp": {
+                "id": "10912",
+                "ecus": [
+                  {
+                    "id": "19726",
+                    "name": "Siemens/Continental SIM4KLE"
+                  },
+                  {
+                    "id": "19950",
+                    "name": "Siemens/Continental SIM4LE"
+                  }
+                ]
+              },
+              "2.0L Komp": {
+                "id": "12083",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "3.0L V6": {
+                "id": "10766",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10765",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "SLK-class R172": {
+            "id": "2266",
+            "engines": {
+              "2.0L R4": {
+                "id": "10974",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10781",
+                "ecus": [
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "5.5L V8": {
+                "id": "10780",
+                "ecus": [
+                  {
+                    "id": "19550",
+                    "name": "Bosch MED17.7.x"
+                  }
+                ]
+              }
+            }
+          },
+          "SLS-class C197/R197": {
+            "id": "1910",
+            "engines": {
+              "6.2L V8": {
+                "id": "9009",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "Sprinter W901-W905 / 909": {
+            "id": "2275",
+            "engines": {
+              "2.2 CDI": {
+                "id": "10705",
+                "ecus": [
+                  {
+                    "id": "19762",
+                    "name": "Bosch EDC15C0"
+                  },
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "2.7 CDI": {
+                "id": "10710",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "2.9 R5 TDI": {
+                "id": "11181",
+                "ecus": [
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  },
+                  {
+                    "id": "19998",
+                    "name": "Bosch MSA25"
+                  }
+                ]
+              }
+            }
+          },
+          "Sprinter W906 / 907": {
+            "id": "1911",
+            "engines": {
+              "1.8L Komp": {
+                "id": "12084",
+                "ecus": [
+                  {
+                    "id": "19722",
+                    "name": "Siemens/Continental SIM271"
+                  }
+                ]
+              },
+              "2.0 CDI": {
+                "id": "13122",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "9010",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  },
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "9011",
+                "ecus": [
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  }
+                ]
+              },
+              "2.9 CDI": {
+                "id": "13123",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "9013",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "9019",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              }
+            }
+          },
+          "T - 2022": {
+            "id": "3160",
+            "engines": {
+              "1.6 CDI": {
+                "id": "12852",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              }
+            }
+          },
+          "V-class W447": {
+            "id": "2270",
+            "engines": {
+              "1.6 CDI": {
+                "id": "11805",
+                "ecus": [
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "1.7 CDI": {
+                "id": "12487",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 CDI": {
+                "id": "13124",
+                "ecus": [
+                  {
+                    "id": "20271",
+                    "name": "Bosch MD1CP001"
+                  }
+                ]
+              },
+              "2.1 CDI": {
+                "id": "10706",
+                "ecus": [
+                  {
+                    "id": "19762",
+                    "name": "Bosch EDC15C0"
+                  },
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  }
+                ]
+              }
+            }
+          },
+          "Viano/Vito W638": {
+            "id": "1913",
+            "engines": {
+              "2.2 CDI": {
+                "id": "9023",
+                "ecus": [
+                  {
+                    "id": "19762",
+                    "name": "Bosch EDC15C0"
+                  },
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  },
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "9024",
+                "ecus": [
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  }
+                ]
+              }
+            }
+          },
+          "Viano/Vito W639": {
+            "id": "2274",
+            "engines": {
+              "2.1 CDI": {
+                "id": "10698",
+                "ecus": [
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  },
+                  {
+                    "id": "19977",
+                    "name": "Delphi CRD 3.xx gen 1"
+                  },
+                  {
+                    "id": "20099",
+                    "name": "Delphi CRD 3.xx gen 2"
+                  },
+                  {
+                    "id": "20154",
+                    "name": "Delphi CRD 3.xx gen 3"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "10720",
+                "ecus": [
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19883",
+                    "name": "Bosch EDC17C66"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "10721",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19445",
+                    "name": "Bosch EDC17CP01"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  },
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              },
+              "3.2L V6": {
+                "id": "10882",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              },
+              "3.5L V6": {
+                "id": "10767",
+                "ecus": [
+                  {
+                    "id": "19535",
+                    "name": "Bosch ME9.7"
+                  }
+                ]
+              },
+              "3.7L V6": {
+                "id": "10883",
+                "ecus": [
+                  {
+                    "id": "19508",
+                    "name": "Bosch ME2.8"
+                  }
+                ]
+              }
+            }
+          },
+          "Х-class W470": {
+            "id": "2974",
+            "engines": {
+              "2.3 CDI": {
+                "id": "12363",
+                "ecus": [
+                  {
+                    "id": "20105",
+                    "name": "Siemens/Continental SID310"
+                  }
+                ]
+              },
+              "3.0 CDI V6": {
+                "id": "12381",
+                "ecus": [
+                  {
+                    "id": "19845",
+                    "name": "Bosch EDC17CP57"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mercury": {
+        "id": "173",
+        "models": {
+          "Mariner": {
+            "id": "2216",
+            "engines": {
+              "2.3L": {
+                "id": "10546",
+                "ecus": [
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              },
+              "3.0L": {
+                "id": "10547",
+                "ecus": [
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mini": {
+        "id": "142",
+        "models": {
+          "Cooper": {
+            "id": "1915",
+            "engines": {
+              "1.4 D": {
+                "id": "10463",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.5 T": {
+                "id": "12726",
+                "ecus": [
+                  {
+                    "id": "20170",
+                    "name": "Bosch MG1CSxxx"
+                  }
+                ]
+              },
+              "1.6 D": {
+                "id": "9045",
+                "ecus": [
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  },
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "1.6 i 16V": {
+                "id": "9047",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19976",
+                    "name": "Bosch MEV17.2.2"
+                  },
+                  {
+                    "id": "19860",
+                    "name": "Bosch MEVD172X"
+                  },
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "9046",
+                "ecus": [
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 T": {
+                "id": "12727",
+                "ecus": [
+                  {
+                    "id": "20170",
+                    "name": "Bosch MG1CSxxx"
+                  }
+                ]
+              }
+            }
+          },
+          "Cooper Clubman": {
+            "id": "1916",
+            "engines": {
+              "1.4 D": {
+                "id": "10464",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.5 T": {
+                "id": "12724",
+                "ecus": [
+                  {
+                    "id": "20170",
+                    "name": "Bosch MG1CSxxx"
+                  }
+                ]
+              },
+              "1.6 D": {
+                "id": "9048",
+                "ecus": [
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  },
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "1.6 i 16V": {
+                "id": "9050",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19976",
+                    "name": "Bosch MEV17.2.2"
+                  },
+                  {
+                    "id": "19860",
+                    "name": "Bosch MEVD172X"
+                  },
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "1.8 D": {
+                "id": "12721",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "9049",
+                "ecus": [
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 T": {
+                "id": "12723",
+                "ecus": [
+                  {
+                    "id": "20170",
+                    "name": "Bosch MG1CSxxx"
+                  }
+                ]
+              }
+            }
+          },
+          "Cooper Coup": {
+            "id": "1917",
+            "engines": {
+              "1.4 D": {
+                "id": "10465",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.6 D": {
+                "id": "9051",
+                "ecus": [
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  },
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  }
+                ]
+              },
+              "1.6 i 16V": {
+                "id": "9053",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19976",
+                    "name": "Bosch MEV17.2.2"
+                  },
+                  {
+                    "id": "19860",
+                    "name": "Bosch MEVD172X"
+                  },
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "9052",
+                "ecus": [
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  }
+                ]
+              }
+            }
+          },
+          "Cooper One": {
+            "id": "1920",
+            "engines": {
+              "1.4 D": {
+                "id": "9060",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  }
+                ]
+              },
+              "1.4 i 16V": {
+                "id": "9063",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "1.5 T": {
+                "id": "12728",
+                "ecus": [
+                  {
+                    "id": "20170",
+                    "name": "Bosch MG1CSxxx"
+                  }
+                ]
+              },
+              "1.6 D": {
+                "id": "9061",
+                "ecus": [
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  },
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  }
+                ]
+              },
+              "1.6 i 16V": {
+                "id": "9064",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19976",
+                    "name": "Bosch MEV17.2.2"
+                  },
+                  {
+                    "id": "19860",
+                    "name": "Bosch MEVD172X"
+                  },
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "9062",
+                "ecus": [
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  }
+                ]
+              }
+            }
+          },
+          "Cooper Roadster": {
+            "id": "1918",
+            "engines": {
+              "1.4 D": {
+                "id": "10466",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.6 D": {
+                "id": "9054",
+                "ecus": [
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  },
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  }
+                ]
+              },
+              "1.6 i 16V": {
+                "id": "9056",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19976",
+                    "name": "Bosch MEV17.2.2"
+                  },
+                  {
+                    "id": "19860",
+                    "name": "Bosch MEVD172X"
+                  },
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "9055",
+                "ecus": [
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  }
+                ]
+              }
+            }
+          },
+          "Countryman Cooper": {
+            "id": "1919",
+            "engines": {
+              "1.4 D": {
+                "id": "10467",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.5 T": {
+                "id": "12725",
+                "ecus": [
+                  {
+                    "id": "20170",
+                    "name": "Bosch MG1CSxxx"
+                  }
+                ]
+              },
+              "1.6 D": {
+                "id": "9057",
+                "ecus": [
+                  {
+                    "id": "19419",
+                    "name": "Bosch EDC16C35"
+                  },
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "1.6 i 16V": {
+                "id": "9059",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "19957",
+                    "name": "Bosch MEV17.2"
+                  },
+                  {
+                    "id": "19976",
+                    "name": "Bosch MEV17.2.2"
+                  },
+                  {
+                    "id": "19860",
+                    "name": "Bosch MEVD172X"
+                  },
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
+                  },
+                  {
+                    "id": "19988",
+                    "name": "Siemens/Continental EMS2"
+                  }
+                ]
+              },
+              "1.8 D": {
+                "id": "12722",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "9058",
+                "ecus": [
+                  {
+                    "id": "19805",
+                    "name": "Bosch EDC17C41"
+                  },
+                  {
+                    "id": "19806",
+                    "name": "Bosch EDC17C50"
+                  },
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0i 16V": {
+                "id": "12284",
+                "ecus": [
+                  {
+                    "id": "20121",
+                    "name": "Bosch MG1xxx"
                   }
                 ]
               }
