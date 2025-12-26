@@ -1218,12 +1218,19 @@ class ECUAnalyzer:
         # Many Denso ECUs don't have "EGR" text but still have EGR maps
         ecu_type = self.results.get("ecu_type", "") or ""
         manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
+        
+        # Transtron ECUs on light trucks have EGR
+        if "TRANSTRON" in mfr_upper or "TRANSTRON" in ecu_upper:
+            indicators.append("Transtron ECU (EGR standard)")
+            confidence_score += 25
         
         # Check if DPF was detected - if DPF exists, EGR almost certainly exists too
         if confidence_score == 0:
             # Check if this is a diesel ECU with DPF
-            is_diesel_ecu = any(x in ecu_type.upper() for x in ["EDC", "DCM", "SID", "DIESEL"])
-            is_denso_diesel = "DENSO" in manufacturer.upper()
+            is_diesel_ecu = any(x in ecu_upper for x in ["EDC", "DCM", "SID", "DIESEL"])
+            is_denso_diesel = "DENSO" in mfr_upper
             
             # If we have DPF indicators, EGR is very likely
             if is_diesel_ecu or is_denso_diesel:
