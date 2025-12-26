@@ -674,30 +674,44 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         analyzer.analyze(file_data)
         display_info = analyzer.get_display_info()
         
-        # Build available services list
-        services = [
-            {"service_id": "dpf_off", "service_name": "DPF/FAP Removal", "price": 50.0},
-            {"service_id": "adblue_off", "service_name": "AdBlue/SCR Removal", "price": 60.0},
-            {"service_id": "egr_off", "service_name": "EGR Removal", "price": 40.0},
-            {"service_id": "dtc_off", "service_name": "DTC/Error Code Removal", "price": 30.0},
-            {"service_id": "lambda_off", "service_name": "Lambda/O2 Sensor Removal", "price": 35.0},
-            {"service_id": "cat_off", "service_name": "Catalyst Removal", "price": 45.0},
-            {"service_id": "speed_limit_off", "service_name": "Speed Limiter Removal", "price": 40.0},
-            {"service_id": "start_stop_off", "service_name": "Start/Stop Disable", "price": 25.0},
-            {"service_id": "flaps_off", "service_name": "Swirl Flaps Removal", "price": 35.0},
-            {"service_id": "immo_off", "service_name": "Immobilizer Removal", "price": 80.0},
-            {"service_id": "stage1", "service_name": "Stage 1 Tuning (+20-30% Power)", "price": 150.0},
-            {"service_id": "stage2", "service_name": "Stage 2 Tuning (+30-50% Power)", "price": 250.0},
-        ]
+        # Get detected services from analyzer
+        detected_services = display_info.get('available_services', [])
+        detected_map_keys = set(s.get('service_id', '') for s in detected_services)
         
+        # Define all possible services with pricing
+        all_services = {
+            "dpf_off": {"service_name": "DPF/FAP Removal", "price": 50.0},
+            "adblue_off": {"service_name": "AdBlue/SCR Removal", "price": 60.0},
+            "egr_off": {"service_name": "EGR Removal", "price": 40.0},
+            "dtc_off": {"service_name": "DTC/Error Code Removal", "price": 30.0},
+            "lambda_off": {"service_name": "Lambda/O2 Sensor Removal", "price": 35.0},
+            "cat_off": {"service_name": "Catalyst Removal", "price": 45.0},
+            "speed_limiter": {"service_name": "Speed Limiter Removal", "price": 40.0},
+            "start_stop_off": {"service_name": "Start/Stop Disable", "price": 25.0},
+            "swirl_off": {"service_name": "Swirl Flaps Removal", "price": 35.0},
+            "hot_start": {"service_name": "Hot Start Fix / Immo", "price": 80.0},
+            "stage_tuning": {"service_name": "Stage 1/2 Tuning", "price": 150.0},
+        }
+        
+        # Build available options ONLY from detected services
         available_options = []
-        for svc in services:
-            available_options.append({
-                "service_id": svc["service_id"],
-                "service_name": svc["service_name"],
-                "price": svc["price"],
-                "file_id": f"{file_id}_{svc['service_id']}",
-            })
+        for detected_svc in detected_services:
+            service_id = detected_svc.get('service_id', '')
+            if service_id in all_services:
+                svc_info = all_services[service_id]
+                available_options.append({
+                    "service_id": service_id,
+                    "service_name": svc_info["service_name"],
+                    "price": svc_info["price"],
+                    "file_id": f"{file_id}_{service_id}",
+                    "detected": True,
+                    "confidence": detected_svc.get('confidence', 'low'),
+                    "indicators": detected_svc.get('indicators', [])
+                })
+        
+        # Sort by confidence (high first)
+        confidence_order = {"high": 0, "medium": 1, "low": 2}
+        available_options.sort(key=lambda x: confidence_order.get(x.get('confidence', 'low'), 3))
         
         # Build ECU info string
         ecu_info = display_info['ecu_type']
