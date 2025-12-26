@@ -1328,13 +1328,26 @@ class ECUAnalyzer:
     def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
         Professional AdBlue/SCR/DEF map detection using binary pattern analysis.
-        Uses methods similar to WinOLS and professional tuning tools.
+        Based on verified data from professional tuning services.
         
         Detection methods:
-        1. ECU Type identification (CM2150E, EDC17CP52, etc.)
-        2. SCR text markers (UREA, NOX, SCR, etc.)
-        3. SCR DTC code concentrations (high counts = SCR present)
-        4. DCU (Dosing Control Unit) signatures
+        1. ECU Type identification (verified against dpfoffservice.com)
+        2. SCR text markers
+        3. DCU (Dosing Control Unit) signatures
+        
+        VERIFIED ECUs WITH SCR:
+        - Cummins CM2150E, CM2250, CM2350
+        - Bosch EDC17CVxx (EDC17CV41, CV44, CV54)
+        - Bosch EDC17CP52, CP54
+        
+        VERIFIED ECUs WITHOUT SCR (in main ECU):
+        - Transtron (Isuzu)
+        - Denso NEC Gen 3 (Toyota)
+        - Denso SH7058 (Hino)
+        - Denso SH72531 (Subaru)
+        - Bosch EDC16xxx (pre-SCR era)
+        - Bosch MD1CSxxx (modern but separate DCU)
+        - Bosch MEVD17.x (petrol ECUs)
         """
         
         indicators = []
@@ -1348,25 +1361,77 @@ class ECUAnalyzer:
         file_size = len(file_data)
         
         # =================================================================
-        # METHOD 1: ECU Type-Based Detection (MOST RELIABLE)
-        # Certain ECU types are KNOWN to have SCR
+        # EXCLUSIONS FIRST: ECUs VERIFIED to NOT have SCR in main ECU
         # =================================================================
         
-        # Cummins CM2150E and later ALL have SCR capability
-        # (CM2150E = EPA2010 compliant = requires SCR)
+        # Transtron (Isuzu) - VERIFIED: No SCR in main ECU
+        if "TRANSTRON" in mfr_upper or "TRANSTRON" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none", 
+                "confidence_score": 0, "indicators": ["Transtron: No SCR in main ECU"]
+            }
+        
+        # Denso SH7058 (Hino) - VERIFIED: No SCR in main ECU
+        if "SH7058" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, "indicators": ["Denso SH7058: SCR in separate DCU"]
+            }
+        
+        # Denso NEC (Toyota/Lexus) - VERIFIED: No SCR in main ECU
+        if "NEC" in ecu_upper and ("GEN" in ecu_upper or "DENSO" in mfr_upper):
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, "indicators": ["Denso NEC: No SCR in main ECU"]
+            }
+        
+        # Denso SH72531 (Subaru) - No SCR
+        if "SH72531" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, "indicators": ["Denso SH72531: No SCR"]
+            }
+        
+        # Bosch EDC16xxx - Pre-SCR era
+        if "EDC16" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, "indicators": ["Bosch EDC16: Pre-SCR era"]
+            }
+        
+        # Bosch MEVD17 - Petrol ECU
+        if "MEVD17" in ecu_upper or "MEVD" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, "indicators": ["Bosch MEVD: Petrol ECU"]
+            }
+        
+        # Bosch MD1CS - VERIFIED: No SCR in main ECU (LDV Maxus etc)
+        if "MD1CS" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, "indicators": ["Bosch MD1CS: SCR in separate DCU"]
+            }
+        
+        # =================================================================
+        # ECUs VERIFIED to have SCR
+        # =================================================================
+        
+        # Cummins CM2150E - VERIFIED: Has SCR (EPA2010+)
         if "CM2150E" in ecu_upper:
             indicators.append("Cummins CM2150E (EPA2010 SCR)")
-            confidence_score += 70
+            confidence_score += 80
         elif "CM2250" in ecu_upper or "CM2350" in ecu_upper:
             indicators.append("Cummins CM22xx/CM23xx (SCR standard)")
-            confidence_score += 70
-        elif "CM2150" in ecu_upper:
-            # CM2150 without 'E' suffix might be pre-EPA2010
-            # Check for additional SCR indicators
-            pass
+            confidence_score += 80
         
-        # Bosch truck ECUs with SCR
-        truck_scr_ecus = ["EDC17CP52", "EDC17CV41", "EDC17CV44", "EDC17CV54", "EDC17C49", "EDC17C54"]
+        # Bosch EDC17CVxx - VERIFIED: Has SCR (truck ECUs)
+        if "EDC17CV" in ecu_upper:
+            indicators.append(f"Bosch {ecu_upper[:10]} (Truck SCR ECU)")
+            confidence_score += 75
+        
+        # Bosch EDC17CP52/54 - Has SCR (truck ECUs)
+        truck_scr_ecus = ["EDC17CP52", "EDC17CP54", "EDC17C49", "EDC17C54"]
         for scr_ecu in truck_scr_ecus:
             if scr_ecu in ecu_upper:
                 indicators.append(f"Bosch {scr_ecu} (Truck SCR)")
