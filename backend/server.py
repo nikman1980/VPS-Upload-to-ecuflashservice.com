@@ -1811,6 +1811,48 @@ async def get_vehicle_database_stats():
     }
 
 
+# ==================== CONTACT FORM API ====================
+
+@api_router.post("/contact")
+async def submit_contact_form(form_data: ContactFormRequest):
+    """Submit a contact form message"""
+    try:
+        # Store the contact message in database
+        contact_message = {
+            "id": str(uuid.uuid4()),
+            "name": form_data.name,
+            "email": form_data.email,
+            "phone": form_data.phone,
+            "subject": form_data.subject,
+            "order_number": form_data.orderNumber,
+            "message": form_data.message,
+            "status": "new",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "responded_at": None
+        }
+        
+        await db.contact_messages.insert_one(contact_message)
+        
+        # Log the contact submission
+        logging.info(f"New contact form submission from {form_data.email} - Subject: {form_data.subject}")
+        
+        return {
+            "success": True,
+            "message": "Your message has been submitted successfully. We will respond within 24 hours.",
+            "ticket_id": contact_message["id"]
+        }
+    except Exception as e:
+        logging.error(f"Error submitting contact form: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to submit contact form")
+
+
+@api_router.get("/admin/contact-messages")
+async def get_contact_messages():
+    """Get all contact messages (admin only)"""
+    messages = await db.contact_messages.find({}, {"_id": 0}).sort("created_at", -1).to_list(100)
+    return messages
+
+
 # ==================== CUSTOMER PORTAL API Endpoints ====================
 
 class PortalLoginRequest(BaseModel):
