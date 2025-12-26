@@ -15,6 +15,15 @@ const CustomerPortal = () => {
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
   
+  // Registration state
+  const [showRegister, setShowRegister] = useState(false);
+  const [registerName, setRegisterName] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [registerConfirm, setRegisterConfirm] = useState('');
+  const [registerError, setRegisterError] = useState('');
+  const [registerSuccess, setRegisterSuccess] = useState(false);
+  
   // Orders state (all orders for this email)
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -28,10 +37,17 @@ const CustomerPortal = () => {
   // File upload state
   const [uploadingFile, setUploadingFile] = useState(false);
 
-  // Check URL params for auto-login
+  // Check URL params for auto-login or registration
   useEffect(() => {
     const email = searchParams.get('email');
-    if (email) {
+    const register = searchParams.get('register');
+    const name = searchParams.get('name');
+    
+    if (register === 'true') {
+      setShowRegister(true);
+      if (email) setRegisterEmail(email);
+      if (name) setRegisterName(decodeURIComponent(name));
+    } else if (email) {
       setLoginEmail(email);
       doLogin(email);
     }
