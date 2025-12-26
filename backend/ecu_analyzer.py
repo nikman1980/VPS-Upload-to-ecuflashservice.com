@@ -1273,11 +1273,12 @@ class ECUAnalyzer:
                 indicators.append(f"Binary pattern: {desc}")
                 confidence_score += 20
         
-        # Modern diesel trucks (Euro 6, 2014+) typically have AdBlue
-        ecu_type = self.results.get("ecu_type", "") or ""
-        if any(x in ecu_type.upper() for x in ["EDC17C", "MD1", "DCM3.5", "DCM6", "DCM7"]):
-            indicators.append("Modern diesel ECU (likely AdBlue equipped)")
-            confidence_score += 10
+        # Only add ECU type inference if other indicators found
+        if confidence_score > 0:
+            ecu_type = self.results.get("ecu_type", "") or ""
+            if any(x in ecu_type.upper() for x in ["EDC17C", "MD1", "DCM3.5", "DCM6", "DCM7"]):
+                indicators.append("Modern diesel ECU (AdBlue common)")
+                confidence_score += 5
         
         if confidence_score >= 50:
             confidence = "high"
