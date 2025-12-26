@@ -672,7 +672,7 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         
         # Use real ECU Analyzer
         analyzer = ECUAnalyzer()
-        analysis = analyzer.analyze(file_data)
+        analyzer.analyze(file_data)
         display_info = analyzer.get_display_info()
         
         # Build available services list
