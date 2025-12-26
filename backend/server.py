@@ -1871,6 +1871,50 @@ class PortalEmailLoginRequest(BaseModel):
     email: str
 
 
+class PortalRegisterRequest(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
+
+
+@api_router.post("/portal/register")
+async def portal_register(register_data: PortalRegisterRequest):
+    """
+    Register a new customer account for the portal
+    """
+    import hashlib
+    
+    email = register_data.email.strip().lower()
+    
+    # Check if account already exists
+    existing = await db.portal_accounts.find_one({"email": email})
+    if existing:
+        raise HTTPException(status_code=400, detail="An account with this email already exists. Please login instead.")
+    
+    # Hash password (simple hash for demo - use bcrypt in production)
+    password_hash = hashlib.sha256(register_data.password.encode()).hexdigest()
+    
+    # Create account
+    account = {
+        "id": str(uuid.uuid4()),
+        "name": register_data.name.strip(),
+        "email": email,
+        "password_hash": password_hash,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "last_login": None
+    }
+    
+    await db.portal_accounts.insert_one(account)
+    
+    logging.info(f"New portal account created for: {email}")
+    
+    return {
+        "success": True,
+        "message": "Account created successfully! You can now login.",
+        "account_id": account["id"]
+    }
+
+
 @api_router.post("/portal/login-email")
 async def portal_login_email(login_data: PortalEmailLoginRequest):
     """
