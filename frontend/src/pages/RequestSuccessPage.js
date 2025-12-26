@@ -78,7 +78,7 @@ const RequestSuccessPage = () => {
           <h2 className="text-4xl font-bold mb-4">Request Submitted Successfully!</h2>
           
           <p className="text-xl text-gray-600 mb-8">
-            Thank you for your service request. We've received your information and will contact you shortly.
+            Thank you for your service request. We&apos;ve received your information and will contact you shortly.
           </p>
 
           <div className="bg-white p-6 rounded-lg mb-8 text-left">
@@ -131,7 +131,7 @@ const RequestSuccessPage = () => {
 
           <div className="bg-blue-900/30 border border-blue-700 p-4 rounded-lg mb-8">
             <p className="text-blue-300">
-              💡 <strong>What's Next?</strong><br/>
+              💡 <strong>What&apos;s Next?</strong><br/>
               Our AI system is now processing your ECU file. You will receive an email with the download link within 24 hours. Most files are processed automatically within 1-2 hours.
             </p>
           </div>
