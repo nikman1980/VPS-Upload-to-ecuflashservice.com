@@ -1147,10 +1147,20 @@ class ECUAnalyzer:
         
         # ECU type inference (lowest priority)
         ecu_type = self.results.get("ecu_type", "") or ""
-        if any(x in ecu_type.upper() for x in ["EDC17", "EDC16", "MD1", "DCM", "SID"]):
-            if confidence_score == 0:  # Only add if no other indicators
+        manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
+        
+        # Diesel ECU types that typically have DPF
+        if any(x in ecu_upper for x in ["EDC17", "EDC16", "MD1", "DCM", "SID"]):
+            if confidence_score == 0:
                 indicators.append("Diesel ECU type (DPF likely)")
                 confidence_score += 5
+        
+        # Transtron ECUs on Isuzu/light trucks typically have DPF
+        if "TRANSTRON" in mfr_upper or "TRANSTRON" in ecu_upper:
+            indicators.append("Transtron ECU (DPF standard on light trucks)")
+            confidence_score += 25
         
         if confidence_score >= 30:
             confidence = "high"
