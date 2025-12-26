@@ -1517,24 +1517,6 @@ class ECUAnalyzer:
                 confidence_score += 30
         
         # =================================================================
-        # EXCLUSION: Light vehicle ECUs (Transtron, etc.)
-        # These typically don't have SCR in main ECU
-        # =================================================================
-        if "TRANSTRON" in mfr_upper and confidence_score < 60:
-            # Transtron without strong SCR indicators = no SCR
-            # (SCR would be in separate DCU if equipped)
-            if confidence_score <= 30:
-                confidence_score = 0
-                indicators = []
-        
-        # Same for small Denso/Isuzu light vehicle ECUs
-        if "DENSO" in mfr_upper or "ISUZU" in mfr_upper:
-            if file_size < 2 * 1024 * 1024 and confidence_score < 60:  # < 2MB
-                if confidence_score <= 30:
-                    confidence_score = 0
-                    indicators = []
-        
-        # =================================================================
         # Calculate final confidence
         # =================================================================
         if confidence_score >= 60:
