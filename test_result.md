@@ -248,3 +248,54 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Implemented Sedox-style vehicle-first workflow. Created local vehicle database with 10,102 records (109 manufacturers, 921 models, 1301 generations, 7766 engines). Updated frontend with 6-step flow. Please test the vehicle selection chain and verify data loads correctly from the API."
+  - agent: "main"
+    message: "FORK SESSION: Fixed critical ECU analyzer issues. Added 8 missing detection methods (lambda, speed_limiter, catalyst, swirl_flaps, start_stop, hotstart_immo, dtc_capability, tuning_maps) and get_display_info() method. Fixed syntax errors. Analyzer now correctly identifies services for different ECU types. Transtron/Isuzu ECUs correctly show DPF+EGR without AdBlue. Bosch EDC17CP52 truck ECUs correctly show DPF+EGR+AdBlue. API tested with curl - working correctly."
+
+backend:
+  - task: "ECU Analyzer - DPF Detection"
+    implemented: true
+    working: true
+    file: "/app/backend/ecu_analyzer.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "DPF detection using binary patterns and text markers. Working correctly for Bosch and Transtron ECUs."
+
+  - task: "ECU Analyzer - EGR Detection"
+    implemented: true
+    working: true
+    file: "/app/backend/ecu_analyzer.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "EGR detection using text markers and diesel ECU inference. Working correctly."
+
+  - task: "ECU Analyzer - AdBlue/SCR Detection"
+    implemented: true
+    working: true
+    file: "/app/backend/ecu_analyzer.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "AdBlue detection correctly excludes light vehicle ECUs (Transtron/Isuzu) and includes truck ECUs (Bosch EDC17CP52). Uses DCU signatures and SCR text markers."
+
+  - task: "ECU Analyze Endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "POST /api/analyze-and-process-file correctly returns detected services based on ECU file content. Tested with multiple files."
