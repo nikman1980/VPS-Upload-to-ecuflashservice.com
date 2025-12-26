@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T22:35:16.120671",
+  "last_update": "2025-12-26T22:38:34.953455",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -40352,6 +40352,1957 @@
                   {
                     "id": "19853",
                     "name": "Hitachi"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Opel": {
+        "id": "145",
+        "models": {
+          "Adam": {
+            "id": "2439",
+            "engines": {
+              "1.2L 16V": {
+                "id": "11250",
+                "ecus": [
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  }
+                ]
+              },
+              "1.4L 16V": {
+                "id": "11251",
+                "ecus": [
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  }
+                ]
+              }
+            }
+          },
+          "Agila": {
+            "id": "1983",
+            "engines": {
+              "1.0L i": {
+                "id": "9316",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  }
+                ]
+              },
+              "1.2L i": {
+                "id": "9317",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  }
+                ]
+              },
+              "1.3 CDTI": {
+                "id": "9315",
+                "ecus": [
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19808",
+                    "name": "Marelli MJD6JF"
+                  },
+                  {
+                    "id": "19646",
+                    "name": "Marelli MJD8DF"
+                  }
+                ]
+              },
+              "1.7 CDTI": {
+                "id": "10375",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              }
+            }
+          },
+          "Antara": {
+            "id": "1984",
+            "engines": {
+              "2.0/2.2 CDTI": {
+                "id": "9318",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              },
+              "2.4": {
+                "id": "9319",
+                "ecus": [
+                  {
+                    "id": "19530",
+                    "name": "Bosch ME7.9.9"
+                  },
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "10934",
+                "ecus": [
+                  {
+                    "id": "19954",
+                    "name": "Delphi ACDelco E39"
+                  },
+                  {
+                    "id": "19955",
+                    "name": "Delphi ACDelco E39A"
+                  }
+                ]
+              },
+              "3.2 V6": {
+                "id": "9320",
+                "ecus": [
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              }
+            }
+          },
+          "Astra": {
+            "id": "1987",
+            "engines": {
+              "1.2L i": {
+                "id": "11872",
+                "ecus": [
+                  {
+                    "id": "19477",
+                    "name": "Bosch M1.5.5"
+                  },
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  }
+                ]
+              },
+              "1.3 CDTI": {
+                "id": "9338",
+                "ecus": [
+                  {
+                    "id": "19776",
+                    "name": "Bosch EDC17C18"
+                  },
+                  {
+                    "id": "19440",
+                    "name": "Bosch EDC17C19"
+                  },
+                  {
+                    "id": "19778",
+                    "name": "Bosch EDC17C59"
+                  },
+                  {
+                    "id": "19821",
+                    "name": "Bosch EDC17CP47"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  }
+                ]
+              },
+              "1.4L i": {
+                "id": "9342",
+                "ecus": [
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "20132",
+                    "name": "Delphi ACDelco E80"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "20053",
+                    "name": "Delphi Delco HSFI-C"
+                  }
+                ]
+              },
+              "1.5 CDTI": {
+                "id": "12498",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 CDTI": {
+                "id": "11866",
+                "ecus": [
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  }
+                ]
+              },
+              "1.6L i": {
+                "id": "9341",
+                "ecus": [
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19982",
+                    "name": "Bosch ME7.6.4"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "20053",
+                    "name": "Delphi Delco HSFI-C"
+                  },
+                  {
+                    "id": "19873",
+                    "name": "Delphi Delco MT35E"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.7 CDTI - TDI": {
+                "id": "9339",
+                "ecus": [
+                  {
+                    "id": "19770",
+                    "name": "Bosch EDC15C7"
+                  },
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  },
+                  {
+                    "id": "19870",
+                    "name": "Delphi ACDelco E87"
+                  },
+                  {
+                    "id": "19897",
+                    "name": "Delphi TD"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "1.8L i": {
+                "id": "11875",
+                "ecus": [
+                  {
+                    "id": "20102",
+                    "name": "Siemens/Continental Simtec70"
+                  },
+                  {
+                    "id": "19744",
+                    "name": "Siemens/Continental Simtec71"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  },
+                  {
+                    "id": "19746",
+                    "name": "Siemens/Continental Simtec81"
+                  }
+                ]
+              },
+              "1.9 CDTI": {
+                "id": "11870",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  }
+                ]
+              },
+              "2.0/2.2 CDTI - TDI": {
+                "id": "9340",
+                "ecus": [
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19776",
+                    "name": "Bosch EDC17C18"
+                  },
+                  {
+                    "id": "19440",
+                    "name": "Bosch EDC17C19"
+                  },
+                  {
+                    "id": "19778",
+                    "name": "Bosch EDC17C59"
+                  },
+                  {
+                    "id": "19821",
+                    "name": "Bosch EDC17CP47"
+                  },
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  },
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  }
+                ]
+              },
+              "2.0L i": {
+                "id": "9343",
+                "ecus": [
+                  {
+                    "id": "19477",
+                    "name": "Bosch M1.5.5"
+                  },
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19530",
+                    "name": "Bosch ME7.9.9"
+                  },
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  }
+                ]
+              },
+              "2.4L i": {
+                "id": "11874",
+                "ecus": [
+                  {
+                    "id": "19530",
+                    "name": "Bosch ME7.9.9"
+                  }
+                ]
+              }
+            }
+          },
+          "Combo": {
+            "id": "1988",
+            "engines": {
+              "1.0L i": {
+                "id": "10291",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  }
+                ]
+              },
+              "1.2L i": {
+                "id": "10292",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "20179",
+                    "name": "Valeo VD56.xx"
+                  }
+                ]
+              },
+              "1.3 CDTI": {
+                "id": "9344",
+                "ecus": [
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19808",
+                    "name": "Marelli MJD6JF"
+                  },
+                  {
+                    "id": "19646",
+                    "name": "Marelli MJD8DF"
+                  }
+                ]
+              },
+              "1.4L i": {
+                "id": "9346",
+                "ecus": [
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  }
+                ]
+              },
+              "1.5 CDTI": {
+                "id": "12497",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 CDTI": {
+                "id": "10970",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              },
+              "1.6L i": {
+                "id": "9347",
+                "ecus": [
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "19873",
+                    "name": "Delphi Delco MT35E"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.7 CDTI - DTI": {
+                "id": "9345",
+                "ecus": [
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  },
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "1.7 DTI": {
+                "id": "10497",
+                "ecus": [
+                  {
+                    "id": "19897",
+                    "name": "Delphi TD"
+                  }
+                ]
+              }
+            }
+          },
+          "Corsa": {
+            "id": "1990",
+            "engines": {
+              "1.0L i": {
+                "id": "10836",
+                "ecus": [
+                  {
+                    "id": "19477",
+                    "name": "Bosch M1.5.5"
+                  },
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19530",
+                    "name": "Bosch ME7.9.9"
+                  },
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "20132",
+                    "name": "Delphi ACDelco E80"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  }
+                ]
+              },
+              "1.2L i": {
+                "id": "10922",
+                "ecus": [
+                  {
+                    "id": "19477",
+                    "name": "Bosch M1.5.5"
+                  },
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "20262",
+                    "name": "Bosch MG1CS032"
+                  },
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "20178",
+                    "name": "Valeo V56.xx"
+                  },
+                  {
+                    "id": "20179",
+                    "name": "Valeo VD56.xx"
+                  }
+                ]
+              },
+              "1.3 CDTI": {
+                "id": "9355",
+                "ecus": [
+                  {
+                    "id": "19776",
+                    "name": "Bosch EDC17C18"
+                  },
+                  {
+                    "id": "19440",
+                    "name": "Bosch EDC17C19"
+                  },
+                  {
+                    "id": "19778",
+                    "name": "Bosch EDC17C59"
+                  },
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19808",
+                    "name": "Marelli MJD6JF"
+                  }
+                ]
+              },
+              "1.4L i": {
+                "id": "10921",
+                "ecus": [
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  }
+                ]
+              },
+              "1.5 CDTI": {
+                "id": "12499",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6L i": {
+                "id": "11868",
+                "ecus": [
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "19873",
+                    "name": "Delphi Delco MT35E"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.7 CDTI - TDI": {
+                "id": "9356",
+                "ecus": [
+                  {
+                    "id": "19770",
+                    "name": "Bosch EDC15C7"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  },
+                  {
+                    "id": "19870",
+                    "name": "Delphi ACDelco E87"
+                  },
+                  {
+                    "id": "19897",
+                    "name": "Delphi TD"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "1.8 i": {
+                "id": "12957",
+                "ecus": [
+                  {
+                    "id": "19744",
+                    "name": "Siemens/Continental Simtec71"
+                  }
+                ]
+              }
+            }
+          },
+          "Crossland X": {
+            "id": "2996",
+            "engines": {
+              "1.2L Turbo": {
+                "id": "12536",
+                "ecus": [
+                  {
+                    "id": "19991",
+                    "name": "Valeo V46"
+                  },
+                  {
+                    "id": "20179",
+                    "name": "Valeo VD56.xx"
+                  }
+                ]
+              },
+              "1.5 CDTI": {
+                "id": "12500",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 CDTI": {
+                "id": "12419",
+                "ecus": [
+                  {
+                    "id": "20012",
+                    "name": "Bosch EDC17C60"
+                  }
+                ]
+              },
+              "1.6L": {
+                "id": "12535",
+                "ecus": [
+                  {
+                    "id": "19991",
+                    "name": "Valeo V46"
+                  }
+                ]
+              }
+            }
+          },
+          "Frontera": {
+            "id": "1994",
+            "engines": {
+              "2.2 DTI": {
+                "id": "9374",
+                "ecus": [
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  }
+                ]
+              }
+            }
+          },
+          "GT": {
+            "id": "1999",
+            "engines": {
+              "2.0L Turbo": {
+                "id": "9396",
+                "ecus": [
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              }
+            }
+          },
+          "Insignia": {
+            "id": "1991",
+            "engines": {
+              "1.5 CDTI": {
+                "id": "12501",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6L i": {
+                "id": "10924",
+                "ecus": [
+                  {
+                    "id": "19982",
+                    "name": "Bosch ME7.6.4"
+                  },
+                  {
+                    "id": "20132",
+                    "name": "Delphi ACDelco E80"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  }
+                ]
+              },
+              "1.8L i": {
+                "id": "10923",
+                "ecus": [
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  }
+                ]
+              },
+              "2.0 CDTI": {
+                "id": "9358",
+                "ecus": [
+                  {
+                    "id": "19776",
+                    "name": "Bosch EDC17C18"
+                  },
+                  {
+                    "id": "19440",
+                    "name": "Bosch EDC17C19"
+                  },
+                  {
+                    "id": "19778",
+                    "name": "Bosch EDC17C59"
+                  },
+                  {
+                    "id": "19821",
+                    "name": "Bosch EDC17CP47"
+                  },
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  }
+                ]
+              },
+              "2.0L i": {
+                "id": "10925",
+                "ecus": [
+                  {
+                    "id": "19982",
+                    "name": "Bosch ME7.6.4"
+                  },
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  },
+                  {
+                    "id": "19954",
+                    "name": "Delphi ACDelco E39"
+                  },
+                  {
+                    "id": "19955",
+                    "name": "Delphi ACDelco E39A"
+                  }
+                ]
+              },
+              "2.8L i V6": {
+                "id": "9361",
+                "ecus": [
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              },
+              "3.0 CDTI": {
+                "id": "9359",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Karl": {
+            "id": "3192",
+            "engines": {
+              "1.0L i": {
+                "id": "12919",
+                "ecus": [
+                  {
+                    "id": "20153",
+                    "name": "Delphi ACDelco E84"
+                  }
+                ]
+              }
+            }
+          },
+          "Meriva": {
+            "id": "1992",
+            "engines": {
+              "1.2L i": {
+                "id": "10293",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  }
+                ]
+              },
+              "1.3 CDTI": {
+                "id": "9362",
+                "ecus": [
+                  {
+                    "id": "19776",
+                    "name": "Bosch EDC17C18"
+                  },
+                  {
+                    "id": "19440",
+                    "name": "Bosch EDC17C19"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19646",
+                    "name": "Marelli MJD8DF"
+                  },
+                  {
+                    "id": "19649",
+                    "name": "Marelli MM6JF"
+                  }
+                ]
+              },
+              "1.4L i": {
+                "id": "9365",
+                "ecus": [
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  }
+                ]
+              },
+              "1.6 CDTI": {
+                "id": "11888",
+                "ecus": [
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  }
+                ]
+              },
+              "1.6L i": {
+                "id": "9366",
+                "ecus": [
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "19873",
+                    "name": "Delphi Delco MT35E"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.7 CDTI - DTI": {
+                "id": "9364",
+                "ecus": [
+                  {
+                    "id": "19770",
+                    "name": "Bosch EDC15C7"
+                  },
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  },
+                  {
+                    "id": "19870",
+                    "name": "Delphi ACDelco E87"
+                  },
+                  {
+                    "id": "19897",
+                    "name": "Delphi TD"
+                  },
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "1.8L i": {
+                "id": "9368",
+                "ecus": [
+                  {
+                    "id": "19744",
+                    "name": "Siemens/Continental Simtec71"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              }
+            }
+          },
+          "Mokka": {
+            "id": "2307",
+            "engines": {
+              "1.2 i": {
+                "id": "13092",
+                "ecus": [
+                  {
+                    "id": "20262",
+                    "name": "Bosch MG1CS032"
+                  }
+                ]
+              },
+              "1.4 i": {
+                "id": "10926",
+                "ecus": [
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  }
+                ]
+              },
+              "1.5 CDTI": {
+                "id": "12502",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 CDTI": {
+                "id": "11867",
+                "ecus": [
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  }
+                ]
+              },
+              "1.7 CDTI": {
+                "id": "10929",
+                "ecus": [
+                  {
+                    "id": "19870",
+                    "name": "Delphi ACDelco E87"
+                  }
+                ]
+              },
+              "1.8 i": {
+                "id": "10927",
+                "ecus": [
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  }
+                ]
+              }
+            }
+          },
+          "Movano": {
+            "id": "1993",
+            "engines": {
+              "1.6 DCI": {
+                "id": "12094",
+                "ecus": [
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  }
+                ]
+              },
+              "1.9 DCI": {
+                "id": "9369",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  }
+                ]
+              },
+              "2.0 DCI": {
+                "id": "9370",
+                "ecus": [
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  },
+                  {
+                    "id": "19429",
+                    "name": "Bosch EDC16CP33"
+                  },
+                  {
+                    "id": "19867",
+                    "name": "Bosch EDC17C11"
+                  },
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  },
+                  {
+                    "id": "19862",
+                    "name": "Bosch EDC17CP19"
+                  },
+                  {
+                    "id": "19868",
+                    "name": "Bosch EDC17CP58"
+                  }
+                ]
+              },
+              "2.2 DCI": {
+                "id": "9371",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  },
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  },
+                  {
+                    "id": "19429",
+                    "name": "Bosch EDC16CP33"
+                  }
+                ]
+              },
+              "2.3 DCI": {
+                "id": "9372",
+                "ecus": [
+                  {
+                    "id": "19867",
+                    "name": "Bosch EDC17C11"
+                  },
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  },
+                  {
+                    "id": "19862",
+                    "name": "Bosch EDC17CP19"
+                  },
+                  {
+                    "id": "19968",
+                    "name": "Siemens/Continental SID309"
+                  },
+                  {
+                    "id": "20235",
+                    "name": "Siemens/Continental SID321"
+                  }
+                ]
+              },
+              "2.5 DCI": {
+                "id": "9373",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  },
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  },
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  }
+                ]
+              },
+              "3.0 DCI": {
+                "id": "10536",
+                "ecus": [
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  }
+                ]
+              }
+            }
+          },
+          "Omega-B": {
+            "id": "1996",
+            "engines": {
+              "2.0 DTI": {
+                "id": "9381",
+                "ecus": [
+                  {
+                    "id": "19408",
+                    "name": "Bosch EDC15VM+"
+                  },
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  }
+                ]
+              },
+              "2.0L i": {
+                "id": "9384",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  }
+                ]
+              },
+              "2.2 DTI": {
+                "id": "9382",
+                "ecus": [
+                  {
+                    "id": "19408",
+                    "name": "Bosch EDC15VM+"
+                  },
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  }
+                ]
+              },
+              "2.5 DTI": {
+                "id": "9383",
+                "ecus": [
+                  {
+                    "id": "19765",
+                    "name": "Bosch EDC15C4"
+                  }
+                ]
+              }
+            }
+          },
+          "Signum": {
+            "id": "1997",
+            "engines": {
+              "1.9 CDTI": {
+                "id": "9390",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  }
+                ]
+              },
+              "2.2 DTI": {
+                "id": "10166",
+                "ecus": [
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  }
+                ]
+              },
+              "2.2L i": {
+                "id": "11057",
+                "ecus": [
+                  {
+                    "id": "19746",
+                    "name": "Siemens/Continental Simtec81"
+                  }
+                ]
+              },
+              "3.0 CDTI": {
+                "id": "9391",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "3.2L i V6": {
+                "id": "12158",
+                "ecus": [
+                  {
+                    "id": "20117",
+                    "name": "Bosch ME3.1.1"
+                  }
+                ]
+              }
+            }
+          },
+          "Tigra-B": {
+            "id": "1998",
+            "engines": {
+              "1.3 CDTI": {
+                "id": "9392",
+                "ecus": [
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19808",
+                    "name": "Marelli MJD6JF"
+                  }
+                ]
+              }
+            }
+          },
+          "Vectra": {
+            "id": "2000",
+            "engines": {
+              "1.6L i": {
+                "id": "10412",
+                "ecus": [
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "20053",
+                    "name": "Delphi Delco HSFI-C"
+                  },
+                  {
+                    "id": "19873",
+                    "name": "Delphi Delco MT35E"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.7 CDTI - DTI": {
+                "id": "11869",
+                "ecus": [
+                  {
+                    "id": "19770",
+                    "name": "Bosch EDC15C7"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  },
+                  {
+                    "id": "19897",
+                    "name": "Delphi TD"
+                  }
+                ]
+              },
+              "1.8L i": {
+                "id": "10420",
+                "ecus": [
+                  {
+                    "id": "20102",
+                    "name": "Siemens/Continental Simtec70"
+                  },
+                  {
+                    "id": "19744",
+                    "name": "Siemens/Continental Simtec71"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.9 CDTI": {
+                "id": "9401",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  }
+                ]
+              },
+              "2.0L i": {
+                "id": "9404",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19522",
+                    "name": "Bosch ME7.6.1"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19530",
+                    "name": "Bosch ME7.9.9"
+                  },
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              },
+              "2.2 DTI": {
+                "id": "9402",
+                "ecus": [
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  }
+                ]
+              },
+              "2.2L i": {
+                "id": "11058",
+                "ecus": [
+                  {
+                    "id": "19746",
+                    "name": "Siemens/Continental Simtec81"
+                  }
+                ]
+              },
+              "2.8L i V6": {
+                "id": "9405",
+                "ecus": [
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              },
+              "3.0 CDTI": {
+                "id": "9403",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "3.2L i V6": {
+                "id": "9406",
+                "ecus": [
+                  {
+                    "id": "20117",
+                    "name": "Bosch ME3.1.1"
+                  },
+                  {
+                    "id": "19534",
+                    "name": "Bosch ME9.6"
+                  }
+                ]
+              }
+            }
+          },
+          "Vivaro": {
+            "id": "2001",
+            "engines": {
+              "1.5 CDTI": {
+                "id": "12503",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 DCI": {
+                "id": "12050",
+                "ecus": [
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  },
+                  {
+                    "id": "19984",
+                    "name": "Bosch EDC17C84"
+                  }
+                ]
+              },
+              "1.9 DCI": {
+                "id": "9407",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  }
+                ]
+              },
+              "2.0 DCI": {
+                "id": "9408",
+                "ecus": [
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  },
+                  {
+                    "id": "19429",
+                    "name": "Bosch EDC16CP33"
+                  },
+                  {
+                    "id": "19867",
+                    "name": "Bosch EDC17C11"
+                  },
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  },
+                  {
+                    "id": "19862",
+                    "name": "Bosch EDC17CP19"
+                  },
+                  {
+                    "id": "19868",
+                    "name": "Bosch EDC17CP58"
+                  }
+                ]
+              },
+              "2.2 DCI": {
+                "id": "9409",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  },
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  },
+                  {
+                    "id": "19429",
+                    "name": "Bosch EDC16CP33"
+                  }
+                ]
+              },
+              "2.3 DCI": {
+                "id": "9410",
+                "ecus": [
+                  {
+                    "id": "19867",
+                    "name": "Bosch EDC17C11"
+                  },
+                  {
+                    "id": "19441",
+                    "name": "Bosch EDC17C42"
+                  },
+                  {
+                    "id": "19862",
+                    "name": "Bosch EDC17CP19"
+                  },
+                  {
+                    "id": "19968",
+                    "name": "Siemens/Continental SID309"
+                  }
+                ]
+              },
+              "2.5 DCI": {
+                "id": "9411",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  },
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "11082",
+                "ecus": [
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  }
+                ]
+              }
+            }
+          },
+          "Zafira": {
+            "id": "2169",
+            "engines": {
+              "1.4L i": {
+                "id": "10932",
+                "ecus": [
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "20053",
+                    "name": "Delphi Delco HSFI-C"
+                  }
+                ]
+              },
+              "1.5 CDTI": {
+                "id": "12504",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 CDTI": {
+                "id": "11865",
+                "ecus": [
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  }
+                ]
+              },
+              "1.6L i": {
+                "id": "10933",
+                "ecus": [
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19814",
+                    "name": "Bosch ME7.6.3"
+                  },
+                  {
+                    "id": "19982",
+                    "name": "Bosch ME7.6.4"
+                  },
+                  {
+                    "id": "19952",
+                    "name": "Delphi ACDelco E78"
+                  },
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "19872",
+                    "name": "Delphi Delco HSFI-2.x"
+                  },
+                  {
+                    "id": "20053",
+                    "name": "Delphi Delco HSFI-C"
+                  },
+                  {
+                    "id": "19873",
+                    "name": "Delphi Delco MT35E"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  }
+                ]
+              },
+              "1.7 CDTI - DTI": {
+                "id": "10408",
+                "ecus": [
+                  {
+                    "id": "19770",
+                    "name": "Bosch EDC15C7"
+                  },
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  },
+                  {
+                    "id": "19870",
+                    "name": "Delphi ACDelco E87"
+                  },
+                  {
+                    "id": "19897",
+                    "name": "Delphi TD"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "1.8L i": {
+                "id": "10931",
+                "ecus": [
+                  {
+                    "id": "19953",
+                    "name": "Delphi ACDelco E83"
+                  },
+                  {
+                    "id": "20102",
+                    "name": "Siemens/Continental Simtec70"
+                  },
+                  {
+                    "id": "19744",
+                    "name": "Siemens/Continental Simtec71"
+                  },
+                  {
+                    "id": "19745",
+                    "name": "Siemens/Continental Simtec75"
+                  },
+                  {
+                    "id": "19746",
+                    "name": "Siemens/Continental Simtec81"
+                  }
+                ]
+              },
+              "1.9 CDTI": {
+                "id": "11871",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  }
+                ]
+              },
+              "2.0/2.2 CDTi - DTI": {
+                "id": "10407",
+                "ecus": [
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19776",
+                    "name": "Bosch EDC17C18"
+                  },
+                  {
+                    "id": "19440",
+                    "name": "Bosch EDC17C19"
+                  },
+                  {
+                    "id": "19778",
+                    "name": "Bosch EDC17C59"
+                  },
+                  {
+                    "id": "19821",
+                    "name": "Bosch EDC17CP47"
+                  },
+                  {
+                    "id": "19579",
+                    "name": "Bosch PSG16"
+                  },
+                  {
+                    "id": "20085",
+                    "name": "Delphi ACDelco E98"
+                  },
+                  {
+                    "id": "20149",
+                    "name": "Delphi DCM7.1"
+                  },
+                  {
+                    "id": "20193",
+                    "name": "Delphi DCM7.1 Gen2"
+                  }
+                ]
+              },
+              "2.0L i": {
+                "id": "11873",
+                "ecus": [
+                  {
+                    "id": "19505",
+                    "name": "Bosch ME1.5.5"
+                  },
+                  {
+                    "id": "19523",
+                    "name": "Bosch ME7.6.2"
+                  },
+                  {
+                    "id": "19982",
+                    "name": "Bosch ME7.6.4"
                   }
                 ]
               }
