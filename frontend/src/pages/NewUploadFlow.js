@@ -905,11 +905,11 @@ const NewUploadFlow = () => {
               </div>
               <div>
                 <h4 className="text-gray-900 font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-500 text-sm">
-                  <li>DTC Removal</li>
-                  <li>DPF OFF</li>
-                  <li>EGR OFF</li>
-                  <li>AdBlue OFF</li>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="/services/dtc-removal" className="text-gray-500 hover:text-blue-600 transition">DTC Removal</a></li>
+                  <li><a href="/services/dpf-off" className="text-gray-500 hover:text-blue-600 transition">DPF OFF</a></li>
+                  <li><a href="/services/egr-off" className="text-gray-500 hover:text-blue-600 transition">EGR OFF</a></li>
+                  <li><a href="/services/adblue-off" className="text-gray-500 hover:text-blue-600 transition">AdBlue OFF</a></li>
                 </ul>
               </div>
               <div>
