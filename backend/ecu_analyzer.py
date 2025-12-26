@@ -1806,5 +1806,3 @@ class ECUAnalyzer:
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
         }
-
-        }
