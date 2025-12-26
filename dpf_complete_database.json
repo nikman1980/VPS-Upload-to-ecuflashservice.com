@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:17:13.824709",
+  "last_update": "2025-12-26T23:21:18.970204",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -61567,6 +61567,1156 @@
                   {
                     "id": "19854",
                     "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Sumitomo": {
+        "id": "332",
+        "models": {
+          "H330LC-6": {
+            "id": "2892",
+            "engines": {
+              "7.8L TD": {
+                "id": "12168",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "TANA": {
+        "id": "414",
+        "models": {
+          "Shark 220DT": {
+            "id": "3225",
+            "engines": {
+              "15L TD L6": {
+                "id": "12989",
+                "ecus": [
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "Shark 440DT": {
+            "id": "3226",
+            "engines": {
+              "15L TD L6": {
+                "id": "12990",
+                "ecus": [
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "TCM Forklift Trucks": {
+        "id": "331",
+        "models": {
+          "FD/FG35-50": {
+            "id": "2891",
+            "engines": {
+              "3.0 CRDI ZD30": {
+                "id": "12166",
+                "ecus": [
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
+                  }
+                ]
+              }
+            }
+          },
+          "iNOMA": {
+            "id": "2890",
+            "engines": {
+              "3.0 CRDI ZD30": {
+                "id": "12167",
+                "ecus": [
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Terex": {
+        "id": "251",
+        "models": {
+          "PT-110": {
+            "id": "2593",
+            "engines": {
+              "3.4 TDI": {
+                "id": "11545",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Terex - Fuchs": {
+        "id": "263",
+        "models": {
+          "MHL 250": {
+            "id": "2651",
+            "engines": {
+              "3.6 TCD L04 2V": {
+                "id": "11651",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 320": {
+            "id": "2650",
+            "engines": {
+              "4.0 TCD L04 2V": {
+                "id": "11650",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 331": {
+            "id": "2649",
+            "engines": {
+              "6.0 TCD L06 2V": {
+                "id": "11649",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 335": {
+            "id": "2648",
+            "engines": {
+              "6.0 TCD L06 2V": {
+                "id": "11648",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 340": {
+            "id": "2647",
+            "engines": {
+              "6.0 TCD L06 2V": {
+                "id": "11647",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 350": {
+            "id": "2643",
+            "engines": {
+              "6.1 TCD L06 V4": {
+                "id": "11643",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 360": {
+            "id": "2644",
+            "engines": {
+              "7.8 L6 4V": {
+                "id": "11644",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 380": {
+            "id": "2645",
+            "engines": {
+              "11.9 TCD V06 4V": {
+                "id": "11645",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "MHL 390": {
+            "id": "2646",
+            "engines": {
+              "12.0 TCD V6 4V": {
+                "id": "11646",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Togercat": {
+        "id": "354",
+        "models": {
+          "602": {
+            "id": "2978",
+            "engines": {
+              "6.7 TDI": {
+                "id": "12369",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Torque Rathole Drilling": {
+        "id": "297",
+        "models": {
+          "TR1xx": {
+            "id": "2758",
+            "engines": {
+              "6.8L TD": {
+                "id": "11842",
+                "ecus": [
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Toyota": {
+        "id": "433",
+        "models": {
+          "Forklifts": {
+            "id": "3315",
+            "engines": {
+              "3.0 d": {
+                "id": "13172",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Volvo": {
+        "id": "250",
+        "models": {
+          "Excavator": {
+            "id": "3266",
+            "engines": {
+              "EC380": {
+                "id": "13069",
+                "ecus": [
+                  {
+                    "id": "20260",
+                    "name": "TRW EMS2.4"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel Loader": {
+            "id": "2592",
+            "engines": {
+              "12.8 TDI L6": {
+                "id": "13076",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Wacker Neuson": {
+        "id": "325",
+        "models": {
+          "DW100": {
+            "id": "2874",
+            "engines": {
+              "3.4L TD": {
+                "id": "12139",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          },
+          "ETxx": {
+            "id": "2943",
+            "engines": {
+              "3.3 TDI": {
+                "id": "12273",
+                "ecus": [
+                  {
+                    "id": "20134",
+                    "name": "Perkins"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "XCMG": {
+        "id": "432",
+        "models": {
+          "Concrete Mixer": {
+            "id": "3313",
+            "engines": {
+              "7.5 TD": {
+                "id": "13169",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Yanmar": {
+        "id": "245",
+        "models": {
+          "C50R": {
+            "id": "3214",
+            "engines": {
+              "3.1D": {
+                "id": "12975",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Pump": {
+            "id": "3317",
+            "engines": {
+              "4.6TDI": {
+                "id": "13175",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  }
+                ]
+              }
+            }
+          },
+          "VIO 80": {
+            "id": "2568",
+            "engines": {
+              "3.3L": {
+                "id": "11494",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Yuchai": {
+        "id": "314",
+        "models": {
+          "Sprinkler": {
+            "id": "2828",
+            "engines": {
+              "6.5 TDI": {
+                "id": "12039",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              },
+              "6.7 TDI": {
+                "id": "12038",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Zephir": {
+        "id": "369",
+        "models": {
+          "Сhassis": {
+            "id": "3035",
+            "engines": {
+              "3.0L TDI": {
+                "id": "12517",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Truck": {
+    "brands": {
+      "Agrale": {
+        "id": "239",
+        "models": {
+          "10000": {
+            "id": "2551",
+            "engines": {
+              "4.8L 16V 121kW": {
+                "id": "11464",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "14000": {
+            "id": "2552",
+            "engines": {
+              "4.8L 16V 140kW": {
+                "id": "11465",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "8700": {
+            "id": "2776",
+            "engines": {
+              "3.7L ISF": {
+                "id": "11901",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Ashok Leyland": {
+        "id": "381",
+        "models": {
+          "Boss": {
+            "id": "3102",
+            "engines": {
+              "3.8 TDI": {
+                "id": "12675",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  },
+                  {
+                    "id": "20149",
+                    "name": "Delphi DCM7.1"
+                  }
+                ]
+              }
+            }
+          },
+          "eComet": {
+            "id": "3101",
+            "engines": {
+              "3.8 TDI": {
+                "id": "12674",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  },
+                  {
+                    "id": "20149",
+                    "name": "Delphi DCM7.1"
+                  }
+                ]
+              }
+            }
+          },
+          "Partner": {
+            "id": "3093",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12649",
+                "ecus": [
+                  {
+                    "id": "19779",
+                    "name": "Bosch EDC17C53"
+                  },
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Avia": {
+        "id": "311",
+        "models": {
+          "Dx": {
+            "id": "2819",
+            "engines": {
+              "4.5L ISB": {
+                "id": "12027",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "BAW": {
+        "id": "166",
+        "models": {
+          "Fenix": {
+            "id": "2172",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12256",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              },
+              "3.2 TDI": {
+                "id": "10417",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "BMC": {
+        "id": "235",
+        "models": {
+          "Megastar 360": {
+            "id": "2589",
+            "engines": {
+              "2.8L TDI": {
+                "id": "11540",
+                "ecus": [
+                  {
+                    "id": "19425",
+                    "name": "Bosch EDC16C8"
+                  }
+                ]
+              }
+            }
+          },
+          "PRO 9xx": {
+            "id": "2544",
+            "engines": {
+              "6.7 TD": {
+                "id": "11801",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "8.9 TD": {
+                "id": "11448",
+                "ecus": [
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "CAMC": {
+        "id": "284",
+        "models": {
+          "Lightweight": {
+            "id": "2723",
+            "engines": {
+              "8.9 TD L6": {
+                "id": "11774",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Catelpillar": {
+        "id": "305",
+        "models": {
+          "On-Highway Trucks": {
+            "id": "2780",
+            "engines": {
+              "C13 / CT13": {
+                "id": "11918",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  },
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  }
+                ]
+              },
+              "C15 / CT15": {
+                "id": "11919",
+                "ecus": [
+                  {
+                    "id": "19581",
+                    "name": "ADEM4"
+                  },
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  },
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Chevrolet": {
+        "id": "288",
+        "models": {
+          "Kodiak": {
+            "id": "2730",
+            "engines": {
+              "6.6 V8 TD": {
+                "id": "11788",
+                "ecus": [
+                  {
+                    "id": "19421",
+                    "name": "Bosch EDC16C37"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Daewoo": {
+        "id": "287",
+        "models": {
+          "Novus": {
+            "id": "2845",
+            "engines": {
+              "5.9L TD": {
+                "id": "12553",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "DAF": {
+        "id": "201",
+        "models": {
+          "CF65": {
+            "id": "2455",
+            "engines": {
+              "4.5 TD": {
+                "id": "11468",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "5.9 TD": {
+                "id": "11284",
+                "ecus": [
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              },
+              "6.7 TD": {
+                "id": "11573",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "CF75": {
+            "id": "2555",
+            "engines": {
+              "250-360PS": {
+                "id": "11470",
+                "ecus": [
+                  {
+                    "id": "19994",
+                    "name": "Delphi DMCI"
+                  },
+                  {
+                    "id": "20010",
+                    "name": "Delphi ETC3"
+                  }
+                ]
+              }
+            }
+          },
+          "CF85": {
+            "id": "2413",
+            "engines": {
+              "360-510PS": {
+                "id": "11175",
+                "ecus": [
+                  {
+                    "id": "19994",
+                    "name": "Delphi DMCI"
+                  },
+                  {
+                    "id": "20010",
+                    "name": "Delphi ETC3"
+                  },
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              }
+            }
+          },
+          "LF45": {
+            "id": "2453",
+            "engines": {
+              "4.5L TD": {
+                "id": "11466",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "5.9L TD": {
+                "id": "11282",
+                "ecus": [
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              },
+              "6.7 TD": {
+                "id": "11574",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "LF55": {
+            "id": "2454",
+            "engines": {
+              "5.9L TD": {
+                "id": "11283",
+                "ecus": [
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              },
+              "6.7L TD": {
+                "id": "11467",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "XF105": {
+            "id": "2411",
+            "engines": {
+              "400-510PS": {
+                "id": "11173",
+                "ecus": [
+                  {
+                    "id": "19994",
+                    "name": "Delphi DMCI"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "XF106": {
+            "id": "2554",
+            "engines": {
+              "400 - 510PS": {
+                "id": "11469",
+                "ecus": [
+                  {
+                    "id": "20010",
+                    "name": "Delphi ETC3"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Dongfeng": {
+        "id": "253",
+        "models": {
+          "C4xxx": {
+            "id": "2870",
+            "engines": {
+              "3.9L ISB": {
+                "id": "12133",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          },
+          "D14-xxx": {
+            "id": "2938",
+            "engines": {
+              "3.9L ISB": {
+                "id": "13138",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              },
+              "ZD3015-4N": {
+                "id": "12261",
+                "ecus": [
+                  {
+                    "id": "19779",
+                    "name": "Bosch EDC17C53"
+                  }
+                ]
+              }
+            }
+          },
+          "DF-1016": {
+            "id": "2599",
+            "engines": {
+              "3.9 TDI": {
+                "id": "11555",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "DF-1216": {
+            "id": "2600",
+            "engines": {
+              "3.9 TDI": {
+                "id": "11556",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "DF-912": {
+            "id": "2598",
+            "engines": {
+              "3.9 TDI": {
+                "id": "11554",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "Kinland 420": {
+            "id": "2768",
+            "engines": {
+              "11.1 L": {
+                "id": "11862",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          },
+          "Tianlong": {
+            "id": "2894",
+            "engines": {
+              "ISZ 13L TD": {
+                "id": "12172",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Durso": {
+        "id": "411",
+        "models": {
+          "Multimobil X-65": {
+            "id": "3213",
+            "engines": {
+              "2.5L TDI": {
+                "id": "12971",
+                "ecus": [
+                  {
+                    "id": "20186",
+                    "name": "Denso DC1U"
                   }
                 ]
               }
