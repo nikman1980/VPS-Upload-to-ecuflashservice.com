@@ -741,7 +741,9 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
             "detected_manufacturer": display_info['manufacturer'],
             "metadata": metadata,
             "available_options": available_options,
-            "message": "File uploaded successfully! Select the services you need."
+            "detected_maps": display_info.get('detected_maps', {}),
+            "total_services_detected": len(available_options),
+            "message": f"File analyzed! {len(available_options)} service(s) detected based on ECU content."
         }
         
     except HTTPException:
