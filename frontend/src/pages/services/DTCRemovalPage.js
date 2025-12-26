@@ -154,7 +154,7 @@ const DTCRemovalPage = () => {
                   <li>• Always diagnose and repair actual faults before requesting DTC removal</li>
                   <li>• Some DTCs are safety-related and should not be removed</li>
                   <li>• This service is intended for off-road and competition vehicles where permitted</li>
-                  <li>• <strong>FREE for 1 month:</strong> If additional DTCs appear after our modification, we'll remove them at no extra cost</li>
+                  <li>• <strong>FREE for 1 month:</strong> If additional DTCs appear after our modification, we&apos;ll remove them at no extra cost</li>
                 </ul>
               </div>
             </div>
