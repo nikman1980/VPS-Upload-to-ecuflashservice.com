@@ -1412,4 +1412,398 @@ class ECUAnalyzer:
             "confidence": confidence,
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
+
+    def _detect_lambda_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect Lambda/O2 sensor maps.
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Lambda/O2 text markers
+        lambda_markers = [
+            (b'LAMBDA', 50), (b'Lambda', 45), (b'lambda', 40),
+            (b'O2_', 45), (b'O2S', 45), (b'O2 SENSOR', 50),
+            (b'OXYGEN', 40), (b'oxygen', 35),
+            (b'LSU', 40), (b'WIDEBAND', 45),
+            (b'HEGO', 45), (b'UEGO', 45),
+        ]
+        
+        for marker, score in lambda_markers:
+            count = file_data.count(marker)
+            if count > 0:
+                indicators.append(f"Lambda marker '{marker.decode()}': {count}x")
+                confidence_score += score
+                break
+        
+        # Check strings
+        lambda_strings = ["LAMBDA", "O2SENSOR", "OXYGEN_SENSOR", "WIDEBAND", "HEGO", "UEGO"]
+        for s in lambda_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 35
+                break
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_speed_limiter(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect speed limiter maps.
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Speed limiter markers
+        speed_markers = [
+            (b'VMAX', 55), (b'V_MAX', 55), (b'SPEED_LIM', 60),
+            (b'SPEED_LIMIT', 60), (b'SPEEDLIM', 55),
+            (b'LIMITER', 45), (b'limiter', 40),
+            (b'TOP_SPEED', 50), (b'TOPSPEED', 50),
+        ]
+        
+        for marker, score in speed_markers:
+            if marker in file_data:
+                indicators.append(f"Speed marker '{marker.decode()}'")
+                confidence_score += score
+                break
+        
+        # Check strings
+        speed_strings = ["SPEED_LIMIT", "VMAX", "SPEEDLIMITER", "TOP_SPEED"]
+        for s in speed_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_catalyst_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect catalyst/CAT monitoring maps.
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Catalyst markers
+        cat_markers = [
+            (b'CAT_', 50), (b'_CAT', 50), (b'CATALYST', 55),
+            (b'KAT_', 50), (b'_KAT', 50), (b'KATALYSATOR', 55),
+            (b'TWC', 45), (b'THREE_WAY', 50),
+            (b'CAT_DIAG', 55), (b'CATDIAG', 50),
+        ]
+        
+        for marker, score in cat_markers:
+            if marker in file_data:
+                indicators.append(f"Catalyst marker '{marker.decode()}'")
+                confidence_score += score
+                break
+        
+        # Check strings
+        cat_strings = ["CATALYST", "CAT_DIAG", "THREE_WAY_CAT", "CATALYTIC"]
+        for s in cat_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_swirl_flaps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect swirl flaps maps (common in VAG/BMW diesels).
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Swirl flaps markers
+        swirl_markers = [
+            (b'SWIRL', 55), (b'swirl', 50),
+            (b'DRALLKLAPPEN', 60), (b'Drallklappen', 55),
+            (b'TUMBLE', 50), (b'tumble', 45),
+            (b'INTAKE_FLAP', 55), (b'INTAKEFLAP', 50),
+        ]
+        
+        for marker, score in swirl_markers:
+            if marker in file_data:
+                indicators.append(f"Swirl flaps marker '{marker.decode()}'")
+                confidence_score += score
+                break
+        
+        # Check strings
+        swirl_strings = ["SWIRL", "DRALLKLAPPEN", "INTAKE_FLAP", "TUMBLE_FLAP"]
+        for s in swirl_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_start_stop(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect start/stop system maps.
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Start/stop markers
+        ss_markers = [
+            (b'START_STOP', 60), (b'STARTSTOP', 55),
+            (b'MSA', 50), (b'AUTO_STOP', 55),
+            (b'ENGINE_RESTART', 50), (b'ECO_STOP', 50),
+            (b'ISG', 45),  # Intelligent Stop & Go
+        ]
+        
+        for marker, score in ss_markers:
+            if marker in file_data:
+                indicators.append(f"Start/Stop marker '{marker.decode()}'")
+                confidence_score += score
+                break
+        
+        # Check strings
+        ss_strings = ["START_STOP", "STARTSTOP", "AUTO_STOP", "ECO_STOP", "ENGINE_RESTART"]
+        for s in ss_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_hotstart_immo(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect hot start fix / immobilizer maps.
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Hot start / Immo markers
+        immo_markers = [
+            (b'IMMO', 55), (b'immo', 50),
+            (b'IMMOBILIZER', 60), (b'IMMOBILISER', 60),
+            (b'WFS', 50),  # Wegfahrsperre (German for immobilizer)
+            (b'HOT_START', 50), (b'HOTSTART', 50),
+            (b'TRANSPONDER', 55),
+        ]
+        
+        for marker, score in immo_markers:
+            if marker in file_data:
+                indicators.append(f"Immo marker '{marker.decode()}'")
+                confidence_score += score
+                break
+        
+        # Check strings
+        immo_strings = ["IMMO", "IMMOBILIZER", "TRANSPONDER", "WEGFAHRSPERRE", "HOT_START"]
+        for s in immo_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_dtc_capability(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect DTC (Diagnostic Trouble Codes) capability.
+        Almost all ECUs have this.
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # DTC markers
+        dtc_markers = [
+            (b'DTC', 50), (b'dtc', 45),
+            (b'FAULT', 45), (b'fault', 40),
+            (b'ERROR_CODE', 50), (b'ERRORCODE', 50),
+            (b'P0', 45), (b'P1', 45), (b'P2', 45),  # OBD-II codes
+            (b'U0', 40), (b'U1', 40),  # Network codes
+            (b'OBD', 50), (b'obd', 45),
+            (b'DIAG', 45),
+        ]
+        
+        for marker, score in dtc_markers:
+            count = file_data.count(marker)
+            if count > 0:
+                indicators.append(f"DTC marker '{marker.decode()}': {count}x")
+                confidence_score += score
+                break
+        
+        # Check strings
+        dtc_strings = ["DTC", "FAULT_CODE", "ERROR_CODE", "OBD", "DIAGNOSTIC"]
+        for s in dtc_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        # All diesel/modern ECUs have DTC capability
+        ecu_type = self.results.get("ecu_type", "") or ""
+        manufacturer = self.results.get("manufacturer", "") or ""
+        if ecu_type or manufacturer:
+            indicators.append("ECU detected (DTC standard)")
+            confidence_score += 30
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_tuning_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect tuning capability (torque/power maps).
+        """
+        indicators = []
+        confidence_score = 0
+        
+        # Tuning-related markers
+        tuning_markers = [
+            (b'TORQUE', 55), (b'torque', 50),
+            (b'TQ_', 50), (b'_TQ', 50),
+            (b'INJECTION', 50), (b'injection', 45),
+            (b'RAIL_P', 50), (b'RAILP', 50),
+            (b'BOOST', 55), (b'boost', 50),
+            (b'TURBO', 50), (b'turbo', 45),
+            (b'IQ_', 50), (b'_IQ', 50),  # Injection Quantity
+            (b'SOI_', 50), (b'_SOI', 50),  # Start of Injection
+        ]
+        
+        for marker, score in tuning_markers:
+            count = file_data.count(marker)
+            if count > 0:
+                indicators.append(f"Tuning marker '{marker.decode()}': {count}x")
+                confidence_score += score
+                break
+        
+        # Check strings
+        tuning_strings = ["TORQUE", "INJECTION", "RAIL_PRESSURE", "BOOST", "TURBO_CTRL"]
+        for s in tuning_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        # All diesel ECUs support tuning
+        ecu_type = self.results.get("ecu_type", "") or ""
+        manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
+        
+        diesel_indicators = ["EDC", "DCM", "SID", "DENSO", "CUMMINS", "MJD"]
+        is_diesel = any(ind in ecu_upper or ind in mfr_upper for ind in diesel_indicators)
+        
+        if is_diesel:
+            indicators.append("Diesel ECU (tuning available)")
+            confidence_score += 45
+        
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 30:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+
         }
