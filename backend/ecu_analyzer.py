@@ -126,6 +126,30 @@ class ECUAnalyzer:
         
         return self.results
     
+    def get_display_info(self) -> Dict:
+        """
+        Get analysis results formatted for display.
+        Returns the same data as analyze() but can be called after analyze().
+        """
+        return {
+            "file_size_mb": self.results.get("file_size_mb", 0),
+            "manufacturer": self.results.get("manufacturer") or "Unknown",
+            "ecu_type": self.results.get("ecu_type") or "Unknown ECU",
+            "ecu_generation": self.results.get("ecu_generation"),
+            "calibration_id": self.results.get("calibration_id"),
+            "software_version": self.results.get("software_version"),
+            "hardware_version": self.results.get("hardware_version"),
+            "part_number": self.results.get("part_number"),
+            "vin": self.results.get("vin"),
+            "vehicle_info": self.results.get("vehicle_info"),
+            "processor": self.results.get("processor"),
+            "flash_type": self.results.get("flash_type"),
+            "strings": self.results.get("strings", []),
+            "confidence": self.results.get("confidence", "low"),
+            "detected_maps": self.results.get("detected_maps", {}),
+            "available_services": self.results.get("available_services", [])
+        }
+    
     def _analyze_file_size(self, file_size: int):
         """Analyze file size to infer ECU generation and flash type"""
         
