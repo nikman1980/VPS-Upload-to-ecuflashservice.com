@@ -14,10 +14,14 @@ Analysis includes:
 - Processor/MCU identification
 - File size analysis for ECU generation inference
 - Strict VIN validation (only 100% confident matches)
-- MAP/BLOCK DETECTION: DPF, EGR, AdBlue/SCR, Lambda, Speed Limiter, etc.
+- MAP/BLOCK DETECTION: Using actual binary map structure analysis
+  - DPF maps: Search for specific switch patterns and map structures
+  - EGR maps: Identify EGR valve/flow map blocks
+  - SCR/AdBlue maps: Detect NOx/urea dosing structures
 """
 
 import re
+import struct
 from typing import Dict, List, Any
 
 
