@@ -1111,7 +1111,7 @@ class ECUAnalyzer:
         indicators = []
         confidence_score = 0
         
-        # String-based detection (most reliable)
+        # Binary pattern detection FIRST (more reliable for real ECU files)
         dpf_strings = [
             "DPF", "DIESEL PARTICULATE", "PARTICULATE FILTER",
             "FAP",  # French: Filtre à particules
