@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T22:16:26.759447",
+  "last_update": "2025-12-26T22:19:28.248874",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -32209,6 +32209,1545 @@
                   {
                     "id": "20131",
                     "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mazda": {
+        "id": "140",
+        "models": {
+          "2": {
+            "id": "1874",
+            "engines": {
+              "1.3 i": {
+                "id": "8646",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19959",
+                    "name": "Siemens/Continental SIM210"
+                  }
+                ]
+              },
+              "1.3 SKYACTIV-G (petrol)": {
+                "id": "10462",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "1.4 CRTD": {
+                "id": "8650",
+                "ecus": [
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  },
+                  {
+                    "id": "19788",
+                    "name": "Bosch EDC16C34-2.xx"
+                  },
+                  {
+                    "id": "19789",
+                    "name": "Bosch EDC16C34-3.xx"
+                  },
+                  {
+                    "id": "19790",
+                    "name": "Bosch EDC16C34-5.xxx"
+                  },
+                  {
+                    "id": "19706",
+                    "name": "Siemens/Continental SID202 / SID206"
+                  },
+                  {
+                    "id": "19910",
+                    "name": "Siemens/Continental SID802"
+                  },
+                  {
+                    "id": "19714",
+                    "name": "Siemens/Continental SID804"
+                  }
+                ]
+              },
+              "1.4 i": {
+                "id": "8647",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.5 i": {
+                "id": "8648",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.5 SKYACTIV-D (diesel)": {
+                "id": "12196",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  },
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "1.6 CRTD": {
+                "id": "10395",
+                "ecus": [
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "1.6 i": {
+                "id": "8649",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              }
+            }
+          },
+          "3": {
+            "id": "1875",
+            "engines": {
+              "1.4 i": {
+                "id": "11272",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.5 SKYACTIV-D (diesel)": {
+                "id": "11551",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  },
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "1.5 SKYACTIV-G (petrol)": {
+                "id": "10461",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "1.6 CRTD": {
+                "id": "8651",
+                "ecus": [
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  },
+                  {
+                    "id": "19788",
+                    "name": "Bosch EDC16C34-2.xx"
+                  },
+                  {
+                    "id": "19789",
+                    "name": "Bosch EDC16C34-3.xx"
+                  },
+                  {
+                    "id": "19790",
+                    "name": "Bosch EDC16C34-5.xxx"
+                  },
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "1.6 i": {
+                "id": "8654",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 CRTD": {
+                "id": "8652",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19901",
+                    "name": "Denso RF5"
+                  },
+                  {
+                    "id": "19900",
+                    "name": "Denso RF6"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "8655",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 SKYACTIV-G (petrol)": {
+                "id": "10456",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "20198",
+                    "name": "Denso D08"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "2.2 CRTD": {
+                "id": "8653",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.3 i Turbo": {
+                "id": "8656",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.5 SKYACTIV-G (petrol)": {
+                "id": "10460",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "20198",
+                    "name": "Denso D08"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              }
+            }
+          },
+          "5": {
+            "id": "1876",
+            "engines": {
+              "1.5 SKYACTIV-D (diesel)": {
+                "id": "11561",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "1.6 CRTD": {
+                "id": "10394",
+                "ecus": [
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "1.8 i": {
+                "id": "8657",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 CRTD": {
+                "id": "8659",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19901",
+                    "name": "Denso RF5"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "8658",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.2 CRTD": {
+                "id": "8660",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              }
+            }
+          },
+          "6": {
+            "id": "1877",
+            "engines": {
+              "1.6 i": {
+                "id": "11273",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.8 i": {
+                "id": "8663",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 CRTD": {
+                "id": "8661",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19901",
+                    "name": "Denso RF5"
+                  },
+                  {
+                    "id": "19900",
+                    "name": "Denso RF6"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "8664",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 SKYACTIV-G (petrol)": {
+                "id": "10453",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "2.2 CRTD": {
+                "id": "8662",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.2 SKYACTIV-D (diesel)": {
+                "id": "10667",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  },
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "2.2 SKYACTIV-G (petrol)": {
+                "id": "10454",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "2.3 i Turbo": {
+                "id": "8665",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.5": {
+                "id": "8666",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.5 SKYACTIV-G (petrol)": {
+                "id": "10455",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "8667",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  },
+                  {
+                    "id": "19908",
+                    "name": "Visteon EEC-V"
+                  }
+                ]
+              }
+            }
+          },
+          "Alexa": {
+            "id": "2451",
+            "engines": {
+              "1.5 i": {
+                "id": "11274",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Atenza": {
+            "id": "1878",
+            "engines": {
+              "2.0 i": {
+                "id": "8668",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.3 i": {
+                "id": "8669",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              }
+            }
+          },
+          "B-series": {
+            "id": "1881",
+            "engines": {
+              "2.5 D 4WD": {
+                "id": "8673",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19424",
+                    "name": "Bosch EDC16C7"
+                  }
+                ]
+              },
+              "2.5 TD": {
+                "id": "8674",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19424",
+                    "name": "Bosch EDC16C7"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "11143",
+                "ecus": [
+                  {
+                    "id": "19989",
+                    "name": "Siemens/Continental EMS2207"
+                  }
+                ]
+              },
+              "3.0 CRTD": {
+                "id": "11505",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19424",
+                    "name": "Bosch EDC16C7"
+                  },
+                  {
+                    "id": "20181",
+                    "name": "Transtron TC265"
+                  }
+                ]
+              }
+            }
+          },
+          "Bongo": {
+            "id": "1882",
+            "engines": {
+              "1.6 CRTD": {
+                "id": "8675",
+                "ecus": [
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  },
+                  {
+                    "id": "19788",
+                    "name": "Bosch EDC16C34-2.xx"
+                  },
+                  {
+                    "id": "19789",
+                    "name": "Bosch EDC16C34-3.xx"
+                  },
+                  {
+                    "id": "19790",
+                    "name": "Bosch EDC16C34-5.xxx"
+                  },
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "1.6 i": {
+                "id": "8678",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 CRTD": {
+                "id": "8676",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19901",
+                    "name": "Denso RF5"
+                  },
+                  {
+                    "id": "19900",
+                    "name": "Denso RF6"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "8679",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.2 CRTD": {
+                "id": "8677",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19901",
+                    "name": "Denso RF5"
+                  },
+                  {
+                    "id": "19900",
+                    "name": "Denso RF6"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              }
+            }
+          },
+          "BT": {
+            "id": "1883",
+            "engines": {
+              "2.2 CRTD": {
+                "id": "12248",
+                "ecus": [
+                  {
+                    "id": "19707",
+                    "name": "Siemens/Continental SID208"
+                  }
+                ]
+              },
+              "2.5 CRTD": {
+                "id": "8681",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19424",
+                    "name": "Bosch EDC16C7"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "8680",
+                "ecus": [
+                  {
+                    "id": "19989",
+                    "name": "Siemens/Continental EMS2207"
+                  }
+                ]
+              },
+              "3.0 CRTD": {
+                "id": "11504",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19424",
+                    "name": "Bosch EDC16C7"
+                  },
+                  {
+                    "id": "20181",
+                    "name": "Transtron TC265"
+                  }
+                ]
+              },
+              "3.2 CRTD": {
+                "id": "12263",
+                "ecus": [
+                  {
+                    "id": "19707",
+                    "name": "Siemens/Continental SID208"
+                  }
+                ]
+              }
+            }
+          },
+          "CX-3": {
+            "id": "2595",
+            "engines": {
+              "1.5 SKYACTIV-D (diesel)": {
+                "id": "11550",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  },
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "1.8 SKYACTIV-D (diesel)": {
+                "id": "12750",
+                "ecus": [
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              }
+            }
+          },
+          "CX-5": {
+            "id": "2181",
+            "engines": {
+              "2.0 SKYACTIV-G (petrol)": {
+                "id": "10457",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "20198",
+                    "name": "Denso D08"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "2.2 SKYACTIV-D (diesel)": {
+                "id": "10668",
+                "ecus": [
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  },
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "2.5 SKYACTIV-G (petrol)": {
+                "id": "10459",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "20198",
+                    "name": "Denso D08"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              }
+            }
+          },
+          "CX-7": {
+            "id": "1885",
+            "engines": {
+              "2.0 CRTD": {
+                "id": "8684",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.2 CRTD": {
+                "id": "8685",
+                "ecus": [
+                  {
+                    "id": "19895",
+                    "name": "Denso R2A"
+                  },
+                  {
+                    "id": "19896",
+                    "name": "Denso R2B"
+                  },
+                  {
+                    "id": "19888",
+                    "name": "Denso RF7"
+                  },
+                  {
+                    "id": "19889",
+                    "name": "Denso RF8"
+                  },
+                  {
+                    "id": "19891",
+                    "name": "Denso RFA"
+                  },
+                  {
+                    "id": "19890",
+                    "name": "Denso RFY"
+                  }
+                ]
+              },
+              "2.3 i": {
+                "id": "8683",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              }
+            }
+          },
+          "CX-8": {
+            "id": "3089",
+            "engines": {
+              "2.2 SKYACTIV-D (diesel)": {
+                "id": "12643",
+                "ecus": [
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "2.5 SKYACTIV-G (petrol)": {
+                "id": "12734",
+                "ecus": [
+                  {
+                    "id": "20198",
+                    "name": "Denso D08"
+                  }
+                ]
+              }
+            }
+          },
+          "CX-9": {
+            "id": "1886",
+            "engines": {
+              "2.2 SKYACTIV-D (diesel)": {
+                "id": "12644",
+                "ecus": [
+                  {
+                    "id": "20175",
+                    "name": "Denso SH9V"
+                  }
+                ]
+              },
+              "2.5 SKYACTIV-G (petrol)": {
+                "id": "12384",
+                "ecus": [
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              },
+              "3.7 i": {
+                "id": "8686",
+                "ecus": [
+                  {
+                    "id": "19909",
+                    "name": "Visteon EEC-VI"
+                  }
+                ]
+              }
+            }
+          },
+          "Demio": {
+            "id": "1887",
+            "engines": {
+              "1.3 i": {
+                "id": "8689",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19959",
+                    "name": "Siemens/Continental SIM210"
+                  }
+                ]
+              },
+              "1.5 i": {
+                "id": "8690",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Levante": {
+            "id": "1888",
+            "engines": {
+              "2.0 i": {
+                "id": "8691",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Millenia": {
+            "id": "1889",
+            "engines": {
+              "2.3 i": {
+                "id": "8692",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              }
+            }
+          },
+          "MPV": {
+            "id": "1890",
+            "engines": {
+              "1.8 i": {
+                "id": "8695",
+                "ecus": [
+                  {
+                    "id": "20086",
+                    "name": "Denso EGI FPxx"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.0 CRTD": {
+                "id": "8693",
+                "ecus": [
+                  {
+                    "id": "19901",
+                    "name": "Denso RF5"
+                  },
+                  {
+                    "id": "19900",
+                    "name": "Denso RF6"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "8696",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.3 i Turbo": {
+                "id": "8697",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "2.5 i": {
+                "id": "8698",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "8699",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  },
+                  {
+                    "id": "19908",
+                    "name": "Visteon EEC-V"
+                  }
+                ]
+              }
+            }
+          },
+          "MX-5": {
+            "id": "2182",
+            "engines": {
+              "1.5 SKYACTIV-G (petrol)": {
+                "id": "12735",
+                "ecus": [
+                  {
+                    "id": "20198",
+                    "name": "Denso D08"
+                  }
+                ]
+              },
+              "1.8 i": {
+                "id": "11275",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "20086",
+                    "name": "Denso EGI FPxx"
+                  }
+                ]
+              },
+              "1.9i": {
+                "id": "11897",
+                "ecus": [
+                  {
+                    "id": "20086",
+                    "name": "Denso EGI FPxx"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "11276",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "2.0 SKYACTIV": {
+                "id": "10458",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19886",
+                    "name": "Mitsubishi"
+                  }
+                ]
+              }
+            }
+          },
+          "Premacy": {
+            "id": "2770",
+            "engines": {
+              "1.8 i": {
+                "id": "11884",
+                "ecus": [
+                  {
+                    "id": "20086",
+                    "name": "Denso EGI FPxx"
+                  }
+                ]
+              }
+            }
+          },
+          "RX-8": {
+            "id": "2452",
+            "engines": {
+              "1.3L Wankel": {
+                "id": "11277",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Tribute": {
+            "id": "1891",
+            "engines": {
+              "2.3L": {
+                "id": "8701",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  },
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "8702",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  }
+                ]
+              },
+              "3.0L": {
+                "id": "8703",
+                "ecus": [
+                  {
+                    "id": "19852",
+                    "name": "Mitsubishi E6T5x"
+                  },
+                  {
+                    "id": "20248",
+                    "name": "Mitsubishi MH8305"
+                  },
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  },
+                  {
+                    "id": "19908",
+                    "name": "Visteon EEC-V"
+                  },
+                  {
+                    "id": "20035",
+                    "name": "Visteon EEC-V 216K (PWM interfase)"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "McLaren": {
+        "id": "274",
+        "models": {
+          "570S": {
+            "id": "2687",
+            "engines": {
+              "3.8L V8 32V BITURBO": {
+                "id": "11716",
+                "ecus": [
+                  {
+                    "id": "20060",
+                    "name": "Bosch ME17.8.3"
+                  }
+                ]
+              }
+            }
+          },
+          "650S": {
+            "id": "2686",
+            "engines": {
+              "3.8L V8 32V BITURBO": {
+                "id": "11717",
+                "ecus": [
+                  {
+                    "id": "20060",
+                    "name": "Bosch ME17.8.3"
+                  }
+                ]
+              }
+            }
+          },
+          "675LT": {
+            "id": "2685",
+            "engines": {
+              "3.8L V8 32V BITURBO": {
+                "id": "11718",
+                "ecus": [
+                  {
+                    "id": "20060",
+                    "name": "Bosch ME17.8.3"
+                  }
+                ]
+              }
+            }
+          },
+          "MP4 12C": {
+            "id": "2684",
+            "engines": {
+              "3.8L V8 32V BITURBO": {
+                "id": "11719",
+                "ecus": [
+                  {
+                    "id": "20060",
+                    "name": "Bosch ME17.8.3"
                   }
                 ]
               }
