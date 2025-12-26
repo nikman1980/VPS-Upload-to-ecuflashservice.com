@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:04:37.087646",
+  "last_update": "2025-12-26T23:07:57.195190",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -56938,6 +56938,1240 @@
                   {
                     "id": "20054",
                     "name": "Bosch MED17.5.26"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Volvo": {
+        "id": "156",
+        "models": {
+          "C30": {
+            "id": "2118",
+            "engines": {
+              "1.6 D": {
+                "id": "9999",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19418",
+                    "name": "Bosch EDC16C34"
+                  },
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "10392",
+                "ecus": [
+                  {
+                    "id": "19706",
+                    "name": "Siemens/Continental SID202 / SID206"
+                  },
+                  {
+                    "id": "19712",
+                    "name": "Siemens/Continental SID803"
+                  },
+                  {
+                    "id": "19713",
+                    "name": "Siemens/Continental SID803A"
+                  }
+                ]
+              },
+              "2.4 D": {
+                "id": "11064",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.4 i": {
+                "id": "12516",
+                "ecus": [
+                  {
+                    "id": "20152",
+                    "name": "Denso 079700-9133"
+                  }
+                ]
+              }
+            }
+          },
+          "C70": {
+            "id": "2119",
+            "engines": {
+              "2.0 D": {
+                "id": "10000",
+                "ecus": [
+                  {
+                    "id": "19706",
+                    "name": "Siemens/Continental SID202 / SID206"
+                  },
+                  {
+                    "id": "19712",
+                    "name": "Siemens/Continental SID803"
+                  },
+                  {
+                    "id": "19713",
+                    "name": "Siemens/Continental SID803A"
+                  }
+                ]
+              },
+              "2.4 D": {
+                "id": "11065",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              }
+            }
+          },
+          "S40/V40": {
+            "id": "2120",
+            "engines": {
+              "1.6 D": {
+                "id": "10002",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19418",
+                    "name": "Bosch EDC16C34"
+                  },
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "1.6 T": {
+                "id": "11785",
+                "ecus": [
+                  {
+                    "id": "20067",
+                    "name": "Bosch MED17.1.9"
+                  }
+                ]
+              },
+              "1.8 i": {
+                "id": "10004",
+                "ecus": [
+                  {
+                    "id": "19747",
+                    "name": "Siemens/Continental Sirius32"
+                  },
+                  {
+                    "id": "19748",
+                    "name": "Siemens/Continental Sirius34"
+                  },
+                  {
+                    "id": "19906",
+                    "name": "Visteon ESU 121"
+                  }
+                ]
+              },
+              "1.9 D": {
+                "id": "10663",
+                "ecus": [
+                  {
+                    "id": "19787",
+                    "name": "Bosch EDC15C3"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "10003",
+                "ecus": [
+                  {
+                    "id": "20119",
+                    "name": "Denso VEA"
+                  },
+                  {
+                    "id": "19706",
+                    "name": "Siemens/Continental SID202 / SID206"
+                  },
+                  {
+                    "id": "19712",
+                    "name": "Siemens/Continental SID803"
+                  },
+                  {
+                    "id": "19713",
+                    "name": "Siemens/Continental SID803A"
+                  }
+                ]
+              },
+              "2.4 i": {
+                "id": "12451",
+                "ecus": [
+                  {
+                    "id": "20152",
+                    "name": "Denso 079700-9133"
+                  }
+                ]
+              }
+            }
+          },
+          "S50": {
+            "id": "3011",
+            "engines": {
+              "2.4 i": {
+                "id": "12452",
+                "ecus": [
+                  {
+                    "id": "20152",
+                    "name": "Denso 079700-9133"
+                  }
+                ]
+              }
+            }
+          },
+          "S60": {
+            "id": "2121",
+            "engines": {
+              "1.6L 16V T4": {
+                "id": "11406",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "12560",
+                "ecus": [
+                  {
+                    "id": "20119",
+                    "name": "Denso VEA"
+                  }
+                ]
+              },
+              "2.0L 16V T4": {
+                "id": "11405",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  }
+                ]
+              },
+              "2.4 D5": {
+                "id": "10005",
+                "ecus": [
+                  {
+                    "id": "19933",
+                    "name": "Bosch EDC15C11"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  },
+                  {
+                    "id": "20022",
+                    "name": "Bosch EDC17CP68"
+                  }
+                ]
+              },
+              "2.4 i": {
+                "id": "12453",
+                "ecus": [
+                  {
+                    "id": "20152",
+                    "name": "Denso 079700-9133"
+                  }
+                ]
+              },
+              "2.5 TDI": {
+                "id": "11793",
+                "ecus": [
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  }
+                ]
+              },
+              "2.5 Turbo": {
+                "id": "10009",
+                "ecus": [
+                  {
+                    "id": "19882",
+                    "name": "Bosch ME7.0"
+                  },
+                  {
+                    "id": "19881",
+                    "name": "Bosch ME7.0.1"
+                  },
+                  {
+                    "id": "19880",
+                    "name": "Bosch ME7.5.00"
+                  },
+                  {
+                    "id": "19532",
+                    "name": "Bosch ME9.0C"
+                  }
+                ]
+              },
+              "3.0 Turbo": {
+                "id": "12019",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "S80": {
+            "id": "2123",
+            "engines": {
+              "1.6 D": {
+                "id": "11920",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "2.4 D5": {
+                "id": "10339",
+                "ecus": [
+                  {
+                    "id": "19933",
+                    "name": "Bosch EDC15C11"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  }
+                ]
+              },
+              "2.4 i": {
+                "id": "12454",
+                "ecus": [
+                  {
+                    "id": "20152",
+                    "name": "Denso 079700-9133"
+                  }
+                ]
+              },
+              "2.5 TDI": {
+                "id": "10011",
+                "ecus": [
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  }
+                ]
+              },
+              "2.5 Turbo": {
+                "id": "10419",
+                "ecus": [
+                  {
+                    "id": "19882",
+                    "name": "Bosch ME7.0"
+                  },
+                  {
+                    "id": "19881",
+                    "name": "Bosch ME7.0.1"
+                  },
+                  {
+                    "id": "19880",
+                    "name": "Bosch ME7.5.00"
+                  },
+                  {
+                    "id": "19532",
+                    "name": "Bosch ME9.0C"
+                  }
+                ]
+              },
+              "3.0 Turbo": {
+                "id": "12018",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "V50": {
+            "id": "2125",
+            "engines": {
+              "1.6 D": {
+                "id": "10014",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19418",
+                    "name": "Bosch EDC16C34"
+                  },
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "10015",
+                "ecus": [
+                  {
+                    "id": "19706",
+                    "name": "Siemens/Continental SID202 / SID206"
+                  },
+                  {
+                    "id": "19712",
+                    "name": "Siemens/Continental SID803"
+                  },
+                  {
+                    "id": "19713",
+                    "name": "Siemens/Continental SID803A"
+                  }
+                ]
+              },
+              "2.4 D5": {
+                "id": "10200",
+                "ecus": [
+                  {
+                    "id": "19933",
+                    "name": "Bosch EDC15C11"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  }
+                ]
+              },
+              "2.5 Turbo": {
+                "id": "12279",
+                "ecus": [
+                  {
+                    "id": "19532",
+                    "name": "Bosch ME9.0C"
+                  }
+                ]
+              }
+            }
+          },
+          "V60": {
+            "id": "2395",
+            "engines": {
+              "1.6 D": {
+                "id": "11139",
+                "ecus": [
+                  {
+                    "id": "19717",
+                    "name": "Siemens/Continental SID807"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "12387",
+                "ecus": [
+                  {
+                    "id": "20119",
+                    "name": "Denso VEA"
+                  }
+                ]
+              },
+              "2.4 D": {
+                "id": "11140",
+                "ecus": [
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  },
+                  {
+                    "id": "20022",
+                    "name": "Bosch EDC17CP68"
+                  }
+                ]
+              }
+            }
+          },
+          "V70": {
+            "id": "2126",
+            "engines": {
+              "1.6 D": {
+                "id": "10401",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.6 T": {
+                "id": "11786",
+                "ecus": [
+                  {
+                    "id": "20067",
+                    "name": "Bosch MED17.1.9"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "12515",
+                "ecus": [
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  }
+                ]
+              },
+              "2.4 D": {
+                "id": "10402",
+                "ecus": [
+                  {
+                    "id": "19933",
+                    "name": "Bosch EDC15C11"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "20022",
+                    "name": "Bosch EDC17CP68"
+                  }
+                ]
+              },
+              "2.5 TDI": {
+                "id": "11792",
+                "ecus": [
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  }
+                ]
+              }
+            }
+          },
+          "XC40": {
+            "id": "3133",
+            "engines": {
+              "1.5 T3": {
+                "id": "12739",
+                "ecus": [
+                  {
+                    "id": "20199",
+                    "name": "Bosch MG1CS080"
+                  }
+                ]
+              }
+            }
+          },
+          "XC60": {
+            "id": "2127",
+            "engines": {
+              "2.0 D": {
+                "id": "12184",
+                "ecus": [
+                  {
+                    "id": "20119",
+                    "name": "Denso VEA"
+                  }
+                ]
+              },
+              "2.0L 16V T5": {
+                "id": "11404",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "20136",
+                    "name": "Denso D5E1C"
+                  }
+                ]
+              },
+              "2.4 D": {
+                "id": "10017",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  },
+                  {
+                    "id": "20022",
+                    "name": "Bosch EDC17CP68"
+                  }
+                ]
+              },
+              "2.5 Turbo": {
+                "id": "10018",
+                "ecus": [
+                  {
+                    "id": "19882",
+                    "name": "Bosch ME7.0"
+                  },
+                  {
+                    "id": "19881",
+                    "name": "Bosch ME7.0.1"
+                  },
+                  {
+                    "id": "19880",
+                    "name": "Bosch ME7.5.00"
+                  },
+                  {
+                    "id": "19532",
+                    "name": "Bosch ME9.0C"
+                  }
+                ]
+              },
+              "3.0L R6": {
+                "id": "11600",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "XC70": {
+            "id": "2128",
+            "engines": {
+              "2.0 D": {
+                "id": "12185",
+                "ecus": [
+                  {
+                    "id": "20119",
+                    "name": "Denso VEA"
+                  }
+                ]
+              },
+              "2.4 D5": {
+                "id": "10019",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  },
+                  {
+                    "id": "20022",
+                    "name": "Bosch EDC17CP68"
+                  }
+                ]
+              },
+              "2.5 Turbo": {
+                "id": "10020",
+                "ecus": [
+                  {
+                    "id": "19882",
+                    "name": "Bosch ME7.0"
+                  },
+                  {
+                    "id": "19881",
+                    "name": "Bosch ME7.0.1"
+                  },
+                  {
+                    "id": "19880",
+                    "name": "Bosch ME7.5.00"
+                  },
+                  {
+                    "id": "19532",
+                    "name": "Bosch ME9.0C"
+                  }
+                ]
+              },
+              "3.0L R6": {
+                "id": "11908",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "3.2i L6": {
+                "id": "11587",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "XC90": {
+            "id": "2129",
+            "engines": {
+              "2.0 D": {
+                "id": "12183",
+                "ecus": [
+                  {
+                    "id": "20119",
+                    "name": "Denso VEA"
+                  }
+                ]
+              },
+              "2.4 D5": {
+                "id": "10021",
+                "ecus": [
+                  {
+                    "id": "19933",
+                    "name": "Bosch EDC15C11"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19454",
+                    "name": "Bosch EDC17CP22"
+                  },
+                  {
+                    "id": "19459",
+                    "name": "Bosch EDC17CP48"
+                  }
+                ]
+              },
+              "2.5 Turbo": {
+                "id": "10022",
+                "ecus": [
+                  {
+                    "id": "19882",
+                    "name": "Bosch ME7.0"
+                  },
+                  {
+                    "id": "19881",
+                    "name": "Bosch ME7.0.1"
+                  },
+                  {
+                    "id": "19880",
+                    "name": "Bosch ME7.5.00"
+                  },
+                  {
+                    "id": "19532",
+                    "name": "Bosch ME9.0C"
+                  }
+                ]
+              },
+              "3.2i L6": {
+                "id": "11880",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "4.4L V8": {
+                "id": "11803",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "WestStar": {
+        "id": "399",
+        "models": {
+          "Maxus G10": {
+            "id": "3142",
+            "engines": {
+              "1.9L CDI": {
+                "id": "12758",
+                "ecus": [
+                  {
+                    "id": "20216",
+                    "name": "Bosch MD1CS089"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Construction / Equipment": {
+    "brands": {
+      "Aebi Schmidt": {
+        "id": "362",
+        "models": {
+          "TT 281": {
+            "id": "3003",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12432",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Astra": {
+        "id": "163",
+        "models": {
+          "HD8": {
+            "id": "2163",
+            "engines": {
+              "410 - 560 CV": {
+                "id": "10369",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "HD9": {
+            "id": "2162",
+            "engines": {
+              "410 CV": {
+                "id": "10370",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Atlas": {
+        "id": "364",
+        "models": {
+          "Bigger": {
+            "id": "3007",
+            "engines": {
+              "6.7L TD": {
+                "id": "12438",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "MH 230": {
+            "id": "3008",
+            "engines": {
+              "6.7L TD": {
+                "id": "12437",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "MH 350": {
+            "id": "3021",
+            "engines": {
+              "7.1 TD": {
+                "id": "12472",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Atlas Copco": {
+        "id": "417",
+        "models": {
+          "Air Compressor": {
+            "id": "3242",
+            "engines": {
+              "4.5L TD": {
+                "id": "13012",
+                "ecus": [
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "19672",
+                    "name": "Phoenix"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Ausa": {
+        "id": "404",
+        "models": {
+          "D1000": {
+            "id": "3182",
+            "engines": {
+              "3.8L TDI": {
+                "id": "12901",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "BMC": {
+        "id": "236",
+        "models": {
+          "Professional 9xx": {
+            "id": "2545",
+            "engines": {
+              "8.9 TD": {
+                "id": "11449",
+                "ecus": [
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Bobcat": {
+        "id": "352",
+        "models": {
+          "Skid Steer Loaders": {
+            "id": "2971",
+            "engines": {
+              "2.4L DTI": {
+                "id": "12697",
+                "ecus": [
+                  {
+                    "id": "20185",
+                    "name": "Bosch EDC17C87"
+                  }
+                ]
+              },
+              "3.4L TD": {
+                "id": "12357",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Bucher": {
+        "id": "207",
+        "models": {
+          "CityCat": {
+            "id": "2430",
+            "engines": {
+              "3.0 TDI": {
+                "id": "11210",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "CAMC": {
+        "id": "275",
+        "models": {
+          "HN 3xxx": {
+            "id": "2722",
+            "engines": {
+              "8.9 TD L6": {
+                "id": "11773",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "SH 3xxx": {
+            "id": "2688",
+            "engines": {
+              "8.9 TD L6": {
+                "id": "11720",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "CASE": {
+        "id": "210",
+        "models": {
+          "BACKHOE LOADERS": {
+            "id": "2446",
+            "engines": {
+              "580xx 3.4L": {
+                "id": "11269",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          },
+          "CRAWLER DOZERS": {
+            "id": "2447",
+            "engines": {
+              "2050M": {
+                "id": "11267",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "CRAWLER EXCAVATORS": {
+            "id": "2448",
+            "engines": {
+              "CX 210 5.2L": {
+                "id": "12538",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              },
+              "CX 300C 7.8L": {
+                "id": "11268",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              },
+              "CX245D 5.2L": {
+                "id": "12458",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              },
+              "CX57C 3.3L": {
+                "id": "12462",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          },
+          "Graders": {
+            "id": "3164",
+            "engines": {
+              "6.7L l6": {
+                "id": "12860",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "TRACTOR LOADER": {
+            "id": "2449",
+            "engines": {
+              "570N EP 3.4L": {
+                "id": "11270",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          },
+          "WHEEL LOADERS": {
+            "id": "2450",
+            "engines": {
+              "3.3 TD": {
+                "id": "12272",
+                "ecus": [
+                  {
+                    "id": "20134",
+                    "name": "Perkins"
+                  }
+                ]
+              },
+              "6.7L l6": {
+                "id": "11266",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "8.7L l6": {
+                "id": "11265",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
                   }
                 ]
               }
