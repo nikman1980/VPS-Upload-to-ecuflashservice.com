@@ -1132,114 +1132,83 @@ class ECUAnalyzer:
     def _detect_dpf_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
         Detect DPF (Diesel Particulate Filter) maps using professional binary analysis.
-        Research-based patterns from WinOLS, ECU tuning forums, and reverse engineering.
+        Uses patterns from the ECU database for accurate detection.
         """
         
         indicators = []
         confidence_score = 0
         
-        # =================================================================
-        # METHOD 1: EDC17 DPF Switch Pattern
-        # Search for "04081 00015" sequence near DPF switch
-        # 4081 = 0x0FF1 (LE: F1 0F), 15 = 0x000F (LE: 0F 00)
-        # Full pattern often includes: 04081 00015 32767 ... 00001 ... 02800
-        # =================================================================
-        # Convert 4081 to bytes (little-endian 16-bit)
-        val_4081 = struct.pack('<H', 4081)  # \xf1\x0f
-        val_15 = struct.pack('<H', 15)      # \x0f\x00
-        val_32767 = struct.pack('<H', 32767)  # \xff\x7f
-        val_32768 = struct.pack('<H', 32768)  # \x00\x80
-        val_2800 = struct.pack('<H', 2800)    # \xf0\x0a
-        
-        # Search for 4081 followed by 15 within 4 bytes
-        for i in range(len(file_data) - 10):
-            if file_data[i:i+2] == val_4081:
-                # Check if 15 follows within next 4 bytes
-                if val_15 in file_data[i+2:i+8]:
-                    indicators.append("EDC17 DPF switch area (4081+15 pattern)")
-                    confidence_score += 45
+        # Use database patterns if available
+        if HAS_ECU_DATABASE:
+            # Check text markers from database
+            for marker, score in DPF_DETECTION_PATTERNS.get("dpf_text_markers", []):
+                count = file_data.count(marker)
+                if count > 0:
+                    # Verify word boundary for short markers
+                    idx = file_data.find(marker)
+                    if idx >= 0:
+                        before = file_data[max(0,idx-1):idx]
+                        after = file_data[idx+len(marker):idx+len(marker)+1]
+                        is_word_boundary = (
+                            (not before or not (32 <= before[0] <= 126 and chr(before[0]).isalnum())) or
+                            (not after or not (32 <= after[0] <= 126 and chr(after[0]).isalnum()))
+                        )
+                        if is_word_boundary or count >= 2:
+                            indicators.append(f"DPF marker '{marker.decode()}': {count}x")
+                            confidence_score += score
+                            break
+            
+            # Check Denso-specific patterns
+            for pattern, score in DPF_DETECTION_PATTERNS.get("denso_dpf_patterns", []):
+                if pattern in file_data:
+                    indicators.append("Denso DPF map pattern")
+                    confidence_score += score
                     break
         
         # =================================================================
-        # METHOD 2: DPF Switch Byte Pattern
-        # The actual switch is often "01 00" (value 1) that disables when set to "00 00"
-        # Look for pattern: 01 00 00 00 00 00 01 00 followed by 2800 area
+        # METHOD 1: EDC17 DPF Switch Pattern (4081 + 15 sequence)
         # =================================================================
-        dpf_switch_pattern = bytes([0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00])
-        if dpf_switch_pattern in file_data:
-            # Verify it's near a reasonable DPF area (check for 2800 nearby)
-            idx = file_data.find(dpf_switch_pattern)
-            if idx > 0:
-                nearby = file_data[idx:idx+30]
-                if val_2800 in nearby or val_32767 in nearby:
-                    indicators.append("DPF switch byte sequence found")
-                    confidence_score += 35
+        val_4081 = struct.pack('<H', 4081)
+        val_15 = struct.pack('<H', 15)
+        
+        for i in range(min(len(file_data) - 10, 500000)):  # Limit search for performance
+            if file_data[i:i+2] == val_4081:
+                if val_15 in file_data[i+2:i+8]:
+                    indicators.append("EDC17 DPF switch area (4081+15)")
+                    confidence_score += 50
+                    break
         
         # =================================================================
-        # METHOD 3: 32767/32768 Boundary Pattern (Common in DPF map areas)
-        # These values mark map boundaries in many ECU types
+        # METHOD 2: Map Boundary Markers (7FFF/8000)
         # =================================================================
-        # Pattern: 7FFF followed by 8000 (or vice versa)
-        pattern_7fff_8000 = val_32767 + val_32768
-        pattern_8000_7fff = val_32768 + val_32767
+        pattern_7fff_8000 = struct.pack('<HH', 32767, 32768)
+        pattern_8000_7fff = struct.pack('<HH', 32768, 32767)
         
-        count_7fff_8000 = file_data.count(pattern_7fff_8000)
-        count_8000_7fff = file_data.count(pattern_8000_7fff)
-        total_boundary = count_7fff_8000 + count_8000_7fff
+        count_boundaries = file_data.count(pattern_7fff_8000) + file_data.count(pattern_8000_7fff)
         
-        if total_boundary >= 5:
-            indicators.append(f"Map boundary markers (7FFF/8000): {total_boundary}x")
+        if count_boundaries >= 5:
+            indicators.append(f"Map boundaries (7FFF/8000): {count_boundaries}x")
             confidence_score += 40
-        elif total_boundary >= 2:
-            indicators.append(f"Map boundary markers: {total_boundary}x")
+        elif count_boundaries >= 2:
+            indicators.append(f"Map boundaries: {count_boundaries}x")
             confidence_score += 25
         
         # =================================================================
-        # METHOD 4: Direct text markers in binary
+        # METHOD 3: Direct text markers (fallback)
         # =================================================================
-        dpf_text_markers = [
-            (b'DPF', 40), (b'dpf', 35), (b'DpF', 35),
-            (b'FAP', 40), (b'Fap', 35), (b'fap', 30),
-            (b'SOOT', 30), (b'soot', 25),
-            (b'REGEN', 30), (b'regen', 25),
-            (b'Partikel', 35), (b'PARTIKEL', 35),
-            (b'DPF_', 45), (b'_DPF', 45),
-            (b'FAP_', 45), (b'_FAP', 45),
-        ]
+        if confidence_score == 0:
+            dpf_markers = [
+                (b'DPF', 45), (b'dpf', 40), (b'DpF', 40),
+                (b'FAP', 45), (b'Fap', 40), (b'fap', 35),
+                (b'SOOT', 30), (b'REGEN', 30),
+            ]
+            for marker, score in dpf_markers:
+                if marker in file_data:
+                    indicators.append(f"Text marker '{marker.decode()}'")
+                    confidence_score += score
+                    break
         
-        for marker, score in dpf_text_markers:
-            count = file_data.count(marker)
-            if count > 0:
-                # Verify it's not just random data by checking for alphanumeric context
-                idx = file_data.find(marker)
-                if idx > 0:
-                    # Check if surrounded by reasonable chars (not pure binary noise)
-                    before = file_data[max(0,idx-1):idx]
-                    after = file_data[idx+len(marker):idx+len(marker)+1]
-                    # Accept if at word boundary (non-alphanumeric before/after)
-                    is_word = (not before or not before[0:1].isalnum()) or (not after or not after[0:1].isalnum())
-                    if is_word or count >= 2:
-                        indicators.append(f"Text marker '{marker.decode()}': {count}x")
-                        confidence_score += score
-                        break
-        
-        # =================================================================
-        # METHOD 5: Denso DPF Detection
-        # Look for specific patterns in Denso ECUs
-        # =================================================================
-        # Denso often uses specific hex sequences for emissions maps
-        denso_dpf_patterns = [
-            (b'\x00\x80\x00\x80\x00\x80', "Denso map boundary"),
-            (b'\xff\x7f\xff\x7f\xff\x7f', "Denso map sequence"),
-        ]
-        
-        for pattern, desc in denso_dpf_patterns:
-            if pattern in file_data:
-                indicators.append(desc)
-                confidence_score += 25
-                break
-        
-        # Determine confidence level
+        # Determine confidence
         if confidence_score >= 60:
             confidence = "high"
         elif confidence_score >= 35:
@@ -1254,663 +1223,4 @@ class ECUAnalyzer:
             "confidence": confidence,
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
-        }
-    
-    def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """
-        Detect EGR (Exhaust Gas Recirculation) maps.
-        Uses text markers + heuristic analysis for files without explicit labels.
-        """
-        
-        indicators = []
-        confidence_score = 0
-        
-        # =================================================================
-        # METHOD 1: Direct text markers (highest priority)
-        # =================================================================
-        egr_text_markers = [
-            (b'EGR', 50), (b'egr', 45), (b'Egr', 45),
-            (b'AGR', 50), (b'agr', 45), (b'Agr', 45),
-            (b'EGR_', 55), (b'_EGR', 55),
-            (b'AGR_', 55), (b'_AGR', 55),
-        ]
-        
-        for marker, score in egr_text_markers:
-            count = file_data.count(marker)
-            if count > 0:
-                idx = file_data.find(marker)
-                before = file_data[max(0,idx-1):idx]
-                after = file_data[idx+len(marker):idx+len(marker)+1]
-                is_word = (not before or not before[0:1].isalnum()) or (not after or not after[0:1].isalnum())
-                if is_word or count >= 2:
-                    indicators.append(f"Text marker '{marker.decode()}': {count}x")
-                    confidence_score += score
-                    break
-        
-        # =================================================================
-        # METHOD 2: String patterns
-        # =================================================================
-        egr_strings = [
-            "EGR_VALVE", "EGR_FLOW", "EGR_TEMP", "EGR_POS", 
-            "EGRVALVE", "EGRFLOW", "LP_EGR", "HP_EGR",
-            "EXHAUST_GAS_RECIRCULATION", "RECIRCULATION"
-        ]
-        
-        for s in egr_strings:
-            if s in strings_upper:
-                indicators.append(f"String: {s}")
-                confidence_score += 35
-                break
-        
-        # =================================================================
-        # METHOD 3: Heuristic - Diesel ECUs with DPF typically have EGR
-        # If we detected DPF with high confidence and this is a diesel ECU,
-        # EGR is highly likely. Add modest score.
-        # =================================================================
-        # Check manufacturer/ECU type for diesel indicators
-        ecu_type = self.results.get("ecu_type", "") or ""
-        manufacturer = self.results.get("manufacturer", "") or ""
-        ecu_upper = ecu_type.upper()
-        mfr_upper = manufacturer.upper()
-        
-        # Known diesel ECU indicators
-        diesel_indicators = ["EDC", "DCM", "SID", "DENSO", "TRANSTRON", "CUMMINS", "CM2150"]
-        is_diesel = any(ind in ecu_upper or ind in mfr_upper for ind in diesel_indicators)
-        
-        if is_diesel and confidence_score == 0:
-            # For diesel ECUs, EGR is standard equipment
-            indicators.append("Diesel ECU (EGR standard)")
-            confidence_score += 30  # Medium confidence for inference
-        
-        # Determine confidence level
-        if confidence_score >= 50:
-            confidence = "high"
-        elif confidence_score >= 30:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """
-        Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps.
-        Uses text markers + ECU type inference for trucks.
-        """
-        
-        indicators = []
-        confidence_score = 0
-        
-        # =================================================================
-        # METHOD 1: Direct text markers (highest priority)
-        # =================================================================
-        adblue_text_markers = [
-            (b'ADBLUE', 60), (b'AdBlue', 60), (b'adblue', 55),
-            (b'UREA', 55), (b'Urea', 50), (b'urea', 45),
-            (b'DENOX', 55), (b'DeNOx', 55), (b'denox', 50),
-            (b'SCR_', 55), (b'_SCR', 55),
-            (b'NOX_', 50), (b'_NOX', 50), (b'NOx_', 50),
-            (b'NOX_SENSOR', 60), (b'NOXSENSOR', 60),
-            (b'AFTERTREATMENT', 50), (b'Aftertreatment', 45),
-            (b'REDUCTANT', 55), (b'Reductant', 50),
-            (b'NH3', 50),
-            (b'BLUETEC', 60), (b'BlueTec', 55),
-        ]
-        
-        for marker, score in adblue_text_markers:
-            count = file_data.count(marker)
-            if count > 0:
-                idx = file_data.find(marker)
-                if len(marker) <= 4:
-                    before = file_data[max(0,idx-1):idx]
-                    after = file_data[idx+len(marker):idx+len(marker)+1]
-                    is_word = (not before or not before[0:1].isalnum()) or (not after or not after[0:1].isalnum())
-                    if not is_word and count < 3:
-                        continue
-                indicators.append(f"Text marker '{marker.decode()}': {count}x")
-                confidence_score += score
-                break
-        
-        # =================================================================
-        # METHOD 2: String patterns
-        # =================================================================
-        adblue_strings = [
-            "ADBLUE", "AD_BLUE", "BLUE_TEC", "BLUETEC",
-            "SCR_CAT", "SCR_TEMP", "SCR_EFF", "SCR_SYSTEM",
-            "UREA_INJ", "UREA_DOS", "NOX_SENSOR", "NOXSENSOR",
-            "DENOXTRONIC", "AFTERTREATMENT", "REDUCTANT"
-        ]
-        
-        for s in adblue_strings:
-            if s in strings_upper:
-                indicators.append(f"String: {s}")
-                confidence_score += 40
-                break
-        
-        # =================================================================
-        # METHOD 3: Truck ECU inference for SCR
-        # Trucks meeting Euro 5/6 emissions typically have SCR
-        # Known truck ECU types get inference-based detection
-        # =================================================================
-        ecu_type = self.results.get("ecu_type", "") or ""
-        manufacturer = self.results.get("manufacturer", "") or ""
-        ecu_upper = ecu_type.upper()
-        mfr_upper = manufacturer.upper()
-        
-        # Check for truck-specific brands in the binary
-        truck_brands = [
-            (b'FUSO', "FUSO truck"),
-            (b'HINO', "Hino truck"),
-            (b'MAN', "MAN truck"),
-            (b'SCANIA', "Scania truck"),
-            (b'VOLVO', "Volvo truck"),
-            (b'IVECO', "Iveco truck"),
-            (b'ACTROS', "Mercedes Actros"),
-            (b'ATEGO', "Mercedes Atego"),
-        ]
-        
-        truck_found = None
-        for brand, desc in truck_brands:
-            if re.search(brand + rb'\b', file_data):  # Word boundary
-                truck_found = desc
-                break
-        
-        # Known truck ECU types that have SCR
-        truck_ecus_with_scr = [
-            "CM2150", "CM2250", "CM2350",  # Cummins
-            "EDC17CP52", "EDC17CV41", "EDC17CV44", "EDC17CV54",  # Bosch truck
-            "EDC17C49", "EDC17C54",  # Bosch commercial
-        ]
-        
-        has_truck_ecu = any(tecu in ecu_upper for tecu in truck_ecus_with_scr)
-        is_cummins = "CUMMINS" in mfr_upper or "CM2150" in ecu_upper or "CM2250" in ecu_upper
-        
-        if confidence_score == 0:
-            if truck_found:
-                indicators.append(f"Truck brand: {truck_found}")
-                confidence_score += 35  # Medium-high for truck detection
-            if has_truck_ecu:
-                indicators.append(f"Truck ECU with SCR: {ecu_type}")
-                confidence_score += 40
-            if is_cummins:
-                indicators.append("Cummins ECU (SCR standard)")
-                confidence_score += 45
-        
-        # Determine confidence level
-        if confidence_score >= 55:
-            confidence = "high"
-        elif confidence_score >= 35:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_lambda_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect Lambda/O2 sensor related maps"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        lambda_strings = [
-            "LAMBDA", "O2_SENSOR", "O2SENSOR", "OXYGEN_SENSOR",
-            "WIDEBAND", "NARROWBAND", "LSU", "LSF",  # Bosch sensor types
-            "AFR", "AIR_FUEL", "AIRFUEL", "A/F RATIO",
-            "LAMBDA_CONTROL", "CLOSED_LOOP", "HEGO",  # Heated Exhaust Gas O2
-            "PRE_CAT", "POST_CAT", "UPSTREAM", "DOWNSTREAM",
-            "O2_HEATER", "SENSOR_HEAT"
-        ]
-        
-        for s in lambda_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 20
-        
-        # Binary patterns - STRICT patterns only
-        lambda_patterns = [
-            (rb"(?i)lambda[_\s]", "Lambda marker"),
-            (rb"(?i)o2[_\s]?sens", "O2 sensor"),
-            (rb"(?i)oxygen[_\s]?sens", "Oxygen sensor"),
-            (rb"(?i)lsu[_\s]?4", "LSU 4.x sensor"),
-            (rb"(?i)wideband", "Wideband sensor"),
-            (rb"(?i)afr[_\s]?target", "AFR target"),
-            (rb"(?i)closed[_\s]?loop", "Closed loop control"),
-        ]
-        
-        for pattern, desc in lambda_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        # Almost all modern ECUs have lambda control
-        ecu_type = self.results.get("ecu_type", "") or ""
-        if any(x in ecu_type.upper() for x in ["MED", "ME7", "EDC", "MG1", "MD1"]):
-            indicators.append("Modern ECU (has lambda control)")
-            confidence_score += 10
-        
-        if confidence_score >= 50:
-            confidence = "high"
-        elif confidence_score >= 25:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_speed_limiter(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect speed limiter maps"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        speed_strings = [
-            "SPEED_LIMIT", "SPEEDLIMIT", "V_MAX", "VMAX",
-            "VELOCITY_LIMIT", "TOP_SPEED", "MAX_SPEED",
-            "GOVERNOR", "SPEED_GOV", "LIMITER",
-            "KPH_LIMIT", "MPH_LIMIT", "SPEED_CUT"
-        ]
-        
-        for s in speed_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 25
-        
-        # Binary patterns - STRICT patterns only
-        speed_patterns = [
-            (rb"(?i)speed[_\s]?limit", "Speed limit marker"),
-            (rb"(?i)v[_\s]?max", "Vmax marker"),
-            (rb"(?i)top[_\s]?speed", "Top speed reference"),
-            (rb"(?i)governor", "Governor reference"),
-            (rb"(?i)speed[_\s]?cut", "Speed cut reference"),
-        ]
-        
-        for pattern, desc in speed_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        # Common in European market vehicles
-        file_size_mb = self.results.get("file_size_mb", 0)
-        if file_size_mb >= 1.5:  # Modern ECUs
-            indicators.append("Modern ECU file (likely has speed limiter)")
-            confidence_score += 5
-        
-        if confidence_score >= 40:
-            confidence = "high"
-        elif confidence_score >= 20:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_catalyst_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect catalyst/CAT related maps"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        cat_strings = [
-            "CATALYST", "CATALYTIC", "CAT_TEMP", "CAT_EFF",
-            "CAT_HEAT", "CAT_MON", "OBD_CAT", "TWC",  # Three-Way Catalyst
-            "WARM_UP", "WARMUP", "CAT_DIAG", "CONVERTER"
-        ]
-        
-        for s in cat_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 20
-        
-        # Binary patterns - STRICT patterns only
-        cat_patterns = [
-            (rb"(?i)catalyst", "Catalyst marker"),
-            (rb"(?i)cat[_\s]?temp", "Catalyst temperature"),
-            (rb"(?i)cat[_\s]?eff", "Catalyst efficiency"),
-            (rb"(?i)cat[_\s]?mon", "Catalyst monitor"),
-            (rb"TWC[_\x00]", "TWC marker"),
-        ]
-        
-        for pattern, desc in cat_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        if confidence_score >= 40:
-            confidence = "high"
-        elif confidence_score >= 20:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_swirl_flaps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect swirl flaps / intake flaps maps (common in VAG/BMW diesels)"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        swirl_strings = [
-            "SWIRL", "FLAP", "INTAKE_FLAP", "TUMBLE",
-            "DRALL", "DROSSELKLAPPE",  # German
-            "MANIFOLD_FLAP", "RUNNER_FLAP", "IMRC"  # Intake Manifold Runner Control
-        ]
-        
-        for s in swirl_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 25
-        
-        # Binary patterns - STRICT patterns only
-        swirl_patterns = [
-            (rb"(?i)swirl[_\s]?flap", "Swirl flap marker"),
-            (rb"(?i)intake[_\s]?flap", "Intake flap marker"),
-            (rb"(?i)tumble", "Tumble flap"),
-            (rb"DRALL", "German swirl marker"),
-        ]
-        
-        for pattern, desc in swirl_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 20
-        
-        # Common in VAG/BMW diesel ECUs
-        manufacturer = self.results.get("manufacturer", "") or ""
-        vehicle_info = self.results.get("vehicle_info", "") or ""
-        if "BOSCH" in manufacturer.upper() or "VW" in vehicle_info.upper() or "BMW" in vehicle_info.upper():
-            confidence_score += 5
-        
-        if confidence_score >= 40:
-            confidence = "high"
-        elif confidence_score >= 20:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_start_stop(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect Start/Stop system maps"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        startstop_strings = [
-            "START_STOP", "STARTSTOP", "START-STOP", "AUTO_STOP",
-            "AUTOSTOP", "MSA",  # Motor Stop/Start Automatik
-            "IDLE_STOP", "ENGINE_RESTART", "SSA", "ISG"  # Integrated Starter Generator
-        ]
-        
-        for s in startstop_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 25
-        
-        # Binary patterns - STRICT patterns only
-        startstop_patterns = [
-            (rb"(?i)start[_\s]?stop", "Start/Stop marker"),
-            (rb"(?i)auto[_\s]?stop", "Auto stop marker"),
-            (rb"(?i)idle[_\s]?stop", "Idle stop marker"),
-            (rb"MSA[_\x00]", "MSA marker"),
-        ]
-        
-        for pattern, desc in startstop_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 20
-        
-        if confidence_score >= 40:
-            confidence = "high"
-        elif confidence_score >= 20:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_hotstart_immo(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect Hot Start / Immobilizer related maps"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        hotstart_strings = [
-            "IMMO", "IMMOBILIZER", "IMMOBILISER", "TRANSPONDER",
-            "HOT_START", "HOTSTART", "WARM_START", "WARMSTART",
-            "ANTI_THEFT", "ANTITHEFT", "SECURITY", "KEY_CODE",
-            "WEGFAHRSPERRE"  # German for immobilizer
-        ]
-        
-        for s in hotstart_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 20
-        
-        # Binary patterns - STRICT patterns only
-        immo_patterns = [
-            (rb"(?i)immo[_\s]", "Immobilizer marker"),
-            (rb"(?i)transponder", "Transponder reference"),
-            (rb"(?i)hot[_\s]?start", "Hot start marker"),
-            (rb"WEGFAHRSPERRE", "German immo marker"),
-        ]
-        
-        for pattern, desc in immo_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        if confidence_score >= 40:
-            confidence = "high"
-        elif confidence_score >= 20:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_dtc_capability(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect DTC (Diagnostic Trouble Code) handling capability"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        dtc_strings = [
-            "DTC", "FAULT", "ERROR", "DIAGNOSTIC", "P0", "P1", "P2",
-            "TROUBLE_CODE", "MIL", "CHECK_ENGINE", "OBD",
-            "FEHLERSPEICHER"  # German: error memory
-        ]
-        
-        for s in dtc_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 15
-        
-        # Binary patterns - STRICT patterns only - DTC codes are often stored in specific format
-        dtc_patterns = [
-            (rb"(?i)dtc[_\s]", "DTC marker"),
-            (rb"(?i)fault[_\s]?code", "Fault code marker"),
-            (rb"(?i)obd[_\s]?diag", "OBD diagnostic"),
-            (rb"P[0-3][0-9A-F]{3}", "P-code pattern"),  # Standard DTC format
-            (rb"(?i)mil[_\s]?lamp", "MIL lamp reference"),
-        ]
-        
-        for pattern, desc in dtc_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        # All modern ECUs have DTC capability
-        file_size = self.results.get("file_size_bytes", 0)
-        if file_size > 100000:  # > 100KB
-            indicators.append("Modern ECU size (DTC capability standard)")
-            confidence_score += 20
-        
-        if confidence_score >= 40:
-            confidence = "high"
-        elif confidence_score >= 20:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def _detect_tuning_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect torque/power tuning maps (Stage tuning capability)"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection
-        tuning_strings = [
-            "TORQUE", "INJECTION", "BOOST", "TURBO", "RAIL_PRESSURE",
-            "FUEL_MAP", "TIMING", "SMOKE_LIMIT", "DRIVER_REQUEST",
-            "PEDAL_MAP", "AIR_MASS", "MAF", "CHARGE_PRESSURE",
-            "IQ", "SOI", "PILOT", "MAIN_INJ"  # Injection quantity, Start of Injection
-        ]
-        
-        for s in tuning_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 10
-        
-        # Binary patterns - STRICT patterns only
-        tuning_patterns = [
-            (rb"(?i)torque[_\s]?req", "Torque request map"),
-            (rb"(?i)boost[_\s]?press", "Boost pressure map"),
-            (rb"(?i)rail[_\s]?press", "Rail pressure map"),
-            (rb"(?i)inj[_\s]?quantity", "Injection quantity"),
-            (rb"(?i)driver[_\s]?wish", "Driver request map"),
-            (rb"(?i)smoke[_\s]?limit", "Smoke limiter"),
-            (rb"(?i)charge[_\s]?press", "Charge pressure"),
-        ]
-        
-        for pattern, desc in tuning_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
-                confidence_score += 15
-        
-        # All engine ECUs can be tuned
-        ecu_type = self.results.get("ecu_type", "") or ""
-        if any(x in ecu_type.upper() for x in ["EDC", "MED", "ME7", "SID", "DCM", "MG1", "MD1"]):
-            indicators.append("Engine ECU detected (tunable)")
-            confidence_score += 20
-        
-        if confidence_score >= 50:
-            confidence = "high"
-        elif confidence_score >= 25:
-            confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
-        else:
-            confidence = "none"
-        
-        return {
-            "detected": confidence_score > 0,
-            "confidence": confidence,
-            "confidence_score": confidence_score,
-            "indicators": indicators[:5]
-        }
-    
-    def get_display_info(self) -> Dict:
-        """Get formatted display info for frontend"""
-        
-        mfr = self.results.get("manufacturer") or "Unknown"
-        ecu = self.results.get("ecu_type")
-        
-        if ecu:
-            display_ecu = ecu
-        elif mfr and mfr != "Unknown":
-            display_ecu = f"{mfr} ECU"
-        else:
-            display_ecu = "Unknown ECU"
-        
-        return {
-            "manufacturer": mfr,
-            "ecu_type": display_ecu,
-            "ecu_generation": self.results.get("ecu_generation") or "",
-            "calibration_id": self.results.get("calibration_id") or "",
-            "software_version": self.results.get("software_version") or "",
-            "hardware_version": self.results.get("hardware_version") or "",
-            "part_number": self.results.get("part_number") or "",
-            "vin": self.results.get("vin") or "",
-            "vehicle_info": self.results.get("vehicle_info") or "",
-            "processor": self.results.get("processor") or "",
-            "flash_type": self.results.get("flash_type") or "",
-            "strings": self.results.get("strings") or [],
-            "file_size_mb": self.results.get("file_size_mb", 0),
-            "file_size_bytes": self.results.get("file_size_bytes", 0),
-            "confidence": self.results.get("confidence", "low"),
-            # NEW: Include detected maps and available services
-            "detected_maps": self.results.get("detected_maps", {}),
-            "available_services": self.results.get("available_services", [])
         }
