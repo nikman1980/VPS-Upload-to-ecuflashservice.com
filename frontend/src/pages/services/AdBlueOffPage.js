@@ -62,6 +62,23 @@ const AdBlueOffPage = () => {
         </div>
       </section>
 
+      {/* Important DCU Notice */}
+      <section className="py-8 px-6 bg-blue-50">
+        <div className="container mx-auto max-w-4xl">
+          <div className="bg-white rounded-2xl p-6 border border-blue-200 flex items-start space-x-4">
+            <span className="text-3xl">📋</span>
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Important Notice for AdBlue Removal</h3>
+              <p className="text-gray-700">
+                For AdBlue Removal, we will advise further if <strong>Dosing Unit ECU (DCU)</strong> data is required or not. 
+                Some vehicles have a separate DCU module that controls AdBlue injection, and this may need to be modified along with 
+                the main engine ECU for complete system deactivation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* What is AdBlue */}
       <section className="py-16 px-6">
         <div className="container mx-auto max-w-4xl">
