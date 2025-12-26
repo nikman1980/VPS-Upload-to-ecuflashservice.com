@@ -1796,27 +1796,27 @@ const NewUploadFlow = () => {
         {step === 6 && (
           <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12 text-center">
             <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="text-3xl font-bold mb-4">Payment Successful!</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Payment Successful!</h2>
             <p className="text-gray-500 mb-8">Your file has been submitted for processing</p>
             
             {/* Processing Status */}
-            <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-6 mb-8">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
               <div className="flex items-center justify-center space-x-3 mb-4">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-amber-400"></div>
-                <span className="text-lg text-amber-400 font-semibold">Processing Your File...</span>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-amber-500"></div>
+                <span className="text-lg text-amber-700 font-semibold">Processing Your File...</span>
               </div>
-              <p className="text-amber-300/80">
-                Our engineers are working on your file. You&apos;ll receive an email within <strong>20-60 minutes</strong> with your download link.
+              <p className="text-amber-600">
+                Our engineers are working on your file. You'll receive an email within <strong>20-60 minutes</strong> with your download link.
               </p>
             </div>
 
             {/* Order Details */}
-            <div className="bg-white/50 rounded-2xl p-6 mb-8 text-left">
-              <h3 className="font-semibold mb-4">Order Details</h3>
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-8 text-left">
+              <h3 className="font-semibold text-gray-900 mb-4">Order Details</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-500">Order ID:</span>
@@ -1827,49 +1827,95 @@ const NewUploadFlow = () => {
                   <span className="text-gray-900">{getVehicleSummary()}</span>
                 </div>
                 <div className="flex justify-between">
+                  <span className="text-gray-500">Email:</span>
+                  <span className="text-gray-900">{customerInfo.customer_email}</span>
+                </div>
+                <div className="flex justify-between">
                   <span className="text-gray-500">Total Paid:</span>
-                  <span className="text-green-400 font-semibold">${totalPrice.toFixed(2)}</span>
+                  <span className="text-green-600 font-semibold">${totalPrice.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Portal Access Options */}
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-8">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center justify-center">
+                <span className="text-2xl mr-2">🔐</span>
+                Access Your Customer Portal
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Track your order status, download files, and manage your requests. Choose how you'd like to access:
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-4">
+                {/* Option 1: Quick Access via Email */}
+                <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-blue-400 transition">
+                  <div className="text-3xl mb-3">📧</div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Quick Access</h4>
+                  <p className="text-gray-500 text-sm mb-4">
+                    Access portal instantly using your order email. No registration required.
+                  </p>
+                  <a
+                    href={`/portal?email=${encodeURIComponent(customerInfo.customer_email)}`}
+                    className="block w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold transition text-center"
+                  >
+                    Access with Email →
+                  </a>
+                </div>
+                
+                {/* Option 2: Create Account */}
+                <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-green-400 transition">
+                  <div className="text-3xl mb-3">👤</div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Create Account</h4>
+                  <p className="text-gray-500 text-sm mb-4">
+                    Register for a full account with password. Manage all your orders easily.
+                  </p>
+                  <a
+                    href={`/portal?register=true&email=${encodeURIComponent(customerInfo.customer_email)}&name=${encodeURIComponent(customerInfo.customer_name)}`}
+                    className="block w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-semibold transition text-center"
+                  >
+                    Create Account →
+                  </a>
                 </div>
               </div>
             </div>
 
             {/* What's Next */}
-            <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6 mb-8 text-left">
-              <h3 className="font-semibold mb-4 text-blue-400">What Happens Next?</h3>
+            <div className="bg-gray-100 rounded-2xl p-6 mb-8 text-left">
+              <h3 className="font-semibold text-gray-900 mb-4">What Happens Next?</h3>
               <ol className="space-y-3 text-sm text-gray-600">
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 mr-3 mt-0.5 flex-shrink-0">1</span>
+                  <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-xs font-bold">1</span>
                   Our engineers analyze and process your file
                 </li>
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 mr-3 mt-0.5 flex-shrink-0">2</span>
-                  You&apos;ll receive an email at <strong>{customerInfo.customer_email}</strong>
+                  <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-xs font-bold">2</span>
+                  You'll receive an email at <strong className="text-gray-900">{customerInfo.customer_email}</strong>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 mr-3 mt-0.5 flex-shrink-0">3</span>
-                  Click the download link to get your modified file
+                  <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-xs font-bold">3</span>
+                  Click the download link or access portal to get your modified file
                 </li>
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 mr-3 mt-0.5 flex-shrink-0">4</span>
+                  <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-xs font-bold">4</span>
                   Flash the file to your vehicle ECU
                 </li>
               </ol>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={`/portal?order=${orderId}&email=${encodeURIComponent(customerInfo.customer_email)}`}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-lg hover:shadow-blue-500/25 text-gray-900 px-8 py-3 rounded-xl font-semibold transition"
-              >
-                Go to Customer Portal
-              </a>
-              <button
-                onClick={() => window.location.reload()}
-                className="bg-gray-100 hover:bg-gray-200 text-gray-900 px-8 py-3 rounded-xl font-semibold transition"
-              >
-                Process Another File
-              </button>
+            {/* Free DTC Support Notice */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8">
+              <p className="text-green-700 text-sm">
+                <strong>🆓 Free DTC Support:</strong> If any DTCs appear after our modification, we'll fix them FREE for 1 month (same file only).
+              </p>
             </div>
+
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-8 py-3 rounded-xl font-semibold transition"
+            >
+              Process Another File
+            </button>
           </div>
         )}
       </div>
