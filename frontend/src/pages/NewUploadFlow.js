@@ -1232,51 +1232,81 @@ const NewUploadFlow = () => {
               {/* ECU Type */}
               {selectedEngine && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">ECU Type</label>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                    ECU Type
+                    {ecuLoading && <span className="ml-2 text-xs text-blue-500">Loading recommended ECUs...</span>}
+                  </label>
                   <select
                     value={selectedEcu?.id || ''}
                     onChange={(e) => handleEcuSelect(e.target.value)}
-                    className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    disabled={ecuLoading}
+                    className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
                   >
                     <option value="">Select ECU type...</option>
-                    <optgroup label="⭐ Chinese Truck ECUs">
-                      {commonEcuTypes.filter(e => ['Weichai', 'Cummins', 'Yuchai', 'FAW', 'Sinotruk', 'Dongfeng'].includes(e.manufacturer)).map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Bosch">
-                      {commonEcuTypes.filter(e => e.manufacturer === 'Bosch').map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Siemens">
-                      {commonEcuTypes.filter(e => e.manufacturer === 'Siemens').map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Continental">
-                      {commonEcuTypes.filter(e => e.manufacturer === 'Continental').map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Delphi">
-                      {commonEcuTypes.filter(e => e.manufacturer === 'Delphi').map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Denso">
-                      {commonEcuTypes.filter(e => e.manufacturer === 'Denso').map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Marelli">
-                      {commonEcuTypes.filter(e => e.manufacturer === 'Marelli').map((ecu) => (
-                        <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Other">
-                      <option value="other">Other (Enter manually)</option>
-                    </optgroup>
+                    
+                    {/* Dynamic ECU Types - Recommended for selected vehicle */}
+                    {dynamicEcuTypes.length > 0 ? (
+                      <>
+                        {/* Group by supplier */}
+                        {(() => {
+                          const suppliers = [...new Set(dynamicEcuTypes.filter(e => e.id !== 'other').map(e => e.supplier))];
+                          return suppliers.map(supplier => (
+                            <optgroup key={supplier} label={`⭐ ${supplier}`}>
+                              {dynamicEcuTypes.filter(e => e.supplier === supplier).map((ecu) => (
+                                <option key={ecu.id} value={ecu.id}>
+                                  {ecu.name} {ecu.years ? `(${ecu.years})` : ''}
+                                </option>
+                              ))}
+                            </optgroup>
+                          ));
+                        })()}
+                        <optgroup label="Other">
+                          <option value="other">Other (Enter manually)</option>
+                        </optgroup>
+                      </>
+                    ) : (
+                      /* Fallback to static list if no dynamic ECUs */
+                      <>
+                        <optgroup label="⭐ Chinese Truck ECUs">
+                          {commonEcuTypes.filter(e => ['Weichai', 'Cummins', 'Yuchai', 'FAW', 'Sinotruk', 'Dongfeng'].includes(e.manufacturer)).map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Bosch">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Bosch').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Siemens">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Siemens').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Continental">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Continental').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Delphi">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Delphi').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Denso">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Denso').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Marelli">
+                          {commonEcuTypes.filter(e => e.manufacturer === 'Marelli').map((ecu) => (
+                            <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Other">
+                          <option value="other">Other (Enter manually)</option>
+                        </optgroup>
+                      </>
+                    )}
                   </select>
                   
                   {/* Custom ECU Input */}
