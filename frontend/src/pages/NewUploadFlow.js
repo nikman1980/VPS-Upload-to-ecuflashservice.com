@@ -1034,7 +1034,7 @@ const NewUploadFlow = () => {
               {/* Manual Vehicle Entry Form */}
               {isManualVehicle && (
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6 space-y-4">
-                  <h3 className="text-orange-400 font-semibold flex items-center">
+                  <h3 className="text-orange-600 font-semibold flex items-center">
                     <span className="mr-2">✏️</span> Enter Vehicle Details Manually
                   </h3>
                   <p className="text-sm text-gray-500">Your vehicle is not in our database? No problem! Enter the details below.</p>
@@ -1082,10 +1082,9 @@ const NewUploadFlow = () => {
                     </div>
                   </div>
                   
-                  {/* ECU Type for Manual Entry */}
-                  {manualVehicle.make && manualVehicle.model && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-600 mb-2">ECU Type</label>
+                  {/* ECU Type for Manual Entry - Always visible */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-600 mb-2">ECU Type *</label>
                       <select
                         value={selectedEcu?.id || ''}
                         onChange={(e) => handleEcuSelect(e.target.value)}
