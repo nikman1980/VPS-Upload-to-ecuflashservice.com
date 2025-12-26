@@ -1131,16 +1131,9 @@ class ECUAnalyzer:
         
         # String-based detection (secondary)
         dpf_strings = [
-            (rb"DPF[_\s]", "DPF marker"),
-            (rb"dpf[_\s]", "dpf marker"),
-            (rb"(?i)soot[_\s]?load", "Soot load reference"),
-            (rb"(?i)regen[_\s]?temp", "Regeneration temperature"),
-            (rb"(?i)diff[_\s]?press", "Differential pressure sensor"),
-            (rb"(?i)exh[_\s]?press", "Exhaust pressure"),
-            (rb"(?i)part[_\s]?filter", "Particulate filter"),
-            (rb"FAP[_\x00]", "FAP marker"),
-            (rb"KDPF", "Korean DPF"),
-            (rb"(?i)ash[_\s]?load", "Ash load map"),
+            "DIESEL PARTICULATE", "PARTICULATE FILTER",
+            "RUSS", "PARTIKELFILTER", "SOOT", "REGENERATION", "REGEN",
+            "DPF_REGEN", "DPFREGEN", "FILTER_REGEN", "PM_FILTER", "PMFILTER"
         ]
         
         for pattern, desc in dpf_binary_patterns:
