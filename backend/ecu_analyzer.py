@@ -1238,7 +1238,7 @@ class ECUAnalyzer:
         indicators = []
         confidence_score = 0
         
-        # String-based detection - STRICT patterns only (avoid false positives)
+        # String-based detection - STRICT patterns only
         adblue_strings = [
             "ADBLUE", "AD_BLUE", "AD-BLUE", "BLUE_TEC", "BLUETEC",
             "SELECTIVE CATALYTIC",
@@ -1280,12 +1280,51 @@ class ECUAnalyzer:
         ecu_upper = ecu_type.upper()
         mfr_upper = manufacturer.upper()
         
+        # Check for truck/commercial vehicle indicators in the binary
+        is_truck_ecu = False
+        truck_indicators = [
+            (rb"FUSO", "Mitsubishi FUSO truck"),
+            (rb"HINO", "Hino truck"),
+            (rb"ISUZU", "Isuzu truck"),
+            (rb"MAN", "MAN truck"),
+            (rb"SCANIA", "Scania truck"),
+            (rb"VOLVO", "Volvo truck"),
+            (rb"DAF", "DAF truck"),
+            (rb"IVECO", "Iveco truck"),
+            (rb"MERCEDES", "Mercedes truck"),
+            (rb"ACTROS", "Mercedes Actros"),
+            (rb"ATEGO", "Mercedes Atego"),
+            (rb"CANTER", "Mitsubishi Canter"),
+            (rb"FIGHTER", "Mitsubishi Fighter"),
+        ]
+        
+        for pattern, desc in truck_indicators:
+            if re.search(pattern, file_data, re.IGNORECASE):
+                indicators.append(f"Truck brand: {desc}")
+                is_truck_ecu = True
+                confidence_score += 25
+                break
+        
         # Cummins CM2150/CM2250/CM2350 ECUs on trucks/buses have SCR
         if "CUMMINS" in mfr_upper or "CM2150" in ecu_upper or "CM2250" in ecu_upper or "CM2350" in ecu_upper:
             indicators.append("Cummins truck ECU (SCR equipped)")
-            confidence_score += 30  # High confidence for Cummins truck ECUs
+            confidence_score += 30
         
-        # Modern Bosch diesel ECUs (Euro 6)
+        # Bosch EDC17CP52 is a common Euro 5/6 truck ECU with SCR
+        # Also EDC17CV41, EDC17CV44, EDC17CV54 for trucks
+        truck_ecu_types = ["EDC17CP52", "EDC17CV41", "EDC17CV44", "EDC17CV54", "EDC17C49", "EDC17C54"]
+        for truck_ecu in truck_ecu_types:
+            if truck_ecu in ecu_upper:
+                indicators.append(f"{truck_ecu} - Euro 5/6 truck ECU (SCR standard)")
+                confidence_score += 30
+                break
+        
+        # If it's a truck ECU with DPF, it very likely has SCR too (Euro 5/6 regulations)
+        if is_truck_ecu and confidence_score < 30:
+            indicators.append("Truck ECU detected (SCR likely for emissions)")
+            confidence_score += 20
+        
+        # Modern Bosch diesel ECUs (Euro 6) - lower confidence inference
         if confidence_score == 0:
             if any(x in ecu_upper for x in ["EDC17C4", "EDC17C5", "EDC17C6", "MD1", "DCM3.5", "DCM6", "DCM7"]):
                 indicators.append("Modern Euro 6 ECU (SCR likely)")
