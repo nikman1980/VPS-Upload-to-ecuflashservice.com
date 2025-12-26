@@ -1242,33 +1242,27 @@ class ECUAnalyzer:
     
     def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
-        Detect EGR (Exhaust Gas Recirculation) maps using professional binary analysis.
-        EGR maps characteristics:
-        - Often 13x16 or similar dimensions
-        - Scale factor 0.1 for mg/stroke
-        - Values represent valve position percentages or mass flow
+        Detect EGR (Exhaust Gas Recirculation) maps.
+        Uses text markers + heuristic analysis for files without explicit labels.
         """
         
         indicators = []
         confidence_score = 0
         
         # =================================================================
-        # METHOD 1: Direct text markers
+        # METHOD 1: Direct text markers (highest priority)
         # =================================================================
         egr_text_markers = [
-            (b'EGR', 45), (b'egr', 40), (b'Egr', 40),
-            (b'AGR', 45), (b'agr', 40), (b'Agr', 40),  # German
-            (b'EGR_', 50), (b'_EGR', 50),
-            (b'AGR_', 50), (b'_AGR', 50),
-            (b'RECIRCULATION', 35),
-            (b'recirculation', 30),
+            (b'EGR', 50), (b'egr', 45), (b'Egr', 45),
+            (b'AGR', 50), (b'agr', 45), (b'Agr', 45),
+            (b'EGR_', 55), (b'_EGR', 55),
+            (b'AGR_', 55), (b'_AGR', 55),
         ]
         
         for marker, score in egr_text_markers:
             count = file_data.count(marker)
             if count > 0:
                 idx = file_data.find(marker)
-                # Verify word boundary
                 before = file_data[max(0,idx-1):idx]
                 after = file_data[idx+len(marker):idx+len(marker)+1]
                 is_word = (not before or not before[0:1].isalnum()) or (not after or not after[0:1].isalnum())
@@ -1278,38 +1272,42 @@ class ECUAnalyzer:
                     break
         
         # =================================================================
-        # METHOD 2: EGR Map Structure Detection
-        # EGR maps often have characteristic patterns:
-        # - Gradual increase from 0 to ~100 (percentage)
-        # - Or mass flow values 0-300 mg
+        # METHOD 2: String patterns
         # =================================================================
-        # Look for repeating gradient patterns typical of EGR maps
-        # Pattern: series of increasing 16-bit values
-        
-        # Check for map-like structures (simplified check)
-        # Look for sequences where values gradually increase (axis-like behavior)
-        
-        # =================================================================
-        # METHOD 3: Check if DPF detected - EGR often co-located
-        # If DPF maps found with high confidence, EGR is likely present
-        # But only add small score for this inference
-        # =================================================================
-        # This is handled by checking extracted strings
-        
         egr_strings = [
-            "EXHAUST_GAS_RECIRCULATION", "EGR_VALVE", "EGR_FLOW",
-            "EGR_TEMP", "EGR_POS", "EGR_RATE", "EGR_COOL",
-            "LP_EGR", "HP_EGR", "EGRVALVE", "EGRFLOW"
+            "EGR_VALVE", "EGR_FLOW", "EGR_TEMP", "EGR_POS", 
+            "EGRVALVE", "EGRFLOW", "LP_EGR", "HP_EGR",
+            "EXHAUST_GAS_RECIRCULATION", "RECIRCULATION"
         ]
         
         for s in egr_strings:
             if s in strings_upper:
                 indicators.append(f"String: {s}")
-                confidence_score += 30
+                confidence_score += 35
                 break
         
+        # =================================================================
+        # METHOD 3: Heuristic - Diesel ECUs with DPF typically have EGR
+        # If we detected DPF with high confidence and this is a diesel ECU,
+        # EGR is highly likely. Add modest score.
+        # =================================================================
+        # Check manufacturer/ECU type for diesel indicators
+        ecu_type = self.results.get("ecu_type", "") or ""
+        manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
+        
+        # Known diesel ECU indicators
+        diesel_indicators = ["EDC", "DCM", "SID", "DENSO", "TRANSTRON", "CUMMINS", "CM2150"]
+        is_diesel = any(ind in ecu_upper or ind in mfr_upper for ind in diesel_indicators)
+        
+        if is_diesel and confidence_score == 0:
+            # For diesel ECUs, EGR is standard equipment
+            indicators.append("Diesel ECU (EGR standard)")
+            confidence_score += 30  # Medium confidence for inference
+        
         # Determine confidence level
-        if confidence_score >= 45:
+        if confidence_score >= 50:
             confidence = "high"
         elif confidence_score >= 30:
             confidence = "medium"
