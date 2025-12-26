@@ -1239,9 +1239,6 @@ class ECUAnalyzer:
         confidence_score = 0
         
         # String-based detection - STRICT patterns only (avoid false positives)
-        # "DEF" alone causes false positives from "ABCDEFG"
-        # "NOX" alone causes false positives from strings like "DKNOXY"
-        # "SCR" alone causes false positives from random data
         adblue_strings = [
             "ADBLUE", "AD_BLUE", "AD-BLUE", "BLUE_TEC", "BLUETEC",
             "SELECTIVE CATALYTIC",
@@ -1250,13 +1247,13 @@ class ECUAnalyzer:
             "DENOX", "DE_NOX", "DENOXTRONIC",
             "SCR_CAT", "SCR_TEMP", "SCR_EFF", "SCR_SYSTEM",
             "NH3", "AMMONIA", "REDUCTANT",
-            "DCU"  # Dosing Control Unit - only if standalone
+            "AFTERTREATMENT"
         ]
         
         for s in adblue_strings:
             if s in strings_upper:
                 indicators.append(f"String found: {s}")
-                confidence_score += 25  # Higher weight - AdBlue is specific
+                confidence_score += 25
         
         # Binary patterns - STRICT patterns only
         adblue_binary_patterns = [
@@ -1269,23 +1266,34 @@ class ECUAnalyzer:
             (rb"(?i)denox", "DeNOx system"),
             (rb"(?i)nh3[_\s]?slip", "NH3 slip"),
             (rb"(?i)reductant", "Reductant reference"),
+            (rb"(?i)aftertreatment", "Aftertreatment system"),
         ]
         
         for pattern, desc in adblue_binary_patterns:
             if re.search(pattern, file_data):
-                indicators.append(f"Binary pattern: {desc}")
+                indicators.append(f"Binary: {desc}")
                 confidence_score += 20
         
-        # Only add ECU type inference if other indicators found
-        if confidence_score > 0:
-            ecu_type = self.results.get("ecu_type", "") or ""
-            if any(x in ecu_type.upper() for x in ["EDC17C", "MD1", "DCM3.5", "DCM6", "DCM7"]):
-                indicators.append("Modern diesel ECU (AdBlue common)")
-                confidence_score += 5
+        # ECU type inference for known SCR-equipped ECUs
+        ecu_type = self.results.get("ecu_type", "") or ""
+        manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
         
-        if confidence_score >= 50:
+        # Cummins CM2150/CM2250/CM2350 ECUs on trucks/buses have SCR
+        if "CUMMINS" in mfr_upper or "CM2150" in ecu_upper or "CM2250" in ecu_upper or "CM2350" in ecu_upper:
+            indicators.append("Cummins truck ECU (SCR equipped)")
+            confidence_score += 30  # High confidence for Cummins truck ECUs
+        
+        # Modern Bosch diesel ECUs (Euro 6)
+        if confidence_score == 0:
+            if any(x in ecu_upper for x in ["EDC17C4", "EDC17C5", "EDC17C6", "MD1", "DCM3.5", "DCM6", "DCM7"]):
+                indicators.append("Modern Euro 6 ECU (SCR likely)")
+                confidence_score += 15
+        
+        if confidence_score >= 30:
             confidence = "high"
-        elif confidence_score >= 25:
+        elif confidence_score >= 15:
             confidence = "medium"
         elif confidence_score > 0:
             confidence = "low"
