@@ -1111,25 +1111,22 @@ class ECUAnalyzer:
         indicators = []
         confidence_score = 0
         
-        # Binary pattern detection FIRST (more reliable for real ECU files)
-        dpf_binary_patterns = [
-            (rb"DPF", "DPF marker found"),
-            (rb"dpf", "dpf marker found"),
-            (rb"DpF", "DpF marker found"),
-            (rb"FAP", "FAP marker (French DPF)"),
-            (rb"(?i)soot[_\s]?load", "Soot load reference"),
-            (rb"(?i)regen[_\s]?temp", "Regeneration temperature"),
-            (rb"(?i)diff[_\s]?press", "Differential pressure sensor"),
-            (rb"(?i)part[_\s]?filter", "Particulate filter"),
-            (rb"KDPF", "Korean DPF"),
+        # String-based detection (most reliable)
+        dpf_strings = [
+            "DPF", "DIESEL PARTICULATE", "PARTICULATE FILTER",
+            "FAP",  # French: Filtre à particules
+            "RUSS",  # German: Russpartikelfilter
+            "PARTIKELFILTER", "SOOT", "REGENERATION", "REGEN",
+            "DPF_REGEN", "DPFREGEN", "FILTER_REGEN",
+            "PARTICLE", "PM_FILTER", "PMFILTER"
         ]
         
-        for pattern, desc in dpf_binary_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary: {desc}")
-                confidence_score += 30  # High confidence for binary matches
+        for s in dpf_strings:
+            if s in strings_upper:
+                indicators.append(f"String found: {s}")
+                confidence_score += 20
         
-        # String-based detection (secondary)
+        # Binary pattern detection
         dpf_binary_patterns = [
             (rb"DPF[_\s]", "DPF marker"),
             (rb"dpf[_\s]", "dpf marker"),
