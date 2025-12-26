@@ -1115,81 +1115,118 @@ class ECUAnalyzer:
     
     def _detect_dpf_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
-        Detect DPF (Diesel Particulate Filter) maps using actual binary structure analysis.
-        Based on professional ECU tuning research:
-        - EDC17: Search for "04081 00015" pattern (decimal in 16-bit view)
-        - EDC16/VAG: Search for 7FFF 8000 (32767 32768) pattern
-        - General: Look for DPF switch bytes and map structures
+        Detect DPF (Diesel Particulate Filter) maps using professional binary analysis.
+        Research-based patterns from WinOLS, ECU tuning forums, and reverse engineering.
         """
         
         indicators = []
         confidence_score = 0
         
         # =================================================================
-        # METHOD 1: Bosch EDC17 DPF Switch Pattern
-        # Search for the characteristic "04081 00015" sequence
-        # In bytes (16-bit little-endian): 0xFF1 0x0F = 4081, 0x0F 0x00 = 15
+        # METHOD 1: EDC17 DPF Switch Pattern
+        # Search for "04081 00015" sequence near DPF switch
+        # 4081 = 0x0FF1 (LE: F1 0F), 15 = 0x000F (LE: 0F 00)
+        # Full pattern often includes: 04081 00015 32767 ... 00001 ... 02800
         # =================================================================
-        # Pattern: 04081 as 16-bit LE = 0xF1 0x0F, 00015 as 16-bit LE = 0x0F 0x00
-        # Actually search for the bytes that represent these decimal values
-        edc17_dpf_pattern1 = bytes([0xF1, 0x0F, 0x0F, 0x00])  # 4081, 15 in 16-bit LE
-        if edc17_dpf_pattern1 in file_data:
-            indicators.append("EDC17 DPF switch pattern (04081 00015) found")
-            confidence_score += 50
+        # Convert 4081 to bytes (little-endian 16-bit)
+        val_4081 = struct.pack('<H', 4081)  # \xf1\x0f
+        val_15 = struct.pack('<H', 15)      # \x0f\x00
+        val_32767 = struct.pack('<H', 32767)  # \xff\x7f
+        val_32768 = struct.pack('<H', 32768)  # \x00\x80
+        val_2800 = struct.pack('<H', 2800)    # \xf0\x0a
+        
+        # Search for 4081 followed by 15 within 4 bytes
+        for i in range(len(file_data) - 10):
+            if file_data[i:i+2] == val_4081:
+                # Check if 15 follows within next 4 bytes
+                if val_15 in file_data[i+2:i+8]:
+                    indicators.append("EDC17 DPF switch area (4081+15 pattern)")
+                    confidence_score += 45
+                    break
         
         # =================================================================
-        # METHOD 2: 32767/32768 Pattern (Common DPF map boundary markers)
-        # 32767 = 0x7FFF, 32768 = 0x8000 (often adjacent in DPF maps)
+        # METHOD 2: DPF Switch Byte Pattern
+        # The actual switch is often "01 00" (value 1) that disables when set to "00 00"
+        # Look for pattern: 01 00 00 00 00 00 01 00 followed by 2800 area
         # =================================================================
-        pattern_7fff_8000 = bytes([0xFF, 0x7F, 0x00, 0x80])  # 32767, 32768 LE
-        pattern_8000_7fff = bytes([0x00, 0x80, 0xFF, 0x7F])  # 32768, 32767 LE
+        dpf_switch_pattern = bytes([0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00])
+        if dpf_switch_pattern in file_data:
+            # Verify it's near a reasonable DPF area (check for 2800 nearby)
+            idx = file_data.find(dpf_switch_pattern)
+            if idx > 0:
+                nearby = file_data[idx:idx+30]
+                if val_2800 in nearby or val_32767 in nearby:
+                    indicators.append("DPF switch byte sequence found")
+                    confidence_score += 35
+        
+        # =================================================================
+        # METHOD 3: 32767/32768 Boundary Pattern (Common in DPF map areas)
+        # These values mark map boundaries in many ECU types
+        # =================================================================
+        # Pattern: 7FFF followed by 8000 (or vice versa)
+        pattern_7fff_8000 = val_32767 + val_32768
+        pattern_8000_7fff = val_32768 + val_32767
         
         count_7fff_8000 = file_data.count(pattern_7fff_8000)
         count_8000_7fff = file_data.count(pattern_8000_7fff)
+        total_boundary = count_7fff_8000 + count_8000_7fff
         
-        if count_7fff_8000 >= 2 or count_8000_7fff >= 2:
-            indicators.append(f"DPF boundary markers (7FFF/8000): {count_7fff_8000 + count_8000_7fff} occurrences")
+        if total_boundary >= 5:
+            indicators.append(f"Map boundary markers (7FFF/8000): {total_boundary}x")
             confidence_score += 40
-        elif count_7fff_8000 >= 1 or count_8000_7fff >= 1:
-            indicators.append("DPF boundary pattern found")
+        elif total_boundary >= 2:
+            indicators.append(f"Map boundary markers: {total_boundary}x")
             confidence_score += 25
         
         # =================================================================
-        # METHOD 3: Direct binary text markers (DPF, FAP, etc.)
-        # These are explicit text labels in the ECU firmware
+        # METHOD 4: Direct text markers in binary
         # =================================================================
-        dpf_binary_markers = [
-            (b"DPF", "DPF text marker"),
-            (b"dpf", "dpf text marker"),
-            (b"DpF", "DpF text marker"),
-            (b"FAP", "FAP marker (French DPF)"),
-            (b"Fap", "Fap marker"),
-            (b"SOOT", "Soot marker"),
-            (b"soot", "soot marker"),
-            (b"REGEN", "Regeneration marker"),
-            (b"regen", "regen marker"),
-            (b"Partikel", "Partikel marker (German)"),
+        dpf_text_markers = [
+            (b'DPF', 40), (b'dpf', 35), (b'DpF', 35),
+            (b'FAP', 40), (b'Fap', 35), (b'fap', 30),
+            (b'SOOT', 30), (b'soot', 25),
+            (b'REGEN', 30), (b'regen', 25),
+            (b'Partikel', 35), (b'PARTIKEL', 35),
+            (b'DPF_', 45), (b'_DPF', 45),
+            (b'FAP_', 45), (b'_FAP', 45),
         ]
         
-        for marker, desc in dpf_binary_markers:
+        for marker, score in dpf_text_markers:
             count = file_data.count(marker)
             if count > 0:
-                indicators.append(f"{desc}: {count}x found")
-                confidence_score += 30
-                break  # Only count the first match type to avoid over-scoring
+                # Verify it's not just random data by checking for alphanumeric context
+                idx = file_data.find(marker)
+                if idx > 0:
+                    # Check if surrounded by reasonable chars (not pure binary noise)
+                    before = file_data[max(0,idx-1):idx]
+                    after = file_data[idx+len(marker):idx+len(marker)+1]
+                    # Accept if at word boundary (non-alphanumeric before/after)
+                    is_word = (not before or not before[0:1].isalnum()) or (not after or not after[0:1].isalnum())
+                    if is_word or count >= 2:
+                        indicators.append(f"Text marker '{marker.decode()}': {count}x")
+                        confidence_score += score
+                        break
         
         # =================================================================
-        # METHOD 4: Map structure detection
-        # Look for 8x8 or 16x16 map structures near potential DPF areas
-        # Maps typically have axis data followed by grid data
+        # METHOD 5: Denso DPF Detection
+        # Look for specific patterns in Denso ECUs
         # =================================================================
-        # Look for repeating small values followed by grid (typical map structure)
-        # This is a simplified heuristic - real tools use more sophisticated analysis
+        # Denso often uses specific hex sequences for emissions maps
+        denso_dpf_patterns = [
+            (b'\x00\x80\x00\x80\x00\x80', "Denso map boundary"),
+            (b'\xff\x7f\xff\x7f\xff\x7f', "Denso map sequence"),
+        ]
+        
+        for pattern, desc in denso_dpf_patterns:
+            if pattern in file_data:
+                indicators.append(desc)
+                confidence_score += 25
+                break
         
         # Determine confidence level
-        if confidence_score >= 50:
+        if confidence_score >= 60:
             confidence = "high"
-        elif confidence_score >= 25:
+        elif confidence_score >= 35:
             confidence = "medium"
         elif confidence_score > 0:
             confidence = "low"
