@@ -680,9 +680,10 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         
         # Define all possible services with CORRECT pricing (matching SERVICE_PRICING)
         all_services = {
-            "dpf_off": {"service_name": "DPF/FAP Removal", "price": 248.0},
-            "adblue_off": {"service_name": "AdBlue/SCR Removal", "price": 698.0},
+            "dpf_off": {"service_name": "DPF Removal", "price": 248.0},
             "egr_off": {"service_name": "EGR Removal", "price": 50.0},
+            "dpf_egr_off": {"service_name": "DPF & EGR Combo", "price": 248.0},  # Combo deal
+            "adblue_off": {"service_name": "AdBlue/SCR Removal", "price": 698.0},
             "dtc_off": {"service_name": "DTC/Error Code Removal", "price": 50.0},
             "lambda_off": {"service_name": "Lambda/O2 Sensor Removal", "price": 50.0},
             "cat_off": {"service_name": "Catalyst Removal", "price": 50.0},
@@ -693,10 +694,60 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
             "stage_tuning": {"service_name": "Stage 1/2 Tuning", "price": 248.0},
         }
         
-        # Build available options ONLY from detected services
+        # Check if DPF was detected
+        dpf_detected = any(s.get('service_id') == 'dpf_off' for s in detected_services)
+        dpf_confidence = "high"
+        dpf_indicators = []
+        for s in detected_services:
+            if s.get('service_id') == 'dpf_off':
+                dpf_confidence = s.get('confidence', 'high')
+                dpf_indicators = s.get('indicators', [])
+                break
+        
+        # Build available options
         available_options = []
+        
+        # If DPF detected, offer DPF, EGR, and Combo options (file with DPF will have EGR)
+        if dpf_detected:
+            # Add DPF Removal
+            available_options.append({
+                "service_id": "dpf_off",
+                "service_name": all_services["dpf_off"]["service_name"],
+                "price": all_services["dpf_off"]["price"],
+                "file_id": f"{file_id}_dpf_off",
+                "detected": True,
+                "confidence": dpf_confidence,
+                "indicators": dpf_indicators
+            })
+            
+            # Add EGR Removal (if DPF exists, EGR exists too)
+            available_options.append({
+                "service_id": "egr_off",
+                "service_name": all_services["egr_off"]["service_name"],
+                "price": all_services["egr_off"]["price"],
+                "file_id": f"{file_id}_egr_off",
+                "detected": True,
+                "confidence": dpf_confidence,  # Same confidence as DPF
+                "indicators": ["DPF detected - EGR included in diesel ECU"]
+            })
+            
+            # Add DPF & EGR Combo
+            available_options.append({
+                "service_id": "dpf_egr_off",
+                "service_name": all_services["dpf_egr_off"]["service_name"],
+                "price": all_services["dpf_egr_off"]["price"],
+                "file_id": f"{file_id}_dpf_egr_off",
+                "detected": True,
+                "confidence": dpf_confidence,
+                "indicators": ["Complete DPF + EGR removal package"]
+            })
+        
+        # Add other detected services (excluding dpf_off and egr_off since handled above)
         for detected_svc in detected_services:
             service_id = detected_svc.get('service_id', '')
+            # Skip DPF and EGR as they're handled above
+            if service_id in ['dpf_off', 'egr_off']:
+                continue
             if service_id in all_services:
                 svc_info = all_services[service_id]
                 available_options.append({
@@ -709,9 +760,20 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
                     "indicators": detected_svc.get('indicators', [])
                 })
         
-        # Sort by confidence (high first)
-        confidence_order = {"high": 0, "medium": 1, "low": 2}
-        available_options.sort(key=lambda x: confidence_order.get(x.get('confidence', 'low'), 3))
+        # Sort: DPF/EGR/Combo first (by service_id), then by confidence
+        def sort_key(x):
+            # Priority order for DPF-related services
+            priority = {
+                "dpf_off": 0,
+                "egr_off": 1, 
+                "dpf_egr_off": 2
+            }
+            service_priority = priority.get(x.get('service_id', ''), 10)
+            confidence_order = {"high": 0, "medium": 1, "low": 2}
+            conf_priority = confidence_order.get(x.get('confidence', 'low'), 3)
+            return (service_priority, conf_priority)
+        
+        available_options.sort(key=sort_key)
         
         # Build ECU info string
         ecu_info = display_info['ecu_type']
