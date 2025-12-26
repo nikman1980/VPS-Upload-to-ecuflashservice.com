@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:21:18.970204",
+  "last_update": "2025-12-26T23:25:23.332878",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -62717,6 +62717,1339 @@
                   {
                     "id": "20186",
                     "name": "Denso DC1U"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "FAW": {
+        "id": "415",
+        "models": {
+          "Cstar": {
+            "id": "3239",
+            "engines": {
+              "3.86 TDI": {
+                "id": "13006",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Ford": {
+        "id": "164",
+        "models": {
+          "Cargo": {
+            "id": "2604",
+            "engines": {
+              "10.3L TD": {
+                "id": "11680",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "4.5L TD": {
+                "id": "11569",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "6.6L TD": {
+                "id": "11570",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "6.7L TD": {
+                "id": "11571",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "F-4000": {
+            "id": "2605",
+            "engines": {
+              "2.8L TD": {
+                "id": "11572",
+                "ecus": [
+                  {
+                    "id": "20025",
+                    "name": "Motorola / Cummins CM2220C"
+                  }
+                ]
+              },
+              "3.9L TD": {
+                "id": "12275",
+                "ecus": [
+                  {
+                    "id": "19466",
+                    "name": "Bosch EDC7C1"
+                  }
+                ]
+              },
+              "6.7L TD": {
+                "id": "12361",
+                "ecus": [
+                  {
+                    "id": "20258",
+                    "name": "Bosch MD1CP062"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Foton": {
+        "id": "240",
+        "models": {
+          "Auman": {
+            "id": "2556",
+            "engines": {
+              "2.8L": {
+                "id": "12134",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              },
+              "3.8L": {
+                "id": "12137",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              },
+              "ISG 11.8L": {
+                "id": "11814",
+                "ecus": [
+                  {
+                    "id": "20073",
+                    "name": "Motorola / Cummins CM2880"
+                  }
+                ]
+              }
+            }
+          },
+          "Aumark": {
+            "id": "2871",
+            "engines": {
+              "2.8L": {
+                "id": "12135",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              },
+              "3.8L": {
+                "id": "12138",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          },
+          "Forland": {
+            "id": "3178",
+            "engines": {
+              "3.8L TDI": {
+                "id": "12896",
+                "ecus": [
+                  {
+                    "id": "19971",
+                    "name": "Bosch EDC17C55"
+                  },
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          },
+          "Tunland": {
+            "id": "3243",
+            "engines": {
+              "3.8L TDI": {
+                "id": "13013",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Freightliner": {
+        "id": "285",
+        "models": {
+          "Cascadia": {
+            "id": "2725",
+            "engines": {
+              "DD13 12.8 L": {
+                "id": "11777",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "DD15 14.8 L": {
+                "id": "11778",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "DD16 15.6 L": {
+                "id": "11779",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "ISX 15.0L": {
+                "id": "12021",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              }
+            }
+          },
+          "Columbia": {
+            "id": "2905",
+            "engines": {
+              "DD15 14.8L TD": {
+                "id": "12751",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "DDEC6 14.0L 6L": {
+                "id": "12198",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          },
+          "M2 1xx": {
+            "id": "2726",
+            "engines": {
+              "6.7L ISB": {
+                "id": "12053",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "7.2D L6": {
+                "id": "12180",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "8.3L ISC": {
+                "id": "12054",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              },
+              "DD13 12.8 L": {
+                "id": "11780",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "GAC": {
+        "id": "347",
+        "models": {
+          "Truck": {
+            "id": "2946",
+            "engines": {
+              "8,4 TD": {
+                "id": "12282",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "GAZ (ГАЗ)": {
+        "id": "190",
+        "models": {
+          "3308": {
+            "id": "2346",
+            "engines": {
+              "4.4 TDI": {
+                "id": "11048",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "4.7 TDI": {
+                "id": "11025",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "3309": {
+            "id": "2340",
+            "engines": {
+              "4.4 TDI": {
+                "id": "11591",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "4.7 TDI": {
+                "id": "11018",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "6.65 TD": {
+                "id": "11913",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "35071": {
+            "id": "2621",
+            "engines": {
+              "4.4 TDI": {
+                "id": "11590",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "6.65 TD": {
+                "id": "11915",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "Gazelle": {
+            "id": "3209",
+            "engines": {
+              "2.0 TDI": {
+                "id": "12966",
+                "ecus": [
+                  {
+                    "id": "20228",
+                    "name": "Bosch MD1CS018"
+                  }
+                ]
+              }
+            }
+          },
+          "Next": {
+            "id": "2668",
+            "engines": {
+              "2.8 TD": {
+                "id": "11684",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "GMC": {
+        "id": "244",
+        "models": {
+          "C7500": {
+            "id": "2566",
+            "engines": {
+              "7.8L Duramax": {
+                "id": "11491",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "TopKick": {
+            "id": "2731",
+            "engines": {
+              "6.6 V8 TD": {
+                "id": "11789",
+                "ecus": [
+                  {
+                    "id": "19421",
+                    "name": "Bosch EDC16C37"
+                  },
+                  {
+                    "id": "19452",
+                    "name": "Bosch EDC17CP18"
+                  }
+                ]
+              }
+            }
+          },
+          "W3500": {
+            "id": "2577",
+            "engines": {
+              "5.2 TDI": {
+                "id": "11523",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hino": {
+        "id": "185",
+        "models": {
+          "185 Serie": {
+            "id": "3137",
+            "engines": {
+              "4.7L TD": {
+                "id": "12744",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              }
+            }
+          },
+          "200 Serie": {
+            "id": "2982",
+            "engines": {
+              "4.0 TD": {
+                "id": "12924",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "7.6 TD": {
+                "id": "12380",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "2005 Series": {
+            "id": "3073",
+            "engines": {
+              "4,7 DTI": {
+                "id": "12612",
+                "ecus": [
+                  {
+                    "id": "19876",
+                    "name": "Denso 1 mb"
+                  }
+                ]
+              }
+            }
+          },
+          "300 Serie": {
+            "id": "2641",
+            "engines": {
+              "4.0 TD": {
+                "id": "11638",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "6.4 TD": {
+                "id": "11685",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "7.6 TD": {
+                "id": "12392",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "500 Serie": {
+            "id": "2719",
+            "engines": {
+              "6.4 TD": {
+                "id": "11766",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "7.6 TD": {
+                "id": "12391",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "8.0 TD": {
+                "id": "11770",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "8.2 TD": {
+                "id": "12106",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "8.9 TD": {
+                "id": "11769",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "700 Serie": {
+            "id": "2642",
+            "engines": {
+              "12.9 TD": {
+                "id": "11639",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Dutro": {
+            "id": "2314",
+            "engines": {
+              "3.0 TD N04C-UE": {
+                "id": "10954",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "4.0 TD": {
+                "id": "11637",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "4.9 TD S05D-D": {
+                "id": "10949",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Dyno": {
+            "id": "2313",
+            "engines": {
+              "3.0 TD - N04C": {
+                "id": "10955",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "4.0 TD": {
+                "id": "11636",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "4.9 TD - S05D": {
+                "id": "10948",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Ranger": {
+            "id": "2349",
+            "engines": {
+              "6.4 TD": {
+                "id": "11038",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "7.6 TD": {
+                "id": "12390",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "8.0 TD": {
+                "id": "11767",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "8.9 TD": {
+                "id": "11768",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hongyan": {
+        "id": "344",
+        "models": {
+          "Genlyon": {
+            "id": "2941",
+            "engines": {
+              "13.0L TD": {
+                "id": "12266",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hyundai": {
+        "id": "213",
+        "models": {
+          "HD120": {
+            "id": "2904",
+            "engines": {
+              "3.9TD D4DD": {
+                "id": "12195",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "HD170": {
+            "id": "3029",
+            "engines": {
+              "3.9TD D4DD": {
+                "id": "12496",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "HD500": {
+            "id": "2466",
+            "engines": {
+              "12.9 TD": {
+                "id": "11309",
+                "ecus": [
+                  {
+                    "id": "20010",
+                    "name": "Delphi ETC3"
+                  }
+                ]
+              }
+            }
+          },
+          "HD65": {
+            "id": "2462",
+            "engines": {
+              "3.9TD D4DD": {
+                "id": "11301",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "HD72": {
+            "id": "2463",
+            "engines": {
+              "3.9TD D4DD": {
+                "id": "11302",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "HD78": {
+            "id": "2461",
+            "engines": {
+              "3.9TD D4DD": {
+                "id": "11303",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "Porter": {
+            "id": "3019",
+            "engines": {
+              "2.5 CRDI": {
+                "id": "12467",
+                "ecus": [
+                  {
+                    "id": "20126",
+                    "name": "Bosch MD1xxx"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "International": {
+        "id": "217",
+        "models": {
+          "4300 series": {
+            "id": "2470",
+            "engines": {
+              "MaxxForce DT 7.6 L": {
+                "id": "11315",
+                "ecus": [
+                  {
+                    "id": "20011",
+                    "name": "Siemens/Continental SID904 / SID913"
+                  }
+                ]
+              }
+            }
+          },
+          "4400 series": {
+            "id": "2471",
+            "engines": {
+              "MaxxForce 9.3 L": {
+                "id": "11345",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "MaxxForce DT 7.6 L": {
+                "id": "11314",
+                "ecus": [
+                  {
+                    "id": "20011",
+                    "name": "Siemens/Continental SID904 / SID913"
+                  }
+                ]
+              }
+            }
+          },
+          "5600 series": {
+            "id": "2853",
+            "engines": {
+              "10.8L ISM": {
+                "id": "12103",
+                "ecus": [
+                  {
+                    "id": "20109",
+                    "name": "Motorola / Cummins CM875"
+                  }
+                ]
+              }
+            }
+          },
+          "7300 series": {
+            "id": "2487",
+            "engines": {
+              "MaxxForce 9.3 L": {
+                "id": "11346",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "MaxxForce DT 7.6 L": {
+                "id": "11349",
+                "ecus": [
+                  {
+                    "id": "20011",
+                    "name": "Siemens/Continental SID904 / SID913"
+                  }
+                ]
+              }
+            }
+          },
+          "7400 series": {
+            "id": "2488",
+            "engines": {
+              "MaxxForce 9.3 L": {
+                "id": "11347",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "MaxxForce DT 7.6 L": {
+                "id": "11350",
+                "ecus": [
+                  {
+                    "id": "20011",
+                    "name": "Siemens/Continental SID904 / SID913"
+                  }
+                ]
+              }
+            }
+          },
+          "7500 series": {
+            "id": "2489",
+            "engines": {
+              "MaxxForce 9.3 L": {
+                "id": "11348",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "MaxxForce DT 7.6 L": {
+                "id": "11351",
+                "ecus": [
+                  {
+                    "id": "20011",
+                    "name": "Siemens/Continental SID904 / SID913"
+                  }
+                ]
+              }
+            }
+          },
+          "7600 series": {
+            "id": "2854",
+            "engines": {
+              "10.8L ISM": {
+                "id": "12104",
+                "ecus": [
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  },
+                  {
+                    "id": "20109",
+                    "name": "Motorola / Cummins CM875"
+                  }
+                ]
+              }
+            }
+          },
+          "8600 series": {
+            "id": "2855",
+            "engines": {
+              "10.8L ISM": {
+                "id": "12105",
+                "ecus": [
+                  {
+                    "id": "20109",
+                    "name": "Motorola / Cummins CM875"
+                  }
+                ]
+              }
+            }
+          },
+          "9400 series": {
+            "id": "2838",
+            "engines": {
+              "10.8L ISM": {
+                "id": "12064",
+                "ecus": [
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              },
+              "15.0L ISX": {
+                "id": "12062",
+                "ecus": [
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  },
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              }
+            }
+          },
+          "9800 series": {
+            "id": "2837",
+            "engines": {
+              "10.8L ISM": {
+                "id": "12065",
+                "ecus": [
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              },
+              "15.0L ISX": {
+                "id": "12063",
+                "ecus": [
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              }
+            }
+          },
+          "9900 series": {
+            "id": "2866",
+            "engines": {
+              "15.0L ISX15": {
+                "id": "12124",
+                "ecus": [
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  }
+                ]
+              }
+            }
+          },
+          "CXT series": {
+            "id": "2469",
+            "engines": {
+              "MaxxForce DT 7.6 L": {
+                "id": "11313",
+                "ecus": [
+                  {
+                    "id": "20011",
+                    "name": "Siemens/Continental SID904 / SID913"
+                  }
+                ]
+              }
+            }
+          },
+          "Lonestar": {
+            "id": "2839",
+            "engines": {
+              "14.9L ISX": {
+                "id": "12067",
+                "ecus": [
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  },
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              }
+            }
+          },
+          "Navistar": {
+            "id": "2920",
+            "engines": {
+              "MaxxForce 6.5 L": {
+                "id": "12210",
+                "ecus": [
+                  {
+                    "id": "20123",
+                    "name": "Siemens/Continental SID908"
+                  }
+                ]
+              }
+            }
+          },
+          "Prostar": {
+            "id": "2567",
+            "engines": {
+              "113 12.4L 6L": {
+                "id": "11492",
+                "ecus": [
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  }
+                ]
+              },
+              "113 13.0L 6L": {
+                "id": "11525",
+                "ecus": [
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              },
+              "14.9L": {
+                "id": "12068",
+                "ecus": [
+                  {
+                    "id": "20173",
+                    "name": "Bosch EDC17CV82"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  }
+                ]
+              },
+              "15.2L": {
+                "id": "12066",
+                "ecus": [
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  },
+                  {
+                    "id": "20089",
+                    "name": "Motorola / Cummins CM876"
+                  }
+                ]
+              }
+            }
+          },
+          "RH Series": {
+            "id": "3074",
+            "engines": {
+              "12.4L": {
+                "id": "12613",
+                "ecus": [
+                  {
+                    "id": "20173",
+                    "name": "Bosch EDC17CV82"
                   }
                 ]
               }
