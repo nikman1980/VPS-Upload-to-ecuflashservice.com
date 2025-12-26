@@ -384,8 +384,8 @@ class ECUAnalyzer:
             # ===================
             # CUMMINS
             # ===================
-            (rb"CM[0-9]{3,4}", "Cummins", "Commercial"),
-            (rb"CM2[0-9]{3}", "Cummins", "Commercial"),
+            (rb"CM[0-9]{3,4}[A-Z]?", "Cummins", "Commercial"),  # CM2150E, CM2250, CM2350, CM870
+            (rb"CM2[0-9]{3}[A-Z]?", "Cummins", "Commercial"),
             
             # ===================
             # TRANSMISSION
