@@ -14,10 +14,11 @@ Analysis includes:
 - Processor/MCU identification
 - File size analysis for ECU generation inference
 - Strict VIN validation (only 100% confident matches)
+- MAP/BLOCK DETECTION: DPF, EGR, AdBlue/SCR, Lambda, Speed Limiter, etc.
 """
 
 import re
-from typing import Dict, List
+from typing import Dict, List, Any
 
 
 class ECUAnalyzer:
