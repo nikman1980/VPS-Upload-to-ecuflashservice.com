@@ -914,24 +914,34 @@ const NewUploadFlow = () => {
               </div>
               <div>
                 <h4 className="text-gray-900 font-semibold mb-4">Support</h4>
-                <ul className="space-y-2 text-gray-500 text-sm">
-                  <li>Contact Us</li>
-                  <li>FAQ</li>
-                  <li>Terms of Service</li>
-                  <li>Privacy Policy</li>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="/contact" className="text-gray-500 hover:text-blue-600 transition">Contact Us</a></li>
+                  <li><a href="/faq" className="text-gray-500 hover:text-blue-600 transition">FAQ</a></li>
+                  <li><a href="/terms" className="text-gray-500 hover:text-blue-600 transition">Terms of Service</a></li>
+                  <li><a href="/privacy" className="text-gray-500 hover:text-blue-600 transition">Privacy Policy</a></li>
                 </ul>
               </div>
               <div>
                 <h4 className="text-gray-900 font-semibold mb-4">Contact</h4>
                 <ul className="space-y-2 text-gray-500 text-sm">
-                  <li>admin@ecuflashservice.com</li>
+                  <li>support@ecuflashservice.com</li>
                   <li>24/7 Email Support</li>
+                  <li className="pt-2">
+                    <a href="/contact" className="inline-block bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                      Send Message
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
             <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-500 text-sm">© 2024 ECU Flash Service. All rights reserved.</p>
-              <p className="text-gray-500 text-sm mt-2 md:mt-0">⚠️ For off-road and competition use only</p>
+              <p className="text-gray-500 text-sm">© {new Date().getFullYear()} ECU Flash Service. All rights reserved.</p>
+              <div className="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="/faq" className="text-gray-400 hover:text-blue-600 text-sm transition">FAQ</a>
+                <a href="/terms" className="text-gray-400 hover:text-blue-600 text-sm transition">Terms</a>
+                <a href="/privacy" className="text-gray-400 hover:text-blue-600 text-sm transition">Privacy</a>
+                <span className="text-gray-400 text-sm">⚠️ For off-road use only</span>
+              </div>
             </div>
           </div>
         </footer>
