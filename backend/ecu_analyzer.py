@@ -1105,7 +1105,64 @@ class ECUAnalyzer:
         self.results["detected_maps"] = detected_maps
         self.results["available_services"] = available_services
     
-    def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+    def _detect_dpf_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """Detect DPF (Diesel Particulate Filter) related maps and blocks"""
+        
+        indicators = []
+        confidence_score = 0
+        
+        # Binary pattern detection FIRST (more reliable for real ECU files)
+        dpf_binary_patterns = [
+            (rb"DPF", "DPF marker found"),
+            (rb"dpf", "dpf marker found"),
+            (rb"DpF", "DpF marker found"),
+            (rb"FAP", "FAP marker (French DPF)"),
+            (rb"(?i)soot[_\s]?load", "Soot load reference"),
+            (rb"(?i)regen[_\s]?temp", "Regeneration temperature"),
+            (rb"(?i)diff[_\s]?press", "Differential pressure sensor"),
+            (rb"(?i)part[_\s]?filter", "Particulate filter"),
+            (rb"KDPF", "Korean DPF"),
+        ]
+        
+        for pattern, desc in dpf_binary_patterns:
+            if re.search(pattern, file_data):
+                indicators.append(f"Binary: {desc}")
+                confidence_score += 30  # High confidence for binary matches
+        
+        # String-based detection (secondary)
+        dpf_strings = [
+            "DIESEL PARTICULATE", "PARTICULATE FILTER",
+            "RUSS", "PARTIKELFILTER", "SOOT", "REGENERATION", "REGEN",
+            "DPF_REGEN", "DPFREGEN", "FILTER_REGEN", "PM_FILTER", "PMFILTER"
+        ]
+        
+        for s in dpf_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 15
+        
+        # ECU type inference (lowest priority)
+        ecu_type = self.results.get("ecu_type", "") or ""
+        if any(x in ecu_type.upper() for x in ["EDC17", "EDC16", "MD1", "DCM", "SID"]):
+            if confidence_score == 0:  # Only add if no other indicators
+                indicators.append("Diesel ECU type (DPF likely)")
+                confidence_score += 5
+        
+        if confidence_score >= 30:
+            confidence = "high"
+        elif confidence_score >= 15:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }    def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """Detect EGR (Exhaust Gas Recirculation) related maps and blocks"""
         
         indicators = []
