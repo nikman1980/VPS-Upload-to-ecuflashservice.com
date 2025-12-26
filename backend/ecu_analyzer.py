@@ -17,12 +17,28 @@ Analysis includes:
 - MAP/BLOCK DETECTION: Using actual binary map structure analysis
   - DPF maps: Search for specific switch patterns and map structures
   - EGR maps: Identify EGR valve/flow map blocks
-  - SCR/AdBlue maps: Detect NOx/urea dosing structures
+  - SCR/AdBlue maps: Detect NOx/urea dosing structures (including separate DCU files)
 """
 
 import re
 import struct
 from typing import Dict, List, Any
+
+# Import ECU database
+try:
+    from ecu_database import (
+        ECU_MANUFACTURER_SIGNATURES,
+        ECU_TYPE_PATTERNS,
+        TRUCK_BRAND_SIGNATURES,
+        TRUCK_ECUS_WITH_SCR,
+        SCR_DCU_SIGNATURES,
+        DPF_DETECTION_PATTERNS,
+        EGR_DETECTION_PATTERNS,
+        SCR_DETECTION_PATTERNS,
+    )
+    HAS_ECU_DATABASE = True
+except ImportError:
+    HAS_ECU_DATABASE = False
 
 
 class ECUAnalyzer:
