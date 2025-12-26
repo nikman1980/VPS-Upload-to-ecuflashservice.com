@@ -234,7 +234,7 @@ const ContactPage = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    placeholder="Please describe your inquiry in detail. If you're reporting an issue with a modified file, please include your vehicle information and any error codes you're seeing."
+                    placeholder="Please describe your inquiry in detail. If you are reporting an issue with a modified file, please include your vehicle information and any error codes you are seeing."
                     className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-none"
                   />
                 </div>
