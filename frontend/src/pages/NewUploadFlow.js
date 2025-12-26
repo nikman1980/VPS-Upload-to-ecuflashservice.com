@@ -984,6 +984,10 @@ const NewUploadFlow = () => {
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Select Your Vehicle</h2>
               <p className="text-gray-500">Choose your vehicle to see available tuning services</p>
+              <p className="text-sm text-blue-600 mt-2 flex items-center justify-center">
+                <span className="mr-2">💡</span>
+                Can't find your vehicle? Select "Other" to enter details manually
+              </p>
             </div>
             
             {/* Vehicle Selection Chain */}
