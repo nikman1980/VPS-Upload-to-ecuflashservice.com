@@ -1258,7 +1258,6 @@ class ECUAnalyzer:
         # Binary patterns
         adblue_binary_patterns = [
             (rb"(?i)adblue", "AdBlue marker"),
-            (rb"SCR[_\s\x00]", "SCR marker"),
             (rb"(?i)scr[_\s]?cat", "SCR catalyst"),
             (rb"(?i)urea[_\s]?dos", "Urea dosing"),
             (rb"(?i)urea[_\s]?inj", "Urea injection"),
