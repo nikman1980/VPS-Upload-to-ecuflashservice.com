@@ -169,75 +169,75 @@ VEHICLE_MODELS = {
 # Service pricing (direct customer prices - no markup)
 SERVICE_PRICING = {
     "dtc-single": {
-        "base_price": 10.00,
+        "base_price": 20.00,
         "name": "DTC Removal (Single Code)"
     },
     "dtc-multiple": {
-        "base_price": 25.00,
+        "base_price": 50.00,
         "name": "DTC Removal (Multiple Codes)"
     },
     "checksum": {
-        "base_price": 5.00,
+        "base_price": 10.00,
         "name": "Checksum Correction"
     },
     "egr-removal": {
-        "base_price": 25.00,
+        "base_price": 50.00,
         "name": "EGR Removal"
     },
     "dpf-removal": {
-        "base_price": 79.00,
+        "base_price": 248.00,
         "name": "DPF Removal"
     },
     "egr-dpf-combo": {
-        "base_price": 79.00,
+        "base_price": 248.00,
         "name": "EGR + DPF Combo"
     },
     "adblue-removal": {
-        "base_price": 199.00,
+        "base_price": 698.00,
         "name": "AdBlue/DEF Removal"
     },
     "immo-off": {
-        "base_price": 35.00,
+        "base_price": 70.00,
         "name": "Immobilizer Off"
     },
     "decat": {
-        "base_price": 20.00,
+        "base_price": 40.00,
         "name": "Decat (Cat OFF)"
     },
     "vmax-off": {
-        "base_price": 15.00,
-        "name": "Vmax OFF"
+        "base_price": 30.00,
+        "name": "Speed Limiter OFF"
     },
     "swirl-flap-off": {
-        "base_price": 20.00,
+        "base_price": 40.00,
         "name": "Swirl Flap OFF"
     },
     "exhaust-flaps": {
-        "base_price": 20.00,
+        "base_price": 40.00,
         "name": "Exhaust Flaps OFF"
     },
     "nox-off": {
-        "base_price": 20.00,
-        "name": "NOX OFF"
+        "base_price": 40.00,
+        "name": "NOX Sensor OFF"
     },
     "opf-gpf-off": {
-        "base_price": 20.00,
+        "base_price": 40.00,
         "name": "OPF/GPF OFF"
     },
     "maf-off": {
-        "base_price": 20.00,
-        "name": "MAF OFF"
+        "base_price": 40.00,
+        "name": "MAF Sensor OFF"
     },
     "cold-start-off": {
-        "base_price": 20.00,
-        "name": "Cold Start OFF"
+        "base_price": 40.00,
+        "name": "Cold Start Noise OFF"
     },
     "start-stop-off": {
-        "base_price": 20.00,
+        "base_price": 40.00,
         "name": "Start & Stop OFF"
     },
     "cylinder-demand-off": {
-        "base_price": 15.00,
+        "base_price": 40.00,
         "name": "Cylinder On Demand OFF"
     }
 }
