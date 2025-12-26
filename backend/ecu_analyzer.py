@@ -798,7 +798,7 @@ class ECUAnalyzer:
                         if s and len(s) >= 4 and len(s) <= 100:
                             if any(c.isalpha() for c in s):
                                 strings.append(s)
-                    except:
+                    except Exception:
                         pass
                 current = b""
         
@@ -809,7 +809,7 @@ class ECUAnalyzer:
                 if s and len(s) >= 4 and len(s) <= 100:
                     if any(c.isalpha() for c in s):
                         strings.append(s)
-            except:
+            except Exception:
                 pass
         
         # Remove duplicates while preserving order
