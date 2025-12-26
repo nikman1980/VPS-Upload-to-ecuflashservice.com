@@ -323,8 +323,8 @@ async def main():
         # Launch browser (non-headless so you can see progress)
         print("\n🌐 Launching browser...")
         browser = await p.chromium.launch(
-            headless=False,  # Set to True if you don't want to see the browser
-            slow_mo=100      # Slow down for stability
+            headless=True,  # Run in background
+            slow_mo=50      # Slightly faster
         )
         
         page = await browser.new_page()
