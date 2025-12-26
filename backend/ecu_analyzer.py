@@ -1188,7 +1188,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 20
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         egr_binary_patterns = [
             (rb"EGR[_\s\x00]", "EGR marker"),
             (rb"egr[_\s]", "egr marker"),
@@ -1255,7 +1255,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 25  # Higher weight - AdBlue is specific
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         adblue_binary_patterns = [
             (rb"(?i)adblue", "AdBlue marker"),
             (rb"(?i)scr[_\s]?cat", "SCR catalyst"),
@@ -1317,7 +1317,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 20
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         lambda_patterns = [
             (rb"(?i)lambda[_\s]", "Lambda marker"),
             (rb"(?i)o2[_\s]?sens", "O2 sensor"),
@@ -1374,7 +1374,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 25
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         speed_patterns = [
             (rb"(?i)speed[_\s]?limit", "Speed limit marker"),
             (rb"(?i)v[_\s]?max", "Vmax marker"),
@@ -1428,7 +1428,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 20
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         cat_patterns = [
             (rb"(?i)catalyst", "Catalyst marker"),
             (rb"(?i)cat[_\s]?temp", "Catalyst temperature"),
@@ -1476,7 +1476,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 25
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         swirl_patterns = [
             (rb"(?i)swirl[_\s]?flap", "Swirl flap marker"),
             (rb"(?i)intake[_\s]?flap", "Intake flap marker"),
@@ -1529,7 +1529,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 25
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         startstop_patterns = [
             (rb"(?i)start[_\s]?stop", "Start/Stop marker"),
             (rb"(?i)auto[_\s]?stop", "Auto stop marker"),
@@ -1577,7 +1577,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 20
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         immo_patterns = [
             (rb"(?i)immo[_\s]", "Immobilizer marker"),
             (rb"(?i)transponder", "Transponder reference"),
@@ -1624,7 +1624,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 15
         
-        # Binary patterns - DTC codes are often stored in specific format
+        # Binary patterns - STRICT patterns only - DTC codes are often stored in specific format
         dtc_patterns = [
             (rb"(?i)dtc[_\s]", "DTC marker"),
             (rb"(?i)fault[_\s]?code", "Fault code marker"),
@@ -1679,7 +1679,7 @@ class ECUAnalyzer:
                 indicators.append(f"String found: {s}")
                 confidence_score += 10
         
-        # Binary patterns
+        # Binary patterns - STRICT patterns only
         tuning_patterns = [
             (rb"(?i)torque[_\s]?req", "Torque request map"),
             (rb"(?i)boost[_\s]?press", "Boost pressure map"),
