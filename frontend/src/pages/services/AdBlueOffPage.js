@@ -285,7 +285,7 @@ const AdBlueOffPage = () => {
                   AdBlue/SCR delete is intended <strong>ONLY for off-road, agricultural, mining, and competition vehicles</strong> in jurisdictions where such modifications are permitted. Removing emission control systems from road-registered vehicles may violate environmental regulations.
                 </p>
                 <p className="text-gray-600 text-sm">
-                  It is the customer's responsibility to ensure compliance with all applicable laws in their jurisdiction.
+                  It is the customer&apos;s responsibility to ensure compliance with all applicable laws in their jurisdiction.
                 </p>
               </div>
             </div>
