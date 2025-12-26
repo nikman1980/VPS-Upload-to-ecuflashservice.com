@@ -1111,29 +1111,33 @@ class ECUAnalyzer:
         indicators = []
         confidence_score = 0
         
-        # Binary pattern detection FIRST (more reliable for real ECU files)
+        # String-based detection (most reliable)
+        dpf_strings = [
+            "DPF", "DIESEL PARTICULATE", "PARTICULATE FILTER",
+            "FAP",  # French: Filtre à particules
+            "RUSS",  # German: Russpartikelfilter
+            "PARTIKELFILTER", "SOOT", "REGENERATION", "REGEN",
+            "DPF_REGEN", "DPFREGEN", "FILTER_REGEN",
+            "PARTICLE", "PM_FILTER", "PMFILTER"
+        ]
+        
+        for s in dpf_strings:
+            if s in strings_upper:
+                indicators.append(f"String found: {s}")
+                confidence_score += 20
+        
+        # Binary pattern detection
         dpf_binary_patterns = [
-            (rb"DPF", "DPF marker found"),
-            (rb"dpf", "dpf marker found"),
-            (rb"DpF", "DpF marker found"),
-            (rb"FAP", "FAP marker (French DPF)"),
+            (rb"DPF[_\s]", "DPF marker"),
+            (rb"dpf[_\s]", "dpf marker"),
             (rb"(?i)soot[_\s]?load", "Soot load reference"),
             (rb"(?i)regen[_\s]?temp", "Regeneration temperature"),
             (rb"(?i)diff[_\s]?press", "Differential pressure sensor"),
+            (rb"(?i)exh[_\s]?press", "Exhaust pressure"),
             (rb"(?i)part[_\s]?filter", "Particulate filter"),
+            (rb"FAP[_\x00]", "FAP marker"),
             (rb"KDPF", "Korean DPF"),
-        ]
-        
-        for pattern, desc in dpf_binary_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary: {desc}")
-                confidence_score += 30  # High confidence for binary matches
-        
-        # String-based detection (secondary)
-        dpf_strings = [
-            "DIESEL PARTICULATE", "PARTICULATE FILTER",
-            "RUSS", "PARTIKELFILTER", "SOOT", "REGENERATION", "REGEN",
-            "DPF_REGEN", "DPFREGEN", "FILTER_REGEN", "PM_FILTER", "PMFILTER"
+            (rb"(?i)ash[_\s]?load", "Ash load map"),
         ]
         
         for pattern, desc in dpf_binary_patterns:
@@ -1144,9 +1148,9 @@ class ECUAnalyzer:
         # ECU type inference (Bosch diesel ECUs commonly have DPF)
         ecu_type = self.results.get("ecu_type", "") or ""
         if any(x in ecu_type.upper() for x in ["EDC17", "EDC16", "MD1", "DCM", "SID"]):
-            if s in strings_upper:
-                indicators.append(f"String: {s}")
-                confidence_score += 15
+            indicators.append("Diesel ECU type detected (likely has DPF)")
+            confidence_score += 10
+        
         # Determine confidence level
         if confidence_score >= 50:
             confidence = "high"
