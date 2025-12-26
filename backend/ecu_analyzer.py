@@ -1179,11 +1179,23 @@ class ECUAnalyzer:
             (rb"agr", "agr marker"),
             (rb"(?i)egr[_\s]?valve", "EGR valve reference"),
             (rb"(?i)egr[_\s]?cool", "EGR cooler reference"),
-            (rb"(?i)recircul", "Recirculation reference"),
+        for pattern, desc in egr_binary_patterns:
+            if re.search(pattern, file_data):
+                indicators.append(f"Binary: {desc}")
+                confidence_score += 30
+        
+        # String-based detection
+        egr_strings = [
+            "EXHAUST GAS RECIRCULATION",
+            "EGR_VALVE", "EGRVALVE", "EGR_FLOW", "EGRFLOW",
+            "EGR_TEMP", "RECIRCULATION", "EGR_POS", "EGR_RATE",
+            "LP_EGR", "HP_EGR", "COOL_EGR", "HOT_EGR"
         ]
         
         for s in egr_strings:
             if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 15
                 indicators.append(f"String found: {s}")
                 confidence_score += 20
         
