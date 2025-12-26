@@ -1249,7 +1249,7 @@ const NewUploadFlow = () => {
                         if (e.target.value === 'other') {
                           handleEngineSelect({ id: 'other', name: 'Other / Not Listed' });
                         } else {
-                          const eng = engines.find(en => en.id === parseInt(e.target.value));
+                          const eng = engines.find(en => String(en.id) === e.target.value);
                           if (eng) handleEngineSelect(eng);
                         }
                       }}
