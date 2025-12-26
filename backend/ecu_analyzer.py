@@ -1325,39 +1325,33 @@ class ECUAnalyzer:
     
     def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
-        Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps using professional analysis.
-        SCR systems include NOx sensor data, urea dosing maps, and SCR efficiency tables.
+        Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps.
+        Uses text markers + ECU type inference for trucks.
         """
         
         indicators = []
         confidence_score = 0
         
         # =================================================================
-        # METHOD 1: Direct text markers (most reliable)
-        # These markers explicitly indicate SCR/AdBlue presence
+        # METHOD 1: Direct text markers (highest priority)
         # =================================================================
         adblue_text_markers = [
-            # High confidence markers
-            (b'ADBLUE', 55), (b'AdBlue', 55), (b'adblue', 50),
-            (b'UREA', 50), (b'Urea', 45), (b'urea', 40),
-            (b'DENOX', 50), (b'DeNOx', 50), (b'denox', 45),
-            # Medium confidence - with word boundaries
-            (b'SCR_', 50), (b'_SCR', 50), (b'SCR-', 45),
-            (b'NOX_', 45), (b'_NOX', 45), (b'NOx_', 45),
-            (b'NOX_SENSOR', 55), (b'NOXSENSOR', 55),
-            # System-level markers
-            (b'AFTERTREATMENT', 45), (b'Aftertreatment', 40),
-            (b'REDUCTANT', 50), (b'Reductant', 45),
-            (b'DOSING', 35), (b'dosing', 30),
-            (b'NH3', 45), (b'nh3', 40),
-            (b'BLUETEC', 55), (b'BlueTec', 50),
+            (b'ADBLUE', 60), (b'AdBlue', 60), (b'adblue', 55),
+            (b'UREA', 55), (b'Urea', 50), (b'urea', 45),
+            (b'DENOX', 55), (b'DeNOx', 55), (b'denox', 50),
+            (b'SCR_', 55), (b'_SCR', 55),
+            (b'NOX_', 50), (b'_NOX', 50), (b'NOx_', 50),
+            (b'NOX_SENSOR', 60), (b'NOXSENSOR', 60),
+            (b'AFTERTREATMENT', 50), (b'Aftertreatment', 45),
+            (b'REDUCTANT', 55), (b'Reductant', 50),
+            (b'NH3', 50),
+            (b'BLUETEC', 60), (b'BlueTec', 55),
         ]
         
         for marker, score in adblue_text_markers:
             count = file_data.count(marker)
             if count > 0:
                 idx = file_data.find(marker)
-                # Verify word boundary for short markers
                 if len(marker) <= 4:
                     before = file_data[max(0,idx-1):idx]
                     after = file_data[idx+len(marker):idx+len(marker)+1]
@@ -1369,33 +1363,74 @@ class ECUAnalyzer:
                 break
         
         # =================================================================
-        # METHOD 2: String patterns from extracted text
+        # METHOD 2: String patterns
         # =================================================================
         adblue_strings = [
             "ADBLUE", "AD_BLUE", "BLUE_TEC", "BLUETEC",
             "SCR_CAT", "SCR_TEMP", "SCR_EFF", "SCR_SYSTEM",
             "UREA_INJ", "UREA_DOS", "NOX_SENSOR", "NOXSENSOR",
-            "DENOXTRONIC", "AFTERTREATMENT", "REDUCTANT",
-            "SELECTIVE_CATALYTIC"
+            "DENOXTRONIC", "AFTERTREATMENT", "REDUCTANT"
         ]
         
         for s in adblue_strings:
             if s in strings_upper:
                 indicators.append(f"String: {s}")
-                confidence_score += 35
+                confidence_score += 40
                 break
         
         # =================================================================
-        # METHOD 3: SCR-specific map patterns
-        # Look for NOx sensor calibration blocks (often have specific ranges)
-        # NOx values typically range 0-3000 ppm
+        # METHOD 3: Truck ECU inference for SCR
+        # Trucks meeting Euro 5/6 emissions typically have SCR
+        # Known truck ECU types get inference-based detection
         # =================================================================
-        # Check for NOx-related value ranges (simplified)
+        ecu_type = self.results.get("ecu_type", "") or ""
+        manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
+        
+        # Check for truck-specific brands in the binary
+        truck_brands = [
+            (b'FUSO', "FUSO truck"),
+            (b'HINO', "Hino truck"),
+            (b'MAN', "MAN truck"),
+            (b'SCANIA', "Scania truck"),
+            (b'VOLVO', "Volvo truck"),
+            (b'IVECO', "Iveco truck"),
+            (b'ACTROS', "Mercedes Actros"),
+            (b'ATEGO', "Mercedes Atego"),
+        ]
+        
+        truck_found = None
+        for brand, desc in truck_brands:
+            if re.search(brand + rb'\b', file_data):  # Word boundary
+                truck_found = desc
+                break
+        
+        # Known truck ECU types that have SCR
+        truck_ecus_with_scr = [
+            "CM2150", "CM2250", "CM2350",  # Cummins
+            "EDC17CP52", "EDC17CV41", "EDC17CV44", "EDC17CV54",  # Bosch truck
+            "EDC17C49", "EDC17C54",  # Bosch commercial
+        ]
+        
+        has_truck_ecu = any(tecu in ecu_upper for tecu in truck_ecus_with_scr)
+        is_cummins = "CUMMINS" in mfr_upper or "CM2150" in ecu_upper or "CM2250" in ecu_upper
+        
+        if confidence_score == 0:
+            if truck_found:
+                indicators.append(f"Truck brand: {truck_found}")
+                confidence_score += 35  # Medium-high for truck detection
+            if has_truck_ecu:
+                indicators.append(f"Truck ECU with SCR: {ecu_type}")
+                confidence_score += 40
+            if is_cummins:
+                indicators.append("Cummins ECU (SCR standard)")
+                confidence_score += 45
         
         # Determine confidence level
         if confidence_score >= 55:
             confidence = "high"
-        elif confidence_score >= 40:
+        elif confidence_score >= 35:
             confidence = "medium"
         elif confidence_score > 0:
             confidence = "low"
