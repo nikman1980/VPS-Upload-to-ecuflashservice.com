@@ -678,19 +678,19 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         detected_services = display_info.get('available_services', [])
         detected_map_keys = set(s.get('service_id', '') for s in detected_services)
         
-        # Define all possible services with pricing
+        # Define all possible services with CORRECT pricing (matching SERVICE_PRICING)
         all_services = {
-            "dpf_off": {"service_name": "DPF/FAP Removal", "price": 50.0},
-            "adblue_off": {"service_name": "AdBlue/SCR Removal", "price": 60.0},
-            "egr_off": {"service_name": "EGR Removal", "price": 40.0},
-            "dtc_off": {"service_name": "DTC/Error Code Removal", "price": 30.0},
-            "lambda_off": {"service_name": "Lambda/O2 Sensor Removal", "price": 35.0},
-            "cat_off": {"service_name": "Catalyst Removal", "price": 45.0},
-            "speed_limiter": {"service_name": "Speed Limiter Removal", "price": 40.0},
-            "start_stop_off": {"service_name": "Start/Stop Disable", "price": 25.0},
-            "swirl_off": {"service_name": "Swirl Flaps Removal", "price": 35.0},
-            "hot_start": {"service_name": "Hot Start Fix / Immo", "price": 80.0},
-            "stage_tuning": {"service_name": "Stage 1/2 Tuning", "price": 150.0},
+            "dpf_off": {"service_name": "DPF/FAP Removal", "price": 248.0},
+            "adblue_off": {"service_name": "AdBlue/SCR Removal", "price": 698.0},
+            "egr_off": {"service_name": "EGR Removal", "price": 50.0},
+            "dtc_off": {"service_name": "DTC/Error Code Removal", "price": 50.0},
+            "lambda_off": {"service_name": "Lambda/O2 Sensor Removal", "price": 50.0},
+            "cat_off": {"service_name": "Catalyst Removal", "price": 50.0},
+            "speed_limiter": {"service_name": "Speed Limiter Removal", "price": 50.0},
+            "start_stop_off": {"service_name": "Start/Stop Disable", "price": 50.0},
+            "swirl_off": {"service_name": "Swirl Flaps Removal", "price": 50.0},
+            "hot_start": {"service_name": "Hot Start Fix / Immo", "price": 70.0},
+            "stage_tuning": {"service_name": "Stage 1/2 Tuning", "price": 248.0},
         }
         
         # Build available options ONLY from detected services
