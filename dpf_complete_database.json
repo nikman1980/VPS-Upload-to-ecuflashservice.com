@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T22:51:03.757305",
+  "last_update": "2025-12-26T22:56:19.143451",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -49517,6 +49517,2636 @@
                   {
                     "id": "19495",
                     "name": "Bosch M5.9.2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Skoda": {
+        "id": "151",
+        "models": {
+          "Citigo": {
+            "id": "2618",
+            "engines": {
+              "1.0L 12V": {
+                "id": "11588",
+                "ecus": [
+                  {
+                    "id": "20052",
+                    "name": "Bosch ME17.5.20"
+                  },
+                  {
+                    "id": "20051",
+                    "name": "Bosch ME17.5.24"
+                  }
+                ]
+              }
+            }
+          },
+          "Fabia": {
+            "id": "2066",
+            "engines": {
+              "1.0L 12V": {
+                "id": "12163",
+                "ecus": [
+                  {
+                    "id": "20051",
+                    "name": "Bosch ME17.5.24"
+                  }
+                ]
+              },
+              "1.2 TDI": {
+                "id": "11136",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              },
+              "1.2 TSI - TFS - FSI - TFSI - i": {
+                "id": "10894",
+                "ecus": [
+                  {
+                    "id": "19742",
+                    "name": "Siemens/Continental Simos 10"
+                  },
+                  {
+                    "id": "20058",
+                    "name": "Siemens/Continental Simos 11"
+                  },
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  },
+                  {
+                    "id": "19740",
+                    "name": "Siemens/Continental Simos 9"
+                  }
+                ]
+              },
+              "1.4 TDI PD - CR": {
+                "id": "9761",
+                "ecus": [
+                  {
+                    "id": "19410",
+                    "name": "Bosch EDC15P"
+                  },
+                  {
+                    "id": "19464",
+                    "name": "Bosch EDC17U01"
+                  },
+                  {
+                    "id": "19772",
+                    "name": "Bosch EDC17U05"
+                  },
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              },
+              "1.4 TSI - TFS - FSI - TFSI - i": {
+                "id": "10278",
+                "ecus": [
+                  {
+                    "id": "19520",
+                    "name": "Bosch ME7.5.10"
+                  },
+                  {
+                    "id": "19521",
+                    "name": "Bosch ME7.5.20"
+                  },
+                  {
+                    "id": "19539",
+                    "name": "Bosch MED17.1.6"
+                  },
+                  {
+                    "id": "19545",
+                    "name": "Bosch MED17.5.1"
+                  },
+                  {
+                    "id": "19547",
+                    "name": "Bosch MED17.5.20"
+                  },
+                  {
+                    "id": "19810",
+                    "name": "Bosch MED17.5.21"
+                  },
+                  {
+                    "id": "19548",
+                    "name": "Bosch MED17.5.5"
+                  },
+                  {
+                    "id": "20031",
+                    "name": "Bosch MED7.5.10"
+                  },
+                  {
+                    "id": "19851",
+                    "name": "Bosch MED7.5.11"
+                  },
+                  {
+                    "id": "19626",
+                    "name": "Marelli IAW4HV"
+                  },
+                  {
+                    "id": "19627",
+                    "name": "Marelli IAW4LV"
+                  },
+                  {
+                    "id": "19628",
+                    "name": "Marelli IAW4MV"
+                  },
+                  {
+                    "id": "19630",
+                    "name": "Marelli IAW4TV"
+                  },
+                  {
+                    "id": "19831",
+                    "name": "Marelli IAW7GV"
+                  }
+                ]
+              },
+              "1.5 TSI": {
+                "id": "12813",
+                "ecus": [
+                  {
+                    "id": "20209",
+                    "name": "Bosch MG1CS011"
+                  }
+                ]
+              },
+              "1.6 TDI CR": {
+                "id": "9762",
+                "ecus": [
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  },
+                  {
+                    "id": "19695",
+                    "name": "Siemens/Continental PCR2.1"
+                  }
+                ]
+              },
+              "1.6 TSI - TFS - FSI - TFSI - i": {
+                "id": "10307",
+                "ecus": [
+                  {
+                    "id": "19521",
+                    "name": "Bosch ME7.5.20"
+                  },
+                  {
+                    "id": "20084",
+                    "name": "Bosch ME7.5.30"
+                  },
+                  {
+                    "id": "19558",
+                    "name": "Bosch MED9.5.10"
+                  },
+                  {
+                    "id": "19626",
+                    "name": "Marelli IAW4HV"
+                  },
+                  {
+                    "id": "19630",
+                    "name": "Marelli IAW4TV"
+                  },
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  },
+                  {
+                    "id": "19737",
+                    "name": "Siemens/Continental Simos 7"
+                  }
+                ]
+              },
+              "1.9 TDI - V - PD": {
+                "id": "9765",
+                "ecus": [
+                  {
+                    "id": "19410",
+                    "name": "Bosch EDC15P"
+                  },
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  },
+                  {
+                    "id": "19464",
+                    "name": "Bosch EDC17U01"
+                  },
+                  {
+                    "id": "19772",
+                    "name": "Bosch EDC17U05"
+                  }
+                ]
+              },
+              "2.0 TDI PD - CR": {
+                "id": "10132",
+                "ecus": [
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  },
+                  {
+                    "id": "19443",
+                    "name": "Bosch EDC17C46"
+                  },
+                  {
+                    "id": "19780",
+                    "name": "Bosch EDC17C54"
+                  },
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "19973",
+                    "name": "Bosch EDC17C74"
+                  },
+                  {
+                    "id": "19451",
+                    "name": "Bosch EDC17CP14"
+                  },
+                  {
+                    "id": "19453",
+                    "name": "Bosch EDC17CP20"
+                  }
+                ]
+              },
+              "2.0i": {
+                "id": "9769",
+                "ecus": [
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Felicia": {
+            "id": "2067",
+            "engines": {
+              "1.2i": {
+                "id": "9777",
+                "ecus": [
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  },
+                  {
+                    "id": "19740",
+                    "name": "Siemens/Continental Simos 9"
+                  }
+                ]
+              },
+              "1.4 i": {
+                "id": "9779",
+                "ecus": [
+                  {
+                    "id": "19520",
+                    "name": "Bosch ME7.5.10"
+                  }
+                ]
+              },
+              "1.4 TDI PD": {
+                "id": "9770",
+                "ecus": [
+                  {
+                    "id": "19410",
+                    "name": "Bosch EDC15P"
+                  },
+                  {
+                    "id": "19464",
+                    "name": "Bosch EDC17U01"
+                  },
+                  {
+                    "id": "19772",
+                    "name": "Bosch EDC17U05"
+                  }
+                ]
+              },
+              "1.6 TDI CR": {
+                "id": "9771",
+                "ecus": [
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  },
+                  {
+                    "id": "19695",
+                    "name": "Siemens/Continental PCR2.1"
+                  }
+                ]
+              },
+              "1.6i": {
+                "id": "9776",
+                "ecus": [
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  },
+                  {
+                    "id": "19737",
+                    "name": "Siemens/Continental Simos 7"
+                  }
+                ]
+              },
+              "1.9 TDI PD": {
+                "id": "9774",
+                "ecus": [
+                  {
+                    "id": "19410",
+                    "name": "Bosch EDC15P"
+                  },
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  }
+                ]
+              },
+              "2.0i": {
+                "id": "9780",
+                "ecus": [
+                  {
+                    "id": "19519",
+                    "name": "Bosch ME7.5"
+                  }
+                ]
+              },
+              "2.0L TDI PD - CR": {
+                "id": "10131",
+                "ecus": [
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19443",
+                    "name": "Bosch EDC17C46"
+                  },
+                  {
+                    "id": "19780",
+                    "name": "Bosch EDC17C54"
+                  },
+                  {
+                    "id": "19451",
+                    "name": "Bosch EDC17CP14"
+                  },
+                  {
+                    "id": "19453",
+                    "name": "Bosch EDC17CP20"
+                  }
+                ]
+              }
+            }
+          },
+          "Kamiq": {
+            "id": "3153",
+            "engines": {
+              "1.5 TSI": {
+                "id": "12814",
+                "ecus": [
+                  {
+                    "id": "20209",
+                    "name": "Bosch MG1CS011"
+                  }
+                ]
+              },
+              "1.6 TDI": {
+                "id": "13108",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Kodiaq": {
+            "id": "2954",
+            "engines": {
+              "1.5 TSI": {
+                "id": "12816",
+                "ecus": [
+                  {
+                    "id": "20209",
+                    "name": "Bosch MG1CS011"
+                  }
+                ]
+              },
+              "2.0 TDI CR": {
+                "id": "12527",
+                "ecus": [
+                  {
+                    "id": "20156",
+                    "name": "Bosch MD1CSxxx"
+                  }
+                ]
+              },
+              "2.0 TSI- TFSI": {
+                "id": "12300",
+                "ecus": [
+                  {
+                    "id": "20211",
+                    "name": "Bosch MG1CS001"
+                  },
+                  {
+                    "id": "20184",
+                    "name": "Siemens/Continental Simos 19.xx"
+                  }
+                ]
+              }
+            }
+          },
+          "Octavia": {
+            "id": "2069",
+            "engines": {
+              "1.2 TFSI": {
+                "id": "10895",
+                "ecus": [
+                  {
+                    "id": "19742",
+                    "name": "Siemens/Continental Simos 10"
+                  }
+                ]
+              },
+              "1.4 TSI - TFS - FSI - TFSI - i": {
+                "id": "10276",
+                "ecus": [
+                  {
+                    "id": "19520",
+                    "name": "Bosch ME7.5.10"
+                  },
+                  {
+                    "id": "19539",
+                    "name": "Bosch MED17.1.6"
+                  },
+                  {
+                    "id": "19545",
+                    "name": "Bosch MED17.5.1"
+                  },
+                  {
+                    "id": "19547",
+                    "name": "Bosch MED17.5.20"
+                  },
+                  {
+                    "id": "19810",
+                    "name": "Bosch MED17.5.21"
+                  },
+                  {
+                    "id": "20044",
+                    "name": "Bosch MED17.5.25"
+                  },
+                  {
+                    "id": "19548",
+                    "name": "Bosch MED17.5.5"
+                  },
+                  {
+                    "id": "19626",
+                    "name": "Marelli IAW4HV"
+                  },
+                  {
+                    "id": "19630",
+                    "name": "Marelli IAW4TV"
+                  },
+                  {
+                    "id": "19831",
+                    "name": "Marelli IAW7GV"
+                  }
+                ]
+              },
+              "1.5 TSI": {
+                "id": "12817",
+                "ecus": [
+                  {
+                    "id": "20209",
+                    "name": "Bosch MG1CS011"
+                  }
+                ]
+              },
+              "1.6 TDI CR": {
+                "id": "9790",
+                "ecus": [
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  },
+                  {
+                    "id": "19695",
+                    "name": "Siemens/Continental PCR2.1"
+                  }
+                ]
+              },
+              "1.6 TSI - TFS - FSI - TFSI - i": {
+                "id": "9796",
+                "ecus": [
+                  {
+                    "id": "19558",
+                    "name": "Bosch MED9.5.10"
+                  },
+                  {
+                    "id": "19626",
+                    "name": "Marelli IAW4HV"
+                  },
+                  {
+                    "id": "19630",
+                    "name": "Marelli IAW4TV"
+                  },
+                  {
+                    "id": "19831",
+                    "name": "Marelli IAW7GV"
+                  },
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  },
+                  {
+                    "id": "19737",
+                    "name": "Siemens/Continental Simos 7"
+                  }
+                ]
+              },
+              "1.8 TSI - TFS - FSI - TFSI - i": {
+                "id": "9797",
+                "ecus": [
+                  {
+                    "id": "19495",
+                    "name": "Bosch M5.9.2"
+                  },
+                  {
+                    "id": "19519",
+                    "name": "Bosch ME7.5"
+                  },
+                  {
+                    "id": "19544",
+                    "name": "Bosch MED17.5"
+                  },
+                  {
+                    "id": "19995",
+                    "name": "Siemens/Continental Simos 12.xx"
+                  },
+                  {
+                    "id": "19996",
+                    "name": "Siemens/Continental Simos 18.xx"
+                  }
+                ]
+              },
+              "1.9 TDI - V - PD": {
+                "id": "9791",
+                "ecus": [
+                  {
+                    "id": "19410",
+                    "name": "Bosch EDC15P"
+                  },
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  }
+                ]
+              },
+              "2.0 TDI PD - CR": {
+                "id": "9793",
+                "ecus": [
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  },
+                  {
+                    "id": "19443",
+                    "name": "Bosch EDC17C46"
+                  },
+                  {
+                    "id": "19780",
+                    "name": "Bosch EDC17C54"
+                  },
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "19973",
+                    "name": "Bosch EDC17C74"
+                  },
+                  {
+                    "id": "19451",
+                    "name": "Bosch EDC17CP14"
+                  },
+                  {
+                    "id": "19453",
+                    "name": "Bosch EDC17CP20"
+                  },
+                  {
+                    "id": "20032",
+                    "name": "Bosch EDC17CP74"
+                  },
+                  {
+                    "id": "20215",
+                    "name": "Bosch MD1CS004"
+                  },
+                  {
+                    "id": "19696",
+                    "name": "Siemens/Continental PPD1.1"
+                  },
+                  {
+                    "id": "19697",
+                    "name": "Siemens/Continental PPD1.2"
+                  },
+                  {
+                    "id": "19698",
+                    "name": "Siemens/Continental PPD1.3"
+                  },
+                  {
+                    "id": "19699",
+                    "name": "Siemens/Continental PPD1.5"
+                  }
+                ]
+              },
+              "2.0 TSI - TFS - FSI - TFSI - i": {
+                "id": "9798",
+                "ecus": [
+                  {
+                    "id": "19513",
+                    "name": "Bosch ME7.1.1"
+                  },
+                  {
+                    "id": "19519",
+                    "name": "Bosch ME7.5"
+                  },
+                  {
+                    "id": "19537",
+                    "name": "Bosch MED17.1"
+                  },
+                  {
+                    "id": "19544",
+                    "name": "Bosch MED17.5"
+                  },
+                  {
+                    "id": "19546",
+                    "name": "Bosch MED17.5.2"
+                  },
+                  {
+                    "id": "19557",
+                    "name": "Bosch MED9.1"
+                  },
+                  {
+                    "id": "19558",
+                    "name": "Bosch MED9.5.10"
+                  },
+                  {
+                    "id": "20211",
+                    "name": "Bosch MG1CS001"
+                  },
+                  {
+                    "id": "20208",
+                    "name": "Bosch MG1CS111"
+                  },
+                  {
+                    "id": "19996",
+                    "name": "Siemens/Continental Simos 18.xx"
+                  },
+                  {
+                    "id": "20184",
+                    "name": "Siemens/Continental Simos 19.xx"
+                  },
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Rapid": {
+            "id": "2300",
+            "engines": {
+              "1.2 TFSI": {
+                "id": "10896",
+                "ecus": [
+                  {
+                    "id": "20044",
+                    "name": "Bosch MED17.5.25"
+                  },
+                  {
+                    "id": "19742",
+                    "name": "Siemens/Continental Simos 10"
+                  }
+                ]
+              },
+              "1.4 TDI": {
+                "id": "12377",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              },
+              "1.6i": {
+                "id": "10904",
+                "ecus": [
+                  {
+                    "id": "19831",
+                    "name": "Marelli IAW7GV"
+                  },
+                  {
+                    "id": "20158",
+                    "name": "Siemens/Continental Simos 15.xx"
+                  }
+                ]
+              }
+            }
+          },
+          "Rumster": {
+            "id": "2301",
+            "engines": {
+              "1.2 TDI": {
+                "id": "11137",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              },
+              "1.2 TFSI - i": {
+                "id": "10897",
+                "ecus": [
+                  {
+                    "id": "19742",
+                    "name": "Siemens/Continental Simos 10"
+                  },
+                  {
+                    "id": "19740",
+                    "name": "Siemens/Continental Simos 9"
+                  }
+                ]
+              },
+              "1.4i": {
+                "id": "10967",
+                "ecus": [
+                  {
+                    "id": "19627",
+                    "name": "Marelli IAW4LV"
+                  },
+                  {
+                    "id": "19628",
+                    "name": "Marelli IAW4MV"
+                  }
+                ]
+              },
+              "1.6i": {
+                "id": "10905",
+                "ecus": [
+                  {
+                    "id": "19831",
+                    "name": "Marelli IAW7GV"
+                  }
+                ]
+              }
+            }
+          },
+          "Scala": {
+            "id": "3154",
+            "engines": {
+              "1.5 TSI": {
+                "id": "12818",
+                "ecus": [
+                  {
+                    "id": "20209",
+                    "name": "Bosch MG1CS011"
+                  }
+                ]
+              },
+              "1.6 TDI": {
+                "id": "13110",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Superb": {
+            "id": "2070",
+            "engines": {
+              "1.5 TSI": {
+                "id": "12819",
+                "ecus": [
+                  {
+                    "id": "20209",
+                    "name": "Bosch MG1CS011"
+                  }
+                ]
+              },
+              "1.8 TSI - TFS - FSI - TFSI - i": {
+                "id": "9805",
+                "ecus": [
+                  {
+                    "id": "19519",
+                    "name": "Bosch ME7.5"
+                  },
+                  {
+                    "id": "19544",
+                    "name": "Bosch MED17.5"
+                  },
+                  {
+                    "id": "19996",
+                    "name": "Siemens/Continental Simos 18.xx"
+                  }
+                ]
+              },
+              "1.9 TDI - V - PD": {
+                "id": "9799",
+                "ecus": [
+                  {
+                    "id": "19410",
+                    "name": "Bosch EDC15P"
+                  },
+                  {
+                    "id": "19407",
+                    "name": "Bosch EDC15V"
+                  },
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  }
+                ]
+              },
+              "2.0 TDI PD - CR": {
+                "id": "9802",
+                "ecus": [
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  },
+                  {
+                    "id": "19443",
+                    "name": "Bosch EDC17C46"
+                  },
+                  {
+                    "id": "19780",
+                    "name": "Bosch EDC17C54"
+                  },
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "19973",
+                    "name": "Bosch EDC17C74"
+                  },
+                  {
+                    "id": "19451",
+                    "name": "Bosch EDC17CP14"
+                  },
+                  {
+                    "id": "19453",
+                    "name": "Bosch EDC17CP20"
+                  },
+                  {
+                    "id": "20032",
+                    "name": "Bosch EDC17CP74"
+                  },
+                  {
+                    "id": "20215",
+                    "name": "Bosch MD1CS004"
+                  },
+                  {
+                    "id": "19696",
+                    "name": "Siemens/Continental PPD1.1"
+                  },
+                  {
+                    "id": "19697",
+                    "name": "Siemens/Continental PPD1.2"
+                  },
+                  {
+                    "id": "19698",
+                    "name": "Siemens/Continental PPD1.3"
+                  },
+                  {
+                    "id": "19699",
+                    "name": "Siemens/Continental PPD1.5"
+                  }
+                ]
+              },
+              "2.0 TSI - TFS - FSI - TFSI - i": {
+                "id": "10231",
+                "ecus": [
+                  {
+                    "id": "19513",
+                    "name": "Bosch ME7.1.1"
+                  },
+                  {
+                    "id": "19519",
+                    "name": "Bosch ME7.5"
+                  },
+                  {
+                    "id": "19537",
+                    "name": "Bosch MED17.1"
+                  },
+                  {
+                    "id": "19544",
+                    "name": "Bosch MED17.5"
+                  },
+                  {
+                    "id": "19546",
+                    "name": "Bosch MED17.5.2"
+                  },
+                  {
+                    "id": "19557",
+                    "name": "Bosch MED9.1"
+                  },
+                  {
+                    "id": "19558",
+                    "name": "Bosch MED9.5.10"
+                  },
+                  {
+                    "id": "20211",
+                    "name": "Bosch MG1CS001"
+                  },
+                  {
+                    "id": "20208",
+                    "name": "Bosch MG1CS111"
+                  },
+                  {
+                    "id": "19996",
+                    "name": "Siemens/Continental Simos 18.xx"
+                  },
+                  {
+                    "id": "20184",
+                    "name": "Siemens/Continental Simos 19.xx"
+                  },
+                  {
+                    "id": "19734",
+                    "name": "Siemens/Continental Simos 3"
+                  }
+                ]
+              },
+              "2.5 TDI PD": {
+                "id": "9803",
+                "ecus": [
+                  {
+                    "id": "19408",
+                    "name": "Bosch EDC15VM+"
+                  },
+                  {
+                    "id": "19434",
+                    "name": "Bosch EDC16U1"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  },
+                  {
+                    "id": "19436",
+                    "name": "Bosch EDC16U34"
+                  }
+                ]
+              },
+              "2.8 30V": {
+                "id": "9807",
+                "ecus": [
+                  {
+                    "id": "19513",
+                    "name": "Bosch ME7.1.1"
+                  }
+                ]
+              }
+            }
+          },
+          "Yeti": {
+            "id": "2071",
+            "engines": {
+              "1.2 TFSI": {
+                "id": "10898",
+                "ecus": [
+                  {
+                    "id": "19742",
+                    "name": "Siemens/Continental Simos 10"
+                  }
+                ]
+              },
+              "1.4 TDI PD": {
+                "id": "10151",
+                "ecus": [
+                  {
+                    "id": "19464",
+                    "name": "Bosch EDC17U01"
+                  },
+                  {
+                    "id": "19772",
+                    "name": "Bosch EDC17U05"
+                  }
+                ]
+              },
+              "1.4 TSI - TFS - FSI - TFSI - i": {
+                "id": "10275",
+                "ecus": [
+                  {
+                    "id": "19539",
+                    "name": "Bosch MED17.1.6"
+                  },
+                  {
+                    "id": "19545",
+                    "name": "Bosch MED17.5.1"
+                  },
+                  {
+                    "id": "19547",
+                    "name": "Bosch MED17.5.20"
+                  },
+                  {
+                    "id": "19810",
+                    "name": "Bosch MED17.5.21"
+                  },
+                  {
+                    "id": "20044",
+                    "name": "Bosch MED17.5.25"
+                  },
+                  {
+                    "id": "19548",
+                    "name": "Bosch MED17.5.5"
+                  }
+                ]
+              },
+              "1.6 TDI CR": {
+                "id": "10142",
+                "ecus": [
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "19695",
+                    "name": "Siemens/Continental PCR2.1"
+                  }
+                ]
+              },
+              "1.6 TSI - TFS - FSI - TFSI - i": {
+                "id": "10306",
+                "ecus": [
+                  {
+                    "id": "19546",
+                    "name": "Bosch MED17.5.2"
+                  },
+                  {
+                    "id": "19547",
+                    "name": "Bosch MED17.5.20"
+                  },
+                  {
+                    "id": "19810",
+                    "name": "Bosch MED17.5.21"
+                  },
+                  {
+                    "id": "20045",
+                    "name": "Bosch MED17.5.24"
+                  },
+                  {
+                    "id": "20044",
+                    "name": "Bosch MED17.5.25"
+                  },
+                  {
+                    "id": "20054",
+                    "name": "Bosch MED17.5.26"
+                  },
+                  {
+                    "id": "19558",
+                    "name": "Bosch MED9.5.10"
+                  }
+                ]
+              },
+              "2.0 TDI CR": {
+                "id": "9808",
+                "ecus": [
+                  {
+                    "id": "19443",
+                    "name": "Bosch EDC17C46"
+                  },
+                  {
+                    "id": "19780",
+                    "name": "Bosch EDC17C54"
+                  },
+                  {
+                    "id": "19781",
+                    "name": "Bosch EDC17C64"
+                  },
+                  {
+                    "id": "19973",
+                    "name": "Bosch EDC17C74"
+                  },
+                  {
+                    "id": "19451",
+                    "name": "Bosch EDC17CP14"
+                  },
+                  {
+                    "id": "19453",
+                    "name": "Bosch EDC17CP20"
+                  },
+                  {
+                    "id": "20032",
+                    "name": "Bosch EDC17CP74"
+                  },
+                  {
+                    "id": "20215",
+                    "name": "Bosch MD1CS004"
+                  }
+                ]
+              },
+              "2.0 TSI - TFS - FSI - TFSI - i": {
+                "id": "10246",
+                "ecus": [
+                  {
+                    "id": "19537",
+                    "name": "Bosch MED17.1"
+                  },
+                  {
+                    "id": "19544",
+                    "name": "Bosch MED17.5"
+                  },
+                  {
+                    "id": "19546",
+                    "name": "Bosch MED17.5.2"
+                  },
+                  {
+                    "id": "19557",
+                    "name": "Bosch MED9.1"
+                  },
+                  {
+                    "id": "19558",
+                    "name": "Bosch MED9.5.10"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Smart": {
+        "id": "167",
+        "models": {
+          "City - Coupe & Cabrio": {
+            "id": "2177",
+            "engines": {
+              "0.6 Turbo": {
+                "id": "10835",
+                "ecus": [
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.8 CDI": {
+                "id": "10427",
+                "ecus": [
+                  {
+                    "id": "19771",
+                    "name": "Bosch EDC15C5"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.0 Turbo": {
+                "id": "10943",
+                "ecus": [
+                  {
+                    "id": "19524",
+                    "name": "Bosch ME7.7.0"
+                  }
+                ]
+              }
+            }
+          },
+          "Crossblade": {
+            "id": "2176",
+            "engines": {
+              "0.7 Turbo": {
+                "id": "10833",
+                "ecus": [
+                  {
+                    "id": "19939",
+                    "name": "Bosch MEG1.0"
+                  },
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.8 CDI": {
+                "id": "10428",
+                "ecus": [
+                  {
+                    "id": "19771",
+                    "name": "Bosch EDC15C5"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.0 Turbo": {
+                "id": "10944",
+                "ecus": [
+                  {
+                    "id": "19524",
+                    "name": "Bosch ME7.7.0"
+                  }
+                ]
+              }
+            }
+          },
+          "Forfour": {
+            "id": "2174",
+            "engines": {
+              "0.6 Turbo": {
+                "id": "10828",
+                "ecus": [
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.7 Turbo": {
+                "id": "10829",
+                "ecus": [
+                  {
+                    "id": "19939",
+                    "name": "Bosch MEG1.0"
+                  },
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.8 CDI": {
+                "id": "10429",
+                "ecus": [
+                  {
+                    "id": "19771",
+                    "name": "Bosch EDC15C5"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "0.9 Turbo": {
+                "id": "11906",
+                "ecus": [
+                  {
+                    "id": "20092",
+                    "name": "Bosch ME17.9.20"
+                  }
+                ]
+              },
+              "1.0 Turbo": {
+                "id": "10945",
+                "ecus": [
+                  {
+                    "id": "19524",
+                    "name": "Bosch ME7.7.0"
+                  }
+                ]
+              },
+              "1.5 CDI": {
+                "id": "10587",
+                "ecus": [
+                  {
+                    "id": "19771",
+                    "name": "Bosch EDC15C5"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              }
+            }
+          },
+          "Fortwo": {
+            "id": "2173",
+            "engines": {
+              "0.6 Turbo": {
+                "id": "10830",
+                "ecus": [
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.7 Turbo": {
+                "id": "10831",
+                "ecus": [
+                  {
+                    "id": "19939",
+                    "name": "Bosch MEG1.0"
+                  },
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.8 CDI": {
+                "id": "10426",
+                "ecus": [
+                  {
+                    "id": "19771",
+                    "name": "Bosch EDC15C5"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "0.9 Turbo": {
+                "id": "11907",
+                "ecus": [
+                  {
+                    "id": "20092",
+                    "name": "Bosch ME17.9.20"
+                  }
+                ]
+              },
+              "1.0 Turbo": {
+                "id": "10946",
+                "ecus": [
+                  {
+                    "id": "19524",
+                    "name": "Bosch ME7.7.0"
+                  }
+                ]
+              }
+            }
+          },
+          "Roadster": {
+            "id": "2175",
+            "engines": {
+              "0.7 Turbo": {
+                "id": "10832",
+                "ecus": [
+                  {
+                    "id": "19939",
+                    "name": "Bosch MEG1.0"
+                  },
+                  {
+                    "id": "19940",
+                    "name": "Bosch MEG1.1"
+                  }
+                ]
+              },
+              "0.8 CDI": {
+                "id": "10430",
+                "ecus": [
+                  {
+                    "id": "19771",
+                    "name": "Bosch EDC15C5"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "1.0 Turbo": {
+                "id": "10947",
+                "ecus": [
+                  {
+                    "id": "19524",
+                    "name": "Bosch ME7.7.0"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Ssang Yong": {
+        "id": "152",
+        "models": {
+          "Actyon": {
+            "id": "2072",
+            "engines": {
+              "2.0 Xdi": {
+                "id": "9809",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              },
+              "2.2L e-XDi": {
+                "id": "12061",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Actyon Sports": {
+            "id": "2073",
+            "engines": {
+              "2.0 Xdi": {
+                "id": "9812",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              },
+              "2.2L e-XDi": {
+                "id": "12060",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Korando": {
+            "id": "2578",
+            "engines": {
+              "2.0 Xdi": {
+                "id": "11529",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              },
+              "2.2L e-XDi": {
+                "id": "12059",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Kyron": {
+            "id": "2074",
+            "engines": {
+              "2.0 Xdi": {
+                "id": "9815",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              }
+            }
+          },
+          "Musso": {
+            "id": "2836",
+            "engines": {
+              "2.2L e-XDi": {
+                "id": "12058",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Rexton": {
+            "id": "2075",
+            "engines": {
+              "2.0 Xdi": {
+                "id": "9818",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              },
+              "2.2L e-XDi": {
+                "id": "12057",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              },
+              "2.7 Xdi": {
+                "id": "9819",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              }
+            }
+          },
+          "Rodius": {
+            "id": "2076",
+            "engines": {
+              "2.7 Xdi": {
+                "id": "9822",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              }
+            }
+          },
+          "Stavic": {
+            "id": "2077",
+            "engines": {
+              "2.0 Xdi": {
+                "id": "9824",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  },
+                  {
+                    "id": "19856",
+                    "name": "Delphi HCF32"
+                  }
+                ]
+              }
+            }
+          },
+          "Tivoli": {
+            "id": "2834",
+            "engines": {
+              "1.6L e-XDi": {
+                "id": "12055",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "XLV": {
+            "id": "2835",
+            "engines": {
+              "1.6L e-XDi": {
+                "id": "12056",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Subaru": {
+        "id": "153",
+        "models": {
+          "Forester": {
+            "id": "2079",
+            "engines": {
+              "2.0 D": {
+                "id": "10850",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "9827",
+                "ecus": [
+                  {
+                    "id": "20081",
+                    "name": "Denso 68HC16"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  },
+                  {
+                    "id": "19853",
+                    "name": "Hitachi"
+                  },
+                  {
+                    "id": "20177",
+                    "name": "Hitachi SH7059"
+                  },
+                  {
+                    "id": "20165",
+                    "name": "Hitachi SH725xx"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "9828",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Impreza": {
+            "id": "2080",
+            "engines": {
+              "1.5L": {
+                "id": "9830",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "1.6L": {
+                "id": "11861",
+                "ecus": [
+                  {
+                    "id": "20081",
+                    "name": "Denso 68HC16"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "10531",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "9832",
+                "ecus": [
+                  {
+                    "id": "20081",
+                    "name": "Denso 68HC16"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  },
+                  {
+                    "id": "19853",
+                    "name": "Hitachi"
+                  },
+                  {
+                    "id": "20177",
+                    "name": "Hitachi SH7059"
+                  },
+                  {
+                    "id": "20165",
+                    "name": "Hitachi SH725xx"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "9833",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              }
+            }
+          },
+          "Legacy": {
+            "id": "2082",
+            "engines": {
+              "2.0 D": {
+                "id": "10532",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "9837",
+                "ecus": [
+                  {
+                    "id": "20081",
+                    "name": "Denso 68HC16"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  },
+                  {
+                    "id": "19853",
+                    "name": "Hitachi"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "9839",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              },
+              "3.0L": {
+                "id": "9840",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              }
+            }
+          },
+          "Levorg": {
+            "id": "3042",
+            "engines": {
+              "2.0L": {
+                "id": "12540",
+                "ecus": [
+                  {
+                    "id": "20177",
+                    "name": "Hitachi SH7059"
+                  },
+                  {
+                    "id": "20165",
+                    "name": "Hitachi SH725xx"
+                  }
+                ]
+              }
+            }
+          },
+          "Outback": {
+            "id": "2083",
+            "engines": {
+              "2.0 D": {
+                "id": "10533",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              },
+              "2.0L": {
+                "id": "11857",
+                "ecus": [
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  },
+                  {
+                    "id": "20177",
+                    "name": "Hitachi SH7059"
+                  },
+                  {
+                    "id": "20165",
+                    "name": "Hitachi SH725xx"
+                  }
+                ]
+              },
+              "2.5L": {
+                "id": "9841",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              },
+              "3.0L": {
+                "id": "9842",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              }
+            }
+          },
+          "Traviq": {
+            "id": "2085",
+            "engines": {
+              "1.9 CDTI": {
+                "id": "10534",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  }
+                ]
+              },
+              "2.0 DTI": {
+                "id": "10535",
+                "ecus": [
+                  {
+                    "id": "19408",
+                    "name": "Bosch EDC15VM+"
+                  }
+                ]
+              },
+              "2.2 i": {
+                "id": "9844",
+                "ecus": [
+                  {
+                    "id": "19746",
+                    "name": "Siemens/Continental Simtec81"
+                  }
+                ]
+              }
+            }
+          },
+          "Trezia": {
+            "id": "2767",
+            "engines": {
+              "1.33 VVT-i": {
+                "id": "11859",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "1.4 D-4D": {
+                "id": "11860",
+                "ecus": [
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  }
+                ]
+              }
+            }
+          },
+          "Tribeca": {
+            "id": "2086",
+            "engines": {
+              "3.0L": {
+                "id": "9846",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "3.6L": {
+                "id": "9845",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "VX": {
+            "id": "2766",
+            "engines": {
+              "2.0L": {
+                "id": "11858",
+                "ecus": [
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              },
+              "2.0L diesel": {
+                "id": "12227",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20043",
+                    "name": "Denso SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "WRX": {
+            "id": "3041",
+            "engines": {
+              "2.0L": {
+                "id": "12539",
+                "ecus": [
+                  {
+                    "id": "20177",
+                    "name": "Hitachi SH7059"
+                  },
+                  {
+                    "id": "20165",
+                    "name": "Hitachi SH725xx"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Suzuki": {
+        "id": "154",
+        "models": {
+          "Aerio": {
+            "id": "2089",
+            "engines": {
+              "1.5 i 16V": {
+                "id": "9852",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Alto": {
+            "id": "2763",
+            "engines": {
+              "1.0L 16V": {
+                "id": "11852",
+                "ecus": [
+                  {
+                    "id": "20137",
+                    "name": "Bosch MED17.9.6.3"
+                  },
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  }
+                ]
+              }
+            }
+          },
+          "Grand Vitara / Vitara": {
+            "id": "2090",
+            "engines": {
+              "1.4T": {
+                "id": "12754",
+                "ecus": [
+                  {
+                    "id": "20267",
+                    "name": "Bosch MG1CS026"
+                  }
+                ]
+              },
+              "1.6 DCI": {
+                "id": "11921",
+                "ecus": [
+                  {
+                    "id": "19979",
+                    "name": "Bosch EDC17C69"
+                  }
+                ]
+              },
+              "1.6 i": {
+                "id": "9855",
+                "ecus": [
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  },
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.9 DCI": {
+                "id": "9853",
+                "ecus": [
+                  {
+                    "id": "19415",
+                    "name": "Bosch EDC16C3"
+                  },
+                  {
+                    "id": "19420",
+                    "name": "Bosch EDC16C36"
+                  }
+                ]
+              },
+              "2.0 DCI": {
+                "id": "9854",
+                "ecus": [
+                  {
+                    "id": "19404",
+                    "name": "Bosch EDC15C2"
+                  },
+                  {
+                    "id": "19979",
+                    "name": "Bosch EDC17C69"
+                  },
+                  {
+                    "id": "19974",
+                    "name": "Siemens/Continental SID801"
+                  },
+                  {
+                    "id": "19975",
+                    "name": "Siemens/Continental SID801A"
+                  }
+                ]
+              },
+              "2.0 i": {
+                "id": "9856",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "2.4 i": {
+                "id": "9857",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "2.7 i V6": {
+                "id": "9858",
+                "ecus": [
+                  {
+                    "id": "20069",
+                    "name": "Hitachi SH7058"
+                  }
+                ]
+              },
+              "3.6i V6": {
+                "id": "10513",
+                "ecus": [
+                  {
+                    "id": "19531",
+                    "name": "Bosch ME9"
+                  }
+                ]
+              }
+            }
+          },
+          "Ignis": {
+            "id": "2091",
+            "engines": {
+              "1.3 MJD": {
+                "id": "10820",
+                "ecus": [
+                  {
+                    "id": "19644",
+                    "name": "Marelli MJD602"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  }
+                ]
+              }
+            }
+          },
+          "Jinmy": {
+            "id": "2222",
+            "engines": {
+              "1.3i": {
+                "id": "12364",
+                "ecus": [
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  },
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.5 DCI": {
+                "id": "10817",
+                "ecus": [
+                  {
+                    "id": "19592",
+                    "name": "Delphi DCM1.2"
+                  },
+                  {
+                    "id": "19590",
+                    "name": "Delphi DDCR"
+                  }
+                ]
+              },
+              "1.6i": {
+                "id": "10585",
+                "ecus": [
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  },
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Kizashi": {
+            "id": "2093",
+            "engines": {
+              "2.4 i": {
+                "id": "9862",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "Liana": {
+            "id": "2221",
+            "engines": {
+              "1.4L 16V DDIS": {
+                "id": "11460",
+                "ecus": [
+                  {
+                    "id": "19590",
+                    "name": "Delphi DDCR"
+                  }
+                ]
+              },
+              "1.6i": {
+                "id": "10584",
+                "ecus": [
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  },
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "S-Cross": {
+            "id": "3140",
+            "engines": {
+              "1.4T": {
+                "id": "12756",
+                "ecus": [
+                  {
+                    "id": "20267",
+                    "name": "Bosch MG1CS026"
+                  }
+                ]
+              }
+            }
+          },
+          "Splash": {
+            "id": "2095",
+            "engines": {
+              "1.2 i": {
+                "id": "9867",
+                "ecus": [
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.3 MJD": {
+                "id": "9868",
+                "ecus": [
+                  {
+                    "id": "19644",
+                    "name": "Marelli MJD602"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19813",
+                    "name": "Marelli MJD8D"
+                  }
+                ]
+              },
+              "2.0 HDI": {
+                "id": "12268",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Swift": {
+            "id": "2094",
+            "engines": {
+              "1.2 i": {
+                "id": "9863",
+                "ecus": [
+                  {
+                    "id": "20082",
+                    "name": "Bosch MED17.8"
+                  },
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  }
+                ]
+              },
+              "1.3 MJD": {
+                "id": "9865",
+                "ecus": [
+                  {
+                    "id": "19644",
+                    "name": "Marelli MJD602"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19808",
+                    "name": "Marelli MJD6JF"
+                  },
+                  {
+                    "id": "19813",
+                    "name": "Marelli MJD8D"
+                  },
+                  {
+                    "id": "19812",
+                    "name": "Marelli MJD8F"
+                  }
+                ]
+              },
+              "1.4T": {
+                "id": "12755",
+                "ecus": [
+                  {
+                    "id": "20267",
+                    "name": "Bosch MG1CS026"
+                  }
+                ]
+              },
+              "1.6 i": {
+                "id": "10583",
+                "ecus": [
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  },
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              }
+            }
+          },
+          "SX4": {
+            "id": "2096",
+            "engines": {
+              "1.3 MJD": {
+                "id": "9869",
+                "ecus": [
+                  {
+                    "id": "19644",
+                    "name": "Marelli MJD602"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  },
+                  {
+                    "id": "19813",
+                    "name": "Marelli MJD8D"
+                  }
+                ]
+              },
+              "1.6 DCI": {
+                "id": "10811",
+                "ecus": [
+                  {
+                    "id": "19418",
+                    "name": "Bosch EDC16C34"
+                  },
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              },
+              "1.6 i": {
+                "id": "9871",
+                "ecus": [
+                  {
+                    "id": "19928",
+                    "name": "Bosch VME17"
+                  },
+                  {
+                    "id": "19887",
+                    "name": "Denso"
+                  }
+                ]
+              },
+              "1.9 DCI": {
+                "id": "9870",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19426",
+                    "name": "Bosch EDC16C9"
+                  }
+                ]
+              },
+              "2.0 DCI": {
+                "id": "10818",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          },
+          "Wagon R": {
+            "id": "2289",
+            "engines": {
+              "1.3 MJD": {
+                "id": "10819",
+                "ecus": [
+                  {
+                    "id": "19644",
+                    "name": "Marelli MJD602"
+                  },
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  }
+                ]
+              }
+            }
+          },
+          "XL7": {
+            "id": "2202",
+            "engines": {
+              "3.6i V6": {
+                "id": "10514",
+                "ecus": [
+                  {
+                    "id": "19531",
+                    "name": "Bosch ME9"
                   }
                 ]
               }
