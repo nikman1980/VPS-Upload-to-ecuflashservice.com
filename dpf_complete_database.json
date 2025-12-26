@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T21:47:06.140158",
+  "last_update": "2025-12-26T21:48:16.895800",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -19550,6 +19550,379 @@
                   {
                     "id": "20164",
                     "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Dodge": {
+        "id": "162",
+        "models": {
+          "Avenger": {
+            "id": "2287",
+            "engines": {
+              "2.8 CRDI": {
+                "id": "10815",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  }
+                ]
+              }
+            }
+          },
+          "Caliber": {
+            "id": "2159",
+            "engines": {
+              "2.0 CRDI": {
+                "id": "10337",
+                "ecus": [
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  }
+                ]
+              },
+              "2.2 CRDI": {
+                "id": "12037",
+                "ecus": [
+                  {
+                    "id": "19800",
+                    "name": "Delphi CRD 2.xx"
+                  }
+                ]
+              },
+              "2.8 CRDI": {
+                "id": "11063",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              }
+            }
+          },
+          "Challenger": {
+            "id": "2293",
+            "engines": {
+              "6.3 V8": {
+                "id": "12404",
+                "ecus": [
+                  {
+                    "id": "20130",
+                    "name": "Continental GPEC-x"
+                  }
+                ]
+              },
+              "6.8 V8": {
+                "id": "10825",
+                "ecus": [
+                  {
+                    "id": "19937",
+                    "name": "Motorola NCG5"
+                  }
+                ]
+              }
+            }
+          },
+          "Dart": {
+            "id": "2849",
+            "engines": {
+              "1.4L Multiair Turbo": {
+                "id": "12091",
+                "ecus": [
+                  {
+                    "id": "19850",
+                    "name": "Marelli MM8Gxх"
+                  }
+                ]
+              }
+            }
+          },
+          "Grand-Caravan": {
+            "id": "2290",
+            "engines": {
+              "3.3 V6": {
+                "id": "10821",
+                "ecus": [
+                  {
+                    "id": "19937",
+                    "name": "Motorola NCG5"
+                  }
+                ]
+              }
+            }
+          },
+          "Journey": {
+            "id": "2160",
+            "engines": {
+              "2.0 CRDI": {
+                "id": "10338",
+                "ecus": [
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  }
+                ]
+              }
+            }
+          },
+          "Nitro": {
+            "id": "2288",
+            "engines": {
+              "2.0 TDI": {
+                "id": "11005",
+                "ecus": [
+                  {
+                    "id": "19435",
+                    "name": "Bosch EDC16U31"
+                  }
+                ]
+              },
+              "2.8 CRDI": {
+                "id": "10816",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  }
+                ]
+              }
+            }
+          },
+          "Promaster": {
+            "id": "2368",
+            "engines": {
+              "3.0 DCI V6": {
+                "id": "11081",
+                "ecus": [
+                  {
+                    "id": "19816",
+                    "name": "Bosch EDC17C79"
+                  }
+                ]
+              }
+            }
+          },
+          "Ram 1500": {
+            "id": "2294",
+            "engines": {
+              "3.0 CDI V6": {
+                "id": "11004",
+                "ecus": [
+                  {
+                    "id": "19979",
+                    "name": "Bosch EDC17C69"
+                  },
+                  {
+                    "id": "19816",
+                    "name": "Bosch EDC17C79"
+                  }
+                ]
+              },
+              "3.6i V6": {
+                "id": "11864",
+                "ecus": [
+                  {
+                    "id": "19937",
+                    "name": "Motorola NCG5"
+                  }
+                ]
+              },
+              "5.7 V8": {
+                "id": "10826",
+                "ecus": [
+                  {
+                    "id": "20130",
+                    "name": "Continental GPEC-x"
+                  },
+                  {
+                    "id": "19937",
+                    "name": "Motorola NCG5"
+                  }
+                ]
+              }
+            }
+          },
+          "Ram 2500 - 3500": {
+            "id": "2291",
+            "engines": {
+              "5.7 V8": {
+                "id": "10823",
+                "ecus": [
+                  {
+                    "id": "20130",
+                    "name": "Continental GPEC-x"
+                  },
+                  {
+                    "id": "19937",
+                    "name": "Motorola NCG5"
+                  }
+                ]
+              },
+              "6.7L TD": {
+                "id": "11614",
+                "ecus": [
+                  {
+                    "id": "20075",
+                    "name": "Motorola / Cummins CM2100"
+                  },
+                  {
+                    "id": "20048",
+                    "name": "Motorola / Cummins CM2200"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20176",
+                    "name": "Motorola / Cummins CM2450"
+                  },
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          },
+          "Sprinter": {
+            "id": "2298",
+            "engines": {
+              "2.7 CRD R5": {
+                "id": "10852",
+                "ecus": [
+                  {
+                    "id": "19404",
+                    "name": "Bosch EDC15C2"
+                  },
+                  {
+                    "id": "19414",
+                    "name": "Bosch EDC16C2"
+                  }
+                ]
+              },
+              "3.0 CRD V6": {
+                "id": "10969",
+                "ecus": [
+                  {
+                    "id": "19428",
+                    "name": "Bosch EDC16CP31"
+                  },
+                  {
+                    "id": "19449",
+                    "name": "Bosch EDC17CP10"
+                  },
+                  {
+                    "id": "19458",
+                    "name": "Bosch EDC17CP46"
+                  }
+                ]
+              }
+            }
+          },
+          "Viper": {
+            "id": "2292",
+            "engines": {
+              "8.4 V10": {
+                "id": "10824",
+                "ecus": [
+                  {
+                    "id": "19937",
+                    "name": "Motorola NCG5"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Dongfeng": {
+        "id": "356",
+        "models": {
+          "Rich": {
+            "id": "2990",
+            "engines": {
+              "2.3 TD": {
+                "id": "12908",
+                "ecus": [
+                  {
+                    "id": "20149",
+                    "name": "Delphi DCM7.1"
+                  }
+                ]
+              },
+              "2.5 TD": {
+                "id": "12909",
+                "ecus": [
+                  {
+                    "id": "20149",
+                    "name": "Delphi DCM7.1"
+                  }
+                ]
+              },
+              "2.8 TDI": {
+                "id": "12403",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          },
+          "SX5": {
+            "id": "3231",
+            "engines": {
+              "1.6L i": {
+                "id": "12995",
+                "ecus": [
+                  {
+                    "id": "19849",
+                    "name": "Marelli MM9GFх"
+                  }
+                ]
+              }
+            }
+          },
+          "T01": {
+            "id": "3228",
+            "engines": {
+              "2.9L TDI": {
+                "id": "12992",
+                "ecus": [
+                  {
+                    "id": "20200",
+                    "name": "Bosch EDC17C63"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "DR EVO": {
+        "id": "431",
+        "models": {
+          "Cross 4": {
+            "id": "3312",
+            "engines": {
+              "2.0 Turbo diesel": {
+                "id": "13168",
+                "ecus": [
+                  {
+                    "id": "20216",
+                    "name": "Bosch MD1CS089"
                   }
                 ]
               }
