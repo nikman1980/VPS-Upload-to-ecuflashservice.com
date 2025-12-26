@@ -1172,7 +1172,7 @@ const NewUploadFlow = () => {
                     <select
                       value={selectedManufacturer?.id || ''}
                       onChange={(e) => {
-                        const mfr = manufacturers.find(m => m.id === parseInt(e.target.value));
+                        const mfr = manufacturers.find(m => String(m.id) === e.target.value);
                         if (mfr) handleManufacturerSelect(mfr);
                       }}
                       className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
