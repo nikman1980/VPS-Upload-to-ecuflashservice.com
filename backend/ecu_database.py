@@ -1,828 +1,257 @@
 """
-ECU Database - Maps vehicles/engines to their ECU types
-
-This module provides ECU information based on:
-- Manufacturer
-- Fuel type (Diesel/Petrol/Hybrid)
-- Engine size/power
-- Model year (when available)
+Professional ECU Database
+=========================
+Comprehensive database of ECU types, manufacturers, and their characteristics.
+Built from research of professional tuning databases (WinOLS, mappacks, tuning forums).
 """
 
-# Comprehensive ECU mapping by manufacturer
-ECU_MAPPING = {
-    # =====================================================================
-    # EUROPEAN MANUFACTURERS
-    # =====================================================================
-    
-    "Audi": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "small": "Bosch EDC17C46",      # 1.6 TDI, 2.0 TDI
-                "medium": "Bosch EDC17CP44",    # 2.0 TDI, 3.0 TDI
-                "large": "Bosch EDC17CP14",     # 3.0 TDI V6, 4.2 TDI V8
-                "modern": "Bosch MD1",          # 2019+
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "small": "Bosch MED17.5.2",     # 1.4 TFSI, 1.8 TFSI
-                "medium": "Bosch MED17.1",      # 2.0 TFSI
-                "large": "Bosch MED17.1.1",     # 3.0 TFSI, 4.0 TFSI
-                "performance": "Bosch MED17.1.62",  # RS models
-                "modern": "Bosch MG1",          # 2019+
-                "simos": "Siemens SIMOS18",     # Some 2.0 TFSI
-            }
-        }
-    },
-    
-    "Volkswagen": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "small": "Bosch EDC17C46",      # 1.6 TDI
-                "medium": "Bosch EDC17C64",     # 2.0 TDI CR
-                "old": "Bosch EDC16",           # Pre-2008
-                "modern": "Bosch MD1",          # 2019+
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "small": "Siemens SIMOS10",     # 1.2 TSI, 1.4 TSI
-                "medium": "Siemens SIMOS18",    # 2.0 TSI Gen3
-                "old": "Bosch ME7.5",           # Pre-2008
-                "modern": "Bosch MG1",          # 2019+
-            }
-        }
-    },
-    
-    "BMW": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "small": "Bosch EDC17C50",      # N47 2.0d
-                "medium": "Bosch EDC17C56",     # N57 3.0d
-                "large": "Bosch EDC17CP45",     # N57 3.0d Quad Turbo
-                "modern": "Bosch MD1",          # B47, B57 2019+
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MSD80/81",
-            "variants": {
-                "small": "Bosch MSD81",         # N43, N13
-                "medium": "Bosch MEVD17.2",     # N55
-                "large": "Bosch MSD85",         # N63 V8
-                "modern": "Bosch MG1",          # B48, B58 2019+
-                "m_series": "Bosch MEVD17.2.G", # M3, M4
-            }
-        }
-    },
-    
-    "Mercedes-Benz": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "small": "Bosch EDC17C66",      # OM651
-                "medium": "Bosch EDC17CP57",    # OM642 V6
-                "modern": "Bosch MD1",          # OM654, OM656
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "small": "Bosch MED17.7.2",     # M270, M274
-                "medium": "Bosch MED17.7.3",    # M276 V6
-                "large": "Bosch MED17.7.5",     # M278 V8
-                "amg": "Bosch MED17.7.8",       # M157 AMG
-                "modern": "Bosch MG1",          # M256, M264
-            }
-        }
-    },
-    
-    "Porsche": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "cayenne": "Bosch EDC17CP44",   # Cayenne Diesel
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "911": "Bosch MED17.1.11",      # 991 911
-                "turbo": "Bosch MED17.1.27",    # 911 Turbo
-                "cayenne": "Bosch MED17.1.6",   # Cayenne
-                "modern": "Bosch MG1",          # 992 911
-            }
-        }
-    },
-    
-    "Volvo": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "d5": "Bosch EDC17CP22",        # D5 5-cyl
-                "d4": "Bosch EDC17C10",         # D4 4-cyl
-                "modern": "Denso",              # VEA engines
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "t5": "Bosch MED17.0",          # T5 5-cyl
-                "t6": "Bosch MED17.0",          # T6 6-cyl
-                "modern": "Denso",              # VEA engines
-            }
-        }
-    },
-    
-    "Jaguar": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "ingenium": "Bosch EDC17C70",   # Ingenium diesel
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "v6": "Bosch MED17.8.31",       # 3.0 V6 SC
-                "v8": "Bosch MED17.8.32",       # 5.0 V8 SC
-                "ingenium": "Bosch MED17.9.8",  # Ingenium petrol
-            }
-        }
-    },
-    
-    "Land Rover": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "tdv6": "Bosch EDC17CP42",      # TDV6
-                "tdv8": "Bosch EDC17CP11",      # TDV8
-                "ingenium": "Bosch EDC17C70",   # Ingenium
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "v6": "Bosch MED17.8.31",       # 3.0 V6 SC
-                "v8": "Bosch MED17.8.32",       # 5.0 V8 SC
-            }
-        }
-    },
-    
-    "Peugeot": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "hdi": "Bosch EDC17C10",        # 1.6 HDI, 2.0 HDI
-                "bluehdi": "Bosch EDC17C60",    # BlueHDI
-                "delphi": "Delphi DCM3.5",      # Some 1.6 HDI
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "thp": "Bosch MED17.4.4",       # 1.6 THP
-                "puretech": "Bosch MED17.4.2",  # PureTech
-            }
-        }
-    },
-    
-    "Citroën": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "hdi": "Bosch EDC17C10",
-                "bluehdi": "Bosch EDC17C60",
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "thp": "Bosch MED17.4.4",
-                "puretech": "Bosch MED17.4.2",
-            }
-        }
-    },
-    
-    "Renault": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "dci": "Bosch EDC17C42",        # 1.5 dCi, 1.6 dCi
-                "large": "Bosch EDC17C11",      # 2.0 dCi, 3.0 dCi
-                "siemens": "Siemens SID305",    # Some 1.5 dCi
-            }
-        },
-        "Petrol": {
-            "default": "Siemens EMS3",
-            "variants": {
-                "tce": "Siemens EMS3150",       # 0.9 TCe, 1.2 TCe
-                "large": "Siemens EMS3155",     # 1.6 TCe
-            }
-        }
-    },
-    
-    "Fiat": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "multijet": "Bosch EDC17C49",   # 1.3 MJ, 1.6 MJ
-                "large": "Bosch EDC17C69",      # 2.0 MJ
-                "marelli": "Marelli MJD8F3",    # Some 1.3 MJ
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "fire": "Bosch ME7.9.10",       # Fire engines
-                "multiair": "Marelli 8GMF",     # MultiAir
-            }
-        }
-    },
-    
-    "Alfa Romeo": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "jtdm": "Bosch EDC17C49",       # 1.6 JTDM, 2.0 JTDM
-                "large": "Bosch EDC17C69",      # 2.2 JTDM
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "multiair": "Bosch MED17.3.5",  # MultiAir
-                "qv": "Bosch MED17.3.4",        # QV/Veloce
-            }
-        }
-    },
-    
-    "Opel": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "cdti": "Bosch EDC17C59",       # 1.6 CDTI, 2.0 CDTI
-                "old": "Bosch EDC16C9",         # Pre-2010
-                "delphi": "Delphi DCM3.5",      # Some CDTI
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "ecotec": "Delco E83",          # EcoTec
-                "turbo": "Bosch MED17.6.9",     # Turbo EcoTec
-            }
-        }
-    },
-    
-    "Ford": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "tdci": "Bosch EDC17C10",       # 1.6 TDCi, 2.0 TDCi
-                "large": "Delphi DCM3.5",       # 2.2 TDCi
-                "ecoblue": "Bosch EDC17C70",    # EcoBlue
-            }
-        },
-        "Petrol": {
-            "default": "Bosch MED17",
-            "variants": {
-                "ecoboost": "Bosch MED17.2",    # 1.0 EcoBoost
-                "large": "Bosch MED17.0.7",     # 1.6 EcoBoost, 2.0 EcoBoost
-                "mustang": "Bosch MED17.2.2",   # Mustang
-            }
-        }
-    },
-    
-    # =====================================================================
-    # JAPANESE MANUFACTURERS
-    # =====================================================================
-    
-    "Toyota": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "d4d": "Denso 89661",           # D-4D engines
-                "modern": "Denso 89663",        # Modern D-4D
-            }
-        },
-        "Petrol": {
-            "default": "Denso",
-            "variants": {
-                "vvti": "Denso 89661",          # VVT-i engines
-                "d4s": "Denso 89663",           # D-4S direct injection
-            }
-        },
-        "Hybrid": {
-            "default": "Denso Hybrid ECU",
-            "variants": {
-                "ths": "Denso THS",             # Toyota Hybrid System
-            }
-        }
-    },
-    
-    "Lexus": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "d4d": "Denso 89661",
-            }
-        },
-        "Petrol": {
-            "default": "Denso",
-            "variants": {
-                "vvti": "Denso 89661",
-                "d4s": "Denso 89663",
-            }
-        },
-        "Hybrid": {
-            "default": "Denso Hybrid ECU",
-        }
-    },
-    
-    "Honda": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "ictdi": "Bosch EDC17C58",      # i-CTDi
-            }
-        },
-        "Petrol": {
-            "default": "Keihin",
-            "variants": {
-                "vtec": "Keihin 37820",         # VTEC
-                "earth_dreams": "Keihin 37805", # Earth Dreams
-                "type_r": "Keihin 37820-5AN",   # Type R
-            }
-        }
-    },
-    
-    "Nissan": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "dci": "Bosch EDC17C42",        # dCi (Renault-based)
-            }
-        },
-        "Petrol": {
-            "default": "Hitachi",
-            "variants": {
-                "vq": "Hitachi MEC",            # VQ engines
-                "mr": "Hitachi MEC32",          # MR engines
-                "hr": "Hitachi MEC121",         # HR engines
-            }
-        }
-    },
-    
-    "Mazda": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "skyactiv_d": "Denso SH01",     # SKYACTIV-D
-            }
-        },
-        "Petrol": {
-            "default": "Denso",
-            "variants": {
-                "skyactiv_g": "Denso PE01",     # SKYACTIV-G
-                "mzr": "Denso L8/LF",           # MZR
-            }
-        }
-    },
-    
-    "Subaru": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "boxer_d": "Denso 22611",       # Boxer Diesel
-            }
-        },
-        "Petrol": {
-            "default": "Denso",
-            "variants": {
-                "fa": "Denso 22765",            # FA engines
-                "fb": "Denso 22611",            # FB engines
-                "ej": "Denso 22611",            # EJ engines
-            }
-        }
-    },
-    
-    "Mitsubishi": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "did": "Denso",                 # DI-D
-            }
-        },
-        "Petrol": {
-            "default": "Mitsubishi Electric",
-            "variants": {
-                "mivec": "Mitsubishi E6T",      # MIVEC
-            }
-        }
-    },
-    
-    "Suzuki": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "ddis": "Bosch EDC17C69",       # DDiS
-            }
-        },
-        "Petrol": {
-            "default": "Denso",
-            "variants": {
-                "boosterjet": "Bosch MED17.9",  # BoosterJet
-            }
-        }
-    },
-    
-    "Isuzu": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "dmax": "Denso",                # D-MAX
-                "truck": "Bosch EDC17",         # Trucks
-            }
-        },
-        "Petrol": {
-            "default": "Denso",
-        }
-    },
-    
-    # =====================================================================
-    # KOREAN MANUFACTURERS
-    # =====================================================================
-    
-    "Hyundai": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "crdi": "Bosch EDC17C08",       # CRDi
-                "modern": "Bosch EDC17C57",     # Modern CRDi
-            }
-        },
-        "Petrol": {
-            "default": "Kefico",
-            "variants": {
-                "gdi": "Kefico CPGDSH2",        # GDI
-                "mpi": "Kefico 39100",          # MPI
-            }
-        }
-    },
-    
-    "Kia": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "crdi": "Bosch EDC17C08",
-                "modern": "Bosch EDC17C57",
-            }
-        },
-        "Petrol": {
-            "default": "Kefico",
-            "variants": {
-                "gdi": "Kefico CPGDSH2",
-                "mpi": "Kefico 39100",
-            }
-        }
-    },
-    
-    # =====================================================================
-    # AMERICAN MANUFACTURERS
-    # =====================================================================
-    
-    "Chevrolet": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "duramax": "Bosch EDC17CP18",   # Duramax
-            }
-        },
-        "Petrol": {
-            "default": "Delco E",
-            "variants": {
-                "small_block": "Delco E38",     # Small Block V8
-                "ecotec": "Delco E83",          # Ecotec
-            }
-        }
-    },
-    
-    "Dodge": {
-        "Diesel": {
-            "default": "Cummins CM",
-            "variants": {
-                "cummins": "Cummins CM2350",    # Cummins diesel
-            }
-        },
-        "Petrol": {
-            "default": "NGC",
-            "variants": {
-                "hemi": "NGC GPEC2",            # HEMI
-            }
-        }
-    },
-    
-    "Jeep": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "multijet": "Bosch EDC17C49",   # MultiJet (FCA)
-                "ecodiesel": "Bosch EDC17C79",  # EcoDiesel VM Motori
-            }
-        },
-        "Petrol": {
-            "default": "NGC",
-            "variants": {
-                "pentastar": "NGC GPEC2",       # Pentastar V6
-                "hemi": "NGC GPEC2A",           # HEMI
-            }
-        }
-    },
-    
-    # =====================================================================
-    # TRUCKS AND COMMERCIAL
-    # =====================================================================
-    
-    "Mitsubishi Fuso": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "canter": "Denso",              # Canter
-                "fighter": "Denso",             # Fighter
-            }
-        }
-    },
-    
-    "Hino": {
-        "Diesel": {
-            "default": "Denso",
-            "variants": {
-                "truck": "Denso",               # All trucks
-            }
-        }
-    },
-    
-    "Isuzu Trucks": {
-        "Diesel": {
-            "default": "Denso/Transtron",
-            "variants": {
-                "npr": "Transtron",             # N-Series
-                "ftr": "Denso",                 # F-Series
-            }
-        }
-    },
-    
-    "DAF": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "paccar": "Bosch EDC17CV44",    # PACCAR MX engines
-            }
-        }
-    },
-    
-    "MAN": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "d08": "Bosch EDC17C53",        # D08 engines
-                "d20": "Bosch EDC17CV41",       # D20 engines
-                "d26": "Bosch EDC17CV41",       # D26 engines
-            }
-        }
-    },
-    
-    "Scania": {
-        "Diesel": {
-            "default": "Scania EMS",
-            "variants": {
-                "dc09": "Scania EMS S8",        # DC09
-                "dc13": "Scania EMS S8",        # DC13
-                "dc16": "Scania EMS S8",        # DC16
-            }
-        }
-    },
-    
-    "Volvo Trucks": {
-        "Diesel": {
-            "default": "Volvo EMS",
-            "variants": {
-                "d11": "Volvo EMS2",            # D11
-                "d13": "Volvo EMS2",            # D13
-                "d16": "Volvo EMS2",            # D16
-            }
-        }
-    },
-    
-    "Iveco Trucks": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "cursor": "Bosch EDC17CV41",    # Cursor engines
-                "f1c": "Bosch EDC17C49",        # F1C Daily
-            }
-        }
-    },
-    
-    "Cummins": {
-        "Diesel": {
-            "default": "Cummins CM",
-            "variants": {
-                "isx": "Cummins CM2350",        # ISX
-                "isb": "Cummins CM2150",        # ISB
-                "isl": "Cummins CM2150",        # ISL
-                "qsb": "Cummins CM850",         # QSB
-            }
-        }
-    },
-    
-    "Caterpillar": {
-        "Diesel": {
-            "default": "Caterpillar ADEM",
-            "variants": {
-                "c7": "CAT ADEM A4",            # C7
-                "c9": "CAT ADEM A4",            # C9
-                "c13": "CAT ADEM A4",           # C13
-                "c15": "CAT ADEM A4",           # C15
-            }
-        }
-    },
-    
-    # =====================================================================
-    # AGRICULTURAL / CONSTRUCTION
-    # =====================================================================
-    
-    "John Deere": {
-        "Diesel": {
-            "default": "John Deere PowerTech",
-            "variants": {
-                "powertech": "Bosch EDC17CV52", # PowerTech
-            }
-        }
-    },
-    
-    "Case": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "fpt": "Bosch EDC17C49",        # FPT engines
-            }
-        }
-    },
-    
-    "New Holland": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "fpt": "Bosch EDC17C49",        # FPT engines
-            }
-        }
-    },
-    
-    "Fendt": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "agco": "Bosch EDC17CV52",      # AGCO Power
-            }
-        }
-    },
-    
-    "Claas": {
-        "Diesel": {
-            "default": "Bosch EDC17",
-            "variants": {
-                "mercedes": "Bosch EDC17C66",   # Mercedes OM engines
-            }
-        }
-    },
+# ECU Manufacturer Signatures - Binary patterns to identify manufacturer
+ECU_MANUFACTURER_SIGNATURES = {
+    "Bosch": [
+        b"Robert Bosch", b"ROBERT BOSCH", b"Bosch", b"BOSCH", b"(c) Bosch",
+        b"EDC15", b"EDC16", b"EDC17", b"MED", b"ME7", b"MG1", b"MD1",
+    ],
+    "Continental": [
+        b"Continental", b"CONTINENTAL", b"Siemens", b"SIEMENS", b"SID",
+        b"EMS", b"Continental Automotive",
+    ],
+    "Denso": [
+        b"DENSO", b"Denso", b"89661", b"SH705", b"76F00",
+    ],
+    "Delphi": [
+        b"Delphi", b"DELPHI", b"DCM", b"DDCR",
+    ],
+    "Marelli": [
+        b"Magneti Marelli", b"MAGNETI MARELLI", b"Marelli", b"MARELLI",
+        b"IAW", b"MJD",
+    ],
+    "Transtron": [
+        b"TRANSTRON", b"Transtron", b"TTI",
+    ],
+    "Cummins": [
+        b"CUMMINS", b"Cummins", b"CM870", b"CM2150", b"CM2250", b"CM2350",
+    ],
+    "Hitachi": [
+        b"HITACHI", b"Hitachi",
+    ],
+    "Keihin": [
+        b"KEIHIN", b"Keihin",
+    ],
+    "Kefico": [
+        b"KEFICO", b"Kefico",
+    ],
 }
 
-# Default ECU fallbacks by fuel type
-DEFAULT_ECU = {
-    "Diesel": "Bosch EDC17",
-    "Petrol": "Bosch MED17",
-    "Hybrid": "Manufacturer-specific Hybrid ECU",
-    None: "Unknown ECU"
+# ECU Type Patterns - regex patterns to identify specific ECU types
+# Format: (pattern, manufacturer, ecu_type, category)
+ECU_TYPE_PATTERNS = [
+    # Bosch EDC (Diesel) - Most specific first
+    (rb"EDC17CP52", "Bosch", "EDC17CP52", "Diesel"),
+    (rb"EDC17CV54", "Bosch", "EDC17CV54", "Diesel"),
+    (rb"EDC17CV44", "Bosch", "EDC17CV44", "Diesel"),
+    (rb"EDC17CV41", "Bosch", "EDC17CV41", "Diesel"),
+    (rb"EDC17C[0-9]{2}", "Bosch", "EDC17Cxx", "Diesel"),
+    (rb"EDC17CP[0-9]{2}", "Bosch", "EDC17CPxx", "Diesel"),
+    (rb"EDC17[A-Z]{1,2}[0-9]{1,2}", "Bosch", "EDC17", "Diesel"),
+    (rb"EDC17U[0-9]", "Bosch", "EDC17U", "Diesel"),
+    (rb"EDC16[A-Z]{0,2}[0-9]{0,2}", "Bosch", "EDC16", "Diesel"),
+    (rb"EDC15[A-Z]{0,2}[0-9]{0,2}", "Bosch", "EDC15", "Diesel"),
+    
+    # Bosch MD1/MG1 (Latest Diesel/Gasoline)
+    (rb"MD1[A-Z]{2}[0-9]{0,3}", "Bosch", "MD1", "Diesel"),
+    (rb"MG1[A-Z]{2}[0-9]{0,3}", "Bosch", "MG1", "Gasoline"),
+    
+    # Bosch MED/ME (Gasoline)
+    (rb"MED17\.[0-9]+", "Bosch", "MED17", "Gasoline"),
+    (rb"MED9\.[0-9]+", "Bosch", "MED9", "Gasoline"),
+    (rb"ME7\.[0-9]+", "Bosch", "ME7", "Gasoline"),
+    
+    # Continental/Siemens SID (Diesel)
+    (rb"SID807", "Continental", "SID807", "Diesel"),
+    (rb"SID803[A]?", "Continental", "SID803", "Diesel"),
+    (rb"SID901", "Continental", "SID901", "Diesel"),
+    (rb"SID[0-9]{3}", "Continental", "SID", "Diesel"),
+    
+    # Continental EMS (Gasoline)
+    (rb"EMS[0-9]{4}", "Continental", "EMS", "Gasoline"),
+    
+    # Delphi DCM (Diesel)
+    (rb"DCM7\.[0-9]", "Delphi", "DCM7", "Diesel"),
+    (rb"DCM6\.[0-9]", "Delphi", "DCM6", "Diesel"),
+    (rb"DCM3\.[0-9]", "Delphi", "DCM3", "Diesel"),
+    (rb"DDCR", "Delphi", "DDCR", "Diesel"),
+    
+    # Marelli MJD/IAW (Diesel)
+    (rb"MJD[0-9][A-Z][0-9]", "Marelli", "MJD", "Diesel"),
+    (rb"IAW[0-9][A-Z]{2}", "Marelli", "IAW", "Mixed"),
+    
+    # Denso
+    (rb"89661-[0-9A-Z]{5}", "Denso", "Denso 89661", "Mixed"),
+    (rb"SH7058", "Denso", "Denso SH7058", "Mixed"),
+    (rb"SH7055", "Denso", "Denso SH7055", "Mixed"),
+    (rb"76F0038", "Denso", "Denso 76F", "Diesel"),
+    
+    # Transtron (Isuzu)
+    (rb"SH72544", "Transtron", "Transtron SH72544", "Diesel"),
+    (rb"SH7059", "Transtron", "Transtron SH7059", "Diesel"),
+    
+    # Cummins
+    (rb"CM2350", "Cummins", "CM2350", "Diesel"),
+    (rb"CM2250", "Cummins", "CM2250", "Diesel"),
+    (rb"CM2150[A-Z]?", "Cummins", "CM2150", "Diesel"),
+    (rb"CM870", "Cummins", "CM870", "Diesel"),
+]
+
+# Truck/Commercial Vehicle Brand Signatures
+TRUCK_BRAND_SIGNATURES = [
+    (b"FUSO", "Mitsubishi FUSO"),
+    (b"Fuso", "Mitsubishi FUSO"),
+    (b"HINO", "Hino"),
+    (b"Hino", "Hino"),
+    (b"ISUZU", "Isuzu"),
+    (b"Isuzu", "Isuzu"),
+    (b"MAN ", "MAN"),
+    (b"SCANIA", "Scania"),
+    (b"Scania", "Scania"),
+    (b"VOLVO", "Volvo"),
+    (b"Volvo", "Volvo"),
+    (b"DAF ", "DAF"),
+    (b"IVECO", "Iveco"),
+    (b"Iveco", "Iveco"),
+    (b"MERCEDES", "Mercedes"),
+    (b"Mercedes", "Mercedes"),
+    (b"ACTROS", "Mercedes Actros"),
+    (b"ATEGO", "Mercedes Atego"),
+    (b"CANTER", "Mitsubishi Canter"),
+    (b"Canter", "Mitsubishi Canter"),
+    (b"FIGHTER", "Mitsubishi Fighter"),
+    (b"RANGER", "Hino Ranger"),
+    (b"PROFIA", "Hino Profia"),
+    (b"FORWARD", "Isuzu Forward"),
+    (b"GIGA", "Isuzu Giga"),
+    (b"ELF", "Isuzu ELF"),
+]
+
+# Known SCR-equipped truck ECU types (heavy-duty vehicles)
+# These ECU types are known to be in vehicles with SCR/AdBlue systems
+TRUCK_ECUS_WITH_SCR = {
+    # Cummins - All CM22xx and CM23xx have SCR
+    "CM2250", "CM2350",
+    # Bosch truck ECUs (Euro 5/6 commercial vehicles)
+    "EDC17CP52", "EDC17CV41", "EDC17CV44", "EDC17CV54",
+    "EDC17C49", "EDC17C54",
+    # Continental truck ECUs
+    "SID807", "SID901",
 }
 
+# SCR/AdBlue Dosing ECU Signatures
+# These are SEPARATE ECUs that control AdBlue injection
+SCR_DCU_SIGNATURES = [
+    # Bosch Denoxtronic
+    (b"DENOXTRONIC", "Bosch Denoxtronic"),
+    (b"Denoxtronic", "Bosch Denoxtronic"),
+    (b"denoxtronic", "Bosch Denoxtronic"),
+    # DCU identifiers
+    (b"DCU", "Dosing Control Unit"),
+    (b"DOSING", "Dosing System"),
+    (b"Dosing", "Dosing System"),
+    # NOx/SCR controller specific
+    (b"NOX_CTRL", "NOx Controller"),
+    (b"SCR_CTRL", "SCR Controller"),
+    (b"AFTERTREATMENT", "Aftertreatment ECU"),
+    (b"Aftertreatment", "Aftertreatment ECU"),
+]
 
-def get_ecu_for_vehicle(manufacturer, fuel_type, engine_power=None, engine_name=None):
-    """
-    Get the most likely ECU type for a vehicle
-    
-    Args:
-        manufacturer: Vehicle manufacturer name
-        fuel_type: 'Diesel', 'Petrol', or 'Hybrid'
-        engine_power: Engine power in HP (optional)
-        engine_name: Engine name/code (optional)
-    
-    Returns:
-        dict with 'ecu_type', 'ecu_family', and 'confidence'
-    """
-    
-    # Normalize inputs
-    manufacturer = manufacturer.strip() if manufacturer else ""
-    fuel_type = fuel_type if fuel_type in ["Diesel", "Petrol", "Hybrid"] else None
-    
-    # Try to find manufacturer in database
-    mfr_data = None
-    for mfr_name, mfr_ecus in ECU_MAPPING.items():
-        if mfr_name.lower() in manufacturer.lower() or manufacturer.lower() in mfr_name.lower():
-            mfr_data = mfr_ecus
-            break
-    
-    if not mfr_data:
-        # Use default based on fuel type
-        return {
-            "ecu_type": DEFAULT_ECU.get(fuel_type, "Unknown ECU"),
-            "ecu_family": "Generic",
-            "confidence": "low"
-        }
-    
-    # Get fuel-specific data
-    fuel_data = mfr_data.get(fuel_type, mfr_data.get("Diesel", mfr_data.get("Petrol", {})))
-    
-    if not fuel_data:
-        return {
-            "ecu_type": DEFAULT_ECU.get(fuel_type, "Unknown ECU"),
-            "ecu_family": "Generic",
-            "confidence": "low"
-        }
-    
-    default_ecu = fuel_data.get("default", DEFAULT_ECU.get(fuel_type))
-    variants = fuel_data.get("variants", {})
-    
-    # Try to match specific variant based on engine characteristics
-    selected_variant = None
-    
-    if engine_power:
-        if engine_power < 120:
-            selected_variant = variants.get("small")
-        elif engine_power < 250:
-            selected_variant = variants.get("medium")
-        else:
-            selected_variant = variants.get("large") or variants.get("performance")
-    
-    if engine_name:
-        engine_lower = engine_name.lower()
-        # Check for specific engine type keywords
-        if "skyactiv" in engine_lower:
-            selected_variant = variants.get("skyactiv_g") or variants.get("skyactiv_d")
-        elif "ecoboost" in engine_lower:
-            selected_variant = variants.get("ecoboost")
-        elif "tdi" in engine_lower or "crdi" in engine_lower or "dci" in engine_lower:
-            selected_variant = variants.get("medium") or variants.get("small")
-        elif "tfsi" in engine_lower or "tsi" in engine_lower:
-            selected_variant = variants.get("medium") or variants.get("small")
-        elif "gdi" in engine_lower:
-            selected_variant = variants.get("gdi")
-        elif "hybrid" in engine_lower:
-            selected_variant = variants.get("hybrid") or fuel_data.get("default")
-    
-    ecu_type = selected_variant or default_ecu
-    
-    return {
-        "ecu_type": ecu_type,
-        "ecu_family": default_ecu.split()[0] if default_ecu else "Unknown",  # e.g., "Bosch" from "Bosch EDC17"
-        "confidence": "high" if selected_variant else "medium"
-    }
+# DPF Map Detection Patterns
+DPF_DETECTION_PATTERNS = {
+    "edc17_switch_sequence": {
+        # The famous 4081, 15 sequence in EDC17
+        # 4081 decimal = 0xFF1 (little endian: F1 0F)
+        # 15 decimal = 0x000F (little endian: 0F 00)
+        "pattern": b"\xf1\x0f",  # 4081 in LE
+        "follow_pattern": b"\x0f\x00",  # 15 in LE
+        "confidence": 50,
+        "description": "EDC17 DPF switch area (4081+15)"
+    },
+    "map_boundary_7fff_8000": {
+        # 32767, 32768 boundary - common in map areas
+        "pattern": b"\xff\x7f\x00\x80",  # 7FFF 8000 in LE
+        "min_count": 2,
+        "confidence": 35,
+        "description": "Map boundary markers (7FFF/8000)"
+    },
+    "map_boundary_8000_7fff": {
+        "pattern": b"\x00\x80\xff\x7f",  # 8000 7FFF in LE
+        "min_count": 2,
+        "confidence": 35,
+        "description": "Map boundary markers (8000/7FFF)"
+    },
+    "dpf_text_markers": [
+        (b"DPF", 45), (b"dpf", 40), (b"DpF", 40),
+        (b"FAP", 45), (b"Fap", 40), (b"fap", 35),
+        (b"DPF_", 50), (b"_DPF", 50),
+        (b"FAP_", 50), (b"_FAP", 50),
+        (b"SOOT", 35), (b"soot", 30),
+        (b"REGEN", 35), (b"regen", 30),
+        (b"Partikel", 40), (b"PARTIKEL", 40),
+        (b"DIESEL_PARTICULATE", 50),
+        (b"PARTICULATE", 40),
+    ],
+    "denso_dpf_patterns": [
+        (b"\x00\x80\x00\x80\x00\x80", 30),  # Repeated 8000 boundary
+        (b"\xff\x7f\xff\x7f\xff\x7f", 30),  # Repeated 7FFF
+    ]
+}
 
+# EGR Map Detection Patterns
+EGR_DETECTION_PATTERNS = {
+    "egr_text_markers": [
+        (b"EGR", 50), (b"egr", 45), (b"Egr", 45),
+        (b"AGR", 50), (b"agr", 45), (b"Agr", 45),
+        (b"EGR_", 55), (b"_EGR", 55),
+        (b"AGR_", 55), (b"_AGR", 55),
+        (b"EGR_VALVE", 60), (b"EGRVALVE", 55),
+        (b"EGR_FLOW", 55), (b"EGRFLOW", 50),
+        (b"RECIRCULATION", 45),
+    ]
+}
 
-def get_ecu_info_for_engine(engine_data, manufacturer_name=None):
-    """
-    Get ECU information for an engine record
-    
-    Args:
-        engine_data: dict with engine info (name, fuel, etc.)
-        manufacturer_name: Optional manufacturer name
-    
-    Returns:
-        dict with ECU information
-    """
-    
-    fuel_type = engine_data.get("fuel")
-    engine_name = engine_data.get("name", "")
-    
-    # Try to extract power from engine name
-    engine_power = None
-    import re
-    power_match = re.search(r'(\d+)\s*hp', engine_name.lower())
-    if power_match:
-        engine_power = int(power_match.group(1))
-    
-    return get_ecu_for_vehicle(
-        manufacturer=manufacturer_name or "",
-        fuel_type=fuel_type,
-        engine_power=engine_power,
-        engine_name=engine_name
-    )
+# SCR/AdBlue Map Detection Patterns
+SCR_DETECTION_PATTERNS = {
+    "scr_text_markers": [
+        (b"ADBLUE", 60), (b"AdBlue", 60), (b"adblue", 55),
+        (b"UREA", 55), (b"Urea", 50), (b"urea", 45),
+        (b"DENOX", 55), (b"DeNOx", 55), (b"denox", 50),
+        (b"SCR_", 55), (b"_SCR", 55),
+        (b"NOX_", 50), (b"_NOX", 50), (b"NOx_", 50),
+        (b"NOX_SENSOR", 60), (b"NOXSENSOR", 60),
+        (b"AFTERTREATMENT", 50), (b"Aftertreatment", 45),
+        (b"REDUCTANT", 55), (b"Reductant", 50),
+        (b"NH3", 50),
+        (b"BLUETEC", 60), (b"BlueTec", 55),
+        (b"DENOXTRONIC", 65), (b"Denoxtronic", 60),
+    ],
+    "scr_dcu_identifiers": [
+        (b"DCU", 40),  # Dosing Control Unit
+        (b"DOSING_UNIT", 55),
+        (b"UREA_TANK", 50),
+        (b"DEF_TANK", 50),
+    ]
+}
 
-
-# Export all mappings
-__all__ = ['ECU_MAPPING', 'DEFAULT_ECU', 'get_ecu_for_vehicle', 'get_ecu_info_for_engine']
+# Map Size Characteristics by ECU type (approximate)
+ECU_MAP_CHARACTERISTICS = {
+    "EDC17": {
+        "typical_dpf_map_size": (8, 8),  # 8x8 or similar
+        "typical_egr_map_size": (13, 16),
+        "value_range": (0, 65535),  # 16-bit
+    },
+    "EDC16": {
+        "typical_dpf_map_size": (8, 8),
+        "value_range": (0, 65535),
+    },
+    "Denso": {
+        "typical_dpf_map_size": (10, 12),
+        "value_range": (0, 65535),
+    },
+}
