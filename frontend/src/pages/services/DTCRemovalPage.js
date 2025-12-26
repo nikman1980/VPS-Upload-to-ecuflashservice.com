@@ -55,7 +55,7 @@ const DTCRemovalPage = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">What is DTC Removal?</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                DTC (Diagnostic Trouble Code) removal is a software modification that eliminates specific error codes from your vehicle's ECU. When sensors detect issues or when modifications trigger false errors, these codes cause warning lights on your dashboard.
+                DTC (Diagnostic Trouble Code) removal is a software modification that eliminates specific error codes from your vehicle&apos;s ECU. When sensors detect issues or when modifications trigger false errors, these codes cause warning lights on your dashboard.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
                 Our DTC removal service permanently disables the generation of specific error codes in the ECU software, preventing warning lights from appearing while maintaining normal vehicle operation.
