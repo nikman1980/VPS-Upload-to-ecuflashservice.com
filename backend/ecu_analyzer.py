@@ -1144,9 +1144,9 @@ class ECUAnalyzer:
         # ECU type inference (Bosch diesel ECUs commonly have DPF)
         ecu_type = self.results.get("ecu_type", "") or ""
         if any(x in ecu_type.upper() for x in ["EDC17", "EDC16", "MD1", "DCM", "SID"]):
-            indicators.append("Diesel ECU type detected (likely has DPF)")
-            confidence_score += 10
-        
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 15
         # Determine confidence level
         if confidence_score >= 50:
             confidence = "high"
