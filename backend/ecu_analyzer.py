@@ -1224,3 +1224,192 @@ class ECUAnalyzer:
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
         }
+    
+    def _detect_egr_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect EGR (Exhaust Gas Recirculation) maps using database patterns.
+        """
+        
+        indicators = []
+        confidence_score = 0
+        
+        # Use database patterns if available
+        if HAS_ECU_DATABASE:
+            for marker, score in EGR_DETECTION_PATTERNS.get("egr_text_markers", []):
+                count = file_data.count(marker)
+                if count > 0:
+                    idx = file_data.find(marker)
+                    if idx >= 0:
+                        before = file_data[max(0,idx-1):idx]
+                        after = file_data[idx+len(marker):idx+len(marker)+1]
+                        is_word_boundary = (
+                            (not before or not (32 <= before[0] <= 126 and chr(before[0]).isalnum())) or
+                            (not after or not (32 <= after[0] <= 126 and chr(after[0]).isalnum()))
+                        )
+                        if is_word_boundary or count >= 2:
+                            indicators.append(f"EGR marker '{marker.decode()}': {count}x")
+                            confidence_score += score
+                            break
+        
+        # Fallback direct text markers
+        if confidence_score == 0:
+            egr_markers = [
+                (b'EGR', 50), (b'egr', 45), (b'Egr', 45),
+                (b'AGR', 50), (b'agr', 45), (b'Agr', 45),
+            ]
+            for marker, score in egr_markers:
+                if marker in file_data:
+                    indicators.append(f"Text marker '{marker.decode()}'")
+                    confidence_score += score
+                    break
+        
+        # Check extracted strings
+        egr_strings = ["EGR_VALVE", "EGR_FLOW", "EGR_TEMP", "EGRVALVE", "RECIRCULATION"]
+        for s in egr_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 35
+                break
+        
+        # Diesel ECU inference - if this is a diesel ECU, EGR is standard
+        ecu_type = self.results.get("ecu_type", "") or ""
+        manufacturer = self.results.get("manufacturer", "") or ""
+        ecu_upper = ecu_type.upper()
+        mfr_upper = manufacturer.upper()
+        
+        diesel_indicators = ["EDC", "DCM", "SID", "DENSO", "TRANSTRON", "CUMMINS", "CM2150", "MJD"]
+        is_diesel = any(ind in ecu_upper or ind in mfr_upper for ind in diesel_indicators)
+        
+        if is_diesel and confidence_score == 0:
+            indicators.append("Diesel ECU (EGR standard)")
+            confidence_score += 25
+        
+        # Determine confidence
+        if confidence_score >= 50:
+            confidence = "high"
+        elif confidence_score >= 25:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
+    
+    def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect AdBlue/SCR/DEF maps using database patterns.
+        Also detects separate DCU (Dosing Control Unit) files.
+        """
+        
+        indicators = []
+        confidence_score = 0
+        
+        # =================================================================
+        # IMPORTANT: Check if this is a DCU (AdBlue Dosing Control Unit) file
+        # These are SEPARATE ECUs that only control AdBlue injection
+        # =================================================================
+        if HAS_ECU_DATABASE:
+            for marker, desc in SCR_DCU_SIGNATURES:
+                if marker in file_data:
+                    indicators.append(f"DCU detected: {desc}")
+                    confidence_score += 60  # High confidence for dedicated DCU
+                    break
+        
+        # Check for Denoxtronic and other SCR controller signatures
+        dcu_markers = [
+            (b'DENOXTRONIC', 65), (b'Denoxtronic', 60), (b'denoxtronic', 55),
+            (b'DCU', 40), (b'DOSING_UNIT', 55), (b'DOSING UNIT', 50),
+        ]
+        for marker, score in dcu_markers:
+            if marker in file_data:
+                indicators.append(f"SCR controller: {marker.decode()}")
+                confidence_score += score
+                break
+        
+        # =================================================================
+        # Check for AdBlue/SCR text markers
+        # =================================================================
+        if HAS_ECU_DATABASE:
+            for marker, score in SCR_DETECTION_PATTERNS.get("scr_text_markers", []):
+                count = file_data.count(marker)
+                if count > 0:
+                    idx = file_data.find(marker)
+                    if len(marker) <= 4 and idx >= 0:
+                        before = file_data[max(0,idx-1):idx]
+                        after = file_data[idx+len(marker):idx+len(marker)+1]
+                        is_word_boundary = (
+                            (not before or not (32 <= before[0] <= 126 and chr(before[0]).isalnum())) or
+                            (not after or not (32 <= after[0] <= 126 and chr(after[0]).isalnum()))
+                        )
+                        if not is_word_boundary and count < 3:
+                            continue
+                    indicators.append(f"SCR marker '{marker.decode()}': {count}x")
+                    confidence_score += score
+                    break
+        
+        # Fallback direct text markers
+        if confidence_score == 0:
+            adblue_markers = [
+                (b'ADBLUE', 60), (b'AdBlue', 60), (b'adblue', 55),
+                (b'UREA', 55), (b'Urea', 50),
+                (b'DENOX', 55), (b'DeNOx', 55),
+                (b'SCR_', 50), (b'_SCR', 50),
+                (b'NOX_', 45), (b'_NOX', 45),
+                (b'AFTERTREATMENT', 50),
+            ]
+            for marker, score in adblue_markers:
+                if marker in file_data:
+                    indicators.append(f"Text marker '{marker.decode()}'")
+                    confidence_score += score
+                    break
+        
+        # Check extracted strings
+        adblue_strings = ["ADBLUE", "UREA", "SCR_CAT", "NOX_SENSOR", "DENOXTRONIC", "AFTERTREATMENT", "REDUCTANT"]
+        for s in adblue_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 40
+                break
+        
+        # =================================================================
+        # Truck ECU inference - check for known truck brands and ECU types
+        # =================================================================
+        if confidence_score == 0 and HAS_ECU_DATABASE:
+            # Check for truck brand signatures
+            for brand_marker, brand_name in TRUCK_BRAND_SIGNATURES:
+                if brand_marker in file_data:
+                    ecu_type = self.results.get("ecu_type", "") or ""
+                    # Only add if ECU is in known SCR list
+                    if any(scr_ecu in ecu_type.upper() for scr_ecu in TRUCK_ECUS_WITH_SCR):
+                        indicators.append(f"Truck: {brand_name} with SCR ECU")
+                        confidence_score += 40
+                        break
+        
+        # Cummins inference - all CM22xx and CM23xx have SCR
+        ecu_type = self.results.get("ecu_type", "") or ""
+        if "CM2250" in ecu_type.upper() or "CM2350" in ecu_type.upper():
+            indicators.append("Cummins CM22xx/CM23xx (SCR standard)")
+            confidence_score += 50
+        
+        # Determine confidence
+        if confidence_score >= 55:
+            confidence = "high"
+        elif confidence_score >= 35:
+            confidence = "medium"
+        elif confidence_score > 0:
+            confidence = "low"
+        else:
+            confidence = "none"
+        
+        return {
+            "detected": confidence_score > 0,
+            "confidence": confidence,
+            "confidence_score": confidence_score,
+            "indicators": indicators[:5]
+        }
