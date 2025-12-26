@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:13:05.595779",
+  "last_update": "2025-12-26T23:17:13.824709",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -60294,6 +60294,1279 @@
                   {
                     "id": "19932",
                     "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hongyan": {
+        "id": "345",
+        "models": {
+          "Genlyon": {
+            "id": "2942",
+            "engines": {
+              "13.0L TD": {
+                "id": "12267",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hydrema": {
+        "id": "268",
+        "models": {
+          "Tipper": {
+            "id": "2671",
+            "engines": {
+              "4.5 TD": {
+                "id": "11690",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hyster": {
+        "id": "416",
+        "models": {
+          "Forklift": {
+            "id": "3240",
+            "engines": {
+              "2.6 TDI": {
+                "id": "13009",
+                "ecus": [
+                  {
+                    "id": "20135",
+                    "name": "Bosch EDC17CV45"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Hyundai": {
+        "id": "323",
+        "models": {
+          "Crawler Excavator": {
+            "id": "2867",
+            "engines": {
+              "3.3L": {
+                "id": "12251",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "6.7L": {
+                "id": "12125",
+                "ecus": [
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  },
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              },
+              "8.9L": {
+                "id": "12126",
+                "ecus": [
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel Loader": {
+            "id": "2868",
+            "engines": {
+              "6.7L": {
+                "id": "12128",
+                "ecus": [
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  },
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "8.9L": {
+                "id": "12127",
+                "ecus": [
+                  {
+                    "id": "20095",
+                    "name": "ADEM5"
+                  },
+                  {
+                    "id": "20180",
+                    "name": "ADEM6"
+                  },
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "JCB": {
+        "id": "310",
+        "models": {
+          "Excavator": {
+            "id": "2932",
+            "engines": {
+              "7.8 TD": {
+                "id": "12245",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "Skid Steer Loader": {
+            "id": "2815",
+            "engines": {
+              "4.4 TD": {
+                "id": "12009",
+                "ecus": [
+                  {
+                    "id": "20076",
+                    "name": "Delphi DCM3.3"
+                  },
+                  {
+                    "id": "20190",
+                    "name": "Delphi DCM7.24"
+                  }
+                ]
+              }
+            }
+          },
+          "Telescopic": {
+            "id": "3187",
+            "engines": {
+              "4.4 TD": {
+                "id": "12910",
+                "ecus": [
+                  {
+                    "id": "20190",
+                    "name": "Delphi DCM7.24"
+                  }
+                ]
+              }
+            }
+          },
+          "Wheel Loaders": {
+            "id": "2816",
+            "engines": {
+              "6.7 TD": {
+                "id": "12010",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "20100",
+                    "name": "Motorola / Cummins CM850 generation 1"
+                  },
+                  {
+                    "id": "20101",
+                    "name": "Motorola / Cummins CM850 generation 2"
+                  }
+                ]
+              },
+              "8.9 TD": {
+                "id": "12011",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "20100",
+                    "name": "Motorola / Cummins CM850 generation 1"
+                  },
+                  {
+                    "id": "20101",
+                    "name": "Motorola / Cummins CM850 generation 2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "John Deere": {
+        "id": "368",
+        "models": {
+          "Excavator": {
+            "id": "3020",
+            "engines": {
+              "9.8 TDI": {
+                "id": "12468",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "Skid Steers": {
+            "id": "3132",
+            "engines": {
+              "3.0L TD": {
+                "id": "12733",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Jun ton": {
+        "id": "309",
+        "models": {
+          "MX22": {
+            "id": "2814",
+            "engines": {
+              "6.7 TD": {
+                "id": "12007",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              },
+              "8.9 TD": {
+                "id": "12008",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Kato": {
+        "id": "330",
+        "models": {
+          "Excavator": {
+            "id": "2889",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12362",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              },
+              "4.9d 4M50-Tx 24volt": {
+                "id": "12165",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Kobelco": {
+        "id": "307",
+        "models": {
+          "CDX130": {
+            "id": "2784",
+            "engines": {
+              "3.0 TDI": {
+                "id": "11926",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          },
+          "E140C": {
+            "id": "2884",
+            "engines": {
+              "3.4 D": {
+                "id": "12159",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          },
+          "SK260": {
+            "id": "3236",
+            "engines": {
+              "4.5L TDI": {
+                "id": "13003",
+                "ecus": [
+                  {
+                    "id": "20249",
+                    "name": "Denso DC1V"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Komatsu": {
+        "id": "202",
+        "models": {
+          "911": {
+            "id": "2412",
+            "engines": {
+              "74-AWI": {
+                "id": "11174",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          },
+          "Backhoe Loaders": {
+            "id": "3103",
+            "engines": {
+              "4.5L TDI": {
+                "id": "12676",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          },
+          "HMxxx": {
+            "id": "2893",
+            "engines": {
+              "15.24L TD": {
+                "id": "12170",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              }
+            }
+          },
+          "PCxxx": {
+            "id": "2782",
+            "engines": {
+              "6.7 TD": {
+                "id": "11922",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  },
+                  {
+                    "id": "20101",
+                    "name": "Motorola / Cummins CM850 generation 2"
+                  }
+                ]
+              },
+              "8.9 TD": {
+                "id": "12187",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  },
+                  {
+                    "id": "20101",
+                    "name": "Motorola / Cummins CM850 generation 2"
+                  }
+                ]
+              }
+            }
+          },
+          "WA": {
+            "id": "2865",
+            "engines": {
+              "11.4L": {
+                "id": "12121",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  },
+                  {
+                    "id": "20101",
+                    "name": "Motorola / Cummins CM850 generation 2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Kubota": {
+        "id": "335",
+        "models": {
+          "Skid Steer": {
+            "id": "3241",
+            "engines": {
+              "3.3 TDI": {
+                "id": "13010",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "3.8 TDI": {
+                "id": "13011",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Linde": {
+        "id": "294",
+        "models": {
+          "Forklift": {
+            "id": "2749",
+            "engines": {
+              "2.0 TDI CR": {
+                "id": "11824",
+                "ecus": [
+                  {
+                    "id": "20185",
+                    "name": "Bosch EDC17C87"
+                  },
+                  {
+                    "id": "19453",
+                    "name": "Bosch EDC17CP20"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Link-Belt": {
+        "id": "357",
+        "models": {
+          "Excavator": {
+            "id": "2995",
+            "engines": {
+              "9.9. TD": {
+                "id": "12417",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Liugong": {
+        "id": "353",
+        "models": {
+          "Crawler Excavator": {
+            "id": "2972",
+            "engines": {
+              "6.7L QSB": {
+                "id": "12359",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Manitou": {
+        "id": "291",
+        "models": {
+          "2200R": {
+            "id": "3230",
+            "engines": {
+              "3.3L TDI": {
+                "id": "12994",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              }
+            }
+          },
+          "MH7x": {
+            "id": "3318",
+            "engines": {
+              "4.6TDI": {
+                "id": "13176",
+                "ecus": [
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  }
+                ]
+              }
+            }
+          },
+          "MHT-X": {
+            "id": "2743",
+            "engines": {
+              "5.1L TD": {
+                "id": "11817",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "7.2L TD": {
+                "id": "11816",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          },
+          "MLT-X": {
+            "id": "2744",
+            "engines": {
+              "3.6L TD": {
+                "id": "11819",
+                "ecus": [
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  }
+                ]
+              },
+              "4.2L TD": {
+                "id": "11818",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mecalac": {
+        "id": "409",
+        "models": {
+          "11MWR": {
+            "id": "3199",
+            "engines": {
+              "2.9 TDI": {
+                "id": "12929",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              },
+              "3.6 TDI": {
+                "id": "12930",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mitsubishi FUSO": {
+        "id": "280",
+        "models": {
+          "FP / FV": {
+            "id": "2705",
+            "engines": {
+              "12.0 TD L6": {
+                "id": "11750",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "New Holland": {
+        "id": "209",
+        "models": {
+          "CRAWLER EXCAVATORS": {
+            "id": "2443",
+            "engines": {
+              "E140C": {
+                "id": "11261",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "E230xxx": {
+                "id": "12194",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "E385xxx": {
+                "id": "12252",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "FPT INDUSTRIAL ENGINES": {
+            "id": "2444",
+            "engines": {
+              "N45ENTX20": {
+                "id": "11262",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "WHEEL LOADERS": {
+            "id": "2445",
+            "engines": {
+              "2.0 TDI": {
+                "id": "12657",
+                "ecus": [
+                  {
+                    "id": "20134",
+                    "name": "Perkins"
+                  }
+                ]
+              },
+              "3.3 TDI": {
+                "id": "12271",
+                "ecus": [
+                  {
+                    "id": "20134",
+                    "name": "Perkins"
+                  }
+                ]
+              },
+              "6.7L l6": {
+                "id": "12874",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "W130B": {
+                "id": "11264",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "W190B": {
+                "id": "11263",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Palazzani": {
+        "id": "293",
+        "models": {
+          "Paload": {
+            "id": "2748",
+            "engines": {
+              "4.4L TD": {
+                "id": "11823",
+                "ecus": [
+                  {
+                    "id": "20076",
+                    "name": "Delphi DCM3.3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Putzmeister": {
+        "id": "350",
+        "models": {
+          "BSA Series": {
+            "id": "2961",
+            "engines": {
+              "4.3L TD": {
+                "id": "12326",
+                "ecus": [
+                  {
+                    "id": "20135",
+                    "name": "Bosch EDC17CV45"
+                  }
+                ]
+              }
+            }
+          },
+          "TK 70": {
+            "id": "3186",
+            "engines": {
+              "3.8L TD": {
+                "id": "12906",
+                "ecus": [
+                  {
+                    "id": "20066",
+                    "name": "Motorola / Cummins CM2350"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Rasco": {
+        "id": "413",
+        "models": {
+          "MUVO": {
+            "id": "3224",
+            "engines": {
+              "2.3 DCI": {
+                "id": "12988",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Sany": {
+        "id": "393",
+        "models": {
+          "SY200": {
+            "id": "3206",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12963",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              },
+              "3.86 DTI": {
+                "id": "13007",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  }
+                ]
+              }
+            }
+          },
+          "SY65": {
+            "id": "3126",
+            "engines": {
+              "2.6 TD": {
+                "id": "12719",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "3.86 TDI": {
+                "id": "13008",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Scania": {
+        "id": "230",
+        "models": {
+          "industrial equipment": {
+            "id": "2523",
+            "engines": {
+              "DC09 - DC16": {
+                "id": "11397",
+                "ecus": [
+                  {
+                    "id": "19657",
+                    "name": "Motorola EMS S6"
+                  }
+                ]
+              },
+              "DI12 - DI13": {
+                "id": "11398",
+                "ecus": [
+                  {
+                    "id": "19657",
+                    "name": "Motorola EMS S6"
+                  },
+                  {
+                    "id": "20167",
+                    "name": "Motorola EMS S6 V2"
+                  }
+                ]
+              },
+              "DT1210 - DT1212": {
+                "id": "11399",
+                "ecus": [
+                  {
+                    "id": "19657",
+                    "name": "Motorola EMS S6"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Sennebogen": {
+        "id": "324",
+        "models": {
+          "Series 8xx": {
+            "id": "2872",
+            "engines": {
+              "8.9L TD": {
+                "id": "12136",
+                "ecus": [
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20245",
+                    "name": "Motorola / Cummins CM2350 V2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Shacman / Shaanxi": {
+        "id": "214",
+        "models": {
+          "SX3256": {
+            "id": "2464",
+            "engines": {
+              "9.7L WP10": {
+                "id": "11307",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          },
+          "SX4256": {
+            "id": "2883",
+            "engines": {
+              "11.6L WP12": {
+                "id": "12156",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Shmidt": {
+        "id": "206",
+        "models": {
+          "Swingo 200": {
+            "id": "2429",
+            "engines": {
+              "3.0 TDI": {
+                "id": "11208",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Sinotruk": {
+        "id": "277",
+        "models": {
+          "Gold Prince": {
+            "id": "2693",
+            "engines": {
+              "10.5L TD L6": {
+                "id": "11727",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "9.7L TD L6": {
+                "id": "11731",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "HOHAN": {
+            "id": "2694",
+            "engines": {
+              "10.5L TD L6": {
+                "id": "11728",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "9.7L TD L6": {
+                "id": "11732",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "HOWO": {
+            "id": "2691",
+            "engines": {
+              "10.5L TD L6": {
+                "id": "11729",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "9.7L TD L6": {
+                "id": "11733",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "New HUANGHE": {
+            "id": "2695",
+            "engines": {
+              "10.5L TD L6": {
+                "id": "11730",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "9.7L TD L6": {
+                "id": "11734",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Steyr M5G": {
+            "id": "2751",
+            "engines": {
+              "10.5L TD L6": {
+                "id": "11830",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  }
+                ]
+              },
+              "9.7L TD L6": {
+                "id": "11831",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
                   }
                 ]
               }
