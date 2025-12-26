@@ -1220,7 +1220,7 @@ const NewUploadFlow = () => {
                     <select
                       value={selectedGeneration?.id || ''}
                       onChange={(e) => {
-                        const gen = generations.find(g => g.id === parseInt(e.target.value));
+                        const gen = generations.find(g => String(g.id) === e.target.value);
                         if (gen) handleGenerationSelect(gen);
                       }}
                       className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
