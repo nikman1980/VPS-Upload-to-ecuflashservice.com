@@ -1721,7 +1721,11 @@ async def get_ecu_types_for_engine(engine_id: int):
     is_truck = False
     if vehicle_type:
         vt_name = vehicle_type.get("name", "").lower()
-        is_truck = any(x in vt_name for x in ["truck", "commercial", "heavy", "lcv"])
+        # Only mark as truck if explicitly truck/commercial/heavy, NOT "Cars & LCV"
+        is_truck = any(x in vt_name for x in ["truck", "commercial vehicle", "heavy duty"])
+        # But NOT if it's "Cars & LCV" which is passenger cars
+        if "cars" in vt_name:
+            is_truck = False
     
     # Get ECU types
     ecu_types = get_ecu_types_for_vehicle(
