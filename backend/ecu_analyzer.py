@@ -1171,12 +1171,15 @@ class ECUAnalyzer:
         confidence_score = 0
         
         # Binary pattern detection FIRST (more reliable)
-        egr_strings = [
-            "EGR", "EXHAUST GAS RECIRCULATION", "AGR",  # German: Abgasrückführung
-            "EGR_VALVE", "EGRVALVE", "EGR_FLOW", "EGRFLOW",
-            "EGR_TEMP", "RECIRCULATION", "EGR_POS", "EGR_RATE",
-            "LP_EGR", "HP_EGR",  # Low/High pressure EGR
-            "COOL_EGR", "HOT_EGR"
+        egr_binary_patterns = [
+            (rb"EGR", "EGR marker"),
+            (rb"egr", "egr marker"),
+            (rb"Egr", "Egr marker"),
+            (rb"AGR", "AGR marker (German)"),
+            (rb"agr", "agr marker"),
+            (rb"(?i)egr[_\s]?valve", "EGR valve reference"),
+            (rb"(?i)egr[_\s]?cool", "EGR cooler reference"),
+            (rb"(?i)recircul", "Recirculation reference"),
         ]
         
         for s in egr_strings:
