@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:34:34.692959",
+  "last_update": "2025-12-26T23:35:56.773876",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -67380,7 +67380,429 @@
             }
           }
         }
+      },
+      "Volkswagen Truck": {
+        "id": "289",
+        "models": {
+          "19.xxx": {
+            "id": "2791",
+            "engines": {
+              "6.7L ISL 6L": {
+                "id": "11953",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "8.2L ISC L6": {
+                "id": "12116",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "9.3L TD": {
+                "id": "12446",
+                "ecus": [
+                  {
+                    "id": "20151",
+                    "name": "Siemens NDG370"
+                  }
+                ]
+              }
+            }
+          },
+          "25.xxx": {
+            "id": "2812",
+            "engines": {
+              "6.7L ISL 6L": {
+                "id": "12004",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "8.3L ISC L6": {
+                "id": "12117",
+                "ecus": [
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              },
+              "9.3L TD": {
+                "id": "12447",
+                "ecus": [
+                  {
+                    "id": "20151",
+                    "name": "Siemens NDG370"
+                  }
+                ]
+              }
+            }
+          },
+          "31.xxx": {
+            "id": "3010",
+            "engines": {
+              "9.3L TD": {
+                "id": "12448",
+                "ecus": [
+                  {
+                    "id": "20151",
+                    "name": "Siemens NDG370"
+                  }
+                ]
+              }
+            }
+          },
+          "9.xxx": {
+            "id": "2779",
+            "engines": {
+              "3.8 TD": {
+                "id": "11917",
+                "ecus": [
+                  {
+                    "id": "19425",
+                    "name": "Bosch EDC16C8"
+                  },
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              }
+            }
+          },
+          "Constellation": {
+            "id": "2737",
+            "engines": {
+              "3.8L TD": {
+                "id": "12222",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  },
+                  {
+                    "id": "20151",
+                    "name": "Siemens NDG370"
+                  }
+                ]
+              },
+              "6.7L ISL 6L TD": {
+                "id": "11811",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "8.9L ISL 6L TD": {
+                "id": "11810",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20027",
+                    "name": "Motorola / Cummins CM850"
+                  }
+                ]
+              }
+            }
+          },
+          "Delivery": {
+            "id": "2739",
+            "engines": {
+              "3.8L L4 TD": {
+                "id": "12152",
+                "ecus": [
+                  {
+                    "id": "19425",
+                    "name": "Bosch EDC16C8"
+                  }
+                ]
+              }
+            }
+          },
+          "Meteor": {
+            "id": "3235",
+            "engines": {
+              "12.4 TDI": {
+                "id": "13002",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Volvo": {
+        "id": "223",
+        "models": {
+          "FE": {
+            "id": "2503",
+            "engines": {
+              "D7E": {
+                "id": "11367",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  }
+                ]
+              }
+            }
+          },
+          "FH Series": {
+            "id": "2504",
+            "engines": {
+              "D13A - D13C 12.8TDI": {
+                "id": "11369",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  },
+                  {
+                    "id": "20260",
+                    "name": "TRW EMS2.4"
+                  },
+                  {
+                    "id": "19760",
+                    "name": "TRW EMS2.2"
+                  }
+                ]
+              },
+              "D16G 16.1 TDI": {
+                "id": "11371",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  },
+                  {
+                    "id": "20260",
+                    "name": "TRW EMS2.4"
+                  },
+                  {
+                    "id": "19760",
+                    "name": "TRW EMS2.2"
+                  }
+                ]
+              }
+            }
+          },
+          "FL Series": {
+            "id": "3271",
+            "engines": {
+              "5.1L TD": {
+                "id": "13079",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  }
+                ]
+              },
+              "7.7L TD": {
+                "id": "13080",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  }
+                ]
+              }
+            }
+          },
+          "FM Series": {
+            "id": "3269",
+            "engines": {
+              "10.8L TD": {
+                "id": "13074",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  },
+                  {
+                    "id": "20260",
+                    "name": "TRW EMS2.4"
+                  }
+                ]
+              },
+              "12.8L TD": {
+                "id": "13075",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  },
+                  {
+                    "id": "20260",
+                    "name": "TRW EMS2.4"
+                  }
+                ]
+              }
+            }
+          },
+          "VM Series": {
+            "id": "2590",
+            "engines": {
+              "7.2 TDI L6": {
+                "id": "11541",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "VN Series": {
+            "id": "3272",
+            "engines": {
+              "12.8L TD": {
+                "id": "13081",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  }
+                ]
+              }
+            }
+          },
+          "VNL": {
+            "id": "2790",
+            "engines": {
+              "15.0L ISX15": {
+                "id": "11952",
+                "ecus": [
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Weichai": {
+        "id": "341",
+        "models": {
+          "MP12375N": {
+            "id": "2933",
+            "engines": {
+              "4.3L TD": {
+                "id": "12246",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Western Star": {
+        "id": "271",
+        "models": {
+          "4900": {
+            "id": "2679",
+            "engines": {
+              "12.8L TD": {
+                "id": "11708",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "DD13 12.8L": {
+                "id": "11825",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "DD15 14.8L": {
+                "id": "11826",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "DD16 15.6L": {
+                "id": "11827",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Yuchai": {
+        "id": "315",
+        "models": {
+          "Sprinkler": {
+            "id": "2829",
+            "engines": {
+              "6.5 TDI": {
+                "id": "12041",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              },
+              "6.7 TDI": {
+                "id": "12040",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          }
+        }
       }
     }
-  }
+  },
+  "extraction_completed": "2025-12-26T23:35:56.773857",
+  "total_vehicles": 3139
 }
