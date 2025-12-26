@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T21:47:01.046936",
+  "last_update": "2025-12-26T21:47:06.140158",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -19531,6 +19531,25 @@
                   {
                     "id": "19534",
                     "name": "Bosch ME9.6"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Daihatsu": {
+        "id": "379",
+        "models": {
+          "Altis": {
+            "id": "3088",
+            "engines": {
+              "2.5 VVT-iE": {
+                "id": "12641",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
                   }
                 ]
               }
