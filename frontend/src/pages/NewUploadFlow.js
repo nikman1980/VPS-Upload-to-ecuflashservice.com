@@ -161,30 +161,21 @@ const NewUploadFlow = () => {
   // Services from API
   const [allServices, setAllServices] = useState([]);
 
-  // Fetch vehicle types on load
-  const fetchVehicleTypes = async () => {
-    try {
-      const response = await axios.get(`${API}/vehicles/types`);
-      setVehicleTypes(response.data || []);
-    } catch (error) {
-      console.error('Error fetching vehicle types:', error);
-    }
-  };
-
-  // Fetch services
-  const fetchServices = async () => {
-    try {
-      const response = await axios.get(`${API}/services`);
-      setAllServices(response.data || []);
-    } catch (error) {
-      console.error('Error fetching services:', error);
-    }
-  };
-
+  // Initialize data on mount
   useEffect(() => {
-    fetchVehicleTypes();
-    fetchServices();
-     
+    const initializeData = async () => {
+      try {
+        const [typesResponse, servicesResponse] = await Promise.all([
+          axios.get(`${API}/vehicles/types`),
+          axios.get(`${API}/services`)
+        ]);
+        setVehicleTypes(typesResponse.data || []);
+        setAllServices(servicesResponse.data || []);
+      } catch (error) {
+        console.error('Error initializing data:', error);
+      }
+    };
+    initializeData();
   }, []);
 
   // Fetch manufacturers when vehicle type is selected
