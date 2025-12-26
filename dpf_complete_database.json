@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T22:06:29.883841",
+  "last_update": "2025-12-26T22:07:56.380179",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -28201,6 +28201,530 @@
                   {
                     "id": "20200",
                     "name": "Bosch EDC17C63"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Jaguar": {
+        "id": "134",
+        "models": {
+          "E-Pace": {
+            "id": "3253",
+            "engines": {
+              "1.5 i": {
+                "id": "13039",
+                "ecus": [
+                  {
+                    "id": "20257",
+                    "name": "Bosch MG1CS028"
+                  }
+                ]
+              }
+            }
+          },
+          "F-Pace": {
+            "id": "2734",
+            "engines": {
+              "2.0L D 4L 16V": {
+                "id": "11796",
+                "ecus": [
+                  {
+                    "id": "19965",
+                    "name": "Bosch EDC17CP55"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "13040",
+                "ecus": [
+                  {
+                    "id": "20257",
+                    "name": "Bosch MG1CS028"
+                  }
+                ]
+              },
+              "3.0L D V6 24V": {
+                "id": "11797",
+                "ecus": [
+                  {
+                    "id": "19965",
+                    "name": "Bosch EDC17CP55"
+                  }
+                ]
+              }
+            }
+          },
+          "F-Type": {
+            "id": "2320",
+            "engines": {
+              "3.0 V6 Supercharged": {
+                "id": "10978",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              },
+              "5.0 V8 Supercharged": {
+                "id": "10979",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              }
+            }
+          },
+          "S-TYPE": {
+            "id": "1811",
+            "engines": {
+              "2.7 TD V6": {
+                "id": "8448",
+                "ecus": [
+                  {
+                    "id": "19703",
+                    "name": "Siemens/Continental SID201"
+                  },
+                  {
+                    "id": "19704",
+                    "name": "Siemens/Continental SID202"
+                  },
+                  {
+                    "id": "19705",
+                    "name": "Siemens/Continental SID204"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "10187",
+                "ecus": [
+                  {
+                    "id": "19450",
+                    "name": "Bosch EDC17CP11"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "8450",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              },
+              "3.0 V6 Supercharged": {
+                "id": "10976",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              },
+              "4.0 i": {
+                "id": "8451",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "4.2 i": {
+                "id": "8452",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "X-TYPE": {
+            "id": "1812",
+            "engines": {
+              "2.0 TDI": {
+                "id": "8453",
+                "ecus": [
+                  {
+                    "id": "19595",
+                    "name": "Delphi DCM3.4"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "8454",
+                "ecus": [
+                  {
+                    "id": "19595",
+                    "name": "Delphi DCM3.4"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "8457",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              }
+            }
+          },
+          "XE": {
+            "id": "2331",
+            "engines": {
+              "2.0 16V TURBO": {
+                "id": "11794",
+                "ecus": [
+                  {
+                    "id": "20070",
+                    "name": "Bosch MED17.9.7"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "10993",
+                "ecus": [
+                  {
+                    "id": "19965",
+                    "name": "Bosch EDC17CP55"
+                  }
+                ]
+              }
+            }
+          },
+          "XF": {
+            "id": "1813",
+            "engines": {
+              "2.0 16V TURBO": {
+                "id": "11493",
+                "ecus": [
+                  {
+                    "id": "19540",
+                    "name": "Bosch MED17.2"
+                  },
+                  {
+                    "id": "20070",
+                    "name": "Bosch MED17.9.7"
+                  }
+                ]
+              },
+              "2.0 D": {
+                "id": "11795",
+                "ecus": [
+                  {
+                    "id": "19965",
+                    "name": "Bosch EDC17CP55"
+                  }
+                ]
+              },
+              "2.2 CDI": {
+                "id": "8458",
+                "ecus": [
+                  {
+                    "id": "19456",
+                    "name": "Bosch EDC17CP42"
+                  },
+                  {
+                    "id": "19595",
+                    "name": "Delphi DCM3.4"
+                  }
+                ]
+              },
+              "2.7 TD V6": {
+                "id": "8459",
+                "ecus": [
+                  {
+                    "id": "19703",
+                    "name": "Siemens/Continental SID201"
+                  },
+                  {
+                    "id": "19704",
+                    "name": "Siemens/Continental SID202"
+                  },
+                  {
+                    "id": "19705",
+                    "name": "Siemens/Continental SID204"
+                  }
+                ]
+              },
+              "3.0 CDI": {
+                "id": "8460",
+                "ecus": [
+                  {
+                    "id": "19450",
+                    "name": "Bosch EDC17CP11"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "8461",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              },
+              "3.0 V6 Supercharged": {
+                "id": "10980",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              },
+              "4.2 i": {
+                "id": "8462",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "5.0 i": {
+                "id": "8463",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "XJ": {
+            "id": "1814",
+            "engines": {
+              "2.7 TD V6": {
+                "id": "12107",
+                "ecus": [
+                  {
+                    "id": "19703",
+                    "name": "Siemens/Continental SID201"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "8466",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20038",
+                    "name": "Visteon EEC 4-6"
+                  }
+                ]
+              },
+              "3.0 V6 Supercharged": {
+                "id": "10977",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              },
+              "4.2 i": {
+                "id": "8468",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "5.0 i": {
+                "id": "8469",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "5.0 V8 Supercharged": {
+                "id": "10981",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              }
+            }
+          },
+          "XK": {
+            "id": "1815",
+            "engines": {
+              "4.2 i": {
+                "id": "8471",
+                "ecus": [
+                  {
+                    "id": "19875",
+                    "name": "Denso 512kb"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "5.0 i": {
+                "id": "8472",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              },
+              "5.0 V8 Supercharged": {
+                "id": "10982",
+                "ecus": [
+                  {
+                    "id": "19960",
+                    "name": "Bosch MED17.8.31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Jinbei": {
+        "id": "365",
+        "models": {
+          "Hercules K5": {
+            "id": "3012",
+            "engines": {
+              "2.5L TDI": {
+                "id": "12456",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "JMC": {
+        "id": "339",
+        "models": {
+          "Baodian": {
+            "id": "3135",
+            "engines": {
+              "2.8L TDI": {
+                "id": "12844",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              },
+              "2.9L TD": {
+                "id": "12742",
+                "ecus": [
+                  {
+                    "id": "20200",
+                    "name": "Bosch EDC17C63"
+                  }
+                ]
+              }
+            }
+          },
+          "Baowei": {
+            "id": "3159",
+            "engines": {
+              "2.8L TDI": {
+                "id": "12845",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          },
+          "Transit": {
+            "id": "2928",
+            "engines": {
+              "2.8 TDI": {
+                "id": "12234",
+                "ecus": [
+                  {
+                    "id": "19971",
+                    "name": "Bosch EDC17C55"
                   }
                 ]
               }
