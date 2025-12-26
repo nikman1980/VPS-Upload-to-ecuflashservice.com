@@ -1272,10 +1272,64 @@ class ECUAnalyzer:
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
         }
+    
+    def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
+        """
+        Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps using binary analysis.
+        SCR systems include:
+        - NOx sensor calibration blocks
+        - Urea dosing maps
+        - SCR catalyst efficiency maps
+        """
         
-        if confidence_score >= 30:
+        indicators = []
+        confidence_score = 0
+        
+        # =================================================================
+        # METHOD 1: Direct binary text markers for SCR/AdBlue
+        # These must be explicit - avoid false positives from random data
+        # =================================================================
+        adblue_binary_markers = [
+            (b"ADBLUE", "ADBLUE marker"),
+            (b"AdBlue", "AdBlue marker"),
+            (b"adblue", "adblue marker"),
+            (b"UREA", "UREA marker"),
+            (b"Urea", "Urea marker"),
+            (b"SCR_", "SCR_ marker"),
+            (b"_SCR", "_SCR marker"),
+            (b"NOX_", "NOX_ marker"),
+            (b"_NOX", "_NOX marker"),
+            (b"DENOX", "DENOX marker"),
+            (b"DeNOx", "DeNOx marker"),
+        ]
+        
+        for marker, desc in adblue_binary_markers:
+            count = file_data.count(marker)
+            if count > 0:
+                indicators.append(f"{desc}: {count}x found")
+                confidence_score += 50
+                break  # Only count first match type
+        
+        # =================================================================
+        # METHOD 2: String-based detection from extracted text
+        # =================================================================
+        adblue_strings = [
+            "ADBLUE", "AD_BLUE", "BLUE_TEC", "BLUETEC",
+            "SELECTIVE CATALYTIC", "SCR_CAT", "SCR_TEMP", "SCR_EFF",
+            "UREA_INJ", "UREA_DOS", "NOX_SENSOR", "NOXSENSOR",
+            "DENOX", "DENOXTRONIC", "NH3", "REDUCTANT", "AFTERTREATMENT"
+        ]
+        
+        for s in adblue_strings:
+            if s in strings_upper:
+                indicators.append(f"String: {s}")
+                confidence_score += 35
+                break
+        
+        # Determine confidence level
+        if confidence_score >= 50:
             confidence = "high"
-        elif confidence_score >= 15:
+        elif confidence_score >= 35:
             confidence = "medium"
         elif confidence_score > 0:
             confidence = "low"
@@ -1288,56 +1342,6 @@ class ECUAnalyzer:
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
         }
-    
-    def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
-        """Detect AdBlue/SCR/DEF (Selective Catalytic Reduction) maps and blocks"""
-        
-        indicators = []
-        confidence_score = 0
-        
-        # String-based detection - STRICT patterns only
-        adblue_strings = [
-            "ADBLUE", "AD_BLUE", "AD-BLUE", "BLUE_TEC", "BLUETEC",
-            "SELECTIVE CATALYTIC",
-            "UREA", "UREA_INJ", "UREA_DOS",
-            "NOX_SENSOR", "NOXSENSOR", "NOX_CAT",
-            "DENOX", "DE_NOX", "DENOXTRONIC",
-            "SCR_CAT", "SCR_TEMP", "SCR_EFF", "SCR_SYSTEM",
-            "NH3", "AMMONIA", "REDUCTANT",
-            "AFTERTREATMENT"
-        ]
-        
-        for s in adblue_strings:
-            if s in strings_upper:
-                indicators.append(f"String found: {s}")
-                confidence_score += 25
-        
-        # Binary patterns - STRICT patterns only
-        adblue_binary_patterns = [
-            (rb"(?i)adblue", "AdBlue marker"),
-            (rb"(?i)scr[_\s]?cat", "SCR catalyst"),
-            (rb"(?i)scr[_\s]?system", "SCR system"),
-            (rb"(?i)urea[_\s]?dos", "Urea dosing"),
-            (rb"(?i)urea[_\s]?inj", "Urea injection"),
-            (rb"(?i)nox[_\s]?sens", "NOx sensor"),
-            (rb"(?i)denox", "DeNOx system"),
-            (rb"(?i)nh3[_\s]?slip", "NH3 slip"),
-            (rb"(?i)reductant", "Reductant reference"),
-            (rb"(?i)aftertreatment", "Aftertreatment system"),
-        ]
-        
-        for pattern, desc in adblue_binary_patterns:
-            if re.search(pattern, file_data):
-                indicators.append(f"Binary: {desc}")
-                confidence_score += 20
-        
-        # ECU type inference for known SCR-equipped ECUs
-        ecu_type = self.results.get("ecu_type", "") or ""
-        manufacturer = self.results.get("manufacturer", "") or ""
-        ecu_upper = ecu_type.upper()
-        mfr_upper = manufacturer.upper()
-        
-        # Check for truck/commercial vehicle indicators in the binary
         # IMPORTANT: Use strict patterns to avoid false positives
         is_truck_ecu = False
         truck_indicators = [
