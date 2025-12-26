@@ -37,7 +37,7 @@ const DPFOffPage = () => {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">DPF Delete Service</h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Remove DPF restrictions from your ECU and restore your engine's full performance potential
+            Remove DPF restrictions from your ECU and restore your engine&apos;s full performance potential
           </p>
           <Link 
             to="/" 
@@ -55,7 +55,7 @@ const DPFOffPage = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">What is DPF Delete?</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                The Diesel Particulate Filter (DPF) is an emissions control device that captures and stores soot particles from your diesel engine's exhaust. Over time, the DPF requires "regeneration" cycles to burn off accumulated soot.
+                The Diesel Particulate Filter (DPF) is an emissions control device that captures and stores soot particles from your diesel engine&apos;s exhaust. Over time, the DPF requires &quot;regeneration&quot; cycles to burn off accumulated soot.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
                 DPF delete is an ECU software modification that removes all DPF-related functions from your engine management system. This includes disabling regeneration cycles, DPF monitoring, differential pressure sensors, and related error codes.
