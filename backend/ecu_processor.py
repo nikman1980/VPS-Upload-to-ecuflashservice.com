@@ -5,8 +5,7 @@ Handles DPF, AdBlue, EGR removal, DTC deletion, and checksum correction
 
 import numpy as np
 import struct
-import hashlib
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple
 from enum import Enum
 import logging
 

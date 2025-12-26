@@ -10,7 +10,7 @@ import logging
 import httpx
 import base64
 import asyncio
-from typing import Optional, List, Dict, Any
+from typing import List, Dict, Any
 from datetime import datetime, timezone
 from pathlib import Path
 from dotenv import load_dotenv

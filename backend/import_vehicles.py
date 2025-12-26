@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-DATA_URL = "https://ecutuner-2.preview.emergentagent.com/vehicle_data_export.json"
+DATA_URL = "https://tunemaster-13.preview.emergentagent.com/vehicle_data_export.json"
 
 async def import_data():
     print("=" * 50)

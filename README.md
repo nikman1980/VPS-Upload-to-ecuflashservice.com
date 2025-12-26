@@ -143,7 +143,7 @@ CORS_ORIGINS=*
 
 ### Frontend (.env)
 ```
-REACT_APP_BACKEND_URL=https://ecutuner-2.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://tunemaster-13.preview.emergentagent.com
 ```
 
 ## ✅ Testing

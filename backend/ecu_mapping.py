@@ -11,7 +11,6 @@ This is a smart mapping system that provides relevant ECU options based on:
 """
 
 from typing import List, Dict, Optional
-import re
 
 
 # =============================================================================
