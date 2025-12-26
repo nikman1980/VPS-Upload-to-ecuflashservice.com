@@ -1235,14 +1235,25 @@ class ECUAnalyzer:
         indicators = []
         confidence_score = 0
         
-        # String-based detection
+        # String-based detection - STRICT patterns only (avoid false positives)
+        # "DEF" alone causes false positives from "ABCDEFG"
+        # "NOX" alone causes false positives from strings like "DKNOXY"
+        # "SCR" alone causes false positives from random data
         adblue_strings = [
             "ADBLUE", "AD_BLUE", "AD-BLUE", "BLUE_TEC", "BLUETEC",
-            "SCR", "SELECTIVE CATALYTIC", "DEF",  # Diesel Exhaust Fluid
-            "UREA", "NOX", "NOX_SENSOR", "NOXSENSOR",
+            "SELECTIVE CATALYTIC",
+            "UREA", "UREA_INJ", "UREA_DOS",
+            "NOX_SENSOR", "NOXSENSOR", "NOX_CAT",
             "DENOX", "DE_NOX", "DENOXTRONIC",
-            "SCR_CAT", "SCR_TEMP", "SCR_EFF",
-            "NH3", "AMMONIA", "DOSING", "INJECTION_UREA",
+            "SCR_CAT", "SCR_TEMP", "SCR_EFF", "SCR_SYSTEM",
+            "NH3", "AMMONIA", "REDUCTANT",
+            "DCU"  # Dosing Control Unit - only if standalone
+        ]
+        
+        for s in adblue_strings:
+            if s in strings_upper:
+                indicators.append(f"String found: {s}")
+                confidence_score += 25  # Higher weight - AdBlue is specific
             "DCU",  # Dosing Control Unit
             "REDUCTANT"
         ]
