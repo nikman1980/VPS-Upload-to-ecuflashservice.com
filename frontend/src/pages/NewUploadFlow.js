@@ -1196,7 +1196,7 @@ const NewUploadFlow = () => {
                     <select
                       value={selectedModel?.id || ''}
                       onChange={(e) => {
-                        const model = models.find(m => m.id === parseInt(e.target.value));
+                        const model = models.find(m => String(m.id) === e.target.value);
                         if (model) handleModelSelect(model);
                       }}
                       className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
