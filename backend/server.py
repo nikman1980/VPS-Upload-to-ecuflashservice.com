@@ -353,6 +353,15 @@ class PaymentUpdate(BaseModel):
     payment_status: PaymentStatus
 
 
+class ContactFormRequest(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    subject: str
+    orderNumber: Optional[str] = None
+    message: str
+
+
 # Helper function to calculate pricing
 def calculate_pricing(service_ids: List[str]) -> dict:
     base_total = 0.0
