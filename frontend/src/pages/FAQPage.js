@@ -11,7 +11,7 @@ const FAQPage = () => {
     },
     {
       question: "Is ECU tuning safe for my vehicle?",
-      answer: "When done professionally, ECU tuning is safe for your vehicle. Our experienced technicians understand the safe operating limits of each engine type and never push parameters beyond manufacturer tolerances. We use industry-standard tools and extensively tested calibration maps. However, it's important to note that modifications to emission systems (DPF, EGR, AdBlue) are intended for off-road and competition use only where permitted by local regulations."
+      answer: "When done professionally, ECU tuning is safe for your vehicle. Our experienced technicians understand the safe operating limits of each engine type and never push parameters beyond manufacturer tolerances. We use industry-standard tools and extensively tested calibration maps. However, it is important to note that modifications to emission systems (DPF, EGR, AdBlue) are intended for off-road and competition use only where permitted by local regulations."
     },
     {
       question: "How long does it take to receive my modified file?",
@@ -19,7 +19,7 @@ const FAQPage = () => {
     },
     {
       question: "What file formats do you accept?",
-      answer: "We accept all common ECU file formats including .bin, .hex, .ori, .ecu, .mod, and .fls files. File sizes typically range from 256KB to 8MB depending on the ECU type. If you're unsure about your file format, simply upload it and our system will automatically analyze it. We support ECUs from all major manufacturers including Bosch, Siemens/Continental, Denso, Delphi, Marelli, and more."
+      answer: "We accept all common ECU file formats including .bin, .hex, .ori, .ecu, .mod, and .fls files. File sizes typically range from 256KB to 8MB depending on the ECU type. If you are unsure about your file format, simply upload it and our system will automatically analyze it. We support ECUs from all major manufacturers including Bosch, Siemens/Continental, Denso, Delphi, Marelli, and more."
     },
     {
       question: "What is DPF delete and why would I need it?",
@@ -27,7 +27,7 @@ const FAQPage = () => {
     },
     {
       question: "Do you offer a warranty or guarantee on your work?",
-      answer: "Yes! We stand behind our work with a satisfaction guarantee. If the modified file doesn't work correctly or causes issues, we will rework it free of charge until you're satisfied. Additionally, if any DTC (Diagnostic Trouble Code) errors appear related to our modifications within 30 days, we will resolve them at no extra cost. Please note that warranty does not cover physical damage to components or issues caused by incorrect flashing procedures."
+      answer: "Yes! We stand behind our work with a satisfaction guarantee. If the modified file does not work correctly or causes issues, we will rework it free of charge until you are satisfied. Additionally, if any DTC (Diagnostic Trouble Code) errors appear related to our modifications within 30 days, we will resolve them at no extra cost. Please note that warranty does not cover physical damage to components or issues caused by incorrect flashing procedures."
     },
     {
       question: "Can I revert to my original ECU file?",
@@ -43,7 +43,7 @@ const FAQPage = () => {
     },
     {
       question: "How do I read and write ECU files from my vehicle?",
-      answer: "ECU files can be read and written using specialized tools such as KESS, KTAG, CMD, PCMFlash, or manufacturer-specific diagnostic equipment. The method depends on your vehicle and ECU type - some can be done via OBD port while others require bench or boot mode connection. If you're not familiar with the process, we recommend visiting a professional tuning shop or automotive electrician who can assist with the reading and writing process."
+      answer: "ECU files can be read and written using specialized tools such as KESS, KTAG, CMD, PCMFlash, or manufacturer-specific diagnostic equipment. The method depends on your vehicle and ECU type - some can be done via OBD port while others require bench or boot mode connection. If you are not familiar with the process, we recommend visiting a professional tuning shop or automotive electrician who can assist with the reading and writing process."
     }
   ];
 
