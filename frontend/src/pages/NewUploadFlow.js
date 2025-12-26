@@ -821,7 +821,7 @@ const NewUploadFlow = () => {
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div className="text-3xl mb-3">🆓</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Free DTC Support</h3>
-                <p className="text-gray-600 text-sm">If further DTCs need to be deleted for your job file - it's FREE for 1 month after purchase (same file only).</p>
+                <p className="text-gray-600 text-sm">If further DTCs need to be deleted for your job file - it&apos;s FREE for 1 month after purchase (same file only).</p>
               </div>
             </div>
           </div>
