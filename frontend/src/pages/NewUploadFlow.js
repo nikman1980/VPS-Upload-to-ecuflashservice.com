@@ -764,28 +764,65 @@ const NewUploadFlow = () => {
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
               <p className="text-gray-500 max-w-2xl mx-auto">
-                Get your modified ECU file in 4 simple steps
+                Get your modified ECU file in 6 simple steps
               </p>
             </div>
             
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
               {[
-                { step: '01', title: 'Select Vehicle', desc: 'Choose your vehicle make, model, generation, and engine from our database.' },
-                { step: '02', title: 'Upload ECU File', desc: 'Upload your original ECU file (.bin, .hex, .ori). We support all major brands.' },
-                { step: '03', title: 'Choose Services', desc: 'Select the modifications you need: DPF OFF, EGR OFF, DTC removal, and more.' },
-                { step: '04', title: 'Pay & Download', desc: 'Pay securely via PayPal. Receive your modified file within 20-60 minutes.' },
+                { step: '01', title: 'Select Vehicle', desc: 'Choose your vehicle type, manufacturer, model, generation, and engine.' },
+                { step: '02', title: 'Select ECU Type', desc: 'Choose your ECU type from the recommended list based on your vehicle.' },
+                { step: '03', title: 'Upload ECU File', desc: 'Upload your original ECU file (.bin, .hex, .ori, .ecu, .mod).' },
+                { step: '04', title: 'Auto Analysis', desc: 'Our system automatically analyzes your file and detects ECU details.' },
+                { step: '05', title: 'Choose Services', desc: 'Select the modifications: DPF, EGR, AdBlue, DTC removal, Stage tuning.' },
+                { step: '06', title: 'Pay & Receive', desc: 'Pay via PayPal. Receive modified file within 20-60 minutes.' },
               ].map((item, i) => (
                 <div key={i} className="relative">
-                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200/50 rounded-2xl p-6">
-                    <div className="text-5xl font-bold text-gray-300 mb-3">{item.step}</div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-500 text-sm">{item.desc}</p>
+                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200/50 rounded-2xl p-4">
+                    <div className="text-4xl font-bold text-gray-300 mb-2">{item.step}</div>
+                    <h3 className="text-base font-semibold text-gray-900 mb-1">{item.title}</h3>
+                    <p className="text-gray-500 text-xs">{item.desc}</p>
                   </div>
-                  {i < 3 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-gray-200 text-xl">→</div>
+                  {i < 5 && (
+                    <div className="hidden lg:block absolute top-1/2 -right-2 transform -translate-y-1/2 text-gray-200 text-lg">→</div>
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Special Features / Advertising */}
+        <section className="py-16 px-6 bg-gradient-to-r from-blue-50 to-cyan-50">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div className="text-3xl mb-3">🚛</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Chinese Trucks Specialist</h3>
+                <p className="text-gray-600 text-sm">AdBlue/SCR Delete available for all newer Chinese Trucks - Weichai, Yuchai, FAW, Sinotruk, Dongfeng, Foton.</p>
+              </div>
+              
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div className="text-3xl mb-3">🎯</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">100% Accurate Toyota Files</h3>
+                <p className="text-gray-600 text-sm">100% correct Toyota modified files as per your service request. We guarantee quality on every Toyota ECU file.</p>
+              </div>
+              
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div className="text-3xl mb-3">🔌</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Installation Guidance</h3>
+                <p className="text-gray-600 text-sm">After modification, we advise which plugs you need to disconnect if required for proper operation.</p>
+              </div>
+              
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div className="text-3xl mb-3">🆓</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Free DTC Support</h3>
+                <p className="text-gray-600 text-sm">If further DTCs need to be deleted for your job file - it's FREE for 1 month after purchase (same file only).</p>
+              </div>
             </div>
           </div>
         </section>
