@@ -1412,6 +1412,7 @@ class ECUAnalyzer:
             "confidence": confidence,
             "confidence_score": confidence_score,
             "indicators": indicators[:5]
+        }
 
     def _detect_lambda_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
