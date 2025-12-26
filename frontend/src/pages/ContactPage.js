@@ -69,7 +69,7 @@ const ContactPage = () => {
       <main className="container mx-auto px-6 py-12 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-          <p className="text-gray-600 text-lg">Have questions? We're here to help you with your ECU tuning needs</p>
+          <p className="text-gray-600 text-lg">Have questions? We&apos;re here to help you with your ECU tuning needs</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">

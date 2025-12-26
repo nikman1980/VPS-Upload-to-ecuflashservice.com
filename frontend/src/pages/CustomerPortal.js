@@ -411,7 +411,7 @@ const CustomerPortal = () => {
                   </button>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm text-center mb-3">Don't have an order yet?</p>
+                  <p className="text-gray-500 text-sm text-center mb-3">Don&apos;t have an order yet?</p>
                   <button
                     onClick={() => navigate('/')}
                     className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
@@ -477,7 +477,7 @@ const CustomerPortal = () => {
           <div className="text-center py-20">
             <div className="text-6xl mb-4">📦</div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">No Orders Found</h2>
-            <p className="text-gray-500 mb-8">You haven't placed any orders with this email yet.</p>
+            <p className="text-gray-500 mb-8">You haven&apos;t placed any orders with this email yet.</p>
             <button
               onClick={() => navigate('/')}
               className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition"
