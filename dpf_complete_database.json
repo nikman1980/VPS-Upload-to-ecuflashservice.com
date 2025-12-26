@@ -1732,8 +1732,73 @@
             }
           }
         }
+      },
+      "Gleaner": {
+        "id": "336",
+        "models": {
+          "S7 Series": {
+            "id": "2909",
+            "engines": {
+              "8.4L 6L TD": {
+                "id": "12204",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "S8 Series": {
+            "id": "2908",
+            "engines": {
+              "8.4L 6L TD": {
+                "id": "12202",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              },
+              "9.8L 7L TD": {
+                "id": "12203",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          },
+          "S9 Series": {
+            "id": "2907",
+            "engines": {
+              "8.4L 6L TD": {
+                "id": "12201",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              },
+              "9.8L 7L TD": {
+                "id": "12200",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              }
+            }
+          }
+        }
       }
     }
   },
-  "last_update": "2025-12-26T12:33:18.873657"
+  "last_update": "2025-12-26T12:33:33.184075"
 }
