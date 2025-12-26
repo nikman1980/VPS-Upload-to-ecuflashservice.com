@@ -37,7 +37,7 @@ const EGROffPage = () => {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">EGR Delete Service</h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Eliminate carbon buildup and restore your engine's efficiency by disabling the EGR system
+            Eliminate carbon buildup and restore your engine&apos;s efficiency by disabling the EGR system
           </p>
           <Link 
             to="/" 
@@ -55,7 +55,7 @@ const EGROffPage = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">What is EGR Delete?</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                The Exhaust Gas Recirculation (EGR) system redirects a portion of exhaust gases back into the engine's intake manifold to reduce nitrogen oxide (NOx) emissions. While environmentally beneficial, this system introduces hot, dirty exhaust gases into your engine.
+                The Exhaust Gas Recirculation (EGR) system redirects a portion of exhaust gases back into the engine&apos;s intake manifold to reduce nitrogen oxide (NOx) emissions. While environmentally beneficial, this system introduces hot, dirty exhaust gases into your engine.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
                 EGR delete is an ECU software modification that disables the EGR valve operation and related monitoring systems. This prevents exhaust gases from recirculating into the engine, keeping the intake system clean and improving combustion efficiency.
