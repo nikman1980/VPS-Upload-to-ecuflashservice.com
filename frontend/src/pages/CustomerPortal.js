@@ -214,65 +214,214 @@ const CustomerPortal = () => {
     return new Date(dateString).toLocaleString();
   };
 
+  // Handle registration
+  const handleRegister = async (e) => {
+    e?.preventDefault();
+    setRegisterError('');
+    
+    if (!registerName.trim() || !registerEmail.trim() || !registerPassword) {
+      setRegisterError('Please fill in all required fields');
+      return;
+    }
+    
+    if (registerPassword !== registerConfirm) {
+      setRegisterError('Passwords do not match');
+      return;
+    }
+    
+    if (registerPassword.length < 6) {
+      setRegisterError('Password must be at least 6 characters');
+      return;
+    }
+    
+    setLoginLoading(true);
+    
+    try {
+      const response = await axios.post(`${API}/portal/register`, {
+        name: registerName.trim(),
+        email: registerEmail.trim(),
+        password: registerPassword
+      });
+      
+      if (response.data.success) {
+        setRegisterSuccess(true);
+        // Auto-login after registration
+        setTimeout(() => {
+          setLoginEmail(registerEmail);
+          doLogin(registerEmail);
+        }, 1500);
+      } else {
+        setRegisterError(response.data.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setRegisterError(error.response?.data?.detail || 'Registration failed. Please try again.');
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
   // Login Screen
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl mb-4">
-              <svg className="w-9 h-9 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Customer Portal</h1>
-            <p className="text-gray-500 mt-2">Access all your orders and files</p>
+            <p className="text-gray-500 mt-2">
+              {showRegister ? 'Create your account' : 'Access all your orders and files'}
+            </p>
           </div>
           
-          {/* Login Card */}
-          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-2xl p-8">
-            <form onSubmit={handleLogin}>
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="w-full bg-gray-100/50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    required
-                  />
-                  <p className="text-gray-500 text-sm mt-2">Enter the email you used when placing orders</p>
+          {/* Registration Form */}
+          {showRegister ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+              {registerSuccess ? (
+                <div className="text-center py-8">
+                  <div className="text-6xl mb-4">✅</div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Account Created!</h2>
+                  <p className="text-gray-500">Logging you in automatically...</p>
                 </div>
-                
-                {loginError && (
-                  <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
-                    {loginError}
+              ) : (
+                <form onSubmit={handleRegister}>
+                  <div className="space-y-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                      <input
+                        type="text"
+                        value={registerName}
+                        onChange={(e) => setRegisterName(e.target.value)}
+                        placeholder="John Doe"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                      <input
+                        type="email"
+                        value={registerEmail}
+                        onChange={(e) => setRegisterEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                      <input
+                        type="password"
+                        value={registerPassword}
+                        onChange={(e) => setRegisterPassword(e.target.value)}
+                        placeholder="Minimum 6 characters"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+                      <input
+                        type="password"
+                        value={registerConfirm}
+                        onChange={(e) => setRegisterConfirm(e.target.value)}
+                        placeholder="Re-enter password"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                    
+                    {registerError && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
+                        {registerError}
+                      </div>
+                    )}
+                    
+                    <button
+                      type="submit"
+                      disabled={loginLoading}
+                      className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50"
+                    >
+                      {loginLoading ? 'Creating Account...' : 'Create Account'}
+                    </button>
                   </div>
-                )}
-                
+                </form>
+              )}
+              
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <p className="text-gray-500 text-sm text-center mb-4">Already have an account?</p>
                 <button
-                  type="submit"
-                  disabled={loginLoading}
-                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all disabled:opacity-50"
+                  onClick={() => { setShowRegister(false); setRegisterError(''); }}
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
                 >
-                  {loginLoading ? 'Loading...' : 'Access My Orders'}
+                  Sign In Instead →
                 </button>
               </div>
-            </form>
-            
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <p className="text-gray-500 text-sm text-center mb-4">Don't have an order yet?</p>
-              <button
-                onClick={() => navigate('/')}
-                className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-3 rounded-xl transition"
-              >
-                Start New Order →
-              </button>
             </div>
-          </div>
+          ) : (
+            /* Login Card */
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+              <form onSubmit={handleLogin}>
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      required
+                    />
+                    <p className="text-gray-500 text-sm mt-2">Enter the email you used when placing orders</p>
+                  </div>
+                  
+                  {loginError && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
+                      {loginError}
+                    </div>
+                  )}
+                  
+                  <button
+                    type="submit"
+                    disabled={loginLoading}
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50"
+                  >
+                    {loginLoading ? 'Loading...' : 'Access My Orders'}
+                  </button>
+                </div>
+              </form>
+              
+              <div className="mt-6 pt-6 border-t border-gray-200 space-y-4">
+                <div>
+                  <p className="text-gray-500 text-sm text-center mb-3">Want a full account?</p>
+                  <button
+                    onClick={() => setShowRegister(true)}
+                    className="w-full bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 py-3 rounded-xl transition"
+                  >
+                    Create Account →
+                  </button>
+                </div>
+                <div>
+                  <p className="text-gray-500 text-sm text-center mb-3">Don't have an order yet?</p>
+                  <button
+                    onClick={() => navigate('/')}
+                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
+                  >
+                    Start New Order →
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
