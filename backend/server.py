@@ -676,7 +676,6 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         
         # Get detected services from analyzer
         detected_services = display_info.get('available_services', [])
-        detected_map_keys = set(s.get('service_id', '') for s in detected_services)
         
         # Define all possible services with CORRECT pricing (matching SERVICE_PRICING)
         all_services = {
