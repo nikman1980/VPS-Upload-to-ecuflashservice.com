@@ -1141,7 +1141,6 @@ const NewUploadFlow = () => {
                         />
                       )}
                     </div>
-                  )}
                   
                   {/* Summary for Manual Entry */}
                   {manualVehicle.make && manualVehicle.model && selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()) && (
