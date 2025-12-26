@@ -299,3 +299,5 @@ backend:
       - working: true
         agent: "main"
         comment: "POST /api/analyze-and-process-file correctly returns detected services based on ECU file content. Tested with multiple files."
+  - agent: "main"
+    message: "Major improvement to AdBlue/SCR detection. Now uses ECU type identification (CM2150E = EPA2010 SCR required) as primary method, with higher thresholds for DTC-based detection to avoid false positives. Transtron correctly shows no AdBlue. Cummins CM2150E correctly shows AdBlue with HIGH confidence. Bosch EDC17CP52 correctly shows AdBlue. Research conducted on WinOLS and ToyoLex3 professional map detection methods."
