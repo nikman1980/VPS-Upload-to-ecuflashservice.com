@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:25:23.332878",
+  "last_update": "2025-12-26T23:28:37.225835",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -64050,6 +64050,1342 @@
                   {
                     "id": "20173",
                     "name": "Bosch EDC17CV82"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Isuzu": {
+        "id": "175",
+        "models": {
+          "China Isuzu Small Cargo": {
+            "id": "2986",
+            "engines": {
+              "3.0 DTI": {
+                "id": "12388",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          },
+          "D-max / V-max": {
+            "id": "2337",
+            "engines": {
+              "1.9 TDI": {
+                "id": "12236",
+                "ecus": [
+                  {
+                    "id": "20127",
+                    "name": "Bosch EDC17C83"
+                  }
+                ]
+              },
+              "2.5 TDI": {
+                "id": "11154",
+                "ecus": [
+                  {
+                    "id": "19992",
+                    "name": "Delphi"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "3.0 TDI": {
+                "id": "11014",
+                "ecus": [
+                  {
+                    "id": "19402",
+                    "name": "Bosch EDC15"
+                  },
+                  {
+                    "id": "19997",
+                    "name": "Bosch MSA15"
+                  },
+                  {
+                    "id": "19992",
+                    "name": "Delphi"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  },
+                  {
+                    "id": "20181",
+                    "name": "Transtron TC265"
+                  }
+                ]
+              }
+            }
+          },
+          "ELF / N SERIES": {
+            "id": "2239",
+            "engines": {
+              "2.8 TDI": {
+                "id": "10652",
+                "ecus": [
+                  {
+                    "id": "19971",
+                    "name": "Bosch EDC17C55"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "3.0 TDI": {
+                "id": "10653",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "4.6 TDI": {
+                "id": "10651",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "5.2 TDI": {
+                "id": "10650",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  },
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "Forward": {
+            "id": "2240",
+            "engines": {
+              "5.2 TDI": {
+                "id": "10654",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "7.2 TDI": {
+                "id": "12611",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  }
+                ]
+              },
+              "7.8 TDI": {
+                "id": "10655",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "FTR": {
+            "id": "3207",
+            "engines": {
+              "6,7L TDI": {
+                "id": "12964",
+                "ecus": [
+                  {
+                    "id": "20176",
+                    "name": "Motorola / Cummins CM2450"
+                  }
+                ]
+              }
+            }
+          },
+          "FVR": {
+            "id": "3208",
+            "engines": {
+              "6,7L TDI": {
+                "id": "12965",
+                "ecus": [
+                  {
+                    "id": "20176",
+                    "name": "Motorola / Cummins CM2450"
+                  }
+                ]
+              }
+            }
+          },
+          "Giga": {
+            "id": "2241",
+            "engines": {
+              "15.4 TDI": {
+                "id": "12036",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "15.7 TDI": {
+                "id": "10656",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "M21": {
+            "id": "3301",
+            "engines": {
+              "2.5 TDI": {
+                "id": "13135",
+                "ecus": [
+                  {
+                    "id": "20127",
+                    "name": "Bosch EDC17C83"
+                  }
+                ]
+              }
+            }
+          },
+          "NPR": {
+            "id": "2334",
+            "engines": {
+              "3.0 TDI": {
+                "id": "11009",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "5.2 TDI": {
+                "id": "11008",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  },
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "NPS": {
+            "id": "3034",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12513",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "5.2 TDI": {
+                "id": "12514",
+                "ecus": [
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "NQR": {
+            "id": "2336",
+            "engines": {
+              "3.0 TDI": {
+                "id": "11012",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "5.2 TDI": {
+                "id": "11013",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  },
+                  {
+                    "id": "20232",
+                    "name": "Denso 1N83M"
+                  },
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "20071",
+                    "name": "Denso SH72546"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "Traga": {
+            "id": "3134",
+            "engines": {
+              "2.5L TD": {
+                "id": "12741",
+                "ecus": [
+                  {
+                    "id": "20200",
+                    "name": "Bosch EDC17C63"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Iveco": {
+        "id": "158",
+        "models": {
+          "Daily": {
+            "id": "2152",
+            "engines": {
+              "2.3 d": {
+                "id": "10219",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19425",
+                    "name": "Bosch EDC16C8"
+                  },
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19979",
+                    "name": "Bosch EDC17C69"
+                  },
+                  {
+                    "id": "19812",
+                    "name": "Marelli MJD8F"
+                  }
+                ]
+              },
+              "2.8 d": {
+                "id": "10221",
+                "ecus": [
+                  {
+                    "id": "19770",
+                    "name": "Bosch EDC15C7"
+                  }
+                ]
+              },
+              "3.0 d": {
+                "id": "10220",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19425",
+                    "name": "Bosch EDC16C8"
+                  },
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19460",
+                    "name": "Bosch EDC17CP52"
+                  }
+                ]
+              },
+              "3.0 d (EU6 SCR)": {
+                "id": "11322",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "11305",
+                "ecus": [
+                  {
+                    "id": "19636",
+                    "name": "Marelli IAW5SF"
+                  }
+                ]
+              }
+            }
+          },
+          "Eurocargo": {
+            "id": "2242",
+            "engines": {
+              "160 - 180 CV": {
+                "id": "10657",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  }
+                ]
+              },
+              "220 - 300 CV": {
+                "id": "10658",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "S-Way": {
+            "id": "3176",
+            "engines": {
+              "11.1L R6": {
+                "id": "12885",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "12.9L R6": {
+                "id": "12886",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              },
+              "8.7L R6": {
+                "id": "12884",
+                "ecus": [
+                  {
+                    "id": "20202",
+                    "name": "Bosch MD1CE101"
+                  }
+                ]
+              }
+            }
+          },
+          "Stralis": {
+            "id": "2161",
+            "engines": {
+              "410 - 560 CV": {
+                "id": "10368",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "Trakker": {
+            "id": "2192",
+            "engines": {
+              "410 - 560 CV": {
+                "id": "10472",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "JAC": {
+        "id": "319",
+        "models": {
+          "CityStar": {
+            "id": "2988",
+            "engines": {
+              "4.5 TD": {
+                "id": "12397",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "HCF 1035": {
+            "id": "2856",
+            "engines": {
+              "2.8L 8V TDI": {
+                "id": "12108",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          },
+          "N-series": {
+            "id": "3064",
+            "engines": {
+              "2.8 TDI": {
+                "id": "12591",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              },
+              "4.7 TDI": {
+                "id": "12594",
+                "ecus": [
+                  {
+                    "id": "19437",
+                    "name": "Bosch EDC16UC40"
+                  }
+                ]
+              }
+            }
+          },
+          "SUNRAY": {
+            "id": "2859",
+            "engines": {
+              "1.9 CTI": {
+                "id": "12585",
+                "ecus": [
+                  {
+                    "id": "19779",
+                    "name": "Bosch EDC17C53"
+                  }
+                ]
+              },
+              "2.8L 8V TDI": {
+                "id": "12109",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  },
+                  {
+                    "id": "19779",
+                    "name": "Bosch EDC17C53"
+                  },
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          },
+          "V260": {
+            "id": "3212",
+            "engines": {
+              "1.9 TDI": {
+                "id": "12969",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          },
+          "X-series": {
+            "id": "3063",
+            "engines": {
+              "1.9 CTI": {
+                "id": "12587",
+                "ecus": [
+                  {
+                    "id": "19779",
+                    "name": "Bosch EDC17C53"
+                  }
+                ]
+              },
+              "2.0 CTI": {
+                "id": "12586",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              },
+              "2.8 TDI": {
+                "id": "12588",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "JMC": {
+        "id": "252",
+        "models": {
+          "1051": {
+            "id": "2597",
+            "engines": {
+              "2.8 TDI": {
+                "id": "11553",
+                "ecus": [
+                  {
+                    "id": "19971",
+                    "name": "Bosch EDC17C55"
+                  }
+                ]
+              }
+            }
+          },
+          "Carrying": {
+            "id": "2939",
+            "engines": {
+              "2.7L TDI": {
+                "id": "12262",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              },
+              "2.8L TDI": {
+                "id": "12843",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          },
+          "Conquer": {
+            "id": "2927",
+            "engines": {
+              "2.8 TDI": {
+                "id": "12231",
+                "ecus": [
+                  {
+                    "id": "19971",
+                    "name": "Bosch EDC17C55"
+                  }
+                ]
+              }
+            }
+          },
+          "Convey": {
+            "id": "3158",
+            "engines": {
+              "2.8L TDI": {
+                "id": "12846",
+                "ecus": [
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          },
+          "Transit": {
+            "id": "2596",
+            "engines": {
+              "2.8 TDI": {
+                "id": "11552",
+                "ecus": [
+                  {
+                    "id": "19971",
+                    "name": "Bosch EDC17C55"
+                  },
+                  {
+                    "id": "20131",
+                    "name": "Bosch EDC17C81"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "KAMAZ": {
+        "id": "234",
+        "models": {
+          "5490": {
+            "id": "3028",
+            "engines": {
+              "11.8L ISG12": {
+                "id": "12495",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "65115": {
+            "id": "2635",
+            "engines": {
+              "6.7 TD L6": {
+                "id": "11916",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  },
+                  {
+                    "id": "20110",
+                    "name": "Motorola / Cummins CM2150C"
+                  }
+                ]
+              },
+              "8.9 TD L6": {
+                "id": "11629",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "65206": {
+            "id": "2713",
+            "engines": {
+              "11.8L ISG12": {
+                "id": "11760",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "20073",
+                    "name": "Motorola / Cummins CM2880"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "65207": {
+            "id": "2711",
+            "engines": {
+              "11.8L ISG12": {
+                "id": "11758",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "20073",
+                    "name": "Motorola / Cummins CM2880"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "65806": {
+            "id": "2712",
+            "engines": {
+              "11.8L ISG12": {
+                "id": "11759",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "20073",
+                    "name": "Motorola / Cummins CM2880"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "740.62-2": {
+            "id": "2543",
+            "engines": {
+              "11.67L": {
+                "id": "11447",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Kenworth": {
+        "id": "220",
+        "models": {
+          "T300": {
+            "id": "2675",
+            "engines": {
+              "6.7L PX-6 6L": {
+                "id": "11694",
+                "ecus": [
+                  {
+                    "id": "20056",
+                    "name": "Motorola / Cummins CM2150D"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              },
+              "8.3L PX-8 6L": {
+                "id": "11695",
+                "ecus": [
+                  {
+                    "id": "20056",
+                    "name": "Motorola / Cummins CM2150D"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              }
+            }
+          },
+          "T409": {
+            "id": "2580",
+            "engines": {
+              "410-510PS": {
+                "id": "11531",
+                "ecus": [
+                  {
+                    "id": "19994",
+                    "name": "Delphi DMCI"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  }
+                ]
+              }
+            }
+          },
+          "T600 - T800": {
+            "id": "2481",
+            "engines": {
+              "11.9L ISX": {
+                "id": "12026",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  }
+                ]
+              },
+              "12.9L ISX12": {
+                "id": "11697",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  }
+                ]
+              },
+              "12.9L MX13": {
+                "id": "11334",
+                "ecus": [
+                  {
+                    "id": "20010",
+                    "name": "Delphi ETC3"
+                  },
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  }
+                ]
+              },
+              "15.0L ISX15": {
+                "id": "11696",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20057",
+                    "name": "Motorola / Cummins CM2250"
+                  },
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  }
+                ]
+              }
+            }
+          },
+          "W900": {
+            "id": "2861",
+            "engines": {
+              "15.0L ISX15": {
+                "id": "12113",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "KRAZ (КрАЗ)": {
+        "id": "342",
+        "models": {
+          "6443": {
+            "id": "2937",
+            "engines": {
+              "10.5L TD L6": {
+                "id": "12260",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Lindner": {
+        "id": "370",
+        "models": {
+          "Unitrac 102 S": {
+            "id": "3037",
+            "engines": {
+              "3.0 TDI": {
+                "id": "12523",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mack": {
+        "id": "298",
+        "models": {
+          "ISX": {
+            "id": "2864",
+            "engines": {
+              "15.0L ISX15": {
+                "id": "12120",
+                "ecus": [
+                  {
+                    "id": "20111",
+                    "name": "Motorola / Cummins CM870"
+                  },
+                  {
+                    "id": "20087",
+                    "name": "Motorola / Cummins CM871"
+                  }
+                ]
+              }
+            }
+          },
+          "MP8": {
+            "id": "3292",
+            "engines": {
+              "12.8TDI": {
+                "id": "13121",
+                "ecus": [
+                  {
+                    "id": "20259",
+                    "name": "TRW EMS2.3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mahindra": {
+        "id": "358",
+        "models": {
+          "BLAZO": {
+            "id": "2997",
+            "engines": {
+              "7.2L TD": {
+                "id": "12422",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20243",
+                    "name": "Bosch MD1CC898"
                   }
                 ]
               }
