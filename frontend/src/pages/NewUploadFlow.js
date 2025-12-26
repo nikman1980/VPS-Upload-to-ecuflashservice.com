@@ -1605,56 +1605,89 @@ const NewUploadFlow = () => {
 
 
 
-            <h3 className="text-xl font-semibold mb-4">Available Services</h3>
-            <div className="space-y-3 mb-8">
-              {availableOptions.map((option) => (
-                <div key={option.service_id} className="bg-white/50 rounded-2xl overflow-hidden border border-gray-200/50 hover:border-gray-300 transition">
-                  <label className="flex items-center justify-between p-5 cursor-pointer">
-                    <div className="flex items-center space-x-4">
-                      <input
-                        type="checkbox"
-                        checked={selectedServices.includes(option.service_id)}
-                        onChange={() => handleServiceToggle(option.service_id, option.price)}
-                        className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
-                      />
-                      <div>
-                        <div className="font-semibold text-gray-900">{option.service_name}</div>
-                      </div>
-                    </div>
-                    <div className="text-2xl font-bold text-green-400">${option.price.toFixed(2)}</div>
-                  </label>
-                  
-                  {/* DTC Input Fields */}
-                  {option.service_id === 'dtc-single' && selectedServices.includes('dtc-single') && (
-                    <div className="px-5 pb-5 pt-2 border-t border-gray-200/50">
-                      <label className="block text-sm text-gray-500 mb-2">Enter DTC code to remove:</label>
-                      <input
-                        type="text"
-                        value={dtcSingleCode}
-                        onChange={(e) => { setDtcSingleCode(e.target.value.toUpperCase()); setDtcError(''); }}
-                        placeholder="e.g., P0420"
-                        className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none"
-                        maxLength={5}
-                      />
-                      <p className="text-xs text-gray-500 mt-2">Format: P0420, C1234, B0001, U0100</p>
-                    </div>
-                  )}
-                  
-                  {option.service_id === 'dtc-multiple' && selectedServices.includes('dtc-multiple') && (
-                    <div className="px-5 pb-5 pt-2 border-t border-gray-200/50">
-                      <label className="block text-sm text-gray-500 mb-2">Enter DTC codes (one per line):</label>
-                      <textarea
-                        value={dtcMultipleCodes}
-                        onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(''); }}
-                        placeholder="P0420&#10;P2002&#10;P0401"
-                        className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none min-h-[100px]"
-                        rows={4}
-                      />
-                    </div>
-                  )}
+            <h3 className="text-xl font-semibold mb-2">Detected Services</h3>
+            <p className="text-gray-500 text-sm mb-4">
+              Based on our ECU analysis, the following services are available for your file:
+            </p>
+            
+            {availableOptions.length === 0 ? (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-6">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">⚠️</span>
+                  <div>
+                    <h4 className="font-semibold text-yellow-800">No Services Detected</h4>
+                    <p className="text-yellow-700 text-sm mt-1">
+                      We could not automatically detect available services for this ECU file. 
+                      Please contact us for manual analysis.
+                    </p>
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="space-y-3 mb-8">
+                {availableOptions.map((option) => (
+                  <div key={option.service_id} className={`rounded-2xl overflow-hidden border transition ${
+                    option.confidence === 'high' 
+                      ? 'bg-green-50/50 border-green-200 hover:border-green-300' 
+                      : option.confidence === 'medium'
+                        ? 'bg-blue-50/50 border-blue-200 hover:border-blue-300'
+                        : 'bg-white/50 border-gray-200/50 hover:border-gray-300'
+                  }`}>
+                    <label className="flex items-center justify-between p-5 cursor-pointer">
+                      <div className="flex items-center space-x-4">
+                        <input
+                          type="checkbox"
+                          checked={selectedServices.includes(option.service_id)}
+                          onChange={() => handleServiceToggle(option.service_id, option.price)}
+                          className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
+                        />
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-gray-900">{option.service_name}</span>
+                            {option.confidence === 'high' && (
+                              <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-medium">
+                                ✓ Detected
+                              </span>
+                            )}
+                            {option.confidence === 'medium' && (
+                              <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">
+                                Likely
+                              </span>
+                            )}
+                            {option.confidence === 'low' && (
+                              <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
+                                Possible
+                              </span>
+                            )}
+                          </div>
+                          {option.indicators && option.indicators.length > 0 && (
+                            <div className="text-xs text-gray-500 mt-1">
+                              {option.indicators[0]}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="text-2xl font-bold text-green-500">${option.price.toFixed(2)}</div>
+                    </label>
+                    
+                    {/* DTC Input Fields */}
+                    {option.service_id === 'dtc_off' && selectedServices.includes('dtc_off') && (
+                      <div className="px-5 pb-5 pt-2 border-t border-gray-200/50">
+                        <label className="block text-sm text-gray-500 mb-2">Enter DTC codes to remove (optional):</label>
+                        <textarea
+                          value={dtcMultipleCodes}
+                          onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(&apos;&apos;); }}
+                          placeholder="P0420&#10;P2002&#10;P0401"
+                          className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none min-h-[80px]"
+                          rows={3}
+                        />
+                        <p className="text-xs text-gray-400 mt-2">Leave empty for all DTCs or enter specific codes (one per line)</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
             
             {dtcError && (
               <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-4 rounded-xl mb-6">
