@@ -1890,7 +1890,7 @@ const NewUploadFlow = () => {
                 </li>
                 <li className="flex items-start">
                   <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-xs font-bold">2</span>
-                  You'll receive an email at <strong className="text-gray-900">{customerInfo.customer_email}</strong>
+                  You&apos;ll receive an email at <strong className="text-gray-900">{customerInfo.customer_email}</strong>
                 </li>
                 <li className="flex items-start">
                   <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-xs font-bold">3</span>
