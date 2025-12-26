@@ -1364,8 +1364,376 @@
             }
           }
         }
+      },
+      "Fendt": {
+        "id": "198",
+        "models": {
+          "10xx Vario": {
+            "id": "3013",
+            "engines": {
+              "12.4L": {
+                "id": "12459",
+                "ecus": [
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  }
+                ]
+              }
+            }
+          },
+          "2xx Vario": {
+            "id": "2394",
+            "engines": {
+              "3.3L": {
+                "id": "11120",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "3xx Vario": {
+            "id": "2393",
+            "engines": {
+              "4.1L": {
+                "id": "11121",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "4.4L": {
+                "id": "11122",
+                "ecus": [
+                  {
+                    "id": "19461",
+                    "name": "Bosch EDC17CV41"
+                  },
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "4xx Vario": {
+            "id": "2392",
+            "engines": {
+              "4.1L": {
+                "id": "11123",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "4.4L": {
+                "id": "11124",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "5xx Vario": {
+            "id": "2391",
+            "engines": {
+              "4.4L": {
+                "id": "11125",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "6.0L": {
+                "id": "11126",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "6xx Vario": {
+            "id": "2390",
+            "engines": {
+              "7.4L": {
+                "id": "11127",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              }
+            }
+          },
+          "7xx Vario": {
+            "id": "2389",
+            "engines": {
+              "6.0L": {
+                "id": "11128",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "6.1L": {
+                "id": "11129",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "8xx Vario": {
+            "id": "2388",
+            "engines": {
+              "6.0L": {
+                "id": "11130",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "6.1L": {
+                "id": "11131",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "9xx Vario": {
+            "id": "2387",
+            "engines": {
+              "6.8L": {
+                "id": "11117",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  }
+                ]
+              },
+              "7.1L": {
+                "id": "11118",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              },
+              "7.8L": {
+                "id": "11119",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19462",
+                    "name": "Bosch EDC17CV52"
+                  },
+                  {
+                    "id": "19463",
+                    "name": "Bosch EDC17CV56"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "COMBINES": {
+            "id": "2525",
+            "engines": {
+              "7.4L": {
+                "id": "11408",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          }
+        }
       }
     }
   },
-  "last_update": "2025-12-26T12:32:35.804327"
+  "last_update": "2025-12-26T12:33:18.873657"
 }
