@@ -33,7 +33,7 @@ const TermsPage = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                By accessing and using ECU Flash Service ("the Service"), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                By accessing and using ECU Flash Service (&quot;the Service&quot;), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 These terms apply to all users of the Service, including without limitation users who are browsers, customers, merchants, and/or contributors of content.
@@ -62,7 +62,7 @@ const TermsPage = () => {
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-4">
                 <p className="text-amber-800 font-semibold mb-2">⚠️ Important Notice</p>
                 <p className="text-amber-700">
-                  All modifications to emission control systems (DPF, EGR, AdBlue/SCR, catalytic converters) are intended <strong>SOLELY for off-road, racing, and competition use</strong> in jurisdictions where such modifications are permitted. It is the customer's responsibility to ensure compliance with all applicable local, state, and federal laws and regulations.
+                  All modifications to emission control systems (DPF, EGR, AdBlue/SCR, catalytic converters) are intended <strong>SOLELY for off-road, racing, and competition use</strong> in jurisdictions where such modifications are permitted. It is the customer responsibility to ensure compliance with all applicable local, state, and federal laws and regulations.
                 </p>
               </div>
               <p className="text-gray-600 leading-relaxed">

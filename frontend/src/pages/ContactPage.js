@@ -133,7 +133,7 @@ const ContactPage = () => {
                     <span className="text-2xl">✅</span>
                     <div>
                       <p className="font-semibold text-green-800">Message Sent Successfully!</p>
-                      <p className="text-green-600 text-sm">We'll get back to you as soon as possible.</p>
+                      <p className="text-green-600 text-sm">We will get back to you as soon as possible.</p>
                     </div>
                   </div>
                 </div>
