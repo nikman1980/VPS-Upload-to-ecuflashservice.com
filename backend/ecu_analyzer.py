@@ -1130,7 +1130,7 @@ class ECUAnalyzer:
                 confidence_score += 30  # High confidence for binary matches
         
         # String-based detection (secondary)
-        dpf_binary_patterns = [
+        dpf_strings = [
             (rb"DPF[_\s]", "DPF marker"),
             (rb"dpf[_\s]", "dpf marker"),
             (rb"(?i)soot[_\s]?load", "Soot load reference"),
