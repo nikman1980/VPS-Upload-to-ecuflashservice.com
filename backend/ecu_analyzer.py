@@ -759,8 +759,6 @@ class ECUAnalyzer:
                 
                 # Rule 9: Check for realistic manufacturer codes
                 # Position 1-3 is WMI (World Manufacturer Identifier)
-                wmi = vin[:3]
-                
                 # Common valid WMI patterns
                 valid_wmi_starts = [
                     "1", "2", "3", "4", "5",  # North America
@@ -781,7 +779,7 @@ class ECUAnalyzer:
                 self.results["vin"] = vin
                 return
                 
-            except:
+            except Exception:
                 continue
     
     def _extract_strings(self, file_data: bytes) -> List[str]:
