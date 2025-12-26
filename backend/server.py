@@ -1736,17 +1736,17 @@ async def get_vehicle_types():
 
 
 @api_router.get("/vehicles/manufacturers/{vehicle_type_id}")
-async def get_manufacturers(vehicle_type_id: int):
+async def get_manufacturers(vehicle_type_id: str):
     """Get all manufacturers for a vehicle type"""
     manufacturers = await db.manufacturers.find(
-        {"vehicle_type_id": vehicle_type_id}, 
+        {"type_id": vehicle_type_id}, 
         {"_id": 0}
     ).sort("name", 1).to_list(500)
     return manufacturers
 
 
 @api_router.get("/vehicles/models/{manufacturer_id}")
-async def get_models(manufacturer_id: int):
+async def get_models(manufacturer_id: str):
     """Get all models for a manufacturer"""
     models = await db.models.find(
         {"manufacturer_id": manufacturer_id}, 
@@ -1756,27 +1756,24 @@ async def get_models(manufacturer_id: int):
 
 
 @api_router.get("/vehicles/generations/{model_id}")
-async def get_generations(model_id: int):
-    """Get all generations/years for a model"""
-    generations = await db.generations.find(
-        {"model_id": model_id}, 
-        {"_id": 0}
-    ).sort("name", 1).to_list(200)
-    return generations
+async def get_generations(model_id: str):
+    """Get all generations/years for a model (for compatibility - returns empty)"""
+    # New database structure doesn't use generations, engines are directly under models
+    return []
 
 
-@api_router.get("/vehicles/engines/{generation_id}")
-async def get_engines(generation_id: int):
-    """Get all engines for a generation"""
+@api_router.get("/vehicles/engines/{model_id}")
+async def get_engines(model_id: str):
+    """Get all engines for a model"""
     engines = await db.engines.find(
-        {"generation_id": generation_id}, 
+        {"model_id": model_id}, 
         {"_id": 0}
     ).sort("name", 1).to_list(200)
     return engines
 
 
 @api_router.get("/vehicles/engine/{engine_id}")
-async def get_engine_details(engine_id: int):
+async def get_engine_details(engine_id: str):
     """Get detailed engine information by ID"""
     engine = await db.engines.find_one(
         {"id": engine_id}, 
