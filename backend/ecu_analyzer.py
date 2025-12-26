@@ -1170,7 +1170,7 @@ class ECUAnalyzer:
         indicators = []
         confidence_score = 0
         
-        # String-based detection
+        # Binary pattern detection FIRST (more reliable)
         egr_strings = [
             "EGR", "EXHAUST GAS RECIRCULATION", "AGR",  # German: Abgasrückführung
             "EGR_VALVE", "EGRVALVE", "EGR_FLOW", "EGRFLOW",
