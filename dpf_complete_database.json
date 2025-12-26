@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T22:56:19.143451",
+  "last_update": "2025-12-26T22:59:39.776299",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -52147,6 +52147,1213 @@
                   {
                     "id": "19531",
                     "name": "Bosch ME9"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Tata": {
+        "id": "199",
+        "models": {
+          "Aria": {
+            "id": "2672",
+            "engines": {
+              "2.2L 16V CRD": {
+                "id": "11691",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          },
+          "Indica": {
+            "id": "2398",
+            "engines": {
+              "1.3d 16v Quadrajet": {
+                "id": "11155",
+                "ecus": [
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  }
+                ]
+              }
+            }
+          },
+          "Manza": {
+            "id": "2399",
+            "engines": {
+              "1.3d 16v Quadrajet": {
+                "id": "11156",
+                "ecus": [
+                  {
+                    "id": "19645",
+                    "name": "Marelli MJD6F3"
+                  }
+                ]
+              }
+            }
+          },
+          "Safari": {
+            "id": "2673",
+            "engines": {
+              "2.2L 16V CRD": {
+                "id": "11692",
+                "ecus": [
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          },
+          "TL": {
+            "id": "2735",
+            "engines": {
+              "2.2L 16V CRD": {
+                "id": "11802",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  }
+                ]
+              }
+            }
+          },
+          "Xenon": {
+            "id": "2674",
+            "engines": {
+              "2.2L 16V CRD": {
+                "id": "11693",
+                "ecus": [
+                  {
+                    "id": "19593",
+                    "name": "Delphi DCM3.2"
+                  },
+                  {
+                    "id": "19597",
+                    "name": "Delphi DCM3.7"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Toyota": {
+        "id": "155",
+        "models": {
+          "Auris": {
+            "id": "2104",
+            "engines": {
+              "1.4 D-4D": {
+                "id": "9917",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "20064",
+                    "name": "Bosch EDC17C47"
+                  },
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  }
+                ]
+              },
+              "1.4 VVT-i": {
+                "id": "9921",
+                "ecus": [
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  }
+                ]
+              },
+              "1.6 D-4D": {
+                "id": "11739",
+                "ecus": [
+                  {
+                    "id": "20063",
+                    "name": "Bosch EDC17C73"
+                  }
+                ]
+              },
+              "2.0 VVT-iE": {
+                "id": "12630",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Avalon": {
+            "id": "3081",
+            "engines": {
+              "2.5 VVT-iE": {
+                "id": "12631",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Avensis": {
+            "id": "2098",
+            "engines": {
+              "1.6 VVT-i": {
+                "id": "9891",
+                "ecus": [
+                  {
+                    "id": "20034",
+                    "name": "Denso MPC565"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "1.8 VVT-i": {
+                "id": "9893",
+                "ecus": [
+                  {
+                    "id": "20034",
+                    "name": "Denso MPC565"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.0 D-4D": {
+                "id": "9885",
+                "ecus": [
+                  {
+                    "id": "20063",
+                    "name": "Bosch EDC17C73"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.2 D-4D": {
+                "id": "9886",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "Aygo": {
+            "id": "2101",
+            "engines": {
+              "1.0 VVT-i": {
+                "id": "9907",
+                "ecus": [
+                  {
+                    "id": "20280",
+                    "name": "Bosch ME17.9.53"
+                  },
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  },
+                  {
+                    "id": "20120",
+                    "name": "Bosch MEG17.9.52"
+                  }
+                ]
+              },
+              "1.4 D-4D": {
+                "id": "10199",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "20064",
+                    "name": "Bosch EDC17C47"
+                  },
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  },
+                  {
+                    "id": "19974",
+                    "name": "Siemens/Continental SID801"
+                  },
+                  {
+                    "id": "19714",
+                    "name": "Siemens/Continental SID804"
+                  },
+                  {
+                    "id": "19715",
+                    "name": "Siemens/Continental SID805"
+                  },
+                  {
+                    "id": "19716",
+                    "name": "Siemens/Continental SID806"
+                  }
+                ]
+              }
+            }
+          },
+          "C-Hr": {
+            "id": "3082",
+            "engines": {
+              "2.0 VVT-iE": {
+                "id": "12632",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Camry": {
+            "id": "2099",
+            "engines": {
+              "2.2 i": {
+                "id": "9895",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.4 i": {
+                "id": "9896",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.5 i": {
+                "id": "9898",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "3.0 V6": {
+                "id": "9900",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "3.5 V6": {
+                "id": "9901",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "Corolla": {
+            "id": "2106",
+            "engines": {
+              "1.4 D-4D": {
+                "id": "9935",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "20064",
+                    "name": "Bosch EDC17C47"
+                  },
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  }
+                ]
+              },
+              "1.4 VVT-i": {
+                "id": "9942",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "1.6 VVT-i": {
+                "id": "9945",
+                "ecus": [
+                  {
+                    "id": "20034",
+                    "name": "Denso MPC565"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "1.8 VVT-i": {
+                "id": "9947",
+                "ecus": [
+                  {
+                    "id": "20034",
+                    "name": "Denso MPC565"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.0 D-4D": {
+                "id": "9939",
+                "ecus": [
+                  {
+                    "id": "20063",
+                    "name": "Bosch EDC17C73"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.0 VVT-iE": {
+                "id": "12633",
+                "ecus": [
+                  {
+                    "id": "20034",
+                    "name": "Denso MPC565"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.4": {
+                "id": "9949",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "Crown": {
+            "id": "3083",
+            "engines": {
+              "2.5 VVT-iE": {
+                "id": "12634",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Fortuner": {
+            "id": "2279",
+            "engines": {
+              "2.5 D-4D": {
+                "id": "10786",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.8 D-4D": {
+                "id": "12526",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "GT86": {
+            "id": "2765",
+            "engines": {
+              "2.0L 16V": {
+                "id": "11856",
+                "ecus": [
+                  {
+                    "id": "20079",
+                    "name": "Denso SH72531"
+                  }
+                ]
+              }
+            }
+          },
+          "Harrier": {
+            "id": "3084",
+            "engines": {
+              "2.5 VVT-iE": {
+                "id": "12635",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Hiace": {
+            "id": "2278",
+            "engines": {
+              "2.5 D-4D": {
+                "id": "10785",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.8 D-4D": {
+                "id": "12525",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Highlander": {
+            "id": "2237",
+            "engines": {
+              "2.4 i": {
+                "id": "10641",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.5 D-4D": {
+                "id": "10787",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.5 VVT-iE": {
+                "id": "12636",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.7 i": {
+                "id": "10639",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "3.0 D-4D": {
+                "id": "10788",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "3.0 i": {
+                "id": "10642",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "3.3 i": {
+                "id": "10643",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "3.5 i": {
+                "id": "10640",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "Hilux": {
+            "id": "2235",
+            "engines": {
+              "2.4 D-4D": {
+                "id": "11527",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.5 D-4D": {
+                "id": "10634",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.8 D-4D": {
+                "id": "11526",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "3.0 D-4D": {
+                "id": "10635",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "iQ": {
+            "id": "2102",
+            "engines": {
+              "1.0 VVT-i": {
+                "id": "9909",
+                "ecus": [
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  }
+                ]
+              },
+              "1.4 D-4D": {
+                "id": "9908",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "20064",
+                    "name": "Bosch EDC17C47"
+                  },
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  }
+                ]
+              }
+            }
+          },
+          "Kluger": {
+            "id": "3085",
+            "engines": {
+              "2.5 VVT-iE": {
+                "id": "12637",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Land Cruiser": {
+            "id": "2108",
+            "engines": {
+              "2.5 D-4D": {
+                "id": "9952",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.8 D-4D": {
+                "id": "9954",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "3.0 D-4D": {
+                "id": "9955",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "3.3 D-4D": {
+                "id": "12907",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "3.4": {
+                "id": "9962",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "4.0": {
+                "id": "9963",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "4.5": {
+                "id": "9964",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "4.5 D-4D V8": {
+                "id": "9960",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "4.7 V8": {
+                "id": "9966",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "Levin": {
+            "id": "3086",
+            "engines": {
+              "2.0 VVT-iE": {
+                "id": "12638",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Picnic": {
+            "id": "2111",
+            "engines": {
+              "1.8 VVT-i": {
+                "id": "11539",
+                "ecus": [
+                  {
+                    "id": "20034",
+                    "name": "Denso MPC565"
+                  }
+                ]
+              }
+            }
+          },
+          "ProAce / ProAce City": {
+            "id": "2180",
+            "engines": {
+              "1.2 i": {
+                "id": "12667",
+                "ecus": [
+                  {
+                    "id": "20179",
+                    "name": "Valeo VD56.xx"
+                  }
+                ]
+              },
+              "1.5 D-4D": {
+                "id": "12524",
+                "ecus": [
+                  {
+                    "id": "20224",
+                    "name": "Bosch MD1CS003"
+                  }
+                ]
+              },
+              "1.6 D-4D": {
+                "id": "12570",
+                "ecus": [
+                  {
+                    "id": "20012",
+                    "name": "Bosch EDC17C60"
+                  }
+                ]
+              },
+              "2.0 D-4D": {
+                "id": "10445",
+                "ecus": [
+                  {
+                    "id": "19596",
+                    "name": "Delphi DCM3.5"
+                  },
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  },
+                  {
+                    "id": "20149",
+                    "name": "Delphi DCM7.1"
+                  },
+                  {
+                    "id": "20193",
+                    "name": "Delphi DCM7.1 Gen2"
+                  }
+                ]
+              }
+            }
+          },
+          "RAV4": {
+            "id": "2114",
+            "engines": {
+              "1.8": {
+                "id": "9984",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.0": {
+                "id": "9985",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "2.0 D-4D": {
+                "id": "9982",
+                "ecus": [
+                  {
+                    "id": "20063",
+                    "name": "Bosch EDC17C73"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.0 VVT-i": {
+                "id": "9986",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.2 D-4D": {
+                "id": "9983",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "2.5 VVT-iE": {
+                "id": "12639",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Sequoia": {
+            "id": "2236",
+            "engines": {
+              "4.6 i": {
+                "id": "10636",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "4.7 i": {
+                "id": "10637",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              },
+              "5.7 i": {
+                "id": "10638",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  },
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Starlet": {
+            "id": "2115",
+            "engines": {
+              "1.0 VVT-i": {
+                "id": "9989",
+                "ecus": [
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  }
+                ]
+              }
+            }
+          },
+          "Tacoma": {
+            "id": "3130",
+            "engines": {
+              "3.5L V6": {
+                "id": "12731",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Urban Cruiser": {
+            "id": "2117",
+            "engines": {
+              "1.4 D-4D": {
+                "id": "9997",
+                "ecus": [
+                  {
+                    "id": "20064",
+                    "name": "Bosch EDC17C47"
+                  },
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  }
+                ]
+              },
+              "1.4 VVT-i": {
+                "id": "10356",
+                "ecus": [
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              }
+            }
+          },
+          "Venza": {
+            "id": "3087",
+            "engines": {
+              "2.5 VVT-iE": {
+                "id": "12640",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          },
+          "Yaris": {
+            "id": "2103",
+            "engines": {
+              "1.0 VVT-i": {
+                "id": "9912",
+                "ecus": [
+                  {
+                    "id": "20280",
+                    "name": "Bosch ME17.9.53"
+                  },
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  },
+                  {
+                    "id": "20120",
+                    "name": "Bosch MEG17.9.52"
+                  }
+                ]
+              },
+              "1.4 D-4D": {
+                "id": "9911",
+                "ecus": [
+                  {
+                    "id": "19406",
+                    "name": "Bosch EDC15C9"
+                  },
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "20064",
+                    "name": "Bosch EDC17C47"
+                  },
+                  {
+                    "id": "19802",
+                    "name": "Bosch EDC17CP07"
+                  }
+                ]
+              },
+              "1.4 VVT-i": {
+                "id": "9913",
+                "ecus": [
+                  {
+                    "id": "19830",
+                    "name": "Bosch ME7.9"
+                  },
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "1.5 VVT-i TS": {
+                "id": "9915",
+                "ecus": [
+                  {
+                    "id": "20033",
+                    "name": "Denso NEC cpu"
+                  }
+                ]
+              },
+              "1.6 T": {
+                "id": "12746",
+                "ecus": [
+                  {
+                    "id": "20164",
+                    "name": "Denso NEC Gen 3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Troller": {
+        "id": "257",
+        "models": {
+          "Borrusia": {
+            "id": "2616",
+            "engines": {
+              "3.2L TGV diesel": {
+                "id": "11586",
+                "ecus": [
+                  {
+                    "id": "19707",
+                    "name": "Siemens/Continental SID208"
+                  }
+                ]
+              }
+            }
+          },
+          "Pantanal": {
+            "id": "2617",
+            "engines": {
+              "2.8L MWM diesel": {
+                "id": "11585",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  },
+                  {
+                    "id": "19424",
+                    "name": "Bosch EDC16C7"
+                  }
+                ]
+              }
+            }
+          },
+          "T4": {
+            "id": "2615",
+            "engines": {
+              "3.2L TGV diesel": {
+                "id": "11584",
+                "ecus": [
+                  {
+                    "id": "19707",
+                    "name": "Siemens/Continental SID208"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "UAZ": {
+        "id": "178",
+        "models": {
+          "Patriot": {
+            "id": "2280",
+            "engines": {
+              "2.2/2.3 TD": {
+                "id": "10789",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
                   }
                 ]
               }
