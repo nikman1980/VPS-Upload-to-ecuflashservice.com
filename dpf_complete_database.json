@@ -4240,7 +4240,7 @@
       }
     }
   },
-  "last_update": "2025-12-26T23:28:37.225835",
+  "last_update": "2025-12-26T23:31:25.644573",
   "Bike / Marine / Snowmobile": {
     "brands": {
       "Arctic Cat": {
@@ -65386,6 +65386,1002 @@
                   {
                     "id": "20243",
                     "name": "Bosch MD1CC898"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "MAN": {
+        "id": "204",
+        "models": {
+          "TG-A": {
+            "id": "2427",
+            "engines": {
+              "240-530HP": {
+                "id": "11207",
+                "ecus": [
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  },
+                  {
+                    "id": "19468",
+                    "name": "Bosch EDC7C3"
+                  },
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              }
+            }
+          },
+          "TG-L": {
+            "id": "2426",
+            "engines": {
+              "150-250HP": {
+                "id": "11206",
+                "ecus": [
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  },
+                  {
+                    "id": "19468",
+                    "name": "Bosch EDC7C3"
+                  },
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              }
+            }
+          },
+          "TG-M": {
+            "id": "2425",
+            "engines": {
+              "280-330HP": {
+                "id": "11205",
+                "ecus": [
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  },
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              }
+            }
+          },
+          "TG-S": {
+            "id": "2424",
+            "engines": {
+              "320-540HP": {
+                "id": "11204",
+                "ecus": [
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              }
+            }
+          },
+          "TG-X": {
+            "id": "2423",
+            "engines": {
+              "12.4L TDI": {
+                "id": "12853",
+                "ecus": [
+                  {
+                    "id": "20221",
+                    "name": "Bosch MD1CE100"
+                  }
+                ]
+              },
+              "360-680HP": {
+                "id": "11203",
+                "ecus": [
+                  {
+                    "id": "20026",
+                    "name": "Bosch EDC17CV42"
+                  },
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              }
+            }
+          },
+          "TGE": {
+            "id": "2977",
+            "engines": {
+              "2.0 TDI": {
+                "id": "12368",
+                "ecus": [
+                  {
+                    "id": "20078",
+                    "name": "Delphi DCM6.2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Maxus": {
+        "id": "406",
+        "models": {
+          "C35": {
+            "id": "3194",
+            "engines": {
+              "2.0L TD": {
+                "id": "12921",
+                "ecus": [
+                  {
+                    "id": "20227",
+                    "name": "Bosch MD1CE108"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "MAZ (МАЗ)": {
+        "id": "243",
+        "models": {
+          "4xxx": {
+            "id": "2771",
+            "engines": {
+              "3.8TD": {
+                "id": "11890",
+                "ecus": [
+                  {
+                    "id": "20041",
+                    "name": "Motorola / Cummins CM2220"
+                  }
+                ]
+              },
+              "6.65 TD": {
+                "id": "11914",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "5340 Е9": {
+            "id": "2710",
+            "engines": {
+              "12.0 TD V6": {
+                "id": "11757",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "5370": {
+            "id": "3276",
+            "engines": {
+              "12.7L TD": {
+                "id": "13091",
+                "ecus": [
+                  {
+                    "id": "20203",
+                    "name": "Bosch MD1CC878"
+                  }
+                ]
+              }
+            }
+          },
+          "5440 Е9": {
+            "id": "2708",
+            "engines": {
+              "12.0 TD V6": {
+                "id": "11755",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "6310 Е9": {
+            "id": "2709",
+            "engines": {
+              "12.0 TD V6": {
+                "id": "11756",
+                "ecus": [
+                  {
+                    "id": "19970",
+                    "name": "Bosch EDC17CV44"
+                  },
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "6312 A9": {
+            "id": "2564",
+            "engines": {
+              "11.0L ЯМЗ-650": {
+                "id": "11489",
+                "ecus": [
+                  {
+                    "id": "19473",
+                    "name": "Bosch EDC7UC31"
+                  }
+                ]
+              }
+            }
+          },
+          "6516 А8": {
+            "id": "2565",
+            "engines": {
+              "11.0L ЯМЗ-658": {
+                "id": "11490",
+                "ecus": [
+                  {
+                    "id": "19469",
+                    "name": "Bosch EDC7C32"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mazda": {
+        "id": "176",
+        "models": {
+          "Titan": {
+            "id": "2243",
+            "engines": {
+              "2.0 TDI": {
+                "id": "12224",
+                "ecus": [
+                  {
+                    "id": "19900",
+                    "name": "Denso RF6"
+                  }
+                ]
+              },
+              "5.2 TDI": {
+                "id": "10662",
+                "ecus": [
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mercedes Trucks": {
+        "id": "264",
+        "models": {
+          "Accelo": {
+            "id": "2655",
+            "engines": {
+              "2.7L 20V": {
+                "id": "11705",
+                "ecus": [
+                  {
+                    "id": "19405",
+                    "name": "Bosch EDC15C6"
+                  }
+                ]
+              },
+              "4.8L 16V": {
+                "id": "11658",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Actors": {
+            "id": "2661",
+            "engines": {
+              "12.8L 6L HDEP": {
+                "id": "11703",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "12L V6": {
+                "id": "11665",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "15.6L 6L HDEP": {
+                "id": "11702",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              },
+              "6.4L L6": {
+                "id": "11667",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "7.2L 6L": {
+                "id": "11666",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Antos": {
+            "id": "2678",
+            "engines": {
+              "12.8L 6L HDEP": {
+                "id": "11704",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          },
+          "Atego": {
+            "id": "2662",
+            "engines": {
+              "4.3L 4L": {
+                "id": "11668",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20145",
+                    "name": "Bosch EDC17CV55"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "4.8L 4L": {
+                "id": "11669",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "6.8L 6L": {
+                "id": "11671",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "7.7L 6L HDEP": {
+                "id": "11670",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Atron": {
+            "id": "2663",
+            "engines": {
+              "12L 6L": {
+                "id": "11673",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "4.8L 4L": {
+                "id": "11672",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "7.2L 6L": {
+                "id": "11674",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Axor": {
+            "id": "2664",
+            "engines": {
+              "12L 6L": {
+                "id": "11678",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "6.3L 6L": {
+                "id": "11676",
+                "ecus": [
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "6.4L 6L": {
+                "id": "11675",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "7.2L 6L": {
+                "id": "11677",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Econic": {
+            "id": "2665",
+            "engines": {
+              "7.2L 6L": {
+                "id": "11679",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Mitsubishi FUSO": {
+        "id": "160",
+        "models": {
+          "Canter": {
+            "id": "2154",
+            "engines": {
+              "3.0 DID": {
+                "id": "12418",
+                "ecus": [
+                  {
+                    "id": "19402",
+                    "name": "Bosch EDC15"
+                  }
+                ]
+              },
+              "3.0d 4M42-Tx 12volt": {
+                "id": "10793",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "3.0d 4M42-Tx 24volt": {
+                "id": "10794",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "3.0d 4P10-Tx 12volt": {
+                "id": "10224",
+                "ecus": [
+                  {
+                    "id": "19444",
+                    "name": "Bosch EDC17C49"
+                  },
+                  {
+                    "id": "19809",
+                    "name": "Bosch EDC17CP15"
+                  },
+                  {
+                    "id": "19460",
+                    "name": "Bosch EDC17CP52"
+                  }
+                ]
+              },
+              "4.3d 4D33": {
+                "id": "12557",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20145",
+                    "name": "Bosch EDC17CV55"
+                  }
+                ]
+              },
+              "4.9d 4M50-Tx 12volt": {
+                "id": "10795",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "4.9d 4M50-Tx 24volt": {
+                "id": "10223",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              },
+              "7.5d 6M60-Tx 24volt": {
+                "id": "10225",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "FA / FI / FE / FG": {
+            "id": "2707",
+            "engines": {
+              "4.3d 4D33": {
+                "id": "12558",
+                "ecus": [
+                  {
+                    "id": "19878",
+                    "name": "Bosch EDC17CV54"
+                  },
+                  {
+                    "id": "20145",
+                    "name": "Bosch EDC17CV55"
+                  }
+                ]
+              }
+            }
+          },
+          "Fighter": {
+            "id": "2371",
+            "engines": {
+              "7.5d 6M60-Tx 24volt": {
+                "id": "11091",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "20247",
+                    "name": "Denso SH72xxx"
+                  }
+                ]
+              }
+            }
+          },
+          "FK / FM / FH": {
+            "id": "2706",
+            "engines": {
+              "6.5 TD L6": {
+                "id": "11752",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          },
+          "FO / FZ / FJ": {
+            "id": "2704",
+            "engines": {
+              "6.4 TD L6": {
+                "id": "11749",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  }
+                ]
+              }
+            }
+          },
+          "Shogun": {
+            "id": "2878",
+            "engines": {
+              "12.0d OM457": {
+                "id": "12147",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              }
+            }
+          },
+          "Super Great": {
+            "id": "2703",
+            "engines": {
+              "12.0d OM457": {
+                "id": "12148",
+                "ecus": [
+                  {
+                    "id": "20059",
+                    "name": "Continental Temic ACM / MCM"
+                  },
+                  {
+                    "id": "19869",
+                    "name": "Temic"
+                  }
+                ]
+              },
+              "12.9d 6M70-Tx 24volt": {
+                "id": "11748",
+                "ecus": [
+                  {
+                    "id": "19416",
+                    "name": "Bosch EDC16C31"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Multicar": {
+        "id": "256",
+        "models": {
+          "M26": {
+            "id": "2609",
+            "engines": {
+              "2.5 TDI": {
+                "id": "11578",
+                "ecus": [
+                  {
+                    "id": "19422",
+                    "name": "Bosch EDC16C39"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Nissan": {
+        "id": "161",
+        "models": {
+          "Alteon": {
+            "id": "2155",
+            "engines": {
+              "2.5 dCi R4": {
+                "id": "10442",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "3.0 d": {
+                "id": "10226",
+                "ecus": [
+                  {
+                    "id": "19423",
+                    "name": "Bosch EDC16C41"
+                  },
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
+                  }
+                ]
+              },
+              "4.5 TD": {
+                "id": "11271",
+                "ecus": [
+                  {
+                    "id": "20024",
+                    "name": "Motorola / Cummins CM2150E"
+                  },
+                  {
+                    "id": "19655",
+                    "name": "Motorola CM850"
+                  }
+                ]
+              },
+              "6.0 TD": {
+                "id": "11353",
+                "ecus": [
+                  {
+                    "id": "20006",
+                    "name": "Denso SH7055"
+                  },
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  }
+                ]
+              }
+            }
+          },
+          "Atlas": {
+            "id": "2157",
+            "engines": {
+              "2.5 d": {
+                "id": "10443",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              },
+              "3.0 d": {
+                "id": "10227",
+                "ecus": [
+                  {
+                    "id": "19423",
+                    "name": "Bosch EDC16C41"
+                  },
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
+                  },
+                  {
+                    "id": "19932",
+                    "name": "Transtron"
+                  },
+                  {
+                    "id": "20125",
+                    "name": "Transtron SH725X"
+                  }
+                ]
+              }
+            }
+          },
+          "Cabstar": {
+            "id": "2156",
+            "engines": {
+              "2.5 dCi R4": {
+                "id": "10441",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "3.0 d": {
+                "id": "10228",
+                "ecus": [
+                  {
+                    "id": "20272",
+                    "name": "Bosch EDC15M"
+                  },
+                  {
+                    "id": "19423",
+                    "name": "Bosch EDC16C41"
+                  },
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              }
+            }
+          },
+          "Caravan": {
+            "id": "2179",
+            "engines": {
+              "2.5 dCi R4": {
+                "id": "10444",
+                "ecus": [
+                  {
+                    "id": "19854",
+                    "name": "Denso SH7058"
+                  },
+                  {
+                    "id": "19855",
+                    "name": "Denso SH7059"
+                  }
+                ]
+              },
+              "3.0 d": {
+                "id": "10468",
+                "ecus": [
+                  {
+                    "id": "19423",
+                    "name": "Bosch EDC16C41"
+                  },
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
+                  }
+                ]
+              }
+            }
+          },
+          "NT500": {
+            "id": "2833",
+            "engines": {
+              "3.0 DCI": {
+                "id": "12051",
+                "ecus": [
+                  {
+                    "id": "20083",
+                    "name": "Bosch EDC17C45"
                   }
                 ]
               }
