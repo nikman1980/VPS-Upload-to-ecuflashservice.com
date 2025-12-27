@@ -178,3 +178,31 @@
 ### Agent Communication:
 - **Testing Agent:** Comprehensive testing completed. The "No vehicle selected" bug has been successfully resolved. All primary vehicle selection flows are working correctly and displaying proper vehicle information. The application is ready for production use.
 - **Status:** Bug fix verified and application functionality confirmed across all tested scenarios.
+
+---
+
+## ECU Analyzer Fix - AdBlue False Positive Correction
+**Date:** 2025-12-27
+**Issue:** AdBlue/SCR incorrectly detected for Denso ECU files that don't have SCR
+
+### Root Cause:
+- The `SCR_DCU_SIGNATURES` list contained short generic patterns like `b'DCU'` (3 bytes) which caused false positives
+- The detection logic was too permissive, marking as "detected" even with low confidence scores
+
+### Fix Applied:
+1. Updated `ecu_database.py` - Removed short generic patterns, added longer specific markers
+2. Rewrote `_detect_adblue_maps()` method in `ecu_analyzer.py`:
+   - ALL Denso ECUs now return `detected: False` since SCR is never in main ECU file
+   - Added stricter ECU-type based detection (following dpfoffservice.com approach)
+   - Only detect SCR for VERIFIED truck ECUs: Cummins CM2150E, Bosch EDC17CVxx, etc.
+   - Minimum confidence score of 60 required for detection
+
+### Test Results:
+- User's file (Denso ECU): No longer shows AdBlue/SCR - ✅ FIXED
+- DPF: high confidence - ✅ Correct
+- EGR: medium confidence - ✅ Correct
+- DTC: high confidence - ✅ Correct
+
+### UI Changes:
+- Rephrased: "Based on our initial ECU analysis..."
+- Compacted ECU Analysis Results section
