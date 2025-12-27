@@ -12,7 +12,7 @@ const PAYPAL_SANDBOX_CLIENT_ID = 'AXzBGBayD39Wn5qf_fI7HFs21WMh7kfitbk98w3mMb0xG3
 const PAYPAL_LIVE_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
 
 // Toggle this to switch between Sandbox (testing) and Live (production)
-const USE_SANDBOX = true;  // Set to false for live payments
+const USE_SANDBOX = false;  // Set to true for sandbox testing
 const PAYPAL_CLIENT_ID = USE_SANDBOX ? PAYPAL_SANDBOX_CLIENT_ID : PAYPAL_LIVE_CLIENT_ID;
 
 const NewUploadFlow = () => {
