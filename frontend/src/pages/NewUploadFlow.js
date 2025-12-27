@@ -1008,7 +1008,7 @@ const NewUploadFlow = () => {
               {/* Vehicle Type */}
               <div>
                 <label className="block text-sm font-medium text-gray-600 mb-2">Vehicle Type</label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3">
                   {vehicleTypes.map((type) => (
                     <button
                       key={type.id}
@@ -1020,10 +1020,12 @@ const NewUploadFlow = () => {
                       }`}
                     >
                       <div className="text-2xl mb-1">
-                        {type.slug === 'cars' ? '🚗' : 
-                         type.slug === 'trucks' ? '🚛' : 
-                         type.slug === 'agriculture' ? '🚜' : 
-                         type.slug === 'marine' ? '🚤' : '🏍️'}
+                        {type.id === 'car' ? '🚗' : 
+                         type.id === 'truck' ? '🚛' : 
+                         type.id === 'agriculture' ? '🚜' : 
+                         type.id === 'marine' ? '🚤' :
+                         type.id === 'bus' ? '🚌' :
+                         type.id === 'construction' ? '🏗️' : '🏍️'}
                       </div>
                       <div className="text-sm font-medium">{type.name}</div>
                     </button>
