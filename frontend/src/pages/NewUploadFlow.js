@@ -1757,13 +1757,29 @@ const NewUploadFlow = () => {
             {/* PayPal */}
             <div className="bg-white/50 rounded-2xl p-6">
               <h3 className="font-semibold mb-4 text-center">Secure Payment</h3>
-              <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID, currency: "USD" }}>
+              <PayPalScriptProvider 
+                options={{ 
+                  "client-id": PAYPAL_CLIENT_ID, 
+                  currency: "USD",
+                  intent: "capture"
+                }}
+              >
                 <PayPalButtons 
-                  style={{ layout: "vertical", color: "blue", shape: "rect" }}
+                  style={{ layout: "vertical", color: "blue", shape: "rect", label: "paypal" }}
                   createOrder={createOrder}
                   onApprove={onApprove}
+                  onError={(err) => {
+                    console.error("PayPal Error:", err);
+                    alert("PayPal Error: " + (err.message || JSON.stringify(err)));
+                  }}
+                  onCancel={() => {
+                    console.log("Payment cancelled");
+                  }}
                 />
               </PayPalScriptProvider>
+              <p className="text-xs text-gray-500 text-center mt-3">
+                {USE_SANDBOX ? "🧪 Sandbox Mode - Test payments only" : "🔒 Secure live payments via PayPal"}
+              </p>
             </div>
 
             <button
