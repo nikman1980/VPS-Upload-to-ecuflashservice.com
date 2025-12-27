@@ -47,6 +47,10 @@ PROCESSED_DIR.mkdir(exist_ok=True)
 # Initialize AI ECU Processor
 ecu_processor = ECUProcessor()
 
+# Initialize NEW ECU Processing Engine
+ecu_file_processor = ECUFileProcessor()
+ecu_definition_db = ECUDefinitionDB()
+
 # Create the main app without a prefix
 app = FastAPI()
 
