@@ -260,7 +260,7 @@ const NewUploadFlow = () => {
     setEngines([]);
   };
 
-  // Handle engine selection - fetch recommended ECU types
+  // Handle engine selection - use ECUs from engine document (dpfoffservice structure)
   const handleEngineSelect = async (engine) => {
     setSelectedEngine(engine);
     setSelectedEcu(null);
@@ -268,18 +268,37 @@ const NewUploadFlow = () => {
     setDynamicEcuTypes([]);
     
     if (engine && engine.id !== 'other') {
-      setEcuLoading(true);
-      try {
-        const response = await axios.get(`${API}/vehicles/ecu-types/${engine.id}`);
-        if (response.data && response.data.ecu_types) {
-          setDynamicEcuTypes(response.data.ecu_types);
+      // New structure: ECUs are embedded in the engine document
+      if (engine.ecus && engine.ecus.length > 0) {
+        // Map to match the expected format
+        const ecuTypes = engine.ecus.map(ecu => ({
+          id: ecu.id,
+          name: ecu.name,
+          manufacturer: ecu.name.split(' ')[0], // Extract manufacturer from name (e.g., "Bosch EDC17...")
+          has_dpf: ecu.has_dpf,
+          has_egr: ecu.has_egr,
+          has_adblue: ecu.has_adblue
+        }));
+        setDynamicEcuTypes(ecuTypes);
+        
+        // Auto-select if only one ECU
+        if (ecuTypes.length === 1) {
+          setSelectedEcu(ecuTypes[0]);
         }
-      } catch (error) {
-        console.error('Error fetching ECU types:', error);
-        // Fallback to empty - will use commonEcuTypes
-        setDynamicEcuTypes([]);
+      } else {
+        // Fallback to API call for backward compatibility
+        setEcuLoading(true);
+        try {
+          const response = await axios.get(`${API}/vehicles/ecu-types/${engine.id}`);
+          if (response.data && response.data.ecu_types) {
+            setDynamicEcuTypes(response.data.ecu_types);
+          }
+        } catch (error) {
+          console.error('Error fetching ECU types:', error);
+          setDynamicEcuTypes([]);
+        }
+        setEcuLoading(false);
       }
-      setEcuLoading(false);
     }
   };
 
