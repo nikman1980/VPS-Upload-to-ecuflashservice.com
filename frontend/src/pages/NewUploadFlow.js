@@ -1271,17 +1271,17 @@ const NewUploadFlow = () => {
                   >
                     <option value="">Select ECU type...</option>
                     
-                    {/* Dynamic ECU Types - Recommended for selected vehicle */}
+                    {/* Dynamic ECU Types - From engine document (dpfoffservice structure) */}
                     {dynamicEcuTypes.length > 0 ? (
                       <>
-                        {/* Group by supplier */}
+                        {/* Group by manufacturer */}
                         {(() => {
-                          const suppliers = [...new Set(dynamicEcuTypes.filter(e => e.id !== 'other').map(e => e.supplier))];
-                          return suppliers.map(supplier => (
-                            <optgroup key={supplier} label={`⭐ ${supplier}`}>
-                              {dynamicEcuTypes.filter(e => e.supplier === supplier).map((ecu) => (
+                          const manufacturers = [...new Set(dynamicEcuTypes.filter(e => e.id !== 'other').map(e => e.manufacturer))];
+                          return manufacturers.map(mfr => (
+                            <optgroup key={mfr} label={`⭐ ${mfr}`}>
+                              {dynamicEcuTypes.filter(e => e.manufacturer === mfr).map((ecu) => (
                                 <option key={ecu.id} value={ecu.id}>
-                                  {ecu.name} {ecu.years ? `(${ecu.years})` : ''}
+                                  {ecu.name}
                                 </option>
                               ))}
                             </optgroup>
