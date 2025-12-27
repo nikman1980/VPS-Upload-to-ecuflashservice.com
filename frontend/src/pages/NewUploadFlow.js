@@ -1488,104 +1488,66 @@ const NewUploadFlow = () => {
               <p className="text-gray-500">Select the services you need</p>
             </div>
 
-            {/* ECU Analysis Results - Clean Table Format */}
-            <div className="bg-white/80 border border-gray-200/50 rounded-2xl overflow-hidden mb-8">
+            {/* ECU Analysis Results - Compact Format */}
+            <div className="bg-white/80 border border-gray-200/50 rounded-xl overflow-hidden mb-6">
               {/* Header */}
-              <div className="bg-gray-50/80 px-6 py-4 border-b border-gray-200/50">
-                <h3 className="font-bold text-xl text-gray-900 flex items-center">
-                  <span className="text-2xl mr-3">📊</span>
-                  ECU Analysis Results: {analysisResult.original_filename}
+              <div className="bg-gray-50/80 px-4 py-2 border-b border-gray-200/50 flex items-center justify-between">
+                <h3 className="font-semibold text-base text-gray-900 flex items-center">
+                  <span className="text-lg mr-2">📊</span>
+                  ECU Analysis: {analysisResult.original_filename}
                 </h3>
+                <span className="text-xs text-gray-500">{analysisResult.file_size_mb?.toFixed(2)} MB</span>
               </div>
               
-              {/* Table */}
-              <div className="divide-y divide-gray-300/50">
-                {/* Table Header */}
-                <div className="grid grid-cols-2 bg-gray-50/50">
-                  <div className="px-6 py-3 text-gray-500 font-semibold text-sm">Field</div>
-                  <div className="px-6 py-3 text-gray-500 font-semibold text-sm">Value</div>
-                </div>
-                
-                {/* File Size */}
-                <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                  <div className="px-6 py-4 text-gray-900 font-medium">File Size</div>
-                  <div className="px-6 py-4 text-gray-600">
-                    {analysisResult.file_size_mb?.toFixed(2)} MB ({Math.round(analysisResult.file_size_mb * 1024 * 1024).toLocaleString()} bytes)
-                  </div>
-                </div>
-                
+              {/* Compact Grid Layout */}
+              <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-sm">
                 {/* Manufacturer */}
-                <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                  <div className="px-6 py-4 text-gray-900 font-medium">Manufacturer</div>
-                  <div className="px-6 py-4 text-cyan-400 font-semibold">
+                <div className="bg-gray-50/50 rounded-lg p-2">
+                  <div className="text-gray-500 text-xs mb-0.5">Manufacturer</div>
+                  <div className="text-cyan-600 font-semibold truncate">
                     {analysisResult.detected_manufacturer || 'Unknown'}
-                    {analysisResult.metadata?.vehicle_info && (
-                      <span className="text-gray-500 font-normal"> (for {analysisResult.metadata.vehicle_info})</span>
-                    )}
                   </div>
                 </div>
                 
                 {/* ECU Type */}
-                <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                  <div className="px-6 py-4 text-gray-900 font-medium">ECU Type</div>
-                  <div className="px-6 py-4 text-gray-900">
-                    {analysisResult.detected_ecu || 'Unknown ECU'}
-                    {analysisResult.metadata?.processor && (
-                      <span className="text-cyan-400"> / {analysisResult.metadata.processor} processor</span>
-                    )}
+                <div className="bg-gray-50/50 rounded-lg p-2">
+                  <div className="text-gray-500 text-xs mb-0.5">ECU Type</div>
+                  <div className="text-gray-900 font-medium truncate">
+                    {analysisResult.detected_ecu || 'Unknown'}
                   </div>
                 </div>
                 
                 {/* Part Number */}
                 {analysisResult.metadata?.part_number && (
-                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                    <div className="px-6 py-4 text-gray-900 font-medium">Part Number</div>
-                    <div className="px-6 py-4 text-yellow-400 font-mono font-semibold">
+                  <div className="bg-gray-50/50 rounded-lg p-2">
+                    <div className="text-gray-500 text-xs mb-0.5">Part Number</div>
+                    <div className="text-yellow-600 font-mono text-xs font-semibold truncate">
                       {analysisResult.metadata.part_number}
-                      {analysisResult.metadata.part_number.startsWith('89') && (
-                        <span className="text-gray-500 font-normal font-sans"> (Toyota Part)</span>
-                      )}
                     </div>
                   </div>
                 )}
                 
                 {/* Calibration ID */}
                 {analysisResult.metadata?.calibration_id && (
-                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                    <div className="px-6 py-4 text-gray-900 font-medium">Calibration ID</div>
-                    <div className="px-6 py-4 text-green-400 font-mono">{analysisResult.metadata.calibration_id}</div>
+                  <div className="bg-gray-50/50 rounded-lg p-2">
+                    <div className="text-gray-500 text-xs mb-0.5">Calibration ID</div>
+                    <div className="text-green-600 font-mono text-xs truncate">{analysisResult.metadata.calibration_id}</div>
                   </div>
                 )}
                 
                 {/* Software Version */}
                 {analysisResult.metadata?.software_version && (
-                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                    <div className="px-6 py-4 text-gray-900 font-medium">Software Version</div>
-                    <div className="px-6 py-4 text-gray-600 font-mono">{analysisResult.metadata.software_version}</div>
+                  <div className="bg-gray-50/50 rounded-lg p-2">
+                    <div className="text-gray-500 text-xs mb-0.5">Software</div>
+                    <div className="text-gray-600 font-mono text-xs truncate">{analysisResult.metadata.software_version}</div>
                   </div>
                 )}
                 
                 {/* VIN */}
                 {analysisResult.metadata?.vin && (
-                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                    <div className="px-6 py-4 text-gray-900 font-medium">VIN</div>
-                    <div className="px-6 py-4 text-gray-600 font-mono">{analysisResult.metadata.vin}</div>
-                  </div>
-                )}
-                
-                {/* Binary Strings */}
-                {analysisResult.metadata?.strings?.length > 0 && (
-                  <div className="grid grid-cols-2 hover:bg-gray-50/30 transition-colors">
-                    <div className="px-6 py-4 text-gray-900 font-medium">Detected Strings</div>
-                    <div className="px-6 py-4">
-                      <div className="space-y-1 max-h-32 overflow-y-auto">
-                        {analysisResult.metadata.strings.map((str, idx) => (
-                          <div key={idx} className="text-gray-500 text-sm font-mono truncate" title={str}>
-                            {str}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="bg-gray-50/50 rounded-lg p-2">
+                    <div className="text-gray-500 text-xs mb-0.5">VIN</div>
+                    <div className="text-gray-600 font-mono text-xs truncate">{analysisResult.metadata.vin}</div>
                   </div>
                 )}
               </div>
