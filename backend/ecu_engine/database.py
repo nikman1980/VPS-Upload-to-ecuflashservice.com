@@ -355,24 +355,160 @@ class ECUDefinitionDB:
         )
     
     def _load_denso_definitions(self):
-        """Load Denso ECU definitions (detection only for now)"""
+        """Load Denso ECU definitions - Enhanced based on real file analysis"""
         
-        # Denso is complex - maps are less documented
-        # Starting with detection, will add processing later
+        # =================================================================
+        # DENSO Toyota Hiace (89663-26606) - ANALYZED FROM REAL FILE
+        # =================================================================
+        # Analysis from dpfoffservice.com task_916783
+        # - Part number location: 0x7EC
+        # - DPF temp maps: 0xAE00-0xAF00
+        # - DTC P0248 at: 0x5970, 0x5BC8, 0x5E20
         
+        denso_hiace_dpf_maps = [
+            MapDefinition(
+                map_type=MapType.DPF_REGEN,
+                name="DPF Regen Temperature Map 1",
+                description="DPF regeneration temperature map - zero to disable",
+                offset=0xAE00,
+                rows=16,
+                columns=8,
+                data_size=2,
+                zero_fill=True,
+            ),
+            MapDefinition(
+                map_type=MapType.DPF_REGEN,
+                name="DPF Regen Temperature Map 2",
+                description="DPF regeneration temperature map - zero to disable",
+                offset=0xAF00,
+                rows=16,
+                columns=8,
+                data_size=2,
+                zero_fill=True,
+            ),
+            MapDefinition(
+                map_type=MapType.DPF_SWITCH,
+                name="DPF Enable Area",
+                description="Zeroed region found in processed file",
+                offset=0x7A00,
+                rows=16,
+                columns=8,
+                data_size=2,
+                zero_fill=True,
+            ),
+        ]
+        
+        denso_egr_maps = [
+            MapDefinition(
+                map_type=MapType.EGR_FLOW,
+                name="EGR Flow Map",
+                description="Denso EGR valve flow rate map",
+                rows=16,
+                columns=16,
+                data_size=2,
+                zero_fill=True,
+            ),
+        ]
+        
+        # Toyota Hiace 2.5/2.8 D-4D with Denso ECU
+        self._definitions["denso_toyota_hiace"] = ECUDefinition(
+            id="denso_toyota_hiace",
+            manufacturer=ECUManufacturer.DENSO,
+            family="Toyota",
+            variant="Hiace D-4D",
+            full_name="Denso Toyota Hiace (89663)",
+            identification_patterns=[
+                b"89663-26",    # Hiace part number prefix
+                b"89663-2660",  # Specific Hiace
+            ],
+            file_size_range=(1_000_000, 2_000_000),
+            maps=denso_hiace_dpf_maps + denso_egr_maps,
+            supported_modifications=[
+                ModificationType.DPF_OFF,
+                ModificationType.EGR_OFF,
+                ModificationType.DTC_OFF,
+            ],
+            modification_rules=[
+                ModificationRule(
+                    modification_type=ModificationType.DPF_OFF,
+                    map_types=[MapType.DPF_SWITCH, MapType.DPF_REGEN],
+                    description="Disable DPF regeneration on Denso Hiace",
+                    zero_fill=True,
+                    related_dtcs=["P0248", "P2002", "P2003", "P2458", "P2463"],
+                ),
+                ModificationRule(
+                    modification_type=ModificationType.EGR_OFF,
+                    map_types=[MapType.EGR_FLOW],
+                    description="Disable EGR on Denso Hiace",
+                    zero_fill=True,
+                    related_dtcs=["P0400", "P0401", "P0402", "P0403"],
+                ),
+            ],
+            vehicles=["Toyota Hiace 2.5 D-4D", "Toyota Hiace 2.8 D-4D", "Toyota Fortuner D-4D"],
+            notes="Verified from dpfoffservice.com processed file. DPF maps at 0xAE00-0xAF00.",
+            verified=True,
+        )
+        
+        # =================================================================
+        # DENSO Hino SH7058 - ANALYZED FROM REAL FILE
+        # =================================================================
+        # Analysis from task_915823: BP40YL36B410_SH7058
+        # Part number: 89663-E1041
+        # DENSO identifier at 0x6028
+        
+        denso_hino_dpf_maps = [
+            MapDefinition(
+                map_type=MapType.DPF_REGEN,
+                name="Hino DPF Regen Map",
+                description="Hino truck DPF regeneration map",
+                search_pattern=b'DENSO',
+                pattern_offset=0x1000,
+                rows=16,
+                columns=8,
+                data_size=2,
+                zero_fill=True,
+            ),
+        ]
+        
+        # Hino 500 Series with Denso SH7058
+        self._definitions["denso_hino_sh7058"] = ECUDefinition(
+            id="denso_hino_sh7058",
+            manufacturer=ECUManufacturer.DENSO,
+            family="SH7058",
+            variant="Hino",
+            full_name="Denso SH7058 (Hino)",
+            identification_patterns=[
+                b"DENSO",
+                b"89663-E",     # Hino part number prefix
+                b"SH7058",
+            ],
+            file_size_range=(1_000_000, 2_000_000),
+            maps=denso_hino_dpf_maps,
+            supported_modifications=[
+                ModificationType.DPF_OFF,
+                ModificationType.EGR_OFF,
+                ModificationType.DTC_OFF,
+            ],
+            vehicles=["Hino 300", "Hino 500", "Hino 700", "Hino Ranger"],
+            notes="Verified from dpfoffservice.com. Hino truck ECU with SH7058 processor.",
+            verified=True,
+        )
+        
+        # =================================================================
+        # Generic Denso NEC (fallback)
+        # =================================================================
         denso_dpf_maps = [
             MapDefinition(
                 map_type=MapType.DPF_SWITCH,
                 name="DPF Switch",
                 description="Denso DPF control - pattern varies by variant",
-                search_pattern=b'DpF',  # Common Denso pattern
+                search_pattern=b'DpF',
                 rows=1,
                 columns=1,
                 data_size=2,
             ),
         ]
         
-        # Denso NEC (Toyota)
         self._definitions["denso_nec"] = ECUDefinition(
             id="denso_nec",
             manufacturer=ECUManufacturer.DENSO,
@@ -381,7 +517,8 @@ class ECUDefinitionDB:
             full_name="Denso NEC Gen 3",
             identification_patterns=[
                 b"DENSO",
-                b"89661",  # Toyota part number prefix
+                b"89661",
+                b"89663",
             ],
             file_size_range=(1_000_000, 4_000_000),
             maps=denso_dpf_maps,
@@ -390,28 +527,7 @@ class ECUDefinitionDB:
                 ModificationType.EGR_OFF,
             ],
             vehicles=["Toyota Hilux", "Toyota Fortuner", "Toyota Land Cruiser"],
-            notes="Denso NEC processor. Map locations vary significantly. Needs sample files for accurate processing.",
-            verified=False,
-        )
-        
-        # Denso SH7058 (Hino trucks)
-        self._definitions["denso_sh7058"] = ECUDefinition(
-            id="denso_sh7058",
-            manufacturer=ECUManufacturer.DENSO,
-            family="SH7058",
-            variant="Hino",
-            full_name="Denso SH7058 (Hino)",
-            identification_patterns=[
-                b"SH7058",
-            ],
-            file_size_range=(1_000_000, 4_000_000),
-            maps=denso_dpf_maps,
-            supported_modifications=[
-                ModificationType.DPF_OFF,
-                ModificationType.EGR_OFF,
-            ],
-            vehicles=["Hino 300", "Hino 500", "Hino 700"],
-            notes="Hino truck ECU. SCR is in separate DCU.",
+            notes="Generic Denso NEC. Use specific definitions when available.",
             verified=False,
         )
     
