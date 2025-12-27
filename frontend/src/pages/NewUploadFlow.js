@@ -234,38 +234,30 @@ const NewUploadFlow = () => {
     setVehicleLoading(false);
   };
 
-  // Fetch generations when model is selected
+  // Fetch engines when model is selected (dpfoffservice structure: Model -> Engine directly)
   const handleModelSelect = async (model) => {
     setSelectedModel(model);
-    setSelectedGeneration(null);
+    setSelectedGeneration(null); // Keep for backward compatibility
     setSelectedEngine(null);
     setGenerations([]);
     setEngines([]);
     
     setVehicleLoading(true);
     try {
-      const response = await axios.get(`${API}/vehicles/generations/${model.id}`);
-      setGenerations(response.data || []);
-    } catch (error) {
-      console.error('Error fetching generations:', error);
-    }
-    setVehicleLoading(false);
-  };
-
-  // Fetch engines when generation is selected
-  const handleGenerationSelect = async (gen) => {
-    setSelectedGeneration(gen);
-    setSelectedEngine(null);
-    setEngines([]);
-    
-    setVehicleLoading(true);
-    try {
-      const response = await axios.get(`${API}/vehicles/engines/${gen.id}`);
+      // New structure: engines are directly under models
+      const response = await axios.get(`${API}/vehicles/engines/${model.id}`);
       setEngines(response.data || []);
     } catch (error) {
       console.error('Error fetching engines:', error);
     }
     setVehicleLoading(false);
+  };
+
+  // Keep for backward compatibility but not used in new flow
+  const handleGenerationSelect = async (gen) => {
+    setSelectedGeneration(gen);
+    setSelectedEngine(null);
+    setEngines([]);
   };
 
   // Handle engine selection - fetch recommended ECU types
