@@ -147,19 +147,27 @@ TRUCK_ECUS_WITH_SCR = {
 # SCR/AdBlue Dosing ECU Signatures
 # These are SEPARATE ECUs that control AdBlue injection
 SCR_DCU_SIGNATURES = [
-    # Bosch Denoxtronic
+    # Bosch Denoxtronic - STRONG indicators
     (b"DENOXTRONIC", "Bosch Denoxtronic"),
     (b"Denoxtronic", "Bosch Denoxtronic"),
     (b"denoxtronic", "Bosch Denoxtronic"),
-    # DCU identifiers
-    (b"DCU", "Dosing Control Unit"),
-    (b"DOSING", "Dosing System"),
-    (b"Dosing", "Dosing System"),
-    # NOx/SCR controller specific
+    # Full DCU identifiers (must be longer to avoid false positives)
+    (b"DCU_DOSING", "Dosing Control Unit"),
+    (b"DOSING_CTRL", "Dosing Controller"),
+    (b"DOSING_UNIT", "Dosing Unit"),
+    (b"DOSING UNIT", "Dosing Unit"),
+    (b"UREA_DOSING", "Urea Dosing System"),
+    # NOx/SCR controller specific - longer patterns
     (b"NOX_CTRL", "NOx Controller"),
+    (b"NOX_SENSOR", "NOx Sensor"),
     (b"SCR_CTRL", "SCR Controller"),
-    (b"AFTERTREATMENT", "Aftertreatment ECU"),
-    (b"Aftertreatment", "Aftertreatment ECU"),
+    (b"SCR_CATALYST", "SCR Catalyst"),
+    (b"AFTERTREATMENT_ECU", "Aftertreatment ECU"),
+    (b"REDUCTANT_CTRL", "Reductant Controller"),
+    (b"DEF_TANK", "DEF Tank"),
+    (b"DEF_PUMP", "DEF Pump"),
+    (b"ADBLUE_TANK", "AdBlue Tank"),
+    (b"ADBLUE_PUMP", "AdBlue Pump"),
 ]
 
 # DPF Map Detection Patterns
