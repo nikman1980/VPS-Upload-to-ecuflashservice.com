@@ -1765,19 +1765,28 @@ const NewUploadFlow = () => {
                 options={{ 
                   "client-id": PAYPAL_CLIENT_ID, 
                   currency: "USD",
-                  intent: "capture"
+                  intent: "capture",
+                  components: "buttons",
+                  "enable-funding": "paypal",
+                  "disable-funding": "credit,card"
                 }}
+                onError={(err) => console.error("PayPal Script Error:", err)}
               >
                 <PayPalButtons 
-                  style={{ layout: "vertical", color: "blue", shape: "rect", label: "paypal" }}
+                  style={{ layout: "vertical", color: "blue", shape: "rect", label: "paypal", height: 45 }}
+                  fundingSource="paypal"
                   createOrder={createOrder}
                   onApprove={onApprove}
                   onError={(err) => {
-                    console.error("PayPal Error:", err);
+                    console.error("PayPal Button Error:", err);
                     alert("PayPal Error: " + (err.message || JSON.stringify(err)));
                   }}
                   onCancel={() => {
                     console.log("Payment cancelled");
+                    alert("Payment was cancelled");
+                  }}
+                  onInit={(data, actions) => {
+                    console.log("PayPal Button Initialized", data);
                   }}
                 />
               </PayPalScriptProvider>
