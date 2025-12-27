@@ -1595,7 +1595,7 @@ const NewUploadFlow = () => {
 
             <h3 className="text-xl font-semibold mb-2">Detected Services</h3>
             <p className="text-gray-500 text-sm mb-4">
-              Based on our ECU analysis, the following services are available for your file:
+              Based on our initial ECU analysis, the following services are available for your file:
             </p>
             
             {availableOptions.length === 0 ? (
