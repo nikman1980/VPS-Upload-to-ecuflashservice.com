@@ -29,7 +29,7 @@ from .map_modifier import MapModifier
 from .checksum import ChecksumCalculator
 
 
-class ECUProcessor:
+class ECUFileProcessor:
     """
     Main ECU file processor.
     
