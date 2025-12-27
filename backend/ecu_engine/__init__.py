@@ -10,7 +10,7 @@ Components:
 - MapLocator: Find specific maps in binary ECU files
 - MapModifier: Apply modifications (DPF off, EGR off, etc.)
 - ChecksumCalculator: Recalculate checksums after modification
-- ECUProcessor: Main orchestrator for file processing
+- ECUFileProcessor: Main orchestrator for file processing
 
 Supported ECU Families (Initial):
 - Bosch EDC17 (most common diesel ECU)
@@ -28,12 +28,13 @@ from .models import (
     ModificationRule,
     ProcessingResult,
     ChecksumAlgorithm,
+    ModificationType,
 )
 from .database import ECUDefinitionDB
 from .map_locator import MapLocator
 from .map_modifier import MapModifier
 from .checksum import ChecksumCalculator
-from .processor import ECUProcessor
+from .processor import ECUFileProcessor
 
 __version__ = "1.0.0"
 __all__ = [
@@ -42,9 +43,10 @@ __all__ = [
     "ModificationRule",
     "ProcessingResult",
     "ChecksumAlgorithm",
+    "ModificationType",
     "ECUDefinitionDB",
     "MapLocator",
     "MapModifier",
     "ChecksumCalculator",
-    "ECUProcessor",
+    "ECUFileProcessor",
 ]
