@@ -17,7 +17,7 @@ reverse engineering from sample files.
 """
 
 import struct
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Dict
 from .models import ChecksumAlgorithm, ChecksumType
 
 
