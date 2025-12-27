@@ -2353,6 +2353,180 @@ async def admin_send_portal_message(
     }
 
 
+# =============================================================================
+# ECU PROCESSING ENGINE API
+# =============================================================================
+# New automated ECU file processing endpoints
+
+@api_router.get("/engine/supported-ecus")
+async def get_supported_ecus():
+    """Get list of all supported ECU types and their capabilities"""
+    definitions = ecu_definition_db.get_all_definitions()
+    return {
+        "success": True,
+        "count": len(definitions),
+        "ecus": [
+            {
+                "id": d.id,
+                "name": d.full_name,
+                "manufacturer": d.manufacturer.value,
+                "family": d.family,
+                "variant": d.variant,
+                "supported_modifications": [m.value for m in d.supported_modifications],
+                "vehicles": d.vehicles,
+                "verified": d.verified,
+            }
+            for d in definitions
+        ]
+    }
+
+
+@api_router.post("/engine/analyze")
+async def analyze_ecu_file_engine(
+    file: UploadFile = File(...)
+):
+    """
+    Analyze an ECU file using the new processing engine.
+    Returns detailed analysis without modifying the file.
+    """
+    try:
+        file_data = await file.read()
+        analysis = ecu_file_processor.analyze_file(file_data)
+        
+        return {
+            "success": True,
+            "filename": file.filename,
+            "analysis": analysis
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/engine/process")
+async def process_ecu_file_engine(
+    file: UploadFile = File(...),
+    modifications: str = Form(...)  # Comma-separated: "dpf_off,egr_off,dtc_off"
+):
+    """
+    Process an ECU file with the new processing engine.
+    
+    Modifications available:
+    - dpf_off: Disable DPF/FAP regeneration
+    - egr_off: Disable EGR valve
+    - adblue_off: Disable AdBlue/SCR system
+    - dtc_off: Remove related DTCs
+    - lambda_off: Disable lambda sensors
+    - stage1_tune: Stage 1 performance tune
+    
+    Returns processed file for download.
+    """
+    try:
+        file_data = await file.read()
+        
+        # Parse modifications
+        mod_list = [m.strip() for m in modifications.split(",") if m.strip()]
+        mod_types = []
+        for mod in mod_list:
+            try:
+                mod_types.append(EngineModType(mod))
+            except ValueError:
+                pass
+        
+        if not mod_types:
+            raise HTTPException(status_code=400, detail="No valid modifications specified")
+        
+        # Process file
+        result = ecu_file_processor.process_file(file_data, mod_types, file.filename)
+        
+        if result.success:
+            # Save processed file
+            processed_data = ecu_file_processor.get_processed_file()
+            if processed_data:
+                output_filename = f"processed_{file.filename}"
+                output_path = PROCESSED_DIR / output_filename
+                
+                with open(output_path, 'wb') as f:
+                    f.write(processed_data)
+                
+                # Store result in database
+                processing_record = {
+                    "id": str(uuid.uuid4()),
+                    "original_filename": file.filename,
+                    "processed_filename": output_filename,
+                    "ecu_id": result.ecu_id,
+                    "ecu_name": result.ecu_name,
+                    "modifications_applied": result.modifications_applied,
+                    "dtcs_removed": result.dtcs_removed,
+                    "checksum_updated": result.checksum_updated,
+                    "processing_time_ms": result.processing_time_ms,
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                }
+                await db.ecu_processing_log.insert_one(processing_record)
+                
+                return {
+                    "success": True,
+                    "result": {
+                        "ecu_identified": result.ecu_name,
+                        "modifications_applied": result.modifications_applied,
+                        "maps_modified": result.maps_modified,
+                        "dtcs_removed": result.dtcs_removed,
+                        "checksum_updated": result.checksum_updated,
+                        "processing_time_ms": result.processing_time_ms,
+                        "warnings": result.warnings,
+                    },
+                    "download_path": f"/api/engine/download/{output_filename}"
+                }
+        
+        return {
+            "success": False,
+            "errors": result.errors,
+            "warnings": result.warnings
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/engine/download/{filename}")
+async def download_processed_file(filename: str):
+    """Download a processed ECU file"""
+    file_path = PROCESSED_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    return FileResponse(
+        path=str(file_path),
+        filename=filename,
+        media_type="application/octet-stream"
+    )
+
+
+@api_router.get("/engine/status")
+async def get_engine_status():
+    """Get ECU Processing Engine status and statistics"""
+    definitions = ecu_definition_db.get_all_definitions()
+    
+    # Get processing statistics
+    total_processed = await db.ecu_processing_log.count_documents({})
+    
+    return {
+        "success": True,
+        "engine_version": "1.0.0",
+        "supported_ecus": len(definitions),
+        "total_files_processed": total_processed,
+        "status": "operational",
+        "capabilities": {
+            "dpf_off": True,
+            "egr_off": True,
+            "adblue_off": True,
+            "dtc_off": True,
+            "checksum_correction": True,
+        }
+    }
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
