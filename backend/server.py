@@ -1721,16 +1721,17 @@ async def get_all_orders(skip: int = 0, limit: int = 50):
 
 @api_router.get("/vehicles/types")
 async def get_vehicle_types():
-    """Get all vehicle types (Cars, Trucks, Agriculture, Marine, Motorcycles)"""
-    types = await db.vehicle_types.find({}, {"_id": 0}).to_list(100)
+    """Get all vehicle types sorted by order (Cars, Trucks, Buses, Bike, Construction, Agriculture)"""
+    types = await db.vehicle_types.find({}, {"_id": 0}).sort("order", 1).to_list(100)
     if not types:
         # Fallback to default types if database not populated yet
         return [
-            {"id": 1, "name": "Cars & LCV", "slug": "cars"},
-            {"id": 2, "name": "Trucks & Buses", "slug": "trucks"},
-            {"id": 3, "name": "Agriculture", "slug": "agriculture"},
-            {"id": 4, "name": "Marine", "slug": "marine"},
-            {"id": 5, "name": "Motorcycles & ATVs", "slug": "motorcycles"}
+            {"id": "car", "name": "Cars & LCV", "order": 1},
+            {"id": "truck", "name": "Trucks & Buses", "order": 2},
+            {"id": "bus", "name": "Bus", "order": 3},
+            {"id": "marine", "name": "Bike / Marine / Snowmobile", "order": 4},
+            {"id": "construction", "name": "Construction / Equipment", "order": 5},
+            {"id": "agriculture", "name": "Agriculture", "order": 6}
         ]
     return types
 
