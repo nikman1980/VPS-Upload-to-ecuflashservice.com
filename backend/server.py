@@ -26,6 +26,9 @@ from email_service import send_order_confirmation
 # Import TuningFiles API (real ECU processing)
 from tuningfiles_api import TuningFilesAPI
 
+# Import NEW ECU Processing Engine (for automated processing)
+from ecu_engine import ECUFileProcessor, ECUDefinitionDB, ModificationType as EngineModType
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
