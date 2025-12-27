@@ -50,7 +50,7 @@
 **Status:** ✅ ALL TESTS PASSED
 
 #### Test Execution Summary:
-1. ✅ **Homepage Navigation**: Successfully loaded https://ecu-analyze.preview.emergentagent.com
+1. ✅ **Homepage Navigation**: Successfully loaded https://vehicle-tuner-16.preview.emergentagent.com
 2. ✅ **Get Started Button**: Found and clicked successfully
 3. ✅ **Vehicle Types Display**: Found all 7 expected vehicle types:
    - Agriculture 🚜
