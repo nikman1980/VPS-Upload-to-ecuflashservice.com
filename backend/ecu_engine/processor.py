@@ -361,7 +361,7 @@ def process_ecu_file(
             pass
     
     # Process
-    processor = ECUProcessor()
+    processor = ECUFileProcessor()
     result = processor.process_file(file_data, mod_types, Path(file_path).name)
     
     # Save if successful
