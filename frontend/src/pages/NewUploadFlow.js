@@ -4,7 +4,16 @@ import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
-const PAYPAL_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
+
+// PayPal Configuration
+// SANDBOX Client ID - For Testing (autolocksmith.fj@gmail.com)
+const PAYPAL_SANDBOX_CLIENT_ID = 'AXzBGBayD39Wn5qf_fI7HFs21WMh7kfitbk98w3mMb0xG3ptc8SYB94sI7QIsDsIOJgrPYroHQ9TNJts';
+// LIVE Client ID - For Production
+const PAYPAL_LIVE_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
+
+// Toggle this to switch between Sandbox (testing) and Live (production)
+const USE_SANDBOX = true;  // Set to false for live payments
+const PAYPAL_CLIENT_ID = USE_SANDBOX ? PAYPAL_SANDBOX_CLIENT_ID : PAYPAL_LIVE_CLIENT_ID;
 
 const NewUploadFlow = () => {
   // Updated step: 0: Landing, 1: Vehicle Selection, 2: Upload, 3: Processing, 4: Services, 5: Payment, 6: Success
