@@ -8,7 +8,7 @@ const API = `${BACKEND_URL}/api`;
 
 // PayPal Configuration
 // SANDBOX Client ID - For Testing (autolocksmith.fj@gmail.com)
-const PAYPAL_SANDBOX_CLIENT_ID = 'AXzBGBayD39Wn5qf_fI7HFs21WMh7kfitbk98w3mMb0xG3ptc8SYB94sI7QIsDsIOJgrPYroHQ9TNJts';
+const PAYPAL_SANDBOX_CLIENT_ID = 'AUKI1eDyXSrMhAJ_Lo4E-WL1ptVJQ3NaIsamoiklSc2p83EEyRvDxVBvhDV3k6q8FeG_vdMYPQv5DJtC';
 // LIVE Client ID - For Production
 const PAYPAL_LIVE_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
 
