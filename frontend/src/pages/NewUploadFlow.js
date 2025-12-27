@@ -368,11 +368,12 @@ const NewUploadFlow = () => {
       const ecuInfo = selectedEcu ? (selectedEcu.id === 'other' ? customEcu : selectedEcu.name) : '';
       return `${manualVehicle.make} ${manualVehicle.model} ${manualVehicle.year} - ${manualVehicle.engine}${ecuInfo ? ` (${ecuInfo})` : ''}`;
     }
-    if (!selectedManufacturer || !selectedModel || !selectedGeneration || !selectedEngine) {
+    // Updated: No longer requires selectedGeneration (dpfoffservice structure: Model -> Engine directly)
+    if (!selectedManufacturer || !selectedModel || !selectedEngine) {
       return 'No vehicle selected';
     }
     const ecuInfo = selectedEcu ? (selectedEcu.id === 'other' ? customEcu : selectedEcu.name) : '';
-    return `${selectedManufacturer.name} ${selectedModel.name} ${selectedGeneration.name} - ${selectedEngine.name}${ecuInfo ? ` (${ecuInfo})` : ''}`;
+    return `${selectedManufacturer.name} ${selectedModel.name} - ${selectedEngine.name}${ecuInfo ? ` (${ecuInfo})` : ''}`;
   };
 
   const handleFileSelect = (e) => {
