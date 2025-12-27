@@ -361,3 +361,81 @@ Check the HTTP status code and response body in DevTools to learn more.
 ### Agent Communication:
 - **Testing Agent:** PayPal Sandbox payment flow testing completed. The application flow and payment page UI are working perfectly. However, PayPal button is not appearing due to invalid Sandbox Client ID causing HTTP 400 errors when loading PayPal SDK. The PayPal integration code is correctly implemented - this is a configuration issue requiring a valid Client ID from PayPal Developer Dashboard.
 - **Status:** Critical PayPal configuration issue identified - requires new valid Sandbox Client ID to enable payment functionality.
+
+---
+
+## SKIP PAYMENT BUTTON TESTING - COMPLETED ❌
+
+### Testing Session: December 27, 2025
+**Tester:** Testing Agent  
+**Focus:** Verify "Skip Payment for Testing" button flow from vehicle selection to success page  
+**Status:** ❌ CRITICAL BUG FOUND - JavaScript Error Prevents Success Page
+
+#### Test Results Summary:
+
+### ✅ APPLICATION FLOW - FULLY FUNCTIONAL
+**Status:** PASSED - All steps working correctly
+- ✅ Homepage navigation successful
+- ✅ "Get Started" button working correctly
+- ✅ Vehicle selection flow (Cars & LCV → Toyota → Hilux → 2.8 D-4D → Denso NEC cpu) working
+- ✅ File upload successful (task_916783_HIACE-1-0.bin)
+- ✅ File analysis completed successfully
+- ✅ Service selection working (DPF Removal, EGR Removal, etc.)
+- ✅ Payment page navigation successful
+- ✅ Customer information form working correctly
+
+### ✅ SKIP PAYMENT BUTTON - UI WORKING CORRECTLY
+**Status:** PASSED - Button visible and clickable
+- ✅ **CRITICAL SUCCESS:** Yellow "🧪 Skip Payment (Test Mode)" button is visible and functional
+- ✅ Button appears below PayPal section with correct styling
+- ✅ "For testing only - bypasses PayPal payment" text displayed correctly
+- ✅ "🧪 Sandbox Mode - Test payments only" indicator visible
+- ✅ Button click is registered successfully
+
+### ❌ SKIP PAYMENT BACKEND PROCESSING - CRITICAL BUG
+**Status:** FAILED - JavaScript error prevents order creation
+- ❌ **CRITICAL ERROR:** `ReferenceError: customerEmail is not defined`
+- ❌ **CRITICAL ERROR:** `ReferenceError: customerName is not defined`
+- ❌ Skip Payment button click triggers JavaScript error
+- ❌ No redirect to success page occurs
+- ❌ Order is not created in database
+
+#### Root Cause Analysis:
+**ISSUE:** Variable name mismatch in Skip Payment button onClick handler
+- **Location:** NewUploadFlow.js, Skip Payment button onClick function (lines ~809-810)
+- **Problem:** Code uses `customerEmail` and `customerName` variables
+- **Correct Variables:** Should use `customerInfo.customer_email` and `customerInfo.customer_name`
+- **Impact:** JavaScript error prevents test order creation and success page redirect
+
+#### Console Error Details:
+```
+error: Test order error: ReferenceError: customerEmail is not defined
+    at onClick (https://vehicle-tuner-16.preview.emergentagent.com/static/js/bundle.js:56150:37)
+```
+
+#### Required Fix:
+**File:** `/app/frontend/src/pages/NewUploadFlow.js`
+**Lines:** ~809-810 in Skip Payment button onClick handler
+**Change:**
+```javascript
+// INCORRECT (current code):
+customer_email: customerEmail || 'test@example.com',
+customer_name: customerName || 'Test Customer',
+
+// CORRECT (should be):
+customer_email: customerInfo.customer_email || 'test@example.com',
+customer_name: customerInfo.customer_name || 'Test Customer',
+```
+
+#### Technical Verification:
+- ✅ Skip Payment button UI implementation correct
+- ✅ Sandbox mode detection working
+- ✅ PayPal integration properly configured (separate from this issue)
+- ❌ Variable reference error in onClick handler
+- ❌ Backend API call fails due to JavaScript error
+
+**FINAL VERDICT: ❌ SKIP PAYMENT BUTTON HAS CRITICAL JAVASCRIPT BUG**
+
+### Agent Communication:
+- **Testing Agent:** Skip Payment button testing completed. The button UI is working perfectly and is visible/clickable as expected. However, there is a critical JavaScript bug in the onClick handler that prevents the test order from being created. The variables `customerEmail` and `customerName` are undefined - they should be `customerInfo.customer_email` and `customerInfo.customer_name`. This is a simple but critical fix needed for the Skip Payment functionality to work.
+- **Status:** Critical JavaScript variable reference bug identified - requires immediate fix to enable Skip Payment functionality.
