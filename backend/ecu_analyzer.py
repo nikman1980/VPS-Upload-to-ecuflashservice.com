@@ -1327,86 +1327,79 @@ class ECUAnalyzer:
     
     def _detect_adblue_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
         """
-        Professional AdBlue/SCR/DEF map detection using binary pattern analysis.
-        Based on verified data from professional tuning services.
+        Professional AdBlue/SCR/DEF map detection using ECU-type based analysis.
         
-        Detection methods:
-        1. ECU Type identification (verified against dpfoffservice.com)
-        2. SCR text markers
-        3. DCU (Dosing Control Unit) signatures
+        APPROACH (based on dpfoffservice.com and DaVinci):
+        =====================================================
+        1. Use ECU TYPE to determine if SCR is present - this is the most reliable method
+        2. Most ECUs with SCR are TRUCK ECUs or modern emission-controlled vehicles
+        3. SCR/AdBlue is typically in a SEPARATE DCU (Dosing Control Unit) file, NOT in main ECU
+        4. Only mark as detected if there's STRONG evidence
         
-        VERIFIED ECUs WITH SCR:
-        - Cummins CM2150E, CM2250, CM2350
-        - Bosch EDC17CVxx (EDC17CV41, CV44, CV54)
-        - Bosch EDC17CP52, CP54
+        ECUS WITH SCR IN MAIN ECU (VERIFIED):
+        - Cummins CM2150E, CM2250, CM2350 (EPA2010+ truck engines)
+        - Bosch EDC17CVxx (Heavy truck ECUs)
+        - Bosch EDC17CP52, EDC17CP54, EDC17C49, EDC17C54 (Truck ECUs)
         
-        VERIFIED ECUs WITHOUT SCR (in main ECU):
-        - Transtron (Isuzu)
-        - Denso NEC Gen 3 (Toyota)
-        - Denso SH7058 (Hino)
-        - Denso SH72531 (Subaru)
-        - Bosch EDC16xxx (pre-SCR era)
-        - Bosch MD1CSxxx (modern but separate DCU)
-        - Bosch MEVD17.x (petrol ECUs)
+        ECUS WITHOUT SCR IN MAIN ECU:
+        - ALL Denso ECUs (SCR handled by separate DCU or not present)
+        - Transtron (Isuzu) - No SCR in main ECU
+        - Bosch EDC16xxx (Pre-SCR era)
+        - Bosch MD1CSxxx (Modern but uses separate DCU)
+        - Bosch MEVD17.x (Petrol ECUs - no diesel aftertreatment)
+        - Most passenger car ECUs
         """
         
         indicators = []
         confidence_score = 0
         
-        # Get ECU info for type-based detection
+        # Get ECU info
         ecu_type = self.results.get("ecu_type", "") or ""
         manufacturer = self.results.get("manufacturer", "") or ""
         ecu_upper = ecu_type.upper()
         mfr_upper = manufacturer.upper()
-        file_size = len(file_data)
         
         # =================================================================
-        # EXCLUSIONS FIRST: ECUs VERIFIED to NOT have SCR in main ECU
+        # DENSO ECUs: NEVER have SCR in main ECU file
+        # SCR is always in a separate DCU file if present
         # =================================================================
+        if "DENSO" in mfr_upper or "DENSO" in ecu_upper:
+            return {
+                "detected": False, "confidence": "none",
+                "confidence_score": 0, 
+                "indicators": ["Denso ECU: SCR not in main ECU (separate DCU if equipped)"]
+            }
         
-        # Transtron (Isuzu) - VERIFIED: No SCR in main ECU
+        # =================================================================
+        # TRANSTRON (Isuzu) - No SCR in main ECU
+        # =================================================================
         if "TRANSTRON" in mfr_upper or "TRANSTRON" in ecu_upper:
             return {
                 "detected": False, "confidence": "none", 
                 "confidence_score": 0, "indicators": ["Transtron: No SCR in main ECU"]
             }
         
-        # Denso SH7058 (Hino) - VERIFIED: No SCR in main ECU
-        if "SH7058" in ecu_upper:
-            return {
-                "detected": False, "confidence": "none",
-                "confidence_score": 0, "indicators": ["Denso SH7058: SCR in separate DCU"]
-            }
-        
-        # Denso NEC (Toyota/Lexus) - VERIFIED: No SCR in main ECU
-        if "NEC" in ecu_upper and ("GEN" in ecu_upper or "DENSO" in mfr_upper):
-            return {
-                "detected": False, "confidence": "none",
-                "confidence_score": 0, "indicators": ["Denso NEC: No SCR in main ECU"]
-            }
-        
-        # Denso SH72531 (Subaru) - No SCR
-        if "SH72531" in ecu_upper:
-            return {
-                "detected": False, "confidence": "none",
-                "confidence_score": 0, "indicators": ["Denso SH72531: No SCR"]
-            }
-        
-        # Bosch EDC16xxx - Pre-SCR era
+        # =================================================================
+        # Bosch EDC16xxx - Pre-SCR era (before 2010)
+        # =================================================================
         if "EDC16" in ecu_upper:
             return {
                 "detected": False, "confidence": "none",
                 "confidence_score": 0, "indicators": ["Bosch EDC16: Pre-SCR era"]
             }
         
-        # Bosch MEVD17 - Petrol ECU
-        if "MEVD17" in ecu_upper or "MEVD" in ecu_upper:
+        # =================================================================
+        # Bosch MEVD17 - Petrol ECU (no diesel aftertreatment)
+        # =================================================================
+        if "MEVD17" in ecu_upper or "MEVD" in ecu_upper or "MED" in ecu_upper:
             return {
                 "detected": False, "confidence": "none",
-                "confidence_score": 0, "indicators": ["Bosch MEVD: Petrol ECU"]
+                "confidence_score": 0, "indicators": ["Petrol ECU: No SCR system"]
             }
         
-        # Bosch MD1CS - VERIFIED: No SCR in main ECU (LDV Maxus etc)
+        # =================================================================
+        # Bosch MD1CS - Modern but uses separate DCU
+        # =================================================================
         if "MD1CS" in ecu_upper:
             return {
                 "detected": False, "confidence": "none",
@@ -1414,125 +1407,68 @@ class ECUAnalyzer:
             }
         
         # =================================================================
-        # ECUs VERIFIED to have SCR
+        # ECUs VERIFIED to have SCR - based on dpfoffservice.com data
         # =================================================================
         
-        # Cummins CM2150E - VERIFIED: Has SCR (EPA2010+)
-        if "CM2150E" in ecu_upper:
-            indicators.append("Cummins CM2150E (EPA2010 SCR)")
-            confidence_score += 80
+        # Cummins CM2150E, CM2250, CM2350 - VERIFIED: Has SCR
+        if "CM2150E" in ecu_upper or "CM2150" in ecu_upper:
+            indicators.append("Cummins CM2150E (EPA2010+ SCR)")
+            confidence_score += 85
         elif "CM2250" in ecu_upper or "CM2350" in ecu_upper:
             indicators.append("Cummins CM22xx/CM23xx (SCR standard)")
+            confidence_score += 85
+        
+        # Bosch EDC17CVxx - VERIFIED: Heavy truck ECUs with SCR
+        if "EDC17CV" in ecu_upper:
+            indicators.append(f"Bosch {ecu_upper[:10]} (Heavy Truck SCR ECU)")
             confidence_score += 80
         
-        # Bosch EDC17CVxx - VERIFIED: Has SCR (truck ECUs)
-        if "EDC17CV" in ecu_upper:
-            indicators.append(f"Bosch {ecu_upper[:10]} (Truck SCR ECU)")
-            confidence_score += 75
-        
-        # Bosch EDC17CP52/54 - Has SCR (truck ECUs)
+        # Bosch EDC17CP52/54 and similar truck ECUs
         truck_scr_ecus = ["EDC17CP52", "EDC17CP54", "EDC17C49", "EDC17C54"]
         for scr_ecu in truck_scr_ecus:
             if scr_ecu in ecu_upper:
                 indicators.append(f"Bosch {scr_ecu} (Truck SCR)")
-                confidence_score += 55
+                confidence_score += 75
                 break
         
         # =================================================================
-        # METHOD 2: DCU (Dosing Control Unit) Detection
+        # METHOD 2: Strong text markers (only if high score threshold)
+        # These must be VERY specific - avoid short generic patterns
         # =================================================================
-        dcu_markers = [
-            (b'DENOXTRONIC', 70), (b'Denoxtronic', 65),
-            (b'DOSING_UNIT', 60), (b'DOSING UNIT', 55),
-            (b'UREADOS', 60), (b'DEF_PUMP', 55),
-            (b'REDUCTANT_CTRL', 60), (b'NOX_CTRL', 55),
-            (b'SCR_CTRL', 60), (b'SCRCTRL', 55),
-        ]
-        for marker, score in dcu_markers:
-            if marker in file_data:
-                indicators.append(f"SCR controller: {marker.decode()}")
-                confidence_score += score
-                break
-        
-        if HAS_ECU_DATABASE:
-            for marker, desc in SCR_DCU_SIGNATURES:
+        if confidence_score < 60:
+            strong_scr_markers = [
+                (b'DENOXTRONIC', 70),      # Bosch SCR system name
+                (b'Denoxtronic', 70),
+                (b'UREA_DOSING', 65),       # Urea dosing specific
+                (b'REDUCTANT_CTRL', 65),    # Reductant controller
+                (b'NOX_SENSOR_', 60),       # NOx sensor with suffix
+                (b'SCR_CATALYST', 60),      # SCR catalyst specific
+                (b'ADBLUE_TANK', 60),       # AdBlue tank specific
+                (b'DEF_TANK_', 55),         # DEF tank with suffix
+            ]
+            for marker, score in strong_scr_markers:
                 if marker in file_data:
-                    indicators.append(f"DCU: {desc}")
-                    confidence_score += 65
+                    indicators.append(f"SCR marker: {marker.decode()}")
+                    confidence_score += score
                     break
         
         # =================================================================
-        # METHOD 3: Strong Text Markers
-        # Only use unambiguous markers
+        # Calculate final confidence - ONLY detect if score >= 60
         # =================================================================
-        if confidence_score < 50:
-            strong_markers = [
-                (b'ADBLUE', 65), (b'AdBlue', 65),
-                (b'UREA_TANK', 60), (b'UREA_PUMP', 60),
-                (b'UREA_DOSING', 65), (b'UREADOS', 60),
-                (b'DEF_TANK', 60), (b'DEF_PUMP', 55),
-                (b'SCR_CATALYST', 60), (b'SCRCAT', 55),
-                (b'NOX_SENSOR', 55), (b'NOXSENS', 50),
-                (b'DENOX_', 55), (b'DENOX', 50),
-                (b'AFTERTREATMENT', 55),
-            ]
-            for marker, score in strong_markers:
-                count = file_data.count(marker)
-                if count > 0:
-                    # Verify it's real (not part of "ABCDEF" or other patterns)
-                    idx = file_data.find(marker)
-                    context = file_data[max(0, idx-10):idx+len(marker)+10]
-                    if b'ABCDEF' not in context:
-                        indicators.append(f"SCR text: {marker.decode()}")
-                        confidence_score += score
-                        break
+        detected = confidence_score >= 60
         
-        # =================================================================
-        # METHOD 4: SCR DTC Code Analysis (use higher thresholds)
-        # Only count if DTC codes appear in HIGH concentrations
-        # (to avoid false positives from random byte patterns)
-        # =================================================================
-        if confidence_score < 50:
-            # Only check specific high-value DTCs with very high thresholds
-            # These thresholds are based on real Cummins SCR file analysis
-            scr_dtc_codes = [
-                (3712, 30),   # Need 30+ occurrences
-                (4094, 50),   # Need 50+ occurrences (common in SCR files)
-                (5249, 100),  # Need 100+ occurrences (very common in SCR files)
-            ]
-            
-            dtc_strong_hits = 0
-            for dtc_code, threshold in scr_dtc_codes:
-                be_bytes = struct.pack('>H', dtc_code)
-                le_bytes = struct.pack('<H', dtc_code)
-                count = file_data.count(be_bytes) + file_data.count(le_bytes)
-                if count >= threshold:
-                    dtc_strong_hits += 1
-            
-            if dtc_strong_hits >= 2:
-                indicators.append(f"SCR DTC concentration detected")
-                confidence_score += 50
-            elif dtc_strong_hits == 1:
-                indicators.append("SCR DTC pattern")
-                confidence_score += 30
-        
-        # =================================================================
-        # Calculate final confidence
-        # =================================================================
-        if confidence_score >= 60:
+        if confidence_score >= 75:
             confidence = "high"
-        elif confidence_score >= 40:
+        elif confidence_score >= 60:
             confidence = "medium"
-        elif confidence_score > 0:
-            confidence = "low"
         else:
             confidence = "none"
         
         return {
-            "detected": confidence_score > 0,
+            "detected": detected,
             "confidence": confidence,
             "confidence_score": confidence_score,
-            "indicators": indicators[:5]
+            "indicators": indicators[:5] if indicators else ["No SCR indicators found"]
         }
 
     def _detect_lambda_maps(self, file_data: bytes, strings_upper: str) -> Dict[str, Any]:
