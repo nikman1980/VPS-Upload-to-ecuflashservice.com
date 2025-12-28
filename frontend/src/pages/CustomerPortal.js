@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { useSearchParams, useNavigate } from 'react-router-dom';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${BACKEND_URL}/api`;
 
 const CustomerPortal = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
   
-  // Login state
+  // Auth state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
-  const [usePasswordLogin, setUsePasswordLogin] = useState(true); // Default to password login
   const [accountInfo, setAccountInfo] = useState(null);
   
   // Registration state
@@ -27,7 +27,8 @@ const CustomerPortal = () => {
   const [registerError, setRegisterError] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState(false);
   
-  // Orders state (all orders for this email)
+  // Portal state
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,20 +40,44 @@ const CustomerPortal = () => {
   
   // File upload state
   const [uploadingFile, setUploadingFile] = useState(false);
+  
+  // New Order state
+  const [newOrderFile, setNewOrderFile] = useState(null);
+  const [newOrderServices, setNewOrderServices] = useState([]);
+  const [newOrderNotes, setNewOrderNotes] = useState('');
+  const [newOrderVehicle, setNewOrderVehicle] = useState({ make: '', model: '', year: '' });
+  const [submittingOrder, setSubmittingOrder] = useState(false);
+  
+  // Settings state
+  const [editingProfile, setEditingProfile] = useState(false);
+  const [profileName, setProfileName] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [settingsMessage, setSettingsMessage] = useState({ type: '', text: '' });
 
-  // Check URL params for auto-login or registration
+  // Available services
+  const availableServices = [
+    { id: 'dpf_off', name: 'DPF Off', price: 50 },
+    { id: 'egr_off', name: 'EGR Off', price: 40 },
+    { id: 'adblue_off', name: 'AdBlue Off', price: 45 },
+    { id: 'dtc_removal', name: 'DTC Removal', price: 30 },
+    { id: 'lambda_off', name: 'Lambda Off', price: 35 },
+    { id: 'speed_limit', name: 'Speed Limiter Off', price: 40 },
+    { id: 'stage1', name: 'Stage 1 Tuning', price: 150 },
+    { id: 'stage2', name: 'Stage 2 Tuning', price: 250 },
+  ];
+
+  // Check URL params for auto-login
   useEffect(() => {
     const email = searchParams.get('email');
     const register = searchParams.get('register');
-    const name = searchParams.get('name');
     
     if (register === 'true') {
       setShowRegister(true);
       if (email) setRegisterEmail(email);
-      if (name) setRegisterName(decodeURIComponent(name));
     } else if (email) {
       setLoginEmail(email);
-      setUsePasswordLogin(false); // Use email-only login for URL params
       doLoginEmail(email);
     }
   }, [searchParams]);
@@ -76,25 +101,18 @@ const CustomerPortal = () => {
       if (response.data.success) {
         setOrders(response.data.orders || []);
         setAccountInfo(response.data.account);
+        setProfileName(response.data.account?.name || '');
         setIsLoggedIn(true);
-        // Auto-select first order if any
-        if (response.data.orders?.length > 0) {
-          setSelectedOrder(response.data.orders[0]);
-          setMessages(response.data.orders[0].messages || []);
-        }
         window.history.replaceState({}, '', `/portal?email=${encodeURIComponent(loginEmail)}`);
-      } else {
-        setLoginError(response.data.message || 'Login failed');
       }
     } catch (error) {
-      console.error('Login error:', error);
       setLoginError(error.response?.data?.detail || 'Invalid email or password');
     } finally {
       setLoginLoading(false);
     }
   };
 
-  // Email-only login (for quick access / URL params)
+  // Email-only login (quick access)
   const doLoginEmail = async (email) => {
     if (!email) {
       setLoginError('Please enter your email address');
@@ -111,18 +129,11 @@ const CustomerPortal = () => {
       
       if (response.data.success) {
         setOrders(response.data.orders || []);
+        setAccountInfo(response.data.account || { email: email, name: 'Guest' });
         setIsLoggedIn(true);
-        // Auto-select first order if any
-        if (response.data.orders?.length > 0) {
-          setSelectedOrder(response.data.orders[0]);
-          setMessages(response.data.orders[0].messages || []);
-        }
         window.history.replaceState({}, '', `/portal?email=${encodeURIComponent(email)}`);
-      } else {
-        setLoginError(response.data.message || 'Login failed');
       }
     } catch (error) {
-      console.error('Login error:', error);
       setLoginError(error.response?.data?.detail || 'No orders found for this email');
     } finally {
       setLoginLoading(false);
@@ -131,142 +142,19 @@ const CustomerPortal = () => {
 
   const handleLogin = async (e) => {
     e?.preventDefault();
-    if (usePasswordLogin) {
+    if (loginPassword) {
       doLoginPassword();
     } else {
       doLoginEmail(loginEmail);
     }
   };
 
-  const selectOrder = async (order) => {
-    setSelectedOrder(order);
-    // Fetch messages for this order
-    try {
-      const response = await axios.get(`${API}/portal/messages/${order.id}?email=${encodeURIComponent(loginEmail)}`);
-      setMessages(response.data.messages || []);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-      setMessages([]);
-    }
-  };
-
-  const refreshOrders = async () => {
-    if (!loginEmail) return;
-    setLoading(true);
-    try {
-      const response = await axios.post(`${API}/portal/login-email`, {
-        email: loginEmail.trim()
-      });
-      if (response.data.success) {
-        setOrders(response.data.orders || []);
-        // Refresh selected order
-        if (selectedOrder) {
-          const updated = response.data.orders.find(o => o.id === selectedOrder.id);
-          if (updated) setSelectedOrder(updated);
-        }
-      }
-    } catch (error) {
-      console.error('Refresh error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const sendMessage = async () => {
-    if (!newMessage.trim() || !selectedOrder?.id) return;
-    
-    setSendingMessage(true);
-    try {
-      const response = await axios.post(`${API}/portal/message`, {
-        order_id: selectedOrder.id,
-        email: loginEmail,
-        message: newMessage.trim(),
-        sender: 'customer'
-      });
-      
-      if (response.data.success) {
-        setMessages([...messages, response.data.message]);
-        setNewMessage('');
-      }
-    } catch (error) {
-      console.error('Send message error:', error);
-      alert('Failed to send message');
-    } finally {
-      setSendingMessage(false);
-    }
-  };
-
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file || !selectedOrder?.id) return;
-    
-    setUploadingFile(true);
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('order_id', selectedOrder.id);
-    formData.append('email', loginEmail);
-    
-    try {
-      const response = await axios.post(`${API}/portal/upload-file`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      
-      if (response.data.success) {
-        refreshOrders();
-        alert('File uploaded successfully!');
-      }
-    } catch (error) {
-      console.error('Upload error:', error);
-      alert('Failed to upload file');
-    } finally {
-      setUploadingFile(false);
-    }
-  };
-
-  const downloadFile = async (fileId, fileName) => {
-    try {
-      const response = await axios.get(
-        `${API}/portal/download/${selectedOrder.id}/${fileId}?email=${encodeURIComponent(loginEmail)}`,
-        { responseType: 'blob' }
-      );
-      
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-      console.error('Download error:', error);
-      alert('Failed to download file');
-    }
-  };
-
-  const getStatusInfo = (status) => {
-    const statuses = {
-      'pending_payment': { label: 'Pending Payment', color: 'bg-yellow-500', icon: '💳' },
-      'paid': { label: 'Paid - Awaiting Processing', color: 'bg-blue-500', icon: '✅' },
-      'processing': { label: 'Processing', color: 'bg-cyan-500', icon: '⚙️' },
-      'completed': { label: 'Completed', color: 'bg-green-500', icon: '✅' },
-      'cancelled': { label: 'Cancelled', color: 'bg-red-500', icon: '❌' },
-      'refunded': { label: 'Refunded', color: 'bg-orange-500', icon: '↩️' }
-    };
-    return statuses[status] || { label: status || 'Unknown', color: 'bg-gray-500', icon: '❓' };
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleString();
-  };
-
-  // Handle registration
   const handleRegister = async (e) => {
     e?.preventDefault();
     setRegisterError('');
     
-    if (!registerName.trim() || !registerEmail.trim() || !registerPassword) {
-      setRegisterError('Please fill in all required fields');
+    if (!registerName || !registerEmail || !registerPassword) {
+      setRegisterError('Please fill in all fields');
       return;
     }
     
@@ -291,22 +179,193 @@ const CustomerPortal = () => {
       
       if (response.data.success) {
         setRegisterSuccess(true);
-        // Auto-login after registration using password
         setTimeout(() => {
           setLoginEmail(registerEmail);
           setLoginPassword(registerPassword);
           setShowRegister(false);
-          setUsePasswordLogin(true);
           doLoginPassword();
         }, 1500);
-      } else {
-        setRegisterError(response.data.message || 'Registration failed');
       }
     } catch (error) {
-      console.error('Registration error:', error);
-      setRegisterError(error.response?.data?.detail || 'Registration failed. Please try again.');
+      setRegisterError(error.response?.data?.detail || 'Registration failed');
     } finally {
       setLoginLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setAccountInfo(null);
+    setOrders([]);
+    setSelectedOrder(null);
+    setLoginEmail('');
+    setLoginPassword('');
+    setActiveTab('dashboard');
+    window.history.replaceState({}, '', '/portal');
+  };
+
+  // Fetch messages for selected order
+  const fetchMessages = async (orderId) => {
+    try {
+      const response = await axios.get(`${API}/portal/messages/${orderId}?email=${encodeURIComponent(accountInfo?.email || loginEmail)}`);
+      setMessages(response.data.messages || []);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
+  };
+
+  // Send message
+  const sendMessage = async () => {
+    if (!newMessage.trim() || !selectedOrder) return;
+    
+    setSendingMessage(true);
+    try {
+      await axios.post(`${API}/portal/message`, {
+        order_id: selectedOrder.id,
+        email: accountInfo?.email || loginEmail,
+        message: newMessage.trim(),
+        sender: 'customer'
+      });
+      
+      setMessages([...messages, {
+        id: Date.now(),
+        message: newMessage.trim(),
+        sender: 'customer',
+        created_at: new Date().toISOString()
+      }]);
+      setNewMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+    } finally {
+      setSendingMessage(false);
+    }
+  };
+
+  // Upload additional file
+  const uploadFile = async (file) => {
+    if (!file || !selectedOrder) return;
+    
+    setUploadingFile(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('order_id', selectedOrder.id);
+    formData.append('email', accountInfo?.email || loginEmail);
+    
+    try {
+      await axios.post(`${API}/portal/upload-file`, formData);
+      alert('File uploaded successfully!');
+      // Refresh order
+      const response = await axios.post(`${API}/portal/login-email`, { email: accountInfo?.email || loginEmail });
+      if (response.data.success) {
+        setOrders(response.data.orders || []);
+        const updated = response.data.orders.find(o => o.id === selectedOrder.id);
+        if (updated) setSelectedOrder(updated);
+      }
+    } catch (error) {
+      alert('Failed to upload file');
+    } finally {
+      setUploadingFile(false);
+    }
+  };
+
+  // Submit new order from portal
+  const submitNewOrder = async () => {
+    if (!newOrderFile) {
+      alert('Please select a file to upload');
+      return;
+    }
+    if (newOrderServices.length === 0) {
+      alert('Please select at least one service');
+      return;
+    }
+    
+    setSubmittingOrder(true);
+    const formData = new FormData();
+    formData.append('file', newOrderFile);
+    formData.append('email', accountInfo?.email || loginEmail);
+    formData.append('name', accountInfo?.name || 'Customer');
+    formData.append('services', JSON.stringify(newOrderServices));
+    formData.append('notes', newOrderNotes);
+    formData.append('vehicle', JSON.stringify(newOrderVehicle));
+    
+    try {
+      const response = await axios.post(`${API}/portal/new-order`, formData);
+      if (response.data.success) {
+        alert('Order submitted successfully! You will be redirected to payment.');
+        // Refresh orders
+        const ordersResponse = await axios.post(`${API}/portal/login-email`, { email: accountInfo?.email || loginEmail });
+        if (ordersResponse.data.success) {
+          setOrders(ordersResponse.data.orders || []);
+        }
+        // Reset form
+        setNewOrderFile(null);
+        setNewOrderServices([]);
+        setNewOrderNotes('');
+        setNewOrderVehicle({ make: '', model: '', year: '' });
+        setActiveTab('orders');
+      }
+    } catch (error) {
+      alert(error.response?.data?.detail || 'Failed to submit order');
+    } finally {
+      setSubmittingOrder(false);
+    }
+  };
+
+  // Update profile
+  const updateProfile = async () => {
+    try {
+      await axios.post(`${API}/portal/update-profile`, {
+        email: accountInfo?.email,
+        name: profileName
+      });
+      setAccountInfo({ ...accountInfo, name: profileName });
+      setEditingProfile(false);
+      setSettingsMessage({ type: 'success', text: 'Profile updated successfully!' });
+    } catch (error) {
+      setSettingsMessage({ type: 'error', text: 'Failed to update profile' });
+    }
+  };
+
+  // Change password
+  const changePassword = async () => {
+    if (newPassword !== confirmNewPassword) {
+      setSettingsMessage({ type: 'error', text: 'New passwords do not match' });
+      return;
+    }
+    if (newPassword.length < 6) {
+      setSettingsMessage({ type: 'error', text: 'Password must be at least 6 characters' });
+      return;
+    }
+    
+    try {
+      await axios.post(`${API}/portal/change-password`, {
+        email: accountInfo?.email,
+        current_password: currentPassword,
+        new_password: newPassword
+      });
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmNewPassword('');
+      setSettingsMessage({ type: 'success', text: 'Password changed successfully!' });
+    } catch (error) {
+      setSettingsMessage({ type: 'error', text: error.response?.data?.detail || 'Failed to change password' });
+    }
+  };
+
+  // Calculate totals for dashboard
+  const totalOrders = orders.length;
+  const pendingOrders = orders.filter(o => o.status === 'pending' || o.status === 'processing').length;
+  const completedOrders = orders.filter(o => o.status === 'completed').length;
+  const totalSpent = orders.reduce((sum, o) => sum + (o.total_amount || o.price || 0), 0);
+
+  // Get status color
+  const getStatusColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'completed': return 'bg-green-100 text-green-700';
+      case 'processing': return 'bg-blue-100 text-blue-700';
+      case 'pending': return 'bg-yellow-100 text-yellow-700';
+      case 'cancelled': return 'bg-red-100 text-red-700';
+      default: return 'bg-gray-100 text-gray-700';
     }
   };
 
@@ -322,74 +381,68 @@ const CustomerPortal = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Customer Portal</h1>
-            <p className="text-gray-500 mt-2">
-              {showRegister ? 'Create your account' : 'Access all your orders and files'}
-            </p>
+            <h1 className="text-2xl font-bold text-gray-900">Customer Portal</h1>
+            <p className="text-gray-500">Access your orders, files, and account</p>
           </div>
           
-          {/* Registration Form */}
           {showRegister ? (
+            /* Registration Card */
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+              <h2 className="text-xl font-bold text-gray-900 mb-6">Create Account</h2>
+              
               {registerSuccess ? (
-                <div className="text-center py-8">
-                  <div className="text-6xl mb-4">✅</div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Account Created!</h2>
-                  <p className="text-gray-500">Logging you in automatically...</p>
+                <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+                  <svg className="w-12 h-12 text-green-500 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <p className="text-green-700 font-medium">Account created! Signing you in...</p>
                 </div>
               ) : (
                 <form onSubmit={handleRegister}>
-                  <div className="space-y-5">
+                  <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                       <input
                         type="text"
                         value={registerName}
                         onChange={(e) => setRegisterName(e.target.value)}
-                        placeholder="John Doe"
-                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         required
                       />
                     </div>
-                    
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                       <input
                         type="email"
                         value={registerEmail}
                         onChange={(e) => setRegisterEmail(e.target.value)}
-                        placeholder="your@email.com"
-                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         required
                       />
                     </div>
-                    
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                       <input
                         type="password"
                         value={registerPassword}
                         onChange={(e) => setRegisterPassword(e.target.value)}
-                        placeholder="Minimum 6 characters"
-                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         required
                       />
                     </div>
-                    
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
                       <input
                         type="password"
                         value={registerConfirm}
                         onChange={(e) => setRegisterConfirm(e.target.value)}
-                        placeholder="Re-enter password"
-                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         required
                       />
                     </div>
                     
                     {registerError && (
-                      <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
+                      <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-600 text-sm">
                         {registerError}
                       </div>
                     )}
@@ -397,85 +450,54 @@ const CustomerPortal = () => {
                     <button
                       type="submit"
                       disabled={loginLoading}
-                      className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50"
+                      className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50"
                     >
-                      {loginLoading ? 'Creating Account...' : 'Create Account'}
+                      {loginLoading ? 'Creating...' : 'Create Account'}
                     </button>
                   </div>
                 </form>
               )}
               
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <p className="text-gray-500 text-sm text-center mb-4">Already have an account?</p>
+              <div className="mt-6 pt-6 border-t border-gray-200 text-center">
                 <button
-                  onClick={() => { setShowRegister(false); setRegisterError(''); setUsePasswordLogin(true); }}
-                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
+                  onClick={() => setShowRegister(false)}
+                  className="text-blue-600 hover:text-blue-700 font-medium"
                 >
-                  Sign In Instead →
+                  ← Back to Sign In
                 </button>
               </div>
             </div>
           ) : (
             /* Login Card */
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-              {/* Login Type Toggle */}
-              <div className="flex rounded-xl bg-gray-100 p-1 mb-6">
-                <button
-                  type="button"
-                  onClick={() => setUsePasswordLogin(true)}
-                  className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition ${
-                    usePasswordLogin ? 'bg-white text-gray-900 shadow' : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  Account Login
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setUsePasswordLogin(false)}
-                  className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition ${
-                    !usePasswordLogin ? 'bg-white text-gray-900 shadow' : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  Quick Access
-                </button>
-              </div>
-
               <form onSubmit={handleLogin}>
-                <div className="space-y-5">
+                <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <input
                       type="email"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
                       placeholder="your@email.com"
-                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       required
                     />
                   </div>
                   
-                  {usePasswordLogin && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                      <input
-                        type="password"
-                        value={loginPassword}
-                        onChange={(e) => setLoginPassword(e.target.value)}
-                        placeholder="Enter your password"
-                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                  )}
-
-                  {!usePasswordLogin && (
-                    <p className="text-gray-500 text-sm">
-                      Quick access using your order email. For full account features, use Account Login.
-                    </p>
-                  )}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input
+                      type="password"
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                      placeholder="Enter your password"
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    />
+                    <p className="text-gray-400 text-xs mt-1">Leave blank for quick access with email only</p>
+                  </div>
                   
                   {loginError && (
-                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-600 text-sm">
                       {loginError}
                     </div>
                   )}
@@ -483,32 +505,26 @@ const CustomerPortal = () => {
                   <button
                     type="submit"
                     disabled={loginLoading}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50"
                   >
-                    {loginLoading ? 'Signing In...' : (usePasswordLogin ? 'Sign In' : 'Access My Orders')}
+                    {loginLoading ? 'Signing In...' : 'Sign In'}
                   </button>
                 </div>
               </form>
               
-              <div className="mt-6 pt-6 border-t border-gray-200 space-y-4">
-                <div>
-                  <p className="text-gray-500 text-sm text-center mb-3">Don&apos;t have an account?</p>
-                  <button
-                    onClick={() => setShowRegister(true)}
-                    className="w-full bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 py-3 rounded-xl transition"
-                  >
-                    Create Account →
-                  </button>
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm text-center mb-3">Don&apos;t have an order yet?</p>
-                  <button
-                    onClick={() => navigate('/')}
-                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
-                  >
-                    Start New Order →
-                  </button>
-                </div>
+              <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
+                <button
+                  onClick={() => setShowRegister(true)}
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
+                >
+                  Create New Account
+                </button>
+                <button
+                  onClick={() => navigate('/')}
+                  className="w-full text-gray-500 hover:text-gray-700 py-2 text-sm"
+                >
+                  ← Back to Home
+                </button>
               </div>
             </div>
           )}
@@ -517,319 +533,861 @@ const CustomerPortal = () => {
     );
   }
 
-  // Portal Dashboard
+  // Main Portal UI
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">Customer Portal</h1>
-                <p className="text-xs text-gray-500">{loginEmail}</p>
-              </div>
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+        {/* Logo */}
+        <div className="p-6 border-b border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={refreshOrders}
-                className="text-gray-500 hover:text-blue-600 transition p-2"
-                title="Refresh"
-              >
-                🔄
-              </button>
-              <button
-                onClick={() => navigate('/')}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-4 py-2 rounded-lg transition"
-              >
-                + New Order
-              </button>
-              <button
-                onClick={() => { setIsLoggedIn(false); setOrders([]); setSelectedOrder(null); }}
-                className="bg-gray-100 hover:bg-gray-200 text-gray-900 px-4 py-2 rounded-lg transition"
-              >
-                Logout
-              </button>
+            <div>
+              <h1 className="font-bold text-gray-900">ECU Flash</h1>
+              <p className="text-xs text-gray-500">Customer Portal</p>
             </div>
           </div>
         </div>
-      </header>
-
-      <div className="container mx-auto px-4 py-8">
-        {orders.length === 0 ? (
-          /* No Orders State */
-          <div className="text-center py-20">
-            <div className="text-6xl mb-4">📦</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">No Orders Found</h2>
-            <p className="text-gray-500 mb-8">You haven&apos;t placed any orders with this email yet.</p>
+        
+        {/* Navigation */}
+        <nav className="flex-1 p-4 space-y-1">
+          {[
+            { id: 'dashboard', icon: '📊', label: 'Dashboard' },
+            { id: 'orders', icon: '📦', label: 'My Orders' },
+            { id: 'new-order', icon: '➕', label: 'New Order' },
+            { id: 'files', icon: '📁', label: 'Files' },
+            { id: 'messages', icon: '💬', label: 'Messages' },
+            { id: 'payments', icon: '💳', label: 'Payments' },
+            { id: 'settings', icon: '⚙️', label: 'Settings' },
+          ].map(item => (
             <button
-              onClick={() => navigate('/')}
-              className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition"
+              key={item.id}
+              onClick={() => {
+                setActiveTab(item.id);
+                if (item.id === 'messages' && selectedOrder) {
+                  fetchMessages(selectedOrder.id);
+                }
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition ${
+                activeTab === item.id
+                  ? 'bg-blue-50 text-blue-600'
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
             >
-              Start Your First Order →
+              <span className="text-xl">{item.icon}</span>
+              <span className="font-medium">{item.label}</span>
             </button>
+          ))}
+        </nav>
+        
+        {/* User Info */}
+        <div className="p-4 border-t border-gray-100">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 font-semibold">
+              {accountInfo?.name?.charAt(0)?.toUpperCase() || '?'}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-gray-900 truncate">{accountInfo?.name || 'Guest'}</p>
+              <p className="text-xs text-gray-500 truncate">{accountInfo?.email}</p>
+            </div>
           </div>
-        ) : (
-          <div className="grid lg:grid-cols-4 gap-6">
-            
-            {/* Orders List Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-2xl p-4">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center justify-between">
-                  <span>My Orders ({orders.length})</span>
-                </h3>
-                
-                <div className="space-y-2 max-h-[600px] overflow-y-auto">
-                  {orders.map((order) => {
-                    const status = getStatusInfo(order.status);
-                    return (
-                      <button
-                        key={order.id}
-                        onClick={() => selectOrder(order)}
-                        className={`w-full text-left p-4 rounded-xl transition ${
-                          selectedOrder?.id === order.id
-                            ? 'bg-blue-600/20 border border-blue-500/50'
-                            : 'bg-gray-100/30 hover:bg-gray-100/50 border border-transparent'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-gray-900 font-mono text-sm">#{order.id?.substring(0, 8)}</span>
-                          <span className={`${status.color} text-gray-900 text-xs px-2 py-0.5 rounded-full`}>
-                            {status.icon}
-                          </span>
-                        </div>
-                        <div className="text-gray-500 text-sm">
-                          {order.vehicle_make} {order.vehicle_model}
-                        </div>
-                        <div className="text-green-400 font-semibold text-sm mt-1">
-                          ${order.total_price?.toFixed(2)}
-                        </div>
-                        <div className="text-gray-500 text-xs mt-1">
-                          {formatDate(order.created_at).split(',')[0]}
-                        </div>
-                        {order.processed_files?.length > 0 && (
-                          <div className="text-green-400 text-xs mt-1 flex items-center">
-                            <span className="mr-1">✅</span> Ready for download
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
+          <button
+            onClick={handleLogout}
+            className="w-full text-gray-500 hover:text-red-600 text-sm py-2 transition"
+          >
+            Sign Out
+          </button>
+        </div>
+      </aside>
+      
+      {/* Main Content */}
+      <main className="flex-1 overflow-auto">
+        <div className="p-8">
+          {/* Dashboard */}
+          {activeTab === 'dashboard' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Dashboard</h2>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                  <p className="text-gray-500 text-sm mb-1">Total Orders</p>
+                  <p className="text-3xl font-bold text-gray-900">{totalOrders}</p>
+                </div>
+                <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                  <p className="text-gray-500 text-sm mb-1">In Progress</p>
+                  <p className="text-3xl font-bold text-blue-600">{pendingOrders}</p>
+                </div>
+                <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                  <p className="text-gray-500 text-sm mb-1">Completed</p>
+                  <p className="text-3xl font-bold text-green-600">{completedOrders}</p>
+                </div>
+                <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                  <p className="text-gray-500 text-sm mb-1">Total Spent</p>
+                  <p className="text-3xl font-bold text-gray-900">${totalSpent.toFixed(2)}</p>
                 </div>
               </div>
-            </div>
-            
-            {/* Order Details - Main Content */}
-            <div className="lg:col-span-3 space-y-6">
-              {selectedOrder ? (
-                <>
-                  {/* Status Banner */}
-                  {(() => {
-                    const status = getStatusInfo(selectedOrder.status);
-                    return (
-                      <div className={`${status.color} rounded-2xl p-6 text-gray-900`}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4">
-                            <span className="text-4xl">{status.icon}</span>
-                            <div>
-                              <h2 className="text-2xl font-bold">{status.label}</h2>
-                              <p className="opacity-90">Order #{selectedOrder.id?.substring(0, 8)}</p>
-                            </div>
-                          </div>
-                          {selectedOrder.processed_files?.length > 0 && (
-                            <div className="text-right">
-                              <div className="text-sm opacity-80">Ready for Download</div>
-                              <div className="text-lg font-bold">📥 {selectedOrder.processed_files.length} file(s)</div>
-                            </div>
-                          )}
-                        </div>
+              
+              {/* Quick Actions */}
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <button
+                  onClick={() => setActiveTab('new-order')}
+                  className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-2xl p-6 text-left hover:shadow-lg transition"
+                >
+                  <span className="text-3xl mb-2 block">📤</span>
+                  <span className="font-semibold block">Upload New File</span>
+                  <span className="text-sm opacity-80">Start a new order</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('orders')}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 text-left hover:shadow-md transition"
+                >
+                  <span className="text-3xl mb-2 block">📋</span>
+                  <span className="font-semibold text-gray-900 block">View Orders</span>
+                  <span className="text-sm text-gray-500">Check order status</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('messages')}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 text-left hover:shadow-md transition"
+                >
+                  <span className="text-3xl mb-2 block">💬</span>
+                  <span className="font-semibold text-gray-900 block">Messages</span>
+                  <span className="text-sm text-gray-500">Contact support</span>
+                </button>
+              </div>
+              
+              {/* Recent Orders */}
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Orders</h3>
+              {orders.length === 0 ? (
+                <div className="bg-white rounded-2xl p-8 border border-gray-200 text-center">
+                  <p className="text-gray-500 mb-4">No orders yet</p>
+                  <button
+                    onClick={() => setActiveTab('new-order')}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl transition"
+                  >
+                    Create Your First Order
+                  </button>
+                </div>
+              ) : (
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  {orders.slice(0, 5).map(order => (
+                    <div
+                      key={order.id}
+                      className="flex items-center justify-between p-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 cursor-pointer"
+                      onClick={() => { setSelectedOrder(order); setActiveTab('orders'); }}
+                    >
+                      <div>
+                        <p className="font-medium text-gray-900">Order #{order.id?.slice(-8)}</p>
+                        <p className="text-sm text-gray-500">{order.vehicle_info || order.services?.join(', ') || 'ECU Service'}</p>
                       </div>
-                    );
-                  })()}
+                      <div className="text-right">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                          {order.status || 'Pending'}
+                        </span>
+                        <p className="text-sm text-gray-500 mt-1">{new Date(order.created_at).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Orders Tab */}
+          {activeTab === 'orders' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">My Orders</h2>
+              
+              {selectedOrder ? (
+                /* Order Detail View */
+                <div>
+                  <button
+                    onClick={() => setSelectedOrder(null)}
+                    className="text-blue-600 hover:text-blue-700 mb-4 flex items-center gap-2"
+                  >
+                    ← Back to Orders
+                  </button>
                   
-                  {/* Order Details Grid */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {/* Vehicle & Services */}
-                    <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-2xl p-6">
-                      <h3 className="text-lg font-bold text-gray-900 mb-4">📋 Order Details</h3>
-                      
-                      <div className="space-y-4">
-                        <div className="bg-gray-100/30 rounded-xl p-4">
-                          <h4 className="text-sm text-gray-500 mb-1">Vehicle</h4>
-                          <p className="text-gray-900 font-semibold">
-                            {selectedOrder.vehicle_year} {selectedOrder.vehicle_make} {selectedOrder.vehicle_model}
-                          </p>
-                          {selectedOrder.engine_type && (
-                            <p className="text-gray-500 text-sm">{selectedOrder.engine_type}</p>
-                          )}
-                          {selectedOrder.ecu_type && (
-                            <p className="text-cyan-400 text-sm">ECU: {selectedOrder.ecu_type}</p>
-                          )}
-                        </div>
-                        
-                        <div className="bg-gray-100/30 rounded-xl p-4">
-                          <h4 className="text-sm text-gray-500 mb-2">Services</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedOrder.selected_services?.map((service, idx) => (
-                              <span key={idx} className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-sm">
-                                {service}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-                          <span className="text-gray-500">Total Paid</span>
-                          <span className="text-green-400 font-bold text-2xl">${selectedOrder.total_price?.toFixed(2)}</span>
-                        </div>
+                  <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                    <div className="flex justify-between items-start mb-6">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">Order #{selectedOrder.id?.slice(-8)}</h3>
+                        <p className="text-gray-500">{new Date(selectedOrder.created_at).toLocaleString()}</p>
+                      </div>
+                      <span className={`px-4 py-2 rounded-full font-medium ${getStatusColor(selectedOrder.status)}`}>
+                        {selectedOrder.status || 'Pending'}
+                      </span>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Services</h4>
+                        <ul className="space-y-1">
+                          {(selectedOrder.services || selectedOrder.selected_services || ['ECU Service']).map((s, i) => (
+                            <li key={i} className="text-gray-600">• {typeof s === 'object' ? s.name : s}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Vehicle</h4>
+                        <p className="text-gray-600">{selectedOrder.vehicle_info || 'Not specified'}</p>
                       </div>
                     </div>
                     
-                    {/* Files Section */}
-                    <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-2xl p-6">
-                      <h3 className="text-lg font-bold text-gray-900 mb-4">📁 Files</h3>
-                      
-                      {/* Processed Files (Download) */}
-                      {selectedOrder.processed_files?.length > 0 && (
-                        <div className="mb-6">
-                          <h4 className="text-sm text-green-400 mb-3">✅ Ready for Download</h4>
-                          <div className="space-y-2">
-                            {selectedOrder.processed_files.map((file, idx) => (
-                              <div key={idx} className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-xl p-3">
-                                <div className="flex items-center space-x-3">
-                                  <span className="text-xl">✅</span>
-                                  <div>
-                                    <p className="text-gray-900 text-sm font-medium">{file.processed_filename || file.original_filename}</p>
-                                    <p className="text-green-400 text-xs">Processed</p>
-                                  </div>
-                                </div>
-                                <button
-                                  onClick={() => downloadFile(file.file_id, file.processed_filename || 'processed_file.bin')}
-                                  className="bg-green-600 hover:bg-green-700 text-gray-900 px-3 py-1.5 rounded-lg text-sm transition"
-                                >
-                                  📥 Download
-                                </button>
-                              </div>
-                            ))}
+                    <div className="mt-6 pt-6 border-t border-gray-100">
+                      <h4 className="font-semibold text-gray-900 mb-3">Files</h4>
+                      <div className="space-y-2">
+                        {selectedOrder.original_file && (
+                          <div className="flex items-center justify-between bg-gray-50 rounded-xl p-3">
+                            <span className="text-gray-700">📄 Original File</span>
+                            <a
+                              href={`${API}/download/${selectedOrder.original_file}`}
+                              className="text-blue-600 hover:text-blue-700 text-sm"
+                              download
+                            >
+                              Download
+                            </a>
                           </div>
-                        </div>
-                      )}
-                      
-                      {/* Uploaded Files */}
-                      {selectedOrder.uploaded_files?.length > 0 && (
-                        <div className="mb-6">
-                          <h4 className="text-sm text-gray-500 mb-3">Uploaded Files</h4>
-                          <div className="space-y-2">
-                            {selectedOrder.uploaded_files.map((file, idx) => (
-                              <div key={idx} className="flex items-center justify-between bg-gray-100/30 rounded-xl p-3">
-                                <div className="flex items-center space-x-3">
-                                  <span className="text-xl">📄</span>
-                                  <div>
-                                    <p className="text-gray-900 text-sm">{file.original_filename}</p>
-                                    <p className="text-gray-500 text-xs">{(file.size / 1024).toFixed(1)} KB</p>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
+                        )}
+                        {selectedOrder.modified_file && (
+                          <div className="flex items-center justify-between bg-green-50 rounded-xl p-3">
+                            <span className="text-green-700">✅ Modified File</span>
+                            <a
+                              href={`${API}/download/${selectedOrder.modified_file}`}
+                              className="text-green-600 hover:text-green-700 text-sm font-medium"
+                              download
+                            >
+                              Download
+                            </a>
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
                       
-                      {/* Upload New File */}
-                      {selectedOrder.status !== 'completed' && (
-                        <div>
-                          <h4 className="text-sm text-gray-500 mb-3">Upload Additional File</h4>
-                          <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-6 cursor-pointer hover:border-blue-500 hover:bg-gray-100/30 transition">
-                            <input
-                              type="file"
-                              className="hidden"
-                              accept=".bin,.hex,.ecu,.ori,.mod"
-                              onChange={handleFileUpload}
-                              disabled={uploadingFile}
-                            />
-                            {uploadingFile ? (
-                              <div className="text-gray-500">Uploading...</div>
-                            ) : (
-                              <>
-                                <span className="text-3xl mb-2">📤</span>
-                                <span className="text-gray-500 text-sm">Click to upload</span>
-                              </>
-                            )}
-                          </label>
-                        </div>
-                      )}
+                      {/* Upload Additional File */}
+                      <div className="mt-4">
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          onChange={(e) => uploadFile(e.target.files?.[0])}
+                          className="hidden"
+                        />
+                        <button
+                          onClick={() => fileInputRef.current?.click()}
+                          disabled={uploadingFile}
+                          className="text-blue-600 hover:text-blue-700 text-sm"
+                        >
+                          {uploadingFile ? 'Uploading...' : '+ Upload Additional File'}
+                        </button>
+                      </div>
                     </div>
                   </div>
                   
-                  {/* Communication Section */}
-                  <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-2xl p-6">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">💬 Messages</h3>
-                    
-                    <div className="space-y-3 max-h-64 overflow-y-auto mb-4 pr-2">
+                  {/* Messages Section */}
+                  <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                    <h4 className="font-semibold text-gray-900 mb-4">Messages</h4>
+                    <div className="space-y-3 max-h-64 overflow-y-auto mb-4">
                       {messages.length === 0 ? (
-                        <div className="text-center py-6 text-gray-500">
-                          No messages yet. Send a message to our team!
-                        </div>
+                        <p className="text-gray-500 text-sm">No messages yet</p>
                       ) : (
-                        messages.map((msg, idx) => (
+                        messages.map((msg, i) => (
                           <div
-                            key={idx}
-                            className={`flex ${msg.sender === 'customer' ? 'justify-end' : 'justify-start'}`}
+                            key={i}
+                            className={`p-3 rounded-xl ${
+                              msg.sender === 'customer' ? 'bg-blue-50 ml-8' : 'bg-gray-100 mr-8'
+                            }`}
                           >
-                            <div
-                              className={`max-w-[80%] rounded-2xl p-3 ${
-                                msg.sender === 'customer'
-                                  ? 'bg-blue-600 text-gray-900'
-                                  : 'bg-gray-100 text-gray-900'
-                              }`}
-                            >
-                              <p className="text-sm">{msg.message}</p>
-                              <p className={`text-xs mt-1 ${
-                                msg.sender === 'customer' ? 'text-blue-200' : 'text-gray-500'
-                              }`}>
-                                {formatDate(msg.created_at)}
-                              </p>
-                            </div>
+                            <p className="text-sm text-gray-800">{msg.message}</p>
+                            <p className="text-xs text-gray-400 mt-1">
+                              {msg.sender === 'customer' ? 'You' : 'Support'} • {new Date(msg.created_at).toLocaleString()}
+                            </p>
                           </div>
                         ))
                       )}
                     </div>
-                    
-                    <div className="flex space-x-3">
+                    <div className="flex gap-2">
                       <input
                         type="text"
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
-                        placeholder="Type your message..."
-                        className="flex-1 bg-gray-100/50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-300 focus:border-blue-500"
+                        placeholder="Type a message..."
+                        className="flex-1 bg-gray-50 border border-gray-300 rounded-xl px-4 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                       />
                       <button
                         onClick={sendMessage}
                         disabled={sendingMessage || !newMessage.trim()}
-                        className="bg-blue-600 hover:bg-blue-700 text-gray-900 px-6 py-3 rounded-xl transition disabled:opacity-50"
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl transition disabled:opacity-50"
                       >
                         Send
                       </button>
                     </div>
                   </div>
-                </>
+                </div>
               ) : (
-                <div className="text-center py-20 text-gray-500">
-                  <div className="text-5xl mb-4">👈</div>
-                  <p>Select an order from the list to view details</p>
+                /* Orders List */
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  {orders.length === 0 ? (
+                    <div className="p-8 text-center">
+                      <p className="text-gray-500 mb-4">No orders found</p>
+                      <button
+                        onClick={() => setActiveTab('new-order')}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl transition"
+                      >
+                        Create New Order
+                      </button>
+                    </div>
+                  ) : (
+                    <table className="w-full">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Order ID</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Services</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Date</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Amount</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Status</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-gray-500"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orders.map(order => (
+                          <tr key={order.id} className="border-t border-gray-100 hover:bg-gray-50">
+                            <td className="px-6 py-4 font-mono text-sm">#{order.id?.slice(-8)}</td>
+                            <td className="px-6 py-4 text-sm text-gray-600">
+                              {(order.services || order.selected_services || ['ECU Service']).slice(0, 2).map(s => typeof s === 'object' ? s.name : s).join(', ')}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.created_at).toLocaleDateString()}</td>
+                            <td className="px-6 py-4 font-medium">${(order.total_amount || order.price || 0).toFixed(2)}</td>
+                            <td className="px-6 py-4">
+                              <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                                {order.status || 'Pending'}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4">
+                              <button
+                                onClick={() => { setSelectedOrder(order); fetchMessages(order.id); }}
+                                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                              >
+                                View →
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               )}
             </div>
-          </div>
-        )}
-      </div>
+          )}
+
+          {/* New Order Tab */}
+          {activeTab === 'new-order' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Create New Order</h2>
+              
+              <div className="max-w-2xl">
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">1. Upload ECU File</h3>
+                  <div
+                    className={`border-2 border-dashed rounded-xl p-8 text-center transition ${
+                      newOrderFile ? 'border-green-400 bg-green-50' : 'border-gray-300 hover:border-blue-400'
+                    }`}
+                  >
+                    {newOrderFile ? (
+                      <div>
+                        <span className="text-4xl mb-2 block">✅</span>
+                        <p className="font-medium text-gray-900">{newOrderFile.name}</p>
+                        <p className="text-sm text-gray-500">{(newOrderFile.size / 1024).toFixed(1)} KB</p>
+                        <button
+                          onClick={() => setNewOrderFile(null)}
+                          className="text-red-600 hover:text-red-700 text-sm mt-2"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="text-4xl mb-2 block">📤</span>
+                        <p className="text-gray-600 mb-2">Drag & drop your ECU file here, or</p>
+                        <label className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl cursor-pointer transition">
+                          Browse Files
+                          <input
+                            type="file"
+                            onChange={(e) => setNewOrderFile(e.target.files?.[0])}
+                            className="hidden"
+                            accept=".bin,.ori,.fls,.hex,.ecu"
+                          />
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">2. Vehicle Information (Optional)</h3>
+                  <div className="grid grid-cols-3 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Make"
+                      value={newOrderVehicle.make}
+                      onChange={(e) => setNewOrderVehicle({ ...newOrderVehicle, make: e.target.value })}
+                      className="bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Model"
+                      value={newOrderVehicle.model}
+                      onChange={(e) => setNewOrderVehicle({ ...newOrderVehicle, model: e.target.value })}
+                      className="bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Year"
+                      value={newOrderVehicle.year}
+                      onChange={(e) => setNewOrderVehicle({ ...newOrderVehicle, year: e.target.value })}
+                      className="bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">3. Select Services</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {availableServices.map(service => (
+                      <label
+                        key={service.id}
+                        className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${
+                          newOrderServices.includes(service.id)
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={newOrderServices.includes(service.id)}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setNewOrderServices([...newOrderServices, service.id]);
+                              } else {
+                                setNewOrderServices(newOrderServices.filter(s => s !== service.id));
+                              }
+                            }}
+                            className="w-5 h-5 text-blue-500"
+                          />
+                          <span className="font-medium text-gray-900">{service.name}</span>
+                        </div>
+                        <span className="text-gray-600">${service.price}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">4. Additional Notes (Optional)</h3>
+                  <textarea
+                    value={newOrderNotes}
+                    onChange={(e) => setNewOrderNotes(e.target.value)}
+                    placeholder="Any special instructions or requirements..."
+                    rows={3}
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                  />
+                </div>
+
+                {/* Order Summary */}
+                <div className="bg-gray-900 rounded-2xl p-6 text-white">
+                  <h3 className="font-semibold mb-4">Order Summary</h3>
+                  {newOrderServices.length > 0 ? (
+                    <>
+                      {newOrderServices.map(serviceId => {
+                        const service = availableServices.find(s => s.id === serviceId);
+                        return service ? (
+                          <div key={serviceId} className="flex justify-between text-sm mb-2">
+                            <span className="text-gray-300">{service.name}</span>
+                            <span>${service.price}</span>
+                          </div>
+                        ) : null;
+                      })}
+                      <div className="border-t border-gray-700 mt-4 pt-4 flex justify-between font-bold text-lg">
+                        <span>Total</span>
+                        <span>${newOrderServices.reduce((sum, id) => {
+                          const service = availableServices.find(s => s.id === id);
+                          return sum + (service?.price || 0);
+                        }, 0)}</span>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-gray-400">No services selected</p>
+                  )}
+                  
+                  <button
+                    onClick={submitNewOrder}
+                    disabled={submittingOrder || !newOrderFile || newOrderServices.length === 0}
+                    className="w-full mt-6 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white py-4 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {submittingOrder ? 'Submitting...' : 'Submit Order & Pay'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Files Tab */}
+          {activeTab === 'files' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">My Files</h2>
+              
+              <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                {orders.length === 0 ? (
+                  <div className="p-8 text-center">
+                    <p className="text-gray-500">No files yet. Create an order to upload files.</p>
+                  </div>
+                ) : (
+                  <table className="w-full">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">File</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Order</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Type</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Date</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.flatMap(order => {
+                        const files = [];
+                        if (order.original_file) {
+                          files.push({
+                            name: order.original_filename || 'Original File',
+                            type: 'Original',
+                            file: order.original_file,
+                            order: order,
+                            date: order.created_at
+                          });
+                        }
+                        if (order.modified_file) {
+                          files.push({
+                            name: order.modified_filename || 'Modified File',
+                            type: 'Modified',
+                            file: order.modified_file,
+                            order: order,
+                            date: order.completed_at || order.created_at
+                          });
+                        }
+                        return files;
+                      }).map((file, i) => (
+                        <tr key={i} className="border-t border-gray-100 hover:bg-gray-50">
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-3">
+                              <span className="text-2xl">{file.type === 'Modified' ? '✅' : '📄'}</span>
+                              <span className="font-medium text-gray-900">{file.name}</span>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-500">#{file.order.id?.slice(-8)}</td>
+                          <td className="px-6 py-4">
+                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              file.type === 'Modified' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                            }`}>
+                              {file.type}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-500">{new Date(file.date).toLocaleDateString()}</td>
+                          <td className="px-6 py-4">
+                            <a
+                              href={`${API}/download/${file.file}`}
+                              className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                              download
+                            >
+                              Download
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Messages Tab */}
+          {activeTab === 'messages' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Messages</h2>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Order List */}
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                  <div className="p-4 border-b border-gray-100">
+                    <h3 className="font-semibold text-gray-900">Select Order</h3>
+                  </div>
+                  <div className="max-h-96 overflow-y-auto">
+                    {orders.length === 0 ? (
+                      <p className="p-4 text-gray-500 text-sm">No orders</p>
+                    ) : (
+                      orders.map(order => (
+                        <button
+                          key={order.id}
+                          onClick={() => { setSelectedOrder(order); fetchMessages(order.id); }}
+                          className={`w-full text-left p-4 border-b border-gray-100 hover:bg-gray-50 transition ${
+                            selectedOrder?.id === order.id ? 'bg-blue-50' : ''
+                          }`}
+                        >
+                          <p className="font-medium text-gray-900">Order #{order.id?.slice(-8)}</p>
+                          <p className="text-sm text-gray-500">{new Date(order.created_at).toLocaleDateString()}</p>
+                        </button>
+                      ))
+                    )}
+                  </div>
+                </div>
+                
+                {/* Chat */}
+                <div className="md:col-span-2 bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col" style={{ height: '500px' }}>
+                  {selectedOrder ? (
+                    <>
+                      <div className="p-4 border-b border-gray-100 bg-gray-50">
+                        <p className="font-semibold text-gray-900">Order #{selectedOrder.id?.slice(-8)}</p>
+                      </div>
+                      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                        {messages.length === 0 ? (
+                          <p className="text-gray-500 text-center py-8">No messages yet. Start the conversation!</p>
+                        ) : (
+                          messages.map((msg, i) => (
+                            <div
+                              key={i}
+                              className={`max-w-[80%] p-3 rounded-2xl ${
+                                msg.sender === 'customer'
+                                  ? 'bg-blue-500 text-white ml-auto'
+                                  : 'bg-gray-100 text-gray-800'
+                              }`}
+                            >
+                              <p>{msg.message}</p>
+                              <p className={`text-xs mt-1 ${msg.sender === 'customer' ? 'text-blue-100' : 'text-gray-400'}`}>
+                                {new Date(msg.created_at).toLocaleString()}
+                              </p>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                      <div className="p-4 border-t border-gray-100">
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            placeholder="Type your message..."
+                            className="flex-1 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                          />
+                          <button
+                            onClick={sendMessage}
+                            disabled={sendingMessage || !newMessage.trim()}
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl transition disabled:opacity-50"
+                          >
+                            Send
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex-1 flex items-center justify-center text-gray-500">
+                      Select an order to view messages
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Payments Tab */}
+          {activeTab === 'payments' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Payment History</h2>
+              
+              <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                {orders.length === 0 ? (
+                  <div className="p-8 text-center">
+                    <p className="text-gray-500">No payments yet</p>
+                  </div>
+                ) : (
+                  <table className="w-full">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Date</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Order ID</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Description</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Amount</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Status</th>
+                        <th className="text-left px-6 py-4 text-sm font-medium text-gray-500"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.map(order => (
+                        <tr key={order.id} className="border-t border-gray-100 hover:bg-gray-50">
+                          <td className="px-6 py-4 text-sm text-gray-500">{new Date(order.created_at).toLocaleDateString()}</td>
+                          <td className="px-6 py-4 font-mono text-sm">#{order.id?.slice(-8)}</td>
+                          <td className="px-6 py-4 text-sm text-gray-600">
+                            {(order.services || order.selected_services || []).slice(0, 2).map(s => typeof s === 'object' ? s.name : s).join(', ') || 'ECU Service'}
+                          </td>
+                          <td className="px-6 py-4 font-semibold">${(order.total_amount || order.price || 0).toFixed(2)}</td>
+                          <td className="px-6 py-4">
+                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              order.payment_status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                            }`}>
+                              {order.payment_status || 'Pending'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <button className="text-blue-600 hover:text-blue-700 text-sm">
+                              Invoice
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                
+                {/* Total Summary */}
+                {orders.length > 0 && (
+                  <div className="p-6 bg-gray-50 border-t border-gray-200">
+                    <div className="flex justify-end gap-8">
+                      <div className="text-right">
+                        <p className="text-sm text-gray-500">Total Paid</p>
+                        <p className="text-2xl font-bold text-gray-900">${totalSpent.toFixed(2)}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Settings Tab */}
+          {activeTab === 'settings' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Account Settings</h2>
+              
+              <div className="max-w-2xl space-y-6">
+                {/* Profile */}
+                <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">Profile Information</h3>
+                  
+                  {settingsMessage.text && (
+                    <div className={`mb-4 p-3 rounded-xl text-sm ${
+                      settingsMessage.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+                    }`}>
+                      {settingsMessage.text}
+                    </div>
+                  )}
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                      {editingProfile ? (
+                        <input
+                          type="text"
+                          value={profileName}
+                          onChange={(e) => setProfileName(e.target.value)}
+                          className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                        />
+                      ) : (
+                        <p className="text-gray-900 py-3">{accountInfo?.name}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                      <p className="text-gray-900 py-3">{accountInfo?.email}</p>
+                      <p className="text-xs text-gray-500">Email cannot be changed</p>
+                    </div>
+                    
+                    {editingProfile ? (
+                      <div className="flex gap-3">
+                        <button
+                          onClick={updateProfile}
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl transition"
+                        >
+                          Save Changes
+                        </button>
+                        <button
+                          onClick={() => { setEditingProfile(false); setProfileName(accountInfo?.name || ''); }}
+                          className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-xl transition"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setEditingProfile(true)}
+                        className="text-blue-600 hover:text-blue-700 font-medium"
+                      >
+                        Edit Profile
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Change Password */}
+                <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">Change Password</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                      <input
+                        type="password"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                      <input
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                      <input
+                        type="password"
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                      />
+                    </div>
+                    <button
+                      onClick={changePassword}
+                      disabled={!currentPassword || !newPassword}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl transition disabled:opacity-50"
+                    >
+                      Update Password
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Danger Zone */}
+                <div className="bg-white rounded-2xl border border-red-200 p-6">
+                  <h3 className="font-semibold text-red-600 mb-4">Danger Zone</h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Once you delete your account, there is no going back. Please be certain.
+                  </p>
+                  <button className="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-6 py-2 rounded-xl transition">
+                    Delete Account
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 };
