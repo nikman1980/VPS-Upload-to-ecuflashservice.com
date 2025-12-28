@@ -168,12 +168,11 @@ const CustomerPortal = () => {
   const handleManufacturerChange = async (manufacturerId) => {
     setSelectedManufacturer(manufacturerId);
     setSelectedModel('');
-    setSelectedGeneration('');
     setSelectedEngine('');
     setSelectedEcu('');
     setModels([]);
-    setGenerations([]);
     setEngines([]);
+    setEcuTypes([]);
     
     if (!manufacturerId) return;
     
@@ -187,39 +186,20 @@ const CustomerPortal = () => {
     setVehicleLoading(false);
   };
 
-  // Fetch generations when model changes
+  // Fetch engines when model changes (skipping generations - not used in new DB structure)
   const handleModelChange = async (modelId) => {
     setSelectedModel(modelId);
-    setSelectedGeneration('');
     setSelectedEngine('');
     setSelectedEcu('');
-    setGenerations([]);
     setEngines([]);
+    setEcuTypes([]);
     
     if (!modelId) return;
     
     setVehicleLoading(true);
     try {
-      const response = await axios.get(`${API}/vehicles/generations/${modelId}`);
-      setGenerations(response.data || []);
-    } catch (error) {
-      console.error('Error fetching generations:', error);
-    }
-    setVehicleLoading(false);
-  };
-
-  // Fetch engines when generation changes
-  const handleGenerationChange = async (generationId) => {
-    setSelectedGeneration(generationId);
-    setSelectedEngine('');
-    setSelectedEcu('');
-    setEngines([]);
-    
-    if (!generationId) return;
-    
-    setVehicleLoading(true);
-    try {
-      const response = await axios.get(`${API}/vehicles/engines/${generationId}`);
+      // Fetch engines directly for the model (generations are skipped)
+      const response = await axios.get(`${API}/vehicles/engines/${modelId}`);
       setEngines(response.data || []);
     } catch (error) {
       console.error('Error fetching engines:', error);
@@ -231,17 +211,19 @@ const CustomerPortal = () => {
   const handleEngineChange = async (engineId) => {
     setSelectedEngine(engineId);
     setSelectedEcu('');
+    setEcuTypes([]);
     
     if (!engineId) return;
     
-    setVehicleLoading(true);
-    try {
-      const response = await axios.get(`${API}/vehicles/ecus/${engineId}`);
-      setEcuTypes(response.data || []);
-    } catch (error) {
-      console.error('Error fetching ECU types:', error);
-    }
-    setVehicleLoading(false);
+    // For now, use common ECU types - can be enhanced to fetch from API
+    // setVehicleLoading(true);
+    // try {
+    //   const response = await axios.get(`${API}/vehicles/ecus/${engineId}`);
+    //   setEcuTypes(response.data || []);
+    // } catch (error) {
+    //   console.error('Error fetching ECU types:', error);
+    // }
+    // setVehicleLoading(false);
   };
 
   // Get vehicle summary for display
