@@ -2530,6 +2530,203 @@ async def get_engine_status():
     }
 
 
+# ===========================================
+# DTC DELETE ENGINE ENDPOINTS
+# ===========================================
+
+@api_router.post("/dtc-engine/upload")
+async def dtc_engine_upload(file: UploadFile = File(...)):
+    """Upload a file for DTC analysis"""
+    try:
+        # Generate unique file ID
+        file_id = str(uuid.uuid4())
+        
+        # Save file
+        file_path = UPLOAD_DIR / f"{file_id}_dtc_original{Path(file.filename).suffix}"
+        with open(file_path, "wb") as f:
+            content = await file.read()
+            f.write(content)
+        
+        # Analyze file for DTCs
+        analysis = dtc_delete_engine.analyze_file(content)
+        
+        # Store file info in database
+        await db.dtc_files.insert_one({
+            "id": file_id,
+            "original_filename": file.filename,
+            "file_path": str(file_path),
+            "file_size": len(content),
+            "analysis": {
+                "file_size": analysis["file_size"],
+                "detected_dtcs": analysis["detected_dtcs"],
+                "checksum_info": analysis["checksum_info"],
+                "ecu_info": analysis["ecu_info"]
+            },
+            "created_at": datetime.now(timezone.utc).isoformat()
+        })
+        
+        return {
+            "success": True,
+            "file_id": file_id,
+            "filename": file.filename,
+            "analysis": {
+                "file_size": analysis["file_size"],
+                "detected_dtcs": analysis["detected_dtcs"],
+                "checksum_info": analysis["checksum_info"],
+                "ecu_info": analysis["ecu_info"]
+            }
+        }
+    except Exception as e:
+        logger.error(f"DTC upload error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+class DTCProcessRequest(BaseModel):
+    file_id: str
+    dtc_codes: List[str]
+    correct_checksum: bool = True
+
+
+@api_router.post("/dtc-engine/process")
+async def dtc_engine_process(request: DTCProcessRequest):
+    """Process file to delete specified DTCs"""
+    try:
+        # Get file info from database
+        file_doc = await db.dtc_files.find_one({"id": request.file_id}, {"_id": 0})
+        if not file_doc:
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        # Read original file
+        file_path = Path(file_doc["file_path"])
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="File data not found")
+        
+        with open(file_path, "rb") as f:
+            file_data = f.read()
+        
+        # Process file - delete DTCs
+        result = dtc_delete_engine.delete_dtcs(
+            file_data,
+            request.dtc_codes,
+            request.correct_checksum
+        )
+        
+        # Save modified file if successful
+        download_id = None
+        if result.success and result.modified_data:
+            download_id = str(uuid.uuid4())
+            modified_path = PROCESSED_DIR / f"{download_id}_dtc_deleted.bin"
+            with open(modified_path, "wb") as f:
+                f.write(result.modified_data)
+            
+            # Store in database
+            await db.dtc_processed.insert_one({
+                "download_id": download_id,
+                "original_file_id": request.file_id,
+                "original_filename": file_doc["original_filename"],
+                "modified_path": str(modified_path),
+                "dtcs_deleted": [{"code": d["code"], "description": d.get("description", "")} for d in result.dtcs_deleted],
+                "dtcs_not_found": result.dtcs_not_found,
+                "checksum_corrected": result.checksum_corrected,
+                "checksum_type": result.checksum_type,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            })
+        
+        return {
+            "success": result.success,
+            "download_id": download_id,
+            "dtcs_requested": result.dtcs_requested,
+            "dtcs_found": [{"code": d["code"], "offset": d["offset"]} for d in result.dtcs_found],
+            "dtcs_deleted": [{"code": d["code"], "description": d.get("description", "")} for d in result.dtcs_deleted],
+            "dtcs_not_found": result.dtcs_not_found,
+            "checksum_corrected": result.checksum_corrected,
+            "checksum_type": result.checksum_type,
+            "error_message": result.error_message
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"DTC processing error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/dtc-engine/download/{download_id}")
+async def dtc_engine_download(download_id: str):
+    """Download the modified file"""
+    try:
+        # Get file info from database
+        file_doc = await db.dtc_processed.find_one({"download_id": download_id}, {"_id": 0})
+        if not file_doc:
+            raise HTTPException(status_code=404, detail="Download not found")
+        
+        file_path = Path(file_doc["modified_path"])
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        # Generate download filename
+        original_name = file_doc.get("original_filename", "file")
+        base_name = Path(original_name).stem
+        download_name = f"{base_name}_dtc_deleted.bin"
+        
+        return FileResponse(
+            path=str(file_path),
+            filename=download_name,
+            media_type="application/octet-stream"
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"DTC download error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/dtc-engine/scan/{file_id}")
+async def dtc_engine_scan_all(file_id: str):
+    """Scan file for all recognizable DTCs"""
+    try:
+        # Get file info from database
+        file_doc = await db.dtc_files.find_one({"id": file_id}, {"_id": 0})
+        if not file_doc:
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        # Read file
+        file_path = Path(file_doc["file_path"])
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="File data not found")
+        
+        with open(file_path, "rb") as f:
+            file_data = f.read()
+        
+        # Scan for all DTCs
+        all_dtcs = dtc_delete_engine.scan_all_dtcs(file_data)
+        
+        return {
+            "success": True,
+            "file_id": file_id,
+            "total_dtcs": len(all_dtcs),
+            "dtcs": all_dtcs
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"DTC scan error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/dtc-engine/lookup/{dtc_code}")
+async def dtc_lookup(dtc_code: str):
+    """Look up information about a specific DTC code"""
+    code = dtc_code.upper().strip()
+    description = DTCDatabase.get_description(code)
+    
+    return {
+        "success": True,
+        "code": code,
+        "description": description,
+        "category": dtc_delete_engine._categorize_dtc(code)
+    }
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
