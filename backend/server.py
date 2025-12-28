@@ -1097,6 +1097,23 @@ async def create_order_json(request: CreateOrderRequest):
     except Exception as e:
         logger.error(f"Error creating order: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create order: {str(e)}")
+
+
+@api_router.get("/order-status-check/{order_id}")
+async def get_order_status_check(order_id: str):
+    """
+    Get order processing status (alternative endpoint)
+    Customer can use this to check if their file is ready
+    """
+    order = await db.orders.find_one({"id": order_id}, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    processing_status = order.get("processing_status", "unknown")
+    
+    response = {
+        "order_id": order_id,
         "processing_status": processing_status,
         "payment_status": order.get("payment_status"),
         "created_at": order.get("created_at"),
