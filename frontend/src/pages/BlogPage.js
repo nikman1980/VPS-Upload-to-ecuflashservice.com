@@ -2048,22 +2048,22 @@ const BlogPage = () => {
       </section>
 
       {/* Main CTA Section */}
-      <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-cyan-500 py-12">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Need Professional ECU Tuning?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Get your ECU file professionally modified with our fast 20-60 minute turnaround service. All brands supported.
+          <h2 className="text-2xl font-bold text-white mb-3">Need Professional ECU Tuning?</h2>
+          <p className="text-white/90 mb-6 max-w-xl mx-auto text-sm">
+            Get your ECU file professionally modified with our fast 20-60 minute turnaround service.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={() => navigate('/')}
-              className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition"
+              className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition"
             >
               Start Your Order →
             </button>
             <button
               onClick={() => navigate('/contact')}
-              className="bg-white/10 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition border border-white/20"
+              className="bg-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition border border-white/30"
             >
               Contact Us
             </button>
