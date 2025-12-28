@@ -2085,6 +2085,62 @@ class PortalRegisterRequest(BaseModel):
     password: str
 
 
+class PortalPasswordLoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+
+@api_router.post("/portal/login-password")
+async def portal_login_password(login_data: PortalPasswordLoginRequest):
+    """
+    Customer portal login with email and password
+    """
+    import hashlib
+    
+    email = login_data.email.strip().lower()
+    password_hash = hashlib.sha256(login_data.password.encode()).hexdigest()
+    
+    # Find account
+    account = await db.portal_accounts.find_one({
+        "email": email,
+        "password_hash": password_hash
+    }, {"_id": 0})
+    
+    if not account:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    # Update last login
+    await db.portal_accounts.update_one(
+        {"email": email},
+        {"$set": {"last_login": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    # Get all orders for this email
+    orders_from_requests = await db.service_requests.find(
+        {"customer_email": {"$regex": f"^{email}$", "$options": "i"}},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    orders_from_orders = await db.orders.find(
+        {"customer_email": {"$regex": f"^{email}$", "$options": "i"}},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    all_orders = orders_from_requests + orders_from_orders
+    
+    logging.info(f"Portal login successful for: {email}, found {len(all_orders)} orders")
+    
+    return {
+        "success": True,
+        "account": {
+            "id": account.get("id"),
+            "name": account.get("name"),
+            "email": account.get("email")
+        },
+        "orders": all_orders
+    }
+
+
 @api_router.post("/portal/register")
 async def portal_register(register_data: PortalRegisterRequest):
     """
