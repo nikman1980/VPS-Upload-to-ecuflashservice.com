@@ -1,12 +1,12 @@
 # Test Results
 
-## Test Session: Blog Page with SEO Articles
+## Test Session: Customer Portal Revamp
+- **Date:** 2025-12-28
+- **Feature:** Complete customer portal with 7 features
+
+## Previous Session: Blog Page with SEO Articles
 - **Date:** 2025-12-28
 - **Feature:** Blog page with 6 SEO-optimized articles
-
-## Previous Session: Vehicle Database Revamp Testing
-- **Date:** 2025-12-27
-- **Feature:** dpfoffservice.com vehicle database integration
 
 ## Testing Protocol
 
