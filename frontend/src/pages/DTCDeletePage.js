@@ -723,8 +723,26 @@ const DTCDeletePage = () => {
                     {processResult.success ? 'DTC Deletion Complete!' : 'Processing Completed with Warnings'}
                   </h2>
                   <p className="opacity-90">
-                    {processResult.dtcs_deleted?.length || 0} DTCs deleted • 
+                    {processResult.dtcs_deleted?.length || 0} DTC instance(s) deleted • 
                     {processResult.checksum_corrected ? ' Checksum corrected' : ' Checksum unchanged'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Sub-Code / Fault Byte Explanation */}
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">💡</span>
+                <div>
+                  <h4 className="font-semibold text-blue-900 mb-1">Understanding DTC Sub-Codes / Fault Bytes</h4>
+                  <p className="text-sm text-blue-800 mb-2">
+                    Each DTC (e.g., <span className="font-mono bg-blue-100 px-1 rounded">P0421</span>) can have multiple <strong>sub-codes</strong> or <strong>fault bytes</strong> stored in the ECU. 
+                    For example: <span className="font-mono bg-blue-100 px-1 rounded">P0421-22</span>, <span className="font-mono bg-blue-100 px-1 rounded">P0421-AF</span>
+                  </p>
+                  <p className="text-sm text-blue-700">
+                    The suffix (e.g., <span className="font-mono">-22</span>) represents the <strong>fault byte</strong> which indicates specific failure conditions, freeze frame data, or test results. 
+                    When you delete a DTC, all its sub-code instances are removed from the ECU memory.
                   </p>
                 </div>
               </div>
@@ -737,7 +755,7 @@ const DTCDeletePage = () => {
               <div className="grid md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-green-50 rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-green-600">{processResult.dtcs_deleted?.length || 0}</div>
-                  <div className="text-sm text-green-700">DTCs Deleted</div>
+                  <div className="text-sm text-green-700">Instances Deleted</div>
                 </div>
                 <div className="bg-yellow-50 rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-yellow-600">{processResult.dtcs_not_found?.length || 0}</div>
@@ -749,18 +767,59 @@ const DTCDeletePage = () => {
                 </div>
               </div>
 
-              {/* Deleted DTCs */}
+              {/* Deleted DTCs with Sub-Codes */}
               {processResult.dtcs_deleted?.length > 0 && (
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">✅ Successfully Deleted:</h4>
-                  <div className="bg-green-50 rounded-xl p-4">
-                    <div className="flex flex-wrap gap-2">
-                      {processResult.dtcs_deleted.map((dtc, idx) => (
-                        <span key={idx} className="bg-green-100 text-green-700 px-3 py-1 rounded-lg text-sm font-mono">
-                          {dtc.code}
-                        </span>
-                      ))}
-                    </div>
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">✅ Successfully Deleted ({processResult.dtcs_deleted.length} instances):</h4>
+                  <div className="bg-green-50 rounded-xl p-4 overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="text-left text-gray-600 border-b border-green-200">
+                          <th className="pb-2 pr-4">DTC Code</th>
+                          <th className="pb-2 pr-4">Sub-Code</th>
+                          <th className="pb-2 pr-4">Fault Byte</th>
+                          <th className="pb-2 pr-4">Offset</th>
+                          <th className="pb-2">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {processResult.dtcs_deleted.map((dtc, idx) => (
+                          <tr key={idx} className="border-b border-green-100 last:border-0">
+                            <td className="py-2 pr-4">
+                              <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded font-mono text-xs">
+                                {dtc.code}
+                              </span>
+                            </td>
+                            <td className="py-2 pr-4">
+                              {dtc.sub_code ? (
+                                <span className="bg-green-200 text-green-800 px-2 py-0.5 rounded font-mono text-xs font-semibold">
+                                  {dtc.sub_code}
+                                </span>
+                              ) : (
+                                <span className="text-gray-400">—</span>
+                              )}
+                            </td>
+                            <td className="py-2 pr-4">
+                              {dtc.sub_code_hex ? (
+                                <span className="font-mono text-xs text-gray-600">
+                                  0x{dtc.sub_code_hex}
+                                </span>
+                              ) : (
+                                <span className="text-gray-400">—</span>
+                              )}
+                            </td>
+                            <td className="py-2 pr-4">
+                              <span className="font-mono text-xs text-gray-500">
+                                {dtc.offset_hex || `0x${dtc.offset?.toString(16).toUpperCase().padStart(6, '0')}`}
+                              </span>
+                            </td>
+                            <td className="py-2 text-xs text-gray-600 max-w-xs truncate">
+                              {dtc.description}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}
@@ -777,6 +836,9 @@ const DTCDeletePage = () => {
                         </span>
                       ))}
                     </div>
+                    <p className="text-xs text-yellow-600 mt-2">
+                      These DTCs were not found in the file. They may not be stored in this ECU or use a different encoding format.
+                    </p>
                   </div>
                 </div>
               )}
