@@ -52,14 +52,11 @@ const CustomerPortal = () => {
   const [vehicleTypes, setVehicleTypes] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
-  const [generations, setGenerations] = useState([]);
   const [engines, setEngines] = useState([]);
-  const [ecuTypes, setEcuTypes] = useState([]);
   
   const [selectedVehicleType, setSelectedVehicleType] = useState('');
   const [selectedManufacturer, setSelectedManufacturer] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
-  const [selectedGeneration, setSelectedGeneration] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('');
   const [selectedEcu, setSelectedEcu] = useState('');
   
