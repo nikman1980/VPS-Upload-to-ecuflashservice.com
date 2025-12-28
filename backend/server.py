@@ -61,6 +61,42 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 
+# Email test endpoint
+@api_router.post("/test-email")
+async def test_email_endpoint(to_email: str = ""):
+    """Test email sending capability"""
+    if not to_email:
+        to_email = "support@ecuflashservice.com"
+    
+    # Test connection first
+    connection_ok = test_email_connection()
+    if not connection_ok:
+        return {"success": False, "message": "SMTP connection failed"}
+    
+    # Import send_email function
+    from email_service import send_email
+    
+    result = send_email(
+        to_email=to_email,
+        subject="ECU Flash Service - Email Test",
+        html_content="""
+        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #2563eb;">Email Test Successful! ✅</h2>
+            <p>This is a test email from ECU Flash Service.</p>
+            <p>Your email system is configured correctly and working.</p>
+            <p style="color: #6b7280; font-size: 12px; margin-top: 30px;">
+                Sent from: support@ecuflashservice.com
+            </p>
+        </div>
+        """
+    )
+    
+    return {
+        "success": result,
+        "message": f"Test email sent to {to_email}" if result else "Failed to send email"
+    }
+
+
 # Enums
 class RequestStatus(str, Enum):
     PENDING_PAYMENT = "pending_payment"
