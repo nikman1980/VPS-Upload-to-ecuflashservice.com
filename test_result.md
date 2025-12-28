@@ -19,6 +19,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "COMPREHENSIVE TEST COMPLETED SUCCESSFULLY. All 8 steps of enhanced New Order flow working perfectly: 1) Login with jane.smith@example.com ✅ 2) Dashboard with sidebar navigation ✅ 3) New Order with progress steps (Vehicle→Upload→Analyze→Services) ✅ 4) Vehicle selection dropdown with manual entry (BMW 320d 2018, Bosch EDC17C50) ✅ 5) File upload with green confirmation ✅ 6) Analysis step with Start Analysis button ✅ 7) Services selection grid with 13 available services ✅ 8) Order submission with DPF Removal ($248) + notes, successfully created order #a2e1dded ✅. All UI components functional, dropdowns working, manual entry form complete, file analysis working, service selection operational, order summary accurate."
+      - working: true
+        agent: "testing"
+        comment: "VEHICLE SELECTION DROPDOWN FIX VERIFIED: Tested specific fix where Generation step was removed and Model connects directly to Engine. Results: ✅ Cars & LCV → BMW → E83 → X3 2.0d → Bosch EDC17C50 cascade working perfectly ✅ Engine dropdown loads 7 options after Model selection (critical fix confirmed) ✅ ECU dropdown appears after engine selection ✅ Green confirmation box shows complete vehicle summary ✅ Continue button activates and proceeds to Upload step ✅ No more stuck at Generation step - bypass successful. The reported vehicle selection issue has been RESOLVED."
 
 metadata:
   created_by: "testing_agent"
