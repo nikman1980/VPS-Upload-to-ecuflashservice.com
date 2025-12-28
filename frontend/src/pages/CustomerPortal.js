@@ -186,7 +186,6 @@ const CustomerPortal = () => {
     setSelectedEngine('');
     setSelectedEcu('');
     setEngines([]);
-    setEcuTypes([]);
     
     if (!modelId) return;
     
@@ -205,19 +204,9 @@ const CustomerPortal = () => {
   const handleEngineChange = async (engineId) => {
     setSelectedEngine(engineId);
     setSelectedEcu('');
-    setEcuTypes([]);
     
-    if (!engineId) return;
-    
-    // For now, use common ECU types - can be enhanced to fetch from API
-    // setVehicleLoading(true);
-    // try {
-    //   const response = await axios.get(`${API}/vehicles/ecus/${engineId}`);
-    //   setEcuTypes(response.data || []);
-    // } catch (error) {
-    //   console.error('Error fetching ECU types:', error);
-    // }
-    // setVehicleLoading(false);
+    // ECU types are provided from commonEcuTypes list
+  };;
   };
 
   // Get vehicle summary for display
