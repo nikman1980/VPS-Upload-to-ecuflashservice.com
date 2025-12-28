@@ -75,13 +75,13 @@ class ECUServiceTester:
                     dtc_single = next((s for s in services if s['id'] == 'dtc-single'), None)
                     dtc_multiple = next((s for s in services if s['id'] == 'dtc-multiple'), None)
                     
-                    if dtc_single and dtc_single['base_price'] == 10.00:
-                        print(f"   ✓ DTC Single service found at $10.00")
+                    if dtc_single and dtc_single['base_price'] == 20.00:
+                        print(f"   ✓ DTC Single service found at $20.00")
                     else:
                         print(f"   ⚠️ DTC Single service price issue")
                         
-                    if dtc_multiple and dtc_multiple['base_price'] == 25.00:
-                        print(f"   ✓ DTC Multiple service found at $25.00")
+                    if dtc_multiple and dtc_multiple['base_price'] == 50.00:
+                        print(f"   ✓ DTC Multiple service found at $50.00")
                     else:
                         print(f"   ⚠️ DTC Multiple service price issue")
             else:
