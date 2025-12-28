@@ -21,7 +21,7 @@ from ecu_processor import ECUProcessor, ConfidenceLevel
 from ecu_analyzer import ECUAnalyzer
 
 # Import Email Service
-from email_service import send_order_confirmation
+from email_service import send_order_confirmation, send_download_ready_email, test_email_connection
 
 # Import TuningFiles API (real ECU processing)
 from tuningfiles_api import TuningFilesAPI
