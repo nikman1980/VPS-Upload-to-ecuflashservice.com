@@ -2539,6 +2539,184 @@ class PasswordChangeRequest(BaseModel):
     new_password: str
 
 
+# =============================================================================
+# ADMIN API ENDPOINTS
+# =============================================================================
+
+@api_router.get("/admin/orders")
+async def get_all_admin_orders():
+    """Get all orders for admin panel"""
+    # Get orders from both collections
+    orders = await db.orders.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
+    return orders
+
+
+@api_router.patch("/admin/order/{order_id}/status")
+async def update_order_status(order_id: str, data: dict):
+    """Update order status"""
+    new_status = data.get("status")
+    
+    # Try updating in orders collection
+    result = await db.orders.update_one(
+        {"id": order_id},
+        {"$set": {"status": new_status, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    if result.modified_count == 0:
+        # Try service_requests collection
+        result = await db.service_requests.update_one(
+            {"id": order_id},
+            {"$set": {"status": new_status, "updated_at": datetime.now(timezone.utc).isoformat()}}
+        )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    return {"success": True, "status": new_status}
+
+
+@api_router.post("/admin/upload-modified")
+async def admin_upload_modified_file(
+    file: UploadFile = File(...),
+    order_id: str = Form(...)
+):
+    """Admin uploads modified ECU file for an order"""
+    # Validate file extension
+    allowed_extensions = [".bin", ".hex", ".ecu", ".ori", ".mod", ".fls"]
+    file_ext = Path(file.filename).suffix.lower()
+    
+    if file_ext not in allowed_extensions:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Only ECU files are allowed."
+        )
+    
+    # Save file
+    file_id = str(uuid.uuid4())
+    filename = f"{file_id}_modified{file_ext}"
+    filepath = UPLOAD_DIR / filename
+    
+    content = await file.read()
+    with open(filepath, "wb") as f:
+        f.write(content)
+    
+    # Update order with modified file
+    update_data = {
+        "modified_file": filename,
+        "modified_filename": file.filename,
+        "modified_at": datetime.now(timezone.utc).isoformat(),
+        "status": "completed"
+    }
+    
+    # Try updating in orders collection
+    result = await db.orders.update_one(
+        {"id": order_id},
+        {"$set": update_data}
+    )
+    
+    if result.modified_count == 0:
+        # Try service_requests collection
+        result = await db.service_requests.update_one(
+            {"id": order_id},
+            {"$set": update_data}
+        )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    logging.info(f"Admin uploaded modified file for order: {order_id}")
+    
+    return {"success": True, "filename": filename}
+
+
+class SendDownloadEmailRequest(BaseModel):
+    order_id: str
+    email: EmailStr
+
+
+@api_router.post("/admin/send-download-email")
+async def admin_send_download_email(data: SendDownloadEmailRequest):
+    """Send download link email to customer"""
+    from email_service import send_email
+    
+    # Get order details
+    order = await db.orders.find_one({"id": data.order_id}, {"_id": 0})
+    if not order:
+        order = await db.service_requests.find_one({"id": data.order_id}, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    if not order.get("modified_file"):
+        raise HTTPException(status_code=400, detail="No modified file available for this order")
+    
+    # Create download link
+    download_url = f"{os.environ.get('REACT_APP_BACKEND_URL', '')}/api/download/{order['modified_file']}"
+    portal_url = f"{os.environ.get('REACT_APP_BACKEND_URL', '').replace('/api', '')}/portal?email={data.email}"
+    
+    # Prepare email content
+    subject = f"Your ECU File is Ready - Order #{data.order_id[-8:]}"
+    html_content = f'''
+    <html>
+    <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #3b82f6, #06b6d4); padding: 30px; border-radius: 16px; text-align: center; margin-bottom: 30px;">
+            <h1 style="color: white; margin: 0;">Your ECU File is Ready! ⚡</h1>
+        </div>
+        
+        <p>Hi {order.get('customer_name', 'Customer')},</p>
+        
+        <p>Great news! Your ECU file has been processed and is ready for download.</p>
+        
+        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin: 20px 0;">
+            <h3 style="color: #166534; margin-top: 0;">Order Details</h3>
+            <p><strong>Order ID:</strong> #{data.order_id[-8:]}</p>
+            <p><strong>Vehicle:</strong> {order.get('vehicle_info', 'N/A')}</p>
+            <p><strong>Services:</strong> {', '.join([s.get('name', s) if isinstance(s, dict) else s for s in order.get('services', order.get('selected_services', []))])}</p>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{portal_url}" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block;">
+                Access Your Portal →
+            </a>
+        </div>
+        
+        <p>You can download your modified file from your customer portal at any time.</p>
+        
+        <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
+            If you have any questions, please reply to this email or contact our support team.
+        </p>
+        
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+        
+        <p style="color: #9ca3af; font-size: 12px; text-align: center;">
+            ECU Flash Service<br>
+            Professional ECU Tuning & Modifications
+        </p>
+    </body>
+    </html>
+    '''
+    
+    # Send email
+    success = await send_email(
+        to_email=data.email,
+        subject=subject,
+        html_content=html_content
+    )
+    
+    if not success:
+        raise HTTPException(status_code=500, detail="Failed to send email")
+    
+    # Update order to mark email sent
+    await db.orders.update_one(
+        {"id": data.order_id},
+        {"$set": {"download_email_sent": True, "email_sent_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    logging.info(f"Download email sent for order {data.order_id} to {data.email}")
+    
+    return {"success": True, "message": "Email sent successfully"}
+
+
 @api_router.post("/portal/update-profile")
 async def update_portal_profile(data: ProfileUpdateRequest):
     """Update customer profile name"""
