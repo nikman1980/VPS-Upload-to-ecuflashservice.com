@@ -1709,89 +1709,104 @@ const NewUploadFlow = () => {
 
 
 
-            <h3 className="text-xl font-semibold mb-2">Detected Services</h3>
+            <h3 className="text-xl font-semibold mb-2">Select Services</h3>
             <p className="text-gray-500 text-sm mb-4">
-              Based on our initial ECU analysis, the following services are available for your file:
+              {availableOptions.length > 0 
+                ? "Based on our ECU analysis, the following services are detected. You can also add additional services manually."
+                : "Select the services you need for your ECU file:"}
             </p>
             
-            {availableOptions.length === 0 ? (
-              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-6">
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">⚠️</span>
-                  <div>
-                    <h4 className="font-semibold text-yellow-800">No Services Detected</h4>
-                    <p className="text-yellow-700 text-sm mt-1">
-                      We could not automatically detect available services for this ECU file. 
-                      Please contact us for manual analysis.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-3 mb-8">
-                {availableOptions.map((option) => (
-                  <div key={option.service_id} className={`rounded-2xl overflow-hidden border transition ${
-                    option.confidence === 'high' 
-                      ? 'bg-green-50/50 border-green-200 hover:border-green-300' 
-                      : option.confidence === 'medium'
-                        ? 'bg-blue-50/50 border-blue-200 hover:border-blue-300'
-                        : 'bg-white/50 border-gray-200/50 hover:border-gray-300'
-                  }`}>
-                    <label className="flex items-center justify-between p-5 cursor-pointer">
-                      <div className="flex items-center space-x-4">
-                        <input
-                          type="checkbox"
-                          checked={selectedServices.includes(option.service_id)}
-                          onChange={() => handleServiceToggle(option.service_id, option.price)}
-                          className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
-                        />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-gray-900">{option.service_name}</span>
-                            {option.confidence === 'high' && (
+            {/* Detected Services */}
+            {availableOptions.length > 0 && (
+              <div className="mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  Detected Services
+                </h4>
+                <div className="space-y-3">
+                  {availableOptions.map((option) => (
+                    <div key={option.service_id} className={`rounded-xl overflow-hidden border transition ${
+                      selectedServices.includes(option.service_id)
+                        ? 'bg-blue-50 border-blue-300' 
+                        : 'bg-white border-gray-200 hover:border-gray-300'
+                    }`}>
+                      <label className="flex items-center justify-between p-4 cursor-pointer">
+                        <div className="flex items-center space-x-3">
+                          <input
+                            type="checkbox"
+                            checked={selectedServices.includes(option.service_id)}
+                            onChange={() => handleServiceToggle(option.service_id, option.price)}
+                            className="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
+                          />
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium text-gray-900">{option.service_name}</span>
                               <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-medium">
                                 ✓ Detected
                               </span>
-                            )}
-                            {option.confidence === 'medium' && (
-                              <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">
-                                Likely
-                              </span>
-                            )}
-                            {option.confidence === 'low' && (
-                              <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
-                                Possible
-                              </span>
+                            </div>
+                            {option.indicators && option.indicators.length > 0 && (
+                              <div className="text-xs text-gray-500 mt-0.5">{option.indicators[0]}</div>
                             )}
                           </div>
-                          {option.indicators && option.indicators.length > 0 && (
-                            <div className="text-xs text-gray-500 mt-1">
-                              {option.indicators[0]}
-                            </div>
-                          )}
                         </div>
-                      </div>
-                      <div className="text-2xl font-bold text-green-500">${option.price.toFixed(2)}</div>
-                    </label>
-                    
-                    {/* DTC Input Fields */}
-                    {option.service_id === 'dtc_off' && selectedServices.includes('dtc_off') && (
-                      <div className="px-5 pb-5 pt-2 border-t border-gray-200/50">
-                        <label className="block text-sm text-gray-500 mb-2">Enter DTC codes to remove (optional):</label>
-                        <textarea
-                          value={dtcMultipleCodes}
-                          onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(''); }}
-                          placeholder="P0420&#10;P2002&#10;P0401"
-                          className="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none min-h-[80px]"
-                          rows={3}
-                        />
-                        <p className="text-xs text-gray-400 mt-2">Leave empty for all DTCs or enter specific codes (one per line)</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                        <div className="text-xl font-bold text-green-600">${option.price.toFixed(2)}</div>
+                      </label>
+                      
+                      {/* DTC Input Fields */}
+                      {option.service_id === 'dtc_off' && selectedServices.includes('dtc_off') && (
+                        <div className="px-4 pb-4 pt-2 border-t border-gray-100">
+                          <label className="block text-sm text-gray-500 mb-2">Enter DTC codes to remove (optional):</label>
+                          <textarea
+                            value={dtcMultipleCodes}
+                            onChange={(e) => { setDtcMultipleCodes(e.target.value.toUpperCase()); setDtcError(''); }}
+                            placeholder="P0420&#10;P2002&#10;P0401"
+                            className="w-full bg-gray-50 text-gray-900 px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none min-h-[60px] text-sm"
+                            rows={2}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
+            
+            {/* Manual Service Selection - Always Available */}
+            <div className="mb-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                {availableOptions.length > 0 ? "Add More Services" : "Available Services"}
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {allServices
+                  .filter(s => !availableOptions.find(opt => opt.service_id === s.id))
+                  .map((service) => {
+                    const isSelected = selectedServices.includes(service.id);
+                    return (
+                      <label 
+                        key={service.id} 
+                        className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition ${
+                          isSelected 
+                            ? 'bg-blue-50 border-blue-300' 
+                            : 'bg-white border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => handleServiceToggle(service.id, service.base_price)}
+                            className="w-4 h-4 rounded border-gray-300 text-blue-500 focus:ring-blue-500"
+                          />
+                          <span className="text-sm font-medium text-gray-900">{service.name}</span>
+                        </div>
+                        <span className="text-sm font-semibold text-gray-700">${service.base_price}</span>
+                      </label>
+                    );
+                  })}
+              </div>
+            </div>
             
             {dtcError && (
               <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-4 rounded-xl mb-6">
