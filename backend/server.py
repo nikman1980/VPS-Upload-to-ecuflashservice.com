@@ -1028,6 +1028,32 @@ async def get_order_status(order_id: str):
     
     response = {
         "order_id": order_id,
+        "processing_status": processing_status,
+        "payment_status": order.get("payment_status"),
+        "created_at": order.get("created_at"),
+        "vehicle": f"{order.get('vehicle_year', '')} {order.get('vehicle_make', '')} {order.get('vehicle_model', '')}".strip(),
+        "services": [s.get("service_name") for s in order.get("purchased_services", [])],
+        "total_paid": order.get("total_price", 0)
+    }
+    
+    if processing_status == "completed":
+        response["download_ready"] = True
+        response["download_url"] = f"/api/download-order/{order_id}"
+        response["message"] = "Your processed file is ready for download!"
+    elif processing_status == "submitted_to_sedox":
+        response["download_ready"] = False
+        response["message"] = "Your file is being processed. Please check back in 20-60 minutes."
+    elif processing_status == "sedox_error":
+        response["download_ready"] = False
+        response["message"] = "There was an error processing your file. Please contact support."
+    elif processing_status == "timeout":
+        response["download_ready"] = False
+        response["message"] = "Processing is taking longer than expected. Please contact support."
+    else:
+        response["download_ready"] = False
+        response["message"] = "Your order is being processed."
+    
+    return response
 
 
 class CreateOrderRequest(BaseModel):
