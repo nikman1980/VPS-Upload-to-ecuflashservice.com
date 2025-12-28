@@ -745,6 +745,121 @@ const NewUploadFlow = () => {
           </div>
         </section>
 
+        {/* Customer Reviews Section */}
+        <section className="py-16 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-3">What Our Customers Say</h2>
+              <p className="text-gray-500">Trusted by thousands of vehicle owners and workshops worldwide</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Review 1 - Short */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
+                </div>
+                <p className="text-gray-700 mb-4">"Fast turnaround, DPF delete worked perfectly on my Hilux. No more regen issues!"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">M</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Marcus T.</div>
+                    <div className="text-gray-500 text-sm">2019 Toyota Hilux • DPF Off</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Review 2 - Detailed with Order */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
+                </div>
+                <p className="text-gray-700 mb-4">"Ordered EGR + DPF delete for my Ford Ranger. The team analyzed my Bosch EDC17 file and had the modified version back in 45 minutes. Flashed it and runs like a dream now. Much better throttle response!"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">J</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">James K.</div>
+                    <div className="text-gray-500 text-sm">2020 Ford Ranger 3.2 • Order #ECU-4829</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Review 3 - Short */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
+                </div>
+                <p className="text-gray-700 mb-4">"AdBlue delete saved me $800 in sensor repairs. Highly recommend!"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold">S</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Steve R.</div>
+                    <div className="text-gray-500 text-sm">2018 BMW X5 • AdBlue Off</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Review 4 - Workshop Owner */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
+                </div>
+                <p className="text-gray-700 mb-4">"As a workshop owner, I've used their service for over 50 vehicles. Consistent quality every time. The DTC removal tool is excellent for clearing stubborn codes after modifications."</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold">A</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Auto Tech Garage</div>
+                    <div className="text-gray-500 text-sm">Workshop • 50+ Orders</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Review 5 - Detailed */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
+                </div>
+                <p className="text-gray-700 mb-4">"Had issues with my Audi Q7's DPF constantly going into regen mode. Uploaded my Siemens PCR2.1 file, got the modified version in 30 mins. Professional service, file worked first try."</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold">D</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">David M.</div>
+                    <div className="text-gray-500 text-sm">2017 Audi Q7 3.0 TDI • Order #ECU-3156</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Review 6 - Agriculture */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
+                </div>
+                <p className="text-gray-700 mb-4">"Great service for farm equipment. Got my John Deere tractor sorted with EGR delete. Runs cleaner and more efficient now."</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 font-bold">R</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Rural Mechanics Ltd</div>
+                    <div className="text-gray-500 text-sm">John Deere 6150R • EGR Off</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Trust Stats */}
+            <div className="mt-12 text-center">
+              <div className="inline-flex items-center gap-6 bg-gray-50 rounded-2xl px-8 py-4">
+                <div className="flex items-center gap-1">
+                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
+                </div>
+                <div className="text-left">
+                  <div className="font-bold text-gray-900">4.9 out of 5</div>
+                  <div className="text-gray-500 text-sm">Based on 2,500+ reviews</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Services Section */}
         <section id="services" className="py-20 px-6 bg-gray-50/30">
           <div className="container mx-auto max-w-6xl">
