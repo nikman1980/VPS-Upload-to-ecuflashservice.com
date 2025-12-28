@@ -2562,7 +2562,7 @@ async def process_ecu_file_engine(
 
 
 @api_router.get("/engine/download/{filename}")
-async def download_processed_file(filename: str):
+async def download_engine_processed_file(filename: str):
     """Download a processed ECU file"""
     file_path = PROCESSED_DIR / filename
     if not file_path.exists():
