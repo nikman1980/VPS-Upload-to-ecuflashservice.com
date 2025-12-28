@@ -349,7 +349,7 @@ class ECUServiceTester:
                 total_price = pricing.get('total_price', 0)
                 breakdown = pricing.get('pricing_breakdown', [])
                 
-                expected_total = 5.00 + 10.00  # checksum + dtc-single
+                expected_total = 10.00 + 20.00  # checksum + dtc-single (updated prices)
                 
                 if abs(total_price - expected_total) < 0.01:
                     details = f"Correct pricing: ${total_price} for {len(breakdown)} services"
