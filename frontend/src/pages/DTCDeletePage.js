@@ -677,7 +677,7 @@ const DTCDeletePage = () => {
                     className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-red-500 focus:ring-1 focus:ring-red-500"
                     required
                   />
-                  <p className="text-xs text-gray-500 mt-1">We'll send the modified file to this email</p>
+                  <p className="text-xs text-gray-500 mt-1">We will send the modified file to this email</p>
                 </div>
               </div>
             </div>
