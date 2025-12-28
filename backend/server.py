@@ -29,6 +29,9 @@ from tuningfiles_api import TuningFilesAPI
 # Import NEW ECU Processing Engine (for automated processing)
 from ecu_engine import ECUFileProcessor, ECUDefinitionDB, ModificationType as EngineModType
 
+# Import DTC Delete Engine
+from dtc_engine import dtc_delete_engine, DTCDatabase
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
