@@ -1512,197 +1512,92 @@ const NewUploadFlow = () => {
               <p className="text-gray-500">Select the services you need</p>
             </div>
 
-            {/* ECU Analysis Results - Enhanced Format */}
-            <div className="bg-white/80 border border-gray-200/50 rounded-xl overflow-hidden mb-6">
-              {/* Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 flex items-center justify-between">
-                <h3 className="font-semibold text-base text-white flex items-center">
-                  <span className="text-lg mr-2">🔍</span>
-                  ECU Analysis Results
-                </h3>
-                <span className="text-white/80 text-xs bg-white/20 px-2 py-1 rounded">
-                  {analysisResult.original_filename} • {analysisResult.file_size_mb?.toFixed(2)} MB
-                </span>
-              </div>
-              
-              {/* ECU Detection Summary */}
-              <div className="bg-blue-50/50 px-4 py-3 border-b border-gray-200/50">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">🎯</span>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold text-gray-900">
-                      {[
-                        analysisResult.detected_manufacturer && analysisResult.detected_manufacturer !== 'Unknown' ? analysisResult.detected_manufacturer : null,
-                        analysisResult.detected_ecu && analysisResult.detected_ecu !== 'Unknown' ? analysisResult.detected_ecu : null
-                      ].filter(Boolean).join(' ') || 'ECU File Detected'}
+            {/* ECU Analysis Results - Compact Format */}
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mb-6">
+              {/* Header with main info */}
+              <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                      <span className="text-xl">🎯</span>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      {analysisResult.total_services_detected || 0} service(s) available for this ECU
+                    <div>
+                      <h3 className="font-semibold text-white">
+                        {[
+                          analysisResult.detected_manufacturer && analysisResult.detected_manufacturer !== 'Unknown' ? analysisResult.detected_manufacturer : null,
+                          analysisResult.detected_ecu && analysisResult.detected_ecu !== 'Unknown' ? analysisResult.detected_ecu : null
+                        ].filter(Boolean).join(' ') || 'ECU Analysis Complete'}
+                      </h3>
+                      <p className="text-white/80 text-xs">
+                        {analysisResult.original_filename} • {analysisResult.file_size_mb?.toFixed(2)} MB
+                      </p>
                     </div>
                   </div>
+                  <span className="text-white bg-white/20 px-3 py-1 rounded-full text-xs font-medium">
+                    {analysisResult.total_services_detected || 0} services available
+                  </span>
                 </div>
               </div>
               
-              {/* Detailed Grid Layout */}
-              <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-sm">
-                {/* Manufacturer - only show if detected */}
-                {analysisResult.detected_manufacturer && analysisResult.detected_manufacturer !== 'Unknown' && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">🏭</span> Manufacturer
-                    </div>
-                    <div className="text-blue-600 font-semibold">
-                      {analysisResult.detected_manufacturer}
-                    </div>
-                  </div>
-                )}
-                
-                {/* ECU Type - only show if detected */}
-                {analysisResult.detected_ecu && analysisResult.detected_ecu !== 'Unknown' && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">💾</span> ECU Type
-                    </div>
-                    <div className="text-gray-900 font-semibold">
-                      {analysisResult.detected_ecu}
-                    </div>
-                  </div>
-                )}
-                
-                {/* File Size */}
-                <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                  <div className="text-gray-500 text-xs mb-1 flex items-center">
-                    <span className="mr-1">📁</span> File Size
-                  </div>
-                  <div className="text-gray-900 font-semibold">
-                    {analysisResult.file_size_mb?.toFixed(2)} MB
-                  </div>
-                </div>
-                
-                {/* Part Number */}
+              {/* Compact Info Grid */}
+              <div className="p-3 grid grid-cols-3 md:grid-cols-6 gap-2 text-xs border-b border-gray-100">
                 {analysisResult.metadata?.part_number && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">🏷️</span> Part Number
-                    </div>
-                    <div className="text-yellow-600 font-mono text-xs font-semibold">
-                      {analysisResult.metadata.part_number}
-                    </div>
+                  <div className="bg-gray-50 rounded-lg p-2">
+                    <span className="text-gray-400 block">Part #</span>
+                    <span className="text-gray-800 font-mono font-medium">{analysisResult.metadata.part_number}</span>
                   </div>
                 )}
-                
-                {/* Calibration ID */}
                 {analysisResult.metadata?.calibration_id && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">📋</span> Calibration ID
-                    </div>
-                    <div className="text-green-600 font-mono text-xs font-semibold">
-                      {analysisResult.metadata.calibration_id}
-                    </div>
+                  <div className="bg-gray-50 rounded-lg p-2">
+                    <span className="text-gray-400 block">Calibration</span>
+                    <span className="text-gray-800 font-mono font-medium">{analysisResult.metadata.calibration_id}</span>
                   </div>
                 )}
-                
-                {/* Software Version */}
                 {analysisResult.metadata?.software_version && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">📀</span> Software
-                    </div>
-                    <div className="text-gray-700 font-mono text-xs">
-                      {analysisResult.metadata.software_version}
-                    </div>
+                  <div className="bg-gray-50 rounded-lg p-2">
+                    <span className="text-gray-400 block">Software</span>
+                    <span className="text-gray-800 font-mono font-medium">{analysisResult.metadata.software_version}</span>
                   </div>
                 )}
-                
-                {/* Hardware Version */}
                 {analysisResult.metadata?.hardware_version && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">🔧</span> Hardware
-                    </div>
-                    <div className="text-gray-700 font-mono text-xs">
-                      {analysisResult.metadata.hardware_version}
-                    </div>
+                  <div className="bg-gray-50 rounded-lg p-2">
+                    <span className="text-gray-400 block">Hardware</span>
+                    <span className="text-gray-800 font-mono font-medium">{analysisResult.metadata.hardware_version}</span>
                   </div>
                 )}
-                
-                {/* VIN */}
-                {analysisResult.metadata?.vin && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">🚗</span> VIN
-                    </div>
-                    <div className="text-gray-700 font-mono text-xs">
-                      {analysisResult.metadata.vin}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Processor */}
                 {analysisResult.metadata?.processor && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">🖥️</span> Processor
-                    </div>
-                    <div className="text-purple-600 font-mono text-xs">
-                      {analysisResult.metadata.processor}
-                    </div>
+                  <div className="bg-gray-50 rounded-lg p-2">
+                    <span className="text-gray-400 block">Processor</span>
+                    <span className="text-gray-800 font-mono font-medium">{analysisResult.metadata.processor}</span>
                   </div>
                 )}
-                
-                {/* ECU Generation */}
-                {analysisResult.metadata?.ecu_generation && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">📊</span> Generation
-                    </div>
-                    <div className="text-gray-700 text-xs">
-                      {analysisResult.metadata.ecu_generation}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Flash Type */}
-                {analysisResult.metadata?.flash_type && (
-                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                    <div className="text-gray-500 text-xs mb-1 flex items-center">
-                      <span className="mr-1">⚡</span> Flash Type
-                    </div>
-                    <div className="text-gray-700 text-xs">
-                      {analysisResult.metadata.flash_type}
-                    </div>
+                {analysisResult.metadata?.vin && (
+                  <div className="bg-gray-50 rounded-lg p-2">
+                    <span className="text-gray-400 block">VIN</span>
+                    <span className="text-gray-800 font-mono font-medium">{analysisResult.metadata.vin}</span>
                   </div>
                 )}
               </div>
               
-              {/* Detected Maps Summary */}
-              {analysisResult.detected_maps && Object.keys(analysisResult.detected_maps).length > 0 && (
-                <div className="px-4 pb-4">
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                    <div className="text-sm font-semibold text-green-800 mb-2 flex items-center">
-                      <span className="mr-2">✅</span> Detected Systems
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {analysisResult.detected_maps.dpf && (
-                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">DPF System</span>
-                      )}
-                      {analysisResult.detected_maps.egr && (
-                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">EGR System</span>
-                      )}
-                      {analysisResult.detected_maps.scr && (
-                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">SCR/AdBlue</span>
-                      )}
-                      {analysisResult.detected_maps.lambda && (
-                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">Lambda/O2</span>
-                      )}
-                      {analysisResult.detected_maps.catalyst && (
-                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">Catalyst</span>
-                      )}
-                    </div>
-                  </div>
+              {/* Detected Systems - Inline */}
+              {analysisResult.detected_maps && Object.keys(analysisResult.detected_maps).some(k => analysisResult.detected_maps[k]) && (
+                <div className="px-3 py-2 flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-gray-500">Detected:</span>
+                  {analysisResult.detected_maps.dpf && (
+                    <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium">DPF</span>
+                  )}
+                  {analysisResult.detected_maps.egr && (
+                    <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium">EGR</span>
+                  )}
+                  {analysisResult.detected_maps.scr && (
+                    <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium">SCR/AdBlue</span>
+                  )}
+                  {analysisResult.detected_maps.lambda && (
+                    <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium">Lambda</span>
+                  )}
+                  {analysisResult.detected_maps.catalyst && (
+                    <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium">Catalyst</span>
+                  )}
                 </div>
               )}
             </div>
