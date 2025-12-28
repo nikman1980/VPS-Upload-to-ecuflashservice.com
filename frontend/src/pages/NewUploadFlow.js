@@ -1524,7 +1524,10 @@ const NewUploadFlow = () => {
                   </div>
                   <div>
                     <div className="text-lg font-bold text-gray-900">
-                      {analysisResult.detected_manufacturer || 'Unknown'} {analysisResult.detected_ecu || 'ECU'}
+                      {[
+                        analysisResult.detected_manufacturer && analysisResult.detected_manufacturer !== 'Unknown' ? analysisResult.detected_manufacturer : null,
+                        analysisResult.detected_ecu && analysisResult.detected_ecu !== 'Unknown' ? analysisResult.detected_ecu : null
+                      ].filter(Boolean).join(' ') || 'ECU File Detected'}
                     </div>
                     <div className="text-sm text-gray-600">
                       {analysisResult.total_services_detected || 0} service(s) available for this ECU
@@ -1535,25 +1538,29 @@ const NewUploadFlow = () => {
               
               {/* Detailed Grid Layout */}
               <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-sm">
-                {/* Manufacturer */}
-                <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                  <div className="text-gray-500 text-xs mb-1 flex items-center">
-                    <span className="mr-1">🏭</span> Manufacturer
+                {/* Manufacturer - only show if detected */}
+                {analysisResult.detected_manufacturer && analysisResult.detected_manufacturer !== 'Unknown' && (
+                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
+                    <div className="text-gray-500 text-xs mb-1 flex items-center">
+                      <span className="mr-1">🏭</span> Manufacturer
+                    </div>
+                    <div className="text-blue-600 font-semibold">
+                      {analysisResult.detected_manufacturer}
+                    </div>
                   </div>
-                  <div className="text-blue-600 font-semibold">
-                    {analysisResult.detected_manufacturer || 'Unknown'}
-                  </div>
-                </div>
+                )}
                 
-                {/* ECU Type */}
-                <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
-                  <div className="text-gray-500 text-xs mb-1 flex items-center">
-                    <span className="mr-1">💾</span> ECU Type
+                {/* ECU Type - only show if detected */}
+                {analysisResult.detected_ecu && analysisResult.detected_ecu !== 'Unknown' && (
+                  <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
+                    <div className="text-gray-500 text-xs mb-1 flex items-center">
+                      <span className="mr-1">💾</span> ECU Type
+                    </div>
+                    <div className="text-gray-900 font-semibold">
+                      {analysisResult.detected_ecu}
+                    </div>
                   </div>
-                  <div className="text-gray-900 font-semibold">
-                    {analysisResult.detected_ecu || 'Unknown'}
-                  </div>
-                </div>
+                )}
                 
                 {/* File Size */}
                 <div className="bg-gray-50/50 rounded-lg p-3 border border-gray-100">
