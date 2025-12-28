@@ -787,31 +787,41 @@ const DTCDeletePage = () => {
                 </div>
               </div>
 
-              {/* Deleted DTCs - Compact Badges */}
+              {/* Deleted DTCs - With Descriptions */}
               {processResult.dtcs_deleted?.length > 0 && (
                 <div className="p-4 border-b border-gray-200">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-3">
                     <span className="text-green-500">✓</span>
                     <span className="text-sm font-medium text-gray-700">Successfully Deleted ({processResult.dtcs_deleted.length})</span>
                   </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {/* Group by DTC code and count instances */}
+                  <div className="space-y-2">
+                    {/* Group by DTC code and show with description */}
                     {Object.entries(
                       processResult.dtcs_deleted.reduce((acc, dtc) => {
-                        acc[dtc.code] = (acc[dtc.code] || 0) + 1;
+                        if (!acc[dtc.code]) {
+                          acc[dtc.code] = { count: 0, description: dtc.description };
+                        }
+                        acc[dtc.code].count += 1;
                         return acc;
                       }, {})
-                    ).map(([code, count]) => (
-                      <span key={code} className="inline-flex items-center bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-mono">
-                        {code}
-                        {count > 1 && <span className="ml-1 bg-green-200 px-1 rounded text-green-800">×{count}</span>}
-                      </span>
+                    ).map(([code, data]) => (
+                      <div key={code} className="flex items-start gap-2 bg-green-50 rounded-lg p-2">
+                        <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded font-mono text-xs font-semibold whitespace-nowrap">
+                          {code}
+                          {data.count > 1 && <span className="ml-1 bg-green-200 px-1 rounded text-green-800">×{data.count}</span>}
+                        </span>
+                        <span className="text-xs text-gray-600 leading-relaxed">
+                          {data.description || 'Diagnostic Trouble Code'}
+                        </span>
+                      </div>
                     ))}
                   </div>
                   {/* Sub-code note */}
-                  <p className="text-xs text-gray-500 mt-2">
-                    💡 Multiple instances indicate sub-codes/fault bytes were found and deleted for each DTC.
-                  </p>
+                  {processResult.dtcs_deleted.some(d => d.count > 1 || processResult.dtcs_deleted.filter(x => x.code === d.code).length > 1) && (
+                    <p className="text-xs text-gray-500 mt-2">
+                      💡 Multiple instances (×N) indicate sub-codes/fault bytes were found and deleted.
+                    </p>
+                  )}
                 </div>
               )}
 
