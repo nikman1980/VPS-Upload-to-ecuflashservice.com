@@ -525,51 +525,50 @@ const AdminPage = () => {
             {/* Vehicle Details - Enhanced */}
             <div className="mb-6">
               <h4 className="font-semibold text-gray-900 mb-3">🚗 Vehicle Details</h4>
-              {(selectedOrder.vehicle_info || selectedOrder.vehicle || selectedOrder.selected_vehicle) ? (
+              {(selectedOrder.vehicle_info || selectedOrder.vehicle_make || selectedOrder.vehicle || selectedOrder.selected_vehicle) ? (
                 <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4">
                   {/* Main Vehicle Info */}
                   <div className="text-lg font-semibold text-gray-900 mb-2">
                     {selectedOrder.vehicle_info || 
+                     `${selectedOrder.vehicle_year || ''} ${selectedOrder.vehicle_make || ''} ${selectedOrder.vehicle_model || ''}`.trim() ||
                      (selectedOrder.vehicle && `${selectedOrder.vehicle.year || ''} ${selectedOrder.vehicle.make || ''} ${selectedOrder.vehicle.model || ''}`.trim()) ||
                      (selectedOrder.selected_vehicle && `${selectedOrder.selected_vehicle.year || ''} ${selectedOrder.selected_vehicle.make || ''} ${selectedOrder.selected_vehicle.model || ''}`.trim()) ||
                      'Vehicle info not specified'}
                   </div>
                   
-                  {/* Detailed breakdown if available */}
-                  {(selectedOrder.vehicle || selectedOrder.selected_vehicle) && (
-                    <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
-                      {(selectedOrder.vehicle?.make || selectedOrder.selected_vehicle?.make) && (
-                        <div>
-                          <span className="text-gray-500">Make:</span>
-                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.make || selectedOrder.selected_vehicle?.make}</span>
-                        </div>
-                      )}
-                      {(selectedOrder.vehicle?.model || selectedOrder.selected_vehicle?.model) && (
-                        <div>
-                          <span className="text-gray-500">Model:</span>
-                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.model || selectedOrder.selected_vehicle?.model}</span>
-                        </div>
-                      )}
-                      {(selectedOrder.vehicle?.year || selectedOrder.selected_vehicle?.year) && (
-                        <div>
-                          <span className="text-gray-500">Year:</span>
-                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.year || selectedOrder.selected_vehicle?.year}</span>
-                        </div>
-                      )}
-                      {(selectedOrder.vehicle?.engine || selectedOrder.selected_vehicle?.engine || selectedOrder.engine_info) && (
-                        <div>
-                          <span className="text-gray-500">Engine:</span>
-                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.engine || selectedOrder.selected_vehicle?.engine || selectedOrder.engine_info}</span>
-                        </div>
-                      )}
-                      {(selectedOrder.vehicle?.ecu || selectedOrder.selected_vehicle?.ecu || selectedOrder.ecu_type) && (
-                        <div className="col-span-2">
-                          <span className="text-gray-500">ECU:</span>
-                          <span className="ml-2 font-medium text-blue-600">{selectedOrder.vehicle?.ecu || selectedOrder.selected_vehicle?.ecu || selectedOrder.ecu_type}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  {/* Detailed breakdown - supports both flat fields (vehicle_make) and nested objects (vehicle.make) */}
+                  <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
+                    {(selectedOrder.vehicle_make || selectedOrder.vehicle?.make || selectedOrder.selected_vehicle?.make) && (
+                      <div>
+                        <span className="text-gray-500">Make:</span>
+                        <span className="ml-2 font-medium">{selectedOrder.vehicle_make || selectedOrder.vehicle?.make || selectedOrder.selected_vehicle?.make}</span>
+                      </div>
+                    )}
+                    {(selectedOrder.vehicle_model || selectedOrder.vehicle?.model || selectedOrder.selected_vehicle?.model) && (
+                      <div>
+                        <span className="text-gray-500">Model:</span>
+                        <span className="ml-2 font-medium">{selectedOrder.vehicle_model || selectedOrder.vehicle?.model || selectedOrder.selected_vehicle?.model}</span>
+                      </div>
+                    )}
+                    {(selectedOrder.vehicle_year || selectedOrder.vehicle?.year || selectedOrder.selected_vehicle?.year) && (
+                      <div>
+                        <span className="text-gray-500">Year:</span>
+                        <span className="ml-2 font-medium">{selectedOrder.vehicle_year || selectedOrder.vehicle?.year || selectedOrder.selected_vehicle?.year}</span>
+                      </div>
+                    )}
+                    {(selectedOrder.vehicle_engine || selectedOrder.vehicle?.engine || selectedOrder.selected_vehicle?.engine || selectedOrder.engine_info) && (
+                      <div>
+                        <span className="text-gray-500">Engine:</span>
+                        <span className="ml-2 font-medium">{selectedOrder.vehicle_engine || selectedOrder.vehicle?.engine || selectedOrder.selected_vehicle?.engine || selectedOrder.engine_info}</span>
+                      </div>
+                    )}
+                    {(selectedOrder.vehicle_ecu || selectedOrder.vehicle?.ecu || selectedOrder.selected_vehicle?.ecu || selectedOrder.ecu_type) && (
+                      <div className="col-span-2">
+                        <span className="text-gray-500">ECU:</span>
+                        <span className="ml-2 font-medium text-blue-600">{selectedOrder.vehicle_ecu || selectedOrder.vehicle?.ecu || selectedOrder.selected_vehicle?.ecu || selectedOrder.ecu_type}</span>
+                      </div>
+                    )}
+                  </div>
                   
                   {/* Vehicle Type Badge */}
                   {(selectedOrder.vehicle_type || selectedOrder.selected_vehicle_type) && (
@@ -585,8 +584,7 @@ const AdminPage = () => {
                   No vehicle information provided
                 </div>
               )}
-              </div>
-            )}
+            </div>
             
             {/* Services */}
             <div className="mb-6">
