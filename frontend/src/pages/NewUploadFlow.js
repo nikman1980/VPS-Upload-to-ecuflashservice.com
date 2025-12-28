@@ -568,7 +568,7 @@ const NewUploadFlow = () => {
     return actions.order.create({
       purchase_units: [{
         amount: {
-          currency_code: "EUR",
+          currency_code: "USD",
           value: price.toFixed(2)
         },
         description: `ECU Flash Service - ${selectedServices.length} service(s)`
@@ -1905,7 +1905,7 @@ const NewUploadFlow = () => {
               <PayPalScriptProvider 
                 options={{ 
                   "client-id": PAYPAL_CLIENT_ID, 
-                  currency: "EUR",
+                  currency: "USD",
                   intent: "capture",
                   components: "buttons",
                   "enable-funding": "paypal",
