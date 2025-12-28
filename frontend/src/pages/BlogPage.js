@@ -1,1308 +1,1556 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
-// SEO-optimized blog articles for Google hits
+// SEO-optimized blog articles
 const BLOG_ARTICLES = [
   {
-    id: 'what-is-dpf-delete',
-    title: 'What is DPF Delete? Complete Guide to Diesel Particulate Filter Removal',
-    excerpt: 'Learn everything about DPF delete, how it works, benefits, and considerations for diesel vehicle owners looking to improve performance.',
+    id: 'dpf-delete-benefits-process-legality',
+    title: 'DPF Delete: Benefits, Process & Legal Considerations [2024 Guide]',
+    excerpt: 'Complete guide to Diesel Particulate Filter (DPF) deletion. Learn about the benefits, the professional process, cost savings, and important legal considerations for off-road and competition vehicles.',
     category: 'DPF',
-    readTime: '8 min read',
-    date: '2024-12-15',
-    image: '🔧',
-    keywords: ['DPF delete', 'diesel particulate filter', 'DPF removal', 'DPF off', 'diesel tuning'],
+    readTime: '12 min read',
+    date: '2024-12-20',
+    image: '/images/dpf-delete.jpg',
+    emoji: '🔧',
+    keywords: ['DPF delete', 'diesel particulate filter', 'DPF removal', 'DPF off', 'diesel tuning', 'DPF delete benefits', 'DPF delete cost'],
     content: `
-## What is a DPF (Diesel Particulate Filter)?
+## What is a Diesel Particulate Filter (DPF)?
 
-A Diesel Particulate Filter (DPF) is an emission control device designed to capture and store exhaust soot to prevent it from being released into the atmosphere. While environmentally beneficial, DPFs can cause significant issues for vehicle owners over time.
+The Diesel Particulate Filter (DPF) is an emissions control device installed in the exhaust system of modern diesel vehicles since 2007 (Euro 4 and later). Its primary function is to capture and store exhaust soot particles, preventing them from being released into the atmosphere.
 
-## Why Consider DPF Delete?
+While DPFs serve an important environmental purpose, they can become a significant source of problems and expense for many diesel vehicle owners over time.
 
-### Common DPF Problems
-- **Frequent regeneration cycles** - The DPF needs to burn off accumulated soot, which can happen while driving and affects fuel economy
-- **DPF clogging** - Over time, the filter can become blocked, especially with short journeys
-- **Expensive replacements** - A new DPF can cost $2,000-$5,000 or more
-- **Reduced performance** - A clogged DPF restricts exhaust flow, reducing engine efficiency
-- **Limp mode activation** - Severe blockages can trigger engine protection modes
+## How Does a DPF Work?
 
-### Benefits of DPF Delete
-1. **Improved fuel economy** - Without regeneration cycles, fuel consumption can decrease
-2. **Better engine response** - Unrestricted exhaust flow improves throttle response
-3. **Eliminated DPF-related expenses** - No more costly DPF replacements or cleaning
-4. **Reduced maintenance** - One less system to worry about failing
-5. **Increased reliability** - Especially important for commercial vehicles
+The DPF traps soot particles from exhaust gases in a honeycomb ceramic structure. When the filter becomes full, the vehicle initiates a **regeneration cycle** where:
 
-## How DPF Delete Works
+1. The exhaust temperature is raised to 600°C+ (1100°F)
+2. Accumulated soot is burned off (oxidized)
+3. The filter is cleaned and ready to capture more particles
 
-The DPF delete process involves two main components:
+There are two types of regeneration:
+- **Passive regeneration**: Occurs naturally during highway driving at sustained speeds
+- **Active regeneration**: The ECU injects extra fuel to raise exhaust temperatures
 
-### 1. Physical Removal
-The DPF unit is removed from the exhaust system and replaced with a straight pipe or delete pipe. This allows exhaust gases to flow freely without restriction.
+## Common DPF Problems
 
-### 2. ECU Remapping
-Simply removing the DPF physically will trigger fault codes and potentially limp mode. The ECU (Engine Control Unit) must be reprogrammed to:
-- Disable DPF monitoring
-- Remove regeneration cycles
-- Eliminate DPF-related error codes
+### Clogging Issues
+- **Short journeys**: City driving doesn't allow proper regeneration
+- **Failed regenerations**: Incomplete burn cycles compound the problem
+- **Soot accumulation**: Eventually blocks the filter completely
+
+### Warning Signs
+- DPF warning light illumination
+- Limp mode activation (reduced engine power)
+- Poor fuel economy (10-20% increase in consumption)
+- Rough engine running
+- Frequent forced regeneration attempts
+
+### The Cost Factor
+| Problem | Typical Cost |
+|---------|-------------|
+| DPF cleaning | $300 - $800 |
+| Forced regeneration | $150 - $400 |
+| DPF replacement | $2,000 - $8,000 |
+| Sensor replacement | $200 - $600 |
+
+## Benefits of DPF Delete
+
+For vehicles used in off-road, agricultural, or competition applications, DPF deletion offers several advantages:
+
+### 1. Improved Fuel Economy
+- Eliminates fuel-consuming regeneration cycles
+- Typical savings: 5-15% fuel reduction
+- No extra fuel injection for DPF heating
+
+### 2. Enhanced Performance
+- Reduced exhaust backpressure
+- Better turbo efficiency
+- Improved throttle response
+- More consistent power delivery
+
+### 3. Increased Reliability
+- No more DPF-related breakdowns
+- Eliminates clogging risks
+- Removes a complex failure point
+- Better for high-mileage vehicles
+
+### 4. Eliminated Repair Costs
+- No expensive DPF replacements
+- No sensor failures
+- No cleaning services needed
+- Long-term cost savings
+
+### 5. Extended Engine Life
+- Lower exhaust gas temperatures (EGTs)
+- Reduced strain on turbocharger
+- Less stress on engine components
+
+## The Professional DPF Delete Process
+
+A proper DPF delete involves two essential components:
+
+### Physical Removal
+1. The DPF unit is removed from the exhaust system
+2. A **delete pipe** or **straight pipe** replaces the filter
+3. Differential pressure sensors may be capped or removed
+4. The exhaust flow becomes unrestricted
+
+### ECU Remapping (Critical)
+Simply removing the DPF physically will trigger fault codes and potentially put your vehicle in limp mode. Professional ECU remapping must:
+
+- Disable DPF monitoring functions
+- Remove regeneration programming
+- Eliminate all DPF-related error codes (P2002, P2463, P244A, etc.)
 - Adjust fuel maps for optimal performance
+- Correct temperature sensor readings
+- Ensure clean, error-free operation
 
-## Professional DPF Delete Service
+**This is where our expertise comes in.** Our professional ECU remapping ensures your vehicle runs perfectly without any warning lights or performance issues.
 
-At ECU Flash Service, we provide professional DPF delete solutions:
+## Our DPF Delete Service
 
-- **Expert ECU remapping** - Our engineers have years of experience
-- **Clean file modifications** - No error codes or warning lights
-- **Fast turnaround** - Modified files returned within 20-60 minutes
-- **Support for all brands** - Toyota, Ford, VW, BMW, Mercedes, and more
+At ECU Flash Service, we provide professional DPF off solutions:
 
-## Important Considerations
+**What We Offer:**
+- Expert ECU file modifications
+- Complete DPF monitoring disable
+- All related error codes removed
+- No warning lights guaranteed
+- Fast 20-60 minute turnaround
+- Support for ALL vehicle brands
 
-Before proceeding with DPF delete, consider:
-- **Local regulations** - DPF delete may not be legal for road use in all jurisdictions
-- **Off-road/competition use** - Often acceptable for racing or agricultural vehicles
-- **Vehicle warranty** - Modifications may affect manufacturer warranties
+**Supported ECU Types:**
+- Bosch EDC15, EDC16, EDC17, MD1, MG1
+- Siemens/Continental PCR, SID
+- Denso, Delphi, Marelli
+- And many more
 
-## Conclusion
+## Legal Considerations
 
-DPF delete can be an effective solution for diesel vehicle owners experiencing DPF-related issues, particularly those using vehicles for off-road or competition purposes. Professional ECU remapping ensures the modification is done correctly without triggering error codes.
+**Important Notice:** DPF deletion has legal implications that vary by region:
 
-Contact us today to learn more about our DPF delete services.
+### Where DPF Delete is Generally Acceptable:
+- Off-road vehicles
+- Agricultural and farm equipment
+- Racing and competition vehicles
+- Export vehicles
+- Construction equipment
+- Marine applications
+
+### Where DPF Delete May Not Be Legal:
+- Vehicles used on public roads in many jurisdictions
+- Areas with strict emissions testing
+- Commercial vehicles subject to inspection
+
+**Always check your local regulations before proceeding.** We recommend DPF delete only for legitimate off-road, agricultural, or competition use.
+
+## Frequently Asked Questions
+
+**Q: Will my check engine light come on after DPF delete?**
+A: Not with proper ECU remapping. Our service removes all DPF-related monitoring, ensuring no warning lights.
+
+**Q: How much power will I gain?**
+A: While DPF delete isn't primarily for power gains, you may notice 5-10% improvement in throttle response and efficiency.
+
+**Q: Can I reverse a DPF delete?**
+A: Yes, by reinstalling the DPF and reflashing the original ECU file.
+
+**Q: What files do you need?**
+A: Your original ECU file in .bin, .ori, or similar format.
+
+## Ready to Get Started?
+
+If you're experiencing DPF problems and have a legitimate off-road or competition vehicle, our professional DPF delete service can help.
+
+**Next Steps:**
+1. Read your ECU file (or have a shop read it)
+2. Upload your file to our service
+3. Select DPF Off modification
+4. Receive your modified file in 20-60 minutes
+5. Flash the file to your vehicle
+
+**Need DTC codes removed too?** Check out our [DTC Delete Tool](/tools/dtc-delete) for a comprehensive solution.
+
+---
+
+*Professional ECU modifications since 2015. Thousands of satisfied customers worldwide.*
     `
   },
   {
-    id: 'egr-delete-benefits',
-    title: 'EGR Delete: Benefits, Process, and What You Need to Know',
-    excerpt: 'Discover the advantages of EGR (Exhaust Gas Recirculation) delete for your diesel engine, including improved performance and reduced carbon buildup.',
+    id: 'egr-delete-explained',
+    title: 'EGR Delete Explained: Complete Guide to Exhaust Gas Recirculation Removal',
+    excerpt: 'Everything you need to know about EGR (Exhaust Gas Recirculation) delete. Understand the benefits, process, and why many diesel owners choose to eliminate this troublesome system.',
     category: 'EGR',
-    readTime: '7 min read',
-    date: '2024-12-10',
-    image: '♻️',
-    keywords: ['EGR delete', 'EGR removal', 'EGR off', 'exhaust gas recirculation', 'diesel performance'],
+    readTime: '10 min read',
+    date: '2024-12-18',
+    image: '/images/egr-delete.jpg',
+    emoji: '♻️',
+    keywords: ['EGR delete', 'EGR removal', 'EGR off', 'exhaust gas recirculation', 'EGR problems', 'EGR valve delete', 'diesel EGR'],
     content: `
-## Understanding EGR (Exhaust Gas Recirculation)
+## What is EGR (Exhaust Gas Recirculation)?
 
-The EGR system recirculates a portion of exhaust gases back into the engine's intake manifold. While designed to reduce NOx emissions, it can cause several problems over time.
+The Exhaust Gas Recirculation (EGR) system is an emissions control mechanism designed to reduce nitrogen oxide (NOx) emissions. It works by recirculating a portion of exhaust gases back into the engine's intake manifold, lowering combustion temperatures and reducing NOx formation.
 
-## Common EGR Problems
+While effective at reducing certain emissions, the EGR system is notoriously problematic in diesel engines, causing significant reliability and performance issues over time.
 
-### Carbon Buildup
-The hot exhaust gases mixed with oil vapors from the crankcase ventilation create a thick, tar-like substance that:
-- Coats intake manifolds
-- Clogs intake valves
-- Reduces airflow efficiency
-- Causes rough idle and poor performance
+## How the EGR System Works
 
-### EGR Valve Failures
-- Stuck open - causes rough idle and poor fuel economy
-- Stuck closed - may increase NOx emissions
-- Sensor failures - triggers warning lights
+### The EGR Cycle:
+1. **Exhaust gas collection**: Hot exhaust gases are diverted before exiting
+2. **Cooling (in some systems)**: Gases pass through an EGR cooler
+3. **Valve control**: The EGR valve regulates flow based on ECU commands
+4. **Intake mixing**: Cooled exhaust gases mix with fresh intake air
+5. **Combustion**: Lower oxygen content reduces peak temperatures
 
-### Cooler Issues
-EGR coolers can:
-- Leak coolant internally
-- Become clogged with carbon
-- Crack from thermal stress
+### EGR System Components:
+- **EGR valve**: Controls gas flow (electrical or vacuum operated)
+- **EGR cooler**: Reduces exhaust gas temperature
+- **EGR pipes**: Connect exhaust to intake
+- **Position sensors**: Monitor valve opening
+- **Temperature sensors**: Monitor gas temperature
+
+## Why EGR Systems Fail
+
+### The Carbon Buildup Problem
+
+The EGR system recirculates exhaust gases containing:
+- Soot and particulate matter
+- Oil vapors from crankcase ventilation
+- Unburned fuel residues
+
+When these mix with intake air, they create a thick, tar-like carbon buildup that:
+- **Coats intake manifolds**: Restricting airflow
+- **Clogs intake valves**: Reducing efficiency
+- **Blocks the EGR valve**: Causing it to stick open or closed
+- **Restricts the EGR cooler**: Reducing effectiveness
+
+### Common EGR Problems
+
+| Problem | Symptoms | Typical Cost |
+|---------|----------|--------------|
+| Stuck EGR valve (open) | Rough idle, poor economy | $300 - $800 |
+| Stuck EGR valve (closed) | Higher NOx, possible codes | $300 - $800 |
+| EGR cooler failure | Coolant loss, white smoke | $800 - $2,500 |
+| Carbon-clogged intake | Power loss, rough running | $500 - $1,500 |
+| EGR sensor failure | Warning lights, limp mode | $150 - $400 |
+
+### The Vicious Cycle
+1. EGR introduces carbon into intake
+2. Carbon buildup restricts airflow
+3. Engine runs less efficiently
+4. More incomplete combustion
+5. More carbon produced
+6. Cycle continues...
 
 ## Benefits of EGR Delete
 
 ### 1. Cleaner Intake System
 Without exhaust gases entering the intake:
-- No carbon deposits on valves
+- No carbon deposits on intake valves
 - Clean intake manifold
-- Better airflow efficiency
+- Optimal airflow maintained
+- No intake cleaning needed
 
-### 2. Improved Performance
+### 2. Improved Engine Performance
 - Better throttle response
 - Smoother power delivery
-- Potential for improved fuel economy
+- Improved fuel efficiency
+- More consistent operation
 
 ### 3. Lower Engine Temperatures
-EGR increases combustion temperatures when it malfunctions. Deleting it can:
-- Reduce engine heat
-- Extend engine life
-- Improve reliability
+EGR increases combustion chamber temperatures when it malfunctions. Deleting it:
+- Reduces engine heat
+- Lowers coolant temperatures
+- Extends engine life
+- Improves turbo longevity
 
-### 4. Reduced Maintenance
-- No EGR valve replacements
-- No cooler failures to worry about
-- No costly intake cleaning
+### 4. Enhanced Reliability
+- No EGR valve failures
+- No cooler leaks
+- No clogging issues
+- Fewer breakdown risks
 
-## The EGR Delete Process
+### 5. Reduced Maintenance Costs
+- No EGR valve replacements ($300-$800)
+- No cooler repairs ($800-$2,500)
+- No intake cleaning services ($500-$1,500)
+- Long-term savings
 
-### Physical Component Removal
-- Block or remove EGR valve
-- Install blanking plates
-- Optional: remove EGR cooler
+### 6. Better Fuel Economy
+- Cleaner combustion
+- No exhaust gas dilution
+- Optimal air/fuel ratios
+- Typical improvement: 3-8%
 
-### ECU Modification
-Essential for proper operation:
-- Disable EGR control
-- Remove fault codes
-- Optimize fuel maps
-- Adjust timing if needed
+## The Professional EGR Delete Process
+
+### Physical Removal (Optional but Recommended)
+
+**Option 1: Blanking Plates**
+- EGR valve blanked off with steel plate
+- EGR cooler remains but bypassed
+- Quick and reversible
+
+**Option 2: Complete Removal**
+- EGR valve removed
+- EGR cooler removed
+- Pipes blocked or removed
+- Openings sealed professionally
+
+### ECU Remapping (Essential)
+
+Physical blocking alone will trigger fault codes. Professional ECU modification must:
+
+- **Disable EGR valve control**: Prevent operation attempts
+- **Remove monitoring functions**: Stop sensor readings
+- **Eliminate fault codes**: P0400, P0401, P0402, P0403, P0404, etc.
+- **Adjust idle parameters**: Ensure smooth idle without EGR
+- **Optimize timing**: Adjust for pure air intake
+- **Ensure clean operation**: No warning lights, no limp mode
 
 ## Our EGR Delete Service
 
-ECU Flash Service offers professional EGR delete:
+ECU Flash Service offers professional EGR off solutions:
 
-✓ Complete ECU remapping
-✓ All error codes disabled
-✓ No warning lights
-✓ Fast 20-60 minute turnaround
-✓ Support for all major brands
+**What's Included:**
+- Complete EGR system deactivation
+- All EGR-related error codes removed
+- Idle and timing adjustments
+- No warning lights guaranteed
+- Fast 20-60 minute turnaround
 
-## Considerations
+**Compatible Vehicles:**
+- All diesel brands (Toyota, Ford, VW, BMW, Mercedes, etc.)
+- All ECU types (Bosch, Siemens, Denso, Delphi)
+- Light and heavy-duty vehicles
+- Agricultural and commercial equipment
 
-- Check local regulations regarding emissions modifications
-- Best suited for off-road or competition vehicles
-- Professional installation recommended
+**Combined Services:**
+Need DPF + EGR delete? We can combine multiple modifications in one file for maximum convenience.
 
-## Conclusion
+## EGR Delete + Other Modifications
 
-EGR delete can significantly improve engine reliability and performance while eliminating common carbon buildup issues. Our professional ECU remapping ensures clean operation without error codes.
-    `
-  },
-  {
-    id: 'adblue-delete-guide',
-    title: 'AdBlue Delete: Complete Guide to SCR System Removal',
-    excerpt: 'Everything you need to know about AdBlue/DEF delete, SCR system removal, and how to eliminate AdBlue-related issues on your diesel vehicle.',
-    category: 'AdBlue',
-    readTime: '9 min read',
-    date: '2024-12-05',
-    image: '💧',
-    keywords: ['AdBlue delete', 'SCR delete', 'DEF delete', 'AdBlue removal', 'urea system'],
-    content: `
-## What is AdBlue/DEF?
+For complete emission system removal (off-road/competition use), consider combining:
 
-AdBlue (also known as DEF - Diesel Exhaust Fluid) is a urea-based solution injected into the exhaust system to reduce NOx emissions. The SCR (Selective Catalytic Reduction) system converts harmful nitrogen oxides into harmless nitrogen and water.
+1. **EGR Off** - Cleaner intake, better performance
+2. **DPF Off** - Better exhaust flow, fuel savings
+3. **AdBlue Off** - Eliminate SCR system issues
 
-## Common AdBlue System Problems
+We can combine all modifications in a single ECU file.
 
-### Frequent Issues
-- **AdBlue quality warnings** - Contaminated or degraded fluid
-- **Pump failures** - Expensive to replace
-- **Injector clogging** - Causes poor system performance
-- **Sensor malfunctions** - False readings and warnings
-- **Tank heating issues** - Especially in cold climates
-- **Crystallization** - AdBlue can crystallize and block components
+## Technical Details by Brand
 
-### The Cost Factor
-- AdBlue fluid: Ongoing expense ($5-15 per gallon)
-- Pump replacement: $1,500-$3,000
-- Injector replacement: $500-$1,500
-- SCR catalyst: $2,000-$5,000
-- Full system repair: Can exceed $10,000
+### German Vehicles (VW, Audi, BMW, Mercedes)
+- Often have sophisticated EGR control
+- May include EGR cooler bypass valves
+- Require comprehensive ECU modifications
 
-### The Inconvenience
-- Regular fluid top-ups required
-- System can limit engine power if low
-- Complete vehicle shutdown possible if empty
+### Japanese Vehicles (Toyota, Nissan, Mitsubishi)
+- Generally simpler EGR systems
+- Some use vacuum-operated valves
+- Reliable delete results
 
-## Benefits of AdBlue Delete
-
-### 1. Eliminate Ongoing Costs
-- No more AdBlue purchases
-- No expensive component replacements
-- Reduced maintenance requirements
-
-### 2. Improved Reliability
-- One less system to fail
-- No more unexpected warnings
-- No power limitations
-
-### 3. Simpler Operation
-- No fluid level monitoring
-- No temperature concerns
-- No crystallization issues
-
-### 4. Better for Certain Applications
-- Off-road vehicles
-- Agricultural equipment
-- Competition vehicles
-- Export vehicles
-
-## The AdBlue Delete Process
-
-### What's Involved
-1. **ECU Reprogramming**
-   - Disable SCR/AdBlue monitoring
-   - Remove NOx sensor readings
-   - Disable tank level warnings
-   - Remove all related fault codes
-
-2. **Optional Physical Modifications**
-   - AdBlue pump disconnection
-   - Injector deactivation
-   - Sensor bypass
-
-### Professional Service
-Our AdBlue delete includes:
-- Complete SCR system deactivation
-- All warning lights eliminated
-- No limp mode or power reduction
-- Clean, error-free operation
-
-## Technical Considerations
-
-### ECU Types We Support
-- Bosch EDC17
-- Siemens/Continental
-- Denso
-- Delphi
-- And many more
-
-### Vehicle Compatibility
-- Trucks and commercial vehicles
-- Passenger cars with SCR
-- Agricultural machinery
-- Construction equipment
-
-## Important Notes
-
-- AdBlue delete may not be legal for on-road use in some regions
-- Best suited for off-road, agricultural, or competition use
-- Always check local regulations
-- Professional service recommended
-
-## Our Service
-
-ECU Flash Service provides expert AdBlue delete:
-
-✓ Fast turnaround (20-60 minutes)
-✓ All brands supported
-✓ No error codes
-✓ Professional engineers
-✓ Secure file handling
-
-Contact us today for a quote.
-    `
-  },
-  {
-    id: 'dtc-removal-explained',
-    title: 'DTC Removal: How to Delete Diagnostic Trouble Codes from Your ECU',
-    excerpt: 'Learn about DTC (Diagnostic Trouble Code) removal, when it is appropriate, and how professional ECU remapping can eliminate persistent error codes.',
-    category: 'DTC',
-    readTime: '6 min read',
-    date: '2024-11-28',
-    image: '🔍',
-    keywords: ['DTC removal', 'error code delete', 'check engine light', 'fault code removal', 'ECU codes'],
-    content: `
-## What are DTCs (Diagnostic Trouble Codes)?
-
-DTCs are standardized codes stored in your vehicle's ECU when it detects a problem. These codes trigger warning lights and can help technicians diagnose issues.
-
-## Understanding DTC Format
-
-### OBD-II Code Structure
-- **P** = Powertrain (engine, transmission)
-- **B** = Body (airbags, AC, etc.)
-- **C** = Chassis (ABS, steering)
-- **U** = Network (communication)
-
-### Common Examples
-- P0420 - Catalyst efficiency below threshold
-- P0401 - EGR flow insufficient
-- P2002 - DPF efficiency below threshold
-- P20EE - SCR NOx catalyst efficiency
-
-## When is DTC Removal Appropriate?
-
-### Legitimate Reasons
-1. **After hardware modifications** - Removed DPF, EGR, or AdBlue systems
-2. **Faulty sensors** - When sensor replacement isn't practical
-3. **Obsolete systems** - Components no longer needed
-4. **Race/competition vehicles** - Emissions systems removed
-
-### What We Can Remove
-- DPF-related codes (P2002, P2463, P244x, etc.)
-- EGR-related codes (P0400-P0408)
-- AdBlue/SCR codes (P20xx, P2BAx)
-- Catalyst codes (P0420, P0430)
-- O2 sensor codes
-- And many more
-
-## The DTC Removal Process
-
-### Step 1: Analysis
-We analyze your ECU file to identify:
-- Active fault codes
-- Related monitoring systems
-- Dependencies between systems
-
-### Step 2: Professional Removal
-Our engineers:
-- Disable specific DTC monitoring
-- Modify related maps/tables
-- Ensure no side effects
-- Verify file integrity
-
-### Step 3: Checksum Correction
-After modifications:
-- Recalculate checksums
-- Verify file integrity
-- Test compatibility
-
-## Our DTC Removal Service
-
-### Single Code Removal
-Perfect for:
-- One specific issue
-- Quick fixes
-- Budget-conscious customers
-
-### Multiple Code Removal
-Ideal for:
-- Complete system deletions
-- Multiple related codes
-- Comprehensive solutions
-
-### Features
-✓ Fast 20-60 minute turnaround
-✓ No warning lights
-✓ Clean ECU operation
-✓ All brands supported
-
-## DTC Delete Tool
-
-We also offer a self-service DTC Delete Tool:
-- Upload your ECU file
-- Select codes to remove
-- Automatic checksum correction
-- Download modified file
-
-[Try our DTC Delete Tool](/tools/dtc-delete)
+### American Vehicles (Ford, GM, Ram)
+- Heavy-duty trucks often have larger EGR systems
+- May include multiple coolers
+- Commercial applications common
 
 ## Important Considerations
 
-- Some codes indicate real problems that should be fixed
-- DTC removal is best after addressing root causes
-- Not all codes can be safely removed
-- Professional advice recommended
+### Where EGR Delete is Appropriate:
+- Off-road vehicles
+- Racing and competition use
+- Agricultural equipment
+- Export vehicles
+- Heavy equipment
+- Marine applications
 
-## Conclusion
+### Legal Notice:
+EGR deletion may affect your vehicle's emissions compliance for road use. Check local regulations and ensure compliance with applicable laws.
 
-DTC removal is a valuable service when codes persist after legitimate modifications or when dealing with obsolete systems. Our professional service ensures clean, error-free operation.
+## Frequently Asked Questions
+
+**Q: Will EGR delete damage my engine?**
+A: No. Many argue engines run better without EGR due to cleaner combustion and lower intake temperatures.
+
+**Q: Do I need to physically block the EGR?**
+A: While ECU remapping alone can work, physical blocking ensures no exhaust gases can enter the intake.
+
+**Q: What about NOx emissions?**
+A: NOx levels will increase, which is why EGR delete is recommended only for off-road/competition use.
+
+**Q: Can I do EGR delete alone without DPF delete?**
+A: Yes, EGR delete can be performed independently.
+
+## Ready to Eliminate EGR Problems?
+
+Stop dealing with carbon buildup, failed EGR valves, and expensive repairs.
+
+**Get Started:**
+1. Upload your original ECU file
+2. Select EGR Off modification
+3. Receive modified file in 20-60 minutes
+4. Flash and enjoy clean, reliable operation
+
+**Questions?** [Contact us](/contact) for expert advice on your specific vehicle.
+
+---
+
+*Trusted by thousands of customers worldwide for professional ECU modifications.*
     `
   },
   {
-    id: 'ecu-tuning-beginners-guide',
-    title: 'ECU Tuning for Beginners: Everything You Need to Know',
-    excerpt: 'A comprehensive beginner guide to ECU tuning, remapping, and chip tuning. Learn the basics and understand what is possible with modern ECU modifications.',
+    id: 'ecu-remapping-tuning-basics',
+    title: 'ECU Remapping & Tuning Basics: The Complete Beginners Guide',
+    excerpt: 'New to ECU tuning? This comprehensive guide explains what ECU remapping is, how it works, what gains to expect, and how to get started with professional ECU modifications.',
     category: 'Guide',
-    readTime: '10 min read',
-    date: '2024-11-20',
-    image: '📚',
-    keywords: ['ECU tuning', 'chip tuning', 'ECU remapping', 'engine tuning', 'performance tuning'],
+    readTime: '15 min read',
+    date: '2024-12-15',
+    image: '/images/ecu-tuning.jpg',
+    emoji: '📚',
+    keywords: ['ECU tuning', 'ECU remapping', 'chip tuning', 'engine tuning', 'diesel tuning', 'ECU programming', 'performance tuning'],
     content: `
-## What is ECU Tuning?
+## What is ECU Remapping?
 
-ECU (Engine Control Unit) tuning, also known as remapping or chip tuning, involves modifying the software that controls your engine. The ECU manages:
+ECU (Engine Control Unit) remapping, also known as **chip tuning** or **reflashing**, is the process of modifying the software that controls your engine. The ECU is essentially your vehicle's brain, managing hundreds of parameters that affect how your engine runs.
 
-- Fuel injection timing and quantity
-- Ignition timing
-- Boost pressure (turbocharged engines)
-- Emission control systems
-- Rev limiters
-- Speed limiters
+Modern vehicles come from the factory with conservative ECU settings designed for:
+- Global markets with varying fuel qualities
+- Maximum reliability under all conditions
+- Emissions compliance in all regions
+- Manufacturer warranty considerations
+
+**ECU remapping unlocks your engine's true potential** by optimizing these parameters for your specific needs and conditions.
+
+## What Does the ECU Control?
+
+### Fuel System
+- Injection timing (when fuel is delivered)
+- Injection quantity (how much fuel)
+- Injection pressure (fuel rail pressure)
+- Number of injection events per cycle
+
+### Ignition/Combustion
+- Ignition timing (petrol engines)
+- Combustion timing optimization
+- Pilot injection timing (diesels)
+
+### Turbo/Boost
+- Boost pressure targets
+- Wastegate control
+- Variable geometry turbo (VGT) positions
+- Boost-by-gear maps
+
+### Limiters and Protection
+- Rev limiter (maximum RPM)
+- Speed limiter
+- Torque limiters
+- Smoke limiters (diesels)
+- Temperature protection
+
+### Emissions Systems
+- DPF regeneration parameters
+- EGR valve control
+- AdBlue/SCR dosing
+- Lambda/O2 sensor targets
 
 ## Types of ECU Modifications
 
-### 1. Performance Tuning
-Optimizing for:
-- More horsepower
-- Increased torque
-- Better throttle response
-- Improved fuel economy
+### 1. Performance Tuning (Stage 1, 2, 3)
+
+**Stage 1 - Software Only**
+- No hardware modifications required
+- Safe power gains within component limits
+- Typical gains: 20-35% (diesel), 10-20% (petrol turbo)
+- Best value for money
+
+**Stage 2 - Supporting Mods**
+- Requires hardware upgrades (intake, exhaust, intercooler)
+- Greater power gains possible
+- Typical gains: 35-50% (diesel), 20-35% (petrol turbo)
+
+**Stage 3 - Major Hardware**
+- Turbo upgrade or hybrid turbo
+- Fuel system upgrades
+- May require internal engine work
+- Gains: 50%+ possible
 
 ### 2. Economy Tuning
-Focused on:
-- Maximum fuel efficiency
-- Optimized shift points
+Optimized for maximum fuel efficiency:
+- Conservative power delivery
+- Optimized shift points (auto transmissions)
 - Reduced fuel consumption
+- Ideal for commercial vehicles
 
 ### 3. Emission System Modifications
-Including:
-- DPF delete/off
-- EGR delete/off
-- AdBlue/SCR delete
+- DPF off (Diesel Particulate Filter removal)
+- EGR off (Exhaust Gas Recirculation disable)
+- AdBlue/SCR off (Selective Catalytic Reduction delete)
+- Lambda/O2 disable
 - Catalyst deactivation
 
 ### 4. Feature Modifications
-Such as:
 - Speed limiter removal
 - Rev limiter adjustment
-- Start/stop disable
+- Start/Stop disable
+- Exhaust flap control
 - Launch control activation
+- Sport mode enhancements
 
-## How ECU Tuning Works
+## How ECU Remapping Works
 
 ### The Process
-1. **Read** - Original ECU data is extracted
-2. **Modify** - Engineers adjust relevant maps and parameters
-3. **Write** - Modified data is programmed back to ECU
 
-### What Gets Modified
-- Fuel maps
-- Ignition timing maps
-- Boost pressure maps
-- Torque limiters
-- Various sensors parameters
+**Step 1: Reading**
+Your ECU's original software is extracted using:
+- **OBD port**: Through the diagnostic connector (most common)
+- **Bench mode**: ECU removed and connected directly
+- **Boot mode**: Special access for protected ECUs
 
-## Benefits of ECU Tuning
+**Step 2: Modification**
+Professional engineers modify the relevant maps:
+- Fuel maps adjusted
+- Boost curves optimized  
+- Limiters removed/adjusted
+- Protection parameters maintained
+- Checksums corrected
 
-### Performance Gains
-- Diesel engines: Typically 20-30% more power
-- Petrol engines: Usually 10-20% more power
-- Better driving experience
+**Step 3: Writing**
+The modified software is programmed back:
+- Same method as reading
+- Typically takes 10-30 minutes
+- No physical modifications to ECU
 
-### Efficiency Improvements
-- Optimized fuel delivery
-- Better combustion
-- Potential fuel savings
+### What Gets Modified (Examples)
 
-### Customization
-- Tailor the vehicle to your needs
+**Fuel Injection Map**
+| RPM | Load 25% | Load 50% | Load 75% | Load 100% |
+|-----|----------|----------|----------|-----------|
+| 1500 | 12mg | 24mg | 36mg → 40mg | 48mg → 55mg |
+| 2500 | 15mg | 30mg | 45mg → 52mg | 60mg → 72mg |
+| 3500 | 18mg | 36mg | 54mg → 65mg | 72mg → 88mg |
+
+**Boost Pressure Map (Example)**
+- Stock: 1.2 bar max
+- Tuned: 1.5 bar max
+- Gradually increased across rev range
+
+## Expected Gains by Engine Type
+
+### Turbocharged Diesel Engines
+| Engine Size | Stock Power | Tuned Power | Gain |
+|-------------|-------------|-------------|------|
+| 1.5-2.0L | 100-150 HP | 140-200 HP | +35-45 HP |
+| 2.0-2.5L | 150-200 HP | 200-280 HP | +50-80 HP |
+| 3.0L+ | 200-300 HP | 280-400 HP | +80-100 HP |
+
+Torque gains are typically even more impressive:
+- 1.5-2.0L: +80-120 Nm
+- 2.0-2.5L: +100-150 Nm
+- 3.0L+: +150-250 Nm
+
+### Turbocharged Petrol Engines
+| Engine Size | Stock Power | Tuned Power | Gain |
+|-------------|-------------|-------------|------|
+| 1.0-1.5T | 100-150 HP | 130-180 HP | +25-35 HP |
+| 2.0T | 180-280 HP | 230-350 HP | +50-70 HP |
+| 3.0T+ | 300-450 HP | 380-550 HP | +80-100 HP |
+
+### Naturally Aspirated Engines
+- Gains typically 5-15%
+- Less dramatic than turbocharged
+- Still noticeable improvement
+
+## Benefits of ECU Remapping
+
+### 1. Increased Power & Torque
+- More overtaking capability
+- Better towing performance
+- Enhanced driving enjoyment
+- Reduced gear changes needed
+
+### 2. Improved Fuel Economy
+Counter-intuitively, tuned engines often use less fuel:
+- More efficient combustion
+- Less throttle input needed
+- Optimal power delivery
+- Typical improvement: 5-15%
+
+### 3. Better Throttle Response
+- Immediate power delivery
+- Reduced turbo lag
+- More linear power curve
+- More enjoyable driving
+
+### 4. Customization
+- Tailor performance to your needs
 - Remove unwanted features
-- Add desired functions
+- Optimize for your driving style
+- Adapt to modifications
 
-## ECU Tuning Methods
+## Is ECU Remapping Safe?
 
-### 1. OBD Tuning
-- Through diagnostic port
-- Non-invasive
-- Most common method
+### When Done Professionally: Yes
 
-### 2. Bench Tuning
-- ECU removed from vehicle
-- Direct connection to ECU
-- For locked/protected ECUs
+Professional tuning respects:
+- **Component limits**: Turbo, injectors, fuel pump capacity
+- **Safety margins**: Maintains adequate protection
+- **Thermal limits**: Monitors EGTs and coolant temps
+- **Mechanical stress**: Stays within engine design parameters
 
-### 3. Boot Mode
-- Special programming mode
-- Used when OBD blocked
-- Requires ECU opening sometimes
+### Risk Factors to Consider:
+- Poor quality tunes can damage engines
+- Excessive power on stock hardware
+- Ignoring maintenance requirements
+- Non-professional "one-size-fits-all" files
 
-## Choosing a Tuning Service
+### Our Approach:
+- Vehicle-specific custom modifications
+- Tested and verified parameters
+- Safety margins maintained
+- Quality guaranteed
 
-### What to Look For
-✓ Experience and reputation
-✓ Support for your vehicle
-✓ Clear communication
-✓ Reasonable turnaround time
-✓ Customer support
+## Getting Started with ECU Tuning
 
-### Why Choose Us
-- Professional engineers
-- Years of experience
-- Fast 20-60 minute delivery
-- All brands supported
-- Secure file handling
+### What You Need:
 
-## Getting Started
+**1. ECU Reading Capability**
+Either:
+- Visit a local tuning shop
+- Purchase a reading tool (Kess, KTag, etc.)
+- Use a diagnostic interface
 
-### What You Need
-1. ECU reading tool or service
-2. Original ECU file
-3. Clear goals for the tune
+**2. Original ECU File**
+- .bin, .ori, .fls format
+- Complete and uncorrupted
+- Correct file size for your ECU
 
-### Our Process
-1. Upload your original file
-2. Select desired modifications
-3. Receive modified file
-4. Program it to your vehicle
+**3. Clear Goals**
+- Performance increase?
+- Emission system removal?
+- Specific features?
 
-## Conclusion
+### Our Simple Process:
 
-ECU tuning opens up a world of possibilities for optimizing your vehicle. Whether you want more power, better economy, or to remove restrictive systems, professional tuning can help achieve your goals.
+1. **Upload** your original ECU file
+2. **Select** your desired modifications
+3. **Receive** your tuned file (20-60 minutes)
+4. **Flash** the modified file to your vehicle
 
-Ready to get started? Upload your ECU file today!
+## Common Questions
+
+**Q: Will tuning void my warranty?**
+A: Possibly. Dealer tools may detect modifications. Keep your original file for reverting if needed.
+
+**Q: How long does it take?**
+A: Our turnaround is 20-60 minutes for most files.
+
+**Q: Can I reverse the tune?**
+A: Yes, by flashing your original file back to the ECU.
+
+**Q: Do I need other modifications?**
+A: Stage 1 tunes typically require no additional modifications.
+
+**Q: Will it affect reliability?**
+A: Professional tunes within safe limits should not affect reliability. Many argue improved efficiency benefits longevity.
+
+## Ready to Unlock Your Engine's Potential?
+
+Professional ECU remapping can transform your driving experience. Whether you want more power, better economy, or need to remove problematic emission systems, we can help.
+
+**Get Started Today:**
+1. [Start your order](/) - Upload your ECU file
+2. Select your modifications
+3. Receive your optimized file
+
+**Need emission system removal?**
+- [DPF Off Service](/services/dpf-off)
+- [EGR Off Service](/services/egr-off)  
+- [AdBlue Off Service](/services/adblue-off)
+- [DTC Removal Tool](/tools/dtc-delete)
+
+---
+
+*Professional ECU tuning services trusted by thousands worldwide.*
     `
   },
   {
-    id: 'diesel-performance-upgrades',
-    title: 'Top 5 Diesel Performance Upgrades for Maximum Power',
-    excerpt: 'Discover the most effective diesel performance upgrades including ECU tuning, DPF delete, EGR removal, and more for maximizing your diesel engines potential.',
+    id: 'stage-1-stage-2-tuning-differences',
+    title: 'Stage 1 vs Stage 2 Tuning: What is the Difference & Which Do You Need?',
+    excerpt: 'Understanding the differences between Stage 1, Stage 2, and Stage 3 ECU tuning. Learn what hardware is required, expected power gains, and which stage is right for your vehicle.',
     category: 'Performance',
-    readTime: '7 min read',
-    date: '2024-11-15',
-    image: '🚀',
-    keywords: ['diesel performance', 'diesel upgrades', 'diesel power', 'diesel tuning', 'performance mods'],
+    readTime: '11 min read',
+    date: '2024-12-12',
+    image: '/images/stage-tuning.jpg',
+    emoji: '🚀',
+    keywords: ['Stage 1 tuning', 'Stage 2 tuning', 'Stage 3 tuning', 'ECU stages', 'performance stages', 'tuning stages explained'],
     content: `
-## Maximizing Diesel Performance
+## Understanding Tuning Stages
 
-Modern diesel engines have tremendous potential that is often restricted by factory settings. Here are the top 5 upgrades to unlock maximum performance.
+In the ECU tuning world, modifications are commonly categorized into "stages" - Stage 1, Stage 2, and Stage 3. These stages indicate the level of modification and the hardware requirements needed to safely achieve the power gains.
 
-## 1. ECU Remapping
+**The key difference:** Each stage unlocks more power but requires additional hardware modifications to safely support that power.
 
-### The Foundation of Performance
-ECU remapping is the most cost-effective upgrade, providing:
-- 20-30% more power (typical)
-- 25-40% more torque
-- Improved throttle response
-- Better drivability
+## Stage 1 Tuning
 
-### What Gets Optimized
-- Fuel injection timing
-- Injection duration
-- Boost pressure curves
+### What is Stage 1?
+
+Stage 1 is a **software-only** modification that optimizes your ECU parameters within the safe limits of your stock hardware. No additional physical modifications are required.
+
+### What Stage 1 Modifies:
+- Fuel injection timing and quantity
+- Boost pressure (turbocharged vehicles)
+- Ignition timing (petrol engines)
 - Torque limiters
+- Rev limiters (if requested)
+- Throttle response
 
-### Expected Gains
-| Engine Type | Power Increase | Torque Increase |
-|-------------|----------------|-----------------|
-| 2.0L Diesel | +40-60 HP | +80-120 Nm |
-| 3.0L Diesel | +50-80 HP | +100-150 Nm |
-| Heavy Duty | +80-150 HP | +200-400 Nm |
+### Stage 1 Requirements:
+**Hardware Required:** NONE
+- Stock intake system: OK
+- Stock exhaust system: OK
+- Stock turbo: OK
+- Stock intercooler: OK
 
-## 2. DPF Delete
+**Vehicle Condition Requirements:**
+- Engine in good mechanical condition
+- No existing faults or issues
+- Regular maintenance up to date
+- Quality fuel available
 
-### Removing Restrictions
-The DPF restricts exhaust flow. Removing it provides:
-- Improved exhaust flow
-- Eliminated regeneration cycles
-- Better fuel economy
-- Increased reliability
+### Stage 1 Expected Gains:
 
-### Performance Benefits
-- Lower exhaust backpressure
-- Cooler EGTs
-- More responsive turbo
-- Extended engine life
+**Turbocharged Diesel:**
+| Original Power | Stage 1 Power | HP Gain | Torque Gain |
+|----------------|---------------|---------|-------------|
+| 100 HP | 130-140 HP | +30-40 HP | +60-80 Nm |
+| 150 HP | 190-210 HP | +40-60 HP | +80-120 Nm |
+| 200 HP | 260-280 HP | +60-80 HP | +120-160 Nm |
+| 300 HP | 380-400 HP | +80-100 HP | +150-200 Nm |
 
-[Learn more about DPF Delete](/blog/what-is-dpf-delete)
+**Turbocharged Petrol:**
+| Original Power | Stage 1 Power | HP Gain | Torque Gain |
+|----------------|---------------|---------|-------------|
+| 150 HP | 175-190 HP | +25-40 HP | +40-60 Nm |
+| 200 HP | 240-260 HP | +40-60 HP | +60-90 Nm |
+| 300 HP | 360-380 HP | +60-80 HP | +80-120 Nm |
 
-## 3. EGR Delete
+### Stage 1 Benefits:
+- **Best value for money** - Maximum gains with minimum investment
+- **No modifications needed** - Just software
+- **Fully reversible** - Flash back to stock anytime
+- **Quick process** - Usually same-day installation
+- **Maintains reliability** - Within stock component limits
 
-### Cleaner Combustion
-EGR recirculates exhaust gases, causing:
-- Carbon buildup
-- Reduced efficiency
-- Higher intake temperatures
+### Who Should Choose Stage 1?
+- Daily drivers wanting more power
+- First-time tuning customers
+- Budget-conscious enthusiasts
+- Vehicles under warranty (can revert for service)
+- Those wanting improvement without hardware changes
 
-### Benefits of Removal
-- Cleaner intake system
-- Cooler combustion
-- Better performance
-- Reduced maintenance
+## Stage 2 Tuning
 
-[Learn more about EGR Delete](/blog/egr-delete-benefits)
+### What is Stage 2?
 
-## 4. Intake and Exhaust Upgrades
+Stage 2 builds upon Stage 1 by utilizing aftermarket hardware modifications that allow for greater power output. The ECU is tuned to take advantage of improved airflow and cooling.
 
-### Hardware Modifications
-- Cold air intake systems
-- Larger intercoolers
-- Performance exhaust
-- Upgraded turbo pipes
+### Stage 2 Hardware Requirements:
 
-### Working with ECU Tuning
-Hardware upgrades combined with ECU tuning provide:
-- Maximum airflow
-- Optimized fuel delivery
-- Complete system optimization
+**Minimum Required:**
+- Performance air intake / cold air intake
+- Performance exhaust (cat-back or downpipe)
+- Upgraded intercooler (highly recommended for diesels)
 
-## 5. Upgraded Turbocharger
+**Recommended Additions:**
+- Larger downpipe (3" or larger)
+- High-flow catalytic converter or decat
+- Silicone intake hoses
+- Upgraded boost pipes
 
-### For Maximum Power
-When factory limits are reached:
-- Hybrid turbo upgrades
-- Larger turbo installations
-- Twin-turbo conversions
+### Stage 2 Expected Gains:
 
-### Requires Supporting Mods
-- Fuel system upgrades
-- Intercooler upgrade
-- Custom ECU tuning
-- Strengthened internals (sometimes)
+**Turbocharged Diesel:**
+| Original Power | Stage 2 Power | HP Gain | Torque Gain |
+|----------------|---------------|---------|-------------|
+| 100 HP | 150-160 HP | +50-60 HP | +100-130 Nm |
+| 150 HP | 220-240 HP | +70-90 HP | +140-180 Nm |
+| 200 HP | 300-330 HP | +100-130 HP | +200-260 Nm |
+| 300 HP | 420-460 HP | +120-160 HP | +250-350 Nm |
 
-## The Complete Package
+**Turbocharged Petrol:**
+| Original Power | Stage 2 Power | HP Gain | Torque Gain |
+|----------------|---------------|---------|-------------|
+| 150 HP | 200-220 HP | +50-70 HP | +70-100 Nm |
+| 200 HP | 280-310 HP | +80-110 HP | +100-140 Nm |
+| 300 HP | 400-440 HP | +100-140 HP | +130-180 Nm |
 
-### Optimal Combination
-For best results, combine:
-1. Professional ECU remap
-2. DPF delete (where legal)
-3. EGR delete
-4. Quality intake/exhaust
+### Why Hardware Matters for Stage 2:
 
-### Expected Results
-With full modifications:
-- 40-50%+ power increase possible
-- Dramatically improved response
-- Better fuel economy under normal driving
-- Enhanced reliability
+**Intake System:**
+- Stock airboxes restrict airflow at higher boost
+- Performance intakes flow 30-50% more air
+- Cooler intake temperatures improve power
 
-## Our Services
+**Exhaust System:**
+- Stock exhausts create backpressure
+- Larger diameter = less restriction
+- Allows turbo to spool faster and make more boost
 
-ECU Flash Service offers all the software modifications you need:
+**Intercooler:**
+- Stock intercoolers can heat-soak
+- Larger intercoolers maintain intake temps
+- Critical for consistent power on diesels
 
-✓ ECU Remapping for performance
-✓ DPF delete/off
-✓ EGR delete/off
-✓ AdBlue/SCR delete
-✓ DTC removal
-✓ All in one file if needed
+### Stage 2 Benefits:
+- Significant power increase over Stage 1
+- Unleashes more engine potential
+- Better exhaust sound (with performance exhaust)
+- Improved turbo response
 
-### Fast Turnaround
-- Upload your file
-- Select modifications
-- Receive in 20-60 minutes
+### Stage 2 Considerations:
+- Higher initial investment (hardware + tune)
+- May be louder than stock
+- Installation time for hardware
+- Some modifications may affect emissions compliance
 
-## Conclusion
+### Who Should Choose Stage 2?
+- Enthusiasts wanting more power than Stage 1
+- Those already planning exhaust/intake upgrades
+- Performance-focused drivers
+- Track day participants
+- Towing heavy loads (benefit from extra torque)
 
-Diesel performance upgrades can transform your vehicle. Starting with ECU remapping provides the best value, with additional modifications available for maximum gains.
+## Stage 3 Tuning
 
-Contact us today to discuss your performance goals!
+### What is Stage 3?
+
+Stage 3 involves major hardware upgrades that significantly exceed stock component capabilities. This typically includes turbocharger upgrades and may require internal engine modifications.
+
+### Stage 3 Hardware Requirements:
+
+**Required:**
+- Hybrid or upgraded turbocharger
+- Performance fuel injectors
+- Upgraded fuel pump (HPFP for diesels)
+- Stage 2 hardware (intake, exhaust, intercooler)
+
+**Often Needed:**
+- Upgraded clutch (manual) or transmission work
+- Strengthened engine internals (rods, pistons)
+- Upgraded cooling system
+- Performance fuel system
+- Custom manifolds
+
+### Stage 3 Expected Gains:
+
+Power levels depend heavily on hardware:
+- **Hybrid turbo**: 50-100% over stock possible
+- **Larger turbo**: 100%+ over stock possible
+- **Built engine**: 200%+ over stock possible
+
+Example (2.0L Diesel):
+- Stock: 150 HP
+- Stage 3 (Hybrid): 280-350 HP
+- Stage 3 (Built): 400+ HP possible
+
+### Stage 3 Considerations:
+- Significant investment ($3,000-$15,000+)
+- Professional installation required
+- May affect reliability if pushed hard
+- Often requires custom tuning
+- Transmission may need upgrading
+- Likely not road-legal in many areas
+
+### Who Should Choose Stage 3?
+- Serious performance enthusiasts
+- Racing and competition vehicles
+- Those building dedicated track cars
+- Experienced tuners wanting maximum power
+
+## Stage Comparison Summary
+
+| Aspect | Stage 1 | Stage 2 | Stage 3 |
+|--------|---------|---------|---------|
+| Hardware Required | None | Intake/Exhaust/Intercooler | Turbo upgrade + supporting mods |
+| Typical Cost | $300-600 | $1,500-4,000 | $5,000-20,000+ |
+| Power Gain (Diesel) | 25-35% | 40-60% | 70-150%+ |
+| Power Gain (Petrol) | 15-25% | 30-45% | 50-100%+ |
+| Reliability Impact | Minimal | Low-Moderate | Moderate-High |
+| Installation Time | 1 hour | 1-2 days | Days to weeks |
+| Reversibility | Easy | Moderate | Difficult/Expensive |
+
+## Choosing the Right Stage
+
+### Choose Stage 1 If:
+- You want the best value for money
+- Your vehicle is stock
+- You want a safe power increase
+- Reversibility is important
+- You're new to tuning
+
+### Choose Stage 2 If:
+- Stage 1 isn't enough
+- You're willing to invest in hardware
+- You want noticeably more power
+- You don't mind modifications
+- You use the vehicle for performance driving
+
+### Choose Stage 3 If:
+- You need maximum power
+- Cost is not the primary concern
+- You have a dedicated performance vehicle
+- You understand the maintenance requirements
+- Professional support is available
+
+## Our Tuning Services
+
+At ECU Flash Service, we provide professional Stage 1 and Stage 2 tuning files:
+
+**Stage 1 Service:**
+- Optimized for your stock vehicle
+- Safe, tested parameters
+- Maximum gains within stock limits
+- Fast 20-60 minute turnaround
+
+**Stage 2 Service:**
+- Optimized for your specific modifications
+- Tell us what hardware you have
+- Custom-tailored for maximum performance
+- Support for all major brands
+
+**Additional Services:**
+- [DPF Delete](/services/dpf-off) - Remove exhaust restrictions
+- [EGR Delete](/services/egr-off) - Cleaner intake system
+- [DTC Removal](/tools/dtc-delete) - Eliminate error codes
+
+## Ready to Upgrade?
+
+Whether you choose Stage 1 or Stage 2, professional tuning can transform your driving experience.
+
+**Get Started:**
+1. [Upload your ECU file](/)
+2. Select your stage and modifications
+3. Receive your optimized file
+4. Enjoy the gains!
+
+---
+
+*Professional tuning files for all stages. Trusted by enthusiasts worldwide.*
     `
   },
   {
-    id: 'check-engine-light-causes',
-    title: 'Check Engine Light: Common Causes and Solutions for Diesel Vehicles',
-    excerpt: 'Understanding why your check engine light is on. Learn about common causes in diesel vehicles and how ECU solutions can help resolve persistent warnings.',
-    category: 'Troubleshooting',
-    readTime: '8 min read',
-    date: '2024-11-10',
-    image: '⚠️',
-    keywords: ['check engine light', 'engine warning light', 'diesel problems', 'fault codes', 'engine light causes'],
+    id: 'adblue-delete-removal-guide',
+    title: 'AdBlue Delete Guide: SCR System Removal Explained',
+    excerpt: 'Complete guide to AdBlue (DEF) delete and SCR system removal. Learn about common AdBlue problems, the deletion process, benefits, and when AdBlue delete is the right solution.',
+    category: 'AdBlue',
+    readTime: '11 min read',
+    date: '2024-12-08',
+    image: '/images/adblue-delete.jpg',
+    emoji: '💧',
+    keywords: ['AdBlue delete', 'SCR delete', 'DEF delete', 'AdBlue removal', 'urea system delete', 'AdBlue problems', 'SCR system'],
     content: `
-## Understanding the Check Engine Light
+## What is AdBlue/DEF?
 
-The check engine light (CEL) or malfunction indicator lamp (MIL) illuminates when your vehicle's ECU detects a problem. For diesel vehicles, certain issues are particularly common.
+AdBlue (known as DEF - Diesel Exhaust Fluid in North America) is a urea-based solution (32.5% urea, 67.5% deionized water) used in SCR (Selective Catalytic Reduction) systems to reduce NOx emissions in diesel vehicles.
 
-## Most Common Diesel CEL Causes
+Introduced on passenger vehicles around 2014-2015, AdBlue systems have become increasingly common but are also a major source of problems and expense for diesel vehicle owners.
 
-### 1. DPF-Related Issues
+## How AdBlue/SCR Systems Work
 
-**Symptoms:**
-- DPF warning light
-- Reduced power
-- Frequent regeneration
-- Poor fuel economy
+### The SCR Process:
 
-**Common Codes:**
-- P2002 - DPF efficiency below threshold
-- P2463 - Soot accumulation
-- P244A/P244B - Differential pressure issues
+1. **Injection**: AdBlue is injected into the exhaust stream before the SCR catalyst
+2. **Evaporation**: Heat converts liquid AdBlue to ammonia (NH3)
+3. **Reaction**: Ammonia reacts with NOx in the catalyst
+4. **Result**: NOx is converted to harmless nitrogen (N2) and water (H2O)
 
-**Solutions:**
-- DPF cleaning
-- Forced regeneration
-- DPF delete (off-road only)
+### System Components:
 
-### 2. EGR System Problems
+- **AdBlue tank**: Stores the fluid (typically 10-25 liters)
+- **AdBlue pump**: Delivers fluid under pressure
+- **Dosing module/injector**: Sprays AdBlue into exhaust
+- **SCR catalyst**: Where the chemical reaction occurs
+- **NOx sensors**: Monitor emissions before and after catalyst
+- **Temperature sensors**: Ensure proper operating conditions
+- **Tank heater**: Prevents freezing (AdBlue freezes at -11°C/12°F)
+- **Quality sensor**: Detects contamination
 
-**Symptoms:**
-- Rough idle
-- Poor acceleration
-- Black smoke
-- Increased fuel consumption
+## Common AdBlue System Problems
 
-**Common Codes:**
-- P0401 - EGR flow insufficient
-- P0402 - EGR flow excessive
-- P0404 - EGR control circuit
+### 1. AdBlue Quality Issues
 
-**Solutions:**
-- EGR valve cleaning
-- EGR cooler replacement
-- EGR delete (off-road only)
-
-### 3. AdBlue/SCR Issues
+**Causes:**
+- Contaminated fluid
+- Degraded AdBlue (shelf life ~18 months)
+- Wrong fluid added to tank
+- Water contamination
 
 **Symptoms:**
-- AdBlue warning messages
+- "AdBlue quality poor" warnings
+- Check engine light
 - Power reduction
-- Countdown to engine disable
+- Countdown to vehicle disable
 
-**Common Codes:**
-- P20EE - SCR efficiency
-- P203F - Reductant level low
-- P207F - Reductant quality
+### 2. Injector/Dosing Problems
 
-**Solutions:**
-- Refill with quality AdBlue
-- Component replacement
-- SCR delete (off-road only)
+**Issues:**
+- Crystallization at injector tip
+- Clogged injector
+- Failed injector
 
-### 4. Turbo/Boost Problems
+**Result:**
+- Poor SCR efficiency codes
+- AdBlue consumption changes
+- Warning messages
+
+### 3. Pump Failures
+
+**Common Causes:**
+- Running tank empty
+- Contamination
+- Electrical failures
+
+**Cost:** $1,500 - $3,500 for replacement
+
+### 4. NOx Sensor Failures
 
 **Symptoms:**
-- Loss of power
-- Whistling sounds
-- Excessive smoke
+- Incorrect readings
+- Efficiency codes
+- System malfunction warnings
 
-**Common Codes:**
-- P0234 - Overboost
-- P0299 - Underboost
+**Cost:** $400 - $1,200 per sensor (usually 2 sensors)
 
-**Solutions:**
-- Check for boost leaks
-- Inspect turbo
-- ECU recalibration
+### 5. Tank/Heating System Issues
 
-### 5. Sensor Failures
+**Problems:**
+- Heater element failure
+- Tank cracks
+- Level sensor malfunction
 
-**Common Failing Sensors:**
-- MAF (Mass Air Flow)
-- MAP (Manifold Absolute Pressure)
-- O2/Lambda sensors
-- NOx sensors
-- Temperature sensors
+**Especially common in cold climates**
 
-**Solutions:**
-- Sensor replacement
-- Wiring repair
-- ECU recalibration
+### Cost Summary
 
-## When ECU Solutions Help
+| Component | Typical Repair Cost |
+|-----------|-------------------|
+| AdBlue pump | $1,500 - $3,500 |
+| Injector/dosing module | $800 - $2,000 |
+| NOx sensor (each) | $400 - $1,200 |
+| SCR catalyst | $2,000 - $6,000 |
+| Tank assembly | $800 - $2,500 |
+| Quality sensor | $200 - $600 |
+| Full system repair | $5,000 - $15,000 |
 
-### After Repairs
-Sometimes codes persist after fixing the root cause. ECU solutions can:
-- Clear stored codes
-- Reset adaptation values
-- Restore normal operation
+**Plus ongoing AdBlue costs:** $3-6 per liter, consumption varies by vehicle
 
-### System Deletions
-When removing DPF, EGR, or AdBlue:
-- Disable monitoring
-- Remove fault codes
-- Prevent future warnings
+## Vehicle Behavior with AdBlue Issues
 
-### Faulty Sensors
-When replacement isn't practical:
-- Disable specific monitoring
-- Remove related codes
-- Alternative: Use resistor bypasses
+### Warning Progression (Typical):
 
-## Our Services
+1. **Initial warning**: "AdBlue range: XXX km" or quality warning
+2. **Increasing urgency**: More frequent warnings
+3. **Speed limitation**: Max speed limited (often 120 km/h, then lower)
+4. **Power reduction**: Engine derated significantly  
+5. **No restart**: Vehicle may refuse to start until refilled/repaired
 
-### DTC Removal
-We can professionally remove persistent codes:
-- Single code removal
-- Multiple code removal
-- System-specific packages
+### The Inconvenience Factor:
+- Must monitor AdBlue level constantly
+- Need to find and carry AdBlue
+- System can limit vehicle at worst times
+- Repairs often require dealer visit
+- Diagnosis can be complex and expensive
 
-### System Deletions
-Complete solutions for:
-- DPF off + codes
-- EGR off + codes
-- AdBlue off + codes
+## Benefits of AdBlue Delete
 
-### Self-Service Tool
-Try our DTC Delete Engine:
-- Upload your file
-- Select codes
-- Download modified file
+For off-road, agricultural, and competition vehicles, AdBlue delete offers:
 
-[Use DTC Delete Tool](/tools/dtc-delete)
+### 1. Elimination of AdBlue Costs
+- No more fluid purchases
+- No pump/injector repairs
+- No sensor replacements
+- No catalyst failures
 
-## Prevention Tips
+### 2. Improved Reliability
+- One less complex system
+- No unexpected shutdowns
+- No speed/power limitations
+- Fewer failure points
 
-### For DPF Health
-- Regular highway driving
-- Quality fuel
-- Proper maintenance
-- Address issues early
+### 3. Simplified Operation
+- No fluid level monitoring
+- No cold weather concerns
+- No quality worries
+- No crystallization issues
 
-### For EGR Health
-- Regular cleaning
-- Quality fuel
-- Address symptoms early
+### 4. Better for Certain Uses
+- Off-road vehicles
+- Agricultural equipment
+- Construction machinery
+- Export vehicles
+- Competition vehicles
 
-### For AdBlue Systems
-- Use quality AdBlue
-- Keep tank topped up
-- Regular system checks
+### 5. Reduced Maintenance
+- No DEF system servicing
+- Fewer dealer visits
+- Simpler diagnostics
+- Lower long-term costs
 
-## Conclusion
+## The AdBlue Delete Process
 
-Check engine lights in diesel vehicles often relate to emission control systems. Understanding the cause helps determine the best solution, whether repair, maintenance, or professional ECU modification.
+### What's Involved:
 
-Need help with persistent warning lights? Contact us today!
+**ECU Modification (Essential):**
+- Disable AdBlue dosing control
+- Disable NOx sensor monitoring
+- Remove SCR efficiency monitoring
+- Eliminate tank level warnings
+- Remove all related fault codes
+- Prevent speed/power limitations
+- Ensure clean dashboard operation
+
+**Physical Modifications (Optional):**
+- Pump can be left in place (disabled via ECU)
+- Injector can remain installed
+- Some prefer physical disconnection
+- Not always necessary with proper ECU work
+
+### Our AdBlue Delete Service:
+
+**What We Modify:**
+- Complete SCR system deactivation
+- NOx sensor monitoring disabled
+- All AdBlue-related DTCs removed
+- No warning messages
+- No speed/power restrictions
+- Clean, error-free operation
+
+**Supported Systems:**
+- Bosch (EDC17, MD1, MG1)
+- Continental/Siemens
+- Denso
+- Delphi
+
+**Supported Vehicles:**
+- Passenger cars (VW, Audi, BMW, Mercedes, etc.)
+- Light commercial vehicles
+- Heavy trucks
+- Agricultural machinery
+- Construction equipment
+
+## AdBlue Delete + Other Modifications
+
+For complete emission system removal, we can combine:
+
+### Full Delete Package:
+1. **AdBlue/SCR Off** - Eliminate urea system
+2. **DPF Off** - Remove particulate filter
+3. **EGR Off** - Disable exhaust gas recirculation
+
+All modifications in one ECU file, one flash process.
+
+### Benefits of Combined Delete:
+- Simplified exhaust system
+- Maximum reliability
+- Optimal performance
+- All emission-related issues eliminated
+
+## Technical Considerations
+
+### Why Professional ECU Work is Essential:
+
+**Without proper ECU modification:**
+- Check engine light ON
+- Power reduction active
+- Speed limitation enforced
+- Vehicle may not start
+- Continuous warning messages
+
+**With professional modification:**
+- No warning lights
+- Full power available
+- No limitations
+- Normal vehicle operation
+- All related codes prevented
+
+### Checksum Correction:
+Our service includes proper checksum correction to ensure file integrity and prevent ECU rejection.
+
+## Important Legal Notice
+
+**AdBlue/SCR delete considerations:**
+
+### Generally Acceptable For:
+- Off-road vehicles
+- Agricultural equipment
+- Racing/competition vehicles
+- Export vehicles
+- Construction machinery
+- Marine applications
+- Vehicles not used on public roads
+
+### May Not Be Legal For:
+- Road-registered vehicles in emission-controlled areas
+- Vehicles subject to periodic inspection
+- Commercial vehicles with regulatory requirements
+
+**Always verify local regulations before proceeding.**
+
+## Frequently Asked Questions
+
+**Q: Will my vehicle run without AdBlue?**
+A: Yes, with proper ECU modification, your vehicle will run normally without any AdBlue system function.
+
+**Q: Do I need to drain the AdBlue tank?**
+A: No, you can leave it as is. The system will simply not use it.
+
+**Q: What about the NOx sensors?**
+A: Our ECU modification disables their monitoring, so they can remain installed without causing issues.
+
+**Q: Can I do AdBlue delete alone without DPF delete?**
+A: Yes, each system can be deleted independently.
+
+**Q: Will there be any warning lights?**
+A: No. Professional ECU modification eliminates all AdBlue-related warnings and fault codes.
+
+## Ready to Eliminate AdBlue Problems?
+
+Stop dealing with AdBlue hassles, expensive repairs, and unexpected vehicle limitations.
+
+**Get Started:**
+1. [Upload your ECU file](/)
+2. Select AdBlue/SCR Off modification
+3. Add DPF Off or EGR Off if desired
+4. Receive your modified file in 20-60 minutes
+5. Flash and enjoy trouble-free operation
+
+**Need help?** [Contact us](/contact) for expert advice on your specific vehicle.
+
+---
+
+*Professional AdBlue delete solutions trusted by customers worldwide.*
     `
   },
   {
-    id: 'ecu-file-types-explained',
-    title: 'ECU File Types Explained: BIN, ORI, FLS, and More',
-    excerpt: 'Understanding different ECU file formats used in tuning. Learn about BIN, ORI, FLS, HEX files and which format you need for your vehicle.',
-    category: 'Technical',
-    readTime: '5 min read',
-    date: '2024-11-05',
-    image: '📁',
-    keywords: ['ECU file types', 'BIN file', 'ORI file', 'ECU formats', 'tuning files'],
+    id: 'common-ecu-problems-by-brand',
+    title: 'Common ECU & Engine Problems by Brand: Toyota, Ford, VW, BMW & More',
+    excerpt: 'Discover the most common ECU-related problems for major vehicle brands. Learn about brand-specific issues with DPF, EGR, AdBlue systems and how professional ECU solutions can help.',
+    category: 'Troubleshooting',
+    readTime: '14 min read',
+    date: '2024-12-05',
+    image: '/images/brand-problems.jpg',
+    emoji: '🔍',
+    keywords: ['ECU problems', 'Toyota ECU', 'Ford ECU issues', 'VW ECU problems', 'BMW ECU', 'Mercedes ECU', 'diesel problems by brand'],
     content: `
-## ECU File Formats
-
-When reading or tuning an ECU, you'll encounter various file formats. Understanding these helps ensure you're working with the right files.
-
-## Common File Types
-
-### BIN Files (.bin)
-**Binary Files**
-- Most common format
-- Raw binary data
-- Contains full ECU memory
-- Used by most tuning tools
-
-**Characteristics:**
-- Fixed size (matches ECU memory)
-- No header information
-- Direct memory representation
-
-### ORI Files (.ori)
-**Original Files**
-- Typically the unmodified backup
-- Same as BIN format technically
-- Used to indicate "original" state
-
-**Best Practice:**
-- Always keep original .ori backup
-- Never modify original file
-- Work on copies
-
-### FLS Files (.fls)
-**Flash Files**
-- Common with certain tools
-- May include metadata
-- Brand-specific sometimes
-
-**Used By:**
-- Some professional tools
-- Specific ECU types
-- Certain tuning software
-
-### HEX Files (.hex)
-**Intel HEX Format**
-- Text-based format
-- Contains address information
-- Used for certain ECUs
-
-**Characteristics:**
-- Human-readable (sort of)
-- Includes checksums
-- Popular with older ECUs
-
-### MOD Files (.mod)
-**Modified Files**
-- Indicates modified/tuned file
-- Same format as BIN usually
-- Naming convention only
-
-## File Sizes
-
-### Common ECU Sizes
-| ECU Type | Typical Size |
-|----------|--------------|
-| Bosch EDC15 | 512 KB |
-| Bosch EDC16 | 1-2 MB |
-| Bosch EDC17 | 2-4 MB |
-| Siemens PCR | 1-2 MB |
-| Denso | 512 KB - 2 MB |
-
-### Why Size Matters
-- Indicates ECU type
-- Helps verify correct read
-- Determines processing method
-
-## Reading ECU Files
-
-### OBD Reading
-- Through diagnostic port
-- Non-invasive
-- Most convenient
-- Not all ECUs supported
-
-### Bench Reading
-- ECU removed
-- Direct connection
-- All ECUs supported
-- More complex
-
-### Boot Mode
-- Special access mode
-- For protected ECUs
-- Requires specific tools
-
-## What We Need
-
-### For Our Services
-Upload your ECU file in:
-- .bin format (preferred)
-- .ori format
-- .fls format
-- .hex format
-
-### File Requirements
-✓ Complete ECU read
-✓ Correct file size
-✓ Undamaged file
-✓ Original or known-good state
-
-## Working with Files
-
-### Best Practices
-1. Always backup original
-2. Verify file integrity
-3. Use correct format
-4. Check file size
-
-### Common Issues
-- Incomplete reads
-- Wrong file size
-- Corrupted data
-- Mixed formats
-
-## Our Service
-
-### File Handling
-We accept all common formats:
-- Automatic format detection
-- Professional processing
-- Checksum correction
-- Quality verification
-
-### Upload Process
-1. Select your file
-2. Automatic analysis
-3. Choose modifications
-4. Receive modified file
-
-## Conclusion
-
-Understanding ECU file types ensures smooth tuning process. Whether you have .bin, .ori, .fls, or other formats, we can work with your files professionally.
-
-Ready to upload? Start your order today!
-    `
-  },
-  {
-    id: 'turbo-diesel-maintenance',
-    title: 'Essential Turbo Diesel Maintenance: Keep Your Engine Running Strong',
-    excerpt: 'Learn critical maintenance tips for turbo diesel engines including oil changes, intercooler care, and how to prevent common issues.',
-    category: 'Maintenance',
-    readTime: '7 min read',
-    date: '2024-10-28',
-    image: '🔧',
-    keywords: ['diesel maintenance', 'turbo maintenance', 'diesel engine care', 'diesel service', 'turbo diesel'],
-    content: `
-## Turbo Diesel Maintenance Essentials
-
-Modern turbo diesel engines are engineering marvels, but they require proper maintenance to deliver their full potential and longevity.
-
-## Critical Maintenance Areas
-
-### 1. Oil and Filter Changes
-
-**Why It's Critical:**
-- Turbo bearings rely on oil
-- High temperatures demand quality oil
-- Diesel engines are harder on oil
-
-**Recommendations:**
-- Use diesel-specific oil
-- Follow manufacturer intervals (or shorter)
-- Quality filters only
-- Check level regularly
-
-**Recommended Intervals:**
-| Driving Type | Interval |
-|--------------|----------|
-| Normal | 5,000-7,500 miles |
-| Severe | 3,000-5,000 miles |
-| Commercial | By hours/load |
-
-### 2. Fuel System Care
-
-**Components to Maintain:**
-- Fuel filter (replace regularly)
-- Injectors (professional cleaning)
-- Fuel lines (inspect for leaks)
-- Fuel tank (keep clean)
-
-**Tips:**
-- Use quality diesel fuel
-- Keep tank at least 1/4 full
-- Add fuel treatment periodically
-- Address issues promptly
-
-### 3. Air Filtration
-
-**Why It Matters:**
-- Turbos compress air
-- Dirty air damages compressor
-- Affects performance
-
-**Maintenance:**
-- Check filter regularly
-- Replace when dirty
-- Inspect intake pipes
-- Check for leaks
-
-### 4. Cooling System
-
-**Critical for Turbos:**
-- EGR cooler maintenance
-- Intercooler inspection
-- Coolant quality
-- Thermostat function
-
-**Tips:**
-- Use correct coolant
-- Flush periodically
-- Check hoses
-- Monitor temperatures
-
-### 5. Turbocharger Care
-
-**Best Practices:**
-- Let engine warm up before hard use
-- Idle briefly before shutdown
-- Regular oil changes
-- Address boost leaks promptly
-
-**Warning Signs:**
-- Excessive smoke
-- Unusual sounds
-- Power loss
-- Oil consumption
-
-## DPF Maintenance
-
-### Keeping DPF Healthy
-- Regular highway driving
-- Proper regeneration cycles
-- Quality fuel
-- Address warnings promptly
-
-### When DPF Becomes a Problem
-Options include:
-- Professional cleaning
-- Forced regeneration
-- [DPF delete](/blog/what-is-dpf-delete) (off-road only)
-
-## EGR System
-
-### Maintenance Tips
-- Periodic cleaning
-- Quality fuel
-- Address codes early
-
-### When Issues Persist
-Consider:
-- Professional cleaning
-- Component replacement
-- [EGR delete](/blog/egr-delete-benefits) (off-road only)
-
-## Performance Maintenance
-
-### Maximizing Efficiency
-- Clean air filter
-- Proper tire pressure
-- Smooth driving habits
-- Regular service
-
-### Tuning Maintenance
-After ECU tuning:
-- More frequent oil changes
-- Monitor temperatures
-- Quality fuel important
-- Regular inspections
-
-## Our Services
-
-### Helping Your Diesel
-We offer:
-- Performance ECU tuning
-- DPF solutions
-- EGR solutions
-- DTC removal
-
-### Benefits
-- Improved performance
-- Better reliability
-- Reduced maintenance costs
-- Expert support
-
-## Conclusion
-
-Proper maintenance keeps turbo diesel engines running strong for hundreds of thousands of miles. Combined with professional tuning, you can enjoy optimal performance and reliability.
-
-Questions about your diesel? Contact us!
-    `
-  },
-  {
-    id: 'choosing-ecu-tuning-service',
-    title: 'How to Choose the Right ECU Tuning Service: A Buyers Guide',
-    excerpt: 'Learn what to look for when choosing an ECU tuning service. Compare options, understand pricing, and find a reliable service for your vehicle.',
-    category: 'Guide',
-    readTime: '6 min read',
-    date: '2024-10-20',
-    image: '✅',
-    keywords: ['ECU tuning service', 'tuning company', 'remapping service', 'best tuning', 'tuning comparison'],
-    content: `
-## Finding the Right ECU Tuning Service
-
-With many tuning services available, choosing the right one is crucial for safe, quality results. Here's what to look for.
-
-## Key Factors to Consider
-
-### 1. Experience and Reputation
-
-**What to Look For:**
-- Years in business
-- Customer reviews
-- Technical expertise
-- Industry recognition
-
-**Red Flags:**
-- No verifiable history
-- Only positive reviews (suspicious)
-- Vague about methods
-- No technical knowledge
-
-### 2. Vehicle Support
-
-**Important Questions:**
-- Do they support your make/model?
-- Experience with your ECU type?
-- Specific modifications available?
-- Custom tuning options?
-
-**Our Coverage:**
-- All major brands
-- All ECU types
-- Full modification range
-- Custom solutions available
-
-### 3. Turnaround Time
-
-**Industry Standards:**
-- Same day to 24 hours typical
-- Complex jobs may take longer
-
-**Our Service:**
-- 20-60 minute turnaround
-- Rush options available
-- Clear communication
-
-### 4. Technical Support
-
-**What to Expect:**
-- Pre-sale consultation
-- Installation guidance
-- Post-sale support
-- Issue resolution
-
-**Red Flags:**
-- No contact information
-- Unresponsive to questions
-- No support after purchase
-
-### 5. Pricing
-
-**Understanding Pricing:**
-- Too cheap may mean poor quality
-- Very expensive doesn't guarantee better
-- Fair pricing reflects skill and service
-
-**What Affects Price:**
-- Complexity of modifications
-- ECU type
-- Turnaround time
-- Support level
-
-## Types of Services
-
-### File-Only Services (Like Us)
-**Pros:**
-- Cost-effective
-- Fast turnaround
-- Work with any installer
-
-**Cons:**
-- Need reading/writing capability
-- Self-installation required
-
-### Full-Service Shops
-**Pros:**
-- Complete solution
-- Professional installation
-- Hands-on support
-
-**Cons:**
-- Higher cost
-- Geographic limitations
-- Scheduling required
-
-### DIY Tools
-**Pros:**
-- One-time cost
-- Full control
-- Learn the skill
-
-**Cons:**
-- Learning curve
-- Risk of errors
-- Limited support
-
-## Questions to Ask
-
-### Before Ordering
-1. What modifications are included?
-2. What's the turnaround time?
-3. Is support included?
-4. What if there are issues?
-5. What file formats do you accept?
-
-### About Quality
-1. How is the file tested?
-2. What about checksums?
-3. Do you provide warranty?
-4. Can you handle custom requests?
-
-## Why Choose Us
-
-### ECU Flash Service Advantages
-
-**Experience:**
-✓ Professional engineers
-✓ Years of experience
-✓ Thousands of files processed
-
-**Service:**
-✓ 20-60 minute turnaround
-✓ All brands supported
-✓ Customer support included
-
-**Quality:**
-✓ Tested modifications
-✓ Checksum correction
-✓ Error-free files
-
-**Convenience:**
-✓ Online service 24/7
-✓ Easy upload process
-✓ Instant delivery
-
-## Making Your Decision
-
-### Checklist
-☐ Verify reputation/reviews
-☐ Confirm vehicle support
-☐ Understand pricing
-☐ Check support options
-☐ Review turnaround time
-
-### Getting Started
-1. Gather your ECU file
-2. Choose modifications
-3. Upload to our service
-4. Receive modified file
-
-## Conclusion
-
-Choosing the right ECU tuning service impacts your results and experience. Look for experience, support, and reasonable pricing.
-
-Ready to start? Upload your file today!
+## Brand-Specific ECU & Diesel Problems
+
+Every vehicle manufacturer has unique engineering approaches, and with that comes specific problems that tend to affect their vehicles. Understanding these brand-specific issues can help you identify problems early and find the right solutions.
+
+This guide covers common ECU and emission system problems for major brands and how our services can help resolve them.
+
+---
+
+## Toyota / Lexus
+
+### Common Toyota Diesel Issues:
+
+**1. DPF Problems (D-4D Engines)**
+- **Affected**: Land Cruiser, Hilux, Prado, Hiace
+- **Symptoms**: Frequent regeneration, DPF light, limp mode
+- **Common codes**: P2002, P2463, P244B
+- **Solution**: [DPF Delete Service](/services/dpf-off)
+
+**2. EGR Carbon Buildup**
+- **Affected**: Most D-4D engines
+- **Symptoms**: Rough idle, power loss, black smoke
+- **Cause**: EGR deposits clog intake manifold
+- **Solution**: [EGR Delete Service](/services/egr-off)
+
+**3. Injector Problems (1KD-FTV, 2KD-FTV)**
+- **Symptoms**: Rough running, excessive smoke, poor fuel economy
+- **Common on**: Early Hilux, Land Cruiser models
+
+### Toyota ECU Types We Support:
+- Denso (most common)
+- All D-4D diesel ECUs
+- Petrol ECUs (1GR-FE, 2GR-FE, etc.)
+
+---
+
+## Ford
+
+### Common Ford Diesel Issues:
+
+**1. DPF Clogging (Transit, Ranger)**
+- **Affected**: Transit 2.0/2.2 TDCi, Ranger 2.2/3.2
+- **Symptoms**: DPF warning, reduced power, failed regeneration
+- **Especially common**: City driving, delivery vehicles
+- **Solution**: [DPF Delete Service](/services/dpf-off)
+
+**2. EGR Cooler Failures**
+- **Affected**: 6.0L/6.4L Power Stroke (US), TDCi engines
+- **Symptoms**: Coolant loss, white smoke, overheating
+- **Risk**: Can cause engine damage if ignored
+
+**3. Injector Sticking (2.0/2.2 TDCi)**
+- **Symptoms**: Rough cold start, ticking noise, smoke
+- **Common codes**: P0263, P0266, P0269, P0272
+
+**4. Turbo Actuator Issues**
+- **Affected**: Transit, Focus, Mondeo TDCi
+- **Symptoms**: Limp mode, poor boost, turbo codes
+
+### Ford ECU Types We Support:
+- Bosch EDC16, EDC17
+- Siemens/Continental SID
+- Delphi DCM
+
+---
+
+## Volkswagen Group (VW, Audi, Skoda, SEAT)
+
+### Common VW Diesel Issues:
+
+**1. DPF Problems (TDI Engines)**
+- **Affected**: Golf, Passat, Tiguan, Touareg, Transporter
+- **Symptoms**: Constant regeneration attempts, ash buildup
+- **Common codes**: P2002, P2463, P246B
+- **Solution**: [DPF Delete Service](/services/dpf-off)
+
+**2. EGR Valve Failures**
+- **Affected**: 1.9 TDI, 2.0 TDI (common rail)
+- **Symptoms**: Rough idle, stalling, check engine light
+- **Common codes**: P0401, P0403, P0404
+- **Solution**: [EGR Delete Service](/services/egr-off)
+
+**3. AdBlue System Problems**
+- **Affected**: 2.0 TDI EA288, 3.0 TDI
+- **Symptoms**: Quality warnings, pump failures, NOx sensor codes
+- **Common codes**: P20EE, P203F, P203B
+- **Solution**: [AdBlue Delete Service](/services/adblue-off)
+
+**4. Intake Manifold Flap Issues**
+- **Affected**: 2.0 TDI CR engines
+- **Symptoms**: Limp mode, swirl flap codes
+- **Common code**: P2015
+
+### VW Group ECU Types We Support:
+- Bosch EDC15, EDC16, EDC17, MD1, MG1
+- Siemens/Continental PCR, SDI
+- All TDI generations
+
+---
+
+## BMW
+
+### Common BMW Diesel Issues:
+
+**1. DPF Regeneration Problems**
+- **Affected**: 1, 3, 5 Series, X3, X5 diesel
+- **Symptoms**: Frequent short regenerations, blocked DPF
+- **Common codes**: 4800, 4801, 481A
+- **Especially affects**: City driving patterns
+
+**2. EGR Valve Carbon Buildup**
+- **Affected**: N47, N57 engines
+- **Symptoms**: Rough running, reduced power, smoke
+- **Known issue**: Swirl flap carbon deposits
+
+**3. AdBlue System Failures**
+- **Affected**: F-series and G-series diesels
+- **Symptoms**: Quality warnings, tank heater issues, injection failures
+- **High repair costs**: $2,000+ typical
+
+**4. Timing Chain Issues (N47)**
+- **Affected**: 118d, 120d, 318d, 320d, 520d, X1
+- **Symptoms**: Rattling noise, timing codes
+- **Note**: Mechanical issue, not ECU solvable
+
+### BMW ECU Types We Support:
+- Bosch EDC17
+- Continental/Siemens
+- All diesel variants
+
+---
+
+## Mercedes-Benz
+
+### Common Mercedes Diesel Issues:
+
+**1. DPF System Problems**
+- **Affected**: C, E, ML, GL, Sprinter class diesels
+- **Symptoms**: Regeneration warnings, soot buildup, limp mode
+- **Common on**: OM651, OM642 engines
+
+**2. AdBlue/BlueTEC Issues**
+- **Affected**: All BlueTEC models
+- **Symptoms**: Quality warnings, heater failures, pump failures
+- **Known for**: High repair costs ($3,000-$8,000)
+- **Solution**: [AdBlue Delete Service](/services/adblue-off)
+
+**3. Swirl Flap Motor Failures (OM642)**
+- **Affected**: 3.0L V6 diesel
+- **Symptoms**: Check engine light, rough running
+- **Common code**: P2004, P2005
+
+**4. Injector Seal Leaks (OM651)**
+- **Symptoms**: Diesel smell, rough running, smoke
+- **Affected**: 4-cylinder diesels
+
+### Mercedes ECU Types We Support:
+- Bosch EDC17
+- Delphi
+- All BlueTEC systems
+
+---
+
+## Hyundai / Kia
+
+### Common Hyundai/Kia Diesel Issues:
+
+**1. DPF Clogging**
+- **Affected**: Santa Fe, Tucson, Sorento, Sportage
+- **Symptoms**: DPF light, forced regeneration failures
+- **Common on**: 2.0/2.2 CRDi engines
+
+**2. EGR Valve Problems**
+- **Symptoms**: Rough idle, power loss, check engine light
+- **Known for**: Carbon buildup in intake
+
+**3. Injector Issues**
+- **Symptoms**: Knock, rough running, smoke
+- **Common codes**: P0201-P0204
+
+### ECU Types We Support:
+- Bosch EDC17
+- Denso
+- Delphi
+
+---
+
+## Nissan / Renault
+
+### Common Issues:
+
+**1. DPF Problems (2.0/2.3 dCi)**
+- **Affected**: Navara, X-Trail, Qashqai, Master
+- **Symptoms**: Blocked DPF, constant regeneration attempts
+
+**2. EGR Valve Failures**
+- **Common on**: 1.5 dCi, 2.0 dCi
+- **Symptoms**: Stalling, rough idle, poor performance
+
+**3. Turbo Actuator Issues**
+- **Affected**: 1.5 dCi engines
+- **Symptoms**: Limp mode, boost codes
+
+### ECU Types We Support:
+- Bosch EDC16, EDC17
+- Siemens/Continental
+- Denso
+
+---
+
+## Land Rover / Jaguar
+
+### Common Issues:
+
+**1. DPF Problems (TDV6, SD4)**
+- **Affected**: Discovery, Range Rover, Defender
+- **Symptoms**: Repeated regeneration, blocked DPF
+- **High replacement costs**: $4,000-$8,000
+
+**2. AdBlue System Failures**
+- **Affected**: TDV6 and Ingenium diesels
+- **Symptoms**: Quality warnings, NOx sensor failures
+- **Known for**: Expensive repairs
+
+**3. EGR Cooler Leaks (TDV6)**
+- **Symptoms**: Coolant loss, white smoke
+
+### ECU Types We Support:
+- Bosch EDC17
+- Continental
+- Denso
+
+---
+
+## Solutions by Brand
+
+### Our Services Help With:
+
+**All Brands:**
+- [DPF Delete](/services/dpf-off) - Eliminate particulate filter issues
+- [EGR Delete](/services/egr-off) - Remove carbon buildup problems  
+- [AdBlue Delete](/services/adblue-off) - Stop SCR system failures
+- [DTC Removal](/tools/dtc-delete) - Clear persistent error codes
+
+**How We Support Your Brand:**
+
+| Brand | ECU Support | DPF Off | EGR Off | AdBlue Off |
+|-------|-------------|---------|---------|------------|
+| Toyota | ✓ | ✓ | ✓ | ✓ |
+| Ford | ✓ | ✓ | ✓ | ✓ |
+| VW/Audi | ✓ | ✓ | ✓ | ✓ |
+| BMW | ✓ | ✓ | ✓ | ✓ |
+| Mercedes | ✓ | ✓ | ✓ | ✓ |
+| Hyundai/Kia | ✓ | ✓ | ✓ | ✓ |
+| Nissan/Renault | ✓ | ✓ | ✓ | ✓ |
+| Land Rover | ✓ | ✓ | ✓ | ✓ |
+
+---
+
+## Getting Help for Your Vehicle
+
+### Step 1: Identify Your Problem
+- What warning lights are on?
+- What symptoms are you experiencing?
+- What codes has diagnosis revealed?
+
+### Step 2: Get Your ECU File
+- Visit a local tuning shop or mechanic
+- Use an ECU reading tool
+- Ensure complete, error-free read
+
+### Step 3: Upload for Service
+1. [Go to our upload page](/)
+2. Select your vehicle
+3. Choose required modifications
+4. Receive modified file in 20-60 minutes
+
+### Need Specific Help?
+[Contact us](/contact) with your:
+- Vehicle make, model, year
+- Engine type
+- ECU type (if known)
+- Current problems/codes
+
+We'll advise on the best solution for your specific situation.
+
+---
+
+## Prevention Tips by Brand
+
+### Universal Advice:
+- Regular highway driving (helps DPF regeneration)
+- Quality fuel and AdBlue
+- Prompt attention to warning lights
+- Regular maintenance
+
+### Brand-Specific Tips:
+- **Toyota**: Monitor EGR system, especially on high-mileage D-4D
+- **Ford**: Watch for EGR cooler symptoms early
+- **VW**: Keep AdBlue topped up, use quality fluid
+- **BMW**: Extended highway runs help N47/N57 DPF health
+- **Mercedes**: Quality AdBlue essential for BlueTEC longevity
+
+---
+
+*Professional ECU solutions for all major brands. Fast turnaround, guaranteed results.*
+
+**Ready to solve your vehicle's problems?** [Start your order](/) today.
     `
   }
 ];
@@ -1319,6 +1567,196 @@ const BlogPage = () => {
   const filteredArticles = selectedCategory === 'all' 
     ? BLOG_ARTICLES 
     : BLOG_ARTICLES.filter(a => a.category === selectedCategory);
+
+  // Render markdown-like content
+  const renderContent = (content) => {
+    const lines = content.trim().split('\n');
+    const elements = [];
+    let inTable = false;
+    let tableRows = [];
+    let tableHeaders = [];
+    let listItems = [];
+    let inList = false;
+
+    const flushList = () => {
+      if (listItems.length > 0) {
+        elements.push(
+          <ul key={`list-${elements.length}`} className="list-disc pl-6 mb-4 space-y-2">
+            {listItems.map((item, i) => (
+              <li key={i} className="text-gray-700">{renderInlineContent(item)}</li>
+            ))}
+          </ul>
+        );
+        listItems = [];
+      }
+      inList = false;
+    };
+
+    const flushTable = () => {
+      if (tableRows.length > 0) {
+        elements.push(
+          <div key={`table-${elements.length}`} className="overflow-x-auto mb-6">
+            <table className="min-w-full border border-gray-200 rounded-lg">
+              <thead className="bg-gray-50">
+                <tr>
+                  {tableHeaders.map((header, i) => (
+                    <th key={i} className="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b">
+                      {header.trim()}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows.map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    {row.map((cell, j) => (
+                      <td key={j} className="px-4 py-3 text-sm text-gray-700 border-b">
+                        {renderInlineContent(cell.trim())}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+        tableRows = [];
+        tableHeaders = [];
+      }
+      inTable = false;
+    };
+
+    const renderInlineContent = (text) => {
+      // Handle links
+      const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+      const parts = [];
+      let lastIndex = 0;
+      let match;
+
+      while ((match = linkRegex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          parts.push(renderBoldText(text.slice(lastIndex, match.index)));
+        }
+        parts.push(
+          <Link key={match.index} to={match[2]} className="text-blue-600 hover:text-blue-800 underline">
+            {match[1]}
+          </Link>
+        );
+        lastIndex = match.index + match[0].length;
+      }
+
+      if (lastIndex < text.length) {
+        parts.push(renderBoldText(text.slice(lastIndex)));
+      }
+
+      return parts.length > 0 ? parts : renderBoldText(text);
+    };
+
+    const renderBoldText = (text) => {
+      if (typeof text !== 'string') return text;
+      const boldRegex = /\*\*([^*]+)\*\*/g;
+      const parts = [];
+      let lastIndex = 0;
+      let match;
+
+      while ((match = boldRegex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          parts.push(<span key={`text-${lastIndex}`}>{text.slice(lastIndex, match.index)}</span>);
+        }
+        parts.push(<strong key={`bold-${match.index}`} className="font-semibold text-gray-900">{match[1]}</strong>);
+        lastIndex = match.index + match[0].length;
+      }
+
+      if (lastIndex < text.length) {
+        parts.push(<span key={`text-end-${lastIndex}`}>{text.slice(lastIndex)}</span>);
+      }
+
+      return parts.length > 0 ? parts : text;
+    };
+
+    lines.forEach((line, idx) => {
+      const trimmedLine = line.trim();
+
+      // Table handling
+      if (trimmedLine.startsWith('|') && trimmedLine.endsWith('|')) {
+        flushList();
+        const cells = trimmedLine.slice(1, -1).split('|').map(c => c.trim());
+        
+        // Skip separator row
+        if (cells.every(c => c.match(/^[-:]+$/))) {
+          return;
+        }
+
+        if (!inTable) {
+          inTable = true;
+          tableHeaders = cells;
+        } else {
+          tableRows.push(cells);
+        }
+        return;
+      } else if (inTable) {
+        flushTable();
+      }
+
+      // List handling
+      if (trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ')) {
+        inList = true;
+        listItems.push(trimmedLine.slice(2));
+        return;
+      } else if (inList && trimmedLine) {
+        flushList();
+      }
+
+      // Numbered list
+      if (trimmedLine.match(/^\d+\.\s/)) {
+        const content = trimmedLine.replace(/^\d+\.\s/, '');
+        elements.push(
+          <p key={idx} className="text-gray-700 mb-2 pl-4">
+            <span className="font-medium">{trimmedLine.match(/^\d+/)[0]}.</span> {renderInlineContent(content)}
+          </p>
+        );
+        return;
+      }
+
+      // Headers
+      if (trimmedLine.startsWith('## ')) {
+        flushList();
+        elements.push(
+          <h2 key={idx} className="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b border-gray-200">
+            {trimmedLine.replace('## ', '')}
+          </h2>
+        );
+      } else if (trimmedLine.startsWith('### ')) {
+        flushList();
+        elements.push(
+          <h3 key={idx} className="text-xl font-semibold text-gray-900 mt-8 mb-3">
+            {trimmedLine.replace('### ', '')}
+          </h3>
+        );
+      } else if (trimmedLine.startsWith('---')) {
+        flushList();
+        elements.push(<hr key={idx} className="my-8 border-gray-200" />);
+      } else if (trimmedLine.startsWith('✓') || trimmedLine.startsWith('☐')) {
+        elements.push(
+          <p key={idx} className="text-gray-700 flex items-start gap-2 mb-1">
+            <span className="text-green-600">{trimmedLine[0]}</span>
+            {renderInlineContent(trimmedLine.slice(1).trim())}
+          </p>
+        );
+      } else if (trimmedLine) {
+        elements.push(
+          <p key={idx} className="text-gray-700 mb-4 leading-relaxed">
+            {renderInlineContent(trimmedLine)}
+          </p>
+        );
+      }
+    });
+
+    flushList();
+    flushTable();
+
+    return elements;
+  };
   
   // If viewing single article
   if (articleId) {
@@ -1343,8 +1781,11 @@ const BlogPage = () => {
         <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              <button onClick={() => navigate('/blog')} className="text-gray-600 hover:text-gray-900 flex items-center">
-                ← Back to Blog
+              <button onClick={() => navigate('/blog')} className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Blog
               </button>
               <button onClick={() => navigate('/')} className="text-blue-600 hover:text-blue-700 font-medium">
                 ECU Flash Service
@@ -1354,65 +1795,110 @@ const BlogPage = () => {
         </header>
         
         {/* Article Content */}
-        <article className="container mx-auto px-4 py-12 max-w-3xl">
+        <article className="container mx-auto px-4 py-12 max-w-4xl">
           <div className="mb-8">
             <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
               {article.category}
             </span>
             <span className="text-gray-500 text-sm ml-4">{article.readTime}</span>
+            <span className="text-gray-400 text-sm ml-4">{article.date}</span>
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">{article.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">{article.title}</h1>
           
-          <p className="text-xl text-gray-600 mb-8">{article.excerpt}</p>
+          <p className="text-xl text-gray-600 mb-8 leading-relaxed">{article.excerpt}</p>
+
+          {/* Keywords for SEO */}
+          <div className="flex flex-wrap gap-2 mb-8">
+            {article.keywords.slice(0, 5).map((keyword, idx) => (
+              <span key={idx} className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
+                {keyword}
+              </span>
+            ))}
+          </div>
           
           <div className="prose prose-lg max-w-none">
-            {article.content.split('\n').map((paragraph, idx) => {
-              if (paragraph.startsWith('## ')) {
-                return <h2 key={idx} className="text-2xl font-bold text-gray-900 mt-8 mb-4">{paragraph.replace('## ', '')}</h2>;
-              } else if (paragraph.startsWith('### ')) {
-                return <h3 key={idx} className="text-xl font-semibold text-gray-900 mt-6 mb-3">{paragraph.replace('### ', '')}</h3>;
-              } else if (paragraph.startsWith('- ')) {
-                return <li key={idx} className="text-gray-700 ml-4">{paragraph.replace('- ', '')}</li>;
-              } else if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-                return <p key={idx} className="font-semibold text-gray-900">{paragraph.replace(/\*\*/g, '')}</p>;
-              } else if (paragraph.startsWith('✓') || paragraph.startsWith('☐')) {
-                return <p key={idx} className="text-gray-700">{paragraph}</p>;
-              } else if (paragraph.startsWith('|')) {
-                return null; // Skip table rows for simplicity
-              } else if (paragraph.trim()) {
-                return <p key={idx} className="text-gray-700 mb-4">{paragraph}</p>;
-              }
-              return null;
-            })}
+            {renderContent(article.content)}
           </div>
           
           {/* CTA */}
           <div className="mt-12 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
-            <p className="mb-6 opacity-90">Professional ECU tuning with 20-60 minute turnaround.</p>
-            <button 
-              onClick={() => navigate('/')}
-              className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition"
-            >
-              Start Your Order →
-            </button>
+            <p className="mb-6 opacity-90">Professional ECU tuning with 20-60 minute turnaround. All brands supported.</p>
+            <div className="flex flex-wrap gap-4">
+              <button 
+                onClick={() => navigate('/')}
+                className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition"
+              >
+                Start Your Order →
+              </button>
+              <button 
+                onClick={() => navigate('/tools/dtc-delete')}
+                className="bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-400 transition border border-white/30"
+              >
+                DTC Delete Tool
+              </button>
+            </div>
           </div>
           
           {/* Related Articles */}
           <div className="mt-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
             <div className="grid md:grid-cols-2 gap-6">
-              {BLOG_ARTICLES.filter(a => a.id !== article.id && a.category === article.category).slice(0, 2).map(related => (
-                <Link key={related.id} to={`/blog/${related.id}`} className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition">
-                  <span className="text-3xl mb-3 block">{related.image}</span>
-                  <h4 className="font-semibold text-gray-900 mb-2">{related.title}</h4>
-                  <p className="text-sm text-gray-600">{related.excerpt.substring(0, 100)}...</p>
+              {BLOG_ARTICLES.filter(a => a.id !== article.id).slice(0, 2).map(related => (
+                <Link key={related.id} to={`/blog/${related.id}`} className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition group">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-3xl">{related.emoji}</span>
+                    <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">
+                      {related.category}
+                    </span>
+                  </div>
+                  <h4 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition">{related.title}</h4>
+                  <p className="text-sm text-gray-600 line-clamp-2">{related.excerpt}</p>
                 </Link>
               ))}
             </div>
           </div>
         </article>
+
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white py-12">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div>
+                <h4 className="font-bold text-lg mb-4">ECU Flash Service</h4>
+                <p className="text-gray-400 text-sm">Professional ECU tuning and modification services. Fast turnaround, all brands supported.</p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-4">Services</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><Link to="/services/dpf-off" className="hover:text-white">DPF Delete</Link></li>
+                  <li><Link to="/services/egr-off" className="hover:text-white">EGR Delete</Link></li>
+                  <li><Link to="/services/adblue-off" className="hover:text-white">AdBlue Delete</Link></li>
+                  <li><Link to="/tools/dtc-delete" className="hover:text-white">DTC Removal</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold mb-4">Resources</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><Link to="/blog" className="hover:text-white">Blog</Link></li>
+                  <li><Link to="/faq" className="hover:text-white">FAQ</Link></li>
+                  <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold mb-4">Legal</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><Link to="/terms" className="hover:text-white">Terms of Service</Link></li>
+                  <li><Link to="/privacy" className="hover:text-white">Privacy Policy</Link></li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+              © {new Date().getFullYear()} ECU Flash Service. All rights reserved.
+            </div>
+          </div>
+        </footer>
       </div>
     );
   }
@@ -1425,8 +1911,11 @@ const BlogPage = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <button onClick={() => navigate('/')} className="text-gray-500 hover:text-gray-700">
-                ← Home
+              <button onClick={() => navigate('/')} className="text-gray-500 hover:text-gray-700 flex items-center gap-1">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Home
               </button>
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1435,7 +1924,7 @@ const BlogPage = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">ECU Flash Blog</h1>
-                <p className="text-xs text-gray-500">Expert guides and tutorials</p>
+                <p className="text-xs text-gray-500">Expert guides & tutorials</p>
               </div>
             </div>
             <button 
@@ -1453,7 +1942,7 @@ const BlogPage = () => {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">ECU Tuning Knowledge Base</h1>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Expert guides on DPF delete, EGR removal, ECU tuning, and diesel performance
+            Expert guides on DPF delete, EGR removal, ECU remapping, AdBlue solutions, and diesel performance
           </p>
         </div>
       </section>
@@ -1468,7 +1957,7 @@ const BlogPage = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                 selectedCategory === cat
                   ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
               }`}
             >
               {cat === 'all' ? 'All Articles' : cat}
@@ -1484,43 +1973,130 @@ const BlogPage = () => {
             <Link
               key={article.id}
               to={`/blog/${article.id}`}
-              className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition group"
+              className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition group border border-gray-100"
             >
-              <div className="h-40 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                <span className="text-6xl">{article.image}</span>
+              <div className="h-48 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center relative">
+                <span className="text-7xl">{article.emoji}</span>
+                <div className="absolute top-4 right-4">
+                  <span className="bg-white/90 text-gray-700 px-2 py-1 rounded text-xs font-medium shadow-sm">
+                    {article.readTime}
+                  </span>
+                </div>
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">
                     {article.category}
                   </span>
-                  <span className="text-gray-500 text-xs">{article.readTime}</span>
+                  <span className="text-gray-400 text-xs">{article.date}</span>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition line-clamp-2">
                   {article.title}
                 </h3>
-                <p className="text-gray-600 text-sm line-clamp-2">{article.excerpt}</p>
+                <p className="text-gray-600 text-sm line-clamp-3">{article.excerpt}</p>
+                <div className="mt-4 flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
+                  Read Article
+                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
       
-      {/* CTA Section */}
+      {/* Services CTA */}
       <section className="bg-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Need Professional ECU Tuning?</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Get your ECU file professionally modified with our fast 20-60 minute turnaround service.
-          </p>
-          <button
-            onClick={() => navigate('/')}
-            className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition"
-          >
-            Start Your Order →
-          </button>
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our ECU Services</h2>
+          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <Link to="/services/dpf-off" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
+              <div className="text-4xl mb-3">🔧</div>
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">DPF Delete</h3>
+              <p className="text-sm text-gray-600">Remove particulate filter restrictions</p>
+            </Link>
+            <Link to="/services/egr-off" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
+              <div className="text-4xl mb-3">♻️</div>
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">EGR Delete</h3>
+              <p className="text-sm text-gray-600">Eliminate carbon buildup issues</p>
+            </Link>
+            <Link to="/services/adblue-off" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
+              <div className="text-4xl mb-3">💧</div>
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">AdBlue Delete</h3>
+              <p className="text-sm text-gray-600">Remove SCR system problems</p>
+            </Link>
+            <Link to="/tools/dtc-delete" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
+              <div className="text-4xl mb-3">🔍</div>
+              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">DTC Removal</h3>
+              <p className="text-sm text-gray-600">Clear persistent error codes</p>
+            </Link>
+          </div>
         </div>
       </section>
+
+      {/* Main CTA Section */}
+      <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">Need Professional ECU Tuning?</h2>
+          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+            Get your ECU file professionally modified with our fast 20-60 minute turnaround service. All brands supported.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => navigate('/')}
+              className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition"
+            >
+              Start Your Order →
+            </button>
+            <button
+              onClick={() => navigate('/contact')}
+              className="bg-white/10 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition border border-white/20"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h4 className="font-bold text-lg mb-4">ECU Flash Service</h4>
+              <p className="text-gray-400 text-sm">Professional ECU tuning and modification services. Fast turnaround, all brands supported.</p>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><Link to="/services/dpf-off" className="hover:text-white">DPF Delete</Link></li>
+                <li><Link to="/services/egr-off" className="hover:text-white">EGR Delete</Link></li>
+                <li><Link to="/services/adblue-off" className="hover:text-white">AdBlue Delete</Link></li>
+                <li><Link to="/tools/dtc-delete" className="hover:text-white">DTC Removal</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Resources</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><Link to="/blog" className="hover:text-white">Blog</Link></li>
+                <li><Link to="/faq" className="hover:text-white">FAQ</Link></li>
+                <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Legal</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><Link to="/terms" className="hover:text-white">Terms of Service</Link></li>
+                <li><Link to="/privacy" className="hover:text-white">Privacy Policy</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+            © {new Date().getFullYear()} ECU Flash Service. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
