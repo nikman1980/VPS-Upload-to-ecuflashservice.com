@@ -2585,6 +2585,53 @@ class DTCProcessRequest(BaseModel):
     file_id: str
     dtc_codes: List[str]
     correct_checksum: bool = True
+    order_id: Optional[str] = None
+
+
+class DTCOrderRequest(BaseModel):
+    file_id: str
+    dtc_codes: List[str]
+    correct_checksum: bool = True
+    customer_name: str
+    customer_email: str
+    dtc_price: float
+    checksum_price: float
+    total_price: float
+    payment_status: str = "pending"
+
+
+@api_router.post("/dtc-engine/order")
+async def dtc_engine_create_order(request: DTCOrderRequest):
+    """Create a DTC deletion order"""
+    try:
+        order_id = str(uuid.uuid4())
+        
+        # Create order in database
+        order_doc = {
+            "id": order_id,
+            "file_id": request.file_id,
+            "dtc_codes": request.dtc_codes,
+            "correct_checksum": request.correct_checksum,
+            "customer_name": request.customer_name,
+            "customer_email": request.customer_email,
+            "dtc_price": request.dtc_price,
+            "checksum_price": request.checksum_price,
+            "total_price": request.total_price,
+            "payment_status": request.payment_status,
+            "processing_status": "pending",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        await db.dtc_orders.insert_one(order_doc)
+        
+        return {
+            "success": True,
+            "order_id": order_id,
+            "total_price": request.total_price
+        }
+    except Exception as e:
+        logger.error(f"DTC order creation error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @api_router.post("/dtc-engine/process")
