@@ -641,6 +641,7 @@ const NewUploadFlow = () => {
                 <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition">How It Works</a>
                 <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition">Pricing</a>
                 <a href="/tools/dtc-delete" className="text-gray-600 hover:text-blue-600 transition">DTC Tool</a>
+                <a href="/blog" className="text-gray-600 hover:text-blue-600 transition">Blog</a>
                 <a href="/portal" className="text-gray-600 hover:text-blue-600 transition">My Orders</a>
                 <button 
                   onClick={() => setStep(1)}
