@@ -284,13 +284,12 @@ const CustomerPortal = () => {
       const vType = vehicleTypes.find(v => v.id === selectedVehicleType);
       const manufacturer = manufacturers.find(m => m.id === selectedManufacturer);
       const model = models.find(m => m.id === selectedModel);
-      const generation = generations.find(g => g.id === selectedGeneration);
       const engine = engines.find(e => e.id === selectedEngine);
       
       formData.append('vehicle_type', vType?.name || '');
       formData.append('manufacturer', manufacturer?.name || '');
       formData.append('model', model?.name || '');
-      formData.append('year', generation?.years || '');
+      formData.append('year', ''); // Year extracted from engine/model if available
       formData.append('engine', engine?.name || '');
     }
     
