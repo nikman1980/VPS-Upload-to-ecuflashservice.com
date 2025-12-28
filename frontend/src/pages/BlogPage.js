@@ -1999,31 +1999,50 @@ const BlogPage = () => {
         </div>
       </section>
       
-      {/* Services CTA */}
-      <section className="bg-white py-16">
+      {/* Services CTA - Compact Flush Design with Matching Colors */}
+      <section className="bg-white py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our ECU Services</h2>
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            <Link to="/services/dpf-off" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
-              <div className="text-4xl mb-3">🔧</div>
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">DPF Delete</h3>
-              <p className="text-sm text-gray-600">Remove particulate filter restrictions</p>
-            </Link>
-            <Link to="/services/egr-off" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
-              <div className="text-4xl mb-3">♻️</div>
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">EGR Delete</h3>
-              <p className="text-sm text-gray-600">Eliminate carbon buildup issues</p>
-            </Link>
-            <Link to="/services/adblue-off" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
-              <div className="text-4xl mb-3">💧</div>
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">AdBlue Delete</h3>
-              <p className="text-sm text-gray-600">Remove SCR system problems</p>
-            </Link>
-            <Link to="/tools/dtc-delete" className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition group">
-              <div className="text-4xl mb-3">🔍</div>
-              <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600">DTC Removal</h3>
-              <p className="text-sm text-gray-600">Clear persistent error codes</p>
-            </Link>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Our ECU Services</h2>
+          <div className="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-200">
+              <Link to="/services/dpf-off" className="flex flex-col items-center p-5 hover:bg-white transition group">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center mb-3">
+                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-900 text-sm group-hover:text-blue-600">DPF Delete</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">Particulate filter</p>
+              </Link>
+              <Link to="/services/egr-off" className="flex flex-col items-center p-5 hover:bg-white transition group">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center mb-3">
+                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-900 text-sm group-hover:text-blue-600">EGR Delete</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">Carbon buildup</p>
+              </Link>
+              <Link to="/services/adblue-off" className="flex flex-col items-center p-5 hover:bg-white transition group">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center mb-3">
+                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-900 text-sm group-hover:text-blue-600">AdBlue Delete</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">SCR system</p>
+              </Link>
+              <Link to="/tools/dtc-delete" className="flex flex-col items-center p-5 hover:bg-white transition group">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center mb-3">
+                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-900 text-sm group-hover:text-blue-600">DTC Removal</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">Error codes</p>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
