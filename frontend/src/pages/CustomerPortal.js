@@ -291,10 +291,13 @@ const CustomerPortal = () => {
       
       if (response.data.success) {
         setRegisterSuccess(true);
-        // Auto-login after registration
+        // Auto-login after registration using password
         setTimeout(() => {
           setLoginEmail(registerEmail);
-          doLogin(registerEmail);
+          setLoginPassword(registerPassword);
+          setShowRegister(false);
+          setUsePasswordLogin(true);
+          doLoginPassword();
         }, 1500);
       } else {
         setRegisterError(response.data.message || 'Registration failed');
