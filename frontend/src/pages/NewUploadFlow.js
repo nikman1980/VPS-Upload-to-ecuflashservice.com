@@ -557,10 +557,19 @@ const NewUploadFlow = () => {
   };
 
   const createOrder = (data, actions) => {
+    // Validate price
+    const price = parseFloat(totalPrice);
+    if (isNaN(price) || price <= 0) {
+      console.error("Invalid price for PayPal order:", totalPrice);
+      alert("Error: Invalid order amount. Please select services first.");
+      return Promise.reject(new Error("Invalid order amount"));
+    }
+    
     return actions.order.create({
       purchase_units: [{
         amount: {
-          value: totalPrice.toFixed(2)
+          currency_code: "EUR",
+          value: price.toFixed(2)
         },
         description: `ECU Flash Service - ${selectedServices.length} service(s)`
       }]
