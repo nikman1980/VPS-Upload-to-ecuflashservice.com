@@ -1911,7 +1911,19 @@ const NewUploadFlow = () => {
                   onApprove={onApprove}
                   onError={(err) => {
                     console.error("PayPal Button Error:", err);
-                    alert("PayPal Error: " + (err.message || JSON.stringify(err)));
+                    let errorMsg = "Payment error occurred";
+                    if (err) {
+                      if (typeof err === 'string') {
+                        errorMsg = err;
+                      } else if (err.message) {
+                        errorMsg = err.message;
+                      } else if (Array.isArray(err)) {
+                        errorMsg = err.map(e => e.message || e.description || 'Unknown error').join(', ');
+                      } else if (err.description) {
+                        errorMsg = err.description;
+                      }
+                    }
+                    alert("PayPal Error: " + errorMsg);
                   }}
                   onCancel={() => {
                     console.log("Payment cancelled");
