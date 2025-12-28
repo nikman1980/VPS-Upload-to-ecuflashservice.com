@@ -78,7 +78,6 @@ const AdminPage = () => {
       return () => clearInterval(interval);
     }
   }, [isAuthenticated]);
-  }, []);
 
   const fetchOrders = async () => {
     try {
