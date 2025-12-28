@@ -9,6 +9,7 @@ import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import ContactPage from './pages/ContactPage';
 import DTCDeletePage from './pages/DTCDeletePage';
+import BlogPage from './pages/BlogPage';
 import DTCRemovalPage from './pages/services/DTCRemovalPage';
 import DPFOffPage from './pages/services/DPFOffPage';
 import EGROffPage from './pages/services/EGROffPage';
@@ -28,6 +29,9 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           {/* Tools */}
           <Route path="/tools/dtc-delete" element={<DTCDeletePage />} />
+          {/* Blog */}
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:articleId" element={<BlogPage />} />
           {/* Service Pages */}
           <Route path="/services/dtc-removal" element={<DTCRemovalPage />} />
           <Route path="/services/dpf-off" element={<DPFOffPage />} />
