@@ -855,55 +855,8 @@ const DTCDeletePage = () => {
                 ← Edit Selection
               </button>
               <button
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-xs text-yellow-600 mt-2">
-                      These DTCs were not found in the file. They may not be stored in this ECU or use a different encoding format.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {/* Checksum Details */}
-              <div className="bg-gray-50 rounded-xl p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">🔐 Checksum Information:</h4>
-                <div className="text-sm text-gray-600 space-y-1">
-                  <div>Type: <span className="font-mono text-gray-900">{processResult.checksum_type}</span></div>
-                  <div>Status: <span className={processResult.checksum_corrected ? 'text-green-600' : 'text-gray-500'}>
-                    {processResult.checksum_corrected ? 'Corrected' : 'Not modified'}
-                  </span></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Download Button */}
-            {processResult.success && (
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <button
-                  onClick={downloadFile}
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 rounded-xl font-semibold text-lg transition flex items-center justify-center space-x-2"
-                >
-                  <span>⬇️</span>
-                  <span>Download Modified File</span>
-                </button>
-                <p className="text-center text-sm text-gray-500 mt-3">
-                  File will be saved as: {file?.name?.replace(/\.[^.]+$/, '')}_dtc_deleted.bin
-                </p>
-              </div>
-            )}
-
-            {/* Actions */}
-            <div className="flex gap-4">
-              <button
-                onClick={() => setStep(2)}
-                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-semibold transition"
-              >
-                ← Edit Selection
-              </button>
-              <button
                 onClick={resetAll}
-                className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-3 rounded-xl font-semibold transition"
+                className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2.5 rounded-lg font-medium text-sm transition"
               >
                 Process Another File
               </button>
