@@ -805,10 +805,20 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
             metadata['calibration_id'] = display_info['calibration_id']
         if display_info.get('software_version'):
             metadata['software_version'] = display_info['software_version']
+        if display_info.get('hardware_version'):
+            metadata['hardware_version'] = display_info['hardware_version']
         if display_info.get('part_number'):
             metadata['part_number'] = display_info['part_number']
         if display_info.get('vin'):
             metadata['vin'] = display_info['vin']
+        if display_info.get('processor'):
+            metadata['processor'] = display_info['processor']
+        if display_info.get('ecu_generation'):
+            metadata['ecu_generation'] = display_info['ecu_generation']
+        if display_info.get('flash_type'):
+            metadata['flash_type'] = display_info['flash_type']
+        if display_info.get('vehicle_info'):
+            metadata['vehicle_info'] = display_info['vehicle_info']
         if display_info.get('strings'):
             metadata['strings'] = display_info['strings']
         
