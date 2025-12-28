@@ -12,8 +12,11 @@ const CustomerPortal = () => {
   // Login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
+  const [usePasswordLogin, setUsePasswordLogin] = useState(true); // Default to password login
+  const [accountInfo, setAccountInfo] = useState(null);
   
   // Registration state
   const [showRegister, setShowRegister] = useState(false);
@@ -49,11 +52,50 @@ const CustomerPortal = () => {
       if (name) setRegisterName(decodeURIComponent(name));
     } else if (email) {
       setLoginEmail(email);
-      doLogin(email);
+      setUsePasswordLogin(false); // Use email-only login for URL params
+      doLoginEmail(email);
     }
   }, [searchParams]);
 
-  const doLogin = async (email) => {
+  // Password-based login
+  const doLoginPassword = async () => {
+    if (!loginEmail || !loginPassword) {
+      setLoginError('Please enter your email and password');
+      return;
+    }
+    
+    setLoginLoading(true);
+    setLoginError('');
+    
+    try {
+      const response = await axios.post(`${API}/portal/login-password`, {
+        email: loginEmail.trim(),
+        password: loginPassword
+      });
+      
+      if (response.data.success) {
+        setOrders(response.data.orders || []);
+        setAccountInfo(response.data.account);
+        setIsLoggedIn(true);
+        // Auto-select first order if any
+        if (response.data.orders?.length > 0) {
+          setSelectedOrder(response.data.orders[0]);
+          setMessages(response.data.orders[0].messages || []);
+        }
+        window.history.replaceState({}, '', `/portal?email=${encodeURIComponent(loginEmail)}`);
+      } else {
+        setLoginError(response.data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError(error.response?.data?.detail || 'Invalid email or password');
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  // Email-only login (for quick access / URL params)
+  const doLoginEmail = async (email) => {
     if (!email) {
       setLoginError('Please enter your email address');
       return;
