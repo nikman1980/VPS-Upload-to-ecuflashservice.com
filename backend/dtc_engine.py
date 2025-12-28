@@ -456,6 +456,7 @@ class DTCDeleteEngine:
             patterns = DTCDatabase.dtc_to_binary(dtc_code)
             
             found = False
+            instance_count = 0
             for pattern in patterns:
                 offset = 0
                 while True:
@@ -464,18 +465,48 @@ class DTCDeleteEngine:
                         break
                     
                     found = True
+                    instance_count += 1
+                    
+                    # Extract sub-code/fault byte (next 1-2 bytes after DTC pattern)
+                    sub_code = None
+                    sub_code_hex = None
+                    fault_byte = None
+                    
+                    # Check bytes after the DTC pattern for sub-code
+                    if pos + len(pattern) + 2 <= len(modified_data):
+                        # Get the fault byte (typically 1 byte after DTC)
+                        fault_byte = modified_data[pos + len(pattern)]
+                        sub_code_hex = f"{fault_byte:02X}"
+                        sub_code = f"{dtc_code}-{fault_byte:02d}"
+                        
+                        # Some ECUs use 2-byte sub-codes
+                        if pos + len(pattern) + 2 <= len(modified_data):
+                            extended_byte = modified_data[pos + len(pattern) + 1]
+                            if extended_byte != 0x00 and extended_byte != 0xFF:
+                                sub_code_hex = f"{fault_byte:02X}{extended_byte:02X}"
+                    
                     dtc_info = {
                         "code": dtc_code,
                         "description": DTCDatabase.get_description(dtc_code),
                         "offset": pos,
+                        "offset_hex": f"0x{pos:06X}",
                         "pattern": pattern.hex(),
-                        "original_bytes": modified_data[pos:pos+len(pattern)].hex()
+                        "original_bytes": modified_data[pos:pos+len(pattern)].hex(),
+                        "instance": instance_count,
+                        "sub_code": sub_code,
+                        "sub_code_hex": sub_code_hex,
+                        "fault_byte": fault_byte,
+                        "full_code": sub_code if sub_code else dtc_code
                     }
                     dtcs_found.append(dtc_info)
                     
                     # Delete by replacing with 0xFF (common masking value)
                     for i in range(len(pattern)):
                         modified_data[pos + i] = 0xFF
+                    
+                    # Also clear the fault byte/sub-code
+                    if pos + len(pattern) < len(modified_data):
+                        modified_data[pos + len(pattern)] = 0xFF
                     
                     dtc_info_deleted = dtc_info.copy()
                     dtc_info_deleted["new_bytes"] = "FF" * len(pattern)
