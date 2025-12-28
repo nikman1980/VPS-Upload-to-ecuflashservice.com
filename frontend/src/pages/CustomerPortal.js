@@ -131,7 +131,11 @@ const CustomerPortal = () => {
 
   const handleLogin = async (e) => {
     e?.preventDefault();
-    doLogin(loginEmail);
+    if (usePasswordLogin) {
+      doLoginPassword();
+    } else {
+      doLoginEmail(loginEmail);
+    }
   };
 
   const selectOrder = async (order) => {
