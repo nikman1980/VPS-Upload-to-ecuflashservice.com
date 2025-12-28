@@ -815,10 +815,20 @@ class ECUServiceTester:
         print("-" * 40)
         success, analysis_result = self.test_file_upload_and_analysis()
         
+        # 🎯 CRITICAL TEST: Manual Service Selection Flow
+        print("\n🎯 CRITICAL TEST: Continue to Payment Button")
+        print("-" * 40)
+        critical_success = self.test_manual_service_selection_flow()
+        
         # Print summary
         print()
         print("=" * 50)
         print(f"📊 Test Results: {self.tests_passed}/{self.tests_run} passed")
+        
+        if critical_success:
+            print("✅ CRITICAL TEST PASSED: Continue to Payment button works with manual service selection!")
+        else:
+            print("❌ CRITICAL TEST FAILED: Continue to Payment button issue detected!")
         
         if self.tests_passed == self.tests_run:
             print("✅ All tests passed!")
