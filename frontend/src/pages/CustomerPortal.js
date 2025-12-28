@@ -561,13 +561,12 @@ const CustomerPortal = () => {
       const vType = vehicleTypes.find(v => v.id === selectedVehicleType);
       const manufacturer = manufacturers.find(m => m.id === selectedManufacturer);
       const model = models.find(m => m.id === selectedModel);
-      const generation = generations.find(g => g.id === selectedGeneration);
       const engine = engines.find(e => e.id === selectedEngine);
       
       vehicleInfo = {
         vehicle_make: manufacturer?.name || '',
         vehicle_model: model?.name || '',
-        vehicle_year: generation?.years || '',
+        vehicle_year: '', // Year extracted from engine/model if available
         engine: engine?.name || '',
         ecu: getEcuName(),
         type: vType?.name || ''
