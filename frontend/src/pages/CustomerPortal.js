@@ -1321,26 +1321,8 @@ const CustomerPortal = () => {
                           </div>
                         )}
 
-                        {/* Generation/Year */}
-                        {selectedModel && generations.length > 0 && (
-                          <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Generation / Year</label>
-                            <select
-                              value={selectedGeneration}
-                              onChange={(e) => handleGenerationChange(e.target.value)}
-                              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
-                              disabled={vehicleLoading}
-                            >
-                              <option value="">Select generation...</option>
-                              {generations.map(g => (
-                                <option key={g.id} value={g.id}>{g.name} ({g.years})</option>
-                              ))}
-                            </select>
-                          </div>
-                        )}
-
-                        {/* Engine */}
-                        {selectedGeneration && engines.length > 0 && (
+                        {/* Engine - Shows directly after Model (no generations) */}
+                        {selectedModel && engines.length > 0 && (
                           <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Engine</label>
                             <select
@@ -1367,15 +1349,9 @@ const CustomerPortal = () => {
                               className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
                             >
                               <option value="">Select ECU...</option>
-                              {ecuTypes.length > 0 ? (
-                                ecuTypes.map(ecu => (
-                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                                ))
-                              ) : (
-                                commonEcuTypes.map(ecu => (
-                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                                ))
-                              )}
+                              {commonEcuTypes.map(ecu => (
+                                <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                              ))}
                             </select>
                           </div>
                         )}
