@@ -5,9 +5,19 @@ import { useNavigate } from 'react-router-dom';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Admin Credentials - Change these for production
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'ECUflash2024!';
+
 const AdminPage = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  
+  // Auth state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   
   // Data state
   const [orders, setOrders] = useState([]);
@@ -27,6 +37,33 @@ const AdminPage = () => {
   const [adminMessage, setAdminMessage] = useState('');
   const [sendingMessage, setSendingMessage] = useState(false);
 
+  // Check for existing session
+  useEffect(() => {
+    const adminSession = sessionStorage.getItem('adminAuth');
+    if (adminSession === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  // Admin Login Handler
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    setLoginError('');
+    
+    if (loginUsername === ADMIN_USERNAME && loginPassword === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      sessionStorage.setItem('adminAuth', 'true');
+    } else {
+      setLoginError('Invalid username or password');
+    }
+  };
+
+  // Admin Logout Handler
+  const handleAdminLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem('adminAuth');
+  };
+
   // Notification sound
   const playNotification = () => {
     const audio = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU...');
@@ -34,10 +71,13 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    fetchOrders();
-    // Poll for new orders every 30 seconds
-    const interval = setInterval(fetchOrders, 30000);
-    return () => clearInterval(interval);
+    if (isAuthenticated) {
+      fetchOrders();
+      // Poll for new orders every 30 seconds
+      const interval = setInterval(fetchOrders, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [isAuthenticated]);
   }, []);
 
   const fetchOrders = async () => {
