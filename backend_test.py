@@ -600,6 +600,145 @@ class ECUServiceTester:
             self.log_test("Chinese Truck Models", False, f"Error: {str(e)}")
             return False
 
+    def test_manual_service_selection_flow(self):
+        """Test the complete manual service selection flow - the critical test case"""
+        try:
+            print("\n🎯 CRITICAL TEST: Manual Service Selection Flow")
+            print("=" * 60)
+            
+            # Step 1: Upload a test file that won't auto-detect services
+            test_file_path = "/tmp/test_ecu.bin"
+            if not os.path.exists(test_file_path):
+                self.log_test("Manual Service Selection Flow", False, "Test file not found")
+                return False
+            
+            print("Step 1: Uploading test file...")
+            with open(test_file_path, 'rb') as f:
+                files = {'file': ('test_ecu.bin', f, 'application/octet-stream')}
+                response = requests.post(f"{self.api_url}/analyze-and-process-file", files=files, timeout=30)
+            
+            if response.status_code != 200:
+                self.log_test("Manual Service Selection Flow", False, f"File upload failed: {response.status_code}")
+                return False
+            
+            analysis_result = response.json()
+            if not analysis_result.get('success'):
+                self.log_test("Manual Service Selection Flow", False, "File analysis failed")
+                return False
+            
+            file_id = analysis_result.get('file_id')
+            available_options = analysis_result.get('available_options', [])
+            
+            print(f"   ✓ File uploaded successfully (ID: {file_id})")
+            print(f"   ✓ Auto-detected services: {len(available_options)} (expected: 0 for test file)")
+            
+            # Step 2: Test manual service selection via API
+            print("\nStep 2: Testing manual service selection...")
+            
+            # Get available services
+            services_response = requests.get(f"{self.api_url}/services", timeout=10)
+            if services_response.status_code != 200:
+                self.log_test("Manual Service Selection Flow", False, "Failed to get services")
+                return False
+            
+            all_services = services_response.json()
+            print(f"   ✓ Retrieved {len(all_services)} available services")
+            
+            # Select some services manually (simulating user selection)
+            selected_services = ['dpf-removal', 'egr-removal']  # Common services
+            selected_service_names = []
+            total_expected_price = 0
+            
+            for service_id in selected_services:
+                service = next((s for s in all_services if s['id'] == service_id), None)
+                if service:
+                    selected_service_names.append(service['name'])
+                    total_expected_price += service['base_price']
+                    print(f"   ✓ Selected: {service['name']} (${service['base_price']})")
+            
+            print(f"   ✓ Total expected price: ${total_expected_price}")
+            
+            # Step 3: Test price calculation
+            print("\nStep 3: Testing price calculation...")
+            price_response = requests.post(f"{self.api_url}/calculate-price", json=selected_services, timeout=10)
+            
+            if price_response.status_code != 200:
+                self.log_test("Manual Service Selection Flow", False, "Price calculation failed")
+                return False
+            
+            pricing = price_response.json()
+            calculated_total = pricing.get('total_price', 0)
+            
+            print(f"   ✓ API calculated total: ${calculated_total}")
+            
+            if abs(calculated_total - total_expected_price) > 0.01:
+                self.log_test("Manual Service Selection Flow", False, 
+                             f"Price mismatch: expected ${total_expected_price}, got ${calculated_total}")
+                return False
+            
+            # Step 4: Test order creation (simulating "Continue to Payment" button)
+            print("\nStep 4: Testing order creation (Continue to Payment simulation)...")
+            
+            order_data = {
+                "file_id": file_id,
+                "services": selected_services,
+                "total_amount": calculated_total,
+                "vehicle_info": {
+                    "manufacturer": "Test",
+                    "model": "Car", 
+                    "year": 2020,
+                    "engine": "2.0 Diesel"
+                },
+                "customer_email": "test@example.com",
+                "customer_name": "Test Customer",
+                "payment_status": "test_completed"
+            }
+            
+            order_response = requests.post(f"{self.api_url}/orders", json=order_data, timeout=10)
+            
+            if order_response.status_code != 200:
+                self.log_test("Manual Service Selection Flow", False, 
+                             f"Order creation failed: {order_response.status_code}")
+                return False
+            
+            order_result = order_response.json()
+            if not order_result.get('success'):
+                self.log_test("Manual Service Selection Flow", False, "Order creation returned failure")
+                return False
+            
+            order_id = order_result.get('order_id')
+            print(f"   ✓ Order created successfully (ID: {order_id})")
+            
+            # Step 5: Verify the complete flow worked
+            print("\nStep 5: Verifying complete flow...")
+            
+            success_criteria = [
+                len(available_options) == 0,  # No auto-detected services (manual selection scenario)
+                len(selected_services) > 0,   # Services were manually selected
+                calculated_total > 0,         # Price was calculated correctly
+                order_id is not None          # Order was created (Continue to Payment worked)
+            ]
+            
+            if all(success_criteria):
+                details = f"✅ CRITICAL TEST PASSED: Manual service selection flow works correctly"
+                details += f"\n   - No auto-detected services (manual selection scenario)"
+                details += f"\n   - {len(selected_services)} services manually selected: {selected_service_names}"
+                details += f"\n   - Price calculated correctly: ${calculated_total}"
+                details += f"\n   - Order created successfully: {order_id}"
+                details += f"\n   - 'Continue to Payment' button functionality verified"
+                
+                print(f"   ✅ All criteria met - CRITICAL TEST PASSED")
+                self.log_test("🎯 CRITICAL: Manual Service Selection Flow", True, details)
+                return True
+            else:
+                details = f"❌ CRITICAL TEST FAILED: Some criteria not met"
+                self.log_test("🎯 CRITICAL: Manual Service Selection Flow", False, details)
+                return False
+                
+        except Exception as e:
+            self.log_test("🎯 CRITICAL: Manual Service Selection Flow", False, f"Error: {str(e)}")
+            return False
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("🔧 ECU Flash Service Backend API Tests")
