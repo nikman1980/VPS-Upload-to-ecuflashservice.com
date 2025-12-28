@@ -405,7 +405,7 @@ const CustomerPortal = () => {
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <p className="text-gray-500 text-sm text-center mb-4">Already have an account?</p>
                 <button
-                  onClick={() => { setShowRegister(false); setRegisterError(''); }}
+                  onClick={() => { setShowRegister(false); setRegisterError(''); setUsePasswordLogin(true); }}
                   className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl transition"
                 >
                   Sign In Instead →
@@ -415,8 +415,30 @@ const CustomerPortal = () => {
           ) : (
             /* Login Card */
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+              {/* Login Type Toggle */}
+              <div className="flex rounded-xl bg-gray-100 p-1 mb-6">
+                <button
+                  type="button"
+                  onClick={() => setUsePasswordLogin(true)}
+                  className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition ${
+                    usePasswordLogin ? 'bg-white text-gray-900 shadow' : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Account Login
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setUsePasswordLogin(false)}
+                  className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition ${
+                    !usePasswordLogin ? 'bg-white text-gray-900 shadow' : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Quick Access
+                </button>
+              </div>
+
               <form onSubmit={handleLogin}>
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <input
@@ -427,8 +449,27 @@ const CustomerPortal = () => {
                       className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       required
                     />
-                    <p className="text-gray-500 text-sm mt-2">Enter the email you used when placing orders</p>
                   </div>
+                  
+                  {usePasswordLogin && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                      <input
+                        type="password"
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                  )}
+
+                  {!usePasswordLogin && (
+                    <p className="text-gray-500 text-sm">
+                      Quick access using your order email. For full account features, use Account Login.
+                    </p>
+                  )}
                   
                   {loginError && (
                     <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm">
@@ -441,14 +482,14 @@ const CustomerPortal = () => {
                     disabled={loginLoading}
                     className="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50"
                   >
-                    {loginLoading ? 'Loading...' : 'Access My Orders'}
+                    {loginLoading ? 'Signing In...' : (usePasswordLogin ? 'Sign In' : 'Access My Orders')}
                   </button>
                 </div>
               </form>
               
               <div className="mt-6 pt-6 border-t border-gray-200 space-y-4">
                 <div>
-                  <p className="text-gray-500 text-sm text-center mb-3">Want a full account?</p>
+                  <p className="text-gray-500 text-sm text-center mb-3">Don&apos;t have an account?</p>
                   <button
                     onClick={() => setShowRegister(true)}
                     className="w-full bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 py-3 rounded-xl transition"
