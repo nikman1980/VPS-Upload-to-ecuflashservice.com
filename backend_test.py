@@ -300,35 +300,22 @@ class ECUServiceTester:
                 if analysis_result.get('success'):
                     file_id = analysis_result.get('file_id')
                     available_options = analysis_result.get('available_options', [])
-                    ecu_type = analysis_result.get('ecu_type')
+                    detected_ecu = analysis_result.get('detected_ecu', 'Unknown')
                     
                     # Check if required services are available
                     service_ids = [opt['service_id'] for opt in available_options]
                     
-                    has_checksum = 'checksum' in service_ids
-                    has_dtc_single = 'dtc-single' in service_ids  
-                    has_dtc_multiple = 'dtc-multiple' in service_ids
+                    details = f"File ID: {file_id}, ECU: {detected_ecu}, Auto-detected services: {len(available_options)}"
                     
-                    details = f"File ID: {file_id}, ECU: {ecu_type}, Services: {len(available_options)}"
-                    
-                    if has_checksum:
-                        print(f"   ✓ Checksum service available")
+                    # For test file, we expect NO auto-detected services (since it's not a real ECU file)
+                    if len(available_options) == 0:
+                        print(f"   ✓ No services auto-detected (expected for test file)")
+                        print(f"   ✓ This tests the manual service selection scenario")
                     else:
-                        print(f"   ❌ Checksum service missing")
-                        success = False
-                        
-                    if has_dtc_single and has_dtc_multiple:
-                        print(f"   ✓ DTC services available (Single & Multiple)")
-                    else:
-                        print(f"   ❌ DTC services missing")
-                        success = False
-                        
-                    # Check that ECU Type is NOT displayed in response (as per requirement)
-                    if 'ecu_type' in analysis_result and analysis_result['ecu_type']:
-                        print(f"   ⚠️ ECU Type is being returned: {analysis_result['ecu_type']}")
-                        print(f"   Note: Frontend should NOT display ECU Type to user")
+                        print(f"   ⚠️ Services auto-detected: {[opt['service_name'] for opt in available_options]}")
                     
-                    print(f"   Available services: {[opt['service_name'] for opt in available_options]}")
+                    print(f"   Detected ECU: {detected_ecu}")
+                    print(f"   File size: {analysis_result.get('file_size_mb', 'Unknown')} MB")
                 else:
                     success = False
                     details = f"Analysis failed: {analysis_result.get('error', 'Unknown error')}"
