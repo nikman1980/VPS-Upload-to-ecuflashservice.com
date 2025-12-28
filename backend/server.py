@@ -2527,6 +2527,141 @@ async def admin_send_portal_message(
     }
 
 
+# Additional Portal Endpoints for Profile and Settings
+class ProfileUpdateRequest(BaseModel):
+    email: EmailStr
+    name: str
+
+
+class PasswordChangeRequest(BaseModel):
+    email: EmailStr
+    current_password: str
+    new_password: str
+
+
+@api_router.post("/portal/update-profile")
+async def update_portal_profile(data: ProfileUpdateRequest):
+    """Update customer profile name"""
+    email = data.email.strip().lower()
+    
+    result = await db.portal_accounts.update_one(
+        {"email": email},
+        {"$set": {"name": data.name.strip()}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Account not found")
+    
+    return {"success": True, "message": "Profile updated successfully"}
+
+
+@api_router.post("/portal/change-password")
+async def change_portal_password(data: PasswordChangeRequest):
+    """Change customer password"""
+    import hashlib
+    
+    email = data.email.strip().lower()
+    current_hash = hashlib.sha256(data.current_password.encode()).hexdigest()
+    new_hash = hashlib.sha256(data.new_password.encode()).hexdigest()
+    
+    # Verify current password
+    account = await db.portal_accounts.find_one({
+        "email": email,
+        "password_hash": current_hash
+    })
+    
+    if not account:
+        raise HTTPException(status_code=401, detail="Current password is incorrect")
+    
+    # Update password
+    await db.portal_accounts.update_one(
+        {"email": email},
+        {"$set": {"password_hash": new_hash}}
+    )
+    
+    return {"success": True, "message": "Password changed successfully"}
+
+
+@api_router.post("/portal/new-order")
+async def create_portal_order(
+    file: UploadFile = File(...),
+    email: str = Form(...),
+    name: str = Form(...),
+    services: str = Form(...),
+    notes: str = Form(""),
+    vehicle: str = Form("{}")
+):
+    """Create new order from customer portal"""
+    import json
+    
+    email = email.strip().lower()
+    
+    # Parse services and vehicle JSON
+    try:
+        services_list = json.loads(services)
+        vehicle_info = json.loads(vehicle)
+    except:
+        services_list = []
+        vehicle_info = {}
+    
+    # Validate file extension
+    allowed_extensions = [".bin", ".hex", ".ecu", ".ori", ".mod", ".fls"]
+    file_ext = Path(file.filename).suffix.lower()
+    
+    if file_ext not in allowed_extensions:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Only ECU files ({', '.join(allowed_extensions)}) are allowed."
+        )
+    
+    # Save file
+    file_id = str(uuid.uuid4())
+    filename = f"{file_id}_original{file_ext}"
+    filepath = UPLOAD_DIR / filename
+    
+    content = await file.read()
+    with open(filepath, "wb") as f:
+        f.write(content)
+    
+    # Calculate price based on services
+    service_prices = {
+        'dpf_off': 50, 'egr_off': 40, 'adblue_off': 45, 'dtc_removal': 30,
+        'lambda_off': 35, 'speed_limit': 40, 'stage1': 150, 'stage2': 250
+    }
+    total_price = sum(service_prices.get(s, 0) for s in services_list)
+    
+    # Create order
+    order_id = str(uuid.uuid4())
+    order = {
+        "id": order_id,
+        "customer_name": name,
+        "customer_email": email,
+        "vehicle_info": f"{vehicle_info.get('year', '')} {vehicle_info.get('make', '')} {vehicle_info.get('model', '')}".strip(),
+        "vehicle": vehicle_info,
+        "services": services_list,
+        "selected_services": [{"id": s, "name": s.replace('_', ' ').title()} for s in services_list],
+        "notes": notes,
+        "total_amount": total_price,
+        "original_file": filename,
+        "original_filename": file.filename,
+        "status": "pending",
+        "payment_status": "pending",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "source": "portal"
+    }
+    
+    await db.orders.insert_one(order)
+    
+    logging.info(f"New order created from portal: {order_id} for {email}")
+    
+    return {
+        "success": True,
+        "order_id": order_id,
+        "total": total_price,
+        "message": "Order created successfully"
+    }
+
+
 # =============================================================================
 # ECU PROCESSING ENGINE API
 # =============================================================================
