@@ -229,6 +229,74 @@ const AdminPage = () => {
   const completedOrders = orders.filter(r => r.status === 'completed').length;
   const totalRevenue = orders.filter(r => r.payment_status === 'paid' || r.status === 'completed').reduce((sum, o) => sum + (o.total_amount || o.price || 0), 0);
 
+  // Admin Login Screen
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl mb-4">
+              <span className="text-3xl">⚡</span>
+            </div>
+            <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
+            <p className="text-gray-400">ECU Flash Service</p>
+          </div>
+          
+          <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <form onSubmit={handleAdminLogin}>
+              <div className="space-y-5">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                  <input
+                    type="text"
+                    value={loginUsername}
+                    onChange={(e) => setLoginUsername(e.target.value)}
+                    className="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="Enter username"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                  <input
+                    type="password"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    className="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="Enter password"
+                    required
+                  />
+                </div>
+                
+                {loginError && (
+                  <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-3 text-red-400 text-sm">
+                    {loginError}
+                  </div>
+                )}
+                
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition"
+                >
+                  Sign In to Admin
+                </button>
+              </div>
+            </form>
+            
+            <div className="mt-6 pt-6 border-t border-gray-700 text-center">
+              <button
+                onClick={() => navigate('/')}
+                className="text-gray-400 hover:text-white text-sm"
+              >
+                ← Back to Website
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
