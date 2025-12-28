@@ -135,12 +135,10 @@ const CustomerPortal = () => {
     setSelectedVehicleType(typeId);
     setSelectedManufacturer('');
     setSelectedModel('');
-    setSelectedGeneration('');
     setSelectedEngine('');
     setSelectedEcu('');
     setManufacturers([]);
     setModels([]);
-    setGenerations([]);
     setEngines([]);
     
     if (typeId === 'other') {
@@ -169,7 +167,6 @@ const CustomerPortal = () => {
     setSelectedEcu('');
     setModels([]);
     setEngines([]);
-    setEcuTypes([]);
     
     if (!manufacturerId) return;
     
