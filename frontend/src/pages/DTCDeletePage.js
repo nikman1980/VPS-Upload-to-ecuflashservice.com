@@ -62,8 +62,39 @@ const DTCDeletePage = () => {
   const [processing, setProcessing] = useState(false);
   const [processResult, setProcessResult] = useState(null);
   
-  // Step tracking
-  const [step, setStep] = useState(1); // 1: Upload, 2: Select DTCs, 3: Results
+  // Payment state
+  const [customerName, setCustomerName] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [orderId, setOrderId] = useState(null);
+  
+  // Step tracking: 1: Upload, 2: Select DTCs, 3: Payment, 4: Results
+  const [step, setStep] = useState(1);
+
+  // Pricing calculator
+  const calculatePrice = () => {
+    const dtcCount = selectedDTCs.length;
+    let dtcPrice = 0;
+    
+    if (dtcCount === 0) {
+      dtcPrice = 0;
+    } else if (dtcCount === 1) {
+      dtcPrice = 10; // $10 for 1 DTC
+    } else if (dtcCount >= 2 && dtcCount <= 6) {
+      dtcPrice = 20; // $20 for 2-6 DTCs
+    } else {
+      dtcPrice = 30; // $30 for 7+ DTCs
+    }
+    
+    const checksumPrice = correctChecksum ? 5 : 0; // $5 for checksum
+    
+    return {
+      dtcPrice,
+      checksumPrice,
+      total: dtcPrice + checksumPrice
+    };
+  };
+
+  const pricing = calculatePrice();
 
   // File upload handler
   const onDrop = useCallback(async (acceptedFiles) => {
