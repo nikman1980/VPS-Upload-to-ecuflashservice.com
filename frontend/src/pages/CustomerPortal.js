@@ -201,12 +201,10 @@ const CustomerPortal = () => {
   };
 
   // Fetch ECU types when engine changes
-  const handleEngineChange = async (engineId) => {
+  const handleEngineChange = (engineId) => {
     setSelectedEngine(engineId);
     setSelectedEcu('');
-    
     // ECU types are provided from commonEcuTypes list
-  };;
   };
 
   // Get vehicle summary for display
