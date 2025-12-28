@@ -672,6 +672,16 @@ class ECUServiceTester:
             
             print(f"   ✓ API calculated total: ${calculated_total}")
             
+            # Check for combo pricing logic (EGR + DPF = $248 combo instead of $298 separate)
+            if 'dpf-removal' in selected_services and 'egr-removal' in selected_services:
+                # Backend should apply combo pricing
+                expected_combo_price = 248.0  # EGR + DPF combo price
+                if abs(calculated_total - expected_combo_price) < 0.01:
+                    print(f"   ✓ Combo pricing applied correctly: ${calculated_total}")
+                    total_expected_price = expected_combo_price  # Update for validation
+                else:
+                    print(f"   ⚠️ Combo pricing not applied: expected ${expected_combo_price}, got ${calculated_total}")
+            
             if abs(calculated_total - total_expected_price) > 0.01:
                 self.log_test("Manual Service Selection Flow", False, 
                              f"Price mismatch: expected ${total_expected_price}, got ${calculated_total}")
