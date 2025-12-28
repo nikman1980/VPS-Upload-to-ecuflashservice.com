@@ -1197,154 +1197,492 @@ const CustomerPortal = () => {
             </div>
           )}
 
-          {/* New Order Tab */}
+          {/* New Order Tab - Enhanced with Vehicle Selection & Analysis */}
           {activeTab === 'new-order' && (
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Create New Order</h2>
-              
-              <div className="max-w-2xl">
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-4">1. Upload ECU File</h3>
-                  <div
-                    className={`border-2 border-dashed rounded-xl p-8 text-center transition ${
-                      newOrderFile ? 'border-green-400 bg-green-50' : 'border-gray-300 hover:border-blue-400'
-                    }`}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">Create New Order</h2>
+                {newOrderStep > 1 && (
+                  <button
+                    onClick={resetNewOrder}
+                    className="text-gray-500 hover:text-gray-700 text-sm"
                   >
-                    {newOrderFile ? (
-                      <div>
-                        <span className="text-4xl mb-2 block">✅</span>
-                        <p className="font-medium text-gray-900">{newOrderFile.name}</p>
-                        <p className="text-sm text-gray-500">{(newOrderFile.size / 1024).toFixed(1)} KB</p>
-                        <button
-                          onClick={() => setNewOrderFile(null)}
-                          className="text-red-600 hover:text-red-700 text-sm mt-2"
-                        >
-                          Remove
-                        </button>
+                    ← Start Over
+                  </button>
+                )}
+              </div>
+
+              {/* Progress Steps */}
+              <div className="flex items-center justify-center mb-8">
+                {['Vehicle', 'Upload', 'Analyze', 'Services'].map((label, i) => (
+                  <div key={i} className="flex items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                      newOrderStep > i + 1 ? 'bg-green-500 text-white' :
+                      newOrderStep === i + 1 ? 'bg-blue-500 text-white' :
+                      'bg-gray-200 text-gray-500'
+                    }`}>
+                      {newOrderStep > i + 1 ? '✓' : i + 1}
+                    </div>
+                    <span className={`mx-2 text-sm ${newOrderStep === i + 1 ? 'text-gray-900 font-medium' : 'text-gray-400'}`}>
+                      {label}
+                    </span>
+                    {i < 3 && <div className={`w-8 h-0.5 ${newOrderStep > i + 1 ? 'bg-green-500' : 'bg-gray-200'}`} />}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="max-w-2xl mx-auto">
+                
+                {/* Step 1: Vehicle Selection */}
+                {newOrderStep === 1 && (
+                  <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                    <h3 className="font-semibold text-gray-900 mb-4">Select Your Vehicle</h3>
+                    
+                    {/* Vehicle Type */}
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
+                      <select
+                        value={selectedVehicleType}
+                        onChange={(e) => handleVehicleTypeChange(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                      >
+                        <option value="">Select vehicle type...</option>
+                        {vehicleTypes.map(type => (
+                          <option key={type.id} value={type.id}>{type.name}</option>
+                        ))}
+                        <option value="other">Other / Enter Manually</option>
+                      </select>
+                    </div>
+
+                    {/* Manual Vehicle Entry */}
+                    {isManualVehicle ? (
+                      <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-4">
+                        <h4 className="font-medium text-orange-700 mb-3">Enter Vehicle Details</h4>
+                        <div className="grid grid-cols-2 gap-3">
+                          <input
+                            type="text"
+                            placeholder="Make (e.g., BMW)"
+                            value={manualVehicle.make}
+                            onChange={(e) => setManualVehicle({...manualVehicle, make: e.target.value})}
+                            className="bg-white border border-gray-300 rounded-xl px-4 py-3"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Model (e.g., 320d)"
+                            value={manualVehicle.model}
+                            onChange={(e) => setManualVehicle({...manualVehicle, model: e.target.value})}
+                            className="bg-white border border-gray-300 rounded-xl px-4 py-3"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Year (e.g., 2018)"
+                            value={manualVehicle.year}
+                            onChange={(e) => setManualVehicle({...manualVehicle, year: e.target.value})}
+                            className="bg-white border border-gray-300 rounded-xl px-4 py-3"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Engine (e.g., 2.0 Diesel)"
+                            value={manualVehicle.engine}
+                            onChange={(e) => setManualVehicle({...manualVehicle, engine: e.target.value})}
+                            className="bg-white border border-gray-300 rounded-xl px-4 py-3"
+                          />
+                        </div>
+                        <div className="mt-3">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">ECU Type</label>
+                          <select
+                            value={selectedEcu}
+                            onChange={(e) => setSelectedEcu(e.target.value)}
+                            className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3"
+                          >
+                            <option value="">Select ECU type...</option>
+                            {commonEcuTypes.map(ecu => (
+                              <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
                     ) : (
-                      <div>
-                        <span className="text-4xl mb-2 block">📤</span>
-                        <p className="text-gray-600 mb-2">Drag & drop your ECU file here, or</p>
-                        <label className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl cursor-pointer transition">
-                          Browse Files
-                          <input
-                            type="file"
-                            onChange={(e) => setNewOrderFile(e.target.files?.[0])}
-                            className="hidden"
-                            accept=".bin,.ori,.fls,.hex,.ecu"
-                          />
-                        </label>
+                      <>
+                        {/* Manufacturer */}
+                        {selectedVehicleType && manufacturers.length > 0 && (
+                          <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Manufacturer</label>
+                            <select
+                              value={selectedManufacturer}
+                              onChange={(e) => handleManufacturerChange(e.target.value)}
+                              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
+                              disabled={vehicleLoading}
+                            >
+                              <option value="">Select manufacturer...</option>
+                              {manufacturers.map(m => (
+                                <option key={m.id} value={m.id}>{m.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+
+                        {/* Model */}
+                        {selectedManufacturer && models.length > 0 && (
+                          <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Model</label>
+                            <select
+                              value={selectedModel}
+                              onChange={(e) => handleModelChange(e.target.value)}
+                              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
+                              disabled={vehicleLoading}
+                            >
+                              <option value="">Select model...</option>
+                              {models.map(m => (
+                                <option key={m.id} value={m.id}>{m.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+
+                        {/* Generation/Year */}
+                        {selectedModel && generations.length > 0 && (
+                          <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Generation / Year</label>
+                            <select
+                              value={selectedGeneration}
+                              onChange={(e) => handleGenerationChange(e.target.value)}
+                              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
+                              disabled={vehicleLoading}
+                            >
+                              <option value="">Select generation...</option>
+                              {generations.map(g => (
+                                <option key={g.id} value={g.id}>{g.name} ({g.years})</option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+
+                        {/* Engine */}
+                        {selectedGeneration && engines.length > 0 && (
+                          <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Engine</label>
+                            <select
+                              value={selectedEngine}
+                              onChange={(e) => handleEngineChange(e.target.value)}
+                              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
+                              disabled={vehicleLoading}
+                            >
+                              <option value="">Select engine...</option>
+                              {engines.map(e => (
+                                <option key={e.id} value={e.id}>{e.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+
+                        {/* ECU Type */}
+                        {selectedEngine && (
+                          <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">ECU Type</label>
+                            <select
+                              value={selectedEcu}
+                              onChange={(e) => setSelectedEcu(e.target.value)}
+                              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
+                            >
+                              <option value="">Select ECU...</option>
+                              {ecuTypes.length > 0 ? (
+                                ecuTypes.map(ecu => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))
+                              ) : (
+                                commonEcuTypes.map(ecu => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))
+                              )}
+                            </select>
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                    {/* Vehicle Summary */}
+                    {isVehicleComplete() && (
+                      <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+                        <div className="flex items-center gap-2 text-green-700">
+                          <span>✓</span>
+                          <span className="font-medium">{getVehicleSummary()}</span>
+                          {getEcuName() && <span className="text-sm">({getEcuName()})</span>}
+                        </div>
                       </div>
                     )}
-                  </div>
-                </div>
 
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-4">2. Vehicle Information (Optional)</h3>
-                  <div className="grid grid-cols-3 gap-4">
-                    <input
-                      type="text"
-                      placeholder="Make"
-                      value={newOrderVehicle.make}
-                      onChange={(e) => setNewOrderVehicle({ ...newOrderVehicle, make: e.target.value })}
-                      className="bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Model"
-                      value={newOrderVehicle.model}
-                      onChange={(e) => setNewOrderVehicle({ ...newOrderVehicle, model: e.target.value })}
-                      className="bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Year"
-                      value={newOrderVehicle.year}
-                      onChange={(e) => setNewOrderVehicle({ ...newOrderVehicle, year: e.target.value })}
-                      className="bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
-                    />
+                    <button
+                      onClick={() => setNewOrderStep(2)}
+                      disabled={!isVehicleComplete()}
+                      className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 text-white py-4 rounded-xl font-semibold transition"
+                    >
+                      Continue to Upload →
+                    </button>
                   </div>
-                </div>
+                )}
 
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-4">3. Select Services</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {availableServices.map(service => (
-                      <label
-                        key={service.id}
-                        className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${
-                          newOrderServices.includes(service.id)
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="checkbox"
-                            checked={newOrderServices.includes(service.id)}
-                            onChange={(e) => {
-                              if (e.target.checked) {
-                                setNewOrderServices([...newOrderServices, service.id]);
-                              } else {
-                                setNewOrderServices(newOrderServices.filter(s => s !== service.id));
-                              }
-                            }}
-                            className="w-5 h-5 text-blue-500"
-                          />
-                          <span className="font-medium text-gray-900">{service.name}</span>
+                {/* Step 2: File Upload */}
+                {newOrderStep === 2 && (
+                  <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                    <h3 className="font-semibold text-gray-900 mb-2">Upload ECU File</h3>
+                    <p className="text-sm text-gray-500 mb-4">Vehicle: {getVehicleSummary()} ({getEcuName()})</p>
+                    
+                    <div
+                      className={`border-2 border-dashed rounded-xl p-8 text-center transition ${
+                        newOrderFile ? 'border-green-400 bg-green-50' : 'border-gray-300 hover:border-blue-400'
+                      }`}
+                    >
+                      {newOrderFile ? (
+                        <div>
+                          <span className="text-4xl mb-2 block">✅</span>
+                          <p className="font-medium text-gray-900">{newOrderFile.name}</p>
+                          <p className="text-sm text-gray-500">{(newOrderFile.size / 1024).toFixed(1)} KB</p>
+                          <button
+                            onClick={() => setNewOrderFile(null)}
+                            className="text-red-600 hover:text-red-700 text-sm mt-2"
+                          >
+                            Remove
+                          </button>
                         </div>
-                        <span className="text-gray-600">${service.price}</span>
-                      </label>
-                    ))}
+                      ) : (
+                        <div>
+                          <span className="text-4xl mb-2 block">📤</span>
+                          <p className="text-gray-600 mb-2">Drag & drop your ECU file here, or</p>
+                          <label className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl cursor-pointer transition">
+                            Browse Files
+                            <input
+                              type="file"
+                              onChange={(e) => setNewOrderFile(e.target.files?.[0])}
+                              className="hidden"
+                              accept=".bin,.ori,.fls,.hex,.ecu,.mod"
+                            />
+                          </label>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex gap-3 mt-6">
+                      <button
+                        onClick={() => setNewOrderStep(1)}
+                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-4 rounded-xl font-semibold transition"
+                      >
+                        ← Back
+                      </button>
+                      <button
+                        onClick={() => setNewOrderStep(3)}
+                        disabled={!newOrderFile}
+                        className="flex-1 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 text-white py-4 rounded-xl font-semibold transition"
+                      >
+                        Analyze File →
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-4">4. Additional Notes (Optional)</h3>
-                  <textarea
-                    value={newOrderNotes}
-                    onChange={(e) => setNewOrderNotes(e.target.value)}
-                    placeholder="Any special instructions or requirements..."
-                    rows={3}
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
-                  />
-                </div>
+                {/* Step 3: Analysis */}
+                {newOrderStep === 3 && (
+                  <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                    <h3 className="font-semibold text-gray-900 mb-4">Analyzing ECU File</h3>
+                    
+                    <div className="text-center py-8">
+                      {analyzing ? (
+                        <div>
+                          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                          <p className="text-gray-600">Analyzing your ECU file...</p>
+                          <p className="text-sm text-gray-400">This may take a moment</p>
+                        </div>
+                      ) : (
+                        <div>
+                          <span className="text-5xl mb-4 block">🔍</span>
+                          <p className="text-gray-600 mb-4">Ready to analyze your ECU file</p>
+                          <p className="text-sm text-gray-500 mb-6">
+                            File: {newOrderFile?.name}<br/>
+                            Vehicle: {getVehicleSummary()}
+                          </p>
+                          <button
+                            onClick={analyzeFile}
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold transition"
+                          >
+                            Start Analysis
+                          </button>
+                        </div>
+                      )}
+                    </div>
 
-                {/* Order Summary */}
-                <div className="bg-gray-900 rounded-2xl p-6 text-white">
-                  <h3 className="font-semibold mb-4">Order Summary</h3>
-                  {newOrderServices.length > 0 ? (
-                    <>
-                      {newOrderServices.map(serviceId => {
-                        const service = availableServices.find(s => s.id === serviceId);
-                        return service ? (
-                          <div key={serviceId} className="flex justify-between text-sm mb-2">
-                            <span className="text-gray-300">{service.name}</span>
-                            <span>${service.price}</span>
+                    {!analyzing && (
+                      <button
+                        onClick={() => setNewOrderStep(2)}
+                        className="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-medium transition"
+                      >
+                        ← Back to Upload
+                      </button>
+                    )}
+                  </div>
+                )}
+
+                {/* Step 4: Service Selection */}
+                {newOrderStep === 4 && (
+                  <div>
+                    {/* Analysis Result */}
+                    {analysisResult && (
+                      <div className="bg-gradient-to-r from-blue-500 to-cyan-400 rounded-2xl p-4 mb-6 text-white">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-semibold">{analysisResult.detected_manufacturer || 'ECU'} {analysisResult.detected_ecu || ''}</p>
+                            <p className="text-sm text-white/80">{newOrderFile?.name}</p>
                           </div>
-                        ) : null;
-                      })}
-                      <div className="border-t border-gray-700 mt-4 pt-4 flex justify-between font-bold text-lg">
-                        <span>Total</span>
-                        <span>${newOrderServices.reduce((sum, id) => {
-                          const service = availableServices.find(s => s.id === id);
-                          return sum + (service?.price || 0);
-                        }, 0)}</span>
+                          <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+                            {detectedServices.length} detected
+                          </span>
+                        </div>
                       </div>
-                    </>
-                  ) : (
-                    <p className="text-gray-400">No services selected</p>
-                  )}
-                  
-                  <button
-                    onClick={submitNewOrder}
-                    disabled={submittingOrder || !newOrderFile || newOrderServices.length === 0}
-                    className="w-full mt-6 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white py-4 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {submittingOrder ? 'Submitting...' : 'Submit Order & Pay'}
-                  </button>
-                </div>
+                    )}
+
+                    <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                      <h3 className="font-semibold text-gray-900 mb-4">Select Services</h3>
+                      
+                      {/* Detected Services */}
+                      {detectedServices.length > 0 && (
+                        <div className="mb-6">
+                          <h4 className="text-sm font-medium text-green-600 mb-3 flex items-center gap-2">
+                            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                            Detected Services
+                          </h4>
+                          <div className="space-y-2">
+                            {detectedServices.map(service => (
+                              <label
+                                key={service.service_id}
+                                className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${
+                                  newOrderServices.includes(service.service_id)
+                                    ? 'border-blue-500 bg-blue-50'
+                                    : 'border-gray-200 hover:border-gray-300'
+                                }`}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <input
+                                    type="checkbox"
+                                    checked={newOrderServices.includes(service.service_id)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setNewOrderServices([...newOrderServices, service.service_id]);
+                                      } else {
+                                        setNewOrderServices(newOrderServices.filter(s => s !== service.service_id));
+                                      }
+                                    }}
+                                    className="w-5 h-5 text-blue-500"
+                                  />
+                                  <div>
+                                    <span className="font-medium text-gray-900">{service.service_name}</span>
+                                    <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Detected</span>
+                                  </div>
+                                </div>
+                                <span className="font-semibold text-green-600">${service.price}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* All Available Services */}
+                      <div>
+                        <h4 className="text-sm font-medium text-gray-600 mb-3 flex items-center gap-2">
+                          <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                          {detectedServices.length > 0 ? 'Additional Services' : 'Available Services'}
+                        </h4>
+                        <div className="grid grid-cols-2 gap-2">
+                          {availableServices
+                            .filter(s => !detectedServices.find(d => d.service_id === s.id))
+                            .map(service => (
+                            <label
+                              key={service.id}
+                              className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition ${
+                                newOrderServices.includes(service.id)
+                                  ? 'border-blue-500 bg-blue-50'
+                                  : 'border-gray-200 hover:border-gray-300'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2">
+                                <input
+                                  type="checkbox"
+                                  checked={newOrderServices.includes(service.id)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setNewOrderServices([...newOrderServices, service.id]);
+                                    } else {
+                                      setNewOrderServices(newOrderServices.filter(s => s !== service.id));
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-blue-500"
+                                />
+                                <span className="text-sm font-medium text-gray-900">{service.name}</span>
+                              </div>
+                              <span className="text-sm text-gray-600">${service.price}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Notes */}
+                    <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                      <h3 className="font-semibold text-gray-900 mb-4">Additional Notes (Optional)</h3>
+                      <textarea
+                        value={newOrderNotes}
+                        onChange={(e) => setNewOrderNotes(e.target.value)}
+                        placeholder="Any special instructions or requirements..."
+                        rows={3}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500"
+                      />
+                    </div>
+
+                    {/* Order Summary */}
+                    <div className="bg-gray-900 rounded-2xl p-6 text-white">
+                      <h3 className="font-semibold mb-4">Order Summary</h3>
+                      
+                      <div className="text-sm text-gray-400 mb-3">
+                        Vehicle: {getVehicleSummary()}
+                      </div>
+                      
+                      {newOrderServices.length > 0 ? (
+                        <>
+                          {newOrderServices.map(serviceId => {
+                            const detected = detectedServices.find(s => s.service_id === serviceId);
+                            const available = availableServices.find(s => s.id === serviceId);
+                            const service = detected || available;
+                            const name = detected?.service_name || available?.name;
+                            const price = detected?.price || available?.price || 0;
+                            
+                            return service ? (
+                              <div key={serviceId} className="flex justify-between text-sm mb-2">
+                                <span className="text-gray-300">{name}</span>
+                                <span>${price}</span>
+                              </div>
+                            ) : null;
+                          })}
+                          <div className="border-t border-gray-700 mt-4 pt-4 flex justify-between font-bold text-lg">
+                            <span>Total</span>
+                            <span>${newOrderServices.reduce((sum, id) => {
+                              const detected = detectedServices.find(s => s.service_id === id);
+                              const available = availableServices.find(s => s.id === id);
+                              return sum + (detected?.price || available?.price || 0);
+                            }, 0)}</span>
+                          </div>
+                        </>
+                      ) : (
+                        <p className="text-gray-400">No services selected</p>
+                      )}
+                      
+                      <button
+                        onClick={submitNewOrder}
+                        disabled={submittingOrder || newOrderServices.length === 0}
+                        className="w-full mt-6 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white py-4 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {submittingOrder ? 'Submitting...' : 'Submit Order'}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
