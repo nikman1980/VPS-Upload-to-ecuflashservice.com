@@ -235,12 +235,12 @@ const CustomerPortal = () => {
     
     const manufacturer = manufacturers.find(m => m.id === selectedManufacturer);
     const model = models.find(m => m.id === selectedModel);
-    const generation = generations.find(g => g.id === selectedGeneration);
+    const engine = engines.find(e => e.id === selectedEngine);
     
     const parts = [
-      generation?.years || '',
       manufacturer?.name || '',
-      model?.name || ''
+      model?.name || '',
+      engine?.name || ''
     ].filter(Boolean);
     
     return parts.join(' ') || 'Select Vehicle';
@@ -252,7 +252,8 @@ const CustomerPortal = () => {
       const ecu = commonEcuTypes.find(e => e.id === selectedEcu);
       return ecu?.name || '';
     }
-    const ecu = ecuTypes.find(e => e.id === selectedEcu);
+    // Use common ECU types for now (can be enhanced)
+    const ecu = commonEcuTypes.find(e => e.id === selectedEcu);
     return ecu?.name || '';
   };
 
@@ -261,7 +262,7 @@ const CustomerPortal = () => {
     if (isManualVehicle) {
       return manualVehicle.make && manualVehicle.model && selectedEcu;
     }
-    return selectedVehicleType && selectedManufacturer && selectedModel && selectedEcu;
+    return selectedVehicleType && selectedManufacturer && selectedModel && selectedEngine && selectedEcu;
   };
 
   // Analyze uploaded file
