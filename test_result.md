@@ -50,7 +50,7 @@
 **Status:** ✅ ALL TESTS PASSED
 
 #### Test Execution Summary:
-1. ✅ **Homepage Navigation**: Successfully loaded https://vehicle-tuner-16.preview.emergentagent.com
+1. ✅ **Homepage Navigation**: Successfully loaded https://engine-remap-2.preview.emergentagent.com
 2. ✅ **Get Started Button**: Found and clicked successfully
 3. ✅ **Vehicle Types Display**: Found all 7 expected vehicle types:
    - Agriculture 🚜
@@ -535,7 +535,7 @@ customer_name: customerInfo.customer_name || 'Test Customer',
 
 ### ✅ TEST CASE 1: Direct Portal Access Verification
 **Status:** PASSED - Portal loads without errors
-- ✅ Successfully navigated to https://vehicle-tuner-16.preview.emergentagent.com/portal
+- ✅ Successfully navigated to https://engine-remap-2.preview.emergentagent.com/portal
 - ✅ Customer Portal page loaded correctly with proper title and UI elements
 - ✅ **CRITICAL SUCCESS:** No "Error: Not Found" message detected on direct portal access
 - ✅ Portal login form displayed correctly with email input and "Access My Orders" button
@@ -1011,7 +1011,7 @@ customer_name: customerInfo.customer_name || 'Test Customer',
 
 ### ✅ TEST CASE 1: Homepage and Vehicle Selection Flow
 **Status:** PASSED - All navigation elements working correctly
-- ✅ Homepage loads successfully at https://vehicle-tuner-16.preview.emergentagent.com
+- ✅ Homepage loads successfully at https://engine-remap-2.preview.emergentagent.com
 - ✅ "Get Started" button found and clickable
 - ✅ Vehicle selection page loads with all vehicle types displayed
 - ✅ Cars & LCV selection working correctly
