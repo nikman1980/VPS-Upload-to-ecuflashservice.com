@@ -284,6 +284,9 @@ const DTCDeletePage = () => {
     setSelectedDTCs([]);
     setDtcInput('');
     setProcessResult(null);
+    setCustomerName('');
+    setCustomerEmail('');
+    setOrderId(null);
     setStep(1);
   };
 
@@ -306,16 +309,21 @@ const DTCDeletePage = () => {
               </div>
             </div>
             
-            {/* Progress Steps */}
+            {/* Progress Steps - Now 4 steps */}
             <div className="flex items-center space-x-2">
-              {[1, 2, 3].map((s) => (
-                <div key={s} className="flex items-center">
+              {[
+                { num: 1, label: 'Upload' },
+                { num: 2, label: 'Select' },
+                { num: 3, label: 'Pay' },
+                { num: 4, label: 'Done' }
+              ].map((s, idx) => (
+                <div key={s.num} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                    step >= s ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-500'
+                    step >= s.num ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-500'
                   }`}>
-                    {s}
+                    {s.num}
                   </div>
-                  {s < 3 && <div className={`w-8 h-0.5 ${step > s ? 'bg-red-500' : 'bg-gray-200'}`} />}
+                  {idx < 3 && <div className={`w-6 h-0.5 ${step > s.num ? 'bg-red-500' : 'bg-gray-200'}`} />}
                 </div>
               ))}
             </div>
@@ -331,6 +339,31 @@ const DTCDeletePage = () => {
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Upload ECU File</h2>
               <p className="text-gray-500">Upload your ECU file to scan and delete specific DTCs</p>
+            </div>
+            
+            {/* Pricing Info */}
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-100 rounded-xl p-6 mb-8">
+              <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
+                <span className="mr-2">💰</span> Pricing
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="bg-white rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-red-600">$10</div>
+                  <div className="text-gray-600">1 DTC</div>
+                </div>
+                <div className="bg-white rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-red-600">$20</div>
+                  <div className="text-gray-600">2-6 DTCs</div>
+                </div>
+                <div className="bg-white rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-red-600">$30</div>
+                  <div className="text-gray-600">7+ DTCs</div>
+                </div>
+                <div className="bg-white rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-orange-600">+$5</div>
+                  <div className="text-gray-600">Checksum</div>
+                </div>
+              </div>
             </div>
             
             <div
