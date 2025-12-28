@@ -657,6 +657,7 @@ class ECUServiceTester:
                     print(f"   ✓ Selected: {service['name']} (${service['base_price']})")
             
             print(f"   ✓ Total expected price: ${total_expected_price}")
+            print(f"   ⚠️ Note: Backend may apply combo pricing for EGR+DPF")
             
             # Step 3: Test price calculation
             print("\nStep 3: Testing price calculation...")
