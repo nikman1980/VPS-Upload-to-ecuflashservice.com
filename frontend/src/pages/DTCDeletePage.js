@@ -6,6 +6,74 @@ import { useDropzone } from 'react-dropzone';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// DTC Descriptions for common codes
+const DTC_DESCRIPTIONS = {
+  // Catalyst
+  'P0420': 'Catalyst System Efficiency Below Threshold (Bank 1)',
+  'P0421': 'Warm Up Catalyst Efficiency Below Threshold (Bank 1)',
+  'P0430': 'Catalyst System Efficiency Below Threshold (Bank 2)',
+  'P0431': 'Warm Up Catalyst Efficiency Below Threshold (Bank 2)',
+  // EGR
+  'P0400': 'Exhaust Gas Recirculation Flow Malfunction',
+  'P0401': 'EGR Flow Insufficient Detected',
+  'P0402': 'EGR Flow Excessive Detected',
+  'P0403': 'EGR Control Circuit Malfunction',
+  'P0404': 'EGR Control Circuit Range/Performance',
+  'P0405': 'EGR Sensor A Circuit Low',
+  'P0406': 'EGR Sensor A Circuit High',
+  'P0407': 'EGR Sensor B Circuit Low',
+  'P0408': 'EGR Sensor B Circuit High',
+  // DPF
+  'P2002': 'DPF Efficiency Below Threshold (Bank 1)',
+  'P2003': 'DPF Efficiency Below Threshold (Bank 2)',
+  'P244A': 'DPF Differential Pressure Too Low',
+  'P244B': 'DPF Differential Pressure Too High',
+  'P2452': 'DPF Pressure Sensor A Circuit',
+  'P2453': 'DPF Pressure Sensor A Range/Performance',
+  'P2454': 'DPF Pressure Sensor A Circuit Low',
+  'P2455': 'DPF Pressure Sensor A Circuit High',
+  'P2458': 'DPF Regeneration Duration',
+  'P2459': 'DPF Regeneration Frequency',
+  'P2463': 'DPF Soot Accumulation',
+  // SCR/AdBlue
+  'P20E8': 'Reductant Pressure Too Low',
+  'P20EE': 'SCR NOx Catalyst Efficiency Below Threshold (Bank 1)',
+  'P20EF': 'SCR NOx Catalyst Efficiency Below Threshold (Bank 2)',
+  'P2200': 'NOx Sensor Circuit (Bank 1)',
+  'P2201': 'NOx Sensor Circuit Range/Performance (Bank 1)',
+  'P2202': 'NOx Sensor Circuit Low Input (Bank 1)',
+  'P2203': 'NOx Sensor Circuit High Input (Bank 1)',
+  'P2BAD': 'NOx Exceedance - SCR Efficiency Below Threshold',
+  'P2BAE': 'NOx Exceedance - Derating Active',
+  'P203B': 'Reductant Level Sensor Range/Performance',
+  'P203F': 'Reductant Level Too Low',
+  'P207F': 'Reductant Quality Performance',
+  'P20A1': 'Reductant Injection Malfunction',
+  // O2 Sensors
+  'P0130': 'O2 Sensor Circuit Malfunction (Bank 1 Sensor 1)',
+  'P0131': 'O2 Sensor Circuit Low Voltage (Bank 1 Sensor 1)',
+  'P0132': 'O2 Sensor Circuit High Voltage (Bank 1 Sensor 1)',
+  'P0133': 'O2 Sensor Circuit Slow Response (Bank 1 Sensor 1)',
+  'P0134': 'O2 Sensor No Activity Detected (Bank 1 Sensor 1)',
+  'P0135': 'O2 Sensor Heater Circuit Malfunction (Bank 1 Sensor 1)',
+  'P0136': 'O2 Sensor Circuit Malfunction (Bank 1 Sensor 2)',
+  'P0137': 'O2 Sensor Circuit Low Voltage (Bank 1 Sensor 2)',
+  'P0138': 'O2 Sensor Circuit High Voltage (Bank 1 Sensor 2)',
+  'P0139': 'O2 Sensor Circuit Slow Response (Bank 1 Sensor 2)',
+  'P0140': 'O2 Sensor No Activity Detected (Bank 1 Sensor 2)',
+  'P0141': 'O2 Sensor Heater Circuit Malfunction (Bank 1 Sensor 2)',
+  // Turbo
+  'P0234': 'Turbocharger Overboost Condition',
+  'P0235': 'Turbocharger Boost Sensor A Circuit Malfunction',
+  'P0236': 'Turbocharger Boost Sensor A Range/Performance',
+  'P0299': 'Turbocharger Underboost Condition',
+};
+
+// Get description for a DTC code
+const getDTCDescription = (code) => {
+  return DTC_DESCRIPTIONS[code?.toUpperCase()] || 'Diagnostic Trouble Code';
+};
+
 // Common DTC categories for quick selection
 const DTC_CATEGORIES = {
   dpf: {
