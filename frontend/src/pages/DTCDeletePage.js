@@ -893,20 +893,28 @@ const DTCDeletePage = () => {
                 </div>
               )}
 
-              {/* Not Found DTCs - Compact */}
+              {/* Not Found DTCs - With Descriptions */}
               {processResult.dtcs_not_found?.length > 0 && (
                 <div className="p-4 border-b border-gray-200 bg-yellow-50/50">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-3">
                     <span className="text-yellow-500">⚠</span>
                     <span className="text-sm font-medium text-gray-700">Not Found ({processResult.dtcs_not_found.length})</span>
                   </div>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="space-y-2">
                     {processResult.dtcs_not_found.map((code, idx) => (
-                      <span key={idx} className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-mono">
-                        {code}
-                      </span>
+                      <div key={idx} className="flex items-start gap-2 bg-yellow-100/50 rounded-lg p-2">
+                        <span className="bg-yellow-200 text-yellow-800 px-2 py-0.5 rounded font-mono text-xs font-semibold whitespace-nowrap">
+                          {code}
+                        </span>
+                        <span className="text-xs text-gray-600 leading-relaxed">
+                          {getDTCDescription(code)}
+                        </span>
+                      </div>
                     ))}
                   </div>
+                  <p className="text-xs text-yellow-600 mt-2">
+                    These DTCs were not found in the file. They may not be stored in this ECU.
+                  </p>
                 </div>
               )}
 
