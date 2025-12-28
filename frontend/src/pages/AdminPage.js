@@ -432,7 +432,11 @@ const AdminPage = () => {
                               <div className="text-sm font-medium text-gray-900">{order.customer_name}</div>
                               <div className="text-xs text-gray-500">{order.customer_email}</div>
                             </td>
-                            <td className="px-4 py-3 text-sm text-gray-600">{order.vehicle_info || '-'}</td>
+                            <td className="px-4 py-3 text-sm text-gray-600">
+                              {order.vehicle_info || 
+                               (order.vehicle_make && `${order.vehicle_year || ''} ${order.vehicle_make} ${order.vehicle_model || ''}`.trim()) ||
+                               '-'}
+                            </td>
                             <td className="px-4 py-3 text-sm text-gray-600">
                               {(order.services || order.selected_services || []).slice(0, 2).map(s => typeof s === 'object' ? s.name : s).join(', ') || '-'}
                             </td>
