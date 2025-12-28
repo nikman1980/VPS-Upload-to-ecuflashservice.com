@@ -306,7 +306,6 @@ const CustomerPortal = () => {
     setSelectedVehicleType('');
     setSelectedManufacturer('');
     setSelectedModel('');
-    setSelectedGeneration('');
     setSelectedEngine('');
     setSelectedEcu('');
     setIsManualVehicle(false);
