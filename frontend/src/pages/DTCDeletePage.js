@@ -432,9 +432,9 @@ const DTCDeletePage = () => {
                   <div>
                     <h3 className="font-semibold text-gray-900">{file?.name}</h3>
                     <p className="text-sm text-gray-500">
-                      {(file?.size / 1024 / 1024).toFixed(2)} MB • 
-                      {analysisResult.ecu_info?.manufacturer || 'Unknown'} • 
-                      {analysisResult.ecu_info?.type || 'Unknown ECU'}
+                      {(file?.size / 1024 / 1024).toFixed(2)} MB
+                      {analysisResult.ecu_info?.manufacturer && analysisResult.ecu_info.manufacturer !== 'Unknown' && ` • ${analysisResult.ecu_info.manufacturer}`}
+                      {analysisResult.ecu_info?.type && analysisResult.ecu_info.type !== 'Unknown' && ` • ${analysisResult.ecu_info.type}`}
                     </p>
                   </div>
                 </div>
@@ -450,7 +450,7 @@ const DTCDeletePage = () => {
               <div className="bg-gray-50 rounded-xl p-4 text-sm">
                 <div className="flex items-center space-x-2 text-gray-600">
                   <span>🔐</span>
-                  <span>Checksum Type: <strong className="text-gray-900">{analysisResult.checksum_info?.type || 'Unknown'}</strong></span>
+                  <span>Checksum Type: <strong className="text-gray-900">{analysisResult.checksum_info?.type || 'Detecting...'}</strong></span>
                 </div>
               </div>
             </div>
