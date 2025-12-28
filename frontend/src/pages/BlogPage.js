@@ -1966,43 +1966,36 @@ const BlogPage = () => {
         </div>
       </div>
       
-      {/* Articles Grid */}
-      <section className="container mx-auto px-4 pb-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredArticles.map(article => (
-            <Link
-              key={article.id}
-              to={`/blog/${article.id}`}
-              className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition group border border-gray-100"
-            >
-              <div className="h-48 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center relative">
-                <span className="text-7xl">{article.emoji}</span>
-                <div className="absolute top-4 right-4">
-                  <span className="bg-white/90 text-gray-700 px-2 py-1 rounded text-xs font-medium shadow-sm">
-                    {article.readTime}
-                  </span>
+      {/* Articles Grid - Compact Flush Design */}
+      <section className="container mx-auto px-4 pb-12">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 divide-x divide-y divide-gray-100">
+            {filteredArticles.map((article, idx) => (
+              <Link
+                key={article.id}
+                to={`/blog/${article.id}`}
+                className="flex items-start gap-4 p-5 hover:bg-gray-50 transition group"
+              >
+                {/* Icon */}
+                <div className="w-14 h-14 flex-shrink-0 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl flex items-center justify-center border border-gray-100">
+                  <span className="text-3xl">{article.emoji}</span>
                 </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">
-                    {article.category}
-                  </span>
-                  <span className="text-gray-400 text-xs">{article.date}</span>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
+                      {article.category}
+                    </span>
+                    <span className="text-gray-400 text-xs">{article.readTime}</span>
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition line-clamp-2 leading-snug">
+                    {article.title}
+                  </h3>
+                  <p className="text-gray-500 text-xs mt-1 line-clamp-2">{article.excerpt}</p>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition line-clamp-2">
-                  {article.title}
-                </h3>
-                <p className="text-gray-600 text-sm line-clamp-3">{article.excerpt}</p>
-                <div className="mt-4 flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
-                  Read Article
-                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
       
