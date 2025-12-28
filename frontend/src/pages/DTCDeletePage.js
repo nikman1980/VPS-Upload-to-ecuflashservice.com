@@ -755,14 +755,17 @@ const DTCDeletePage = () => {
                       <span className="text-xl">🔍</span>
                       <div>
                         <div className="font-semibold">
-                          {analysisResult.ecu_info?.manufacturer || 'Unknown'} {analysisResult.ecu_info?.type || 'ECU'}
+                          {[
+                            analysisResult.ecu_info?.manufacturer && analysisResult.ecu_info.manufacturer !== 'Unknown' ? analysisResult.ecu_info.manufacturer : null,
+                            analysisResult.ecu_info?.type && analysisResult.ecu_info.type !== 'Unknown' ? analysisResult.ecu_info.type : null
+                          ].filter(Boolean).join(' ') || 'ECU File'}
                         </div>
                         <div className="text-xs text-white/80">{file?.name} • {(file?.size / 1024 / 1024).toFixed(2)} MB</div>
                       </div>
                     </div>
                     <div className="text-right text-sm">
                       <div className="text-white/80">Checksum</div>
-                      <div className="font-mono">{analysisResult.checksum_info?.type || processResult.checksum_type}</div>
+                      <div className="font-mono">{analysisResult.checksum_info?.type || processResult.checksum_type || 'auto'}</div>
                     </div>
                   </div>
                 </div>
