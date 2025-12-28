@@ -457,49 +457,59 @@ const AdminPage = () => {
             
             {/* Files Section */}
             <div className="mb-6">
-              <h4 className="font-semibold text-gray-900 mb-3">Files</h4>
+              <h4 className="font-semibold text-gray-900 mb-3">📁 Files</h4>
               
-              {/* Original File */}
-              {(selectedOrder.original_file || selectedOrder.uploaded_files?.length > 0) && (
-                <div className="bg-gray-50 rounded-xl p-3 mb-3">
+              {/* Original File - Customer's Upload */}
+              {(selectedOrder.original_file || selectedOrder.uploaded_files?.length > 0) ? (
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-xs text-gray-500">Original File</div>
-                      <div className="text-sm font-medium">
+                      <div className="text-xs text-blue-600 font-medium mb-1">📥 CUSTOMER'S ORIGINAL FILE</div>
+                      <div className="text-sm font-medium text-gray-900">
                         {selectedOrder.original_filename || selectedOrder.uploaded_files?.[0]?.original_name || 'ECU File'}
                       </div>
+                      {selectedOrder.file_size_mb && (
+                        <div className="text-xs text-gray-500">{selectedOrder.file_size_mb?.toFixed(2)} MB</div>
+                      )}
                     </div>
                     <button
                       onClick={() => downloadFile(selectedOrder.original_file || selectedOrder.uploaded_files?.[0]?.file_id)}
-                      className="text-blue-600 hover:text-blue-700 text-sm"
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
                     >
-                      Download
+                      ⬇️ Download
                     </button>
                   </div>
                 </div>
+              ) : (
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-3 text-center">
+                  <span className="text-gray-400">No original file found</span>
+                </div>
               )}
               
-              {/* Modified File */}
+              {/* Modified File - Your Upload */}
               {selectedOrder.modified_file ? (
-                <div className="bg-green-50 rounded-xl p-3 mb-3">
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-xs text-green-600">Modified File ✓</div>
+                      <div className="text-xs text-green-600 font-medium mb-1">✅ MODIFIED FILE (Ready)</div>
                       <div className="text-sm font-medium text-green-700">
                         {selectedOrder.modified_filename || 'Modified ECU File'}
                       </div>
                     </div>
                     <button
                       onClick={() => downloadFile(selectedOrder.modified_file)}
-                      className="text-green-600 hover:text-green-700 text-sm"
+                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
                     >
-                      Download
+                      ⬇️ Download
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="bg-yellow-50 rounded-xl p-3 mb-3">
-                  <div className="text-xs text-yellow-600 mb-2">No modified file yet</div>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-3">
+                  <div className="text-xs text-yellow-700 font-medium mb-2">⏳ UPLOAD MODIFIED FILE</div>
+                  <p className="text-sm text-yellow-600 mb-3">
+                    Download the customer's file above, process it, then upload the modified version here.
+                  </p>
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -510,7 +520,7 @@ const AdminPage = () => {
                   <button
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploadingFile}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg text-sm font-medium transition disabled:opacity-50"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg text-sm font-medium transition disabled:opacity-50"
                   >
                     {uploadingFile ? `Uploading... ${uploadProgress}%` : '📤 Upload Modified File'}
                   </button>
@@ -518,24 +528,26 @@ const AdminPage = () => {
               )}
             </div>
             
-            {/* Send Download Link */}
+            {/* Send to Customer Section */}
             {selectedOrder.modified_file && (
               <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-3">Email Customer</h4>
-                <button
-                  onClick={sendDownloadEmail}
-                  disabled={sendingEmail}
-                  className={`w-full py-3 rounded-xl font-medium transition ${
-                    emailSent
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white hover:shadow-lg'
-                  } disabled:opacity-50`}
-                >
-                  {emailSent ? '✓ Email Sent!' : sendingEmail ? 'Sending...' : '📧 Send Download Link'}
-                </button>
-                <p className="text-xs text-gray-500 mt-2 text-center">
-                  Sends email to {selectedOrder.customer_email}
-                </p>
+                <h4 className="font-semibold text-gray-900 mb-3">📧 Send to Customer</h4>
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4">
+                  <p className="text-sm text-gray-600 mb-3">
+                    Send download link to <strong>{selectedOrder.customer_email}</strong>
+                  </p>
+                  <button
+                    onClick={sendDownloadEmail}
+                    disabled={sendingEmail}
+                    className={`w-full py-3 rounded-xl font-medium transition ${
+                      emailSent
+                        ? 'bg-green-500 text-white'
+                        : 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white hover:shadow-lg'
+                    } disabled:opacity-50`}
+                  >
+                    {emailSent ? '✓ Email Sent!' : sendingEmail ? 'Sending...' : '📧 Send Download Link Email'}
+                  </button>
+                </div>
               </div>
             )}
             
