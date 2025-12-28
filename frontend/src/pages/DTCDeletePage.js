@@ -554,39 +554,165 @@ const DTCDeletePage = () => {
                   onChange={(e) => setCorrectChecksum(e.target.checked)}
                   className="w-5 h-5 text-blue-600 rounded"
                 />
-                <label htmlFor="checksum" className="text-sm">
-                  <span className="font-medium text-gray-900">Automatic Checksum Correction</span>
+                <label htmlFor="checksum" className="text-sm flex-1">
+                  <span className="font-medium text-gray-900">Automatic Checksum Correction (+$5)</span>
                   <span className="text-gray-500 block">Recalculate file checksum after DTC deletion</span>
                 </label>
+                <span className="text-blue-600 font-semibold">${correctChecksum ? '5.00' : '0.00'}</span>
               </div>
 
-              {/* Process Button */}
+              {/* Price Summary */}
+              {selectedDTCs.length > 0 && (
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4 mb-6">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-600">DTC Removal ({selectedDTCs.length} code{selectedDTCs.length !== 1 ? 's' : ''})</span>
+                    <span className="font-semibold">${pricing.dtcPrice.toFixed(2)}</span>
+                  </div>
+                  {correctChecksum && (
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-600">Checksum Correction</span>
+                      <span className="font-semibold">${pricing.checksumPrice.toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="border-t border-gray-300 pt-2 mt-2 flex justify-between items-center">
+                    <span className="font-bold text-gray-900">Total</span>
+                    <span className="text-2xl font-bold text-red-600">${pricing.total.toFixed(2)}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Continue to Payment Button */}
               <button
-                onClick={processFile}
-                disabled={selectedDTCs.length === 0 || processing}
+                onClick={() => setStep(3)}
+                disabled={selectedDTCs.length === 0}
                 className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
-                {processing ? (
-                  <>
-                    <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Processing...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>🗑️</span>
-                    <span>Delete {selectedDTCs.length} DTC{selectedDTCs.length !== 1 ? 's' : ''}</span>
-                  </>
-                )}
+                <span>💳</span>
+                <span>Continue to Payment - ${pricing.total.toFixed(2)}</span>
               </button>
             </div>
           </div>
         )}
 
-        {/* Step 3: Results */}
-        {step === 3 && processResult && (
+        {/* Step 3: Payment */}
+        {step === 3 && (
+          <div className="space-y-6">
+            {/* Order Summary */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-6">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="mr-2">📋</span> Order Summary
+              </h3>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span className="text-gray-600">File</span>
+                  <span className="font-medium text-gray-900">{file?.name}</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span className="text-gray-600">DTCs to Delete</span>
+                  <span className="font-medium text-gray-900">{selectedDTCs.length} code{selectedDTCs.length !== 1 ? 's' : ''}</span>
+                </div>
+                <div className="flex flex-wrap gap-1 py-2 border-b border-gray-100">
+                  {selectedDTCs.map(code => (
+                    <span key={code} className="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-mono">{code}</span>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                  <span className="text-gray-600">DTC Removal</span>
+                  <span className="font-semibold">${pricing.dtcPrice.toFixed(2)}</span>
+                </div>
+                {correctChecksum && (
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="text-gray-600">Checksum Correction</span>
+                    <span className="font-semibold">${pricing.checksumPrice.toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center py-3 bg-gray-50 rounded-lg px-3">
+                  <span className="font-bold text-gray-900">Total</span>
+                  <span className="text-2xl font-bold text-red-600">${pricing.total.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Customer Info */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-6">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="mr-2">👤</span> Your Information
+              </h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder="John Doe"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <input
+                    type="email"
+                    value={customerEmail}
+                    onChange={(e) => setCustomerEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">We'll send the modified file to this email</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Section */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-6">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="mr-2">💳</span> Payment
+              </h3>
+              
+              {/* PayPal Button Placeholder */}
+              <div className="bg-gray-50 rounded-xl p-6 text-center mb-4">
+                <p className="text-gray-500 mb-4">PayPal payment coming soon</p>
+                
+                {/* Skip Payment Button for Testing */}
+                <button
+                  onClick={() => createOrderAndPay(true)}
+                  disabled={processing || !customerName || !customerEmail}
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-4 rounded-xl font-semibold transition disabled:opacity-50 flex items-center justify-center space-x-2"
+                >
+                  {processing ? (
+                    <>
+                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>🧪</span>
+                      <span>Skip Payment (Test Mode) - ${pricing.total.toFixed(2)}</span>
+                    </>
+                  )}
+                </button>
+                <p className="text-xs text-yellow-600 mt-2">For testing only - bypasses payment</p>
+              </div>
+
+              <button
+                onClick={() => setStep(2)}
+                className="w-full py-3 text-gray-500 hover:text-gray-700 transition"
+              >
+                ← Back to DTC Selection
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 4: Results */}
+        {step === 4 && processResult && (
           <div className="space-y-6">
             {/* Success Banner */}
             <div className={`rounded-2xl p-6 ${processResult.success ? 'bg-green-500' : 'bg-yellow-500'} text-white`}>
