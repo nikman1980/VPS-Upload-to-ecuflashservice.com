@@ -120,6 +120,237 @@ const CustomerPortal = () => {
     { id: 'start-stop-off', name: 'Start & Stop OFF', price: 40 },
   ];
 
+  // Fetch vehicle types on component mount
+  useEffect(() => {
+    const fetchVehicleTypes = async () => {
+      try {
+        const response = await axios.get(`${API}/vehicles/types`);
+        setVehicleTypes(response.data || []);
+      } catch (error) {
+        console.error('Error fetching vehicle types:', error);
+      }
+    };
+    fetchVehicleTypes();
+  }, []);
+
+  // Fetch manufacturers when vehicle type changes
+  const handleVehicleTypeChange = async (typeId) => {
+    setSelectedVehicleType(typeId);
+    setSelectedManufacturer('');
+    setSelectedModel('');
+    setSelectedGeneration('');
+    setSelectedEngine('');
+    setSelectedEcu('');
+    setManufacturers([]);
+    setModels([]);
+    setGenerations([]);
+    setEngines([]);
+    
+    if (typeId === 'other') {
+      setIsManualVehicle(true);
+      return;
+    }
+    
+    setIsManualVehicle(false);
+    if (!typeId) return;
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/manufacturers/${typeId}`);
+      setManufacturers(response.data || []);
+    } catch (error) {
+      console.error('Error fetching manufacturers:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch models when manufacturer changes
+  const handleManufacturerChange = async (manufacturerId) => {
+    setSelectedManufacturer(manufacturerId);
+    setSelectedModel('');
+    setSelectedGeneration('');
+    setSelectedEngine('');
+    setSelectedEcu('');
+    setModels([]);
+    setGenerations([]);
+    setEngines([]);
+    
+    if (!manufacturerId) return;
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/models/${manufacturerId}`);
+      setModels(response.data || []);
+    } catch (error) {
+      console.error('Error fetching models:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch generations when model changes
+  const handleModelChange = async (modelId) => {
+    setSelectedModel(modelId);
+    setSelectedGeneration('');
+    setSelectedEngine('');
+    setSelectedEcu('');
+    setGenerations([]);
+    setEngines([]);
+    
+    if (!modelId) return;
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/generations/${modelId}`);
+      setGenerations(response.data || []);
+    } catch (error) {
+      console.error('Error fetching generations:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch engines when generation changes
+  const handleGenerationChange = async (generationId) => {
+    setSelectedGeneration(generationId);
+    setSelectedEngine('');
+    setSelectedEcu('');
+    setEngines([]);
+    
+    if (!generationId) return;
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/engines/${generationId}`);
+      setEngines(response.data || []);
+    } catch (error) {
+      console.error('Error fetching engines:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Fetch ECU types when engine changes
+  const handleEngineChange = async (engineId) => {
+    setSelectedEngine(engineId);
+    setSelectedEcu('');
+    
+    if (!engineId) return;
+    
+    setVehicleLoading(true);
+    try {
+      const response = await axios.get(`${API}/vehicles/ecus/${engineId}`);
+      setEcuTypes(response.data || []);
+    } catch (error) {
+      console.error('Error fetching ECU types:', error);
+    }
+    setVehicleLoading(false);
+  };
+
+  // Get vehicle summary for display
+  const getVehicleSummary = () => {
+    if (isManualVehicle) {
+      const parts = [manualVehicle.year, manualVehicle.make, manualVehicle.model].filter(Boolean);
+      return parts.length > 0 ? parts.join(' ') : 'Manual Entry';
+    }
+    
+    const manufacturer = manufacturers.find(m => m.id === selectedManufacturer);
+    const model = models.find(m => m.id === selectedModel);
+    const generation = generations.find(g => g.id === selectedGeneration);
+    
+    const parts = [
+      generation?.years || '',
+      manufacturer?.name || '',
+      model?.name || ''
+    ].filter(Boolean);
+    
+    return parts.join(' ') || 'Select Vehicle';
+  };
+
+  // Get ECU name for display
+  const getEcuName = () => {
+    if (isManualVehicle) {
+      const ecu = commonEcuTypes.find(e => e.id === selectedEcu);
+      return ecu?.name || '';
+    }
+    const ecu = ecuTypes.find(e => e.id === selectedEcu);
+    return ecu?.name || '';
+  };
+
+  // Check if vehicle selection is complete
+  const isVehicleComplete = () => {
+    if (isManualVehicle) {
+      return manualVehicle.make && manualVehicle.model && selectedEcu;
+    }
+    return selectedVehicleType && selectedManufacturer && selectedModel && selectedEcu;
+  };
+
+  // Analyze uploaded file
+  const analyzeFile = async () => {
+    if (!newOrderFile) return;
+    
+    setAnalyzing(true);
+    const formData = new FormData();
+    formData.append('file', newOrderFile);
+    
+    // Add vehicle info
+    if (isManualVehicle) {
+      formData.append('vehicle_type', 'Other');
+      formData.append('manufacturer', manualVehicle.make);
+      formData.append('model', manualVehicle.model);
+      formData.append('year', manualVehicle.year);
+      formData.append('engine', manualVehicle.engine);
+    } else {
+      const vType = vehicleTypes.find(v => v.id === selectedVehicleType);
+      const manufacturer = manufacturers.find(m => m.id === selectedManufacturer);
+      const model = models.find(m => m.id === selectedModel);
+      const generation = generations.find(g => g.id === selectedGeneration);
+      const engine = engines.find(e => e.id === selectedEngine);
+      
+      formData.append('vehicle_type', vType?.name || '');
+      formData.append('manufacturer', manufacturer?.name || '');
+      formData.append('model', model?.name || '');
+      formData.append('year', generation?.years || '');
+      formData.append('engine', engine?.name || '');
+    }
+    
+    formData.append('ecu_type', getEcuName());
+    
+    try {
+      const response = await axios.post(`${API}/analyze-and-process-file`, formData);
+      
+      if (response.data.success) {
+        setFileId(response.data.file_id);
+        setAnalysisResult(response.data);
+        setDetectedServices(response.data.available_options || []);
+        setNewOrderStep(4); // Move to services step
+      } else {
+        alert('Analysis failed: ' + (response.data.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Error analyzing file:', error);
+      alert('Error analyzing file. Please try again.');
+    } finally {
+      setAnalyzing(false);
+    }
+  };
+
+  // Reset new order form
+  const resetNewOrder = () => {
+    setNewOrderStep(1);
+    setNewOrderFile(null);
+    setNewOrderServices([]);
+    setNewOrderNotes('');
+    setSelectedVehicleType('');
+    setSelectedManufacturer('');
+    setSelectedModel('');
+    setSelectedGeneration('');
+    setSelectedEngine('');
+    setSelectedEcu('');
+    setIsManualVehicle(false);
+    setManualVehicle({ make: '', model: '', year: '', engine: '' });
+    setAnalysisResult(null);
+    setDetectedServices([]);
+    setFileId(null);
+  };
+
   // Check URL params for auto-login
   useEffect(() => {
     const email = searchParams.get('email');
