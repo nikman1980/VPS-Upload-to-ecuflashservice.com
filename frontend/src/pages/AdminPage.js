@@ -522,11 +522,69 @@ const AdminPage = () => {
               </div>
             </div>
             
-            {/* Vehicle */}
-            {selectedOrder.vehicle_info && (
-              <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-3">Vehicle</h4>
-                <div className="bg-gray-50 rounded-xl p-3 text-sm">{selectedOrder.vehicle_info}</div>
+            {/* Vehicle Details - Enhanced */}
+            <div className="mb-6">
+              <h4 className="font-semibold text-gray-900 mb-3">🚗 Vehicle Details</h4>
+              {(selectedOrder.vehicle_info || selectedOrder.vehicle || selectedOrder.selected_vehicle) ? (
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4">
+                  {/* Main Vehicle Info */}
+                  <div className="text-lg font-semibold text-gray-900 mb-2">
+                    {selectedOrder.vehicle_info || 
+                     (selectedOrder.vehicle && `${selectedOrder.vehicle.year || ''} ${selectedOrder.vehicle.make || ''} ${selectedOrder.vehicle.model || ''}`.trim()) ||
+                     (selectedOrder.selected_vehicle && `${selectedOrder.selected_vehicle.year || ''} ${selectedOrder.selected_vehicle.make || ''} ${selectedOrder.selected_vehicle.model || ''}`.trim()) ||
+                     'Vehicle info not specified'}
+                  </div>
+                  
+                  {/* Detailed breakdown if available */}
+                  {(selectedOrder.vehicle || selectedOrder.selected_vehicle) && (
+                    <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
+                      {(selectedOrder.vehicle?.make || selectedOrder.selected_vehicle?.make) && (
+                        <div>
+                          <span className="text-gray-500">Make:</span>
+                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.make || selectedOrder.selected_vehicle?.make}</span>
+                        </div>
+                      )}
+                      {(selectedOrder.vehicle?.model || selectedOrder.selected_vehicle?.model) && (
+                        <div>
+                          <span className="text-gray-500">Model:</span>
+                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.model || selectedOrder.selected_vehicle?.model}</span>
+                        </div>
+                      )}
+                      {(selectedOrder.vehicle?.year || selectedOrder.selected_vehicle?.year) && (
+                        <div>
+                          <span className="text-gray-500">Year:</span>
+                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.year || selectedOrder.selected_vehicle?.year}</span>
+                        </div>
+                      )}
+                      {(selectedOrder.vehicle?.engine || selectedOrder.selected_vehicle?.engine || selectedOrder.engine_info) && (
+                        <div>
+                          <span className="text-gray-500">Engine:</span>
+                          <span className="ml-2 font-medium">{selectedOrder.vehicle?.engine || selectedOrder.selected_vehicle?.engine || selectedOrder.engine_info}</span>
+                        </div>
+                      )}
+                      {(selectedOrder.vehicle?.ecu || selectedOrder.selected_vehicle?.ecu || selectedOrder.ecu_type) && (
+                        <div className="col-span-2">
+                          <span className="text-gray-500">ECU:</span>
+                          <span className="ml-2 font-medium text-blue-600">{selectedOrder.vehicle?.ecu || selectedOrder.selected_vehicle?.ecu || selectedOrder.ecu_type}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Vehicle Type Badge */}
+                  {(selectedOrder.vehicle_type || selectedOrder.selected_vehicle_type) && (
+                    <div className="mt-3">
+                      <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">
+                        {selectedOrder.vehicle_type || selectedOrder.selected_vehicle_type}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center text-gray-400">
+                  No vehicle information provided
+                </div>
+              )}
               </div>
             )}
             
