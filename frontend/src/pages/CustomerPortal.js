@@ -56,16 +56,21 @@ const CustomerPortal = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [settingsMessage, setSettingsMessage] = useState({ type: '', text: '' });
 
-  // Available services
+  // Available services - using original app pricing
   const availableServices = [
-    { id: 'dpf_off', name: 'DPF Off', price: 50 },
-    { id: 'egr_off', name: 'EGR Off', price: 40 },
-    { id: 'adblue_off', name: 'AdBlue Off', price: 45 },
-    { id: 'dtc_removal', name: 'DTC Removal', price: 30 },
-    { id: 'lambda_off', name: 'Lambda Off', price: 35 },
-    { id: 'speed_limit', name: 'Speed Limiter Off', price: 40 },
-    { id: 'stage1', name: 'Stage 1 Tuning', price: 150 },
-    { id: 'stage2', name: 'Stage 2 Tuning', price: 250 },
+    { id: 'dtc-single', name: 'DTC Removal (Single)', price: 20 },
+    { id: 'dtc-multiple', name: 'DTC Removal (Multiple)', price: 50 },
+    { id: 'egr-removal', name: 'EGR Removal', price: 50 },
+    { id: 'dpf-removal', name: 'DPF Removal', price: 248 },
+    { id: 'egr-dpf-combo', name: 'EGR + DPF Combo', price: 248 },
+    { id: 'adblue-removal', name: 'AdBlue/DEF Removal', price: 698 },
+    { id: 'immo-off', name: 'Immobilizer Off', price: 70 },
+    { id: 'decat', name: 'Decat (Cat OFF)', price: 40 },
+    { id: 'vmax-off', name: 'Speed Limiter OFF', price: 30 },
+    { id: 'checksum', name: 'Checksum Correction', price: 10 },
+    { id: 'swirl-flap-off', name: 'Swirl Flap OFF', price: 40 },
+    { id: 'nox-off', name: 'NOX Sensor OFF', price: 40 },
+    { id: 'start-stop-off', name: 'Start & Stop OFF', price: 40 },
   ];
 
   // Check URL params for auto-login
