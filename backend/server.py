@@ -1028,6 +1028,75 @@ async def get_order_status(order_id: str):
     
     response = {
         "order_id": order_id,
+
+
+class CreateOrderRequest(BaseModel):
+    file_id: str
+    services: List[str]
+    total_amount: float
+    vehicle_info: dict
+    customer_email: str
+    customer_name: str
+    payment_status: str = "pending"
+    paypal_order_id: Optional[str] = None
+    paypal_transaction_id: Optional[str] = None
+
+
+@api_router.post("/orders")
+async def create_order_json(request: CreateOrderRequest):
+    """
+    Create an order via JSON (used by Skip Payment and other flows)
+    """
+    try:
+        order_id = str(uuid.uuid4())
+        
+        # Build services info
+        purchased_services = []
+        total_price = 0.0
+        for service_id in request.services:
+            if service_id in SERVICE_PRICING:
+                price = SERVICE_PRICING[service_id]["base_price"]
+                total_price += price
+                purchased_services.append({
+                    "service_id": service_id,
+                    "service_name": SERVICE_PRICING[service_id]["name"],
+                    "price": price
+                })
+        
+        # Create order document
+        order_doc = {
+            "id": order_id,
+            "file_id": request.file_id,
+            "customer_name": request.customer_name,
+            "customer_email": request.customer_email.lower().strip(),
+            "vehicle_make": request.vehicle_info.get("vehicle_make") or request.vehicle_info.get("manufacturer"),
+            "vehicle_model": request.vehicle_info.get("vehicle_model") or request.vehicle_info.get("model"),
+            "vehicle_year": request.vehicle_info.get("vehicle_year") or request.vehicle_info.get("year"),
+            "vehicle_engine": request.vehicle_info.get("engine"),
+            "vehicle_ecu": request.vehicle_info.get("ecu"),
+            "vehicle_type": request.vehicle_info.get("type"),
+            "purchased_services": purchased_services,
+            "total_price": request.total_amount or total_price,
+            "paypal_order_id": request.paypal_order_id,
+            "paypal_transaction_id": request.paypal_transaction_id,
+            "payment_status": request.payment_status,
+            "payment_date": datetime.now(timezone.utc).isoformat() if request.payment_status in ["completed", "test_completed"] else None,
+            "processing_status": "pending",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        await db.orders.insert_one(order_doc)
+        
+        logger.info(f"Order created: {order_id} for {request.customer_email}")
+        
+        return {
+            "success": True,
+            "order_id": order_id,
+            "message": "Order created successfully"
+        }
+    except Exception as e:
+        logger.error(f"Error creating order: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create order: {str(e)}")
         "processing_status": processing_status,
         "payment_status": order.get("payment_status"),
         "created_at": order.get("created_at"),
