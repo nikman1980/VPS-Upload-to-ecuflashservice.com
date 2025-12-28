@@ -180,14 +180,75 @@ const DTCDeletePage = () => {
       const response = await axios.post(`${API}/dtc-engine/process`, {
         file_id: fileId,
         dtc_codes: selectedDTCs,
-        correct_checksum: correctChecksum
+        correct_checksum: correctChecksum,
+        order_id: orderId
       });
       
       setProcessResult(response.data);
-      setStep(3);
+      setStep(4); // Changed from 3 to 4 (after payment step)
     } catch (error) {
       console.error('Processing error:', error);
       alert('Failed to process file: ' + (error.response?.data?.detail || error.message));
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  // Create order and process payment
+  const createOrderAndPay = async (skipPayment = false) => {
+    if (!customerEmail || !customerName) {
+      alert('Please fill in your name and email');
+      return;
+    }
+    
+    setProcessing(true);
+    try {
+      // Create order in database
+      const orderResponse = await axios.post(`${API}/dtc-engine/order`, {
+        file_id: fileId,
+        dtc_codes: selectedDTCs,
+        correct_checksum: correctChecksum,
+        customer_name: customerName,
+        customer_email: customerEmail,
+        dtc_price: pricing.dtcPrice,
+        checksum_price: pricing.checksumPrice,
+        total_price: pricing.total,
+        payment_status: skipPayment ? 'test_completed' : 'pending'
+      });
+      
+      if (orderResponse.data.success) {
+        setOrderId(orderResponse.data.order_id);
+        
+        // If skipping payment (test mode), process immediately
+        if (skipPayment) {
+          const processResponse = await axios.post(`${API}/dtc-engine/process`, {
+            file_id: fileId,
+            dtc_codes: selectedDTCs,
+            correct_checksum: correctChecksum,
+            order_id: orderResponse.data.order_id
+          });
+          
+          setProcessResult(processResponse.data);
+          setStep(4);
+        } else {
+          // TODO: Integrate PayPal payment here
+          // For now, show message
+          alert('PayPal payment integration coming soon. Using test mode.');
+          // Process after "payment"
+          const processResponse = await axios.post(`${API}/dtc-engine/process`, {
+            file_id: fileId,
+            dtc_codes: selectedDTCs,
+            correct_checksum: correctChecksum,
+            order_id: orderResponse.data.order_id
+          });
+          
+          setProcessResult(processResponse.data);
+          setStep(4);
+        }
+      }
+    } catch (error) {
+      console.error('Order error:', error);
+      alert('Failed to create order: ' + (error.response?.data?.detail || error.message));
     } finally {
       setProcessing(false);
     }
