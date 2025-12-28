@@ -41,12 +41,59 @@ const CustomerPortal = () => {
   // File upload state
   const [uploadingFile, setUploadingFile] = useState(false);
   
-  // New Order state
+  // New Order state - Enhanced with full vehicle selection
+  const [newOrderStep, setNewOrderStep] = useState(1); // 1: Vehicle, 2: Upload, 3: Analysis, 4: Services, 5: Confirm
   const [newOrderFile, setNewOrderFile] = useState(null);
   const [newOrderServices, setNewOrderServices] = useState([]);
   const [newOrderNotes, setNewOrderNotes] = useState('');
-  const [newOrderVehicle, setNewOrderVehicle] = useState({ make: '', model: '', year: '' });
   const [submittingOrder, setSubmittingOrder] = useState(false);
+  
+  // Vehicle Selection State
+  const [vehicleTypes, setVehicleTypes] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
+  const [models, setModels] = useState([]);
+  const [generations, setGenerations] = useState([]);
+  const [engines, setEngines] = useState([]);
+  const [ecuTypes, setEcuTypes] = useState([]);
+  
+  const [selectedVehicleType, setSelectedVehicleType] = useState('');
+  const [selectedManufacturer, setSelectedManufacturer] = useState('');
+  const [selectedModel, setSelectedModel] = useState('');
+  const [selectedGeneration, setSelectedGeneration] = useState('');
+  const [selectedEngine, setSelectedEngine] = useState('');
+  const [selectedEcu, setSelectedEcu] = useState('');
+  
+  // Manual vehicle entry
+  const [isManualVehicle, setIsManualVehicle] = useState(false);
+  const [manualVehicle, setManualVehicle] = useState({ make: '', model: '', year: '', engine: '' });
+  
+  // Vehicle loading states
+  const [vehicleLoading, setVehicleLoading] = useState(false);
+  
+  // ECU Analysis State
+  const [analyzing, setAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState(null);
+  const [detectedServices, setDetectedServices] = useState([]);
+  const [fileId, setFileId] = useState(null);
+  
+  // Common ECU types for manual entry
+  const commonEcuTypes = [
+    { id: 'bosch-edc17c50', name: 'Bosch EDC17C50' },
+    { id: 'bosch-edc17c46', name: 'Bosch EDC17C46' },
+    { id: 'bosch-edc17c54', name: 'Bosch EDC17C54' },
+    { id: 'bosch-edc17c64', name: 'Bosch EDC17C64' },
+    { id: 'bosch-edc16', name: 'Bosch EDC16' },
+    { id: 'bosch-med17', name: 'Bosch MED17' },
+    { id: 'bosch-me7', name: 'Bosch ME7' },
+    { id: 'siemens-sid201', name: 'Siemens SID201' },
+    { id: 'siemens-sid206', name: 'Siemens SID206' },
+    { id: 'siemens-sid803', name: 'Siemens SID803' },
+    { id: 'continental-simos18', name: 'Continental Simos 18' },
+    { id: 'delphi-dcm35', name: 'Delphi DCM3.5' },
+    { id: 'denso', name: 'Denso' },
+    { id: 'marelli', name: 'Marelli' },
+    { id: 'other', name: 'Other / Unknown' },
+  ];
   
   // Settings state
   const [editingProfile, setEditingProfile] = useState(false);
