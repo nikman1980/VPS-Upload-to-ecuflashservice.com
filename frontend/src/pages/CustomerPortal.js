@@ -553,8 +553,8 @@ const CustomerPortal = () => {
 
   // Submit new order from portal
   const submitNewOrder = async () => {
-    if (!newOrderFile) {
-      alert('Please select a file to upload');
+    if (!fileId && !newOrderFile) {
+      alert('Please upload and analyze a file first');
       return;
     }
     if (newOrderServices.length === 0) {
@@ -563,28 +563,57 @@ const CustomerPortal = () => {
     }
     
     setSubmittingOrder(true);
+    
+    // Build vehicle info
+    let vehicleInfo = {};
+    if (isManualVehicle) {
+      vehicleInfo = {
+        vehicle_make: manualVehicle.make,
+        vehicle_model: manualVehicle.model,
+        vehicle_year: manualVehicle.year,
+        engine: manualVehicle.engine,
+        ecu: getEcuName(),
+        type: 'Other'
+      };
+    } else {
+      const vType = vehicleTypes.find(v => v.id === selectedVehicleType);
+      const manufacturer = manufacturers.find(m => m.id === selectedManufacturer);
+      const model = models.find(m => m.id === selectedModel);
+      const generation = generations.find(g => g.id === selectedGeneration);
+      const engine = engines.find(e => e.id === selectedEngine);
+      
+      vehicleInfo = {
+        vehicle_make: manufacturer?.name || '',
+        vehicle_model: model?.name || '',
+        vehicle_year: generation?.years || '',
+        engine: engine?.name || '',
+        ecu: getEcuName(),
+        type: vType?.name || ''
+      };
+    }
+    
     const formData = new FormData();
-    formData.append('file', newOrderFile);
+    if (newOrderFile) {
+      formData.append('file', newOrderFile);
+    }
+    formData.append('file_id', fileId || '');
     formData.append('email', accountInfo?.email || loginEmail);
     formData.append('name', accountInfo?.name || 'Customer');
     formData.append('services', JSON.stringify(newOrderServices));
     formData.append('notes', newOrderNotes);
-    formData.append('vehicle', JSON.stringify(newOrderVehicle));
+    formData.append('vehicle', JSON.stringify(vehicleInfo));
     
     try {
       const response = await axios.post(`${API}/portal/new-order`, formData);
       if (response.data.success) {
-        alert('Order submitted successfully! You will be redirected to payment.');
+        alert('Order submitted successfully!');
         // Refresh orders
         const ordersResponse = await axios.post(`${API}/portal/login-email`, { email: accountInfo?.email || loginEmail });
         if (ordersResponse.data.success) {
           setOrders(ordersResponse.data.orders || []);
         }
         // Reset form
-        setNewOrderFile(null);
-        setNewOrderServices([]);
-        setNewOrderNotes('');
-        setNewOrderVehicle({ make: '', model: '', year: '' });
+        resetNewOrder();
         setActiveTab('orders');
       }
     } catch (error) {
