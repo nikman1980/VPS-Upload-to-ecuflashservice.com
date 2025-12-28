@@ -1905,7 +1905,7 @@ const NewUploadFlow = () => {
               <PayPalScriptProvider 
                 options={{ 
                   "client-id": PAYPAL_CLIENT_ID, 
-                  currency: "USD",
+                  currency: "EUR",
                   intent: "capture",
                   components: "buttons",
                   "enable-funding": "paypal",
