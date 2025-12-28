@@ -342,7 +342,7 @@ const DTCDeletePage = () => {
             </div>
             
             {/* Pricing Info */}
-            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-100 rounded-xl p-6 mb-8">
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-100 rounded-xl p-6 mb-6">
               <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
                 <span className="mr-2">💰</span> Pricing
               </h3>
@@ -362,6 +362,21 @@ const DTCDeletePage = () => {
                 <div className="bg-white rounded-lg p-3 text-center">
                   <div className="text-2xl font-bold text-orange-600">+$5</div>
                   <div className="text-gray-600">Checksum</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sub-Code Explanation */}
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+              <div className="flex items-start gap-3">
+                <span className="text-xl">ℹ️</span>
+                <div className="text-sm">
+                  <h4 className="font-semibold text-blue-900 mb-1">About DTC Sub-Codes (Fault Bytes)</h4>
+                  <p className="text-blue-700">
+                    A single DTC like <span className="font-mono bg-blue-100 px-1 rounded">P0421</span> may appear multiple times in your ECU with different 
+                    <strong> sub-codes</strong> (e.g., <span className="font-mono bg-blue-100 px-1 rounded">P0421-22</span>, <span className="font-mono bg-blue-100 px-1 rounded">P0421-AF</span>). 
+                    The tool will find and delete <strong>all instances</strong> of each DTC you select, including all its sub-codes/fault bytes.
+                  </p>
                 </div>
               </div>
             </div>
