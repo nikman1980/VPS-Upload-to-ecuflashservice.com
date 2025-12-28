@@ -143,7 +143,7 @@ CORS_ORIGINS=*
 
 ### Frontend (.env)
 ```
-REACT_APP_BACKEND_URL=https://engine-remap-2.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://ecutuner-3.preview.emergentagent.com
 ```
 
 ## ✅ Testing
