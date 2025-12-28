@@ -728,126 +728,133 @@ const DTCDeletePage = () => {
 
         {/* Step 4: Results */}
         {step === 4 && processResult && (
-          <div className="space-y-6">
-            {/* Success Banner */}
-            <div className={`rounded-2xl p-6 ${processResult.success ? 'bg-green-500' : 'bg-yellow-500'} text-white`}>
-              <div className="flex items-center space-x-4">
-                <div className="text-4xl">{processResult.success ? '✅' : '⚠️'}</div>
+          <div className="space-y-4">
+            {/* Success Banner - Compact */}
+            <div className={`rounded-xl p-4 ${processResult.success ? 'bg-green-500' : 'bg-yellow-500'} text-white`}>
+              <div className="flex items-center space-x-3">
+                <div className="text-3xl">{processResult.success ? '✅' : '⚠️'}</div>
                 <div>
-                  <h2 className="text-2xl font-bold">
-                    {processResult.success ? 'DTC Deletion Complete!' : 'Processing Completed with Warnings'}
+                  <h2 className="text-xl font-bold">
+                    {processResult.success ? 'DTC Deletion Complete!' : 'Processing Completed'}
                   </h2>
-                  <p className="opacity-90">
-                    {processResult.dtcs_deleted?.length || 0} DTC instance(s) deleted • 
+                  <p className="text-sm opacity-90">
+                    {processResult.dtcs_deleted?.length || 0} instance(s) deleted • 
                     {processResult.checksum_corrected ? ' Checksum corrected' : ' Checksum unchanged'}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Sub-Code / Fault Byte Explanation */}
-            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">💡</span>
-                <div>
-                  <h4 className="font-semibold text-blue-900 mb-1">Understanding DTC Sub-Codes / Fault Bytes</h4>
-                  <p className="text-sm text-blue-800 mb-2">
-                    Each DTC (e.g., <span className="font-mono bg-blue-100 px-1 rounded">P0421</span>) can have multiple <strong>sub-codes</strong> or <strong>fault bytes</strong> stored in the ECU. 
-                    For example: <span className="font-mono bg-blue-100 px-1 rounded">P0421-22</span>, <span className="font-mono bg-blue-100 px-1 rounded">P0421-AF</span>
-                  </p>
-                  <p className="text-sm text-blue-700">
-                    The suffix (e.g., <span className="font-mono">-22</span>) represents the <strong>fault byte</strong> which indicates specific failure conditions, freeze frame data, or test results. 
-                    When you delete a DTC, all its sub-code instances are removed from the ECU memory.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Results Summary */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Processing Results</h3>
-              
-              <div className="grid md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-green-50 rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-green-600">{processResult.dtcs_deleted?.length || 0}</div>
-                  <div className="text-sm text-green-700">Instances Deleted</div>
-                </div>
-                <div className="bg-yellow-50 rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-yellow-600">{processResult.dtcs_not_found?.length || 0}</div>
-                  <div className="text-sm text-yellow-700">Not Found</div>
-                </div>
-                <div className="bg-blue-50 rounded-xl p-4 text-center">
-                  <div className="text-3xl font-bold text-blue-600">{processResult.checksum_corrected ? '✓' : '—'}</div>
-                  <div className="text-sm text-blue-700">Checksum</div>
-                </div>
-              </div>
-
-              {/* Deleted DTCs with Sub-Codes */}
-              {processResult.dtcs_deleted?.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">✅ Successfully Deleted ({processResult.dtcs_deleted.length} instances):</h4>
-                  <div className="bg-green-50 rounded-xl p-4 overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="text-left text-gray-600 border-b border-green-200">
-                          <th className="pb-2 pr-4">DTC Code</th>
-                          <th className="pb-2 pr-4">Sub-Code</th>
-                          <th className="pb-2 pr-4">Fault Byte</th>
-                          <th className="pb-2 pr-4">Offset</th>
-                          <th className="pb-2">Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {processResult.dtcs_deleted.map((dtc, idx) => (
-                          <tr key={idx} className="border-b border-green-100 last:border-0">
-                            <td className="py-2 pr-4">
-                              <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded font-mono text-xs">
-                                {dtc.code}
-                              </span>
-                            </td>
-                            <td className="py-2 pr-4">
-                              {dtc.sub_code ? (
-                                <span className="bg-green-200 text-green-800 px-2 py-0.5 rounded font-mono text-xs font-semibold">
-                                  {dtc.sub_code}
-                                </span>
-                              ) : (
-                                <span className="text-gray-400">—</span>
-                              )}
-                            </td>
-                            <td className="py-2 pr-4">
-                              {dtc.sub_code_hex ? (
-                                <span className="font-mono text-xs text-gray-600">
-                                  0x{dtc.sub_code_hex}
-                                </span>
-                              ) : (
-                                <span className="text-gray-400">—</span>
-                              )}
-                            </td>
-                            <td className="py-2 pr-4">
-                              <span className="font-mono text-xs text-gray-500">
-                                {dtc.offset_hex || `0x${dtc.offset?.toString(16).toUpperCase().padStart(6, '0')}`}
-                              </span>
-                            </td>
-                            <td className="py-2 text-xs text-gray-600 max-w-xs truncate">
-                              {dtc.description}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+            {/* ECU Analysis Summary + Results - Combined Card */}
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+              {/* ECU Analysis Header */}
+              {analysisResult && (
+                <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3">
+                  <div className="flex items-center justify-between text-white">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">🔍</span>
+                      <div>
+                        <div className="font-semibold">
+                          {analysisResult.ecu_info?.manufacturer || 'Unknown'} {analysisResult.ecu_info?.type || 'ECU'}
+                        </div>
+                        <div className="text-xs text-white/80">{file?.name} • {(file?.size / 1024 / 1024).toFixed(2)} MB</div>
+                      </div>
+                    </div>
+                    <div className="text-right text-sm">
+                      <div className="text-white/80">Checksum</div>
+                      <div className="font-mono">{analysisResult.checksum_info?.type || processResult.checksum_type}</div>
+                    </div>
                   </div>
                 </div>
               )}
 
-              {/* Not Found DTCs */}
+              {/* Stats Row */}
+              <div className="grid grid-cols-3 divide-x divide-gray-200 border-b border-gray-200">
+                <div className="p-3 text-center">
+                  <div className="text-2xl font-bold text-green-600">{processResult.dtcs_deleted?.length || 0}</div>
+                  <div className="text-xs text-gray-500">Deleted</div>
+                </div>
+                <div className="p-3 text-center">
+                  <div className="text-2xl font-bold text-yellow-600">{processResult.dtcs_not_found?.length || 0}</div>
+                  <div className="text-xs text-gray-500">Not Found</div>
+                </div>
+                <div className="p-3 text-center">
+                  <div className="text-2xl font-bold text-blue-600">{processResult.checksum_corrected ? '✓' : '—'}</div>
+                  <div className="text-xs text-gray-500">Checksum</div>
+                </div>
+              </div>
+
+              {/* Deleted DTCs - Compact Badges */}
+              {processResult.dtcs_deleted?.length > 0 && (
+                <div className="p-4 border-b border-gray-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-green-500">✓</span>
+                    <span className="text-sm font-medium text-gray-700">Successfully Deleted ({processResult.dtcs_deleted.length})</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {/* Group by DTC code and count instances */}
+                    {Object.entries(
+                      processResult.dtcs_deleted.reduce((acc, dtc) => {
+                        acc[dtc.code] = (acc[dtc.code] || 0) + 1;
+                        return acc;
+                      }, {})
+                    ).map(([code, count]) => (
+                      <span key={code} className="inline-flex items-center bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-mono">
+                        {code}
+                        {count > 1 && <span className="ml-1 bg-green-200 px-1 rounded text-green-800">×{count}</span>}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Sub-code note */}
+                  <p className="text-xs text-gray-500 mt-2">
+                    💡 Multiple instances indicate sub-codes/fault bytes were found and deleted for each DTC.
+                  </p>
+                </div>
+              )}
+
+              {/* Not Found DTCs - Compact */}
               {processResult.dtcs_not_found?.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">⚠️ Not Found in File:</h4>
-                  <div className="bg-yellow-50 rounded-xl p-4">
-                    <div className="flex flex-wrap gap-2">
-                      {processResult.dtcs_not_found.map((code, idx) => (
-                        <span key={idx} className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-lg text-sm font-mono">
-                          {code}
+                <div className="p-4 border-b border-gray-200 bg-yellow-50/50">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-yellow-500">⚠</span>
+                    <span className="text-sm font-medium text-gray-700">Not Found ({processResult.dtcs_not_found.length})</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {processResult.dtcs_not_found.map((code, idx) => (
+                      <span key={idx} className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-mono">
+                        {code}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Download Section */}
+              {processResult.success && (
+                <div className="p-4 bg-gray-50">
+                  <button
+                    onClick={downloadFile}
+                    className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
+                  >
+                    <span>⬇️</span>
+                    <span>Download Modified File</span>
+                  </button>
+                  <p className="text-center text-xs text-gray-500 mt-2">
+                    {file?.name?.replace(/\.[^.]+$/, '')}_dtc_deleted.bin
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Actions - Compact */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => setStep(2)}
+                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-lg font-medium text-sm transition"
+              >
+                ← Edit Selection
+              </button>
+              <button
                         </span>
                       ))}
                     </div>
