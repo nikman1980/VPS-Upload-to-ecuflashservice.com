@@ -858,6 +858,16 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
         if display_info.get('strings'):
             metadata['strings'] = display_info['strings']
         
+        # Scan for DTCs using the DTC Engine with DaVinci database
+        detected_dtcs = []
+        try:
+            from dtc_engine import DTCDeleteEngine
+            dtc_engine = DTCDeleteEngine()
+            dtc_analysis = dtc_engine.analyze_file(file_data)
+            detected_dtcs = dtc_analysis.get("detected_dtcs", [])
+        except Exception as dtc_err:
+            logger.warning(f"DTC scan warning: {dtc_err}")
+        
         return {
             "success": True,
             "file_id": file_id,
@@ -868,6 +878,7 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
             "metadata": metadata,
             "available_options": available_options,
             "detected_maps": display_info.get('detected_maps', {}),
+            "detected_dtcs": detected_dtcs,
             "total_services_detected": len(available_options),
             "message": f"File analyzed! {len(available_options)} service(s) detected based on ECU content."
         }
