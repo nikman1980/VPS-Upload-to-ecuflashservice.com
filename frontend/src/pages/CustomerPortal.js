@@ -1503,12 +1503,105 @@ const CustomerPortal = () => {
                           <div className="flex-1">
                             <h4 className="font-semibold text-green-800 text-sm mb-1">FREE DTC Removal Included</h4>
                             <p className="text-green-700 text-xs mb-2">
-                              All related DTCs are automatically removed with DPF/EGR/AdBlue services. Specify any additional DTCs below (optional).
+                              All related DTCs are automatically removed with DPF/EGR/AdBlue services.
                             </p>
+                            
+                            {/* DTC Count & View/Select Button */}
+                            {analysisResult?.detected_dtcs?.length > 0 && (
+                              <div className="bg-white rounded-lg p-3 border border-green-200 mb-3">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-xl font-bold text-green-600">{analysisResult.detected_dtcs.length}</span>
+                                    <span className="text-xs text-gray-600">DTCs found in file</span>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    onClick={() => setShowDtcSelector(!showDtcSelector)}
+                                    className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition"
+                                  >
+                                    <span>{showDtcSelector ? 'Hide' : 'View & Select'}</span>
+                                    <svg className={`w-3 h-3 transition-transform ${showDtcSelector ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                  </button>
+                                </div>
+                                
+                                {/* DTC Selection Grid */}
+                                {showDtcSelector && (
+                                  <div className="mt-3 border-t border-green-200 pt-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                      <span className="text-xs font-medium text-gray-700">Select DTCs:</span>
+                                      <div className="flex gap-2">
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            setSelectedFileDtcs(analysisResult.detected_dtcs.map(d => d.code));
+                                            setAdditionalDtcCodes(analysisResult.detected_dtcs.map(d => d.code).join(', '));
+                                          }}
+                                          className="text-xs text-green-600 hover:text-green-700 font-medium"
+                                        >
+                                          Select All
+                                        </button>
+                                        <span className="text-gray-300">|</span>
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            setSelectedFileDtcs([]);
+                                            setAdditionalDtcCodes('');
+                                          }}
+                                          className="text-xs text-gray-500 hover:text-gray-700 font-medium"
+                                        >
+                                          Clear
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-1.5 max-h-40 overflow-y-auto">
+                                      {analysisResult.detected_dtcs.map((dtc) => (
+                                        <label
+                                          key={dtc.code}
+                                          className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition text-xs ${
+                                            selectedFileDtcs.includes(dtc.code)
+                                              ? 'bg-green-100 border-green-400'
+                                              : 'bg-gray-50 border-gray-200 hover:border-green-300'
+                                          }`}
+                                        >
+                                          <input
+                                            type="checkbox"
+                                            checked={selectedFileDtcs.includes(dtc.code)}
+                                            onChange={(e) => {
+                                              let newSelected;
+                                              if (e.target.checked) {
+                                                newSelected = [...selectedFileDtcs, dtc.code];
+                                              } else {
+                                                newSelected = selectedFileDtcs.filter(c => c !== dtc.code);
+                                              }
+                                              setSelectedFileDtcs(newSelected);
+                                              setAdditionalDtcCodes(newSelected.join(', '));
+                                            }}
+                                            className="h-3 w-3 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                                          />
+                                          <div className="flex-1 min-w-0">
+                                            <span className="font-mono font-semibold text-gray-800">{dtc.code}</span>
+                                            <p className="text-gray-500 truncate text-xs" title={dtc.description}>{dtc.description}</p>
+                                          </div>
+                                        </label>
+                                      ))}
+                                    </div>
+                                    {selectedFileDtcs.length > 0 && (
+                                      <div className="mt-2 p-2 bg-green-100 rounded-lg text-xs text-green-700">
+                                        <strong>{selectedFileDtcs.length}</strong> DTC(s) selected
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            
+                            {/* Manual DTC Input */}
                             <textarea
                               value={additionalDtcCodes}
                               onChange={(e) => setAdditionalDtcCodes(e.target.value.toUpperCase())}
-                              placeholder="Additional DTCs (e.g., P0420, P0401)"
+                              placeholder={analysisResult?.detected_dtcs?.length > 0 ? "Or enter additional DTCs manually..." : "Additional DTCs (e.g., P0420, P0401)"}
                               rows={2}
                               className="w-full bg-white border border-green-200 rounded-lg px-3 py-2 text-xs focus:border-green-500"
                             />
