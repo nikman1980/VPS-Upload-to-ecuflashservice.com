@@ -811,6 +811,17 @@ const DTCDeletePage = () => {
             <div className="bg-white border border-gray-200 rounded-2xl p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Select DTCs to Delete</h3>
               
+              {/* Database Stats */}
+              {dtcDatabase && (
+                <div className="bg-green-50 border border-green-200 rounded-xl p-3 mb-4 flex items-center gap-3">
+                  <span className="text-green-600">✓</span>
+                  <div className="text-sm">
+                    <span className="font-medium text-green-700">DaVinci Database Loaded</span>
+                    <span className="text-green-600 ml-2">• {dtcDatabase.total_codes} codes available</span>
+                  </div>
+                </div>
+              )}
+              
               {/* Search Input with Autocomplete */}
               <div className="mb-6 relative">
                 <label className="block text-sm font-medium text-gray-700 mb-2">🔍 Search DTC Codes</label>
