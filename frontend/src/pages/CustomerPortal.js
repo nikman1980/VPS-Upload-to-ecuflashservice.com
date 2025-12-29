@@ -302,6 +302,7 @@ const CustomerPortal = () => {
     setNewOrderFile(null);
     setNewOrderServices([]);
     setNewOrderNotes('');
+    setAdditionalDtcCodes('');
     setSelectedVehicleType('');
     setSelectedManufacturer('');
     setSelectedModel('');
