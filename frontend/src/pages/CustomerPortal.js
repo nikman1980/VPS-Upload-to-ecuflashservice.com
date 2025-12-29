@@ -564,6 +564,7 @@ const CustomerPortal = () => {
     formData.append('services', JSON.stringify(newOrderServices));
     formData.append('notes', newOrderNotes);
     formData.append('vehicle', JSON.stringify(vehicleInfo));
+    formData.append('additional_dtc_codes', additionalDtcCodes); // FREE DTCs with DPF/EGR/AdBlue
     
     try {
       const response = await axios.post(`${API}/portal/new-order`, formData);
