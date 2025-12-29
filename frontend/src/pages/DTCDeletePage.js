@@ -766,9 +766,61 @@ const DTCDeletePage = () => {
             <div className="bg-white border border-gray-200 rounded-2xl p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Select DTCs to Delete</h3>
               
+              {/* Database Stats */}
+              {dtcDatabase && (
+                <div className="bg-green-50 border border-green-200 rounded-xl p-3 mb-4 flex items-center gap-3">
+                  <span className="text-green-600">✓</span>
+                  <div className="text-sm">
+                    <span className="font-medium text-green-700">DaVinci Database Loaded</span>
+                    <span className="text-green-600 ml-2">• {dtcDatabase.total_codes} codes available</span>
+                  </div>
+                </div>
+              )}
+              
+              {/* Search Input with Autocomplete */}
+              <div className="mb-6 relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2">🔍 Search DTC Codes</label>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by code or description (e.g., P0420, DPF, catalyst)..."
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                />
+                
+                {/* Autocomplete Results */}
+                {searchResults.length > 0 && (
+                  <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-64 overflow-y-auto">
+                    {searchResults.map((result) => (
+                      <button
+                        key={result.code}
+                        onClick={() => {
+                          if (!selectedDTCs.includes(result.code)) {
+                            setSelectedDTCs([...selectedDTCs, result.code]);
+                          }
+                          setSearchQuery('');
+                          setSearchResults([]);
+                        }}
+                        className="w-full px-4 py-3 text-left hover:bg-blue-50 border-b border-gray-100 last:border-b-0 flex items-center justify-between"
+                      >
+                        <div>
+                          <span className="font-mono font-semibold text-blue-600">{result.code}</span>
+                          <span className="text-gray-600 text-sm ml-2">{result.description}</span>
+                        </div>
+                        {selectedDTCs.includes(result.code) ? (
+                          <span className="text-green-500 text-sm">✓ Added</span>
+                        ) : (
+                          <span className="text-gray-400 text-sm">+ Add</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
               {/* Manual Input */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Enter DTC Codes</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Enter DTC Codes Manually</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
@@ -776,11 +828,11 @@ const DTCDeletePage = () => {
                     onChange={(e) => setDtcInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && addDTCsFromInput()}
                     placeholder="P0420, P2002, P0401..."
-                    className="flex-1 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-red-500"
+                    className="flex-1 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   />
                   <button
                     onClick={addDTCsFromInput}
-                    className="bg-blue-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold transition"
                   >
                     Add
                   </button>
@@ -788,20 +840,29 @@ const DTCDeletePage = () => {
                 <p className="text-xs text-gray-500 mt-1">Enter one or more DTC codes separated by commas or spaces</p>
               </div>
 
-              {/* Category Quick Select */}
+              {/* Category Quick Select - Enhanced with counts */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Quick Add by Category</label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {Object.entries(DTC_CATEGORIES).map(([key, cat]) => (
-                    <button
-                      key={key}
-                      onClick={() => addCategoryDTCs(key)}
-                      className="flex items-center space-x-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-red-300 rounded-xl px-4 py-3 text-left transition"
-                    >
-                      <span>{cat.icon}</span>
-                      <span className="text-sm font-medium text-gray-700">{cat.name}</span>
-                    </button>
-                  ))}
+                  {Object.entries(DTC_CATEGORIES).map(([key, cat]) => {
+                    // Use database counts if available
+                    const dbCodes = dtcDatabase?.categories?.[key] || cat.codes;
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => addCategoryDTCs(key)}
+                        className="flex items-center justify-between bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-xl px-4 py-3 text-left transition"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <span>{cat.icon}</span>
+                          <span className="text-sm font-medium text-gray-700">{cat.name}</span>
+                        </div>
+                        <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">
+                          {dbCodes.length}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -814,7 +875,7 @@ const DTCDeletePage = () => {
                     </label>
                     <button
                       onClick={clearAllDTCs}
-                      className="text-xs text-blue-500 hover:text-blue-600"
+                      className="text-xs text-red-500 hover:text-red-600"
                     >
                       Clear All
                     </button>
@@ -824,17 +885,32 @@ const DTCDeletePage = () => {
                       {selectedDTCs.map((code) => (
                         <span
                           key={code}
-                          className="inline-flex items-center bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg text-sm font-mono"
+                          className="inline-flex items-center bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg text-sm font-mono group relative"
+                          title={getDTCDescription(code)}
                         >
                           {code}
                           <button
                             onClick={() => removeDTC(code)}
-                            className="ml-2 text-blue-500 hover:text-blue-700"
+                            className="ml-2 text-blue-500 hover:text-red-500"
                           >
                             ✕
                           </button>
                         </span>
                       ))}
+                    </div>
+                    {/* Show descriptions for selected DTCs */}
+                    <div className="mt-3 border-t border-gray-200 pt-3">
+                      <p className="text-xs text-gray-500 mb-2">Selected Code Descriptions:</p>
+                      <div className="text-xs text-gray-600 space-y-1">
+                        {selectedDTCs.slice(0, 5).map(code => (
+                          <div key={code}>
+                            <span className="font-mono font-semibold">{code}</span>: {getDTCDescription(code)}
+                          </div>
+                        ))}
+                        {selectedDTCs.length > 5 && (
+                          <div className="text-gray-400">...and {selectedDTCs.length - 5} more</div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
