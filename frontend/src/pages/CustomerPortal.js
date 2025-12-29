@@ -48,6 +48,8 @@ const CustomerPortal = () => {
   const [newOrderNotes, setNewOrderNotes] = useState('');
   const [additionalDtcCodes, setAdditionalDtcCodes] = useState('');
   const [submittingOrder, setSubmittingOrder] = useState(false);
+  const [showDtcSelector, setShowDtcSelector] = useState(false);
+  const [selectedFileDtcs, setSelectedFileDtcs] = useState([]);
   
   // Vehicle Selection State
   const [vehicleTypes, setVehicleTypes] = useState([]);
