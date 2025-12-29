@@ -160,6 +160,9 @@ const NewUploadFlow = () => {
   const [dtcMultipleCodes, setDtcMultipleCodes] = useState('');
   const [dtcError, setDtcError] = useState('');
   
+  // FREE Additional DTCs (included with DPF/EGR/AdBlue services)
+  const [additionalDtcCodes, setAdditionalDtcCodes] = useState('');
+  
   // Customer info
   const [customerInfo, setCustomerInfo] = useState({
     customer_name: '',
