@@ -1850,13 +1850,106 @@ const NewUploadFlow = () => {
                   <div className="flex-1">
                     <h4 className="font-semibold text-green-800 mb-1">FREE DTC Removal Included</h4>
                     <p className="text-green-700 text-sm mb-3">
-                      When processing DPF, EGR, or AdBlue removal, <strong>all related DTCs are automatically removed</strong> at no extra cost. 
-                      If you want to remove any additional DTCs, please specify them below as a comma-separated list (e.g., P0420, P0401, P2002).
+                      When processing DPF, EGR, or AdBlue removal, <strong>all related DTCs are automatically removed</strong> at no extra cost.
                     </p>
                     
+                    {/* DTC Count & View/Select Button */}
+                    {analysisResult?.detected_dtcs?.length > 0 && (
+                      <div className="bg-white rounded-lg p-3 border border-green-200 mb-3">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl font-bold text-green-600">{analysisResult.detected_dtcs.length}</span>
+                            <span className="text-sm text-gray-600">DTCs found in your file</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setShowDtcSelector(!showDtcSelector)}
+                            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+                          >
+                            <span>{showDtcSelector ? 'Hide' : 'View & Select'}</span>
+                            <svg className={`w-4 h-4 transition-transform ${showDtcSelector ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                        </div>
+                        
+                        {/* DTC Selection Grid */}
+                        {showDtcSelector && (
+                          <div className="mt-4 border-t border-green-200 pt-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="text-sm font-medium text-gray-700">Select DTCs to remove:</span>
+                              <div className="flex gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedFileDtcs(analysisResult.detected_dtcs.map(d => d.code));
+                                    setAdditionalDtcCodes(analysisResult.detected_dtcs.map(d => d.code).join(', '));
+                                  }}
+                                  className="text-xs text-green-600 hover:text-green-700 font-medium"
+                                >
+                                  Select All
+                                </button>
+                                <span className="text-gray-300">|</span>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedFileDtcs([]);
+                                    setAdditionalDtcCodes('');
+                                  }}
+                                  className="text-xs text-gray-500 hover:text-gray-700 font-medium"
+                                >
+                                  Clear All
+                                </button>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto">
+                              {analysisResult.detected_dtcs.map((dtc) => (
+                                <label
+                                  key={dtc.code}
+                                  className={`flex items-start gap-2 p-2 rounded-lg border cursor-pointer transition ${
+                                    selectedFileDtcs.includes(dtc.code)
+                                      ? 'bg-green-100 border-green-400'
+                                      : 'bg-gray-50 border-gray-200 hover:border-green-300'
+                                  }`}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={selectedFileDtcs.includes(dtc.code)}
+                                    onChange={(e) => {
+                                      let newSelected;
+                                      if (e.target.checked) {
+                                        newSelected = [...selectedFileDtcs, dtc.code];
+                                      } else {
+                                        newSelected = selectedFileDtcs.filter(c => c !== dtc.code);
+                                      }
+                                      setSelectedFileDtcs(newSelected);
+                                      setAdditionalDtcCodes(newSelected.join(', '));
+                                    }}
+                                    className="mt-1 h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                                  />
+                                  <div className="flex-1 min-w-0">
+                                    <span className="font-mono font-semibold text-sm text-gray-800">{dtc.code}</span>
+                                    <p className="text-xs text-gray-500 truncate" title={dtc.description}>{dtc.description}</p>
+                                  </div>
+                                </label>
+                              ))}
+                            </div>
+                            {selectedFileDtcs.length > 0 && (
+                              <div className="mt-3 p-2 bg-green-100 rounded-lg">
+                                <span className="text-sm text-green-700">
+                                  <strong>{selectedFileDtcs.length}</strong> DTC(s) selected for removal
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Manual DTC Input */}
                     <div className="bg-white rounded-lg p-3 border border-green-200">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Additional DTCs to Remove (Optional - FREE)
+                        {analysisResult?.detected_dtcs?.length > 0 ? 'Or enter additional DTCs manually:' : 'Enter DTCs to remove (Optional - FREE)'}
                       </label>
                       <textarea
                         value={additionalDtcCodes}
