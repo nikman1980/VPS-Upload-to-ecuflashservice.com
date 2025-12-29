@@ -80,7 +80,7 @@ test_plan:
   - task: "NEW DTC View & Select Feature"
     implemented: true
     working: true
-    file: "/app/frontend/src/pages/NewUploadFlow.js"
+    file: "/app/frontend/src/pages/DTCDeletePage.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
@@ -91,6 +91,9 @@ test_plan:
       - working: true
         agent: "testing"
         comment: "NEW DTC VIEW & SELECT FEATURE IMPLEMENTATION VERIFIED: ✅ FEATURE LOCATION: Lines 1856-1945 in NewUploadFlow.js ✅ DTC COUNT DISPLAY: Implemented with large green number (.text-2xl.font-bold.text-green-600) showing detected DTCs count ✅ VIEW & SELECT BUTTON: Green button (bg-green-600) with toggle functionality and chevron icon ✅ EXPANDABLE GRID: Grid layout (grid-cols-2 md:grid-cols-3) with max-height and scroll ✅ DTC CHECKBOXES: Each DTC has checkbox with code (font-mono) and description display ✅ SELECT ALL/CLEAR ALL: Both buttons implemented with proper state management ✅ TEXTAREA AUTO-FILL: Selected DTCs automatically populate textarea with comma separation ✅ SELECTION COUNT: Shows 'X DTC(s) selected for removal' feedback ✅ TRIGGER CONDITIONS: Appears when DPF, EGR, AdBlue, or EGR+DPF Combo services are selected ⚠️ TECHNICAL LIMITATION: Unable to complete full UI testing due to vehicle selection flow issues, but code implementation is complete and comprehensive."
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE UI TESTING COMPLETED SUCCESSFULLY! ✅ TESTED ON DTC DELETE TOOL PAGE: /tools/dtc-delete with real file upload and DTC detection ✅ COMPACT DTC COUNT DISPLAY: Large blue number (13) with 'DTCs Found in File' text working perfectly ✅ VIEW & SELECT BUTTON: Blue button toggles correctly between 'View & Select' and 'Hide DTCs' ✅ EXPANDABLE GRID: Grid expands/collapses smoothly showing all 13 detected DTCs with checkboxes ✅ DTC DISPLAY: Each DTC shows code (P0004, P0020, etc.) with descriptions in grid format ✅ SELECT ALL FUNCTIONALITY: Selects all 13 checkboxes correctly ✅ CLEAR FILE DTCS: Clears all file DTC selections correctly ✅ INDIVIDUAL SELECTION: Individual checkbox clicks work properly ✅ SELECTION SUMMARY: Shows '0 of 13 file DTCs selected' and 'Total selected: 0' feedback ✅ HIDE FUNCTIONALITY: 'Hide DTCs' button collapses grid and changes back to 'View & Select' ✅ ALL SPECIFIED REQUIREMENTS MET: Feature works exactly as requested in the review. The NEW DTC View & Select feature is fully functional and ready for production use."
 
   - task: "DTC Delete Tool Page Enhancements"
     implemented: true
