@@ -874,31 +874,52 @@ const DTCDeletePage = () => {
                 <p className="text-xs text-gray-500 mt-1">Enter one or more DTC codes separated by commas or spaces</p>
               </div>
 
-              {/* Category Quick Select - Enhanced with counts */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Quick Add by Category</label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {Object.entries(DTC_CATEGORIES).map(([key, cat]) => {
-                    // Use database counts if available
-                    const dbCodes = dtcDatabase?.categories?.[key] || cat.codes;
-                    return (
-                      <button
-                        key={key}
-                        onClick={() => addCategoryDTCs(key)}
-                        className="flex items-center justify-between bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-xl px-4 py-3 text-left transition"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <span>{cat.icon}</span>
-                          <span className="text-sm font-medium text-gray-700">{cat.name}</span>
-                        </div>
-                        <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">
-                          {dbCodes.length}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+              {/* Category Quick Select - Only show categories with detected DTCs */}
+              {analysisResult?.detected_dtcs?.length > 0 && (() => {
+                // Get list of detected DTC codes from analysis
+                const detectedCodes = analysisResult.detected_dtcs.map(d => d.code.toUpperCase());
+                
+                // Filter categories to only show those with at least one matching DTC
+                const matchingCategories = Object.entries(DTC_CATEGORIES).filter(([key, cat]) => {
+                  const categoryDtcs = dtcDatabase?.categories?.[key] || cat.codes;
+                  return categoryDtcs.some(code => detectedCodes.includes(code.toUpperCase()));
+                });
+                
+                if (matchingCategories.length === 0) return null;
+                
+                return (
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Quick Add by Category <span className="text-blue-500 text-xs font-normal">(based on detected DTCs)</span>
+                    </label>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      {matchingCategories.map(([key, cat]) => {
+                        // Count how many DTCs from this category were found in the file
+                        const categoryDtcs = dtcDatabase?.categories?.[key] || cat.codes;
+                        const matchingDtcs = categoryDtcs.filter(code => 
+                          detectedCodes.includes(code.toUpperCase())
+                        );
+                        
+                        return (
+                          <button
+                            key={key}
+                            onClick={() => addCategoryDTCs(key)}
+                            className="flex items-center justify-between bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 rounded-xl px-4 py-3 text-left transition"
+                          >
+                            <div className="flex items-center space-x-2">
+                              <span>{cat.icon}</span>
+                              <span className="text-sm font-medium text-gray-700">{cat.name}</span>
+                            </div>
+                            <span className="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full">
+                              {matchingDtcs.length} found
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Selected DTCs */}
               {selectedDTCs.length > 0 && (
