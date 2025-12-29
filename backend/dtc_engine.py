@@ -195,8 +195,13 @@ class DTCDatabase:
     
     @classmethod
     def get_description(cls, dtc_code: str) -> str:
-        """Get description for a DTC code"""
-        return cls.DTC_DESCRIPTIONS.get(dtc_code.upper(), f'Unknown DTC: {dtc_code}')
+        """Get description for a DTC code - uses DaVinci database first, then fallback"""
+        code_upper = dtc_code.upper()
+        # Try DaVinci database first (has 2000+ codes)
+        if DAVINCI_DATABASE and code_upper in DAVINCI_DATABASE:
+            return DAVINCI_DATABASE[code_upper]
+        # Fallback to local descriptions
+        return cls.DTC_DESCRIPTIONS.get(code_upper, f'Unknown DTC: {dtc_code}')
     
     @classmethod
     def dtc_to_binary(cls, dtc_code: str) -> List[bytes]:
