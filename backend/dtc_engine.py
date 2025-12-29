@@ -398,6 +398,7 @@ class DTCDeleteEngine:
     def analyze_file(self, file_data: bytes) -> Dict[str, Any]:
         """
         Analyze an ECU file for DTC-related content.
+        Enhanced to use full DaVinci database (2000+ codes).
         Returns information about detected DTCs and checksum.
         """
         result = {
@@ -417,19 +418,48 @@ class DTCDeleteEngine:
             "details": checksum_details
         }
         
-        # Scan for common DTCs
-        for dtc_code in DTCDatabase.DTC_DESCRIPTIONS.keys():
-            patterns = DTCDatabase.dtc_to_binary(dtc_code)
-            for pattern in patterns:
-                offset = file_data.find(pattern)
-                if offset != -1:
-                    result["detected_dtcs"].append({
-                        "code": dtc_code,
-                        "description": DTCDatabase.get_description(dtc_code),
-                        "offset": offset,
-                        "pattern": pattern.hex()
-                    })
-                    break  # Found this DTC, move to next
+        # First, scan using DaVinci database (2000+ codes) for comprehensive detection
+        scanned_codes = set()
+        
+        if DAVINCI_DATABASE:
+            # Scan against DaVinci's comprehensive database
+            for dtc_code in DAVINCI_DATABASE.keys():
+                if dtc_code in scanned_codes:
+                    continue
+                patterns = DTCDatabase.dtc_to_binary(dtc_code)
+                for pattern in patterns:
+                    if len(pattern) >= 2:  # Only search valid patterns
+                        offset = file_data.find(pattern)
+                        if offset != -1:
+                            result["detected_dtcs"].append({
+                                "code": dtc_code,
+                                "description": DAVINCI_DATABASE.get(dtc_code, f'DTC {dtc_code}'),
+                                "offset": offset,
+                                "pattern": pattern.hex()
+                            })
+                            scanned_codes.add(dtc_code)
+                            break  # Found this DTC, move to next
+        
+        # Fallback: scan local DTC descriptions if DaVinci not available
+        if not DAVINCI_DATABASE:
+            for dtc_code in DTCDatabase.DTC_DESCRIPTIONS.keys():
+                if dtc_code in scanned_codes:
+                    continue
+                patterns = DTCDatabase.dtc_to_binary(dtc_code)
+                for pattern in patterns:
+                    offset = file_data.find(pattern)
+                    if offset != -1:
+                        result["detected_dtcs"].append({
+                            "code": dtc_code,
+                            "description": DTCDatabase.get_description(dtc_code),
+                            "offset": offset,
+                            "pattern": pattern.hex()
+                        })
+                        scanned_codes.add(dtc_code)
+                        break  # Found this DTC, move to next
+        
+        # Sort detected DTCs by code for consistent ordering
+        result["detected_dtcs"].sort(key=lambda x: x["code"])
         
         return result
     
