@@ -69,6 +69,9 @@ test_plan:
       - working: true
         agent: "testing"
         comment: "FREE DTC REMOVAL FEATURE TESTING COMPLETED SUCCESSFULLY! All test requirements verified: ✅ AdBlue/DCU amber warning box displays correctly with proper text about 'Dosing Control Unit (DCU)' and 'both your ECU file AND DCU file' ✅ FREE DTC box is correctly hidden initially ✅ GREEN 'FREE DTC Removal Included' box appears when DPF Removal is selected ✅ Box contains checkmark icon (✓), correct title, explanation about automatic DTC removal ✅ Input field for additional DTCs with correct placeholder text ✅ Text input converts to uppercase (P0420, P2002, P2463) ✅ Tip about FREE removal if new DTCs appear ✅ Box disappears when DPF is deselected ✅ Box appears when EGR Removal is selected ✅ Box appears when AdBlue/DEF Removal is selected ✅ Box appears when EGR + DPF Combo is selected. Feature works perfectly for all qualifying services (DPF, EGR, AdBlue, Combo) as specified in requirements."
+      - working: true
+        agent: "testing"
+        comment: "SCREENSHOT TESTING ATTEMPTED: Attempted to capture screenshots of FREE DTC Removal feature in both homepage flow and customer portal flow as requested. ✅ CODE VERIFICATION: Confirmed implementation exists in both NewUploadFlow.js (lines 1841-1872) and CustomerPortal.js (lines 1496-1512) ✅ FEATURE STRUCTURE: Green box with checkmark icon, 'FREE DTC Removal Included' title, explanation text, textarea for additional DTCs, and tip message ✅ TRIGGER CONDITIONS: Appears when DPF Removal, EGR Removal, AdBlue/DEF Removal, or EGR+DPF Combo services are selected ⚠️ TESTING CHALLENGES: Encountered technical issues with file analysis flow and session management during screenshot capture attempts. Feature implementation is confirmed in code and previous testing verified functionality."
 
   - task: "DTC Delete Tool Page Enhancements"
     implemented: true
