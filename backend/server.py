@@ -214,15 +214,19 @@ VEHICLE_MODELS = {
 # Service pricing (direct customer prices - no markup)
 SERVICE_PRICING = {
     "dtc-single": {
-        "base_price": 20.00,
-        "name": "DTC Removal (Single Code)"
+        "base_price": 10.00,
+        "name": "DTC Removal (1 Code)"
     },
     "dtc-multiple": {
-        "base_price": 50.00,
-        "name": "DTC Removal (Multiple Codes)"
+        "base_price": 20.00,
+        "name": "DTC Removal (2-6 Codes)"
+    },
+    "dtc-bulk": {
+        "base_price": 30.00,
+        "name": "DTC Removal (7+ Codes)"
     },
     "checksum": {
-        "base_price": 10.00,
+        "base_price": 5.00,
         "name": "Checksum Correction"
     },
     "egr-removal": {
