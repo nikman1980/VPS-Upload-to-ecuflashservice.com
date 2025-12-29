@@ -478,22 +478,32 @@ MARKUP_PERCENTAGE = 100  # 100% markup
 AVAILABLE_SERVICES = [
     {
         "id": "dtc-single",
-        "name": "DTC Removal (Single Code)",
+        "name": "DTC Removal (1 Code)",
         "description": "Remove one diagnostic trouble code from ECU file.",
         "icon": "🔍",
+        "base_price": 10.00,
+        "final_price": 10.00,
+        "cost_price": 5.00,
+        "category": "diagnostics"
+    },
+    {
+        "id": "dtc-multiple",
+        "name": "DTC Removal (2-6 Codes)",
+        "description": "Remove 2-6 diagnostic trouble codes from ECU file.",
+        "icon": "✓",
         "base_price": 20.00,
         "final_price": 20.00,
         "cost_price": 10.00,
         "category": "diagnostics"
     },
     {
-        "id": "dtc-multiple",
-        "name": "DTC Removal (Multiple Codes)",
-        "description": "Remove all diagnostic trouble codes from ECU file.",
-        "icon": "✓",
-        "base_price": 50.00,
-        "final_price": 50.00,
-        "cost_price": 25.00,
+        "id": "dtc-bulk",
+        "name": "DTC Removal (7+ Codes)",
+        "description": "Remove 7 or more diagnostic trouble codes from ECU file.",
+        "icon": "✓✓",
+        "base_price": 30.00,
+        "final_price": 30.00,
+        "cost_price": 15.00,
         "category": "diagnostics"
     },
     {
