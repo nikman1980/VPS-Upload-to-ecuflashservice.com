@@ -1793,7 +1793,7 @@ const CustomerPortal = () => {
                 </div>
                 
                 <div className="bg-gray-50 rounded-xl p-4 mb-6">
-                  <h4 className="font-medium text-gray-800 mb-2">✅ What's Included:</h4>
+                  <h4 className="font-medium text-gray-800 mb-2">✅ What&apos;s Included:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
                     <li>• Permanent DTC code removal from ECU file</li>
                     <li>• Checksum correction included (+$5)</li>
