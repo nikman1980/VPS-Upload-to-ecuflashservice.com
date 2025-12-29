@@ -395,6 +395,127 @@ const DTCDeletePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>{SEO_DATA.title}</title>
+        <meta name="description" content={SEO_DATA.description} />
+        <meta name="keywords" content={SEO_DATA.keywords} />
+        <link rel="canonical" href={SEO_DATA.canonical} />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={SEO_DATA.title} />
+        <meta property="og:description" content={SEO_DATA.description} />
+        <meta property="og:url" content={SEO_DATA.canonical} />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={SEO_DATA.title} />
+        <meta name="twitter:description" content={SEO_DATA.description} />
+        
+        {/* Additional SEO Tags */}
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="author" content="ECU Flash Service" />
+        
+        {/* Structured Data - Service Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "DTC Delete Service",
+            "description": "Professional diagnostic trouble code (DTC) removal service for vehicles. Remove check engine lights, clear fault codes permanently from ECU files.",
+            "provider": {
+              "@type": "Organization",
+              "name": "ECU Flash Service",
+              "url": "https://ecuflashservice.com"
+            },
+            "serviceType": "ECU Programming",
+            "areaServed": "Worldwide",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "DTC Removal Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Single DTC Removal"
+                  },
+                  "price": "10",
+                  "priceCurrency": "USD"
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Multiple DTC Removal (2-6)"
+                  },
+                  "price": "20",
+                  "priceCurrency": "USD"
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Bulk DTC Removal (7+)"
+                  },
+                  "price": "30",
+                  "priceCurrency": "USD"
+                }
+              ]
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "3500"
+            }
+          })}
+        </script>
+        
+        {/* FAQ Schema for common questions */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is DTC delete?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "DTC delete is the process of permanently removing Diagnostic Trouble Codes from your vehicle's ECU file. This prevents check engine lights from appearing for specific fault codes like P0420, P2002, or EGR-related codes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does DTC removal cost?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our DTC removal service starts at $10 for a single code, $20 for 2-6 codes, and $30 for 7 or more codes. Checksum correction is included at $5 additional."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is DTC delete permanent?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, when we remove DTCs from your ECU file, the codes are permanently deleted. The check engine light will not return for those specific codes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What DTC codes can you remove?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We can remove almost any DTC including P0420 (catalyst), P0401-P0408 (EGR), P2002/P2463 (DPF), P20EE/P203F (AdBlue/SCR), O2 sensor codes, turbo codes, and many more."
+                }
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
