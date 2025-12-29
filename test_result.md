@@ -51,6 +51,7 @@ test_plan:
     - "Customer Portal Enhanced New Order Flow"
     - "DTC Recommendation and AdBlue/DCU Notice"
     - "FREE DTC Removal Feature"
+    - "NEW DTC View & Select Feature"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
