@@ -22,6 +22,24 @@ frontend:
       - working: true
         agent: "testing"
         comment: "VEHICLE SELECTION DROPDOWN FIX VERIFIED: Tested specific fix where Generation step was removed and Model connects directly to Engine. Results: ✅ Cars & LCV → BMW → E83 → X3 2.0d → Bosch EDC17C50 cascade working perfectly ✅ Engine dropdown loads 7 options after Model selection (critical fix confirmed) ✅ ECU dropdown appears after engine selection ✅ Green confirmation box shows complete vehicle summary ✅ Continue button activates and proceeds to Upload step ✅ No more stuck at Generation step - bypass successful. The reported vehicle selection issue has been RESOLVED."
+      - working: true
+        agent: "testing"
+        comment: "DTC RECOMMENDATION AND ADBLUE/DCU NOTICE FEATURES VERIFIED: Comprehensive testing of both new features completed successfully. ✅ AdBlue/DCU Warning Notice: Amber warning box displays correctly on Services page (Step 4) with proper warning icon (⚠️) and text about 'Important: AdBlue/SCR System Notice', 'Dosing Control Unit (DCU)', and 'both your ECU file AND DCU file' ✅ DTC Removal Recommendation: Blue recommendation box appears correctly when DPF Removal, EGR Removal, or AdBlue services are selected ✅ 'Add DTC Removal (+$50)' button functions properly and adds DTC service to selection ✅ Recommendation box disappears after DTC service is added (correct logic) ✅ Tested with DPF Removal and EGR Removal - both trigger recommendation ✅ Complete upload flow (Vehicle→Upload→Analyze→Services) working with new features integrated. Both features enhance user experience and provide important guidance for ECU modifications."
+
+  - task: "DTC Recommendation and AdBlue/DCU Notice"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/NewUploadFlow.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Starting test of DTC Recommendation and AdBlue/DCU Notice features on Services selection step (Step 4)"
+      - working: true
+        agent: "testing"
+        comment: "BOTH FEATURES WORKING PERFECTLY: ✅ AdBlue/DCU Warning Notice (lines 1819-1835): Amber warning box with ⚠️ icon displays correctly with text 'Important: AdBlue/SCR System Notice', mentions 'Dosing Control Unit (DCU)' and 'both your ECU file AND DCU file' ✅ DTC Removal Recommendation (lines 1837-1866): Blue recommendation box with 💡 icon appears when DPF/EGR/AdBlue services are selected, includes 'Add DTC Removal (+$50)' button ✅ Button functionality: Clicking 'Add DTC Removal' correctly adds DTC service and removes recommendation box ✅ Logic verification: Recommendation appears for DPF Removal, EGR Removal, and AdBlue Removal services ✅ Recommendation disappears when DTC is already selected ✅ Complete test flow: Vehicle selection (BMW 320d 2018) → File upload → Analysis → Services page with both features working. Implementation matches requirements exactly."
 
 metadata:
   created_by: "testing_agent"
