@@ -200,6 +200,7 @@ const DTCDeletePage = () => {
   // Analysis state
   const [analysisResult, setAnalysisResult] = useState(null);
   const [analyzing, setAnalyzing] = useState(false);
+  const [showFileDtcSelector, setShowFileDtcSelector] = useState(false);
   
   // DTC Database state (from DaVinci)
   const [dtcDatabase, setDtcDatabase] = useState(null);
