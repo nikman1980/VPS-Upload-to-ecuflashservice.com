@@ -125,7 +125,7 @@ const ContactPage = () => {
                   <p className="text-gray-500 text-sm">Mon - Sat</p>
                 </div>
               </div>
-              <p className="text-gray-600 text-sm">9:00 AM - 6:00 PM (GMT+8)<br/>Sunday: Limited support</p>
+              <p className="text-gray-600 text-sm">10:00 AM - 10:00 PM (GMT+12)<br/>7 days a week</p>
             </div>
 
             <div className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl p-6 text-white">
