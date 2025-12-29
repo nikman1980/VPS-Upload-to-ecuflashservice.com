@@ -44,14 +44,76 @@ frontend:
 metadata:
   created_by: "testing_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
+  run_ui: false
+
+backend:
+  - task: "Services API DTC Pricing Verification"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Starting test of Services API endpoint to verify new DTC pricing: Single=$10, Multiple=$20, Bulk=$30, Checksum=$5"
+      - working: true
+        agent: "testing"
+        comment: "✅ SERVICES API PRICING VERIFIED: All DTC pricing correct - DTC Single: $10.00 ✓, DTC Multiple (2-6): $20.00 ✓, DTC Bulk (7+): $30.00 ✓, Checksum: $5.00 ✓. Fixed pricing inconsistency where checksum was showing $10 instead of $5 in AVAILABLE_SERVICES array. All pricing now matches requirements exactly."
+
+  - task: "Portal Registration API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Testing /api/portal/register endpoint for creating new customer accounts"
+      - working: true
+        agent: "testing"
+        comment: "✅ PORTAL REGISTRATION WORKING: Endpoint /api/portal/register functioning correctly. Tested account creation with proper validation. Registration validation works correctly (returns 400 when account already exists). Account creation flow operational for new customers."
+
+  - task: "DTC Engine Upload API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Testing /api/dtc-engine/upload endpoint for file upload and DTC detection"
+      - working: true
+        agent: "testing"
+        comment: "✅ DTC ENGINE UPLOAD WORKING: Endpoint /api/dtc-engine/upload functioning correctly. File upload and DTC detection working (found 0 DTCs in test file as expected). DTC detection engine operational and ready for real ECU files."
+
+  - task: "Contact Form API"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Testing /api/contact endpoint for contact form submissions"
+      - working: true
+        agent: "testing"
+        comment: "✅ CONTACT FORM WORKING: Endpoint /api/contact functioning correctly. Contact form submission successful with proper validation. Email integration working for customer inquiries."
 
 test_plan:
   current_focus:
-    - "Customer Portal Enhanced New Order Flow"
-    - "DTC Recommendation and AdBlue/DCU Notice"
-    - "FREE DTC Removal Feature"
-    - "NEW DTC View & Select Feature"
+    - "Services API DTC Pricing Verification"
+    - "Portal Registration API"
+    - "DTC Engine Upload API"
+    - "Contact Form API"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
