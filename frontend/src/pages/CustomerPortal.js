@@ -1491,24 +1491,24 @@ const CustomerPortal = () => {
                       </div>
                     </div>
                     
-                    {/* DTC Recommendation when DPF/EGR/AdBlue is selected */}
-                    {(newOrderServices.some(s => ['dpf-removal', 'egr-removal', 'adblue-removal', 'egr-dpf-combo'].includes(s)) && 
-                      !newOrderServices.includes('dtc-multiple') && !newOrderServices.includes('dtc-single')) && (
-                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
+                    {/* FREE DTC Removal Input - Shows when DPF/EGR/AdBlue is selected */}
+                    {newOrderServices.some(s => ['dpf-removal', 'egr-removal', 'adblue-removal', 'egr-dpf-combo'].includes(s)) && (
+                      <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
                         <div className="flex items-start gap-3">
-                          <span className="text-blue-600">💡</span>
+                          <span className="text-green-600 text-xl">✓</span>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-blue-800 text-sm mb-1">Recommended: Add DTC Removal</h4>
-                            <p className="text-blue-700 text-xs mb-2">
-                              DPF/EGR/AdBlue removal may trigger DTCs. Add DTC removal to prevent check engine lights.
+                            <h4 className="font-semibold text-green-800 text-sm mb-1">FREE DTC Removal Included</h4>
+                            <p className="text-green-700 text-xs mb-2">
+                              All related DTCs are automatically removed with DPF/EGR/AdBlue services. Specify any additional DTCs below (optional).
                             </p>
-                            <button
-                              type="button"
-                              onClick={() => setNewOrderServices([...newOrderServices, 'dtc-multiple'])}
-                              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition"
-                            >
-                              + Add DTC Removal ($50)
-                            </button>
+                            <textarea
+                              value={additionalDtcCodes}
+                              onChange={(e) => setAdditionalDtcCodes(e.target.value.toUpperCase())}
+                              placeholder="Additional DTCs (e.g., P0420, P0401)"
+                              rows={2}
+                              className="w-full bg-white border border-green-200 rounded-lg px-3 py-2 text-xs focus:border-green-500"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">💡 New DTCs after flashing? Contact us - FREE removal!</p>
                           </div>
                         </div>
                       </div>
