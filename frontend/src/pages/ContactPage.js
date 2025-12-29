@@ -122,7 +122,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Business Hours</h3>
-                  <p className="text-gray-500 text-sm">Mon - Sat</p>
+                  <p className="text-gray-500 text-sm">Mon - Sun</p>
                 </div>
               </div>
               <p className="text-gray-600 text-sm">10:00 AM - 10:00 PM (GMT+12)<br/>7 days a week</p>
