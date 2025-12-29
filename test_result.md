@@ -54,6 +54,21 @@ test_plan:
   test_all: false
   test_priority: "high_first"
 
+  - task: "FREE DTC Removal Feature"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/NewUploadFlow.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Starting comprehensive test of FREE DTC Removal feature. Testing that green box appears when DPF/EGR/AdBlue services are selected, includes input field for additional DTCs, and disappears when services are deselected."
+      - working: true
+        agent: "testing"
+        comment: "FREE DTC REMOVAL FEATURE TESTING COMPLETED SUCCESSFULLY! All test requirements verified: ✅ AdBlue/DCU amber warning box displays correctly with proper text about 'Dosing Control Unit (DCU)' and 'both your ECU file AND DCU file' ✅ FREE DTC box is correctly hidden initially ✅ GREEN 'FREE DTC Removal Included' box appears when DPF Removal is selected ✅ Box contains checkmark icon (✓), correct title, explanation about automatic DTC removal ✅ Input field for additional DTCs with correct placeholder text ✅ Text input converts to uppercase (P0420, P2002, P2463) ✅ Tip about FREE removal if new DTCs appear ✅ Box disappears when DPF is deselected ✅ Box appears when EGR Removal is selected ✅ Box appears when AdBlue/DEF Removal is selected ✅ Box appears when EGR + DPF Combo is selected. Feature works perfectly for all qualifying services (DPF, EGR, AdBlue, Combo) as specified in requirements."
+
 agent_communication:
   - agent: "testing"
     message: "Beginning comprehensive test of Customer Portal enhanced New Order flow. Testing multi-step process with vehicle selection, file upload, analysis, and service selection."
@@ -63,6 +78,8 @@ agent_communication:
     message: "🔧 VEHICLE SELECTION DROPDOWN FIX VERIFICATION COMPLETED: Tested specific fix where Generation step was removed and Model connects directly to Engine. Test Results: ✅ Type→Manufacturer→Model→Engine→ECU cascade working perfectly ✅ BMW E83 model loads 7 engine options (X3 2.0d, etc.) ✅ Engine selection enables ECU dropdown with Bosch EDC17C50 ✅ Green confirmation shows 'BMW E83 X3 2.0d (Bosch EDC17C50)' ✅ Continue button activates and proceeds to Upload step ✅ Complete flow from vehicle selection to file upload working. The reported issue where dropdowns got stuck at Model step has been RESOLVED. Generation bypass successful."
   - agent: "testing"
     message: "🎯 DTC RECOMMENDATION AND ADBLUE/DCU NOTICE TESTING COMPLETED SUCCESSFULLY! Both new features are working perfectly: ✅ AdBlue/DCU Warning Notice: Amber warning box displays correctly on Step 4 with proper text about 'Dosing Control Unit (DCU)' and 'both your ECU file AND DCU file' ✅ DTC Removal Recommendation: Blue recommendation box appears when DPF/EGR/AdBlue services are selected ✅ 'Add DTC Removal (+$50)' button functions correctly and adds DTC service ✅ Recommendation box disappears after DTC service is added ✅ Logic works for DPF Removal, EGR Removal, and AdBlue Removal services ✅ Complete upload flow (Vehicle→Upload→Analyze→Services) working with new features integrated. Both features enhance user experience and provide important guidance for ECU modifications."
+  - agent: "testing"
+    message: "🆓 FREE DTC REMOVAL FEATURE TESTING COMPLETED SUCCESSFULLY! Comprehensive testing of the new FREE DTC feature completed with all requirements verified: ✅ GREEN 'FREE DTC Removal Included' box appears ONLY when qualifying services (DPF, EGR, AdBlue, EGR+DPF Combo) are selected ✅ Box contains checkmark icon, proper title, explanation about automatic DTC removal ✅ Input field for additional DTCs with correct placeholder and uppercase conversion ✅ Box disappears when qualifying services are deselected ✅ AdBlue/DCU notice continues to work correctly ✅ All qualifying services trigger the FREE DTC box as expected. This is a significant improvement over the previous paid DTC recommendation feature - now DTC removal is included FREE with emission-related services. Feature ready for production use."
 
 ---
 
