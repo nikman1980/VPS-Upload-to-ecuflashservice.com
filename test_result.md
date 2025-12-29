@@ -50,6 +50,7 @@ test_plan:
   current_focus:
     - "Customer Portal Enhanced New Order Flow"
     - "DTC Recommendation and AdBlue/DCU Notice"
+    - "FREE DTC Removal Feature"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
