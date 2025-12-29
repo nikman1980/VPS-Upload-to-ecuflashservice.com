@@ -1,8 +1,8 @@
 # ECU File Processing Service - Complete Deployment Summary
 
 ## 🚀 Live Application
-**URL:** https://ecutuner-3.preview.emergentagent.com
-**Admin Dashboard:** https://ecutuner-3.preview.emergentagent.com/admin
+**URL:** https://tune-master-37.preview.emergentagent.com
+**Admin Dashboard:** https://tune-master-37.preview.emergentagent.com/admin
 
 ## 💼 Business Information
 **Business Name:** Auto Car Locksmith
@@ -291,8 +291,8 @@ Total if all selected: $318
 ## 📋 Quick Reference
 
 ### Login URLs
-- App: https://ecutuner-3.preview.emergentagent.com
-- Admin: https://ecutuner-3.preview.emergentagent.com/admin
+- App: https://tune-master-37.preview.emergentagent.com
+- Admin: https://tune-master-37.preview.emergentagent.com/admin
 - PayPal: https://paypal.com (autolocksmith.fj@gmail.com)
 
 ### Support
