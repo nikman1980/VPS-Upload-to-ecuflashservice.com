@@ -1761,6 +1761,89 @@ const CustomerPortal = () => {
             </div>
           )}
 
+          {/* DTC Tool Tab */}
+          {activeTab === 'dtc-tool' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">DTC Delete Tool</h2>
+              
+              <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <span className="text-3xl">🔍</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-lg">Professional DTC Delete Service</h3>
+                    <p className="text-gray-500">Remove diagnostic trouble codes from your ECU file</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div className="bg-green-50 rounded-xl p-4 text-center">
+                    <p className="text-2xl font-bold text-green-600">$10</p>
+                    <p className="text-sm text-gray-600">1 DTC Code</p>
+                  </div>
+                  <div className="bg-blue-50 rounded-xl p-4 text-center">
+                    <p className="text-2xl font-bold text-blue-600">$20</p>
+                    <p className="text-sm text-gray-600">2-6 DTC Codes</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-xl p-4 text-center">
+                    <p className="text-2xl font-bold text-purple-600">$30</p>
+                    <p className="text-sm text-gray-600">7+ DTC Codes</p>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                  <h4 className="font-medium text-gray-800 mb-2">✅ What's Included:</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• Permanent DTC code removal from ECU file</li>
+                    <li>• Checksum correction included (+$5)</li>
+                    <li>• Instant download after processing</li>
+                    <li>• Support for all major ECU types</li>
+                    <li>• Free re-processing if issues arise</li>
+                  </ul>
+                </div>
+                
+                <a
+                  href="/tools/dtc-delete"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl font-medium transition flex items-center justify-center gap-2"
+                >
+                  <span>Open DTC Delete Tool</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              
+              {/* Recent DTC Orders */}
+              <div className="bg-white rounded-2xl border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4">Your DTC Orders</h3>
+                {orders.filter(o => o.services?.some(s => s.includes('dtc'))).length > 0 ? (
+                  <div className="space-y-3">
+                    {orders.filter(o => o.services?.some(s => s.includes('dtc'))).slice(0, 5).map(order => (
+                      <div key={order.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                        <div>
+                          <p className="font-medium text-gray-800">{order.vehicle_info?.make} {order.vehicle_info?.model}</p>
+                          <p className="text-sm text-gray-500">{new Date(order.created_at).toLocaleDateString()}</p>
+                        </div>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          order.status === 'completed' ? 'bg-green-100 text-green-700' :
+                          order.status === 'processing' ? 'bg-blue-100 text-blue-700' :
+                          'bg-yellow-100 text-yellow-700'
+                        }`}>
+                          {order.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-500 text-center py-4">No DTC orders yet. Use the tool above to get started!</p>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Files Tab */}
           {activeTab === 'files' && (
             <div>
