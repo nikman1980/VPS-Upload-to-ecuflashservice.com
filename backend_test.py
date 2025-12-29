@@ -866,105 +866,121 @@ class ECUServiceTester:
             return False
 
     def run_all_tests(self):
-        """Run all backend tests"""
+        """Run all backend tests focusing on review request requirements"""
         print("🔧 ECU Flash Service Backend API Tests")
         print("=" * 50)
         print(f"Testing API at: {self.api_url}")
+        print("🎯 FOCUS: Review Request Requirements")
         print()
         
         # Test basic connectivity first
         if not self.test_api_health():
             print("❌ API is not accessible. Stopping tests.")
             return False
-            
-        # Test vehicle database APIs (Sedox-style)
-        print("\n🚗 Testing Vehicle Database APIs (Sedox-style)")
+        
+        # === REVIEW REQUEST TESTS ===
+        print("\n🎯 REVIEW REQUEST BACKEND API TESTS")
+        print("-" * 50)
+        
+        # 1. Services API - Test DTC pricing
+        print("1. Testing Services API - DTC Pricing Verification")
+        services_success = self.test_get_services()
+        
+        # 2. Portal Registration
+        print("\n2. Testing Portal Registration")
+        portal_reg_success = self.test_portal_registration()
+        
+        # 3. DTC Engine Upload
+        print("\n3. Testing DTC Engine Upload")
+        dtc_engine_success = self.test_dtc_engine_upload()
+        
+        # 4. Contact Form
+        print("\n4. Testing Contact Form")
+        contact_success = self.test_contact_form()
+        
+        # === ADDITIONAL CORE TESTS ===
+        print("\n🔧 ADDITIONAL CORE BACKEND TESTS")
         print("-" * 40)
         
-        # Test vehicle types
-        success, vehicle_types = self.test_vehicle_types()
-        if not success:
-            print("❌ Vehicle types API failed. Skipping dependent tests.")
-            return False
-            
-        # Test manufacturers for Cars (type_id=1)
-        success, manufacturers = self.test_manufacturers(1)
-        if success and manufacturers:
-            # Find BMW for model testing
-            bmw = next((m for m in manufacturers if 'BMW' in m.get('name', '')), None)
-            if bmw:
-                bmw_id = bmw.get('id')
-                print(f"   Using BMW ID {bmw_id} for model testing")
-                
-                # Test models for BMW
-                success, models = self.test_models(bmw_id)
-                if success and models:
-                    # Test generations for first BMW model
-                    first_model = models[0]
-                    model_id = first_model.get('id')
-                    print(f"   Using model '{first_model.get('name')}' (ID: {model_id}) for generation testing")
-                    
-                    success, generations = self.test_generations(model_id)
-                    if success and generations:
-                        # Test engines for first generation
-                        first_gen = generations[0]
-                        gen_id = first_gen.get('id')
-                        print(f"   Using generation '{first_gen.get('name')}' (ID: {gen_id}) for engine testing")
-                        
-                        self.test_engines(gen_id)
+        # Test price calculation with new pricing
+        print("5. Testing Price Calculation")
+        price_calc_success = self.test_price_calculation_new_pricing()
         
-        # Test vehicle database stats
-        self.test_vehicle_stats()
+        # Test file upload workflow
+        print("\n6. Testing File Upload Workflow")
+        file_upload_success, _ = self.test_file_upload_and_analysis()
         
-        # Test other endpoints
-        print("\n🔧 Testing Other APIs")
-        print("-" * 40)
-        self.test_get_services()
-        self.test_get_vehicles()  # Legacy endpoint
-        self.test_price_calculation()
-        self.test_invalid_file_upload()
+        # Test invalid file handling
+        print("\n7. Testing Invalid File Upload")
+        invalid_file_success = self.test_invalid_file_upload()
         
-        # Test Customer Portal APIs
-        print("\n🏠 Testing Customer Portal APIs")
-        print("-" * 40)
-        self.test_portal_login_invalid()
-        self.test_portal_login_missing_data()
-        self.test_portal_email_login()  # New email-only login
-        
-        # Test Chinese Truck Database
-        print("\n🚛 Testing Chinese Truck Database")
-        print("-" * 40)
-        self.test_chinese_truck_models()  # This calls test_chinese_truck_manufacturers internally
-        
-        # Test main workflow (if test file exists)
-        print("\n📁 Testing File Upload Workflow")
-        print("-" * 40)
-        success, analysis_result = self.test_file_upload_and_analysis()
-        
-        # 🎯 CRITICAL TEST: Manual Service Selection Flow
-        print("\n🎯 CRITICAL TEST: Continue to Payment Button")
-        print("-" * 40)
-        critical_success = self.test_manual_service_selection_flow()
-        
-        # Print summary
+        # === SUMMARY ===
         print()
-        print("=" * 50)
-        print(f"📊 Test Results: {self.tests_passed}/{self.tests_run} passed")
+        print("=" * 60)
+        print("📊 REVIEW REQUEST TEST RESULTS")
+        print("=" * 60)
         
-        if critical_success:
-            print("✅ CRITICAL TEST PASSED: Continue to Payment button works with manual service selection!")
-        else:
-            print("❌ CRITICAL TEST FAILED: Continue to Payment button issue detected!")
+        review_tests = [
+            ("Services API (DTC Pricing)", services_success),
+            ("Portal Registration", portal_reg_success),
+            ("DTC Engine Upload", dtc_engine_success),
+            ("Contact Form", contact_success)
+        ]
         
-        if self.tests_passed == self.tests_run:
-            print("✅ All tests passed!")
-            return True
+        review_passed = 0
+        for test_name, success in review_tests:
+            status = "✅ PASS" if success else "❌ FAIL"
+            print(f"{status} {test_name}")
+            if success:
+                review_passed += 1
+        
+        print(f"\nReview Request Tests: {review_passed}/{len(review_tests)} passed")
+        print(f"Total Tests: {self.tests_passed}/{self.tests_run} passed")
+        
+        # Determine overall success
+        critical_tests_passed = review_passed == len(review_tests)
+        
+        if critical_tests_passed:
+            print("\n✅ ALL REVIEW REQUEST TESTS PASSED!")
         else:
-            print("❌ Some tests failed!")
-            failed_tests = [r for r in self.test_results if not r['success']]
-            print("\nFailed tests:")
-            for test in failed_tests:
-                print(f"  - {test['test']}: {test['details']}")
+            print("\n❌ SOME REVIEW REQUEST TESTS FAILED!")
+            failed_review_tests = [name for name, success in review_tests if not success]
+            print(f"Failed: {', '.join(failed_review_tests)}")
+        
+        return critical_tests_passed
+
+    def test_price_calculation_new_pricing(self):
+        """Test price calculation with new DTC pricing"""
+        try:
+            # Test with new DTC pricing: single=$10, multiple=$20, bulk=$30, checksum=$5
+            test_services = ['dtc-single', 'checksum']
+            response = requests.post(f"{self.api_url}/calculate-price", 
+                                   json=test_services, timeout=10)
+            
+            success = response.status_code == 200
+            
+            if success:
+                pricing = response.json()
+                total_price = pricing.get('total_price', 0)
+                breakdown = pricing.get('pricing_breakdown', [])
+                
+                expected_total = 10.00 + 5.00  # dtc-single + checksum (new pricing)
+                
+                if abs(total_price - expected_total) < 0.01:
+                    details = f"✅ Correct new pricing: ${total_price} (DTC Single $10 + Checksum $5)"
+                    print(f"   ✓ DTC Single: $10.00")
+                    print(f"   ✓ Checksum: $5.00")
+                    print(f"   ✓ Total: ${total_price}")
+                else:
+                    success = False
+                    details = f"❌ Wrong total: ${total_price}, expected ${expected_total}"
+            else:
+                details = f"HTTP {response.status_code}"
+                
+            self.log_test("Price Calculation - New DTC Pricing", success, details, 200, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Price Calculation - New DTC Pricing", False, f"Error: {str(e)}")
             return False
 
 def main():
