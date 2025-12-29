@@ -3258,6 +3258,183 @@ async def dtc_lookup(dtc_code: str):
     }
 
 
+# ============================================
+# Enhanced DTC Database API (from DaVinci)
+# ============================================
+
+@api_router.get("/dtc-database")
+async def get_dtc_database():
+    """Get the full DTC database with categories"""
+    try:
+        db_path = ROOT_DIR / "dtc_database.json"
+        if db_path.exists():
+            with open(db_path, "r") as f:
+                data = json.load(f)
+            return {
+                "success": True,
+                "total_codes": len(data.get("codes", {})),
+                "categories": {
+                    "dpf": data.get("dpf_codes", []),
+                    "egr": data.get("egr_codes", []),
+                    "adblue": data.get("adblue_codes", []),
+                    "o2_lambda": data.get("o2_lambda_codes", []),
+                    "catalyst": data.get("catalyst_codes", [])
+                },
+                "supported_ecus": data.get("supported_ecus", [])
+            }
+        else:
+            return {"success": False, "error": "DTC database not found"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@api_router.get("/dtc-database/codes/{category}")
+async def get_dtc_codes_by_category(category: str):
+    """Get DTC codes by category (dpf, egr, adblue, o2_lambda, catalyst)"""
+    try:
+        db_path = ROOT_DIR / "dtc_database.json"
+        if db_path.exists():
+            with open(db_path, "r") as f:
+                data = json.load(f)
+            
+            category_key = f"{category}_codes" if not category.endswith("_codes") else category
+            codes = data.get(category_key, data.get("categories", {}).get(category, []))
+            
+            # Get descriptions for each code
+            result = []
+            all_codes = data.get("codes", {})
+            for code in codes:
+                result.append({
+                    "code": code,
+                    "description": all_codes.get(code, "No description available")
+                })
+            
+            return {
+                "success": True,
+                "category": category,
+                "codes": result,
+                "count": len(result)
+            }
+        else:
+            return {"success": False, "error": "DTC database not found"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@api_router.get("/dtc-database/lookup/{dtc_code}")
+async def lookup_dtc_code(dtc_code: str):
+    """Look up a specific DTC code from the DaVinci database"""
+    try:
+        code = dtc_code.upper().strip()
+        db_path = ROOT_DIR / "dtc_database.json"
+        
+        if db_path.exists():
+            with open(db_path, "r") as f:
+                data = json.load(f)
+            
+            all_codes = data.get("codes", {})
+            description = all_codes.get(code, None)
+            
+            # Determine category
+            category = "other"
+            if code in data.get("dpf_codes", []):
+                category = "dpf"
+            elif code in data.get("egr_codes", []):
+                category = "egr"
+            elif code in data.get("adblue_codes", []):
+                category = "adblue"
+            elif code in data.get("o2_lambda_codes", []):
+                category = "o2_lambda"
+            elif code in data.get("catalyst_codes", []):
+                category = "catalyst"
+            
+            return {
+                "success": True,
+                "code": code,
+                "description": description or "Code not found in database",
+                "found": description is not None,
+                "category": category
+            }
+        else:
+            # Fallback to original DTCDatabase
+            description = DTCDatabase.get_description(code)
+            return {
+                "success": True,
+                "code": code,
+                "description": description,
+                "found": description != f"Unknown DTC: {code}",
+                "category": dtc_delete_engine._categorize_dtc(code)
+            }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@api_router.post("/dtc-database/validate")
+async def validate_dtc_codes(codes: List[str]):
+    """Validate multiple DTC codes and return descriptions"""
+    try:
+        db_path = ROOT_DIR / "dtc_database.json"
+        results = []
+        
+        if db_path.exists():
+            with open(db_path, "r") as f:
+                data = json.load(f)
+            all_codes = data.get("codes", {})
+        else:
+            all_codes = {}
+        
+        for code in codes:
+            code = code.upper().strip()
+            if code:
+                description = all_codes.get(code, DTCDatabase.get_description(code))
+                results.append({
+                    "code": code,
+                    "description": description,
+                    "valid": not description.startswith("Unknown")
+                })
+        
+        return {
+            "success": True,
+            "results": results,
+            "valid_count": sum(1 for r in results if r["valid"]),
+            "total": len(results)
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@api_router.get("/dtc-database/search")
+async def search_dtc_codes(q: str):
+    """Search DTC codes by description keyword"""
+    try:
+        db_path = ROOT_DIR / "dtc_database.json"
+        results = []
+        query = q.lower().strip()
+        
+        if db_path.exists():
+            with open(db_path, "r") as f:
+                data = json.load(f)
+            
+            all_codes = data.get("codes", {})
+            for code, description in all_codes.items():
+                if query in code.lower() or query in description.lower():
+                    results.append({
+                        "code": code,
+                        "description": description
+                    })
+                    if len(results) >= 50:  # Limit results
+                        break
+        
+        return {
+            "success": True,
+            "query": q,
+            "results": results,
+            "count": len(results)
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
