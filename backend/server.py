@@ -743,12 +743,12 @@ async def analyze_and_process_file(file: UploadFile = File(...)):
             "egr_off": {"service_name": "EGR Removal", "price": 50.0},
             "dpf_egr_off": {"service_name": "DPF & EGR Combo", "price": 248.0},  # Combo deal
             "adblue_off": {"service_name": "AdBlue/SCR Removal", "price": 698.0},
-            "dtc_off": {"service_name": "DTC/Error Code Removal", "price": 50.0},
+            "dtc_off": {"service_name": "DTC/Error Code Removal", "price": 10.0},  # Base price for 1 DTC
             "lambda_off": {"service_name": "Lambda/O2 Sensor Removal", "price": 50.0},
             "cat_off": {"service_name": "Catalyst Removal", "price": 50.0},
-            "speed_limiter": {"service_name": "Speed Limiter Removal", "price": 50.0},
-            "start_stop_off": {"service_name": "Start/Stop Disable", "price": 50.0},
-            "swirl_off": {"service_name": "Swirl Flaps Removal", "price": 50.0},
+            "speed_limiter": {"service_name": "Speed Limiter Removal", "price": 30.0},
+            "start_stop_off": {"service_name": "Start/Stop Disable", "price": 40.0},
+            "swirl_off": {"service_name": "Swirl Flaps Removal", "price": 40.0},
             "hot_start": {"service_name": "Hot Start Fix / Immo", "price": 70.0},
             "stage_tuning": {"service_name": "Stage 1/2 Tuning", "price": 248.0},
         }
