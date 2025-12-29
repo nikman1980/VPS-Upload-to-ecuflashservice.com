@@ -1837,35 +1837,34 @@ const NewUploadFlow = () => {
               </div>
             </div>
             
-            {/* DTC Removal Recommendation - Shows when DPF, EGR, or AdBlue is selected */}
-            {(selectedServices.some(s => ['dpf-removal', 'egr-removal', 'adblue-removal', 'egr-dpf-combo'].includes(s)) && 
-              !selectedServices.includes('dtc-multiple') && !selectedServices.includes('dtc-single')) && (
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            {/* FREE DTC Removal Input - Shows when DPF, EGR, or AdBlue is selected */}
+            {selectedServices.some(s => ['dpf-removal', 'egr-removal', 'adblue-removal', 'egr-dpf-combo'].includes(s)) && (
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600">💡</span>
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-green-600 text-xl">✓</span>
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-blue-800 mb-1">Recommended: Add DTC Removal</h4>
-                    <p className="text-blue-700 text-sm mb-3">
-                      When removing DPF, EGR, or AdBlue systems, related <strong>Diagnostic Trouble Codes (DTCs)</strong> may 
-                      appear. We recommend adding DTC removal to prevent check engine lights and ensure a clean modification.
+                    <h4 className="font-semibold text-green-800 mb-1">FREE DTC Removal Included</h4>
+                    <p className="text-green-700 text-sm mb-3">
+                      When processing DPF, EGR, or AdBlue removal, <strong>all related DTCs are automatically removed</strong> at no extra cost. 
+                      If you want to remove any additional DTCs, please specify them below as a comma-separated list (e.g., P0420, P0401, P2002).
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleServiceToggle('dtc-multiple', 50)}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2"
-                      >
-                        <span>✓</span> Add DTC Removal (+$50)
-                      </button>
-                      <button
-                        type="button"
-                        className="bg-white hover:bg-gray-50 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 transition"
-                        onClick={() => {}}
-                      >
-                        No Thanks
-                      </button>
+                    
+                    <div className="bg-white rounded-lg p-3 border border-green-200">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Additional DTCs to Remove (Optional - FREE)
+                      </label>
+                      <textarea
+                        value={additionalDtcCodes}
+                        onChange={(e) => setAdditionalDtcCodes(e.target.value.toUpperCase())}
+                        placeholder="Enter DTC codes separated by commas (e.g., P0420, P0401, P2002)"
+                        rows={2}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                      />
+                      <p className="text-xs text-gray-500 mt-2">
+                        💡 <strong>Tip:</strong> If new DTCs appear after flashing, contact us and we'll remove them for FREE.
+                      </p>
                     </div>
                   </div>
                 </div>
