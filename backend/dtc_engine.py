@@ -1,14 +1,18 @@
 """
 ECU DTC Delete Engine
 Specialized engine for DTC (Diagnostic Trouble Codes) deletion with checksum correction.
+Enhanced with DaVinci database for comprehensive DTC detection.
 """
 
 import struct
 import re
+import json
+import os
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 from enum import Enum
 import binascii
+from pathlib import Path
 
 
 class ChecksumType(Enum):
@@ -46,6 +50,46 @@ class DTCDeleteResult:
     checksum_details: Dict
     modified_data: Optional[bytes]
     error_message: Optional[str]
+
+
+# Load DaVinci database on module import
+DAVINCI_DATABASE = None
+DAVINCI_CATEGORIES = {}
+
+def load_davinci_database():
+    """Load the DaVinci DTC database from JSON file"""
+    global DAVINCI_DATABASE, DAVINCI_CATEGORIES
+    try:
+        db_path = Path(__file__).parent / "dtc_database.json"
+        if db_path.exists():
+            with open(db_path, 'r') as f:
+                data = json.load(f)
+                DAVINCI_DATABASE = data.get("codes", {})
+                DAVINCI_CATEGORIES = {
+                    "dpf": data.get("categories", {}).get("dpf", []),
+                    "egr": data.get("categories", {}).get("egr", []),
+                    "adblue": data.get("categories", {}).get("adblue", []),
+                    "catalyst": data.get("categories", {}).get("catalyst", []),
+                    "o2_lambda": data.get("categories", {}).get("o2_lambda", []),
+                    "turbo": data.get("categories", {}).get("turbo", []),
+                    "flaps": data.get("categories", {}).get("flaps", []),
+                    "tva": data.get("categories", {}).get("tva", []),
+                    "nox": data.get("categories", {}).get("nox", []),
+                    "readiness": data.get("readiness_codes", []),
+                    "immo": data.get("immo_codes", []),
+                    "speed_limiter": data.get("speed_limiter_codes", []),
+                    "start_stop": data.get("start_stop_codes", []),
+                    "fuel": data.get("fuel_codes", []),
+                    "evap": data.get("evap_codes", []),
+                }
+                print(f"Loaded DaVinci database: {len(DAVINCI_DATABASE)} DTC codes")
+    except Exception as e:
+        print(f"Warning: Could not load DaVinci database: {e}")
+        DAVINCI_DATABASE = {}
+        DAVINCI_CATEGORIES = {}
+
+# Load database at module import
+load_davinci_database()
 
 
 class DTCDatabase:
