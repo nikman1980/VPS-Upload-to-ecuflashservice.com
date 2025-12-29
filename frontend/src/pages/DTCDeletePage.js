@@ -781,30 +781,116 @@ const DTCDeletePage = () => {
               </div>
             </div>
 
-            {/* DTCs Found in File */}
+            {/* DTCs Found in File - Compact View with View & Select */}
             {analysisResult.detected_dtcs?.length > 0 && (
               <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                  <span className="mr-2">🔍</span>
-                  DTCs Found in File ({analysisResult.detected_dtcs.length})
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {analysisResult.detected_dtcs.map((dtc, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => !selectedDTCs.includes(dtc.code) && setSelectedDTCs([...selectedDTCs, dtc.code])}
-                      disabled={selectedDTCs.includes(dtc.code)}
-                      className={`px-3 py-1.5 rounded-lg text-sm font-mono transition ${
-                        selectedDTCs.includes(dtc.code)
-                          ? 'bg-blue-100 text-blue-600 cursor-not-allowed'
-                          : 'bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-600'
-                      }`}
-                      title={dtc.description}
-                    >
-                      {dtc.code}
-                    </button>
-                  ))}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <span className="text-2xl">🔍</span>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-3xl font-bold text-blue-600">{analysisResult.detected_dtcs.length}</span>
+                        <span className="text-gray-600 font-medium">DTCs Found in File</span>
+                      </div>
+                      <p className="text-sm text-gray-500">Click to view and select codes for deletion</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowFileDtcSelector(!showFileDtcSelector)}
+                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-medium transition shadow-sm"
+                  >
+                    <span>{showFileDtcSelector ? 'Hide DTCs' : 'View & Select'}</span>
+                    <svg className={`w-5 h-5 transition-transform ${showFileDtcSelector ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
                 </div>
+                
+                {/* Expandable DTC Grid */}
+                {showFileDtcSelector && (
+                  <div className="mt-6 border-t border-gray-200 pt-6">
+                    {/* Quick Actions */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-sm font-medium text-gray-700">Select DTCs to add for deletion:</span>
+                      <div className="flex gap-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newDtcs = analysisResult.detected_dtcs
+                              .map(d => d.code)
+                              .filter(code => !selectedDTCs.includes(code));
+                            setSelectedDTCs([...selectedDTCs, ...newDtcs]);
+                          }}
+                          className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Select All
+                        </button>
+                        <span className="text-gray-300">|</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const fileDtcCodes = analysisResult.detected_dtcs.map(d => d.code);
+                            setSelectedDTCs(selectedDTCs.filter(code => !fileDtcCodes.includes(code)));
+                          }}
+                          className="text-sm text-gray-500 hover:text-gray-700 font-medium flex items-center gap-1"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                          Clear File DTCs
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* DTC Grid with Checkboxes */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-h-64 overflow-y-auto p-1">
+                      {analysisResult.detected_dtcs.map((dtc, idx) => (
+                        <label
+                          key={idx}
+                          className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition ${
+                            selectedDTCs.includes(dtc.code)
+                              ? 'bg-blue-50 border-blue-400'
+                              : 'bg-gray-50 border-gray-200 hover:border-blue-300 hover:bg-blue-50/50'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedDTCs.includes(dtc.code)}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setSelectedDTCs([...selectedDTCs, dtc.code]);
+                              } else {
+                                setSelectedDTCs(selectedDTCs.filter(c => c !== dtc.code));
+                              }
+                            }}
+                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <span className="font-mono font-semibold text-sm text-gray-800">{dtc.code}</span>
+                            {dtc.description && (
+                              <p className="text-xs text-gray-500 truncate" title={dtc.description}>{dtc.description}</p>
+                            )}
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                    
+                    {/* Selection Summary */}
+                    <div className="mt-4 flex items-center justify-between p-3 bg-blue-50 rounded-xl">
+                      <span className="text-sm text-blue-700">
+                        <strong>{selectedDTCs.filter(code => analysisResult.detected_dtcs.map(d => d.code).includes(code)).length}</strong> of {analysisResult.detected_dtcs.length} file DTCs selected
+                      </span>
+                      <span className="text-sm text-blue-600">
+                        Total selected: <strong>{selectedDTCs.length}</strong>
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
