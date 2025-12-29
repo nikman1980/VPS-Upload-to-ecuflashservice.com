@@ -156,6 +156,11 @@ const DTCDeletePage = () => {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [analyzing, setAnalyzing] = useState(false);
   
+  // DTC Database state (from DaVinci)
+  const [dtcDatabase, setDtcDatabase] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  
   // DTC input state
   const [dtcInput, setDtcInput] = useState('');
   const [selectedDTCs, setSelectedDTCs] = useState([]);
