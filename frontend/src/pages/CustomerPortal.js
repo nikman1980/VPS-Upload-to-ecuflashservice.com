@@ -1475,6 +1475,43 @@ const CustomerPortal = () => {
                         </div>
                       </div>
                     )}
+                    
+                    {/* AdBlue/DCU Notice */}
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+                      <div className="flex items-start gap-3">
+                        <span className="text-amber-600">⚠️</span>
+                        <div>
+                          <h4 className="font-semibold text-amber-800 text-sm mb-1">AdBlue/SCR System Notice</h4>
+                          <p className="text-amber-700 text-xs">
+                            AdBlue systems are often controlled by a separate <strong>Dosing Control Unit (DCU)</strong>. 
+                            If you need AdBlue removal, please upload both ECU and DCU files.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* DTC Recommendation when DPF/EGR/AdBlue is selected */}
+                    {(newOrderServices.some(s => ['dpf-removal', 'egr-removal', 'adblue-removal', 'egr-dpf-combo'].includes(s)) && 
+                      !newOrderServices.includes('dtc-multiple') && !newOrderServices.includes('dtc-single')) && (
+                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
+                        <div className="flex items-start gap-3">
+                          <span className="text-blue-600">💡</span>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-blue-800 text-sm mb-1">Recommended: Add DTC Removal</h4>
+                            <p className="text-blue-700 text-xs mb-2">
+                              DPF/EGR/AdBlue removal may trigger DTCs. Add DTC removal to prevent check engine lights.
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => setNewOrderServices([...newOrderServices, 'dtc-multiple'])}
+                              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition"
+                            >
+                              + Add DTC Removal ($50)
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
                       <h3 className="font-semibold text-gray-900 mb-4">Select Services</h3>
