@@ -178,6 +178,57 @@ const DTCDeletePage = () => {
   // Step tracking: 1: Upload, 2: Select DTCs, 3: Payment, 4: Results
   const [step, setStep] = useState(1);
 
+  // Load DTC Database from backend (DaVinci data)
+  useEffect(() => {
+    const loadDTCDatabase = async () => {
+      try {
+        const response = await axios.get(`${API}/dtc-database`);
+        if (response.data.success) {
+          setDtcDatabase(response.data);
+          console.log(`Loaded ${response.data.total_codes} DTC codes from database`);
+        }
+      } catch (error) {
+        console.log('Using local DTC database');
+      }
+    };
+    loadDTCDatabase();
+  }, []);
+
+  // Search DTC codes
+  const searchDTCs = async (query) => {
+    if (!query || query.length < 2) {
+      setSearchResults([]);
+      return;
+    }
+    
+    try {
+      const response = await axios.get(`${API}/dtc-database/search?q=${encodeURIComponent(query)}`);
+      if (response.data.success) {
+        setSearchResults(response.data.results.slice(0, 10));
+      }
+    } catch (error) {
+      // Fallback to local search
+      const results = Object.entries(DTC_DESCRIPTIONS)
+        .filter(([code, desc]) => 
+          code.toLowerCase().includes(query.toLowerCase()) || 
+          desc.toLowerCase().includes(query.toLowerCase())
+        )
+        .slice(0, 10)
+        .map(([code, description]) => ({ code, description }));
+      setSearchResults(results);
+    }
+  };
+
+  // Debounced search handler
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        searchDTCs(searchQuery);
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   // Pricing calculator
   const calculatePrice = () => {
     const dtcCount = selectedDTCs.length;
