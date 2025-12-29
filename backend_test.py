@@ -53,44 +53,60 @@ class ECUServiceTester:
             return False
 
     def test_get_services(self):
-        """Test services endpoint"""
+        """Test services endpoint - verify DTC pricing as per review request"""
         try:
             response = requests.get(f"{self.api_url}/services", timeout=10)
             success = response.status_code == 200
             
             if success:
                 services = response.json()
-                # Check for required services (checksum is added during file analysis)
                 service_ids = [s['id'] for s in services]
-                required_services = ['dtc-single', 'dtc-multiple']
                 
-                missing_services = [s for s in required_services if s not in service_ids]
-                if missing_services:
-                    success = False
-                    details = f"Missing services: {missing_services}"
+                # Check for required DTC services with correct pricing
+                dtc_single = next((s for s in services if s['id'] == 'dtc-single'), None)
+                dtc_multiple = next((s for s in services if s['id'] == 'dtc-multiple'), None)
+                dtc_bulk = next((s for s in services if s['id'] == 'dtc-bulk'), None)
+                checksum = next((s for s in services if s['id'] == 'checksum'), None)
+                
+                pricing_issues = []
+                
+                # Verify DTC Single should be $10
+                if dtc_single and dtc_single['base_price'] == 10.00:
+                    print(f"   ✓ DTC Single service found at $10.00 ✓")
                 else:
-                    details = f"Found {len(services)} services including required DTC services"
+                    pricing_issues.append(f"DTC Single: expected $10, got ${dtc_single['base_price'] if dtc_single else 'NOT FOUND'}")
+                
+                # Verify DTC Multiple (2-6) should be $20
+                if dtc_multiple and dtc_multiple['base_price'] == 20.00:
+                    print(f"   ✓ DTC Multiple (2-6) service found at $20.00 ✓")
+                else:
+                    pricing_issues.append(f"DTC Multiple: expected $20, got ${dtc_multiple['base_price'] if dtc_multiple else 'NOT FOUND'}")
+                
+                # Verify DTC Bulk (7+) should be $30
+                if dtc_bulk and dtc_bulk['base_price'] == 30.00:
+                    print(f"   ✓ DTC Bulk (7+) service found at $30.00 ✓")
+                else:
+                    pricing_issues.append(f"DTC Bulk: expected $30, got ${dtc_bulk['base_price'] if dtc_bulk else 'NOT FOUND'}")
+                
+                # Verify Checksum should be $5
+                if checksum and checksum['base_price'] == 5.00:
+                    print(f"   ✓ Checksum service found at $5.00 ✓")
+                else:
+                    pricing_issues.append(f"Checksum: expected $5, got ${checksum['base_price'] if checksum else 'NOT FOUND'}")
+                
+                if pricing_issues:
+                    success = False
+                    details = f"PRICING ISSUES: {'; '.join(pricing_issues)}"
+                else:
+                    details = f"✅ ALL DTC PRICING CORRECT: Single=$10, Multiple=$20, Bulk=$30, Checksum=$5"
                     
-                    # Check specific pricing (checksum is not in general services)
-                    dtc_single = next((s for s in services if s['id'] == 'dtc-single'), None)
-                    dtc_multiple = next((s for s in services if s['id'] == 'dtc-multiple'), None)
-                    
-                    if dtc_single and dtc_single['base_price'] == 20.00:
-                        print(f"   ✓ DTC Single service found at $20.00")
-                    else:
-                        print(f"   ⚠️ DTC Single service price issue")
-                        
-                    if dtc_multiple and dtc_multiple['base_price'] == 50.00:
-                        print(f"   ✓ DTC Multiple service found at $50.00")
-                    else:
-                        print(f"   ⚠️ DTC Multiple service price issue")
             else:
                 details = f"HTTP {response.status_code}"
                 
-            self.log_test("Get Services", success, details, 200, response.status_code)
+            self.log_test("Services API - DTC Pricing Verification", success, details, 200, response.status_code)
             return success
         except Exception as e:
-            self.log_test("Get Services", False, f"Error: {str(e)}")
+            self.log_test("Services API - DTC Pricing Verification", False, f"Error: {str(e)}")
             return False
 
     def test_vehicle_types(self):
