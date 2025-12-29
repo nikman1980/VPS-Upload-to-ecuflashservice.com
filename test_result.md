@@ -49,6 +49,7 @@ metadata:
 test_plan:
   current_focus:
     - "Customer Portal Enhanced New Order Flow"
+    - "DTC Recommendation and AdBlue/DCU Notice"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
