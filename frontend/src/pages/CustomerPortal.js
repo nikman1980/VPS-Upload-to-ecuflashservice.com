@@ -103,10 +103,11 @@ const CustomerPortal = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [settingsMessage, setSettingsMessage] = useState({ type: '', text: '' });
 
-  // Available services - using original app pricing
+  // Available services - matching DTC Delete Tool pricing
   const availableServices = [
-    { id: 'dtc-single', name: 'DTC Removal (Single)', price: 20 },
-    { id: 'dtc-multiple', name: 'DTC Removal (Multiple)', price: 50 },
+    { id: 'dtc-single', name: 'DTC Removal (1 Code)', price: 10 },
+    { id: 'dtc-multiple', name: 'DTC Removal (2-6 Codes)', price: 20 },
+    { id: 'dtc-bulk', name: 'DTC Removal (7+ Codes)', price: 30 },
     { id: 'egr-removal', name: 'EGR Removal', price: 50 },
     { id: 'dpf-removal', name: 'DPF Removal', price: 248 },
     { id: 'egr-dpf-combo', name: 'EGR + DPF Combo', price: 248 },
@@ -114,7 +115,7 @@ const CustomerPortal = () => {
     { id: 'immo-off', name: 'Immobilizer Off', price: 70 },
     { id: 'decat', name: 'Decat (Cat OFF)', price: 40 },
     { id: 'vmax-off', name: 'Speed Limiter OFF', price: 30 },
-    { id: 'checksum', name: 'Checksum Correction', price: 10 },
+    { id: 'checksum', name: 'Checksum Correction', price: 5 },
     { id: 'swirl-flap-off', name: 'Swirl Flap OFF', price: 40 },
     { id: 'nox-off', name: 'NOX Sensor OFF', price: 40 },
     { id: 'start-stop-off', name: 'Start & Stop OFF', price: 40 },
