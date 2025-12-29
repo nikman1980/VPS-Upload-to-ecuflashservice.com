@@ -515,9 +515,9 @@ AVAILABLE_SERVICES = [
         "name": "Checksum Correction",
         "description": "Automatic checksum recalculation for modified files.",
         "icon": "♻️",
-        "base_price": 10.00,
-        "final_price": 10.00,
-        "cost_price": 5.00,
+        "base_price": 5.00,
+        "final_price": 5.00,
+        "cost_price": 2.50,
         "category": "utility"
     },
     {
