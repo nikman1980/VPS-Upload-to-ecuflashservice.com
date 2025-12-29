@@ -838,6 +838,7 @@ const CustomerPortal = () => {
             { id: 'dashboard', icon: '📊', label: 'Dashboard' },
             { id: 'orders', icon: '📦', label: 'My Orders' },
             { id: 'new-order', icon: '➕', label: 'New Order' },
+            { id: 'dtc-tool', icon: '🔍', label: 'DTC Tool' },
             { id: 'files', icon: '📁', label: 'Files' },
             { id: 'messages', icon: '💬', label: 'Messages' },
             { id: 'payments', icon: '💳', label: 'Payments' },
