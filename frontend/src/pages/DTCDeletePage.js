@@ -2,9 +2,44 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
+import { Helmet } from 'react-helmet-async';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// SEO Keywords and Meta Data for DTC Delete Tool
+const SEO_DATA = {
+  title: "DTC Delete Tool | Check Engine Light Removal | Error Code Delete Service",
+  description: "Professional DTC deletion service. Remove check engine light, clear diagnostic trouble codes P0420, P0401, P2002, EGR, DPF, AdBlue codes. From $10. Instant download. Checksum correction included.",
+  keywords: [
+    // Primary Keywords
+    "DTC delete", "DTC removal", "check engine light removal", "error code delete",
+    "diagnostic trouble code removal", "fault code delete", "engine light off",
+    // Service Keywords  
+    "ECU DTC delete service", "permanent DTC removal", "DTC file service",
+    "check engine light off service", "CEL delete", "MIL delete",
+    // Code-Specific Keywords
+    "P0420 delete", "P0401 remove", "P2002 delete", "P0171 remove",
+    "EGR code delete", "DPF code removal", "AdBlue code delete", "SCR code removal",
+    "catalyst code delete", "O2 sensor code removal", "lambda code delete",
+    // Vehicle Keywords
+    "diesel DTC delete", "truck error code removal", "car fault code delete",
+    "BMW DTC delete", "Audi fault code removal", "Mercedes error code delete",
+    "Ford DTC removal", "Toyota fault code delete", "VW error code service",
+    // Technical Keywords
+    "ECU fault code removal", "ECM error code delete", "OBD2 code removal",
+    "checksum correction", "ECU flash DTC delete", "ECU tuning DTC removal",
+    // Location/Service Keywords
+    "online DTC delete service", "remote DTC removal", "instant DTC delete",
+    "cheap DTC delete", "affordable error code removal", "fast DTC service",
+    // Problem-Specific Keywords
+    "how to remove check engine light", "clear engine codes permanently",
+    "delete fault codes without scanner", "remove DTC from ECU file",
+    "fix check engine light", "stop engine warning light"
+  ].join(", "),
+  canonical: "/tools/dtc-delete",
+  ogImage: "/dtc-delete-og.jpg"
+};
 
 // DTC Descriptions for common codes
 const DTC_DESCRIPTIONS = {
