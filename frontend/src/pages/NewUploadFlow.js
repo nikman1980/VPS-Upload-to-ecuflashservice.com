@@ -613,6 +613,7 @@ const NewUploadFlow = () => {
       purchaseData.append('customer_phone', customerInfo.customer_phone);
       purchaseData.append('vehicle_info', JSON.stringify(vehicleInfo));
       purchaseData.append('dtc_codes', JSON.stringify(dtcCodesData));
+      purchaseData.append('additional_dtc_codes', additionalDtcCodes); // FREE DTCs with DPF/EGR/AdBlue
       purchaseData.append('paypal_order_id', order.id);
       purchaseData.append('paypal_transaction_id', order.purchase_units[0].payments.captures[0].id);
       
