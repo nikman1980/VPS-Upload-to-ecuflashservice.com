@@ -234,11 +234,9 @@ const CustomerPortal = () => {
 
   // Get ECU name for display
   const getEcuName = () => {
-    if (isManualVehicle) {
-      const ecu = commonEcuTypes.find(e => e.id === selectedEcu);
-      return ecu?.name || '';
+    if (selectedEcu === 'other') {
+      return customEcu || 'Custom ECU';
     }
-    // Use common ECU types for now (can be enhanced)
     const ecu = commonEcuTypes.find(e => e.id === selectedEcu);
     return ecu?.name || '';
   };
@@ -246,9 +244,11 @@ const CustomerPortal = () => {
   // Check if vehicle selection is complete
   const isVehicleComplete = () => {
     if (isManualVehicle) {
-      return manualVehicle.make && manualVehicle.model && selectedEcu;
+      const ecuValid = selectedEcu === 'other' ? customEcu.trim() : selectedEcu;
+      return manualVehicle.make && manualVehicle.model && ecuValid;
     }
-    return selectedVehicleType && selectedManufacturer && selectedModel && selectedEngine && selectedEcu;
+    const ecuValid = selectedEcu === 'other' ? customEcu.trim() : selectedEcu;
+    return selectedVehicleType && selectedManufacturer && selectedModel && selectedEngine && ecuValid;
   };
 
   // Analyze uploaded file
