@@ -2200,50 +2200,8 @@ const NewUploadFlow = () => {
                 />
               </PayPalScriptProvider>
               <p className="text-xs text-gray-500 text-center mt-3">
-                {USE_SANDBOX ? "🧪 Sandbox Mode - Test payments only" : "🔒 Secure live payments via PayPal"}
+                🔒 Secure live payments via PayPal
               </p>
-              
-              {/* Test Mode: Skip Payment Button */}
-              {USE_SANDBOX && (
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <button
-                    onClick={async () => {
-                      try {
-                        // Create a test order without actual payment
-                        const orderData = {
-                          file_id: fileId,
-                          services: selectedServices.map(s => s.id),
-                          total_amount: totalPrice,
-                          vehicle_info: getVehicleSummary(),
-                          customer_email: customerInfo.customer_email || 'test@example.com',
-                          customer_name: customerInfo.customer_name || 'Test Customer',
-                          payment_status: 'test_completed',
-                          paypal_order_id: 'TEST_' + Date.now(),
-                          paypal_transaction_id: 'TEST_TXN_' + Date.now(),
-                        };
-                        
-                        const response = await axios.post(`${API}/orders`, orderData);
-                        
-                        if (response.data.success) {
-                          setOrderId(response.data.order_id);
-                          setStep(6); // Go to success page
-                        } else {
-                          alert('Failed to create test order');
-                        }
-                      } catch (error) {
-                        console.error('Test order error:', error);
-                        alert('Error: ' + (error.response?.data?.detail || error.message));
-                      }
-                    }}
-                    className="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl font-semibold transition flex items-center justify-center gap-2"
-                  >
-                    🧪 Skip Payment (Test Mode)
-                  </button>
-                  <p className="text-xs text-yellow-600 text-center mt-2">
-                    For testing only - bypasses PayPal payment
-                  </p>
-                </div>
-              )}
             </div>
 
             <button
