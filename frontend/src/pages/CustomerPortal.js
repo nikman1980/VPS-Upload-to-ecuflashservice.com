@@ -2044,15 +2044,32 @@ const CustomerPortal = () => {
                           <td className="px-6 py-4 font-semibold">${(order.total_amount || order.price || 0).toFixed(2)}</td>
                           <td className="px-6 py-4">
                             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                              order.payment_status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                              order.payment_status === 'paid' || order.payment_status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
                             }`}>
-                              {order.payment_status || 'Pending'}
+                              {order.payment_status === 'completed' ? 'Paid' : (order.payment_status || 'Pending')}
                             </span>
                           </td>
-                          <td className="px-6 py-4">
-                            <button className="text-blue-600 hover:text-blue-700 text-sm">
-                              Invoice
+                          <td className="px-6 py-4 flex gap-2">
+                            <button 
+                              onClick={() => {
+                                const invoiceUrl = `${process.env.REACT_APP_BACKEND_URL}/api/portal/invoice/${order.id}?email=${encodeURIComponent(accountInfo?.email)}`;
+                                window.open(invoiceUrl, '_blank');
+                              }}
+                              className="text-blue-600 hover:text-blue-700 text-sm"
+                            >
+                              📄 Invoice
                             </button>
+                            {order.payment_status !== 'paid' && order.payment_status !== 'completed' && (
+                              <button 
+                                onClick={() => {
+                                  setSelectedOrder(order);
+                                  setActiveTab('orders');
+                                }}
+                                className="text-green-600 hover:text-green-700 text-sm"
+                              >
+                                💳 Pay Now
+                              </button>
+                            )}
                           </td>
                         </tr>
                       ))}
