@@ -1169,32 +1169,85 @@ const DTCDeletePage = () => {
                 <span className="mr-2">💳</span> Payment
               </h3>
               
-              {/* PayPal Button Placeholder */}
-              <div className="bg-gray-50 rounded-xl p-6 text-center mb-4">
-                <p className="text-gray-500 mb-4">PayPal payment coming soon</p>
+              {/* PayPal Integration */}
+              <div className="bg-gray-50 rounded-xl p-6 mb-4">
+                {pricing.total > 0 ? (
+                  <PayPalScriptProvider 
+                    options={{ 
+                      "client-id": PAYPAL_CLIENT_ID, 
+                      currency: "USD",
+                      intent: "capture"
+                    }}
+                  >
+                    <PayPalButtons
+                      style={{ 
+                        layout: "vertical",
+                        color: "blue",
+                        shape: "rect",
+                        label: "pay"
+                      }}
+                      disabled={!customerName || !customerEmail || processing}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [{
+                            amount: {
+                              value: pricing.total.toFixed(2),
+                              currency_code: "USD"
+                            },
+                            description: `DTC Delete Service - ${selectedDTCs.length} code(s)${correctChecksum ? ' + Checksum' : ''}`
+                          }]
+                        });
+                      }}
+                      onApprove={async (data, actions) => {
+                        try {
+                          setProcessing(true);
+                          const order = await actions.order.capture();
+                          
+                          // Create order in backend
+                          const orderResponse = await axios.post(`${API}/dtc-engine/order`, {
+                            file_id: fileId,
+                            dtc_codes: selectedDTCs,
+                            correct_checksum: correctChecksum,
+                            customer_name: customerName,
+                            customer_email: customerEmail,
+                            dtc_price: pricing.dtcPrice,
+                            checksum_price: pricing.checksumPrice,
+                            total_price: pricing.total,
+                            paypal_order_id: order.id,
+                            paypal_transaction_id: order.purchase_units[0].payments.captures[0].id
+                          });
+                          
+                          // Process the DTC deletion
+                          const processResponse = await axios.post(`${API}/dtc-engine/process`, {
+                            file_id: fileId,
+                            dtc_codes: selectedDTCs,
+                            correct_checksum: correctChecksum,
+                            order_id: orderResponse.data.order_id
+                          });
+                          
+                          setProcessResult(processResponse.data);
+                          setStep(4);
+                        } catch (error) {
+                          console.error('Payment/Order error:', error);
+                          alert('Payment successful but error processing order. Contact support with PayPal Order ID: ' + data.orderID);
+                        } finally {
+                          setProcessing(false);
+                        }
+                      }}
+                      onError={(err) => {
+                        console.error('PayPal Error:', err);
+                        alert('PayPal payment failed. Please try again.');
+                      }}
+                    />
+                  </PayPalScriptProvider>
+                ) : (
+                  <p className="text-center text-gray-500">Please select at least one DTC code</p>
+                )}
                 
-                {/* Skip Payment Button for Testing */}
-                <button
-                  onClick={() => createOrderAndPay(true)}
-                  disabled={processing || !customerName || !customerEmail}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-4 rounded-xl font-semibold transition disabled:opacity-50 flex items-center justify-center space-x-2"
-                >
-                  {processing ? (
-                    <>
-                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      <span>Processing...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>🧪</span>
-                      <span>Skip Payment (Test Mode) - ${pricing.total.toFixed(2)}</span>
-                    </>
-                  )}
-                </button>
-                <p className="text-xs text-yellow-600 mt-2">For testing only - bypasses payment</p>
+                <div className="mt-4 text-center">
+                  <p className="text-xs text-gray-500">Secure payment processed by PayPal</p>
+                  <p className="text-xs text-gray-400 mt-1">Total: ${pricing.total.toFixed(2)} USD</p>
+                </div>
               </div>
 
               <button
