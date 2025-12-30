@@ -615,7 +615,17 @@ class ECUServiceTester:
                 details = "DTC Database endpoint not found (/api/dtc-database)"
             elif response.status_code == 200:
                 result = response.json()
-                if isinstance(result, dict) and ('dtcs' in result or 'database' in result or 'codes' in result):
+                if result.get('success') and result.get('total_codes'):
+                    success = True
+                    total_codes = result.get('total_codes', 0)
+                    categories = result.get('categories', {})
+                    supported_ecus = result.get('supported_ecus', [])
+                    details = f"DaVinci database returned with {total_codes} DTC codes, {len(categories)} categories, {len(supported_ecus)} ECUs"
+                    print(f"   ✓ DaVinci DTC database working")
+                    print(f"   ✓ Total codes: {total_codes}")
+                    print(f"   ✓ Categories: {list(categories.keys())}")
+                    print(f"   ✓ Supported ECUs: {len(supported_ecus)}")
+                elif isinstance(result, dict) and ('dtcs' in result or 'database' in result or 'codes' in result):
                     success = True
                     dtc_count = len(result.get('dtcs', result.get('database', result.get('codes', []))))
                     details = f"DaVinci database returned with {dtc_count} DTC codes"
