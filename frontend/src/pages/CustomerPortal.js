@@ -1065,6 +1065,40 @@ const CustomerPortal = () => {
                         </button>
                       </div>
                     </div>
+                    
+                    {/* Payment Section - Show if payment is pending */}
+                    {selectedOrder.payment_status !== 'paid' && selectedOrder.payment_status !== 'completed' && (
+                      <div className="mt-6 pt-6 border-t border-gray-100">
+                        <h4 className="font-semibold text-gray-900 mb-3">💳 Payment Required</h4>
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-4">
+                          <p className="text-yellow-800 text-sm">
+                            Your order is pending payment. Please complete the payment to process your file.
+                          </p>
+                          <p className="text-yellow-900 font-semibold text-lg mt-2">
+                            Total: ${(selectedOrder.total_amount || selectedOrder.price || 0).toFixed(2)} USD
+                          </p>
+                        </div>
+                        <a
+                          href={`/tools/dtc-delete?order=${selectedOrder.id}`}
+                          className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition"
+                        >
+                          Pay with PayPal
+                        </a>
+                      </div>
+                    )}
+                    
+                    {/* Invoice Link */}
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                      <button
+                        onClick={() => {
+                          const invoiceUrl = `${API}/portal/invoice/${selectedOrder.id}?email=${encodeURIComponent(accountInfo?.email)}`;
+                          window.open(invoiceUrl, '_blank');
+                        }}
+                        className="text-blue-600 hover:text-blue-700 text-sm flex items-center gap-1"
+                      >
+                        📄 View/Download Invoice
+                      </button>
+                    </div>
                   </div>
                   
                   {/* Messages Section */}
