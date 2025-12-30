@@ -3,9 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { Helmet } from 'react-helmet-async';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// PayPal Configuration - LIVE MODE
+const PAYPAL_CLIENT_ID = 'AVHOtncoJmXhk_-HrJGRk1Yblmm25Zv7BdQbIByEhXrkzc5Gw9Rv9jP8q9YJ5HPPqqIZGtWQDP7jIDko';
 
 // SEO Keywords and Meta Data for DTC Delete Tool
 const SEO_DATA = {
