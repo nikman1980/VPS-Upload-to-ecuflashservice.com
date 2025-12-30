@@ -1367,14 +1367,63 @@ const CustomerPortal = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-2">ECU Type</label>
                             <select
                               value={selectedEcu}
-                              onChange={(e) => setSelectedEcu(e.target.value)}
+                              onChange={(e) => {
+                                setSelectedEcu(e.target.value);
+                                if (e.target.value !== 'other') setCustomEcu('');
+                              }}
                               className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
                             >
                               <option value="">Select ECU...</option>
-                              {commonEcuTypes.map(ecu => (
-                                <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
-                              ))}
+                              <optgroup label="⭐ Chinese Truck ECUs">
+                                {commonEcuTypes.filter(e => ['Weichai', 'Cummins', 'Yuchai', 'FAW', 'Sinotruk', 'Dongfeng'].includes(e.manufacturer)).map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Bosch">
+                                {commonEcuTypes.filter(e => e.manufacturer === 'Bosch').map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Siemens">
+                                {commonEcuTypes.filter(e => e.manufacturer === 'Siemens').map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Continental">
+                                {commonEcuTypes.filter(e => e.manufacturer === 'Continental').map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Delphi">
+                                {commonEcuTypes.filter(e => e.manufacturer === 'Delphi').map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Denso">
+                                {commonEcuTypes.filter(e => e.manufacturer === 'Denso').map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Marelli">
+                                {commonEcuTypes.filter(e => e.manufacturer === 'Marelli').map((ecu) => (
+                                  <option key={ecu.id} value={ecu.id}>{ecu.name}</option>
+                                ))}
+                              </optgroup>
+                              <optgroup label="Other">
+                                <option value="other">Other (Enter manually)</option>
+                              </optgroup>
                             </select>
+                            
+                            {/* Custom ECU Input */}
+                            {selectedEcu === 'other' && (
+                              <input
+                                type="text"
+                                value={customEcu}
+                                onChange={(e) => setCustomEcu(e.target.value)}
+                                placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
+                                className="w-full mt-3 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3"
+                              />
+                            )}
                           </div>
                         )}
                       </>
