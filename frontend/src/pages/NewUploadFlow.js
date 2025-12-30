@@ -5,19 +5,9 @@ import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// PayPal Configuration
-// SANDBOX Client ID - For Testing
-const PAYPAL_SANDBOX_CLIENT_ID = 'AUKI1eDyXSrMhAJ_Lo4E-WL1ptVJQ3NaIsamoiklSc2p83EEyRvDxVBvhDV3k6q8FeG_vdMYPQv5DJtC';
-// LIVE Client ID - For Production (payments@ecuflashservice.com)
-const PAYPAL_LIVE_CLIENT_ID = 'AVHOtncoJmXhk_-HrJGRk1Yblmm25Zv7BdQbIByEhXrkzc5Gw9Rv9jP8q9YJ5HPPqqIZGtWQDP7jIDko';
-
-// Toggle this to switch between Sandbox (testing) and Live (production)
-const USE_SANDBOX = false;  // Set to false for LIVE payments
-const PAYPAL_CLIENT_ID = USE_SANDBOX ? PAYPAL_SANDBOX_CLIENT_ID : PAYPAL_LIVE_CLIENT_ID;
-
-// Debug log
-console.log("PayPal Mode:", USE_SANDBOX ? "SANDBOX" : "LIVE");
-console.log("PayPal Client ID:", PAYPAL_CLIENT_ID.substring(0, 20) + "...");
+// PayPal Configuration - LIVE MODE
+// Client ID for payments@ecuflashservice.com
+const PAYPAL_CLIENT_ID = 'AVHOtncoJmXhk_-HrJGRk1Yblmm25Zv7BdQbIByEhXrkzc5Gw9Rv9jP8q9YJ5HPPqqIZGtWQDP7jIDko';
 
 const NewUploadFlow = () => {
   // Updated step: 0: Landing, 1: Vehicle Selection, 2: Upload, 3: Processing, 4: Services, 5: Payment, 6: Success
