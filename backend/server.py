@@ -2487,6 +2487,83 @@ async def portal_upload_file(
     }
 
 
+@api_router.get("/portal/invoice/{order_id}")
+async def get_portal_invoice(order_id: str, email: str):
+    """
+    Get invoice HTML for an order
+    """
+    email = email.strip().lower()
+    
+    # Verify order access
+    order = await db.service_requests.find_one({
+        "id": order_id,
+        "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+    }, {"_id": 0})
+    
+    if not order:
+        order = await db.orders.find_one({
+            "id": order_id,
+            "customer_email": {"$regex": f"^{email}$", "$options": "i"}
+        }, {"_id": 0})
+    
+    if not order:
+        raise HTTPException(status_code=401, detail="Order not found or access denied")
+    
+    # Generate invoice
+    from email_service import generate_invoice_html
+    
+    customer_name = order.get('customer_name', order.get('name', 'Customer'))
+    customer_email = order.get('customer_email', email)
+    vehicle_info = order.get('vehicle_info', f"{order.get('vehicle_make', '')} {order.get('vehicle_model', '')} {order.get('vehicle_year', '')}")
+    
+    # Get services and prices
+    services = []
+    service_prices = []
+    if 'purchased_services' in order:
+        for s in order['purchased_services']:
+            services.append(s.get('service_name', s.get('name', 'Service')))
+            service_prices.append(s.get('price', 0))
+    elif 'services' in order:
+        for s in order['services']:
+            if isinstance(s, dict):
+                services.append(s.get('name', s.get('service_name', str(s))))
+                service_prices.append(s.get('price', 0))
+            else:
+                services.append(str(s).replace('_', ' ').title())
+                service_prices.append(0)
+    elif 'selected_services' in order:
+        for s in order['selected_services']:
+            services.append(s.get('name', str(s)))
+            service_prices.append(s.get('price', 0))
+    
+    total_amount = order.get('total_amount', order.get('total_price', sum(service_prices)))
+    payment_status = order.get('payment_status', 'pending')
+    created_at = order.get('created_at', datetime.now(timezone.utc).isoformat())
+    
+    # Format date
+    try:
+        if isinstance(created_at, str):
+            date_obj = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
+            created_at = date_obj.strftime('%B %d, %Y')
+    except:
+        pass
+    
+    invoice_html = generate_invoice_html(
+        order_id=order_id,
+        customer_name=customer_name,
+        customer_email=customer_email,
+        vehicle_info=vehicle_info,
+        services=services,
+        service_prices=service_prices,
+        total_amount=total_amount,
+        payment_status=payment_status,
+        created_at=created_at
+    )
+    
+    from fastapi.responses import HTMLResponse
+    return HTMLResponse(content=invoice_html)
+
+
 @api_router.get("/portal/download/{order_id}/{file_id}")
 async def portal_download_file(order_id: str, file_id: str, email: str):
     """
