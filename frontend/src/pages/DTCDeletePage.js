@@ -1019,7 +1019,10 @@ const DTCDeletePage = () => {
 
               {/* Continue to Payment Button */}
               <button
-                onClick={() => setStep(3)}
+                onClick={() => {
+                  setStep(3);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 disabled={selectedDTCs.length === 0}
                 className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
