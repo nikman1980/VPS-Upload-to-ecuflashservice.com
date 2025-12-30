@@ -359,3 +359,226 @@ def test_email_connection() -> bool:
     except Exception as e:
         logger.error(f"SMTP connection test failed: {e}")
         return False
+
+
+def send_order_notification_to_support(
+    order_id: str,
+    customer_name: str,
+    customer_email: str,
+    vehicle_info: str,
+    services: list,
+    total_amount: float,
+    source: str = "Website"
+) -> bool:
+    """Send notification to support@ecuflashservice.com when a new order is placed"""
+    
+    services_html = "".join([f"<li>{s}</li>" for s in services])
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+            .header {{ background: #10b981; color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }}
+            .content {{ background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }}
+            .order-box {{ background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e5e7eb; }}
+            .highlight {{ background: #fef3c7; padding: 10px; border-radius: 6px; margin: 10px 0; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2 style="margin: 0;">💰 New Order Received!</h2>
+                <p style="margin: 5px 0 0 0; opacity: 0.9;">From: {source}</p>
+            </div>
+            <div class="content">
+                <div class="highlight">
+                    <strong>Order ID:</strong> {order_id}<br>
+                    <strong>Total:</strong> ${total_amount:.2f}
+                </div>
+                
+                <div class="order-box">
+                    <h3 style="margin-top: 0; color: #2563eb;">Customer Details</h3>
+                    <p><strong>Name:</strong> {customer_name}</p>
+                    <p><strong>Email:</strong> <a href="mailto:{customer_email}">{customer_email}</a></p>
+                </div>
+                
+                <div class="order-box">
+                    <h3 style="margin-top: 0; color: #2563eb;">Order Details</h3>
+                    <p><strong>Vehicle:</strong> {vehicle_info}</p>
+                    <p><strong>Services:</strong></p>
+                    <ul>{services_html}</ul>
+                </div>
+                
+                <p style="text-align: center;">
+                    <a href="https://ecuflashservice.com/admin" style="display: inline-block; background: #2563eb; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px;">
+                        View in Admin Panel
+                    </a>
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    return send_email(
+        to_email=SMTP_FROM_EMAIL,  # support@ecuflashservice.com
+        subject=f"🆕 New Order #{order_id[:8]} - ${total_amount:.2f}",
+        html_content=html_content
+    )
+
+
+def send_portal_message_notification(
+    customer_name: str,
+    customer_email: str,
+    order_id: str,
+    message: str
+) -> bool:
+    """Send notification to support when a customer sends a message in the portal"""
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+            .header {{ background: #8b5cf6; color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }}
+            .content {{ background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }}
+            .message-box {{ background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #8b5cf6; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2 style="margin: 0;">💬 New Customer Message</h2>
+            </div>
+            <div class="content">
+                <p><strong>From:</strong> {customer_name} ({customer_email})</p>
+                <p><strong>Order ID:</strong> {order_id}</p>
+                
+                <div class="message-box">
+                    <h3 style="margin-top: 0;">Message:</h3>
+                    <p>{message}</p>
+                </div>
+                
+                <p style="text-align: center;">
+                    <a href="mailto:{customer_email}" style="display: inline-block; background: #8b5cf6; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px;">
+                        Reply to Customer
+                    </a>
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    return send_email(
+        to_email=SMTP_FROM_EMAIL,  # support@ecuflashservice.com
+        subject=f"💬 Message from {customer_name} - Order #{order_id[:8]}",
+        html_content=html_content
+    )
+
+
+def generate_invoice_html(
+    order_id: str,
+    customer_name: str,
+    customer_email: str,
+    vehicle_info: str,
+    services: list,
+    service_prices: list,
+    total_amount: float,
+    payment_status: str,
+    created_at: str
+) -> str:
+    """Generate HTML invoice for an order"""
+    
+    import datetime
+    
+    services_rows = ""
+    for i, service in enumerate(services):
+        price = service_prices[i] if i < len(service_prices) else 0
+        services_rows += f"""
+        <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #e5e7eb;">{service}</td>
+            <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: right;">${price:.2f}</td>
+        </tr>
+        """
+    
+    invoice_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {{ font-family: Arial, sans-serif; color: #333; margin: 0; padding: 20px; }}
+            .invoice {{ max-width: 800px; margin: 0 auto; background: white; border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; }}
+            .invoice-header {{ background: linear-gradient(135deg, #2563eb, #0891b2); color: white; padding: 30px; }}
+            .invoice-body {{ padding: 30px; }}
+            .invoice-title {{ font-size: 28px; margin: 0; }}
+            .invoice-meta {{ display: flex; justify-content: space-between; margin-top: 30px; }}
+            .invoice-meta-col {{ }}
+            .invoice-table {{ width: 100%; border-collapse: collapse; margin: 30px 0; }}
+            .invoice-table th {{ background: #f3f4f6; padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb; }}
+            .invoice-table td {{ padding: 12px; border-bottom: 1px solid #e5e7eb; }}
+            .invoice-total {{ font-size: 24px; text-align: right; margin-top: 20px; }}
+            .invoice-footer {{ background: #f9fafb; padding: 20px 30px; text-align: center; font-size: 12px; color: #6b7280; }}
+            .status-paid {{ color: #10b981; font-weight: bold; }}
+            .status-pending {{ color: #f59e0b; font-weight: bold; }}
+        </style>
+    </head>
+    <body>
+        <div class="invoice">
+            <div class="invoice-header">
+                <h1 class="invoice-title">INVOICE</h1>
+                <p style="margin: 5px 0 0 0; opacity: 0.9;">ECU Flash Service</p>
+            </div>
+            <div class="invoice-body">
+                <div class="invoice-meta">
+                    <div class="invoice-meta-col">
+                        <h3 style="margin: 0 0 10px 0; color: #6b7280;">Bill To:</h3>
+                        <p style="margin: 0;"><strong>{customer_name}</strong></p>
+                        <p style="margin: 5px 0;">{customer_email}</p>
+                    </div>
+                    <div class="invoice-meta-col" style="text-align: right;">
+                        <p style="margin: 0;"><strong>Invoice #:</strong> {order_id[:12].upper()}</p>
+                        <p style="margin: 5px 0;"><strong>Date:</strong> {created_at}</p>
+                        <p style="margin: 5px 0;"><strong>Status:</strong> 
+                            <span class="{'status-paid' if payment_status == 'paid' else 'status-pending'}">
+                                {payment_status.upper()}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: #f9fafb; border-radius: 8px;">
+                    <strong>Vehicle:</strong> {vehicle_info}
+                </div>
+                
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th style="text-align: right;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {services_rows}
+                    </tbody>
+                </table>
+                
+                <div class="invoice-total">
+                    <strong>Total: ${total_amount:.2f} USD</strong>
+                </div>
+            </div>
+            <div class="invoice-footer">
+                <p>ECU Flash Service | support@ecuflashservice.com</p>
+                <p>Thank you for your business!</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    return invoice_html
