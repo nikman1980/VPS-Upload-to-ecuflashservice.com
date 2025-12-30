@@ -208,10 +208,47 @@ const CustomerPortal = () => {
   };
 
   // Fetch ECU types when engine changes
-  const handleEngineChange = (engineId) => {
+  const handleEngineChange = async (engineId) => {
     setSelectedEngine(engineId);
     setSelectedEcu('');
-    // ECU types are provided from commonEcuTypes list
+    setCustomEcu('');
+    setDynamicEcuTypes([]);
+    
+    if (engineId) {
+      // Find the selected engine to get embedded ECUs
+      const engine = engines.find(e => e.id === engineId);
+      
+      if (engine && engine.ecus && engine.ecus.length > 0) {
+        // ECUs are embedded in the engine document (new structure)
+        const ecuTypes = engine.ecus.map(ecu => ({
+          id: ecu.id,
+          name: ecu.name,
+          manufacturer: ecu.name.split(' ')[0],
+          has_dpf: ecu.has_dpf,
+          has_egr: ecu.has_egr,
+          has_adblue: ecu.has_adblue
+        }));
+        setDynamicEcuTypes(ecuTypes);
+        
+        // Auto-select if only one ECU
+        if (ecuTypes.length === 1) {
+          setSelectedEcu(ecuTypes[0].id);
+        }
+      } else {
+        // Fallback to API call
+        setEcuLoading(true);
+        try {
+          const response = await axios.get(`${API}/vehicles/ecu-types/${engineId}`);
+          if (response.data && response.data.ecu_types) {
+            setDynamicEcuTypes(response.data.ecu_types);
+          }
+        } catch (error) {
+          console.error('Error fetching ECU types:', error);
+          setDynamicEcuTypes([]);
+        }
+        setEcuLoading(false);
+      }
+    }
   };
 
   // Get vehicle summary for display
