@@ -6,15 +6,9 @@ import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// PayPal Configuration
-// SANDBOX Client ID - For Testing (autolocksmith.fj@gmail.com)
-const PAYPAL_SANDBOX_CLIENT_ID = 'AUKI1eDyXSrMhAJ_Lo4E-WL1ptVJQ3NaIsamoiklSc2p83EEyRvDxVBvhDV3k6q8FeG_vdMYPQv5DJtC';
-// LIVE Client ID - For Production
-const PAYPAL_LIVE_CLIENT_ID = 'AdVyLaCwPuU1Adn3p-1HCu07rg-LvTUi2H30M-7-aCT0fuW3Q1o8ZeqFg7jnUaPo4ZTxCvKSuZQ6kLYW';
-
-// Toggle this to switch between Sandbox (testing) and Live (production)
-const USE_SANDBOX = false;  // Set to true for sandbox testing
-const PAYPAL_CLIENT_ID = USE_SANDBOX ? PAYPAL_SANDBOX_CLIENT_ID : PAYPAL_LIVE_CLIENT_ID;
+// PayPal Configuration - LIVE MODE
+// Client ID for payments@ecuflashservice.com
+const PAYPAL_CLIENT_ID = 'AVHOtncoJmXhk_-HrJGRk1Yblmm25Zv7BdQbIByEhXrkzc5Gw9Rv9jP8q9YJ5HPPqqIZGtWQDP7jIDko';
 
 const HomePage = () => {
   const navigate = useNavigate();
