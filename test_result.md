@@ -26,6 +26,21 @@ frontend:
         agent: "testing"
         comment: "DTC RECOMMENDATION AND ADBLUE/DCU NOTICE FEATURES VERIFIED: Comprehensive testing of both new features completed successfully. ✅ AdBlue/DCU Warning Notice: Amber warning box displays correctly on Services page (Step 4) with proper warning icon (⚠️) and text about 'Important: AdBlue/SCR System Notice', 'Dosing Control Unit (DCU)', and 'both your ECU file AND DCU file' ✅ DTC Removal Recommendation: Blue recommendation box appears correctly when DPF Removal, EGR Removal, or AdBlue services are selected ✅ 'Add DTC Removal (+$50)' button functions properly and adds DTC service to selection ✅ Recommendation box disappears after DTC service is added (correct logic) ✅ Tested with DPF Removal and EGR Removal - both trigger recommendation ✅ Complete upload flow (Vehicle→Upload→Analyze→Services) working with new features integrated. Both features enhance user experience and provide important guidance for ECU modifications."
 
+  - task: "PayPal Integration Testing"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages/DTCDeletePage.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Starting comprehensive PayPal integration testing across all requested flows: DTC Delete Tool, Main Upload Flow, Contact Form, and Customer Portal"
+      - working: false
+        agent: "testing"
+        comment: "PAYPAL INTEGRATION TESTING COMPLETED - MIXED RESULTS: ✅ MAIN UPLOAD FLOW (/): PayPal integration is FULLY WORKING with live PayPal Client ID (AVHOtncoJmXhk_-HrJGRk1Yblmm25Zv7BdQbIByEhXrkzc5Gw9Rv9jP8q9YJ5HPPqqIZGtWQDP7jIDko), PayPalScriptProvider, PayPalButtons components, and displays 'Secure live payments via PayPal' text. ❌ DTC DELETE TOOL (/tools/dtc-delete): PayPal integration is IMPLEMENTED in code but has a CRITICAL BUG at line 445 in DTCDeletePage.js - shows alert 'PayPal payment integration coming soon. Using test mode.' instead of proceeding to the actual PayPal payment step (step 3). The PayPal components are properly implemented in the payment step but the flow never reaches them due to this bug. ✅ CONTACT FORM (/contact): Loads correctly with functional contact form, no errors. ✅ CUSTOMER PORTAL (/portal): Loads correctly with login form and 'Create New Account' button, no errors. ✅ NO SANDBOX MODE: No 'Sandbox Mode' text found on any page - correctly shows live payments. ✅ PRICING VISIBLE: All pricing information ($10/$20/$30 + $5 checksum) displays correctly on all pages."
+
   - task: "DTC Recommendation and AdBlue/DCU Notice"
     implemented: true
     working: true
