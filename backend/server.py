@@ -2890,6 +2890,39 @@ async def create_portal_order(
     
     logging.info(f"New order created from portal: {order_id} for {email}")
     
+    # Send notification to support@ecuflashservice.com
+    try:
+        from email_service import send_order_notification_to_support, send_order_confirmation
+        
+        vehicle_str = f"{vehicle_info.get('year', '')} {vehicle_info.get('make', '')} {vehicle_info.get('model', '')}".strip()
+        service_names = [s.replace('_', ' ').title() for s in services_list]
+        
+        # Notify support
+        send_order_notification_to_support(
+            order_id=order_id,
+            customer_name=name,
+            customer_email=email,
+            vehicle_info=vehicle_str,
+            services=service_names,
+            total_amount=total_price,
+            source="Customer Portal"
+        )
+        
+        # Send confirmation to customer
+        await send_order_confirmation(
+            customer_email=email,
+            customer_name=name,
+            order_id=order_id,
+            order_details={
+                'vehicle_info': vehicle_str,
+                'services': service_names,
+                'total_amount': total_price
+            }
+        )
+        logger.info(f"Email notifications sent for portal order {order_id}")
+    except Exception as email_err:
+        logger.error(f"Failed to send email notifications for portal order: {email_err}")
+    
     return {
         "success": True,
         "order_id": order_id,
