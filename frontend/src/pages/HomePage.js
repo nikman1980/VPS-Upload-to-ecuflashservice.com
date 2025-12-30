@@ -7,8 +7,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 // PayPal Configuration - LIVE MODE
-// Client ID for payments@ecuflashservice.com
-const PAYPAL_CLIENT_ID = 'AVHOtncoJmXhk_-HrJGRk1Yblmm25Zv7BdQbIByEhXrkzc5Gw9Rv9jP8q9YJ5HPPqqIZGtWQDP7jIDko';
+const PAYPAL_CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID;
 
 const HomePage = () => {
   const navigate = useNavigate();
