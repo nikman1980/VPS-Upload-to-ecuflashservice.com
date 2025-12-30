@@ -1024,32 +1024,40 @@ class ECUServiceTester:
         print("1. Testing Services API - DTC Pricing Verification")
         services_success = self.test_get_services()
         
-        # 2. Portal Registration
-        print("\n2. Testing Portal Registration")
-        portal_reg_success = self.test_portal_registration()
-        
-        # 3. DTC Engine Upload
-        print("\n3. Testing DTC Engine Upload")
+        # 2. DTC Engine Upload
+        print("\n2. Testing DTC Engine Upload")
         dtc_engine_success = self.test_dtc_engine_upload()
+        
+        # 3. DTC Database
+        print("\n3. Testing DTC Database")
+        dtc_database_success = self.test_dtc_database()
         
         # 4. Contact Form
         print("\n4. Testing Contact Form")
         contact_success = self.test_contact_form()
+        
+        # 5. Orders API
+        print("\n5. Testing Orders API")
+        orders_success = self.test_orders_api()
+        
+        # 6. Portal Auth Login
+        print("\n6. Testing Portal Auth Login")
+        portal_login_success = self.test_portal_login()
         
         # === ADDITIONAL CORE TESTS ===
         print("\n🔧 ADDITIONAL CORE BACKEND TESTS")
         print("-" * 40)
         
         # Test price calculation with new pricing
-        print("5. Testing Price Calculation")
+        print("7. Testing Price Calculation")
         price_calc_success = self.test_price_calculation_new_pricing()
         
         # Test file upload workflow
-        print("\n6. Testing File Upload Workflow")
+        print("\n8. Testing File Upload Workflow")
         file_upload_success, _ = self.test_file_upload_and_analysis()
         
         # Test invalid file handling
-        print("\n7. Testing Invalid File Upload")
+        print("\n9. Testing Invalid File Upload")
         invalid_file_success = self.test_invalid_file_upload()
         
         # === SUMMARY ===
@@ -1060,9 +1068,11 @@ class ECUServiceTester:
         
         review_tests = [
             ("Services API (DTC Pricing)", services_success),
-            ("Portal Registration", portal_reg_success),
             ("DTC Engine Upload", dtc_engine_success),
-            ("Contact Form", contact_success)
+            ("DTC Database", dtc_database_success),
+            ("Contact Form", contact_success),
+            ("Orders API", orders_success),
+            ("Portal Auth Login", portal_login_success)
         ]
         
         review_passed = 0
