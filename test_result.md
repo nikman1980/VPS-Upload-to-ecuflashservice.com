@@ -110,11 +110,12 @@ backend:
 
 test_plan:
   current_focus:
-    - "Services API DTC Pricing Verification"
-    - "Portal Registration API"
-    - "DTC Engine Upload API"
-    - "Contact Form API"
-  stuck_tasks: []
+    - "PayPal Integration Testing"
+    - "DTC Delete Tool PayPal Bug Fix"
+    - "Main Upload Flow PayPal Verification"
+    - "Contact Form and Portal Testing"
+  stuck_tasks: 
+    - "DTC Delete Tool PayPal Integration Bug"
   test_all: false
   test_priority: "high_first"
 
