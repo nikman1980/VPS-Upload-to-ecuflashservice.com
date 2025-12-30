@@ -1186,6 +1186,39 @@ async def create_order_json(request: CreateOrderRequest):
         
         logger.info(f"Order created: {order_id} for {request.customer_email}")
         
+        # Send notification to support@ecuflashservice.com
+        try:
+            from email_service import send_order_notification_to_support, send_order_confirmation
+            
+            vehicle_info = f"{order_doc.get('vehicle_make', '')} {order_doc.get('vehicle_model', '')} {order_doc.get('vehicle_year', '')}"
+            services = [s['service_name'] for s in purchased_services]
+            
+            # Notify support
+            send_order_notification_to_support(
+                order_id=order_id,
+                customer_name=request.customer_name,
+                customer_email=request.customer_email,
+                vehicle_info=vehicle_info,
+                services=services,
+                total_amount=order_doc['total_price'],
+                source="Get Started Flow"
+            )
+            
+            # Send confirmation to customer
+            await send_order_confirmation(
+                customer_email=request.customer_email,
+                customer_name=request.customer_name,
+                order_id=order_id,
+                order_details={
+                    'vehicle_info': vehicle_info,
+                    'services': services,
+                    'total_amount': order_doc['total_price']
+                }
+            )
+            logger.info(f"Email notifications sent for order {order_id}")
+        except Exception as email_err:
+            logger.error(f"Failed to send email notifications: {email_err}")
+        
         return {
             "success": True,
             "order_id": order_id,
