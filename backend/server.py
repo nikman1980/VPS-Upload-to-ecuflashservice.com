@@ -2385,9 +2385,21 @@ async def send_portal_message(msg_data: PortalMessageRequest):
     
     await db.portal_messages.insert_one(message)
     
-    # If customer sends message, notify admin (optional background task)
+    # If customer sends message, notify support
     if msg_data.sender == "customer":
         logger.info(f"New customer message on order {order_id[:8]}: {msg_data.message[:50]}...")
+        try:
+            from email_service import send_portal_message_notification
+            customer_name = order.get('customer_name', order.get('name', 'Customer'))
+            send_portal_message_notification(
+                customer_name=customer_name,
+                customer_email=email,
+                order_id=order_id,
+                message=msg_data.message
+            )
+            logger.info(f"Support notified of message on order {order_id}")
+        except Exception as email_err:
+            logger.error(f"Failed to send message notification: {email_err}")
     
     return {
         "success": True,
