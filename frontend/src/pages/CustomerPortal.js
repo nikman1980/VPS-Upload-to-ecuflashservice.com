@@ -62,6 +62,7 @@ const CustomerPortal = () => {
   const [selectedModel, setSelectedModel] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('');
   const [selectedEcu, setSelectedEcu] = useState('');
+  const [customEcu, setCustomEcu] = useState('');
   
   // Manual vehicle entry
   const [isManualVehicle, setIsManualVehicle] = useState(false);
