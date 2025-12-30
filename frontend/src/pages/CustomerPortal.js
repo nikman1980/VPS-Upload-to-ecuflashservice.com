@@ -276,7 +276,11 @@ const CustomerPortal = () => {
     if (selectedEcu === 'other') {
       return customEcu || 'Custom ECU';
     }
-    const ecu = commonEcuTypes.find(e => e.id === selectedEcu);
+    // Check dynamic ECU types first (from API/engine selection)
+    let ecu = dynamicEcuTypes.find(e => e.id === selectedEcu);
+    if (ecu) return ecu.name;
+    // Fallback to common ECU types
+    ecu = commonEcuTypes.find(e => e.id === selectedEcu);
     return ecu?.name || '';
   };
 
