@@ -173,12 +173,13 @@ backend:
 
 test_plan:
   current_focus:
-    - "PayPal Integration Testing"
-    - "DTC Delete Tool PayPal Bug Fix"
-    - "Main Upload Flow PayPal Verification"
-    - "Contact Form and Portal Testing"
+    - "Portal Invoice Generation"
+    - "Portal Order Payment Section"
+    - "FREE DTC Option in Homepage Get Started Flow"
+    - "FREE DTC Option in Portal New Order Flow"
   stuck_tasks: 
     - "DTC Delete Tool PayPal Integration Bug"
+    - "Portal Authentication Issues"
   test_all: false
   test_priority: "high_first"
 
