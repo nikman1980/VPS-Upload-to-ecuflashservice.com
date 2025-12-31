@@ -1197,7 +1197,7 @@ class ECUServiceTester:
         print("🔧 ECU Flash Service Backend API Tests")
         print("=" * 50)
         print(f"Testing API at: {self.api_url}")
-        print("🎯 FOCUS: Review Request Requirements")
+        print("🎯 FOCUS: Three Priority Portal API Fixes")
         print()
         
         # Test basic connectivity first
@@ -1205,86 +1205,92 @@ class ECUServiceTester:
             print("❌ API is not accessible. Stopping tests.")
             return False
         
-        # === REVIEW REQUEST TESTS ===
-        print("\n🎯 REVIEW REQUEST BACKEND API TESTS")
-        print("-" * 50)
+        # === PRIORITY PORTAL API TESTS ===
+        print("\n🎯 PRIORITY PORTAL API TESTS (Review Request)")
+        print("-" * 60)
         
-        # 1. Services API - Test DTC pricing
-        print("1. Testing Services API - DTC Pricing Verification")
-        services_success = self.test_get_services()
+        # 1. Customer Registration API
+        print("1. Testing Customer Registration API")
+        registration_success = self.test_portal_registration()
         
-        # 2. DTC Engine Upload
-        print("\n2. Testing DTC Engine Upload")
-        dtc_engine_success = self.test_dtc_engine_upload()
+        # 2. Forgot Password API
+        print("\n2. Testing Forgot Password API")
+        forgot_password_success = self.test_portal_forgot_password()
         
-        # 3. DTC Database
-        print("\n3. Testing DTC Database")
-        dtc_database_success = self.test_dtc_database()
-        
-        # 4. Contact Form
-        print("\n4. Testing Contact Form")
-        contact_success = self.test_contact_form()
-        
-        # 5. Orders API
-        print("\n5. Testing Orders API")
-        orders_success = self.test_orders_api()
-        
-        # 6. Portal Auth Login
-        print("\n6. Testing Portal Auth Login")
-        portal_login_success = self.test_portal_login()
+        # 3. Login Flow API
+        print("\n3. Testing Login Flow API")
+        login_flow_success = self.test_portal_login_flow()
         
         # === ADDITIONAL CORE TESTS ===
         print("\n🔧 ADDITIONAL CORE BACKEND TESTS")
         print("-" * 40)
         
-        # Test price calculation with new pricing
-        print("7. Testing Price Calculation")
+        # 4. Services API - Test DTC pricing
+        print("4. Testing Services API - DTC Pricing Verification")
+        services_success = self.test_get_services()
+        
+        # 5. Price calculation with new pricing
+        print("\n5. Testing Price Calculation")
         price_calc_success = self.test_price_calculation_new_pricing()
         
-        # Test file upload workflow
-        print("\n8. Testing File Upload Workflow")
+        # 6. File upload workflow
+        print("\n6. Testing File Upload Workflow")
         file_upload_success, _ = self.test_file_upload_and_analysis()
         
-        # Test invalid file handling
-        print("\n9. Testing Invalid File Upload")
+        # 7. Invalid file handling
+        print("\n7. Testing Invalid File Upload")
         invalid_file_success = self.test_invalid_file_upload()
         
         # === SUMMARY ===
         print()
         print("=" * 60)
-        print("📊 REVIEW REQUEST TEST RESULTS")
+        print("📊 PRIORITY PORTAL API TEST RESULTS")
         print("=" * 60)
         
-        review_tests = [
-            ("Services API (DTC Pricing)", services_success),
-            ("DTC Engine Upload", dtc_engine_success),
-            ("DTC Database", dtc_database_success),
-            ("Contact Form", contact_success),
-            ("Orders API", orders_success),
-            ("Portal Auth Login", portal_login_success)
+        priority_tests = [
+            ("Customer Registration API", registration_success),
+            ("Forgot Password API", forgot_password_success),
+            ("Login Flow API", login_flow_success)
         ]
         
-        review_passed = 0
-        for test_name, success in review_tests:
+        additional_tests = [
+            ("Services API (DTC Pricing)", services_success),
+            ("Price Calculation", price_calc_success),
+            ("File Upload Workflow", file_upload_success),
+            ("Invalid File Upload", invalid_file_success)
+        ]
+        
+        priority_passed = 0
+        for test_name, success in priority_tests:
             status = "✅ PASS" if success else "❌ FAIL"
             print(f"{status} {test_name}")
             if success:
-                review_passed += 1
+                priority_passed += 1
         
-        print(f"\nReview Request Tests: {review_passed}/{len(review_tests)} passed")
+        print(f"\nPriority Portal API Tests: {priority_passed}/{len(priority_tests)} passed")
+        
+        additional_passed = 0
+        print("\nAdditional Core Tests:")
+        for test_name, success in additional_tests:
+            status = "✅ PASS" if success else "❌ FAIL"
+            print(f"{status} {test_name}")
+            if success:
+                additional_passed += 1
+        
+        print(f"Additional Tests: {additional_passed}/{len(additional_tests)} passed")
         print(f"Total Tests: {self.tests_passed}/{self.tests_run} passed")
         
-        # Determine overall success
-        critical_tests_passed = review_passed == len(review_tests)
+        # Determine overall success - focus on priority tests
+        priority_tests_passed = priority_passed == len(priority_tests)
         
-        if critical_tests_passed:
-            print("\n✅ ALL REVIEW REQUEST TESTS PASSED!")
+        if priority_tests_passed:
+            print("\n✅ ALL PRIORITY PORTAL API TESTS PASSED!")
         else:
-            print("\n❌ SOME REVIEW REQUEST TESTS FAILED!")
-            failed_review_tests = [name for name, success in review_tests if not success]
-            print(f"Failed: {', '.join(failed_review_tests)}")
+            print("\n❌ SOME PRIORITY PORTAL API TESTS FAILED!")
+            failed_priority_tests = [name for name, success in priority_tests if not success]
+            print(f"Failed Priority Tests: {', '.join(failed_priority_tests)}")
         
-        return critical_tests_passed
+        return priority_tests_passed
 
     def test_price_calculation_new_pricing(self):
         """Test price calculation with new DTC pricing"""
