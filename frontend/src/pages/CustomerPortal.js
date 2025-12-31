@@ -505,6 +505,34 @@ const CustomerPortal = () => {
     window.history.replaceState({}, '', '/portal');
   };
 
+  // Handle forgot password
+  const handleForgotPassword = async (e) => {
+    e?.preventDefault();
+    setForgotError('');
+    setForgotMessage('');
+    
+    if (!forgotEmail) {
+      setForgotError('Please enter your email address');
+      return;
+    }
+    
+    setForgotLoading(true);
+    
+    try {
+      const response = await axios.post(`${API}/portal/forgot-password`, {
+        email: forgotEmail.trim()
+      });
+      
+      if (response.data.success) {
+        setForgotMessage('Password reset instructions have been sent to your email.');
+      }
+    } catch (error) {
+      setForgotError(error.response?.data?.detail || 'Failed to send reset email. Please try again.');
+    } finally {
+      setForgotLoading(false);
+    }
+  };
+
   // Fetch messages for selected order
   const fetchMessages = async (orderId) => {
     try {
