@@ -611,13 +611,97 @@ class ECUServiceTester:
         except Exception as e:
             self.log_test("Portal Forgot Password API", False, f"Error: {str(e)}")
             return False
-        """Test DTC Engine upload endpoint as per review request"""
+
+    def test_portal_login_flow(self):
+        """Test portal login flow endpoint as per review request"""
         try:
-            # Create a test file for DTC detection
-            test_file_content = b"Test ECU file content for DTC detection"
-            files = {'file': ('test_dtc.bin', test_file_content, 'application/octet-stream')}
+            # First, try to register a test account to ensure we have valid credentials
+            import time
+            test_email = f"login_test_{int(time.time())}@example.com"
+            test_password = "password123"
             
-            response = requests.post(f"{self.api_url}/dtc-engine/upload", 
+            # Register account first
+            registration_data = {
+                "name": "Login Test User",
+                "email": test_email,
+                "password": test_password
+            }
+            
+            reg_response = requests.post(f"{self.api_url}/portal/register", 
+                                       json=registration_data, timeout=10)
+            
+            account_created = False
+            if reg_response.status_code == 200:
+                reg_result = reg_response.json()
+                if reg_result.get('success'):
+                    account_created = True
+                    print(f"   ✓ Test account created for login testing")
+            elif reg_response.status_code == 400 and "already exists" in reg_response.json().get('detail', '').lower():
+                account_created = True  # Account already exists, can test login
+                print(f"   ✓ Test account already exists, proceeding with login test")
+            
+            # Test login with the account
+            login_data = {
+                "email": test_email,
+                "password": test_password
+            }
+            
+            response = requests.post(f"{self.api_url}/portal/login-password", 
+                                   json=login_data, timeout=10)
+            
+            # Check if endpoint exists and handles login
+            if response.status_code == 404:
+                success = False
+                details = "Portal login endpoint not found (/api/portal/login-password)"
+            elif response.status_code == 200:
+                result = response.json()
+                if result.get('success') and result.get('account'):
+                    success = True
+                    account_info = result.get('account', {})
+                    details = f"Login successful, account info returned"
+                    print(f"   ✓ Login successful with registered account")
+                    print(f"   ✓ Account ID: {account_info.get('id', 'N/A')}")
+                    print(f"   ✓ Account Name: {account_info.get('name', 'N/A')}")
+                    
+                    # Test with invalid credentials
+                    print("   Testing invalid credentials...")
+                    invalid_login_data = {
+                        "email": test_email,
+                        "password": "wrongpassword"
+                    }
+                    invalid_response = requests.post(f"{self.api_url}/portal/login-password", 
+                                                   json=invalid_login_data, timeout=10)
+                    if invalid_response.status_code == 401:
+                        print(f"   ✓ Invalid credentials correctly rejected")
+                    else:
+                        print(f"   ⚠️ Invalid credentials handling unclear (status: {invalid_response.status_code})")
+                        
+                else:
+                    success = False
+                    details = f"Login failed: {result.get('message', 'Unknown error')}"
+            elif response.status_code == 401:
+                if account_created:
+                    success = False
+                    details = "Login failed with valid credentials (401 Unauthorized)"
+                else:
+                    success = True  # Endpoint exists and validates properly
+                    details = "Login endpoint working (401 for invalid/missing credentials)"
+                    print(f"   ✓ Login endpoint exists and validates credentials")
+            elif response.status_code == 422:
+                # Validation error - endpoint exists but data validation failed
+                success = False  # Should work with valid data
+                details = f"Login validation failed with valid data: {response.json().get('detail', 'Unknown')}"
+            else:
+                success = False
+                details = f"Unexpected response: {response.status_code}"
+                
+            self.log_test("Portal Login Flow API", success, details, [200, 401], response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Portal Login Flow API", False, f"Error: {str(e)}")
+            return False
+
+    def test_dtc_engine_upload(self):
                                    files=files, timeout=15)
             
             # Check if endpoint exists
