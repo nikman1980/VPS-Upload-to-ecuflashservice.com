@@ -127,6 +127,9 @@ const NewUploadFlow = () => {
     { id: 'other', name: 'Other (Enter manually)', manufacturer: 'Other' },
   ];
   
+  // Mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   // Upload state
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
