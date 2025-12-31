@@ -56,6 +56,7 @@ metadata:
 
 test_plan:
   current_focus:
+    - "DTC Delete Tool Page"
     - "DTC Engine Order Creation API"
     - "Contact Form API"
   stuck_tasks: []
