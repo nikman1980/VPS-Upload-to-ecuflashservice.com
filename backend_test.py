@@ -740,6 +740,84 @@ class ECUServiceTester:
             self.log_test("DTC Engine Upload", False, f"Error: {str(e)}")
             return False
 
+    def test_dtc_engine_order_creation(self):
+        """Test DTC Engine Order Creation endpoint as per review request"""
+        try:
+            # Test with the exact payload from the review request
+            order_data = {
+                "file_id": "test-file-123",
+                "dtc_codes": ["P0420", "P0300"],
+                "correct_checksum": True,
+                "customer_name": "Test Customer",
+                "customer_email": "test@example.com",
+                "dtc_price": 25.00,
+                "checksum_price": 10.00,
+                "total_price": 35.00,
+                "paypal_order_id": "9XM7280882178014F",
+                "paypal_transaction_id": "1234567890"
+            }
+            
+            response = requests.post(f"{self.api_url}/dtc-engine/order", 
+                                   json=order_data, timeout=10)
+            
+            # Check if endpoint exists and works
+            if response.status_code == 404:
+                success = False
+                details = "DTC Engine Order endpoint not found (/api/dtc-engine/order)"
+            elif response.status_code == 200:
+                result = response.json()
+                if result.get('success') and result.get('order_id'):
+                    success = True
+                    order_id = result.get('order_id')
+                    total_price = result.get('total_price')
+                    details = f"DTC Engine order created successfully"
+                    print(f"   ✓ DTC Engine order creation working")
+                    print(f"   ✓ Order ID: {order_id}")
+                    print(f"   ✓ Total price: ${total_price}")
+                    print(f"   ✓ PayPal fields accepted without errors")
+                    
+                    # Verify the response contains expected fields
+                    if total_price == 35.00:
+                        print(f"   ✓ Total price matches request: ${total_price}")
+                    else:
+                        print(f"   ⚠️ Total price mismatch: expected $35.00, got ${total_price}")
+                        
+                    # Test with missing required fields
+                    print("   Testing validation with missing fields...")
+                    invalid_data = {
+                        "file_id": "test-file-123",
+                        # Missing dtc_codes, customer_name, etc.
+                        "total_price": 35.00
+                    }
+                    
+                    invalid_response = requests.post(f"{self.api_url}/dtc-engine/order", 
+                                                   json=invalid_data, timeout=10)
+                    if invalid_response.status_code == 422:
+                        print(f"   ✓ Validation correctly rejects incomplete data")
+                    else:
+                        print(f"   ⚠️ Validation handling unclear (status: {invalid_response.status_code})")
+                        
+                else:
+                    success = False
+                    details = f"DTC Engine order failed: {result.get('message', 'Unknown error')}"
+            elif response.status_code == 422:
+                # Validation error - endpoint exists but data validation failed
+                success = False  # Should work with valid data from review request
+                details = f"DTC Engine order validation failed with valid data: {response.json().get('detail', 'Unknown')}"
+            elif response.status_code == 500:
+                # Server error - endpoint exists but has internal issues
+                success = False
+                details = f"DTC Engine order server error: {response.json().get('detail', 'Internal server error')}"
+            else:
+                success = False
+                details = f"Unexpected response: {response.status_code}"
+                
+            self.log_test("DTC Engine Order Creation", success, details, 200, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("DTC Engine Order Creation", False, f"Error: {str(e)}")
+            return False
+
     def test_contact_form(self):
         """Test contact form endpoint as per review request"""
         try:
