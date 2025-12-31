@@ -1280,6 +1280,65 @@ class ECUServiceTester:
             self.log_test("🎯 CRITICAL: Manual Service Selection Flow", False, f"Error: {str(e)}")
             return False
 
+    def run_review_request_tests(self):
+        """Run tests specifically for the review request: DTC Delete Tool payment and processing flow"""
+        print("🔧 DTC Delete Tool Payment & Processing Flow Tests")
+        print("=" * 60)
+        print(f"Testing API at: {self.api_url}")
+        print("🎯 FOCUS: DTC Engine Order Creation & Contact Form")
+        print()
+        
+        # Test basic connectivity first
+        if not self.test_api_health():
+            print("❌ API is not accessible. Stopping tests.")
+            return False
+        
+        # === REVIEW REQUEST SPECIFIC TESTS ===
+        print("\n🎯 REVIEW REQUEST TESTS")
+        print("-" * 40)
+        
+        # 1. DTC Engine Order Creation
+        print("1. Testing DTC Engine Order Creation (/api/dtc-engine/order)")
+        dtc_order_success = self.test_dtc_engine_order_creation()
+        
+        # 2. Contact Form
+        print("\n2. Testing Contact Form (/api/contact)")
+        contact_form_success = self.test_contact_form()
+        
+        # === SUMMARY ===
+        print()
+        print("=" * 60)
+        print("📊 REVIEW REQUEST TEST RESULTS")
+        print("=" * 60)
+        
+        review_tests = [
+            ("DTC Engine Order Creation", dtc_order_success),
+            ("Contact Form", contact_form_success)
+        ]
+        
+        passed_count = 0
+        for test_name, success in review_tests:
+            status = "✅ PASS" if success else "❌ FAIL"
+            print(f"{status} {test_name}")
+            if success:
+                passed_count += 1
+        
+        print(f"\nReview Request Tests: {passed_count}/{len(review_tests)} passed")
+        print(f"Total Tests: {self.tests_passed}/{self.tests_run} passed")
+        
+        # Determine overall success
+        all_tests_passed = passed_count == len(review_tests)
+        
+        if all_tests_passed:
+            print("\n✅ ALL REVIEW REQUEST TESTS PASSED!")
+            print("✅ DTC Delete Tool payment and processing flow endpoints working correctly")
+        else:
+            print("\n❌ SOME REVIEW REQUEST TESTS FAILED!")
+            failed_tests = [name for name, success in review_tests if not success]
+            print(f"Failed Tests: {', '.join(failed_tests)}")
+        
+        return all_tests_passed
+
     def run_all_tests(self):
         """Run all backend tests focusing on review request requirements"""
         print("🔧 ECU Flash Service Backend API Tests")
