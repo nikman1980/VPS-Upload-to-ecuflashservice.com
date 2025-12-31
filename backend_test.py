@@ -743,13 +743,14 @@ class ECUServiceTester:
     def test_contact_form(self):
         """Test contact form endpoint as per review request"""
         try:
-            # Test contact form submission
+            # Test contact form submission with realistic data
             contact_data = {
-                "name": "Test Customer",
-                "email": "test@example.com",
-                "phone": "+1234567890",
-                "subject": "Test Contact",
-                "message": "This is a test contact form submission"
+                "name": "John Smith",
+                "email": "john.smith@example.com",
+                "phone": "+1-555-123-4567",
+                "subject": "Question about DTC Delete Service",
+                "orderNumber": "ORD-12345",
+                "message": "I need help with my BMW 320d DTC deletion. The P0420 code keeps coming back after the service."
             }
             
             response = requests.post(f"{self.api_url}/contact", 
@@ -763,24 +764,33 @@ class ECUServiceTester:
                 result = response.json()
                 if result.get('success'):
                     success = True
-                    details = "Contact form submission successful"
+                    ticket_id = result.get('ticket_id')
+                    details = f"Contact form submission successful, ticket ID: {ticket_id}"
                     print(f"   ✓ Contact form working correctly")
+                    print(f"   ✓ Ticket ID generated: {ticket_id}")
+                    print(f"   ✓ Message: {result.get('message', 'No message')}")
+                    
+                    # Verify the message mentions support@ecuflashservice.com
+                    message = result.get('message', '')
+                    if 'support@ecuflashservice.com' in message or '24 hours' in message:
+                        print(f"   ✓ Response mentions support contact or response time")
+                    else:
+                        print(f"   ⚠️ Response doesn't mention support email or response time")
                 else:
                     success = False
                     details = f"Contact form failed: {result.get('message', 'Unknown error')}"
             elif response.status_code == 422:
                 # Validation error - endpoint exists but data validation failed
-                success = True  # Endpoint exists and validates
-                details = "Contact form validation working (422 for invalid data)"
-                print(f"   ✓ Contact form validation works")
+                success = False  # Should work with valid data
+                details = f"Contact form validation failed with valid data: {response.json().get('detail', 'Unknown')}"
             else:
                 success = False
                 details = f"Unexpected response: {response.status_code}"
                 
-            self.log_test("Contact Form", success, details, [200, 422], response.status_code)
+            self.log_test("Contact Form API", success, details, 200, response.status_code)
             return success
         except Exception as e:
-            self.log_test("Contact Form", False, f"Error: {str(e)}")
+            self.log_test("Contact Form API", False, f"Error: {str(e)}")
             return False
 
     def test_dtc_database(self):
