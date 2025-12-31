@@ -640,6 +640,8 @@ const NewUploadFlow = () => {
                   <p className="text-xs text-gray-500">Professional ECU Tuning</p>
                 </div>
               </div>
+              
+              {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center space-x-8">
                 <a href="#services" className="text-gray-600 hover:text-blue-600 transition">Services</a>
                 <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition">How It Works</a>
@@ -654,7 +656,44 @@ const NewUploadFlow = () => {
                   Get Started
                 </button>
               </nav>
+              
+              {/* Mobile Menu Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+              >
+                <svg className="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {mobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
             </div>
+            
+            {/* Mobile Navigation Menu */}
+            {mobileMenuOpen && (
+              <nav className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
+                <div className="flex flex-col space-y-3">
+                  <a href="#services" className="text-gray-600 hover:text-blue-600 transition py-2">Services</a>
+                  <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition py-2">How It Works</a>
+                  <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition py-2">Pricing</a>
+                  <a href="/tools/dtc-delete" className="text-blue-600 font-semibold hover:text-blue-700 transition py-2 flex items-center">
+                    <span className="mr-2">🔍</span> DTC Delete Tool
+                  </a>
+                  <a href="/blog" className="text-gray-600 hover:text-blue-600 transition py-2">Blog</a>
+                  <a href="/portal" className="text-gray-600 hover:text-blue-600 transition py-2">My Orders</a>
+                  <a href="/contact" className="text-gray-600 hover:text-blue-600 transition py-2">Contact</a>
+                  <button 
+                    onClick={() => { setStep(1); setMobileMenuOpen(false); }}
+                    className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 rounded-lg font-semibold text-center mt-2"
+                  >
+                    Get Started
+                  </button>
+                </div>
+              </nav>
+            )}
           </div>
         </header>
 
