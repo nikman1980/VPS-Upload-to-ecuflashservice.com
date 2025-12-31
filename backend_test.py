@@ -1476,7 +1476,9 @@ class ECUServiceTester:
 def main():
     """Main test execution"""
     tester = ECUServiceTester()
-    success = tester.run_all_tests()
+    
+    # Run the specific tests for the review request
+    success = tester.run_review_request_tests()
     
     # Return appropriate exit code
     return 0 if success else 1
