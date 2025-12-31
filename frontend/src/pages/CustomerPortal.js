@@ -832,6 +832,17 @@ const CustomerPortal = () => {
                   >
                     {loginLoading ? 'Signing In...' : 'Sign In'}
                   </button>
+                  
+                  {/* Forgot Password Link */}
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      onClick={() => setShowForgotPassword(true)}
+                      className="text-blue-600 hover:text-blue-700 text-sm"
+                    >
+                      Forgot your password?
+                    </button>
+                  </div>
                 </div>
               </form>
               
