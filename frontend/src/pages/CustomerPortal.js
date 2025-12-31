@@ -897,6 +897,65 @@ const CustomerPortal = () => {
               </div>
             </div>
           )}
+          
+          {/* Forgot Password Modal */}
+          {showForgotPassword && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-xl">
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Reset Password</h2>
+                <p className="text-gray-500 text-sm mb-6">Enter your email and we'll send you instructions to reset your password.</p>
+                
+                <form onSubmit={handleForgotPassword}>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                      <input
+                        type="email"
+                        value={forgotEmail}
+                        onChange={(e) => setForgotEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                    
+                    {forgotError && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-600 text-sm">
+                        {forgotError}
+                      </div>
+                    )}
+                    
+                    {forgotMessage && (
+                      <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-green-600 text-sm">
+                        {forgotMessage}
+                      </div>
+                    )}
+                    
+                    <button
+                      type="submit"
+                      disabled={forgotLoading}
+                      className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50"
+                    >
+                      {forgotLoading ? 'Sending...' : 'Send Reset Link'}
+                    </button>
+                    
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowForgotPassword(false);
+                        setForgotEmail('');
+                        setForgotError('');
+                        setForgotMessage('');
+                      }}
+                      className="w-full text-gray-500 hover:text-gray-700 py-2 text-sm"
+                    >
+                      ← Back to Sign In
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
