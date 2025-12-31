@@ -702,6 +702,13 @@ class ECUServiceTester:
             return False
 
     def test_dtc_engine_upload(self):
+        """Test DTC Engine upload endpoint as per review request"""
+        try:
+            # Create a test file for DTC detection
+            test_file_content = b"Test ECU file content for DTC detection"
+            files = {'file': ('test_dtc.bin', test_file_content, 'application/octet-stream')}
+            
+            response = requests.post(f"{self.api_url}/dtc-engine/upload", 
                                    files=files, timeout=15)
             
             # Check if endpoint exists
