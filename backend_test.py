@@ -555,7 +555,62 @@ class ECUServiceTester:
             self.log_test("Portal Registration API", False, f"Error: {str(e)}")
             return False
 
-    def test_dtc_engine_upload(self):
+    def test_portal_forgot_password(self):
+        """Test portal forgot password endpoint as per review request"""
+        try:
+            # Test with valid email (should return success even if account doesn't exist for security)
+            forgot_data = {
+                "email": "unique_test_user@example.com"
+            }
+            
+            response = requests.post(f"{self.api_url}/portal/forgot-password", 
+                                   json=forgot_data, timeout=10)
+            
+            # Check if endpoint exists and handles forgot password
+            if response.status_code == 404:
+                success = False
+                details = "Portal forgot password endpoint not found (/api/portal/forgot-password)"
+            elif response.status_code == 200:
+                result = response.json()
+                if result.get('success'):
+                    success = True
+                    message = result.get('message', '')
+                    details = f"Forgot password successful: {message}"
+                    print(f"   ✓ Forgot password endpoint working")
+                    print(f"   ✓ Message: {message}")
+                    
+                    # Test with non-existent email (should still return success for security)
+                    print("   Testing with non-existent email...")
+                    nonexistent_data = {
+                        "email": "nonexistent_user_12345@example.com"
+                    }
+                    nonexistent_response = requests.post(f"{self.api_url}/portal/forgot-password", 
+                                                       json=nonexistent_data, timeout=10)
+                    if nonexistent_response.status_code == 200:
+                        nonexistent_result = nonexistent_response.json()
+                        if nonexistent_result.get('success'):
+                            print(f"   ✓ Non-existent email returns success (security best practice)")
+                        else:
+                            print(f"   ⚠️ Non-existent email handling: {nonexistent_result.get('message')}")
+                    else:
+                        print(f"   ⚠️ Non-existent email status: {nonexistent_response.status_code}")
+                        
+                else:
+                    success = False
+                    details = f"Forgot password failed: {result.get('message', 'Unknown error')}"
+            elif response.status_code == 422:
+                # Validation error - endpoint exists but data validation failed
+                success = False  # Should work with valid email
+                details = f"Forgot password validation failed with valid email: {response.json().get('detail', 'Unknown')}"
+            else:
+                success = False
+                details = f"Unexpected response: {response.status_code}"
+                
+            self.log_test("Portal Forgot Password API", success, details, 200, response.status_code)
+            return success
+        except Exception as e:
+            self.log_test("Portal Forgot Password API", False, f"Error: {str(e)}")
+            return False
         """Test DTC Engine upload endpoint as per review request"""
         try:
             # Create a test file for DTC detection
