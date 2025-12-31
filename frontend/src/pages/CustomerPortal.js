@@ -480,11 +480,27 @@ const CustomerPortal = () => {
       
       if (response.data.success) {
         setRegisterSuccess(true);
-        setTimeout(() => {
+        // Auto-login after 1.5 seconds
+        setTimeout(async () => {
           setLoginEmail(registerEmail);
           setLoginPassword(registerPassword);
           setShowRegister(false);
-          doLoginPassword();
+          // Perform login directly with captured credentials
+          try {
+            const loginResponse = await axios.post(`${API}/portal/login-password`, {
+              email: registerEmail.trim(),
+              password: registerPassword
+            });
+            if (loginResponse.data.success) {
+              setOrders(loginResponse.data.orders || []);
+              setAccountInfo(loginResponse.data.account);
+              setProfileName(loginResponse.data.account?.name || '');
+              setIsLoggedIn(true);
+              window.history.replaceState({}, '', `/portal?email=${encodeURIComponent(registerEmail)}`);
+            }
+          } catch (loginError) {
+            setLoginError('Auto-login failed. Please log in manually.');
+          }
         }, 1500);
       }
     } catch (error) {
