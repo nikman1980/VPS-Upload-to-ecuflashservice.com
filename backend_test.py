@@ -474,11 +474,15 @@ class ECUServiceTester:
     def test_portal_registration(self):
         """Test portal registration endpoint as per review request"""
         try:
-            # Test creating a new customer account
+            # Generate unique email to avoid conflicts
+            import time
+            unique_email = f"unique_test_user_{int(time.time())}@example.com"
+            
+            # Test creating a new customer account with valid data
             registration_data = {
-                "email": "newcustomer@example.com",
-                "password": "testpassword123",
-                "name": "New Customer"
+                "name": "Test User",
+                "email": unique_email,
+                "password": "password123"
             }
             
             response = requests.post(f"{self.api_url}/portal/register", 
@@ -490,17 +494,47 @@ class ECUServiceTester:
                 details = "Portal registration endpoint not found (/api/portal/register)"
             elif response.status_code == 200:
                 result = response.json()
-                if result.get('success'):
+                if result.get('success') and result.get('account_id'):
                     success = True
-                    details = "Registration successful"
+                    account_id = result.get('account_id')
+                    details = f"Registration successful with account_id: {account_id}"
                     print(f"   ✓ Customer account created successfully")
+                    print(f"   ✓ Account ID: {account_id}")
+                    
+                    # Test duplicate email rejection
+                    print("   Testing duplicate email rejection...")
+                    dup_response = requests.post(f"{self.api_url}/portal/register", 
+                                               json=registration_data, timeout=10)
+                    if dup_response.status_code == 400:
+                        dup_result = dup_response.json()
+                        if "already exists" in dup_result.get('detail', '').lower():
+                            print(f"   ✓ Duplicate email correctly rejected")
+                        else:
+                            print(f"   ⚠️ Duplicate email handling unclear: {dup_result.get('detail')}")
+                    else:
+                        print(f"   ⚠️ Duplicate email not rejected (status: {dup_response.status_code})")
+                    
+                    # Test password validation (too short)
+                    print("   Testing password validation...")
+                    short_pwd_data = {
+                        "name": "Test User 2",
+                        "email": f"test2_{int(time.time())}@example.com",
+                        "password": "123"  # Too short
+                    }
+                    pwd_response = requests.post(f"{self.api_url}/portal/register", 
+                                               json=short_pwd_data, timeout=10)
+                    if pwd_response.status_code in [400, 422]:
+                        print(f"   ✓ Short password correctly rejected")
+                    else:
+                        print(f"   ⚠️ Short password validation unclear (status: {pwd_response.status_code})")
+                        
                 else:
                     success = False
                     details = f"Registration failed: {result.get('message', 'Unknown error')}"
             elif response.status_code == 400:
                 # Account already exists - endpoint works
                 result = response.json()
-                if "already exists" in result.get('detail', ''):
+                if "already exists" in result.get('detail', '').lower():
                     success = True
                     details = "Registration endpoint working (account already exists)"
                     print(f"   ✓ Registration validation works (account exists)")
@@ -509,17 +543,16 @@ class ECUServiceTester:
                     details = f"Registration failed: {result.get('detail', 'Unknown error')}"
             elif response.status_code == 422:
                 # Validation error - endpoint exists but data validation failed
-                success = True  # Endpoint exists and validates
-                details = "Registration validation working (422 for invalid data)"
-                print(f"   ✓ Registration validation works")
+                success = False  # Should work with valid data
+                details = f"Registration validation failed with valid data: {response.json().get('detail', 'Unknown')}"
             else:
                 success = False
                 details = f"Unexpected response: {response.status_code}"
                 
-            self.log_test("Portal Registration", success, details, [200, 400, 422], response.status_code)
+            self.log_test("Portal Registration API", success, details, 200, response.status_code)
             return success
         except Exception as e:
-            self.log_test("Portal Registration", False, f"Error: {str(e)}")
+            self.log_test("Portal Registration API", False, f"Error: {str(e)}")
             return False
 
     def test_dtc_engine_upload(self):
