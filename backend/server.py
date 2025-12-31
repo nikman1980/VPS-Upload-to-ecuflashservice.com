@@ -2207,6 +2207,14 @@ async def portal_register(register_data: PortalRegisterRequest):
     import hashlib
     
     email = register_data.email.strip().lower()
+    name = register_data.name.strip()
+    
+    # Validate inputs
+    if not email or not name or not register_data.password:
+        raise HTTPException(status_code=400, detail="Name, email, and password are required")
+    
+    if len(register_data.password) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
     
     # Check if account already exists
     existing = await db.portal_accounts.find_one({"email": email})
@@ -2219,14 +2227,18 @@ async def portal_register(register_data: PortalRegisterRequest):
     # Create account
     account = {
         "id": str(uuid.uuid4()),
-        "name": register_data.name.strip(),
+        "name": name,
         "email": email,
         "password_hash": password_hash,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "last_login": None
     }
     
-    await db.portal_accounts.insert_one(account)
+    try:
+        await db.portal_accounts.insert_one(account)
+    except Exception as e:
+        logging.error(f"Failed to create portal account: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create account. Please try again.")
     
     logging.info(f"New portal account created for: {email}")
     
@@ -2235,6 +2247,79 @@ async def portal_register(register_data: PortalRegisterRequest):
         "message": "Account created successfully! You can now login.",
         "account_id": account["id"]
     }
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+
+@api_router.post("/portal/forgot-password")
+async def portal_forgot_password(request: ForgotPasswordRequest):
+    """
+    Send password reset email to customer
+    """
+    import hashlib
+    import secrets
+    
+    email = request.email.strip().lower()
+    
+    # Check if account exists
+    account = await db.portal_accounts.find_one({"email": email})
+    
+    if not account:
+        # Don't reveal if email exists or not for security
+        return {"success": True, "message": "If an account exists with this email, you will receive reset instructions."}
+    
+    # Generate reset token
+    reset_token = secrets.token_urlsafe(32)
+    reset_expires = datetime.now(timezone.utc) + timedelta(hours=24)
+    
+    # Store reset token
+    await db.portal_accounts.update_one(
+        {"email": email},
+        {"$set": {
+            "reset_token": reset_token,
+            "reset_expires": reset_expires.isoformat()
+        }}
+    )
+    
+    # Send reset email
+    try:
+        from email_service import send_email
+        
+        reset_link = f"https://ecuflashservice.com/portal?reset={reset_token}"
+        
+        html_content = f"""
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #2563eb;">Password Reset Request</h2>
+            <p>Hi {account.get('name', 'Customer')},</p>
+            <p>We received a request to reset your password for your ECU Flash Service account.</p>
+            <p>Your temporary password is: <strong>{reset_token[:12]}</strong></p>
+            <p>Please login with this temporary password and change it immediately.</p>
+            <p>If you didn't request this, please ignore this email.</p>
+            <br>
+            <p>Best regards,<br>ECU Flash Service Team</p>
+        </div>
+        """
+        
+        send_email(
+            to_email=email,
+            subject="Password Reset - ECU Flash Service",
+            html_content=html_content
+        )
+        
+        # Also update password to temporary one
+        temp_password_hash = hashlib.sha256(reset_token[:12].encode()).hexdigest()
+        await db.portal_accounts.update_one(
+            {"email": email},
+            {"$set": {"password_hash": temp_password_hash}}
+        )
+        
+        logging.info(f"Password reset email sent to: {email}")
+    except Exception as e:
+        logging.error(f"Failed to send reset email: {e}")
+    
+    return {"success": True, "message": "Password reset instructions have been sent to your email."}
 
 
 @api_router.post("/portal/login-email")
