@@ -2308,13 +2308,6 @@ async def portal_forgot_password(request: ForgotPasswordRequest):
             html_content=html_content
         )
         
-        # Also update password to temporary one
-        temp_password_hash = hashlib.sha256(reset_token[:12].encode()).hexdigest()
-        await db.portal_accounts.update_one(
-            {"email": email},
-            {"$set": {"password_hash": temp_password_hash}}
-        )
-        
         logging.info(f"Password reset email sent to: {email}")
     except Exception as e:
         logging.error(f"Failed to send reset email: {e}")
