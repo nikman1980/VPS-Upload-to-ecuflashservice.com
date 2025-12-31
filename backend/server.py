@@ -2099,6 +2099,39 @@ async def submit_contact_form(form_data: ContactFormRequest):
         
         await db.contact_messages.insert_one(contact_message)
         
+        # Send email notification to support
+        try:
+            from email_service import send_email
+            email_sent = send_email(
+                to_email="support@ecuflashservice.com",
+                subject=f"New Contact Form: {form_data.subject}",
+                html_content=f"""
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #2563eb;">New Contact Form Submission</h2>
+                    <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <p><strong>Name:</strong> {form_data.name}</p>
+                        <p><strong>Email:</strong> {form_data.email}</p>
+                        <p><strong>Phone:</strong> {form_data.phone or 'Not provided'}</p>
+                        <p><strong>Subject:</strong> {form_data.subject}</p>
+                        <p><strong>Order Number:</strong> {form_data.orderNumber or 'Not provided'}</p>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px;">
+                        <p><strong>Message:</strong></p>
+                        <p style="white-space: pre-wrap;">{form_data.message}</p>
+                    </div>
+                    <p style="color: #6b7280; font-size: 12px; margin-top: 20px;">
+                        Ticket ID: {contact_message["id"]}
+                    </p>
+                </div>
+                """
+            )
+            if email_sent:
+                logging.info(f"Contact form email notification sent for {form_data.email}")
+            else:
+                logging.warning(f"Failed to send contact form email notification for {form_data.email}")
+        except Exception as email_error:
+            logging.error(f"Error sending contact form email: {email_error}")
+        
         # Log the contact submission
         logging.info(f"New contact form submission from {form_data.email} - Subject: {form_data.subject}")
         
