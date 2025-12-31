@@ -3362,6 +3362,8 @@ async def dtc_engine_create_order(request: DTCOrderRequest):
             "checksum_price": request.checksum_price,
             "total_price": request.total_price,
             "payment_status": request.payment_status,
+            "paypal_order_id": request.paypal_order_id,
+            "paypal_transaction_id": request.paypal_transaction_id,
             "processing_status": "pending",
             "created_at": datetime.now(timezone.utc).isoformat()
         }
