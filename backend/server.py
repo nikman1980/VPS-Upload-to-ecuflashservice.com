@@ -3339,7 +3339,9 @@ class DTCOrderRequest(BaseModel):
     dtc_price: float
     checksum_price: float
     total_price: float
-    payment_status: str = "pending"
+    payment_status: str = "paid"
+    paypal_order_id: Optional[str] = None
+    paypal_transaction_id: Optional[str] = None
 
 
 @api_router.post("/dtc-engine/order")
