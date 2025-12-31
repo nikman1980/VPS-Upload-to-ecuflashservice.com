@@ -93,7 +93,7 @@ def debug_registration():
                 else:
                     print("❌ Account not found in database")
             
-            await asyncio.run(check_stored_hash())
+            asyncio.run(check_stored_hash())
             
         else:
             print(f"Registration failed: {response.text}")
