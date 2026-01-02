@@ -3464,12 +3464,13 @@ async def dtc_engine_process(request: DTCProcessRequest):
             with open(modified_path, "wb") as f:
                 f.write(result.modified_data)
             
-            # Store in database
+            # Store in database WITH file content for persistence
             await db.dtc_processed.insert_one({
                 "download_id": download_id,
                 "original_file_id": request.file_id,
                 "original_filename": file_doc["original_filename"],
                 "modified_path": str(modified_path),
+                "file_content_b64": base64.b64encode(result.modified_data).decode('utf-8'),  # Store processed file
                 "dtcs_deleted": [{"code": d["code"], "description": d.get("description", "")} for d in result.dtcs_deleted],
                 "dtcs_not_found": result.dtcs_not_found,
                 "checksum_corrected": result.checksum_corrected,
