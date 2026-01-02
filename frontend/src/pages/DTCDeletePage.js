@@ -1175,7 +1175,8 @@ const DTCDeletePage = () => {
                           setStep(4);
                         } catch (error) {
                           console.error('Payment/Order error:', error);
-                          alert('Payment successful but error processing order. Contact support with PayPal Order ID: ' + data.orderID);
+                          const errorMsg = error.response?.data?.detail || error.message || 'Unknown error';
+                          alert(`Payment successful but error processing order: ${errorMsg}\n\nContact support with PayPal Order ID: ${data.orderID}`);
                         } finally {
                           setProcessing(false);
                         }
