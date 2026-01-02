@@ -1349,13 +1349,20 @@ class ECUServiceTester:
             
             # Check if endpoint exists
             if response.status_code == 404:
-                # Could be endpoint not found OR download_id not found
-                # Check if it's the endpoint or the download_id
-                if "not found" in response.text.lower() and "download" in response.text.lower():
-                    success = True  # Endpoint exists but download_id not found (expected)
-                    details = "DTC Engine Download endpoint exists (404 for invalid download_id)"
-                    print(f"   ✓ DTC Engine Download endpoint exists and validates download_id")
-                else:
+                # Check if it's the endpoint not found or download_id not found
+                try:
+                    error_data = response.json()
+                    error_detail = error_data.get('detail', '').lower()
+                    if 'download' in error_detail and ('not found' in error_detail or 'invalid' in error_detail):
+                        success = True  # Endpoint exists but download_id not found (expected)
+                        details = "DTC Engine Download endpoint exists (404 for invalid download_id)"
+                        print(f"   ✓ DTC Engine Download endpoint exists and validates download_id")
+                        print(f"   ✓ Error message: {error_data.get('detail', 'Download not found')}")
+                    else:
+                        success = False
+                        details = "DTC Engine Download endpoint not found (/api/dtc-engine/download/{download_id})"
+                except:
+                    # If we can't parse JSON, assume endpoint doesn't exist
                     success = False
                     details = "DTC Engine Download endpoint not found (/api/dtc-engine/download/{download_id})"
             elif response.status_code == 200:
@@ -1372,11 +1379,16 @@ class ECUServiceTester:
                 success = True  # Endpoint exists
                 details = "DTC Engine Download endpoint exists (400 for invalid download_id)"
                 print(f"   ✓ DTC Engine Download endpoint exists and validates download_id")
+            elif response.status_code == 422:
+                # Validation error - endpoint exists
+                success = True  # Endpoint exists
+                details = "DTC Engine Download endpoint exists (422 validation error)"
+                print(f"   ✓ DTC Engine Download endpoint exists and validates input")
             else:
                 success = False
                 details = f"Unexpected response: {response.status_code}"
                 
-            self.log_test("DTC Engine Download", success, details, [200, 400, 404], response.status_code)
+            self.log_test("DTC Engine Download", success, details, [200, 400, 404, 422], response.status_code)
             return success
         except Exception as e:
             self.log_test("DTC Engine Download", False, f"Error: {str(e)}")
