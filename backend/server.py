@@ -3506,8 +3506,18 @@ async def dtc_engine_download(download_id: str):
             raise HTTPException(status_code=404, detail="Download not found")
         
         file_path = Path(file_doc["modified_path"])
+        
+        # Try to restore from database if file not on disk
         if not file_path.exists():
-            raise HTTPException(status_code=404, detail="File not found")
+            if file_doc.get("file_content_b64"):
+                # Restore from database
+                file_data = base64.b64decode(file_doc["file_content_b64"])
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(file_path, "wb") as f:
+                    f.write(file_data)
+                logger.info(f"Restored processed file from database: {file_path}")
+            else:
+                raise HTTPException(status_code=404, detail="File not found and no backup available")
         
         # Generate download filename
         original_name = file_doc.get("original_filename", "file")
