@@ -3429,11 +3429,23 @@ async def dtc_engine_process(request: DTCProcessRequest):
             logger.error(f"File not found in database: {request.file_id}")
             raise HTTPException(status_code=404, detail=f"File not found: {request.file_id}")
         
-        # Read original file
+        # Read original file - try disk first, then restore from database
         file_path = Path(file_doc["file_path"])
-        if not file_path.exists():
-            logger.error(f"File not found on disk: {file_path}")
-            raise HTTPException(status_code=404, detail=f"File data not found on disk: {file_path}")
+        if file_path.exists():
+            with open(file_path, "rb") as f:
+                file_data = f.read()
+        elif file_doc.get("file_content_b64"):
+            # Restore from database if file not on disk (e.g., after redeployment)
+            import base64
+            file_data = base64.b64decode(file_doc["file_content_b64"])
+            # Re-save to disk for processing
+            file_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(file_path, "wb") as f:
+                f.write(file_data)
+            logger.info(f"Restored file from database: {file_path}")
+        else:
+            logger.error(f"File not found on disk and no backup in database: {file_path}")
+            raise HTTPException(status_code=404, detail=f"File data not found. Please re-upload the file.")
         
         with open(file_path, "rb") as f:
             file_data = f.read()
