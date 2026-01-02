@@ -3329,7 +3329,6 @@ async def dtc_engine_upload(file: UploadFile = File(...)):
         analysis = dtc_delete_engine.analyze_file(content)
         
         # Store file info AND content in database (for persistence across deployments)
-        import base64
         await db.dtc_files.insert_one({
             "id": file_id,
             "original_filename": file.filename,
@@ -3437,7 +3436,6 @@ async def dtc_engine_process(request: DTCProcessRequest):
                 file_data = f.read()
         elif file_doc.get("file_content_b64"):
             # Restore from database if file not on disk (e.g., after redeployment)
-            import base64
             file_data = base64.b64decode(file_doc["file_content_b64"])
             # Re-save to disk for processing
             file_path.parent.mkdir(parents=True, exist_ok=True)
