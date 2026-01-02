@@ -3417,15 +3417,19 @@ async def dtc_engine_create_order(request: DTCOrderRequest):
 async def dtc_engine_process(request: DTCProcessRequest):
     """Process file to delete specified DTCs"""
     try:
+        logger.info(f"Processing DTC deletion for file_id: {request.file_id}, DTCs: {request.dtc_codes}")
+        
         # Get file info from database
         file_doc = await db.dtc_files.find_one({"id": request.file_id}, {"_id": 0})
         if not file_doc:
-            raise HTTPException(status_code=404, detail="File not found")
+            logger.error(f"File not found in database: {request.file_id}")
+            raise HTTPException(status_code=404, detail=f"File not found: {request.file_id}")
         
         # Read original file
         file_path = Path(file_doc["file_path"])
         if not file_path.exists():
-            raise HTTPException(status_code=404, detail="File data not found")
+            logger.error(f"File not found on disk: {file_path}")
+            raise HTTPException(status_code=404, detail=f"File data not found on disk: {file_path}")
         
         with open(file_path, "rb") as f:
             file_data = f.read()
