@@ -2304,16 +2304,17 @@ async def portal_forgot_password(request: ForgotPasswordRequest):
         # Don't reveal if email exists or not for security
         return {"success": True, "message": "If an account exists with this email, you will receive reset instructions."}
     
-    # Generate reset token
-    reset_token = secrets.token_urlsafe(32)
-    reset_expires = datetime.now(timezone.utc) + timedelta(hours=24)
+    # Generate temporary password (12 characters)
+    temp_password = secrets.token_urlsafe(12)[:12]
+    temp_password_hash = hashlib.sha256(temp_password.encode()).hexdigest()
     
-    # Store reset token
+    # Update password to temporary password
     await db.portal_accounts.update_one(
         {"email": email},
         {"$set": {
-            "reset_token": reset_token,
-            "reset_expires": reset_expires.isoformat()
+            "password_hash": temp_password_hash,
+            "temp_password": True,  # Flag to prompt password change
+            "updated_at": datetime.now(timezone.utc).isoformat()
         }}
     )
     
@@ -2321,16 +2322,16 @@ async def portal_forgot_password(request: ForgotPasswordRequest):
     try:
         from email_service import send_email
         
-        reset_link = f"https://ecuflashservice.com/portal?reset={reset_token}"
-        
         html_content = f"""
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #2563eb;">Password Reset Request</h2>
             <p>Hi {account.get('name', 'Customer')},</p>
             <p>We received a request to reset your password for your ECU Flash Service account.</p>
-            <p>Your temporary password is: <strong>{reset_token[:12]}</strong></p>
-            <p>Please login with this temporary password and change it immediately.</p>
-            <p>If you didn't request this, please ignore this email.</p>
+            <p>Your temporary password is: <strong style="font-size: 18px; background: #f3f4f6; padding: 5px 10px; border-radius: 4px;">{temp_password}</strong></p>
+            <p>Please login with this temporary password at <a href="https://ecuflashservice.com/portal">ecuflashservice.com/portal</a></p>
+            <p>We recommend changing your password after logging in.</p>
+            <br>
+            <p>If you didn't request this, please contact support immediately.</p>
             <br>
             <p>Best regards,<br>ECU Flash Service Team</p>
         </div>
