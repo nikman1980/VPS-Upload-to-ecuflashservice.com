@@ -1443,11 +1443,11 @@ class ECUServiceTester:
             return False
 
     def run_review_request_tests(self):
-        """Run tests specifically for the review request: DTC Delete Tool payment and processing flow"""
-        print("🔧 DTC Delete Tool Payment & Processing Flow Tests")
+        """Run tests specifically for the review request: Complete DTC Delete Tool flow"""
+        print("🔧 Complete DTC Delete Tool Flow Tests")
         print("=" * 60)
-        print(f"Testing API at: {self.api_url}")
-        print("🎯 FOCUS: DTC Engine Order Creation & Contact Form")
+        print(f"Testing LIVE API at: {self.api_url}")
+        print("🎯 FOCUS: Complete DTC Tool Flow as per Review Request")
         print()
         
         # Test basic connectivity first
@@ -1456,16 +1456,11 @@ class ECUServiceTester:
             return False
         
         # === REVIEW REQUEST SPECIFIC TESTS ===
-        print("\n🎯 REVIEW REQUEST TESTS")
-        print("-" * 40)
+        print("\n🎯 REVIEW REQUEST: COMPLETE DTC TOOL FLOW")
+        print("-" * 50)
         
-        # 1. DTC Engine Order Creation
-        print("1. Testing DTC Engine Order Creation (/api/dtc-engine/order)")
-        dtc_order_success = self.test_dtc_engine_order_creation()
-        
-        # 2. Contact Form
-        print("\n2. Testing Contact Form (/api/contact)")
-        contact_form_success = self.test_contact_form()
+        # Test the complete DTC Tool flow
+        complete_flow_success = self.test_complete_dtc_tool_flow()
         
         # === SUMMARY ===
         print()
@@ -1474,8 +1469,7 @@ class ECUServiceTester:
         print("=" * 60)
         
         review_tests = [
-            ("DTC Engine Order Creation", dtc_order_success),
-            ("Contact Form", contact_form_success)
+            ("Complete DTC Tool Flow", complete_flow_success)
         ]
         
         passed_count = 0
@@ -1493,9 +1487,10 @@ class ECUServiceTester:
         
         if all_tests_passed:
             print("\n✅ ALL REVIEW REQUEST TESTS PASSED!")
-            print("✅ DTC Delete Tool payment and processing flow endpoints working correctly")
+            print("✅ Complete DTC Delete Tool flow working correctly on LIVE site")
+            print("✅ All endpoints tested: DTC Database, Upload, Order, Process, Download, Contact")
         else:
-            print("\n❌ SOME REVIEW REQUEST TESTS FAILED!")
+            print("\n❌ REVIEW REQUEST TESTS FAILED!")
             failed_tests = [name for name, success in review_tests if not success]
             print(f"Failed Tests: {', '.join(failed_tests)}")
         
