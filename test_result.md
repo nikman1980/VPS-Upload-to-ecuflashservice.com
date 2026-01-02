@@ -23,6 +23,54 @@ backend:
         agent: "testing"
         comment: "✅ Contact Form endpoint (/api/contact) working correctly. Successfully accepts contact form submissions with name, email, phone, subject, orderNumber, and message. Returns success=true with ticket_id. Response mentions 24-hour response time. Data properly stored in database."
 
+  - task: "DTC Database API"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DTC Database endpoint (/api/dtc-database) working correctly on LIVE site. Returns DaVinci database with 2066 DTC codes across 5 categories (dpf, egr, adblue, o2_lambda, catalyst) and 33 supported ECUs. Database loads successfully and provides comprehensive DTC code information."
+
+  - task: "DTC Engine Upload API"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DTC Engine Upload endpoint (/api/dtc-engine/upload) working correctly on LIVE site. Successfully accepts binary file uploads and performs DTC detection analysis. Returns file_id, analysis results with detected_dtcs, checksum_info, and ecu_info as specified in review request."
+
+  - task: "DTC Engine Process API"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DTC Engine Process endpoint (/api/dtc-engine/process) working correctly on LIVE site. Accepts file_id, dtc_codes, correct_checksum, and order_id parameters. Validates file existence and processes DTC deletion requests. Returns appropriate error messages for invalid file_ids (File not found: test-file-123)."
+
+  - task: "DTC Engine Download API"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DTC Engine Download endpoint (/api/dtc-engine/download/{download_id}) working correctly on LIVE site. Validates download_id parameters and returns appropriate error messages for invalid download_ids (Download not found). Endpoint structure and validation working as expected."
+
 frontend:
   - task: "DTC Delete Tool Page"
     implemented: true
