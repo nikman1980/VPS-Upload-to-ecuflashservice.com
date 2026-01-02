@@ -464,52 +464,24 @@ const DTCDeletePage = () => {
         <meta name="googlebot" content="index, follow" />
         <meta name="author" content="ECU Flash Service" />
         
-        {/* Structured Data - Service Schema */}
+        {/* Structured Data - Product Schema (supports aggregateRating for Rich Results) */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Service",
+            "@type": "Product",
             "name": "DTC Delete Service",
             "description": "Professional diagnostic trouble code (DTC) removal service for vehicles. Remove check engine lights, clear fault codes permanently from ECU files.",
-            "provider": {
-              "@type": "Organization",
-              "name": "ECU Flash Service",
-              "url": "https://ecuflashservice.com"
+            "brand": {
+              "@type": "Brand",
+              "name": "ECU Flash Service"
             },
-            "serviceType": "ECU Programming",
-            "areaServed": "Worldwide",
-            "hasOfferCatalog": {
-              "@type": "OfferCatalog",
-              "name": "DTC Removal Services",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Single DTC Removal"
-                  },
-                  "price": "10",
-                  "priceCurrency": "USD"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Multiple DTC Removal (2-6)"
-                  },
-                  "price": "20",
-                  "priceCurrency": "USD"
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Bulk DTC Removal (7+)"
-                  },
-                  "price": "30",
-                  "priceCurrency": "USD"
-                }
-              ]
+            "offers": {
+              "@type": "AggregateOffer",
+              "lowPrice": "10",
+              "highPrice": "30",
+              "priceCurrency": "USD",
+              "offerCount": "3",
+              "availability": "https://schema.org/InStock"
             },
             "aggregateRating": {
               "@type": "AggregateRating",
