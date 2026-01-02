@@ -3316,21 +3316,25 @@ async def dtc_engine_upload(file: UploadFile = File(...)):
         # Generate unique file ID
         file_id = str(uuid.uuid4())
         
-        # Save file
+        # Read file content
+        content = await file.read()
+        
+        # Save file to disk (for processing)
         file_path = UPLOAD_DIR / f"{file_id}_dtc_original{Path(file.filename).suffix}"
         with open(file_path, "wb") as f:
-            content = await file.read()
             f.write(content)
         
         # Analyze file for DTCs
         analysis = dtc_delete_engine.analyze_file(content)
         
-        # Store file info in database
+        # Store file info AND content in database (for persistence across deployments)
+        import base64
         await db.dtc_files.insert_one({
             "id": file_id,
             "original_filename": file.filename,
             "file_path": str(file_path),
             "file_size": len(content),
+            "file_content_b64": base64.b64encode(content).decode('utf-8'),  # Store file content
             "analysis": {
                 "file_size": analysis["file_size"],
                 "detected_dtcs": analysis["detected_dtcs"],
