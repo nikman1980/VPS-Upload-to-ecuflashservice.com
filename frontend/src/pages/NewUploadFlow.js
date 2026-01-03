@@ -995,34 +995,29 @@ const NewUploadFlow = () => {
           </div>
         </section>
 
-        {/* How It Works */}
-        <section id="how-it-works" className="py-20 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-              <p className="text-gray-500 max-w-2xl mx-auto">
-                Get your modified ECU file in 6 simple steps
-              </p>
+        {/* How It Works - Compact */}
+        <section id="how-it-works" className="py-16 px-6 bg-white">
+          <div className="container mx-auto max-w-5xl">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">How It Works</h2>
+              <p className="text-gray-500">Get your modified ECU file in 6 simple steps</p>
             </div>
             
-            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
-                { step: '01', title: 'Select Vehicle', desc: 'Choose your vehicle type, manufacturer, model, generation, and engine.' },
-                { step: '02', title: 'Select ECU Type', desc: 'Choose your ECU type from the recommended list based on your vehicle.' },
-                { step: '03', title: 'Upload ECU File', desc: 'Upload your original ECU file (.bin, .hex, .ori, .ecu, .mod).' },
-                { step: '04', title: 'Auto Analysis', desc: 'Our system automatically analyzes your file and detects ECU details.' },
-                { step: '05', title: 'Choose Services', desc: 'Select the modifications: DPF, EGR, AdBlue, DTC removal, Stage tuning.' },
-                { step: '06', title: 'Pay & Receive', desc: 'Pay via PayPal. Receive modified file within 20-60 minutes.' },
+                { step: '1', title: 'Select Vehicle', icon: '🚗' },
+                { step: '2', title: 'Choose ECU', icon: '🔧' },
+                { step: '3', title: 'Upload File', icon: '📤' },
+                { step: '4', title: 'Auto Analysis', icon: '🔍' },
+                { step: '5', title: 'Select Services', icon: '✅' },
+                { step: '6', title: 'Pay & Receive', icon: '💳' },
               ].map((item, i) => (
-                <div key={i} className="relative">
-                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200/50 rounded-2xl p-4">
-                    <div className="text-4xl font-bold text-gray-300 mb-2">{item.step}</div>
-                    <h3 className="text-base font-semibold text-gray-900 mb-1">{item.title}</h3>
-                    <p className="text-gray-500 text-xs">{item.desc}</p>
+                <div key={i} className="text-center">
+                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 mb-2">
+                    <div className="text-2xl mb-1">{item.icon}</div>
+                    <div className="text-xs font-bold text-blue-600">Step {item.step}</div>
                   </div>
-                  {i < 5 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-2 transform -translate-y-1/2 text-gray-200 text-lg">→</div>
-                  )}
+                  <div className="text-sm font-medium text-gray-900">{item.title}</div>
                 </div>
               ))}
             </div>
