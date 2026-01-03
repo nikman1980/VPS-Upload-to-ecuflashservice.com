@@ -1119,7 +1119,17 @@ const DTCDeletePage = () => {
                       onApprove={async (data, actions) => {
                         try {
                           setProcessing(true);
-                          const order = await actions.order.capture();
+                          
+                          // Capture the payment
+                          let order;
+                          try {
+                            order = await actions.order.capture();
+                          } catch (captureError) {
+                            console.error('PayPal capture error:', captureError);
+                            alert(`PayPal payment capture failed: ${captureError.message || 'Unknown error'}\n\nPlease check your PayPal account or try a different payment method.`);
+                            setProcessing(false);
+                            return;
+                          }
                           
                           // Create order in backend
                           const orderResponse = await axios.post(`${API}/dtc-engine/order`, {
