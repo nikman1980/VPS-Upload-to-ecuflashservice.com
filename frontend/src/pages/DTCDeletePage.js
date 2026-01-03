@@ -1096,7 +1096,8 @@ const DTCDeletePage = () => {
                     options={{ 
                       "client-id": PAYPAL_CLIENT_ID, 
                       currency: "USD",
-                      intent: "capture"
+                      intent: "capture",
+                      "disable-funding": "paylater"
                     }}
                   >
                     <PayPalButtons
