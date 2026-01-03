@@ -1067,7 +1067,24 @@ async def purchase_processed_file(
             )
             logger.info(f"Order received email sent: {email_sent} for order {order_id}")
         except Exception as email_error:
-            logger.error(f"Failed to send email: {email_error}")
+            logger.error(f"Failed to send customer email: {email_error}")
+        
+        # Send notification to support@ecuflashservice.com
+        try:
+            from email_service import send_order_notification_to_support
+            send_order_notification_to_support(
+                order_id=order_id,
+                customer_name=customer_name,
+                customer_email=customer_email,
+                customer_phone=customer_phone,
+                vehicle_info=f"{vehicle_data.get('vehicle_year', '')} {vehicle_data.get('manufacturer', vehicle_data.get('vehicle_make', ''))} {vehicle_data.get('model', vehicle_data.get('vehicle_model', ''))}",
+                services=[s.get("service_name") for s in purchased_services],
+                total_price=total_price,
+                paypal_order_id=paypal_order_id
+            )
+            logger.info(f"Support notification sent for order {order_id}")
+        except Exception as support_email_error:
+            logger.error(f"Failed to send support notification: {support_email_error}")
         
         # Return order confirmation
         return {
