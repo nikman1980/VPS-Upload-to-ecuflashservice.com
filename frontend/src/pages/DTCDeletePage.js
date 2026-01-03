@@ -1351,65 +1351,45 @@ const DTCDeletePage = () => {
         )}
       </div>
       
-      {/* SEO Content Section - Visible to search engines */}
-      <section className="bg-gray-50 py-16 px-4">
+      {/* SEO Content Section - Compact */}
+      <section className="bg-gray-50 py-10 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-            Professional DTC Delete Service - Remove Check Engine Light Permanently
+          <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">
+            Professional DTC Delete Service
           </h2>
           
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="mb-4">
-              Our <strong>DTC delete service</strong> allows you to permanently remove diagnostic trouble codes from your vehicle's ECU file. 
-              Whether you're dealing with a persistent <strong>check engine light</strong>, <strong>EGR fault codes</strong>, 
-              <strong>DPF error codes</strong>, or <strong>AdBlue/SCR system warnings</strong>, our professional service can help.
-            </p>
-            
-            <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Common DTC Codes We Remove</h3>
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-xl p-4 border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">🔧 DPF Codes</h4>
-                <p className="text-sm text-gray-600">P2002, P2003, P244A, P244B, P2452, P2453, P2458, P2459, P2463 - Diesel Particulate Filter efficiency and regeneration codes</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">♻️ EGR Codes</h4>
-                <p className="text-sm text-gray-600">P0400, P0401, P0402, P0403, P0404, P0405, P0406, P0407, P0408 - Exhaust Gas Recirculation system codes</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">💧 AdBlue/SCR Codes</h4>
-                <p className="text-sm text-gray-600">P20E8, P20EE, P20EF, P2200, P2BAD, P203B, P203F, P207F, P20A1 - Selective Catalytic Reduction and DEF codes</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">🌡️ Catalyst Codes</h4>
-                <p className="text-sm text-gray-600">P0420, P0421, P0430, P0431 - Catalytic converter efficiency codes</p>
-              </div>
+          <p className="text-gray-600 text-sm text-center mb-6">
+            Remove check engine lights and diagnostic trouble codes permanently from your ECU file. 
+            DPF, EGR, AdBlue, Catalyst codes - starting from $10.
+          </p>
+          
+          {/* Common DTC Codes - Compact Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            <div className="bg-white rounded-lg p-3 border border-gray-200">
+              <h4 className="font-semibold text-gray-900 text-sm mb-1">🔧 DPF</h4>
+              <p className="text-xs text-gray-500">P2002, P2463, P244A</p>
             </div>
-            
-            <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">How Our DTC Delete Service Works</h3>
-            <ol className="list-decimal list-inside space-y-2 mb-8">
-              <li><strong>Upload your ECU file</strong> - Supported formats: .bin, .ori, .fls, .hex, .ecu</li>
-              <li><strong>Select the DTCs to remove</strong> - Choose from common codes or enter custom codes</li>
-              <li><strong>Pay securely</strong> - Starting from just $10 via PayPal</li>
-              <li><strong>Download your modified file</strong> - With checksum correction included</li>
-            </ol>
-            
-            <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Why Choose Our DTC Removal Service?</h3>
-            <ul className="list-disc list-inside space-y-2 mb-8">
-              <li><strong>Permanent removal</strong> - DTCs are deleted from the ECU file itself</li>
-              <li><strong>Checksum correction</strong> - Ensures your ECU accepts the modified file</li>
-              <li><strong>Fast turnaround</strong> - Get your modified file in minutes</li>
-              <li><strong>Affordable pricing</strong> - From $10 for single DTC removal</li>
-              <li><strong>Wide compatibility</strong> - Support for Bosch, Siemens, Delphi, Denso ECUs</li>
-              <li><strong>Expert support</strong> - Professional technicians available to help</li>
-            </ul>
-            
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-8">
-              <h4 className="font-semibold text-blue-900 mb-2">🚗 Supported Vehicles</h4>
-              <p className="text-blue-800 text-sm">
-                BMW, Mercedes-Benz, Audi, Volkswagen, Ford, Toyota, Hilux, Land Cruiser, Ranger, Triton, 
-                Amarok, Land Rover, Isuzu, Nissan, Mazda, Hyundai, Kia, Volvo, Scania, MAN, DAF, Iveco, 
-                John Deere, Case, New Holland, Caterpillar, and many more.
-              </p>
+            <div className="bg-white rounded-lg p-3 border border-gray-200">
+              <h4 className="font-semibold text-gray-900 text-sm mb-1">♻️ EGR</h4>
+              <p className="text-xs text-gray-500">P0400-P0408</p>
+            </div>
+            <div className="bg-white rounded-lg p-3 border border-gray-200">
+              <h4 className="font-semibold text-gray-900 text-sm mb-1">💧 AdBlue</h4>
+              <p className="text-xs text-gray-500">P20EE, P203F, P207F</p>
+            </div>
+            <div className="bg-white rounded-lg p-3 border border-gray-200">
+              <h4 className="font-semibold text-gray-900 text-sm mb-1">🌡️ Catalyst</h4>
+              <p className="text-xs text-gray-500">P0420, P0430</p>
+            </div>
+          </div>
+          
+          {/* Why Choose Us - Inline */}
+          <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm">
+            <div className="flex flex-wrap justify-center gap-4 text-blue-700">
+              <span>✓ Permanent removal</span>
+              <span>✓ Checksum correction</span>
+              <span>✓ Fast turnaround</span>
+              <span>✓ All ECU brands</span>
             </div>
           </div>
         </div>
