@@ -700,66 +700,44 @@ const NewUploadFlow = () => {
           </div>
         </header>
 
-        {/* Hero Section - Blue Gradient */}
-        <section className="pt-24 bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
-          <div className="container mx-auto px-6 py-16 md:py-24">
-            <div className="text-center max-w-4xl mx-auto">
-              <div className="inline-flex items-center bg-white/20 border border-white/30 rounded-full px-4 py-2 mb-6">
-                <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+        {/* Hero Section - Blue Gradient (Compact) */}
+        <section className="pt-20 bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
+          <div className="container mx-auto px-6 py-10 md:py-14">
+            <div className="text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center bg-white/20 border border-white/30 rounded-full px-3 py-1.5 mb-4">
+                <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
                 <span className="text-white text-sm font-medium">Professional Engineers • 20-60 Min Delivery</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Professional ECU
-                <span className="block">Tuning Service</span>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                Professional ECU Tuning Service
               </h1>
               
-              <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10">
-                Select your vehicle, upload your ECU file, choose your services, and receive your professionally 
-                modified file within 20-60 minutes. No software required.
+              <p className="text-lg text-white/90 max-w-xl mx-auto mb-6">
+                Upload your ECU file, choose services, and receive your modified file within 20-60 minutes.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
                 <button 
                   onClick={() => setStep(1)}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
                 >
-                  Select Your Vehicle →
+                  Get Started →
                 </button>
                 <a 
-                  href="#how-it-works"
-                  className="border border-white/50 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all"
+                  href="#services"
+                  className="border border-white/50 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-all"
                 >
-                  Learn More
+                  View Services
                 </a>
               </div>
-            </div>
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center gap-8 mt-12 pb-8">
-              <div className="flex items-center space-x-2 text-white/90">
-                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>Secure PayPal Checkout</span>
-              </div>
-              <div className="flex items-center space-x-2 text-white/90">
-                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>Professional Engineers</span>
-              </div>
-              <div className="flex items-center space-x-2 text-white/90">
-                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>20-60 Min Delivery</span>
-              </div>
-              <div className="flex items-center space-x-2 text-white/90">
-                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span>All Brands Supported</span>
+              {/* Trust Badges - Compact */}
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-white/80">
+                <span>✓ Secure Payment</span>
+                <span>✓ Fast Delivery</span>
+                <span>✓ All Brands</span>
+                <span>✓ 24/7 Support</span>
               </div>
             </div>
           </div>
