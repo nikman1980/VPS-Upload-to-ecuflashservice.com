@@ -1551,7 +1551,7 @@ const NewUploadFlow = () => {
                       value={customEcu}
                       onChange={(e) => setCustomEcu(e.target.value)}
                       placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
-                      className="w-full mt-3 bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full mt-3 border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     />
                   )}
                 </div>
@@ -1559,15 +1559,15 @@ const NewUploadFlow = () => {
               
               {/* Selected Vehicle Summary */}
               {selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()) && (
-                <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                      <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-green-400 text-sm font-medium">Selected Vehicle</p>
+                      <p className="text-green-600 text-sm font-medium">Selected Vehicle</p>
                       <p className="text-gray-900 font-semibold">{getVehicleSummary()}</p>
                     </div>
                   </div>
@@ -1580,7 +1580,7 @@ const NewUploadFlow = () => {
               (!isManualVehicle && selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()))) && (
               <button
                 onClick={proceedToUpload}
-                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                className="w-full mt-6 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
               >
                 Continue to File Upload →
               </button>
@@ -1590,14 +1590,9 @@ const NewUploadFlow = () => {
         
         {/* STEP 2: Upload */}
         {step === 2 && (
-          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Upload Your ECU File</h2>
-              <p className="text-gray-500">Our engineers will analyze and process your file professionally</p>
-            </div>
-            
+          <div>
             <div 
-              className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all cursor-pointer ${
+              className={`border-2 border-dashed rounded-xl p-10 text-center transition-all cursor-pointer ${
                 isDragging ? 'border-blue-500 bg-blue-500/10' : 
                 uploadedFile ? 'border-green-500 bg-green-500/10' : 
                 'border-gray-300 hover:border-gray-300 hover:bg-gray-100/30'
