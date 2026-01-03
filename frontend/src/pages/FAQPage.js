@@ -50,7 +50,7 @@ const FAQPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3">
@@ -69,12 +69,16 @@ const FAQPage = () => {
         </div>
       </header>
 
+      {/* Hero Section - Blue Gradient */}
+      <section className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-16">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+          <p className="text-xl text-white/90 max-w-2xl mx-auto">Find answers to common questions about our ECU tuning services</p>
+        </div>
+      </section>
+
       {/* Main Content */}
       <main className="container mx-auto px-6 py-12 max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
-          <p className="text-gray-600 text-lg">Find answers to common questions about our ECU tuning services</p>
-        </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
