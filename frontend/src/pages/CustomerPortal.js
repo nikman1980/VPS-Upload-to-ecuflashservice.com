@@ -2367,7 +2367,7 @@ const CustomerPortal = () => {
                           <td className="px-6 py-4 flex gap-2">
                             <button 
                               onClick={() => {
-                                const invoiceUrl = `${process.env.REACT_APP_BACKEND_URL}/api/portal/invoice/${order.id}?email=${encodeURIComponent(accountInfo?.email)}`;
+                                const invoiceUrl = `${BACKEND_URL}/api/portal/invoice/${order.id}?email=${encodeURIComponent(accountInfo?.email)}`;
                                 window.open(invoiceUrl, '_blank');
                               }}
                               className="text-blue-600 hover:text-blue-700 text-sm"
