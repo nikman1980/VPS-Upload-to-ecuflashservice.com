@@ -1209,60 +1209,53 @@ const NewUploadFlow = () => {
       </header>
 
       {/* Main Content Area */}
-      <div className="container mx-auto px-6 py-8 max-w-4xl">
+      <div className="container mx-auto px-6 py-6 max-w-4xl">
         
         {/* STEP 1: Vehicle Selection */}
         {step === 1 && (
           <div>
-            <p className="text-center text-sm text-blue-600 mb-6">
-              💡 Can&apos;t find your vehicle? Select &quot;Other&quot; to enter details manually
-            </p>
-            
-            {/* Vehicle Selection Chain */}
-            <div className="space-y-6">
-              
-              {/* Vehicle Type */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
-                  {vehicleTypes.map((type) => (
-                    <button
-                      key={type.id}
-                      onClick={() => handleVehicleTypeSelect(type)}
-                      className={`p-3 rounded-xl border-2 text-center ${
-                        selectedVehicleType?.id === type.id 
-                          ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                          : 'border-gray-200 hover:border-blue-300 text-gray-600'
-                      }`}
-                    >
-                      <div className="text-xl mb-1">
-                        {type.id === 'car' ? '🚗' : 
-                         type.id === 'truck' ? '🚛' : 
-                         type.id === 'agriculture' ? '🚜' : 
-                         type.id === 'marine' ? '🚤' :
-                         type.id === 'bus' ? '🚌' :
-                         type.id === 'construction' ? '🏗️' : '🏍️'}
-                      </div>
-                      <div className="text-xs font-medium">{type.name}</div>
-                    </button>
-                  ))}
-                  {/* Other / Not Listed Option */}
+            {/* Vehicle Type */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-gray-700 mb-3">Vehicle Type</label>
+              <div className="grid grid-cols-4 sm:grid-cols-7 gap-3">
+                {vehicleTypes.map((type) => (
                   <button
-                    onClick={() => handleVehicleTypeSelect({ id: 'other', name: 'Other / Not Listed', slug: 'other' })}
-                    className={`p-3 rounded-xl border-2 text-center ${
-                      isManualVehicle 
-                        ? 'border-orange-500 bg-orange-50 text-orange-700' 
-                        : 'border-gray-200 hover:border-orange-300 text-gray-600'
+                    key={type.id}
+                    onClick={() => handleVehicleTypeSelect(type)}
+                    className={`p-4 rounded-xl border-2 text-center transition-colors ${
+                      selectedVehicleType?.id === type.id 
+                        ? 'border-blue-500 bg-blue-50 text-blue-700' 
+                        : 'border-gray-200 hover:border-blue-300 bg-white text-gray-600'
                     }`}
                   >
-                    <div className="text-xl mb-1">❓</div>
-                    <div className="text-xs font-medium">Other</div>
+                    <div className="text-2xl mb-1">
+                      {type.id === 'car' ? '🚗' : 
+                       type.id === 'truck' ? '🚛' : 
+                       type.id === 'agriculture' ? '🚜' : 
+                       type.id === 'marine' ? '🚤' :
+                       type.id === 'bus' ? '🚌' :
+                       type.id === 'construction' ? '🏗️' : '🏍️'}
+                    </div>
+                    <div className="text-xs font-medium">{type.name}</div>
                   </button>
-                </div>
-                <p className="text-xs text-gray-500 mt-2">💡 Can't find your vehicle? Select "Other" to enter details manually</p>
+                ))}
+                {/* Other Option */}
+                <button
+                  onClick={() => handleVehicleTypeSelect({ id: 'other', name: 'Other', slug: 'other' })}
+                  className={`p-4 rounded-xl border-2 text-center transition-colors ${
+                    isManualVehicle 
+                      ? 'border-blue-500 bg-blue-50 text-blue-700' 
+                      : 'border-gray-200 hover:border-blue-300 bg-white text-gray-600'
+                  }`}
+                >
+                  <div className="text-2xl mb-1">❓</div>
+                  <div className="text-xs font-medium">Other</div>
+                </button>
               </div>
-              
-              {/* Manual Vehicle Entry Form */}
+            </div>
+            
+            {/* Vehicle Selection Chain */}
+            <div className="space-y-4">
               {isManualVehicle && (
                 <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 space-y-4">
                   <h3 className="text-orange-700 font-semibold flex items-center text-sm">
