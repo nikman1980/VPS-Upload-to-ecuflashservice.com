@@ -651,7 +651,7 @@ const NewUploadFlow = () => {
                 <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition">Pricing</a>
                 <a href="/tools/dtc-delete" className="text-gray-600 hover:text-blue-600 transition">DTC Tool</a>
                 <a href="/blog" className="text-gray-600 hover:text-blue-600 transition">Blog</a>
-                <a href="/portal" className="text-gray-600 hover:text-blue-600 transition">My Orders</a>
+                <a href="/portal" className="text-gray-600 hover:text-blue-600 transition">Customer Portal</a>
                 <button 
                   onClick={() => setStep(1)}
                   className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition"
@@ -686,7 +686,7 @@ const NewUploadFlow = () => {
                     <span className="mr-2">🔍</span> DTC Delete Tool
                   </a>
                   <a href="/blog" className="text-gray-600 hover:text-blue-600 transition py-2">Blog</a>
-                  <a href="/portal" className="text-gray-600 hover:text-blue-600 transition py-2">My Orders</a>
+                  <a href="/portal" className="text-gray-600 hover:text-blue-600 transition py-2">Customer Portal</a>
                   <a href="/contact" className="text-gray-600 hover:text-blue-600 transition py-2">Contact</a>
                   <button 
                     onClick={() => { setStep(1); setMobileMenuOpen(false); }}
@@ -1193,7 +1193,7 @@ const NewUploadFlow = () => {
                   <li><a href="/blog" className="hover:text-white transition">Blog</a></li>
                   <li><a href="/faq" className="hover:text-white transition">FAQ</a></li>
                   <li><a href="/contact" className="hover:text-white transition">Contact</a></li>
-                  <li><a href="/portal" className="hover:text-white transition">My Orders</a></li>
+                  <li><a href="/portal" className="hover:text-white transition">Customer Portal</a></li>
                 </ul>
               </div>
               <div>
