@@ -2132,23 +2132,27 @@ const NewUploadFlow = () => {
               </div>
             </div>
 
-            {/* PayPal */}
-            <div className="bg-white/50 rounded-2xl p-6">
-              <h3 className="font-semibold mb-4 text-center">Secure Payment</h3>
+            {/* PayPal Payment Section */}
+            <div className="bg-gray-50 rounded-2xl p-6">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center justify-center">
+                <span className="mr-2">💳</span> Payment
+              </h3>
+              
               <PayPalScriptProvider 
                 options={{ 
                   "client-id": PAYPAL_CLIENT_ID, 
                   currency: "USD",
-                  intent: "capture",
-                  components: "buttons",
-                  "enable-funding": "paypal",
-                  "disable-funding": "credit,card"
+                  intent: "capture"
                 }}
                 onError={(err) => console.error("PayPal Script Error:", err)}
               >
                 <PayPalButtons 
-                  style={{ layout: "vertical", color: "blue", shape: "rect", label: "paypal", height: 45 }}
-                  fundingSource="paypal"
+                  style={{ 
+                    layout: "vertical",
+                    color: "blue",
+                    shape: "rect",
+                    label: "pay"
+                  }}
                   createOrder={createOrder}
                   onApprove={onApprove}
                   onError={(err) => {
@@ -2176,8 +2180,9 @@ const NewUploadFlow = () => {
                   }}
                 />
               </PayPalScriptProvider>
-              <p className="text-xs text-gray-500 text-center mt-3">
-                🔒 Secure live payments via PayPal
+              
+              <p className="text-xs text-gray-500 text-center mt-4">
+                Secure payment processed by PayPal
               </p>
             </div>
 
