@@ -3769,6 +3769,7 @@ async def get_sitemap():
     """Serve sitemap.xml for SEO"""
     sitemap_content = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
   <url>
     <loc>https://ecuflashservice.com/</loc>
     <lastmod>2025-01-02</lastmod>
@@ -3781,6 +3782,8 @@ async def get_sitemap():
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- Service Pages -->
   <url>
     <loc>https://ecuflashservice.com/services/dtc-removal</loc>
     <lastmod>2025-01-02</lastmod>
@@ -3805,17 +3808,59 @@ async def get_sitemap():
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  <url>
-    <loc>https://ecuflashservice.com/contact</loc>
-    <lastmod>2025-01-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  
+  <!-- Blog Main -->
   <url>
     <loc>https://ecuflashservice.com/blog</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://ecuflashservice.com/blog/dpf-delete-benefits-process-legality</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuflashservice.com/blog/egr-delete-explained</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuflashservice.com/blog/ecu-remapping-tuning-basics</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuflashservice.com/blog/stage-1-stage-2-tuning-differences</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuflashservice.com/blog/adblue-delete-removal-guide</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuflashservice.com/blog/common-ecu-problems-by-brand</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Utility Pages -->
+  <url>
+    <loc>https://ecuflashservice.com/contact</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ecuflashservice.com/faq</loc>
@@ -3823,6 +3868,14 @@ async def get_sitemap():
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://ecuflashservice.com/portal</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Legal Pages -->
   <url>
     <loc>https://ecuflashservice.com/terms</loc>
     <lastmod>2025-01-02</lastmod>
@@ -3834,12 +3887,6 @@ async def get_sitemap():
     <lastmod>2025-01-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://ecuflashservice.com/portal</loc>
-    <lastmod>2025-01-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>"""
     return Response(content=sitemap_content, media_type="application/xml")
