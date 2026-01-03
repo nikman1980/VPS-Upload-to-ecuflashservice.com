@@ -627,14 +627,14 @@ const NewUploadFlow = () => {
   // ============== LANDING PAGE (Step 0) ==============
   if (step === 0) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200/50">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
@@ -654,7 +654,7 @@ const NewUploadFlow = () => {
                 <a href="/portal" className="text-gray-600 hover:text-blue-600 transition">My Orders</a>
                 <button 
                   onClick={() => setStep(1)}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                  className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition"
                 >
                   Get Started
                 </button>
@@ -690,7 +690,7 @@ const NewUploadFlow = () => {
                   <a href="/contact" className="text-gray-600 hover:text-blue-600 transition py-2">Contact</a>
                   <button 
                     onClick={() => { setStep(1); setMobileMenuOpen(false); }}
-                    className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-3 rounded-lg font-semibold text-center mt-2"
+                    className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-center mt-2"
                   >
                     Get Started
                   </button>
@@ -700,23 +700,21 @@ const NewUploadFlow = () => {
           </div>
         </header>
 
-        {/* Hero Section */}
-        <section className="pt-32 pb-20 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
+        {/* Hero Section - Blue Gradient */}
+        <section className="pt-24 bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
+          <div className="container mx-auto px-6 py-16 md:py-24">
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="inline-flex items-center bg-white/20 border border-white/30 rounded-full px-4 py-2 mb-6">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                <span className="text-blue-400 text-sm font-medium">Professional Engineers • 20-60 Min Delivery</span>
+                <span className="text-white text-sm font-medium">Professional Engineers • 20-60 Min Delivery</span>
               </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Professional ECU
-                <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
-                  Tuning Service
-                </span>
+                <span className="block">Tuning Service</span>
               </h1>
               
-              <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-10">
+              <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10">
                 Select your vehicle, upload your ECU file, choose your services, and receive your professionally 
                 modified file within 20-60 minutes. No software required.
               </p>
@@ -724,13 +722,13 @@ const NewUploadFlow = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
                   onClick={() => setStep(1)}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-500 text-gray-900 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all transform hover:-translate-y-1"
+                  className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
                 >
                   Select Your Vehicle →
                 </button>
                 <a 
                   href="#how-it-works"
-                  className="border border-gray-300 text-gray-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all"
+                  className="border border-white/50 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all"
                 >
                   Learn More
                 </a>
@@ -738,44 +736,48 @@ const NewUploadFlow = () => {
             </div>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center gap-8 mb-16">
-              <div className="flex items-center space-x-2 text-gray-500">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <div className="flex flex-wrap justify-center gap-8 mt-12 pb-8">
+              <div className="flex items-center space-x-2 text-white/90">
+                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>Secure PayPal Checkout</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-500">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <div className="flex items-center space-x-2 text-white/90">
+                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>Professional Engineers</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-500">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <div className="flex items-center space-x-2 text-white/90">
+                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>20-60 Min Delivery</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-500">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <div className="flex items-center space-x-2 text-white/90">
+                <svg className="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>All Brands Supported</span>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        {/* Stats Section - White Background */}
+        <section className="bg-white py-12 px-6">
+          <div className="container mx-auto max-w-4xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { value: '10K+', label: 'Files Processed' },
                 { value: '99%', label: 'Success Rate' },
                 { value: '24/7', label: 'Support' },
                 { value: '50+', label: 'Countries Served' },
               ].map((stat, i) => (
-                <div key={i} className="bg-gray-50/50 border border-gray-200/50 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                  <div className="text-gray-500 text-sm">{stat.label}</div>
+                <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-gray-200 rounded-2xl p-6 text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-1">{stat.value}</div>
+                  <div className="text-gray-600 text-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
