@@ -1139,80 +1139,74 @@ const NewUploadFlow = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 px-6">
-          <div className="container mx-auto max-w-4xl">
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
-                Upload your ECU file now and receive your professionally modified file within 20-60 minutes.
-              </p>
+        {/* CTA Section - Blue Gradient */}
+        <section className="bg-gradient-to-r from-blue-600 to-cyan-500 py-12">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Ready to Get Started?</h2>
+            <p className="text-white/90 text-lg mb-8 max-w-xl mx-auto">
+              Upload your ECU file now and receive your professionally modified file within 20-60 minutes.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
               <button 
                 onClick={() => setStep(1)}
-                className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition-all transform hover:-translate-y-1"
+                className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all"
               >
                 Upload ECU File →
               </button>
+              <a 
+                href="/contact"
+                className="bg-white/20 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/30 transition border border-white/30"
+              >
+                Contact Us
+              </a>
             </div>
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="bg-white border-t border-gray-100 py-12 px-6">
+        {/* Footer - Dark Background */}
+        <footer className="bg-gray-900 text-white py-12 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <span className="text-xl font-bold text-gray-900">ECU Flash Service</span>
+                  <span className="text-xl font-bold">ECU Flash Service</span>
                 </div>
-                <p className="text-gray-500 text-sm">Professional ECU tuning services for automotive enthusiasts worldwide.</p>
+                <p className="text-gray-400 text-sm">Professional ECU tuning and modification services. Fast turnaround, all brands supported.</p>
               </div>
               <div>
-                <h4 className="text-gray-900 font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/services/dtc-removal" className="text-gray-500 hover:text-blue-600 transition">DTC Removal</a></li>
-                  <li><a href="/services/dpf-off" className="text-gray-500 hover:text-blue-600 transition">DPF OFF</a></li>
-                  <li><a href="/services/egr-off" className="text-gray-500 hover:text-blue-600 transition">EGR OFF</a></li>
-                  <li><a href="/services/adblue-off" className="text-gray-500 hover:text-blue-600 transition">AdBlue OFF</a></li>
+                <h4 className="font-bold mb-4">Services</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><a href="/services/dtc-removal" className="hover:text-white transition">DTC Removal</a></li>
+                  <li><a href="/services/dpf-off" className="hover:text-white transition">DPF Delete</a></li>
+                  <li><a href="/services/egr-off" className="hover:text-white transition">EGR Delete</a></li>
+                  <li><a href="/services/adblue-off" className="hover:text-white transition">AdBlue Delete</a></li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-gray-900 font-semibold mb-4">Support</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/contact" className="text-gray-500 hover:text-blue-600 transition">Contact Us</a></li>
-                  <li><a href="/faq" className="text-gray-500 hover:text-blue-600 transition">FAQ</a></li>
-                  <li><a href="/terms" className="text-gray-500 hover:text-blue-600 transition">Terms of Service</a></li>
-                  <li><a href="/privacy" className="text-gray-500 hover:text-blue-600 transition">Privacy Policy</a></li>
+                <h4 className="font-bold mb-4">Resources</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><a href="/blog" className="hover:text-white transition">Blog</a></li>
+                  <li><a href="/faq" className="hover:text-white transition">FAQ</a></li>
+                  <li><a href="/contact" className="hover:text-white transition">Contact</a></li>
+                  <li><a href="/portal" className="hover:text-white transition">My Orders</a></li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-gray-900 font-semibold mb-4">Contact</h4>
-                <ul className="space-y-2 text-gray-500 text-sm">
-                  <li>support@ecuflashservice.com</li>
-                  <li>24/7 Email Support</li>
-                  <li className="pt-2">
-                    <a href="/contact" className="inline-block bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                      Send Message
-                    </a>
-                  </li>
+                <h4 className="font-bold mb-4">Legal</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><a href="/terms" className="hover:text-white transition">Terms of Service</a></li>
+                  <li><a href="/privacy" className="hover:text-white transition">Privacy Policy</a></li>
+                  <li className="pt-2 text-yellow-500 text-xs">⚠️ For off-road use only</li>
                 </ul>
               </div>
             </div>
-            <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-500 text-sm">© {new Date().getFullYear()} ECU Flash Service. All rights reserved.</p>
-              <div className="flex items-center space-x-6 mt-4 md:mt-0">
-                <a href="/faq" className="text-gray-400 hover:text-blue-600 text-sm transition">FAQ</a>
-                <a href="/terms" className="text-gray-400 hover:text-blue-600 text-sm transition">Terms</a>
-                <a href="/privacy" className="text-gray-400 hover:text-blue-600 text-sm transition">Privacy</a>
-                <span className="text-gray-400 text-sm">⚠️ For off-road use only</span>
-              </div>
+            <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+              © {new Date().getFullYear()} ECU Flash Service. All rights reserved.
             </div>
           </div>
         </footer>
