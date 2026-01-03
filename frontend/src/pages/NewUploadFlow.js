@@ -1150,9 +1150,9 @@ const NewUploadFlow = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header with Blue Gradient */}
-      <header className="bg-gradient-to-r from-blue-600 to-cyan-500 sticky top-0 z-50">
+    <div className="min-h-screen bg-white">
+      {/* Header with Blue Gradient - Compact */}
+      <header className="bg-gradient-to-r from-blue-600 to-cyan-500">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <button onClick={() => setStep(0)} className="flex items-center space-x-3">
@@ -1184,20 +1184,42 @@ const NewUploadFlow = () => {
             </div>
           </div>
         </div>
+        
+        {/* Blue Hero Section for Steps */}
+        <div className="container mx-auto px-6 pb-8 pt-4">
+          <div className="text-center text-white">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">
+              {step === 1 && 'Select Your Vehicle'}
+              {step === 2 && 'Upload ECU File'}
+              {step === 3 && 'Processing Your File'}
+              {step === 4 && 'Choose Services'}
+              {step === 5 && 'Complete Payment'}
+              {step === 6 && 'Order Complete'}
+            </h2>
+            <p className="text-white/80">
+              {step === 1 && 'Choose your vehicle to see available tuning services'}
+              {step === 2 && 'Upload your original ECU file for analysis'}
+              {step === 3 && 'Analyzing your file...'}
+              {step === 4 && 'Select the modifications you need'}
+              {step === 5 && 'Secure payment via PayPal'}
+              {step === 6 && 'Your modified file is ready'}
+            </p>
+          </div>
+        </div>
       </header>
 
+      {/* Main Content Area */}
       <div className="container mx-auto px-6 py-8 max-w-4xl">
         
         {/* STEP 1: Vehicle Selection */}
         {step === 1 && (
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Select Your Vehicle</h2>
-              <p className="text-gray-500">Choose your vehicle type to get started</p>
-            </div>
+          <div>
+            <p className="text-center text-sm text-blue-600 mb-6">
+              💡 Can&apos;t find your vehicle? Select &quot;Other&quot; to enter details manually
+            </p>
             
             {/* Vehicle Selection Chain */}
-            <div className="space-y-5">
+            <div className="space-y-6">
               
               {/* Vehicle Type */}
               <div>
