@@ -1257,8 +1257,8 @@ const NewUploadFlow = () => {
             {/* Vehicle Selection Chain */}
             <div className="space-y-4">
               {isManualVehicle && (
-                <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 space-y-4">
-                  <h3 className="text-orange-700 font-semibold flex items-center text-sm">
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 space-y-4">
+                  <h3 className="text-blue-700 font-semibold flex items-center text-sm">
                     <span className="mr-2">✏️</span> Enter Vehicle Details Manually
                   </h3>
                   
@@ -1270,7 +1270,7 @@ const NewUploadFlow = () => {
                         value={manualVehicle.make}
                         onChange={(e) => setManualVehicle({...manualVehicle, make: e.target.value})}
                         placeholder="e.g., Shacman, Sinotruk, FAW..."
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -1280,7 +1280,7 @@ const NewUploadFlow = () => {
                         value={manualVehicle.model}
                         onChange={(e) => setManualVehicle({...manualVehicle, model: e.target.value})}
                         placeholder="e.g., X3000, HOWO A7..."
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -1290,28 +1290,28 @@ const NewUploadFlow = () => {
                         value={manualVehicle.year}
                         onChange={(e) => setManualVehicle({...manualVehicle, year: e.target.value})}
                         placeholder="e.g., 2020"
-                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-600 mb-2">Engine</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Engine</label>
                       <input
                         type="text"
                         value={manualVehicle.engine}
                         onChange={(e) => setManualVehicle({...manualVehicle, engine: e.target.value})}
                         placeholder="e.g., Weichai WP10 375hp"
-                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                   </div>
                   
-                  {/* ECU Type for Manual Entry - Always visible */}
+                  {/* ECU Type for Manual Entry */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-2">ECU Type *</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">ECU Type *</label>
                       <select
                         value={selectedEcu?.id || ''}
                         onChange={(e) => handleEcuSelect(e.target.value)}
-                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="">Select ECU type...</option>
                         <optgroup label="⭐ Chinese Truck ECUs">
