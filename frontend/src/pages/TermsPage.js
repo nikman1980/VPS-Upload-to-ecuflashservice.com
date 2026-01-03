@@ -4,7 +4,7 @@ const TermsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3">
@@ -23,11 +23,17 @@ const TermsPage = () => {
         </div>
       </header>
 
+      {/* Hero Section - Blue Gradient */}
+      <section className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-12">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">Terms of Service</h1>
+          <p className="text-white/90">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+        </div>
+      </section>
+
       {/* Main Content */}
       <main className="container mx-auto px-6 py-12 max-w-4xl">
         <div className="bg-white rounded-2xl border border-gray-200 p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Terms of Service</h1>
-          <p className="text-gray-500 mb-8">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
 
           <div className="prose prose-gray max-w-none">
             <section className="mb-8">
