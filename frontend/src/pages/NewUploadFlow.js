@@ -1193,20 +1193,20 @@ const NewUploadFlow = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
+    <div className="min-h-screen bg-gray-50">
+      {/* Header with Blue Gradient */}
+      <header className="bg-gradient-to-r from-blue-600 to-cyan-500 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <button onClick={() => setStep(0)} className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">ECU Flash Service</h1>
-                <p className="text-xs text-gray-500">Professional ECU Tuning</p>
+                <h1 className="text-xl font-bold text-white">ECU Flash Service</h1>
+                <p className="text-xs text-white/70">Professional ECU Tuning</p>
               </div>
             </button>
             
@@ -1215,13 +1215,13 @@ const NewUploadFlow = () => {
               {['Vehicle', 'Upload', 'Analyze', 'Services', 'Pay', 'Done'].map((label, i) => (
                 <div key={i} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    step > i ? 'bg-green-500 text-gray-900' : 
-                    step === i + 1 ? 'bg-blue-500 text-gray-900' : 
-                    'bg-gray-100 text-gray-500'
+                    step > i ? 'bg-white text-blue-600' : 
+                    step === i + 1 ? 'bg-white/30 text-white border-2 border-white' : 
+                    'bg-white/10 text-white/60'
                   }`}>
                     {step > i ? '✓' : i + 1}
                   </div>
-                  {i < 5 && <div className={`w-6 h-0.5 ${step > i ? 'bg-green-500' : 'bg-gray-100'}`}></div>}
+                  {i < 5 && <div className={`w-6 h-0.5 ${step > i ? 'bg-white' : 'bg-white/30'}`}></div>}
                 </div>
               ))}
             </div>
@@ -1229,38 +1229,34 @@ const NewUploadFlow = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-12 max-w-4xl">
+      <div className="container mx-auto px-6 py-8 max-w-4xl">
         
-        {/* STEP 1: Vehicle Selection (Sedox-style) */}
+        {/* STEP 1: Vehicle Selection */}
         {step === 1 && (
-          <div className="bg-gray-50/50 backdrop-blur border border-gray-200/50 rounded-3xl p-8 md:p-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Select Your Vehicle</h2>
-              <p className="text-gray-500">Choose your vehicle to see available tuning services</p>
-              <p className="text-sm text-blue-600 mt-2 flex items-center justify-center">
-                <span className="mr-2">💡</span>
-                Can&apos;t find your vehicle? Select &quot;Other&quot; to enter details manually
-              </p>
+          <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Select Your Vehicle</h2>
+              <p className="text-gray-500">Choose your vehicle type to get started</p>
             </div>
             
             {/* Vehicle Selection Chain */}
-            <div className="space-y-6">
+            <div className="space-y-5">
               
               {/* Vehicle Type */}
               <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">Vehicle Type</label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
                   {vehicleTypes.map((type) => (
                     <button
                       key={type.id}
                       onClick={() => handleVehicleTypeSelect(type)}
-                      className={`p-4 rounded-xl border-2 transition-all text-center ${
+                      className={`p-3 rounded-xl border-2 text-center ${
                         selectedVehicleType?.id === type.id 
-                          ? 'border-blue-500 bg-blue-500/20 text-gray-900' 
-                          : 'border-gray-300 hover:border-gray-300 text-gray-600'
+                          ? 'border-blue-500 bg-blue-50 text-blue-700' 
+                          : 'border-gray-200 hover:border-blue-300 text-gray-600'
                       }`}
                     >
-                      <div className="text-2xl mb-1">
+                      <div className="text-xl mb-1">
                         {type.id === 'car' ? '🚗' : 
                          type.id === 'truck' ? '🚛' : 
                          type.id === 'agriculture' ? '🚜' : 
@@ -1268,22 +1264,23 @@ const NewUploadFlow = () => {
                          type.id === 'bus' ? '🚌' :
                          type.id === 'construction' ? '🏗️' : '🏍️'}
                       </div>
-                      <div className="text-sm font-medium">{type.name}</div>
+                      <div className="text-xs font-medium">{type.name}</div>
                     </button>
                   ))}
                   {/* Other / Not Listed Option */}
                   <button
                     onClick={() => handleVehicleTypeSelect({ id: 'other', name: 'Other / Not Listed', slug: 'other' })}
-                    className={`p-4 rounded-xl border-2 transition-all text-center ${
+                    className={`p-3 rounded-xl border-2 text-center ${
                       isManualVehicle 
-                        ? 'border-orange-500 bg-orange-500/20 text-gray-900' 
-                        : 'border-gray-300 hover:border-gray-300 text-gray-600'
+                        ? 'border-orange-500 bg-orange-50 text-orange-700' 
+                        : 'border-gray-200 hover:border-orange-300 text-gray-600'
                     }`}
                   >
-                    <div className="text-2xl mb-1">❓</div>
-                    <div className="text-sm font-medium">Other</div>
+                    <div className="text-xl mb-1">❓</div>
+                    <div className="text-xs font-medium">Other</div>
                   </button>
                 </div>
+                <p className="text-xs text-gray-500 mt-2">💡 Can't find your vehicle? Select "Other" to enter details manually</p>
               </div>
               
               {/* Manual Vehicle Entry Form */}
