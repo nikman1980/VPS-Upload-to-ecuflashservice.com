@@ -1421,7 +1421,7 @@ const NewUploadFlow = () => {
                         const model = models.find(m => String(m.id) === e.target.value);
                         if (model) handleModelSelect(model);
                       }}
-                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select model...</option>
                       {models.map((model) => (
@@ -1432,10 +1432,10 @@ const NewUploadFlow = () => {
                 </div>
               )}
               
-              {/* Engine - Shown directly after Model (dpfoffservice structure) */}
+              {/* Engine */}
               {selectedModel && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">Engine</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Engine</label>
                   {vehicleLoading && engines.length === 0 ? (
                     <div className="text-center py-4 text-gray-500">Loading engines...</div>
                   ) : (
@@ -1449,11 +1449,10 @@ const NewUploadFlow = () => {
                           if (eng) handleEngineSelect(eng);
                         }
                       }}
-                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select engine...</option>
                       {engines.map((eng) => {
-                        // Simplify engine name display - extract key info
                         const name = eng.name;
                         return (
                           <option key={eng.id} value={eng.id}>{name}</option>
@@ -1468,19 +1467,19 @@ const NewUploadFlow = () => {
               {/* ECU Type */}
               {selectedEngine && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
                     ECU Type
-                    {ecuLoading && <span className="ml-2 text-xs text-blue-500">Loading recommended ECUs...</span>}
+                    {ecuLoading && <span className="ml-2 text-xs text-blue-500">Loading...</span>}
                   </label>
                   <select
                     value={selectedEcu?.id || ''}
                     onChange={(e) => handleEcuSelect(e.target.value)}
                     disabled={ecuLoading}
-                    className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
                   >
                     <option value="">Select ECU type...</option>
                     
-                    {/* Dynamic ECU Types - From engine document (dpfoffservice structure) */}
+                    {/* Dynamic ECU Types */}
                     {dynamicEcuTypes.length > 0 ? (
                       <>
                         {/* Group by manufacturer */}
