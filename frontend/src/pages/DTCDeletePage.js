@@ -1108,6 +1108,7 @@ const DTCDeletePage = () => {
                       }}
                       disabled={!customerName || !customerEmail || processing}
                       createOrder={(data, actions) => {
+                        console.log("Creating PayPal order for:", pricing.total.toFixed(2), "USD");
                         return actions.order.create({
                           purchase_units: [{
                             amount: {
@@ -1119,6 +1120,7 @@ const DTCDeletePage = () => {
                         });
                       }}
                       onApprove={async (data, actions) => {
+                        console.log("PayPal onApprove called, orderID:", data.orderID);
                         try {
                           setProcessing(true);
                           
