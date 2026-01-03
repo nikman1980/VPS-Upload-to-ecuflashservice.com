@@ -911,7 +911,7 @@ const NewUploadFlow = () => {
             </div>
             
             {/* Service Categories */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               {/* Emission Delete Services */}
               <div className="bg-white rounded-2xl p-6 border border-gray-100">
                 <div className="flex items-center gap-3 mb-4">
@@ -922,16 +922,10 @@ const NewUploadFlow = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
-                    { name: 'DPF Off', price: 50, desc: 'Particulate Filter' },
-                    { name: 'EGR Off', price: 40, desc: 'Exhaust Gas Recirc.' },
-                    { name: 'AdBlue Off', price: 60, desc: 'SCR System' },
-                    { name: 'Catalyst Off', price: 50, desc: 'Catalytic Converter' },
-                  ].map((s, i) => (
+                  {allServices.filter(s => ['EGR Removal', 'DPF Removal', 'AdBlue/DEF Removal', 'Decat (Cat OFF)'].includes(s.name)).map((s, i) => (
                     <div key={i} className="bg-gray-50 rounded-xl p-3 text-center">
-                      <div className="font-semibold text-gray-900 text-sm">{s.name}</div>
-                      <div className="text-gray-500 text-xs mb-1">{s.desc}</div>
-                      <div className="text-blue-600 font-bold">${s.price}</div>
+                      <div className="font-semibold text-gray-900 text-sm">{s.name.replace(' Removal', ' Off').replace('AdBlue/DEF Removal', 'AdBlue Off').replace('Decat (Cat OFF)', 'Catalyst Off')}</div>
+                      <div className="text-blue-600 font-bold">${s.base_price?.toFixed(0)}</div>
                     </div>
                   ))}
                 </div>
@@ -947,39 +941,29 @@ const NewUploadFlow = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { name: '1 Code', price: 10 },
-                    { name: '2-6 Codes', price: 20 },
-                    { name: '7+ Codes', price: 30 },
-                  ].map((s, i) => (
+                  {allServices.filter(s => s.name.includes('DTC Removal')).map((s, i) => (
                     <div key={i} className="bg-gray-50 rounded-xl p-3 text-center">
-                      <div className="font-semibold text-gray-900 text-sm">{s.name}</div>
-                      <div className="text-blue-600 font-bold">${s.price}</div>
+                      <div className="font-semibold text-gray-900 text-sm">{s.name.replace('DTC Removal ', '')}</div>
+                      <div className="text-blue-600 font-bold">${s.base_price?.toFixed(0)}</div>
                     </div>
                   ))}
                 </div>
               </div>
               
-              {/* Performance & Other Services */}
+              {/* Other Services */}
               <div className="bg-white rounded-2xl p-6 border border-gray-100">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-600 text-xl">⚡</div>
                   <div>
-                    <h3 className="font-bold text-gray-900">Performance & Other</h3>
-                    <p className="text-gray-500 text-sm">Power upgrades and additional mods</p>
+                    <h3 className="font-bold text-gray-900">Additional Services</h3>
+                    <p className="text-gray-500 text-sm">Other ECU modifications</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
-                    { name: 'Stage 1', price: 80, desc: 'Power Tune' },
-                    { name: 'Stage 2', price: 120, desc: 'Advanced Tune' },
-                    { name: 'Speed Limiter', price: 30, desc: 'Remove Limit' },
-                    { name: 'Start/Stop Off', price: 25, desc: 'Disable Feature' },
-                  ].map((s, i) => (
+                  {allServices.filter(s => ['Speed Limiter OFF', 'Start & Stop OFF', 'Immobilizer Off', 'Checksum Correction'].includes(s.name)).map((s, i) => (
                     <div key={i} className="bg-gray-50 rounded-xl p-3 text-center">
                       <div className="font-semibold text-gray-900 text-sm">{s.name}</div>
-                      <div className="text-gray-500 text-xs mb-1">{s.desc}</div>
-                      <div className="text-blue-600 font-bold">${s.price}</div>
+                      <div className="text-blue-600 font-bold">${s.base_price?.toFixed(0)}</div>
                     </div>
                   ))}
                 </div>
