@@ -1285,35 +1285,34 @@ const NewUploadFlow = () => {
               
               {/* Manual Vehicle Entry Form */}
               {isManualVehicle && (
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6 space-y-4">
-                  <h3 className="text-orange-600 font-semibold flex items-center">
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 space-y-4">
+                  <h3 className="text-orange-700 font-semibold flex items-center text-sm">
                     <span className="mr-2">✏️</span> Enter Vehicle Details Manually
                   </h3>
-                  <p className="text-sm text-gray-500">Your vehicle is not in our database? No problem! Enter the details below.</p>
                   
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-600 mb-2">Make / Brand *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Make / Brand *</label>
                       <input
                         type="text"
                         value={manualVehicle.make}
                         onChange={(e) => setManualVehicle({...manualVehicle, make: e.target.value})}
                         placeholder="e.g., Shacman, Sinotruk, FAW..."
-                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-600 mb-2">Model *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Model *</label>
                       <input
                         type="text"
                         value={manualVehicle.model}
                         onChange={(e) => setManualVehicle({...manualVehicle, model: e.target.value})}
                         placeholder="e.g., X3000, HOWO A7..."
-                        className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-600 mb-2">Year</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
                       <input
                         type="text"
                         value={manualVehicle.year}
