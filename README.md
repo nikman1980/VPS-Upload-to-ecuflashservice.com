@@ -143,7 +143,7 @@ CORS_ORIGINS=*
 
 ### Frontend (.env)
 ```
-REACT_APP_BACKEND_URL=https://ecu-tune-portal.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://ecupayfix.preview.emergentagent.com
 ```
 
 ## ✅ Testing

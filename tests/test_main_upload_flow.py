@@ -21,7 +21,7 @@ import json
 import uuid
 from datetime import datetime
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://ecu-tune-portal.preview.emergentagent.com')
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://ecupayfix.preview.emergentagent.com')
 API = f"{BASE_URL}/api"
 
 # Test data

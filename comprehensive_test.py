@@ -28,7 +28,7 @@ async def verify_account_in_db(email, expected_hash):
 
 def test_comprehensive_portal_apis():
     """Comprehensive test of all portal APIs"""
-    base_url = "https://ecu-tune-portal.preview.emergentagent.com"
+    base_url = "https://ecupayfix.preview.emergentagent.com"
     api_url = f"{base_url}/api"
     
     print("🎯 COMPREHENSIVE PORTAL API TEST")
