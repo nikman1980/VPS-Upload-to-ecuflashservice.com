@@ -20,6 +20,11 @@ Build a professional ECU tuning service platform that allows users to upload ECU
 
 ## What Has Been Implemented
 
+### January 3, 2025 - Payment Flow Fixes
+- **Support email notification** added to `/api/purchase-processed-file` endpoint
+- Email sent to `support@ecuflashservice.com` on new orders
+- PayPal LIVE mode confirmed with Client ID: `AVHOtncoJmXhk_...`
+
 ### January 3, 2025 - DTC Delete Tool Page Redesign
 - **Blue gradient header** with progress steps (1-4: Upload, Select, Pay, Done)
 - **Compact pricing** - 4 boxes in a row ($10, $20, $30, +$5)
