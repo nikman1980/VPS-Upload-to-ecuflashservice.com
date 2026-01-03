@@ -20,15 +20,17 @@ Build a professional ECU tuning service platform that allows users to upload ECU
 
 ## What Has Been Implemented
 
-### January 3, 2025 - UI Redesign Completed
-- **Simplified Reviews Section**: 4 visible reviews + expandable "View More" button (8 total)
-- **Organized Services Section**: Grouped into 3 categories using ACTUAL API prices:
-  - Emission System Delete (EGR $50, DPF $248, AdBlue $698, Catalyst $40)
-  - DTC Code Removal ($10, $20, $30)
-  - Additional Services (Speed Limiter $30, Start/Stop $40, etc.)
-- **Transparent Pricing**: Clean 2-column grid showing ALL services with ACTUAL API prices
-- **Compact How It Works**: 6-step visual process with icons
-- **Why Choose Us**: Integrated into blue gradient banner
+### January 3, 2025 - Vehicle Selection Page Redesign
+- **Blue gradient header** with progress steps (consistent with site)
+- **Removed floating card** - content now directly on white background
+- **Removed animations** - clean, professional appearance
+- **Consistent form styling** - rounded-lg inputs, consistent padding
+- **Title in header** - "Select Your Vehicle" in blue hero section
+
+### January 3, 2025 - Homepage Updates
+- Services section now uses **actual API prices** (dynamic from backend)
+- Pricing section shows all services with correct prices
+- Reviews section: 4 visible + expandable
 
 ### Previously Completed
 - Core DTC Tool functionality (upload, analyze, process)
@@ -60,7 +62,7 @@ Build a professional ECU tuning service platform that allows users to upload ECU
 - Refactor large components (NewUploadFlow.js, DTCDeletePage.js, CustomerPortal.js)
 
 ## Key Files
-- `/app/frontend/src/pages/NewUploadFlow.js` - Main landing page (redesigned)
+- `/app/frontend/src/pages/NewUploadFlow.js` - Main landing page & vehicle selection (redesigned)
 - `/app/backend/server.py` - Backend API logic
 - `/app/frontend/src/pages/DTCDeletePage.js` - DTC removal tool
 - `/app/frontend/src/pages/CustomerPortal.js` - User login/registration
