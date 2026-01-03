@@ -1122,7 +1122,6 @@ const DTCDeletePage = () => {
                       }}
                       onApprove={async (data, actions) => {
                         console.log("PayPal onApprove called, orderID:", data.orderID);
-                        alert("PayPal approved! Processing payment...");
                         
                         try {
                           setProcessing(true);
@@ -1133,10 +1132,9 @@ const DTCDeletePage = () => {
                             console.log("Attempting to capture payment...");
                             order = await actions.order.capture();
                             console.log("Payment captured successfully:", order);
-                            alert("Payment captured! Creating order...");
                           } catch (captureError) {
                             console.error('PayPal capture error:', captureError);
-                            alert(`PayPal payment capture failed: ${JSON.stringify(captureError)}\n\nPlease check your PayPal account or try a different payment method.`);
+                            alert(`Payment failed: ${captureError.message || 'Please try again or use a different payment method.'}`);
                             setProcessing(false);
                             return;
                           }
@@ -1156,7 +1154,6 @@ const DTCDeletePage = () => {
                             paypal_transaction_id: order.purchase_units[0].payments.captures[0].id
                           });
                           console.log("Order created:", orderResponse.data);
-                          alert("Order created! Processing file...");
                           
                           // Process the DTC deletion
                           console.log("Processing DTC deletion...");
@@ -1170,12 +1167,11 @@ const DTCDeletePage = () => {
                           
                           setProcessResult(processResponse.data);
                           setStep(4);
-                          alert("Success! Your file is ready for download.");
                         } catch (error) {
                           console.error('Payment/Order error:', error);
                           console.error('Error response:', error.response);
                           const errorMsg = error.response?.data?.detail || error.message || 'Unknown error';
-                          alert(`Error: ${errorMsg}\n\nFull error: ${JSON.stringify(error.response?.data || error.message)}\n\nContact support with PayPal Order ID: ${data.orderID}`);
+                          alert(`Error processing order: ${errorMsg}\n\nYour payment was successful. Please contact support with PayPal Order ID: ${data.orderID}`);
                         } finally {
                           setProcessing(false);
                         }
