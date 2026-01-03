@@ -765,207 +765,139 @@ const NewUploadFlow = () => {
           </div>
         </section>
 
-        {/* Customer Reviews Section - International Reviews */}
+        {/* Customer Reviews Section - Simplified */}
         <section className="py-16 px-6 bg-white">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">What Our Customers Say</h2>
-              <p className="text-gray-500">Trusted by thousands of vehicle owners and workshops worldwide</p>
+          <div className="container mx-auto max-w-5xl">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <span className="text-yellow-500">★★★★★</span> 4.9/5 from 3,500+ reviews
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Trusted Worldwide</h2>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Review 1 - India */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Excellent service! DPF delete on my Innova Crysta was done in under 2 hours. Vehicle performance improved significantly. Very professional team!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold">R</div>
+            {/* First 4 Reviews - Always Visible */}
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Review 1 */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                <p className="text-gray-700 text-sm mb-3">"DPF delete on my Innova Crysta was done in under 2 hours. Vehicle performance improved significantly. Very professional team!"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold text-sm">R</div>
                   <div>
-                    <div className="font-semibold text-gray-900">Rajesh Kumar</div>
-                    <div className="text-gray-500 text-sm">2021 Toyota Innova • DPF Off • 🇮🇳 India</div>
+                    <div className="font-medium text-gray-900 text-sm">Rajesh Kumar</div>
+                    <div className="text-gray-500 text-xs">Toyota Innova • 🇮🇳 India</div>
                   </div>
                 </div>
               </div>
               
-              {/* Review 2 - Nigeria */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"I was skeptical at first but these guys delivered! EGR + DPF combo on my Hilux. File came back in 40 minutes. My mechanic was impressed with the quality."</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">C</div>
+              {/* Review 2 */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                <p className="text-gray-700 text-sm mb-3">"As a workshop owner, I've done 30+ vehicles through ECU Flash. Consistent quality, fast delivery, fair prices. My go-to for all ECU work!"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 font-bold text-sm">T</div>
                   <div>
-                    <div className="font-semibold text-gray-900">Chukwuemeka Obi</div>
-                    <div className="text-gray-500 text-sm">2019 Toyota Hilux • EGR+DPF • 🇳🇬 Nigeria</div>
+                    <div className="font-medium text-gray-900 text-sm">Thabo Molefe</div>
+                    <div className="text-gray-500 text-xs">Auto Workshop • 🇿🇦 South Africa</div>
                   </div>
                 </div>
               </div>
               
-              {/* Review 3 - Spain */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Servicio increíble! AdBlue delete on my Audi saved me €600 in repairs. Fast turnaround and great communication. Muy recomendado!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold">C</div>
+              {/* Review 3 */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                <p className="text-gray-700 text-sm mb-3">"EGR + DPF combo on my Hilux. File came back in 40 minutes. My mechanic was impressed with the quality. These guys delivered!"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-sm">C</div>
                   <div>
-                    <div className="font-semibold text-gray-900">Carlos García</div>
-                    <div className="text-gray-500 text-sm">2018 Audi A6 3.0 TDI • AdBlue Off • 🇪🇸 Spain</div>
+                    <div className="font-medium text-gray-900 text-sm">Chukwuemeka Obi</div>
+                    <div className="text-gray-500 text-xs">Toyota Hilux • 🇳🇬 Nigeria</div>
                   </div>
                 </div>
               </div>
               
-              {/* Review 4 - Philippines */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Super legit! Got my Ford Ranger's DPF removed. No more warning lights and fuel consumption improved. These guys know their stuff. Salamat po!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">J</div>
+              {/* Review 4 */}
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                <p className="text-gray-700 text-sm mb-3">"AdBlue delete on my Audi saved me €600 in repairs. Fast turnaround and great communication. Muy recomendado!"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold text-sm">C</div>
                   <div>
-                    <div className="font-semibold text-gray-900">Juan Miguel Santos</div>
-                    <div className="text-gray-500 text-sm">2020 Ford Ranger • DPF Off • 🇵🇭 Philippines</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 5 - South Africa */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"As a workshop owner in Johannesburg, I've done 30+ vehicles through ECU Flash. Consistent quality, fast delivery, fair prices. My go-to for all ECU work!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 font-bold">T</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Thabo Molefe</div>
-                    <div className="text-gray-500 text-sm">Auto Workshop • 30+ Orders • 🇿🇦 South Africa</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 6 - UAE */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"DTC removal service is excellent. Had P2002 and P2459 codes cleared permanently from my Land Cruiser. No more check engine lights. Worth every dirham!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold">A</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Ahmed Al-Rashid</div>
-                    <div className="text-gray-500 text-sm">2019 Land Cruiser • DTC Delete • 🇦🇪 UAE</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 7 - Brazil */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Muito bom! EGR delete on my Amarok V6 improved throttle response dramatically. The team was very helpful and explained everything. Highly recommend!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">P</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Pedro Silva</div>
-                    <div className="text-gray-500 text-sm">2020 VW Amarok V6 • EGR Off • 🇧🇷 Brazil</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 8 - Thailand */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Professional service! Got DPF + EGR combo for my Triton. File quality is excellent, car runs smooth. Fast response even with time zone difference. ขอบคุณครับ!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">S</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Somchai Tanaka</div>
-                    <div className="text-gray-500 text-sm">2021 Mitsubishi Triton • DPF+EGR • 🇹🇭 Thailand</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 9 - UK */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Brilliant service! AdBlue system was giving me grief on my Discovery. Both ECU and DCU files were handled perfectly. Saved me a fortune at the dealer!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold">J</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">James Wilson</div>
-                    <div className="text-gray-500 text-sm">2018 Land Rover Discovery • AdBlue Off • 🇬🇧 UK</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 10 - Kenya */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Outstanding service for fleet vehicles! We've processed 15 trucks through ECU Flash. DPF issues sorted, fuel efficiency improved. Great for African road conditions!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold">W</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Wanjiku Mwangi</div>
-                    <div className="text-gray-500 text-sm">Fleet Manager • 15 Trucks • 🇰🇪 Kenya</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 11 - Australia */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Ripper service mate! DPF delete on my 79 Series LandCruiser. Perfect for outback driving now. No more forced regens in the middle of nowhere!"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 font-bold">M</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Mitchell O'Brien</div>
-                    <div className="text-gray-500 text-sm">2020 LC79 Series • DPF Off • 🇦🇺 Australia</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Review 12 - Pakistan */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400">★</span>)}
-                </div>
-                <p className="text-gray-700 mb-4">"Very satisfied with the EGR removal service. My Fortuner runs much better now. Affordable prices and quick delivery. Shukriya! Will use again."</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">A</div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Ali Hassan</div>
-                    <div className="text-gray-500 text-sm">2019 Toyota Fortuner • EGR Off • 🇵🇰 Pakistan</div>
+                    <div className="font-medium text-gray-900 text-sm">Carlos García</div>
+                    <div className="text-gray-500 text-xs">Audi A6 3.0 TDI • 🇪🇸 Spain</div>
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Trust Stats */}
-            <div className="mt-12 text-center">
-              <div className="inline-flex items-center gap-6 bg-gray-50 rounded-2xl px-8 py-4">
-                <div className="flex items-center gap-1">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-400 text-xl">★</span>)}
+            {/* Additional Reviews - Expandable */}
+            {showAllReviews && (
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                {/* Review 5 */}
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                  <p className="text-gray-700 text-sm mb-3">"DPF delete on my 79 Series LandCruiser. Perfect for outback driving now. No more forced regens in the middle of nowhere!"</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 font-bold text-sm">M</div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm">Mitchell O'Brien</div>
+                      <div className="text-gray-500 text-xs">LC79 Series • 🇦🇺 Australia</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-left">
-                  <div className="font-bold text-gray-900">4.9 out of 5</div>
-                  <div className="text-gray-500 text-sm">Based on 3,500+ reviews from 45+ countries</div>
+                
+                {/* Review 6 */}
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                  <p className="text-gray-700 text-sm mb-3">"DTC removal service is excellent. Had P2002 and P2459 codes cleared permanently from my Land Cruiser. Worth every dirham!"</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-sm">A</div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm">Ahmed Al-Rashid</div>
+                      <div className="text-gray-500 text-xs">Land Cruiser • 🇦🇪 UAE</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Review 7 */}
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                  <p className="text-gray-700 text-sm mb-3">"Outstanding service for fleet vehicles! We've processed 15 trucks through ECU Flash. DPF issues sorted, fuel efficiency improved."</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold text-sm">W</div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm">Wanjiku Mwangi</div>
+                      <div className="text-gray-500 text-xs">Fleet Manager • 🇰🇪 Kenya</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Review 8 */}
+                <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                  <div className="flex items-center gap-1 mb-2 text-yellow-400 text-sm">★★★★★</div>
+                  <p className="text-gray-700 text-sm mb-3">"AdBlue system was giving me grief on my Discovery. Both ECU and DCU files were handled perfectly. Saved me a fortune at the dealer!"</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold text-sm">J</div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm">James Wilson</div>
+                      <div className="text-gray-500 text-xs">Land Rover Discovery • 🇬🇧 UK</div>
+                    </div>
+                  </div>
                 </div>
               </div>
+            )}
+            
+            {/* View More Button */}
+            <div className="text-center mt-6">
+              <button 
+                onClick={() => setShowAllReviews(!showAllReviews)}
+                className="text-blue-600 hover:text-blue-700 font-medium text-sm inline-flex items-center gap-1"
+              >
+                {showAllReviews ? 'Show Less' : 'View More Reviews'} 
+                <svg className={`w-4 h-4 transition-transform ${showAllReviews ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
           </div>
         </section>
