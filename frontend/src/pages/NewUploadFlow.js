@@ -578,17 +578,15 @@ const NewUploadFlow = () => {
 
   const onApprove = async (data, actions) => {
     console.log("PayPal onApprove called, orderID:", data.orderID);
-    alert("PayPal approved! Processing payment...");
     
     let order;
     try {
       console.log("Attempting to capture payment...");
       order = await actions.order.capture();
       console.log("Payment captured successfully:", order);
-      alert("Payment captured! Creating order...");
     } catch (captureError) {
       console.error('PayPal capture error:', captureError);
-      alert(`PayPal payment capture failed: ${JSON.stringify(captureError)}\n\nPlease try again or use a different payment method.`);
+      alert(`Payment failed: ${captureError.message || 'Please try again or use a different payment method.'}`);
       return;
     }
     
@@ -624,7 +622,7 @@ const NewUploadFlow = () => {
       purchaseData.append('customer_phone', customerInfo.customer_phone);
       purchaseData.append('vehicle_info', JSON.stringify(vehicleInfo));
       purchaseData.append('dtc_codes', JSON.stringify(dtcCodesData));
-      purchaseData.append('additional_dtc_codes', additionalDtcCodes); // FREE DTCs with DPF/EGR/AdBlue
+      purchaseData.append('additional_dtc_codes', additionalDtcCodes);
       purchaseData.append('paypal_order_id', order.id);
       purchaseData.append('paypal_transaction_id', order.purchase_units[0].payments.captures[0].id);
       
@@ -634,15 +632,14 @@ const NewUploadFlow = () => {
       if (response.data.success) {
         setOrderId(response.data.order_id);
         setDownloadLinks(response.data.download_links || []);
-        setStep(6); // Success step in new flow
-        alert("Success! Your order has been created.");
+        setStep(6);
       } else {
-        alert("Order created but with issues: " + JSON.stringify(response.data));
+        alert("There was an issue with your order. Please contact support.");
       }
     } catch (error) {
       console.error('Error:', error);
       console.error('Error response:', error.response);
-      alert('Payment successful but error creating order.\n\nError: ' + (error.response?.data?.detail || error.message) + '\n\nContact support with PayPal order ID: ' + order.id);
+      alert('Error processing order: ' + (error.response?.data?.detail || error.message) + '\n\nYour payment was successful. Please contact support with PayPal Order ID: ' + order.id);
     }
   };
 
