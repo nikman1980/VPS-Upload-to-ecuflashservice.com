@@ -289,14 +289,14 @@ const ContactPage = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-8 mt-12">
-        <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-          <p>© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
+      {/* Footer - Dark Background */}
+      <footer className="bg-gray-900 text-white py-12 mt-12">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
           <div className="mt-4 space-x-6">
-            <Link to="/terms" className="hover:text-blue-600 transition">Terms of Service</Link>
-            <Link to="/privacy" className="hover:text-blue-600 transition">Privacy Policy</Link>
-            <Link to="/faq" className="hover:text-blue-600 transition">FAQ</Link>
+            <Link to="/terms" className="text-gray-400 hover:text-white transition">Terms of Service</Link>
+            <Link to="/privacy" className="text-gray-400 hover:text-white transition">Privacy Policy</Link>
+            <Link to="/faq" className="text-gray-400 hover:text-white transition">FAQ</Link>
           </div>
         </div>
       </footer>
