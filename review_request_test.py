@@ -10,7 +10,7 @@ import time
 
 def test_review_request_scenarios():
     """Test the exact scenarios from the review request"""
-    base_url = "https://ecufix-central.preview.emergentagent.com"
+    base_url = "https://ecu-tune-portal.preview.emergentagent.com"
     api_url = f"{base_url}/api"
     
     print("🎯 Testing Review Request Scenarios")

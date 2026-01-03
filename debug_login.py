@@ -10,7 +10,7 @@ import hashlib
 
 def debug_login_issue():
     """Debug the login issue"""
-    base_url = "https://ecufix-central.preview.emergentagent.com"
+    base_url = "https://ecu-tune-portal.preview.emergentagent.com"
     api_url = f"{base_url}/api"
     
     print("🔍 Debugging Login Issue")
