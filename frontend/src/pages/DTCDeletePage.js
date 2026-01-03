@@ -1122,21 +1122,27 @@ const DTCDeletePage = () => {
                       }}
                       onApprove={async (data, actions) => {
                         console.log("PayPal onApprove called, orderID:", data.orderID);
+                        alert("PayPal approved! Processing payment...");
+                        
                         try {
                           setProcessing(true);
                           
                           // Capture the payment
                           let order;
                           try {
+                            console.log("Attempting to capture payment...");
                             order = await actions.order.capture();
+                            console.log("Payment captured successfully:", order);
+                            alert("Payment captured! Creating order...");
                           } catch (captureError) {
                             console.error('PayPal capture error:', captureError);
-                            alert(`PayPal payment capture failed: ${captureError.message || 'Unknown error'}\n\nPlease check your PayPal account or try a different payment method.`);
+                            alert(`PayPal payment capture failed: ${JSON.stringify(captureError)}\n\nPlease check your PayPal account or try a different payment method.`);
                             setProcessing(false);
                             return;
                           }
                           
                           // Create order in backend
+                          console.log("Creating order in backend...");
                           const orderResponse = await axios.post(`${API}/dtc-engine/order`, {
                             file_id: fileId,
                             dtc_codes: selectedDTCs,
@@ -1149,21 +1155,27 @@ const DTCDeletePage = () => {
                             paypal_order_id: order.id,
                             paypal_transaction_id: order.purchase_units[0].payments.captures[0].id
                           });
+                          console.log("Order created:", orderResponse.data);
+                          alert("Order created! Processing file...");
                           
                           // Process the DTC deletion
+                          console.log("Processing DTC deletion...");
                           const processResponse = await axios.post(`${API}/dtc-engine/process`, {
                             file_id: fileId,
                             dtc_codes: selectedDTCs,
                             correct_checksum: correctChecksum,
                             order_id: orderResponse.data.order_id
                           });
+                          console.log("Processing complete:", processResponse.data);
                           
                           setProcessResult(processResponse.data);
                           setStep(4);
+                          alert("Success! Your file is ready for download.");
                         } catch (error) {
                           console.error('Payment/Order error:', error);
+                          console.error('Error response:', error.response);
                           const errorMsg = error.response?.data?.detail || error.message || 'Unknown error';
-                          alert(`Payment successful but error processing order: ${errorMsg}\n\nContact support with PayPal Order ID: ${data.orderID}`);
+                          alert(`Error: ${errorMsg}\n\nFull error: ${JSON.stringify(error.response?.data || error.message)}\n\nContact support with PayPal Order ID: ${data.orderID}`);
                         } finally {
                           setProcessing(false);
                         }
