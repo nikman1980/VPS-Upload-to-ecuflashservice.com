@@ -1024,77 +1024,121 @@ const NewUploadFlow = () => {
           </div>
         </section>
         
-        {/* Special Features / Advertising */}
-        <section className="py-16 px-6 bg-gradient-to-r from-blue-50 to-cyan-50">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div className="text-3xl mb-3">🚛</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Chinese Trucks Specialist</h3>
-                <p className="text-gray-600 text-sm">AdBlue/SCR Delete available for all newer Chinese Trucks - Weichai, Yuchai, FAW, Sinotruk, Dongfeng, Foton.</p>
+        {/* Why Choose Us - Compact */}
+        <section className="py-12 px-6 bg-gradient-to-r from-blue-600 to-cyan-500">
+          <div className="container mx-auto max-w-5xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-white text-center">
+              <div>
+                <div className="text-2xl mb-1">🚛</div>
+                <div className="font-semibold text-sm">Chinese Trucks</div>
+                <div className="text-white/70 text-xs">Full Support</div>
               </div>
-              
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div className="text-3xl mb-3">🎯</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">100% Accurate Toyota Files</h3>
-                <p className="text-gray-600 text-sm">100% correct Toyota modified files as per your service request. We guarantee quality on every Toyota ECU file.</p>
+              <div>
+                <div className="text-2xl mb-1">🎯</div>
+                <div className="font-semibold text-sm">100% Accurate</div>
+                <div className="text-white/70 text-xs">Toyota Files</div>
               </div>
-              
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div className="text-3xl mb-3">🔌</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Installation Guidance</h3>
-                <p className="text-gray-600 text-sm">After modification, we advise which plugs you need to disconnect if required for proper operation.</p>
+              <div>
+                <div className="text-2xl mb-1">🔌</div>
+                <div className="font-semibold text-sm">Install Guide</div>
+                <div className="text-white/70 text-xs">Included Free</div>
               </div>
-              
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div className="text-3xl mb-3">🆓</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Free DTC Support</h3>
-                <p className="text-gray-600 text-sm">If further DTCs need to be deleted for your job file - it&apos;s FREE for 1 month after purchase (same file only).</p>
+              <div>
+                <div className="text-2xl mb-1">🆓</div>
+                <div className="font-semibold text-sm">Free DTC</div>
+                <div className="text-white/70 text-xs">30 Days Support</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section id="pricing" className="py-20 px-6 bg-gray-50/30">
-          <div className="container mx-auto max-w-4xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Transparent Pricing</h2>
-              <p className="text-gray-500">No hidden fees. Pay only for what you need.</p>
+        {/* Pricing Section - 3 Packages */}
+        <section id="pricing" className="py-16 px-6 bg-gray-50">
+          <div className="container mx-auto max-w-5xl">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Simple Pricing</h2>
+              <p className="text-gray-500">Choose a package or pay per service</p>
             </div>
             
-            <div className="bg-gradient-to-br from-gray-100 to-white border border-gray-200/50 rounded-3xl overflow-hidden">
-              <div className="p-8 border-b border-gray-200/50">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Service Pricing</h3>
-                <p className="text-gray-500">All prices in USD • 18 services available</p>
+            {/* 3 Main Packages */}
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              {/* Basic Package */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                <div className="text-center mb-4">
+                  <h3 className="font-bold text-gray-900 text-lg">Basic</h3>
+                  <p className="text-gray-500 text-sm">Single modification</p>
+                  <div className="mt-3">
+                    <span className="text-3xl font-bold text-gray-900">$40</span>
+                    <span className="text-gray-500 text-sm">+</span>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-600 mb-4">
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> DPF/EGR/AdBlue Off</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> 1 DTC code included</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> 20-60 min delivery</li>
+                </ul>
+                <button onClick={() => setStep(1)} className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition text-sm">
+                  Get Started
+                </button>
               </div>
-              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 divide-gray-300/50">
-                <div className="divide-y divide-gray-300/50">
-                  {allServices.slice(0, 9).map((service, i) => (
-                    <div key={i} className="flex justify-between items-center p-4 hover:bg-gray-50/50 transition">
-                      <div className="flex items-center space-x-3">
-                        <span className="text-xl">{service.icon}</span>
-                        <span className="text-gray-900 font-medium text-sm">{service.name}</span>
-                      </div>
-                      <span className="text-blue-400 font-bold">${service.base_price?.toFixed(0)}</span>
-                    </div>
-                  ))}
+              
+              {/* Professional Package */}
+              <div className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-6 text-white relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
+                  POPULAR
                 </div>
-                <div className="divide-y divide-gray-300/50 md:border-l md:border-gray-200/50">
-                  {allServices.slice(9).map((service, i) => (
-                    <div key={i} className="flex justify-between items-center p-4 hover:bg-gray-50/50 transition">
-                      <div className="flex items-center space-x-3">
-                        <span className="text-xl">{service.icon}</span>
-                        <span className="text-gray-900 font-medium text-sm">{service.name}</span>
-                      </div>
-                      <span className="text-blue-400 font-bold">${service.base_price?.toFixed(0)}</span>
-                    </div>
-                  ))}
+                <div className="text-center mb-4">
+                  <h3 className="font-bold text-lg">Professional</h3>
+                  <p className="text-white/80 text-sm">Combo package</p>
+                  <div className="mt-3">
+                    <span className="text-3xl font-bold">$99</span>
+                  </div>
                 </div>
+                <ul className="space-y-2 text-sm text-white/90 mb-4">
+                  <li className="flex items-center gap-2"><span>✓</span> DPF + EGR Off</li>
+                  <li className="flex items-center gap-2"><span>✓</span> Up to 5 DTC codes</li>
+                  <li className="flex items-center gap-2"><span>✓</span> Priority support</li>
+                  <li className="flex items-center gap-2"><span>✓</span> 30-day free fixes</li>
+                </ul>
+                <button onClick={() => setStep(1)} className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium hover:shadow-lg transition text-sm">
+                  Get Started
+                </button>
+              </div>
+              
+              {/* Full Delete Package */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                <div className="text-center mb-4">
+                  <h3 className="font-bold text-gray-900 text-lg">Full Delete</h3>
+                  <p className="text-gray-500 text-sm">Complete solution</p>
+                  <div className="mt-3">
+                    <span className="text-3xl font-bold text-gray-900">$149</span>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-600 mb-4">
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> DPF + EGR + AdBlue</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Unlimited DTC codes</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Stage 1 tune included</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> 60-day free fixes</li>
+                </ul>
+                <button onClick={() => setStep(1)} className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition text-sm">
+                  Get Started
+                </button>
+              </div>
+            </div>
+            
+            {/* Individual Pricing - Compact */}
+            <div className="bg-white rounded-xl p-4 border border-gray-100">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-gray-900 text-sm">Individual Services</h4>
+                <span className="text-gray-500 text-xs">All prices in USD</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 text-xs">
+                {allServices.map((service, i) => (
+                  <div key={i} className="flex justify-between items-center bg-gray-50 rounded-lg px-3 py-2">
+                    <span className="text-gray-700 truncate mr-2">{service.name}</span>
+                    <span className="text-blue-600 font-semibold">${service.base_price?.toFixed(0)}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
