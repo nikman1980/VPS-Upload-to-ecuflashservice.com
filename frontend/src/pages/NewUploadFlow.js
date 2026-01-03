@@ -1360,22 +1360,22 @@ const NewUploadFlow = () => {
                           value={customEcu}
                           onChange={(e) => setCustomEcu(e.target.value)}
                           placeholder="Enter your ECU type (e.g., Bosch EDC17C49)"
-                          className="w-full mt-3 bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                          className="w-full mt-3 border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                       )}
                     </div>
                   
                   {/* Summary for Manual Entry */}
                   {manualVehicle.make && manualVehicle.model && selectedEcu && (selectedEcu.id !== 'other' || customEcu.trim()) && (
-                    <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 mt-4">
+                    <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-4">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                          <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                          <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
                         <div>
-                          <p className="text-green-400 text-sm font-medium">Vehicle Ready</p>
+                          <p className="text-green-600 text-sm font-medium">Vehicle Ready</p>
                           <p className="text-gray-900 font-semibold">{getVehicleSummary()}</p>
                         </div>
                       </div>
@@ -1387,7 +1387,7 @@ const NewUploadFlow = () => {
               {/* Manufacturer */}
               {selectedVehicleType && !isManualVehicle && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">Manufacturer</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Manufacturer</label>
                   {vehicleLoading && manufacturers.length === 0 ? (
                     <div className="text-center py-4 text-gray-500">Loading manufacturers...</div>
                   ) : (
@@ -1397,7 +1397,7 @@ const NewUploadFlow = () => {
                         const mfr = manufacturers.find(m => String(m.id) === e.target.value);
                         if (mfr) handleManufacturerSelect(mfr);
                       }}
-                      className="w-full bg-gray-100 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="">Select manufacturer...</option>
                       {manufacturers.map((mfr) => (
@@ -1411,7 +1411,7 @@ const NewUploadFlow = () => {
               {/* Model */}
               {selectedManufacturer && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">Model</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Model</label>
                   {vehicleLoading && models.length === 0 ? (
                     <div className="text-center py-4 text-gray-500">Loading models...</div>
                   ) : (
