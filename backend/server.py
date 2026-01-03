@@ -3430,6 +3430,11 @@ async def dtc_engine_process(request: DTCProcessRequest):
             logger.error(f"File not found in database: {request.file_id}")
             raise HTTPException(status_code=404, detail=f"File not found: {request.file_id}")
         
+        # Get order info for customer email (if order_id provided)
+        order_doc = None
+        if request.order_id:
+            order_doc = await db.dtc_orders.find_one({"id": request.order_id}, {"_id": 0})
+        
         # Read original file - try disk first, then restore from database
         file_path = Path(file_doc["file_path"])
         if file_path.exists():
@@ -3476,8 +3481,39 @@ async def dtc_engine_process(request: DTCProcessRequest):
                 "dtcs_not_found": result.dtcs_not_found,
                 "checksum_corrected": result.checksum_corrected,
                 "checksum_type": result.checksum_type,
+                "order_id": request.order_id,
                 "created_at": datetime.now(timezone.utc).isoformat()
             })
+            
+            # Update order status
+            if request.order_id:
+                await db.dtc_orders.update_one(
+                    {"id": request.order_id},
+                    {"$set": {
+                        "processing_status": "completed",
+                        "download_id": download_id,
+                        "completed_at": datetime.now(timezone.utc).isoformat()
+                    }}
+                )
+            
+            # Send email with download link
+            if order_doc and order_doc.get("customer_email"):
+                try:
+                    customer_email = order_doc["customer_email"]
+                    customer_name = order_doc.get("customer_name", "Customer")
+                    download_url = f"{os.environ.get('FRONTEND_URL', 'https://ecuflashservice.com')}/tools/dtc-delete?download={download_id}"
+                    
+                    # Send download ready email
+                    send_download_ready_email(
+                        customer_email=customer_email,
+                        customer_name=customer_name,
+                        order_id=request.order_id,
+                        download_url=download_url,
+                        dtcs_deleted=[d["code"] for d in result.dtcs_deleted]
+                    )
+                    logger.info(f"Download ready email sent to {customer_email}")
+                except Exception as email_error:
+                    logger.error(f"Failed to send email: {email_error}")
         
         return {
             "success": result.success,
