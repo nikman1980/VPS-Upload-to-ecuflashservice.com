@@ -4,7 +4,7 @@ const DPFOffPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3">
@@ -17,10 +17,10 @@ const DPFOffPage = () => {
               </div>
             </Link>
             <div className="flex items-center space-x-6">
-              <Link to="/services/dtc-removal" className="text-gray-600 hover:text-blue-600 text-sm">DTC Removal</Link>
-              <Link to="/services/egr-off" className="text-gray-600 hover:text-blue-600 text-sm">EGR OFF</Link>
-              <Link to="/services/adblue-off" className="text-gray-600 hover:text-blue-600 text-sm">AdBlue OFF</Link>
-              <Link to="/" className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition">
+              <Link to="/services/dtc-removal" className="text-gray-600 hover:text-blue-600 text-sm hidden md:block">DTC Removal</Link>
+              <Link to="/services/egr-off" className="text-gray-600 hover:text-blue-600 text-sm hidden md:block">EGR OFF</Link>
+              <Link to="/services/adblue-off" className="text-gray-600 hover:text-blue-600 text-sm hidden md:block">AdBlue OFF</Link>
+              <Link to="/" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
                 Get Started
               </Link>
             </div>
@@ -28,8 +28,8 @@ const DPFOffPage = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-blue-800 py-20 px-6">
+      {/* Hero Section - Blue Gradient */}
+      <section className="bg-gradient-to-r from-blue-600 to-cyan-500 py-20 px-6">
         <div className="container mx-auto max-w-4xl text-center text-white">
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full mb-6">
             <span className="text-2xl">🛡️</span>
