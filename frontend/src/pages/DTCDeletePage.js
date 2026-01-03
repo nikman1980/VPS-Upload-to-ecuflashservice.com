@@ -1383,9 +1383,21 @@ const DTCDeletePage = () => {
             </div>
           </div>
           
+          {/* Supported Vehicles */}
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-6">
+            <h4 className="font-semibold text-blue-900 mb-2 flex items-center">
+              <span className="mr-2">🚗</span> Supported Vehicles
+            </h4>
+            <p className="text-blue-700 text-sm">
+              BMW, Mercedes-Benz, Audi, Volkswagen, Ford, Toyota, Hilux, Land Cruiser, Ranger, Triton, 
+              Amarok, Land Rover, Isuzu, Nissan, Mazda, Hyundai, Kia, Volvo, Scania, MAN, DAF, Iveco, 
+              John Deere, Case, New Holland, Caterpillar, and many more.
+            </p>
+          </div>
+          
           {/* Why Choose Us - Inline */}
-          <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm">
-            <div className="flex flex-wrap justify-center gap-4 text-blue-700">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+            <div className="flex flex-wrap justify-center gap-4 text-gray-700">
               <span>✓ Permanent removal</span>
               <span>✓ Checksum correction</span>
               <span>✓ Fast turnaround</span>
