@@ -130,6 +130,9 @@ const NewUploadFlow = () => {
   // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
+  // Reviews expand state
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  
   // Upload state
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
