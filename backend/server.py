@@ -3499,19 +3499,22 @@ async def dtc_engine_process(request: DTCProcessRequest):
             # Send email with download link
             if order_doc and order_doc.get("customer_email"):
                 try:
+                    from email_service import send_dtc_delete_confirmation
                     customer_email = order_doc["customer_email"]
                     customer_name = order_doc.get("customer_name", "Customer")
-                    download_url = f"{os.environ.get('FRONTEND_URL', 'https://ecuflashservice.com')}/tools/dtc-delete?download={download_id}"
+                    total_amount = order_doc.get("total_price", 0)
+                    download_url = f"https://ecuflashservice.com/api/dtc-engine/download/{download_id}"
                     
-                    # Send download ready email
-                    send_download_ready_email(
-                        customer_email=customer_email,
+                    # Send DTC delete confirmation email
+                    send_dtc_delete_confirmation(
+                        to_email=customer_email,
                         customer_name=customer_name,
                         order_id=request.order_id,
-                        download_url=download_url,
-                        dtcs_deleted=[d["code"] for d in result.dtcs_deleted]
+                        dtcs_deleted=[d["code"] for d in result.dtcs_deleted],
+                        total_amount=total_amount,
+                        download_link=download_url
                     )
-                    logger.info(f"Download ready email sent to {customer_email}")
+                    logger.info(f"DTC delete confirmation email sent to {customer_email}")
                 except Exception as email_error:
                     logger.error(f"Failed to send email: {email_error}")
         
