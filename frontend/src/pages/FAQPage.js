@@ -117,11 +117,11 @@ const FAQPage = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-8 mt-12">
-        <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-          <p>© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
-          <p className="mt-2">⚠️ For off-road and competition use only</p>
+      {/* Footer - Dark Background */}
+      <footer className="bg-gray-900 text-white py-12 mt-12">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
+          <p className="mt-2 text-yellow-500 text-sm">⚠️ For off-road and competition use only</p>
         </div>
       </footer>
     </div>
