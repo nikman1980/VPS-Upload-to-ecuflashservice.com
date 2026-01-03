@@ -2142,7 +2142,8 @@ const NewUploadFlow = () => {
                 options={{ 
                   "client-id": PAYPAL_CLIENT_ID, 
                   currency: "USD",
-                  intent: "capture"
+                  intent: "capture",
+                  "disable-funding": "paylater"
                 }}
                 onError={(err) => console.error("PayPal Script Error:", err)}
               >
