@@ -440,7 +440,7 @@ const DTCDeletePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-white">
       {/* SEO Meta Tags */}
       <Helmet>
         <title>{SEO_DATA.title}</title>
@@ -537,25 +537,25 @@ const DTCDeletePage = () => {
         </script>
       </Helmet>
 
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
+      {/* Header - Blue Gradient */}
+      <header className="bg-gradient-to-r from-blue-600 to-cyan-500">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <button onClick={() => navigate('/')} className="text-gray-500 hover:text-gray-700">
+              <button onClick={() => navigate('/')} className="text-white/80 hover:text-white">
                 ← Back
               </button>
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                 <span className="text-white text-xl">🔧</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">ECU DTC Delete Engine</h1>
-                <p className="text-xs text-gray-500">Delete specific DTCs with checksum correction</p>
+                <h1 className="text-xl font-bold text-white">DTC Delete Tool</h1>
+                <p className="text-xs text-white/70">Remove check engine light permanently</p>
               </div>
             </div>
             
-            {/* Progress Steps - Now 4 steps */}
-            <div className="flex items-center space-x-2">
+            {/* Progress Steps */}
+            <div className="hidden md:flex items-center space-x-2">
               {[
                 { num: 1, label: 'Upload' },
                 { num: 2, label: 'Select' },
@@ -564,71 +564,73 @@ const DTCDeletePage = () => {
               ].map((s, idx) => (
                 <div key={s.num} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                    step >= s.num ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'
+                    step >= s.num ? 'bg-white text-blue-600' : 'bg-white/20 text-white/70'
                   }`}>
-                    {s.num}
+                    {step > s.num ? '✓' : s.num}
                   </div>
-                  {idx < 3 && <div className={`w-6 h-0.5 ${step > s.num ? 'bg-blue-500' : 'bg-gray-200'}`} />}
+                  {idx < 3 && <div className={`w-6 h-0.5 ${step > s.num ? 'bg-white' : 'bg-white/30'}`} />}
                 </div>
               ))}
             </div>
           </div>
         </div>
+        
+        {/* Hero Title */}
+        <div className="container mx-auto px-4 pb-6 pt-2">
+          <div className="text-center text-white">
+            <h2 className="text-2xl font-bold mb-1">
+              {step === 1 && 'Upload ECU File'}
+              {step === 2 && 'Select DTC Codes'}
+              {step === 3 && 'Complete Payment'}
+              {step === 4 && 'Download Ready'}
+            </h2>
+            <p className="text-white/80 text-sm">
+              {step === 1 && 'Upload your ECU file to scan and delete specific DTCs'}
+              {step === 2 && 'Choose which fault codes to remove permanently'}
+              {step === 3 && 'Secure payment via PayPal'}
+              {step === 4 && 'Your modified file is ready for download'}
+            </p>
+          </div>
+        </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
+      <div className="container mx-auto px-4 py-6 max-w-4xl">
         
         {/* Step 1: Upload */}
         {step === 1 && (
-          <div className="bg-white border border-gray-200 rounded-2xl p-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Upload ECU File</h2>
-              <p className="text-gray-500">Upload your ECU file to scan and delete specific DTCs</p>
-            </div>
-            
-            {/* Pricing Info */}
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100 rounded-xl p-6 mb-6">
-              <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                <span className="mr-2">💰</span> Pricing
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="bg-white rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-blue-600">$10</div>
-                  <div className="text-gray-600">1 DTC</div>
+          <div>
+            {/* Pricing Info - Compact */}
+            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100 rounded-xl p-4 mb-4">
+              <div className="grid grid-cols-4 gap-3 text-center text-sm">
+                <div className="bg-white rounded-lg p-2">
+                  <div className="text-xl font-bold text-blue-600">$10</div>
+                  <div className="text-gray-600 text-xs">1 DTC</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-blue-600">$20</div>
-                  <div className="text-gray-600">2-6 DTCs</div>
+                <div className="bg-white rounded-lg p-2">
+                  <div className="text-xl font-bold text-blue-600">$20</div>
+                  <div className="text-gray-600 text-xs">2-6 DTCs</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-blue-600">$30</div>
-                  <div className="text-gray-600">7+ DTCs</div>
+                <div className="bg-white rounded-lg p-2">
+                  <div className="text-xl font-bold text-blue-600">$30</div>
+                  <div className="text-gray-600 text-xs">7+ DTCs</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-cyan-600">+$5</div>
-                  <div className="text-gray-600">Checksum</div>
+                <div className="bg-white rounded-lg p-2">
+                  <div className="text-xl font-bold text-cyan-600">+$5</div>
+                  <div className="text-gray-600 text-xs">Checksum</div>
                 </div>
               </div>
             </div>
 
-            {/* Sub-Code Explanation */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
-              <div className="flex items-start gap-3">
-                <span className="text-xl">ℹ️</span>
-                <div className="text-sm">
-                  <h4 className="font-semibold text-blue-900 mb-1">About DTC Sub-Codes (Fault Bytes)</h4>
-                  <p className="text-blue-700">
-                    A single DTC like <span className="font-mono bg-blue-100 px-1 rounded">P0421</span> may appear multiple times in your ECU with different 
-                    <strong> sub-codes</strong> (e.g., <span className="font-mono bg-blue-100 px-1 rounded">P0421-22</span>, <span className="font-mono bg-blue-100 px-1 rounded">P0421-AF</span>). 
-                    The tool will find and delete <strong>all instances</strong> of each DTC you select, including all its sub-codes/fault bytes.
-                  </p>
-                </div>
-              </div>
+            {/* Sub-Code Info - Compact */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm">
+              <p className="text-blue-700">
+                <span className="font-semibold">ℹ️ Note:</span> Each DTC (e.g., P0421) may have multiple sub-codes. We remove all instances automatically.
+              </p>
             </div>
             
             <div
               {...getRootProps()}
-              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition ${
+              className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition ${
                 isDragActive
                   ? 'border-blue-500 bg-blue-50'
                   : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50/50'
