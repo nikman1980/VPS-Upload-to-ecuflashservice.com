@@ -902,42 +902,95 @@ const NewUploadFlow = () => {
           </div>
         </section>
 
-        {/* Services Section */}
-        <section id="services" className="py-20 px-6 bg-gray-50/30">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-              <p className="text-gray-500 max-w-2xl mx-auto">
-                Professional ECU modifications performed by certified engineers
-              </p>
+        {/* Services Section - Organized by Category */}
+        <section id="services" className="py-16 px-6 bg-gray-50">
+          <div className="container mx-auto max-w-5xl">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Our Services</h2>
+              <p className="text-gray-500">Professional ECU modifications by certified engineers</p>
             </div>
             
-            {/* Main Services - 6 cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {allServices.slice(0, 6).map((service, i) => (
-                <div key={i} className="bg-gray-50/50 border border-gray-200/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all group">
-                  <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.name}</h3>
-                  <p className="text-gray-500 text-sm mb-4">{service.description}</p>
-                  <div className="text-blue-400 font-semibold">${service.base_price?.toFixed(0)}</div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Additional Services - Smaller cards */}
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold text-gray-900 text-center mb-6">Additional Services</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {allServices.slice(6).map((service, i) => (
-                  <div key={i} className="bg-gray-50/30 border border-gray-200/30 rounded-xl p-4 hover:border-blue-500/30 transition-all">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <span className="text-2xl">{service.icon}</span>
-                      <span className="text-gray-900 font-medium text-sm">{service.name}</span>
-                    </div>
-                    <div className="text-blue-400 font-semibold text-sm">${service.base_price?.toFixed(0)}</div>
+            {/* Service Categories */}
+            <div className="space-y-8">
+              {/* Emission Delete Services */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center text-red-600 text-xl">🚫</div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Emission System Delete</h3>
+                    <p className="text-gray-500 text-sm">Remove problematic emission controls</p>
                   </div>
-                ))}
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    { name: 'DPF Off', price: 50, desc: 'Particulate Filter' },
+                    { name: 'EGR Off', price: 40, desc: 'Exhaust Gas Recirc.' },
+                    { name: 'AdBlue Off', price: 60, desc: 'SCR System' },
+                    { name: 'Catalyst Off', price: 50, desc: 'Catalytic Converter' },
+                  ].map((s, i) => (
+                    <div key={i} className="bg-gray-50 rounded-xl p-3 text-center">
+                      <div className="font-semibold text-gray-900 text-sm">{s.name}</div>
+                      <div className="text-gray-500 text-xs mb-1">{s.desc}</div>
+                      <div className="text-blue-600 font-bold">${s.price}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
+              
+              {/* DTC Removal Services */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-xl">🔍</div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">DTC Code Removal</h3>
+                    <p className="text-gray-500 text-sm">Clear diagnostic trouble codes permanently</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { name: '1 Code', price: 10 },
+                    { name: '2-6 Codes', price: 20 },
+                    { name: '7+ Codes', price: 30 },
+                  ].map((s, i) => (
+                    <div key={i} className="bg-gray-50 rounded-xl p-3 text-center">
+                      <div className="font-semibold text-gray-900 text-sm">{s.name}</div>
+                      <div className="text-blue-600 font-bold">${s.price}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Performance & Other Services */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-600 text-xl">⚡</div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Performance & Other</h3>
+                    <p className="text-gray-500 text-sm">Power upgrades and additional mods</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    { name: 'Stage 1', price: 80, desc: 'Power Tune' },
+                    { name: 'Stage 2', price: 120, desc: 'Advanced Tune' },
+                    { name: 'Speed Limiter', price: 30, desc: 'Remove Limit' },
+                    { name: 'Start/Stop Off', price: 25, desc: 'Disable Feature' },
+                  ].map((s, i) => (
+                    <div key={i} className="bg-gray-50 rounded-xl p-3 text-center">
+                      <div className="font-semibold text-gray-900 text-sm">{s.name}</div>
+                      <div className="text-gray-500 text-xs mb-1">{s.desc}</div>
+                      <div className="text-blue-600 font-bold">${s.price}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* View All Services Link */}
+            <div className="text-center mt-6">
+              <a href="#pricing" className="text-blue-600 hover:text-blue-700 font-medium text-sm">
+                View Complete Price List →
+              </a>
             </div>
           </div>
         </section>
