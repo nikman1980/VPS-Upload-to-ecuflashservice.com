@@ -1040,89 +1040,35 @@ const NewUploadFlow = () => {
         <section id="pricing" className="py-16 px-6 bg-gray-50">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Simple Pricing</h2>
-              <p className="text-gray-500">Choose a package or pay per service</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Transparent Pricing</h2>
+              <p className="text-gray-500">No hidden fees. Pay only for what you need.</p>
             </div>
             
-            {/* 3 Main Packages */}
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
-              {/* Basic Package */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-200">
-                <div className="text-center mb-4">
-                  <h3 className="font-bold text-gray-900 text-lg">Basic</h3>
-                  <p className="text-gray-500 text-sm">Single modification</p>
-                  <div className="mt-3">
-                    <span className="text-3xl font-bold text-gray-900">$40</span>
-                    <span className="text-gray-500 text-sm">+</span>
-                  </div>
+            {/* Pricing Grid */}
+            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+              <div className="p-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold">All Services</h3>
+                  <span className="text-white/80 text-sm">Prices in USD</span>
                 </div>
-                <ul className="space-y-2 text-sm text-gray-600 mb-4">
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> DPF/EGR/AdBlue Off</li>
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> 1 DTC code included</li>
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> 20-60 min delivery</li>
-                </ul>
-                <button onClick={() => setStep(1)} className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition text-sm">
-                  Get Started
-                </button>
               </div>
-              
-              {/* Professional Package */}
-              <div className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-6 text-white relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
-                  POPULAR
+              <div className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {allServices.map((service, i) => (
+                    <div key={i} className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{service.icon}</span>
+                        <span className="text-gray-700 text-sm">{service.name}</span>
+                      </div>
+                      <span className="text-blue-600 font-bold">${service.base_price?.toFixed(0)}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="text-center mb-4">
-                  <h3 className="font-bold text-lg">Professional</h3>
-                  <p className="text-white/80 text-sm">Combo package</p>
-                  <div className="mt-3">
-                    <span className="text-3xl font-bold">$99</span>
-                  </div>
-                </div>
-                <ul className="space-y-2 text-sm text-white/90 mb-4">
-                  <li className="flex items-center gap-2"><span>✓</span> DPF + EGR Off</li>
-                  <li className="flex items-center gap-2"><span>✓</span> Up to 5 DTC codes</li>
-                  <li className="flex items-center gap-2"><span>✓</span> Priority support</li>
-                  <li className="flex items-center gap-2"><span>✓</span> 30-day free fixes</li>
-                </ul>
-                <button onClick={() => setStep(1)} className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium hover:shadow-lg transition text-sm">
-                  Get Started
-                </button>
               </div>
-              
-              {/* Full Delete Package */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-200">
-                <div className="text-center mb-4">
-                  <h3 className="font-bold text-gray-900 text-lg">Full Delete</h3>
-                  <p className="text-gray-500 text-sm">Complete solution</p>
-                  <div className="mt-3">
-                    <span className="text-3xl font-bold text-gray-900">$149</span>
-                  </div>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-600 mb-4">
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> DPF + EGR + AdBlue</li>
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Unlimited DTC codes</li>
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Stage 1 tune included</li>
-                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> 60-day free fixes</li>
-                </ul>
-                <button onClick={() => setStep(1)} className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition text-sm">
-                  Get Started
-                </button>
-              </div>
-            </div>
-            
-            {/* Individual Pricing - Compact */}
-            <div className="bg-white rounded-xl p-4 border border-gray-100">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="font-semibold text-gray-900 text-sm">Individual Services</h4>
-                <span className="text-gray-500 text-xs">All prices in USD</span>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 text-xs">
-                {allServices.map((service, i) => (
-                  <div key={i} className="flex justify-between items-center bg-gray-50 rounded-lg px-3 py-2">
-                    <span className="text-gray-700 truncate mr-2">{service.name}</span>
-                    <span className="text-blue-600 font-semibold">${service.base_price?.toFixed(0)}</span>
-                  </div>
-                ))}
+              <div className="p-4 bg-gray-50 border-t border-gray-100">
+                <p className="text-gray-500 text-xs text-center">
+                  Combo discounts available • Select multiple services during checkout for best value
+                </p>
               </div>
             </div>
           </div>
