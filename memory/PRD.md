@@ -20,13 +20,13 @@ Build a professional ECU tuning service platform that allows users to upload ECU
 
 ## What Has Been Implemented
 
-### January 2025 - UI Redesign Completed
-- **Simplified Reviews Section**: Reduced from 12 reviews to 4 visible + expandable "View More" button
-- **Organized Services Section**: Grouped into 3 categories:
-  - Emission System Delete (DPF, EGR, AdBlue, Catalyst)
-  - DTC Code Removal (1 code, 2-6 codes, 7+ codes)
-  - Performance & Other (Stage 1, Stage 2, Speed Limiter, Start/Stop)
-- **3 Pricing Packages**: Basic ($40+), Professional ($99 POPULAR), Full Delete ($149)
+### January 3, 2025 - UI Redesign Completed
+- **Simplified Reviews Section**: 4 visible reviews + expandable "View More" button (8 total)
+- **Organized Services Section**: Grouped into 3 categories using ACTUAL API prices:
+  - Emission System Delete (EGR $50, DPF $248, AdBlue $698, Catalyst $40)
+  - DTC Code Removal ($10, $20, $30)
+  - Additional Services (Speed Limiter $30, Start/Stop $40, etc.)
+- **Transparent Pricing**: Clean 2-column grid showing ALL services with ACTUAL API prices
 - **Compact How It Works**: 6-step visual process with icons
 - **Why Choose Us**: Integrated into blue gradient banner
 
@@ -80,3 +80,4 @@ Build a professional ECU tuning service platform that allows users to upload ECU
 - File uploads stored as base64 in MongoDB for persistence
 - Frontend uses REACT_APP_BACKEND_URL for API calls
 - Backend prefixed with /api for Kubernetes routing
+- All service prices are fetched dynamically from /api/services endpoint
