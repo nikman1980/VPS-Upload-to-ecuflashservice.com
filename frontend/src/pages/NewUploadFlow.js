@@ -785,7 +785,7 @@ const NewUploadFlow = () => {
         </section>
 
         {/* Customer Reviews Section - International Reviews */}
-        <section className="py-16 px-6">
+        <section className="py-16 px-6 bg-white">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-3">What Our Customers Say</h2>
