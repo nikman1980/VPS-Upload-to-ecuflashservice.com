@@ -1421,10 +1421,11 @@ const DTCDeletePage = () => {
       {/* Footer - Dark Background */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
+          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Sole Trader | Professional ECU Tuning</p>
           <div className="mt-4 space-x-6">
             <a href="/terms" className="text-gray-400 hover:text-white transition">Terms</a>
             <a href="/privacy" className="text-gray-400 hover:text-white transition">Privacy</a>
+            <a href="/refund" className="text-gray-400 hover:text-white transition">Refund Policy</a>
             <a href="/faq" className="text-gray-400 hover:text-white transition">FAQ</a>
             <a href="/contact" className="text-gray-400 hover:text-white transition">Contact</a>
           </div>
