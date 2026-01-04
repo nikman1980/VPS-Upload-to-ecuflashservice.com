@@ -2341,12 +2341,19 @@ const NewUploadFlow = () => {
         )}
       </div>
 
-      {/* Footer for inner pages */}
+      {/* Footer for inner pages - Dark Background */}
       {step > 0 && (
-        <footer className="bg-white/50 border-t border-gray-100 py-6 mt-16">
-          <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-            <p>© 2024 ECU Flash Service | Professional ECU Tuning</p>
-            <p className="mt-1">⚠️ For off-road and competition use only</p>
+        <footer className="bg-gray-900 text-white py-12 mt-16">
+          <div className="container mx-auto px-6 text-center">
+            <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Sole Trader | Professional ECU Tuning</p>
+            <div className="mt-4 space-x-6">
+              <a href="/terms" className="text-gray-400 hover:text-white transition">Terms</a>
+              <a href="/privacy" className="text-gray-400 hover:text-white transition">Privacy</a>
+              <a href="/refund" className="text-gray-400 hover:text-white transition">Refund Policy</a>
+              <a href="/faq" className="text-gray-400 hover:text-white transition">FAQ</a>
+              <a href="/contact" className="text-gray-400 hover:text-white transition">Contact</a>
+            </div>
+            <p className="mt-4 text-yellow-500 text-xs">⚠️ For off-road and competition use only</p>
           </div>
         </footer>
       )}
