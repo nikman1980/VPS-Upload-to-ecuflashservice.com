@@ -39,7 +39,7 @@ const PrivacyPage = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
               <p className="text-gray-600 leading-relaxed">
-                ECU Flash Service (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services. Please read this policy carefully to understand our practices regarding your personal data.
+                <strong>ECU Flash Service, Sole Trader</strong> (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services. Please read this policy carefully to understand our practices regarding your personal data.
               </p>
             </section>
 
@@ -180,9 +180,10 @@ const PrivacyPage = () => {
       {/* Footer - Dark Background */}
       <footer className="bg-gray-900 text-white py-12 mt-12">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
+          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Sole Trader | Professional ECU Tuning</p>
           <div className="mt-4 space-x-6">
             <Link to="/terms" className="text-gray-400 hover:text-white transition">Terms of Service</Link>
+            <Link to="/refund" className="text-gray-400 hover:text-white transition">Refund Policy</Link>
             <Link to="/faq" className="text-gray-400 hover:text-white transition">FAQ</Link>
             <Link to="/contact" className="text-gray-400 hover:text-white transition">Contact</Link>
           </div>
