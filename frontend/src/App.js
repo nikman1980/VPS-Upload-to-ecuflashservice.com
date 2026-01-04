@@ -8,6 +8,7 @@ import CustomerPortal from './pages/CustomerPortal';
 import FAQPage from './pages/FAQPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
+import RefundPage from './pages/RefundPage';
 import ContactPage from './pages/ContactPage';
 import DTCDeletePage from './pages/DTCDeletePage';
 import BlogPage from './pages/BlogPage';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/refund" element={<RefundPage />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* Tools */}
           <Route path="/tools/dtc-delete" element={<DTCDeletePage />} />
