@@ -1152,12 +1152,13 @@ const NewUploadFlow = () => {
                 <ul className="space-y-2 text-gray-400 text-sm">
                   <li><a href="/terms" className="hover:text-white transition">Terms of Service</a></li>
                   <li><a href="/privacy" className="hover:text-white transition">Privacy Policy</a></li>
+                  <li><a href="/refund" className="hover:text-white transition">Refund Policy</a></li>
                   <li className="pt-2 text-yellow-500 text-xs">⚠️ For off-road use only</li>
                 </ul>
               </div>
             </div>
             <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
-              © {new Date().getFullYear()} ECU Flash Service. All rights reserved.
+              © {new Date().getFullYear()} ECU Flash Service | Sole Trader. All rights reserved.
             </div>
           </div>
         </footer>
