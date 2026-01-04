@@ -39,7 +39,7 @@ const TermsPage = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                By accessing and using ECU Flash Service (&quot;the Service&quot;), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                By accessing and using ECU Flash Service (&quot;the Service&quot;), operated by <strong>ECU Flash Service, Sole Trader</strong>, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 These terms apply to all users of the Service, including without limitation users who are browsers, customers, merchants, and/or contributors of content.
@@ -146,9 +146,19 @@ const TermsPage = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Contact Information</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Governing Law</h2>
               <p className="text-gray-600 leading-relaxed">
-                If you have any questions about these Terms of Service, please contact us through our <Link to="/contact" className="text-blue-600 hover:underline">Contact Page</Link>.
+                These Terms of Service shall be governed by and construed in accordance with the laws of <strong>Fiji</strong>, without regard to its conflict of law provisions. Any disputes arising from or relating to these terms shall be subject to the exclusive jurisdiction of the courts of Fiji.
+              </p>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Business Information</h2>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                <strong>ECU Flash Service</strong> is a Sole Trader business providing professional ECU tuning and file modification services.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                For business inquiries, support, or questions about these Terms of Service, please contact us through our <Link to="/contact" className="text-blue-600 hover:underline">Contact Page</Link> or email us at <a href="mailto:support@ecuflashservice.com" className="text-blue-600 hover:underline">support@ecuflashservice.com</a>.
               </p>
             </section>
           </div>
@@ -158,9 +168,10 @@ const TermsPage = () => {
       {/* Footer - Dark Background */}
       <footer className="bg-gray-900 text-white py-12 mt-12">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Professional ECU Tuning</p>
+          <p className="text-gray-400">© {new Date().getFullYear()} ECU Flash Service | Sole Trader | Professional ECU Tuning</p>
           <div className="mt-4 space-x-6">
             <Link to="/privacy" className="text-gray-400 hover:text-white transition">Privacy Policy</Link>
+            <Link to="/refund" className="text-gray-400 hover:text-white transition">Refund Policy</Link>
             <Link to="/faq" className="text-gray-400 hover:text-white transition">FAQ</Link>
             <Link to="/contact" className="text-gray-400 hover:text-white transition">Contact</Link>
           </div>
